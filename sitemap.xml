@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-  <sitemap>
-    <loc>https://minkj1992.github.io/en/sitemap.xml</loc>
-    
-  </sitemap>
+  <url>
+    <loc>https://minkj1992.github.io/categories/</loc>
+  </url>
   
-  <sitemap>
-    <loc>https://minkj1992.github.io/fr/sitemap.xml</loc>
-    
-  </sitemap>
+  <url>
+    <loc>https://minkj1992.github.io/</loc>
+  </url>
   
-</sitemapindex>
+  <url>
+    <loc>https://minkj1992.github.io/series/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/tags/</loc>
+  </url>
+  
+</urlset>
