@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="minkj1992@gmail.com leoo.j ">
+<meta name="description" content="HTTP/1.x의 커넥션 관리  MDN
+ HTML5의 websocket을 공부하던 중, HTTP가 커넥션을 어떻게 유지하고 TCP와 어떤식으로 상호작용하는지 궁금하여 정리를 하게되었습니다. TLS/1.0, HTTP/2.0 버전을 공부하기 앞서 해당 분야를 먼저 공부하고자 합니다.
+ HTTP/1.0 단기 커넥션 HTTP/1.x 영속적인 커넥션 HTTP/1.x 파이프라이닝 HTTP2.0 멀티 플렉싱  명심해야할 점은 HTTP 내 커넥션 관리가 end-to-end가 아닌 hop-by-hop방식으로 관리가 된다는 점입니다. 여기서 hop-by-hop방식은 클라이언트와 프록시 사이, 첫번째 프록시와 두번째 프록시 사이, 프록시와 최종 목적 서버 사이의 관계들을 의미합니다." />
+<meta name="keywords" content="timeline hugo template" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://minkj1992.github.io/dev/http1.x%EC%9D%98_%EC%BB%A4%EB%84%A5%EC%85%98_%EA%B4%80%EB%A6%AC/" />
+
+
+    <title>
+        
+             :: Leoo&#39;s history  — Timeline
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css"> 
+
+
+
+
+<link rel="stylesheet" href="/main.805b1025016494ee5fd67b55b8ecd5e2b7c4a9f0bdda42e300c62b85ddfef68f.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="css/custom.css">
+    
+
+  
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="HTTP/1.x의 커넥션 관리  MDN
+ HTML5의 websocket을 공부하던 중, HTTP가 커넥션을 어떻게 유지하고 TCP와 어떤식으로 상호작용하는지 궁금하여 정리를 하게되었습니다. TLS/1.0, HTTP/2.0 버전을 공부하기 앞서 해당 분야를 먼저 공부하고자 합니다.
+ HTTP/1.0 단기 커넥션 HTTP/1.x 영속적인 커넥션 HTTP/1.x 파이프라이닝 HTTP2.0 멀티 플렉싱  명심해야할 점은 HTTP 내 커넥션 관리가 end-to-end가 아닌 hop-by-hop방식으로 관리가 된다는 점입니다. 여기서 hop-by-hop방식은 클라이언트와 프록시 사이, 첫번째 프록시와 두번째 프록시 사이, 프록시와 최종 목적 서버 사이의 관계들을 의미합니다.">
+
+<meta itemprop="wordCount" content="393">
+<meta itemprop="image" content="https://minkj1992.github.io/106"/>
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/106"/>
+
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="HTTP/1.x의 커넥션 관리  MDN
+ HTML5의 websocket을 공부하던 중, HTTP가 커넥션을 어떻게 유지하고 TCP와 어떤식으로 상호작용하는지 궁금하여 정리를 하게되었습니다. TLS/1.0, HTTP/2.0 버전을 공부하기 앞서 해당 분야를 먼저 공부하고자 합니다.
+ HTTP/1.0 단기 커넥션 HTTP/1.x 영속적인 커넥션 HTTP/1.x 파이프라이닝 HTTP2.0 멀티 플렉싱  명심해야할 점은 HTTP 내 커넥션 관리가 end-to-end가 아닌 hop-by-hop방식으로 관리가 된다는 점입니다. 여기서 hop-by-hop방식은 클라이언트와 프록시 사이, 첫번째 프록시와 두번째 프록시 사이, 프록시와 최종 목적 서버 사이의 관계들을 의미합니다."/>
+
+
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="HTTP/1.x의 커넥션 관리  MDN
+ HTML5의 websocket을 공부하던 중, HTTP가 커넥션을 어떻게 유지하고 TCP와 어떤식으로 상호작용하는지 궁금하여 정리를 하게되었습니다. TLS/1.0, HTTP/2.0 버전을 공부하기 앞서 해당 분야를 먼저 공부하고자 합니다.
+ HTTP/1.0 단기 커넥션 HTTP/1.x 영속적인 커넥션 HTTP/1.x 파이프라이닝 HTTP2.0 멀티 플렉싱  명심해야할 점은 HTTP 내 커넥션 관리가 end-to-end가 아닌 hop-by-hop방식으로 관리가 된다는 점입니다. 여기서 hop-by-hop방식은 클라이언트와 프록시 사이, 첫번째 프록시와 두번째 프록시 사이, 프록시와 최종 목적 서버 사이의 관계들을 의미합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/dev/http1.x%EC%9D%98_%EC%BB%A4%EB%84%A5%EC%85%98_%EA%B4%80%EB%A6%AC/" />
+<meta property="og:image" content="https://minkj1992.github.io/106"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">Leoo&#39;s history</span>
+            <span class="logo__text">$</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://minkj1992.github.io/info/">Info</a></li><li><a href="https://minkj1992.github.io/timeline/">Timeline</a></li><li><a href="https://minkj1992.github.io/dev/">Dev</a></li><li><a href="https://minkj1992.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+             
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post"> 
+
+        <article>
+            <h2 class="post-title"><a href="https://minkj1992.github.io/dev/http1.x%EC%9D%98_%EC%BB%A4%EB%84%A5%EC%85%98_%EA%B4%80%EB%A6%AC/"></a></h2>
+
+            
+
+            <div class="post-content">
+                <h1 id="http1x의-커넥션-관리">HTTP/1.x의 커넥션 관리</h1>
+<blockquote>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/HTTP/Connection_management_in_HTTP_1.x">MDN</a></p>
+</blockquote>
+<p>HTML5의 <code>websocket</code>을 공부하던 중, HTTP가 커넥션을 어떻게 유지하고 <code>TCP</code>와 어떤식으로 상호작용하는지 궁금하여 정리를 하게되었습니다. TLS/1.0, HTTP/2.0 버전을 공부하기 앞서 해당 분야를 먼저 공부하고자 합니다.</p>
+<ul>
+<li>HTTP/1.0 단기 커넥션</li>
+<li>HTTP/1.x 영속적인 커넥션</li>
+<li>HTTP/1.x 파이프라이닝</li>
+<li>HTTP2.0 멀티 플렉싱</li>
+</ul>
+<p>명심해야할 점은 HTTP 내 커넥션 관리가 <code>end-to-end</code>가 아닌 <code>hop-by-hop</code>방식으로 관리가 된다는 점입니다. 여기서 <code>hop-by-hop</code>방식은 클라이언트와 프록시 사이, 첫번째 프록시와 두번째 프록시 사이, 프록시와 최종 목적 서버 사이의 관계들을 의미합니다. 즉 각 연결들에 관해서 커넥션 관리 정책이 다르게 적용될 수 있습니다.</p>
+<p><img src="./img/HTTP1_x_Connections.png" alt=""></p>
+<h2 id="단기-커넥션">단기 커넥션</h2>
+<blockquote>
+<p>HTTP/1.0의 Default 커넥션</p>
+</blockquote>
+<p>각각의 HTTP 요청은 각각의 커넥션 상에서 실행됩니다. 이는</p>
+<ol>
+<li>Connection 헤더가 존재하지 않음</li>
+<li>Connection 헤더의 값이 <code>close</code></li>
+</ol>
+<p>인경우 적용됩니다.</p>
+<h2 id="non-persistent-connections">non-persistent connections</h2>
+<p>커넥션이 IDLE 상태가 되면 곧바로 닫히는 커넥션입니다.</p>
+<h2 id="영속적인-커넥션-persistent-connection">영속적인 커넥션 (Persistent Connection)</h2>
+<blockquote>
+<p>a.k.a <code>keep-alive 커넥션</code></p>
+</blockquote>
+<p>영속적인 커넥션은 얼마간 연결을 열어놓고 여러 요청에 재사용함으로써, 새로운 TCP 핸드셰이크를 하는 비용을 아끼고, TCP의 성능 향상 기능을 활용할 수 있습니다.</p>
+<p>커넥션은 영원히 열려있지 않으며 Idle 커넥션들에 대해서는 일정 시간 후에 닫히게 됩니다. (keep-alive에 값을 설정하여 해당 시간을 설정 가능합니다.)</p>
+<p>단점은 Idle 상태의 커넥션들에 대해 서버 리소스가 소비되며, 서버가 과부화 상태일 경우 <code>DoS attacks</code>를 당할 수 있습니다. 이에 대해서는 <code>non-persistent connections</code>를 사용하는 것이 더 나은 방법입니다.</p>
+<p>HTTP/1.0에서는</p>
+<ol>
+<li><code>Connection</code>을 <code>Close</code>가 아닌 다른, 일반적으로 <code>retry-after</code>를 설정하여 사용가능</li>
+</ol>
+<p>HTTP/1.1에서는</p>
+<p>기본적으로 영속적이며 헤더도 필요하지 않습니다. 그러나 HTTP/1.0으로 동작하는 경우(fallback)에 대비하기 위해 종종 추가하기도 합니다.</p>
+<h2 id="http-파이프라이닝">HTTP 파이프라이닝</h2>
+<blockquote>
+<p>HTTP/2에서 사용되는 멀티플렉싱 방법이 더욱 좋은 방식</p>
+</blockquote>
+<p><strong>기본적으로, HTTP 요청은 순차적입니다.</strong> 현재의 요청에 대한 응답을 받고 나서야 다음 요청을 실시합니다. 네트워크 지연과 대역폭 제한에 걸려 다음 요청을 보내는 데까지 상당한 딜레이가 발생할 수 있습니다.</p>
+<p>파이프라이닝이란 같은 영속적인 커넥션을 통해서, 응답을 기다리지 않고 요청을 연속적으로 보내는 기능입니다. 이것은 <strong>커넥션의 지연를 회피하고자 하는 방법</strong>입니다</p>
+<p>이론적으로는, 두 개의 HTTP 요청을 하나의 TCP 메시지 안에 채워서(be packed) 성능을 더 향상시킬 수 있습니다. HTTP 요청의 사이즈는 지속적으로 커져왔지만, 일반적인 MSS(최대 세그먼트 크기)는 몇 개의 간단한 요청을 포함하기에는 충분히 여유있습니다.</p>
+<p>모든 종류의 HTTP 요청이 파이프라인으로 처리될 수 있는 것은 아닙니다: <strong>GET, HEAD, PUT 그리고 DELETE 메서드같은 idempotent 메서드만 가능합니다</strong>. 실패가 발생한 경우에는 단순히 파이프라인 컨텐츠를 다시 반복하면 됩니다.</p>
+<p>오늘날, 모든 HTTP/1.1 호환 프록시와 서버들은 파이프라이닝을 지원해야 하지만, 실제로는 많은 프록시와 서버들은 제한을 가지고 있습니다. 모던 브라우저가 이 기능을 기본적으로 활성화하지 않는 이유입니다.</p>
+<p>해당 문제는 <code>HOL Blocking</code>문제라고 칭하며 이에 대해 좀 더 설명하자면: 순차적으로 데이터를 요청하고 받아야 하다 보니 먼저 받은 요청이 끝나지 않으면 그 뒤에 있는 요청의 처리가 아무리 빨리 끝나도 먼저 온 요청이 끝날 때까지 기다려야 합니다. 이를 HTTP의 HOL(Head Of Line) Blocking 문제라고 하고 파이프라이닝의 큰 문제입니다.</p>
+ 
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+             
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://minkj1992.github.io/">leoo.j</a></span>
+            
+             
+        </div>
+    </div> 
+</footer>
+<script type="text/javascript">
+    $(function(){
+
+  window.sr = ScrollReveal();
+
+  if ($(window).width() < 768) {
+
+    if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+        $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+    }
+
+    sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  } else {
+    
+    sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  }
+  
+  sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+
+});
+
+</script>
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

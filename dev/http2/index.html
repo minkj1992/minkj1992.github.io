@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="minkj1992@gmail.com leoo.j ">
+<meta name="description" content="HTTP/2  google docs
+ HTTP/2의 변화과정에 대해서 공부하도록 하겠습니다.
+HTTP/1에서 버전 /2로 넘어오면서 크게 바뀐 점은 3가지 정도가 있습니다.
+  HTTP 헤더 압축
+  Multiplexing
+  Server push
+  HTTP/1.2는 왜 안되나요?  들어가기 앞서 버전을 올린 이유에 대해서 구글측의 설명
+ HTTP Working Group이 규정한 성능 목표를 실현하기 위해 HTTP/2에서는 새 바이너리 프레이밍 계층을 도입합니다. 이 계층은 이전의 HTTP/1.x 서버 및 클라이언트와 호환되지 않으며 따라서 주 프로토콜 버전은 HTTP/2로 올라갑니다." />
+<meta name="keywords" content="timeline hugo template" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://minkj1992.github.io/dev/http2/" />
+
+
+    <title>
+        
+             :: Leoo&#39;s history  — Timeline
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css"> 
+
+
+
+
+<link rel="stylesheet" href="/main.805b1025016494ee5fd67b55b8ecd5e2b7c4a9f0bdda42e300c62b85ddfef68f.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="css/custom.css">
+    
+
+  
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="HTTP/2  google docs
+ HTTP/2의 변화과정에 대해서 공부하도록 하겠습니다.
+HTTP/1에서 버전 /2로 넘어오면서 크게 바뀐 점은 3가지 정도가 있습니다.
+  HTTP 헤더 압축
+  Multiplexing
+  Server push
+  HTTP/1.2는 왜 안되나요?  들어가기 앞서 버전을 올린 이유에 대해서 구글측의 설명
+ HTTP Working Group이 규정한 성능 목표를 실현하기 위해 HTTP/2에서는 새 바이너리 프레이밍 계층을 도입합니다. 이 계층은 이전의 HTTP/1.x 서버 및 클라이언트와 호환되지 않으며 따라서 주 프로토콜 버전은 HTTP/2로 올라갑니다.">
+
+<meta itemprop="wordCount" content="577">
+<meta itemprop="image" content="https://minkj1992.github.io/106"/>
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/106"/>
+
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="HTTP/2  google docs
+ HTTP/2의 변화과정에 대해서 공부하도록 하겠습니다.
+HTTP/1에서 버전 /2로 넘어오면서 크게 바뀐 점은 3가지 정도가 있습니다.
+  HTTP 헤더 압축
+  Multiplexing
+  Server push
+  HTTP/1.2는 왜 안되나요?  들어가기 앞서 버전을 올린 이유에 대해서 구글측의 설명
+ HTTP Working Group이 규정한 성능 목표를 실현하기 위해 HTTP/2에서는 새 바이너리 프레이밍 계층을 도입합니다. 이 계층은 이전의 HTTP/1.x 서버 및 클라이언트와 호환되지 않으며 따라서 주 프로토콜 버전은 HTTP/2로 올라갑니다."/>
+
+
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="HTTP/2  google docs
+ HTTP/2의 변화과정에 대해서 공부하도록 하겠습니다.
+HTTP/1에서 버전 /2로 넘어오면서 크게 바뀐 점은 3가지 정도가 있습니다.
+  HTTP 헤더 압축
+  Multiplexing
+  Server push
+  HTTP/1.2는 왜 안되나요?  들어가기 앞서 버전을 올린 이유에 대해서 구글측의 설명
+ HTTP Working Group이 규정한 성능 목표를 실현하기 위해 HTTP/2에서는 새 바이너리 프레이밍 계층을 도입합니다. 이 계층은 이전의 HTTP/1.x 서버 및 클라이언트와 호환되지 않으며 따라서 주 프로토콜 버전은 HTTP/2로 올라갑니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/dev/http2/" />
+<meta property="og:image" content="https://minkj1992.github.io/106"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">Leoo&#39;s history</span>
+            <span class="logo__text">$</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://minkj1992.github.io/info/">Info</a></li><li><a href="https://minkj1992.github.io/timeline/">Timeline</a></li><li><a href="https://minkj1992.github.io/dev/">Dev</a></li><li><a href="https://minkj1992.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+             
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post"> 
+
+        <article>
+            <h2 class="post-title"><a href="https://minkj1992.github.io/dev/http2/"></a></h2>
+
+            
+
+            <div class="post-content">
+                <h1 id="http2">HTTP/2</h1>
+<blockquote>
+<p><a href="https://developers.google.com/web/fundamentals/performance/http2?hl=ko#spdy_%EB%B0%8F_http2%EC%9D%98_%EA%B0%84%EB%9E%B5%ED%95%9C_%EC%97%AD%EC%82%AC">google docs</a></p>
+</blockquote>
+<p>HTTP/2의 변화과정에 대해서 공부하도록 하겠습니다.</p>
+<p>HTTP/1에서 버전 /2로 넘어오면서 크게 바뀐 점은 3가지 정도가 있습니다.</p>
+<ol>
+<li>
+<p>HTTP 헤더 압축</p>
+</li>
+<li>
+<p>Multiplexing</p>
+</li>
+<li>
+<p>Server push</p>
+</li>
+</ol>
+<h2 id="http12는-왜-안되나요">HTTP/1.2는 왜 안되나요?</h2>
+<blockquote>
+<p>들어가기 앞서 버전을 올린 이유에 대해서 구글측의 설명</p>
+</blockquote>
+<p>HTTP Working Group이 규정한 성능 목표를 실현하기 위해 HTTP/2에서는 새 바이너리 프레이밍 계층을 도입합니다. 이 계층은 이전의 HTTP/1.x 서버 및 클라이언트와 호환되지 않으며 따라서 주 프로토콜 버전은 HTTP/2로 올라갑니다.</p>
+<h2 id="바이너리-프레이밍-계층">바이너리 프레이밍 계층</h2>
+<blockquote>
+<p>HTTP/2의 모든 성능 향상 중 핵심은 <code>Binary Framing layer</code>입니다.</p>
+</blockquote>
+<p>해당 계층을 통해 HTTP 메시지가 캡슐화 되어 client-server 사이에서 선송되는 방식을 규정합니다.</p>
+<p><img src="./img/binary_framing_layer001.svg" alt=""></p>
+<p>해당 계층은 Application에 노출되는 Socket interface와 더 상위 HTTP API 간에 최적의 Encoding 메커니즘을 도입하기 위해 도입되었습니다.</p>
+<p>일반 텍스트로 동작하더 HTTP/1.x 프로토콜은 줄바꿈을 통해 구분이 되었던 반면, HTTP/2 통신은 더 작은 메시지와 프레임으로 분할한 뒤, 이를 바이너리 형식으로 인코딩 시킵니다.</p>
+<p>다행히 모든 프레이밍 작업을 브라우저가 수행해주며 서버 또한 대부분 엔진에서 처리해 줍니다.</p>
+<h2 id="용어-정리--규칙">용어 정리 / 규칙</h2>
+<p>새 바이너리 프레이밍 메커니즘이 도입됨에 따라 클라이언트와 서버 간에 데이터 교환 방식이 바뀌었습니다. 이 과정을 설명하기 위해 HTTP/2 용어를 먼저 익혀보겠습니다.</p>
+<ul>
+<li>스트림
+<ul>
+<li>구성된 연결 내에서 전달되는 바이트의 양방향 흐름이며, 하나 이상의 메시지가 전달될 수 있습니다.</li>
+</ul>
+</li>
+<li>메시지
+<ul>
+<li>논리적 요청 또는 응답 메시지에 매핑되는 프레임의 전체 시퀀스입니다.</li>
+</ul>
+</li>
+<li>프레임
+<ul>
+<li>HTTP/2에서 통신의 최소 단위이며 각 최소 단위에는 하나의 프레임 헤더가 포함됩니다. 이 프레임 헤더는 최소한으로 프레임이 속하는 스트림을 식별합니다.</li>
+</ul>
+</li>
+</ul>
+<p>해당 용어들간의 관계를 설명드리겠습니다.</p>
+<ol>
+<li>모든 통신은 단일 TCP 연결을 통해 수행되며 전달될 수 있는 양방향 스트림의 수는 제한이 없습니다.</li>
+<li>각 스트림에는 양방향 메시지 전달에 사용되는 고유 식별자와 우선순위 정보(선택 사항)가 있습니다.</li>
+<li>각 메시지는 하나의 논리적 HTTP 메시지(예: 요청 또는 응답)이며 하나 이상의 프레임으로 구성됩니다.</li>
+<li>프레임은 통신의 최소 단위이며 특정 유형의 데이터(예: HTTP 헤더, 메시지 페이로드 등)를 전달합니다. 다른 스트림들의 프레임을 인터리빙한 다음, 각 프레임의 헤더에 삽입된 스트림 식별자를 통해 이 프레임을 다시 조립할 수 있습니다.</li>
+</ol>
+<p><img src="./img/streams_messages_frames01.svg" alt=""></p>
+<p><img src="./img/multiplexing01.svg" alt=""></p>
+<h2 id="request-and-response-multiplexing">Request and response <code>multiplexing</code></h2>
+<p>HTTP 메시지가 많은 개별 프레임으로 분할될 수 있고 여러 스트림의 프레임을 다중화하는 것이 가능해짐에 따라, 프레임이 클라이언트와 서버에 의해 인터리빙되고 전달되는 순서가 중요한 성능 고려사항이 되었습니다. 이를 용이하게 하기 위해 HTTP/2 표준에서는 각 스트림이 연관된 가중치와 종속성을 갖도록 허용합니다.</p>
+<p>In short, HTTP/2 breaks down the HTTP protocol communication into an exchange of binary-encoded frames, which are then mapped to messages that belong to a particular stream, all of which are multiplexed within a single TCP connection. This is the foundation that enables all other features and performance optimizations provided by the HTTP/2 protocol.</p>
+<h2 id="one-connection-per-origin">One connection per origin</h2>
+<blockquote>
+<p>출처당 하나의 연결</p>
+</blockquote>
+<p>With the new binary framing mechanism in place, HTTP/2 no longer needs multiple TCP connections to multiplex streams in parallel</p>
+<p>새 바이너리 프레이밍 메커니즘이 배치되면, 스트림을 병렬로 다중화하는 여러 개의 TCP 연결이 더 이상 HTTP/2에 필요 없습니다. 각 스트림은 여러 프레임으로 분할되며 각 프레임이 인터리빙되고 우선순위가 지정될 수 있습니다.</p>
+<p>As a result, all HTTP/2 connections are persistent, and only one connection per origin is required, which offers numerous performance benefits.</p>
+<p>따라서, 모든 HTTP/2 연결은 영구적이고 출처당 하나의 연결만 필요하며 이 경우 성능상의 수많은 이점이 있습니다.</p>
+<p>대부분의 HTTP 전송은 수명이 짧고 폭주하는 반면 TCP는 수명이 긴 대량 데이터 전송에 최적화되어 있습니다. HTTP/2에서는 동일한 연결을 재사용하여 각 TCP 연결을 더 효율적으로 사용할 수 있으며 또한 전반적인 프로토콜 오버헤드를 대폭 줄일 수 있습니다. 또한 더 적은 연결을 사용하므로 전체 연결 경로(즉, 클라이언트, 중개 장치 및 원본 서버)에서 메모리와 처리량이 줄어듭니다. 그 결과 전체 운영 비용이 절감되고 네트워크 활용도와 용량이 개선됩니다. 따라서 HTTP/2로 전환하면 네트워크 지연 시간이 줄어들 뿐만 아니라 처리량이 개선되고 운영 비용이 줄어듭니다.</p>
+<p>참고: 연결 수가 적다는 것은 HTTPS 배포의 성능을 개선하는데 특히 중요합니다. 연결 수가 적으면 값비싼 TLS 핸드셰이크가 줄어들고, 세션 재사용이 더 향상되며, 필요한 클라이언트 및 서버 리소스가 감소합니다.</p>
+ 
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+             
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://minkj1992.github.io/">leoo.j</a></span>
+            
+             
+        </div>
+    </div> 
+</footer>
+<script type="text/javascript">
+    $(function(){
+
+  window.sr = ScrollReveal();
+
+  if ($(window).width() < 768) {
+
+    if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+        $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+    }
+
+    sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  } else {
+    
+    sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  }
+  
+  sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+
+});
+
+</script>
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>

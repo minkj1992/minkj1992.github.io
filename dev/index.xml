@@ -99,5 +99,129 @@ def post_create(request): if request.method == &amp;#34;POST&amp;#34;: # 생략 
  Request  request.POST # Only handles form data. Only works for &amp;lsquo;POST&amp;rsquo; method. request.data # Handles arbitrary data. Works for &amp;lsquo;POST&amp;rsquo;, &amp;lsquo;PUT&amp;rsquo; and &amp;lsquo;PATCH&amp;rsquo; methods.  더 이상 지정된 콘텐츠 유형에 대한 요청 또는 응답을 명시 적으로 연결하지 않아도 됩니다.request.data로 들어오는 json요청을 처리 할 수 있으며, 추가로 다른 형식들도 처리 할 수 ​​있습니다. 마찬가지로 데이터가 포함 된 응답 객체를 반환하지만 REST 프레임 워크가 응답을 올바른 컨텐츠 유형으로 렌더링하도록 허용합니다.</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/change_commits/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/change_commits/</guid>
+      <description>Change commit  when yout want to change commit which you already pushed
+ email &amp;amp; author git filter-branch --env-filter &amp;#39; OLD_EMAIL=&amp;#34;leoo.j@kakaocorp.com&amp;#34; CORRECT_NAME=&amp;#34;minkj1992&amp;#34; CORRECT_EMAIL=&amp;#34;minkj1992@gmail.com&amp;#34; if [ &amp;#34;$GIT_COMMITTER_EMAIL&amp;#34; = &amp;#34;$OLD_EMAIL&amp;#34; ] then export GIT_COMMITTER_NAME=&amp;#34;$CORRECT_NAME&amp;#34; export GIT_COMMITTER_EMAIL=&amp;#34;$CORRECT_EMAIL&amp;#34; fi if [ &amp;#34;$GIT_AUTHOR_EMAIL&amp;#34; = &amp;#34;$OLD_EMAIL&amp;#34; ] then export GIT_AUTHOR_NAME=&amp;#34;$CORRECT_NAME&amp;#34; export GIT_AUTHOR_EMAIL=&amp;#34;$CORRECT_EMAIL&amp;#34; fi &amp;#39; --tag-name-filter cat -- --branches --tags $ git push -f </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/rebase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/rebase/</guid>
+      <description>Rebase  커밋 합치기  $ git rebase -i HEAD~&amp;lt;원하는 커밋갯수&amp;gt;  first commit rebase  $ git rebase -i --root </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/cgi-wsgi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/cgi-wsgi/</guid>
+      <description>CGI, FastCGI와 WSGI  https://show-me-the-money.tistory.com/50 https://brownbears.tistory.com/350
+ CGI의 등장 정적으로 동작하는 웹서버는 한계가 있다. 이를 해결해주기 위해서 다양한 dynamic기능을 필요로 하는 request들을 처리하기 위해 데이터베이스, 다양한 계산을 하는 프로그램 스크립트들(python, java, c 등)과 통신을 하여 이를 해결해 주기 위해서 CGI 인터페이스가 등장하였다.
+CGI는 인터페이스로 특정 플랫폼에 의존하지 않고, 웹 서버로부터 외부 프로그램을 호출하는 방식을 정의해 놓은 프로토콜이다. CGI의 주요한 한계점은 데이터 처리 요청이 있을 때마다 매번 프로세스를 fork()하여 처리를 하였는데, 이 같은 성질 때문에 성능과 확장성에서 한계가 발생하였다.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/git_filter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/git_filter/</guid>
+      <description>commit id 변경시 $ git filter-branch --env-filter &amp;#39; OLD_EMAIL=&amp;#34;minkj1992@gmai.com&amp;#34; CORRECT_NAME=&amp;#34;minkj1992&amp;#34; CORRECT_EMAIL=&amp;#34;minkj1992@gmail.com&amp;#34; if [ &amp;#34;$GIT_COMMITTER_EMAIL&amp;#34; = &amp;#34;$OLD_EMAIL&amp;#34; ] then export GIT_COMMITTER_NAME=&amp;#34;$CORRECT_NAME&amp;#34; export GIT_COMMITTER_EMAIL=&amp;#34;$CORRECT_EMAIL&amp;#34; fi if [ &amp;#34;$GIT_AUTHOR_EMAIL&amp;#34; = &amp;#34;$OLD_EMAIL&amp;#34; ] then export GIT_AUTHOR_NAME=&amp;#34;$CORRECT_NAME&amp;#34; export GIT_AUTHOR_EMAIL=&amp;#34;$CORRECT_EMAIL&amp;#34; fi &amp;#39; --tag-name-filter cat -- --branches --tags </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/http1.x%EC%9D%98_%EC%BB%A4%EB%84%A5%EC%85%98_%EA%B4%80%EB%A6%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/http1.x%EC%9D%98_%EC%BB%A4%EB%84%A5%EC%85%98_%EA%B4%80%EB%A6%AC/</guid>
+      <description>HTTP/1.x의 커넥션 관리  MDN
+ HTML5의 websocket을 공부하던 중, HTTP가 커넥션을 어떻게 유지하고 TCP와 어떤식으로 상호작용하는지 궁금하여 정리를 하게되었습니다. TLS/1.0, HTTP/2.0 버전을 공부하기 앞서 해당 분야를 먼저 공부하고자 합니다.
+ HTTP/1.0 단기 커넥션 HTTP/1.x 영속적인 커넥션 HTTP/1.x 파이프라이닝 HTTP2.0 멀티 플렉싱  명심해야할 점은 HTTP 내 커넥션 관리가 end-to-end가 아닌 hop-by-hop방식으로 관리가 된다는 점입니다. 여기서 hop-by-hop방식은 클라이언트와 프록시 사이, 첫번째 프록시와 두번째 프록시 사이, 프록시와 최종 목적 서버 사이의 관계들을 의미합니다.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/http2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/http2/</guid>
+      <description>HTTP/2  google docs
+ HTTP/2의 변화과정에 대해서 공부하도록 하겠습니다.
+HTTP/1에서 버전 /2로 넘어오면서 크게 바뀐 점은 3가지 정도가 있습니다.
+  HTTP 헤더 압축
+  Multiplexing
+  Server push
+  HTTP/1.2는 왜 안되나요?  들어가기 앞서 버전을 올린 이유에 대해서 구글측의 설명
+ HTTP Working Group이 규정한 성능 목표를 실현하기 위해 HTTP/2에서는 새 바이너리 프레이밍 계층을 도입합니다. 이 계층은 이전의 HTTP/1.x 서버 및 클라이언트와 호환되지 않으며 따라서 주 프로토콜 버전은 HTTP/2로 올라갑니다.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/http_ajax_websocket/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/http_ajax_websocket/</guid>
+      <description>HTTP, AJAX, WEBSOCKET  참고자료
+ TL; DR  HTTP는 통신 제약이 있는 약속입니다. AJAX로 HTTP의 통신 제약으로부터 조금 벗어날 수 있었습니다. Websocket은 HTTP의 통신 제약을 해결한 새로운 약속입니다.  기존의 HTTP (Naive HTTP) HTTP에서 Transfet Protocol의 대 전제는 &amp;ldquo;URL및 부가정보를 통해 사용자가 원하는 페이지를 서버에 요청하고 서버는 해당 요청에 응답한다.&amp;rdquo; 입니다. 이는 기존에 브라우저가 웹서버에 무언가를 요청하기 위해서는 URL을 통해서 페이지를 이동했어야만 한다는 것을 뜻합니다.
+이러한 HTTP 규약을 뛰어넘기 위해 AJAX를 사용하기 시작합니다.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/io_uring/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/io_uring/</guid>
+      <description>io_uring   hands-on-iouring-go
+  lwn.net
+  헷갈리는 관계
+ AIO epoll io_uring    Linux system call의 네트워크 I/O에서 상당히 빠른 성능을 보여주는 epoll이 File I/O부분에서는 약하다는 단점에서 이를 뛰어넘는 성능을 보여주는 io_uring이 있다는 소식을 아는 동생을 통해 전해듣게 되었다. 이를 계기로 io_uring에 대해 정리해보고자 한다. (기존에는 network I/O부분에서만 비동기를 지원했지만 io_uring을 활용하면 file I/O작업에서도 비동기 처리가 가능하다.)
+TL;DR  epoll의 고질적인 문제점은 커널과 어플리케이션 간 system call이 발생한다는 점이다.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/server-cgi-was/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/server-cgi-was/</guid>
+      <description>웹서버  정적 인터넷을 통해 요청된 웹컨텐츠의 전달을 도와주는 HW, SW  CGI  Common Gateway Interface
+  웹 서버에서 application을 동작시키기 위한 인터페이스 정적으로 동작하는 웹서버를 동적으로 관리해주기 위해 등장 클라이언트에서 동적으로 동작해야하는 request를 보내주면, CGI(인터페이스)를 통해 외부 프로그램(python, c 따위 스크립트)를 실행시켜 결과를 만든뒤, 웹서버에서 respond를 보내준다.   외부 프로그램에 요청을 보내는 방식, 2) 프로그램을 내장 시킨 코드를, fork()한 프로세스를 통해 내부적으로 동작시키는 방식    WAS  웹서버 + 동적 = Web Server + CGI 기능</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/websocket/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/websocket/</guid>
+      <description>websocket 이란  websocket 이란
+ WebSocket이란 HTML5에서 도입된 Transport protocol의 일종입니다. 쉽게 이야기하면 WEB 버전의 TCP 또는 Socket입니다.
+특징  양방향 통신 가능 (Duplex) Stateful  서버와 클라이언트 간에 Socket Connection을 유지 이와 달리 HTTP는 Request/Response 기반의 Stateless Protocol이며, 단방향 통신(클-&amp;gt;서버)이다. TCP 연결을 지속하기 때문에, HTTP와 TCP 연결에 의한 트래픽을 피할 수 있다.   refresh없이도 클라이언트 측 데이터 변경 가능(PUSH) HTTP와 같은 80포트를 사용하기 때문에, 방화벽을 재설정 하지 않아도 된다.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://minkj1992.github.io/dev/wsgi%EB%9E%80/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>minkj1992@gmail.com (leoo.j)</author>
+      <guid>https://minkj1992.github.io/dev/wsgi%EB%9E%80/</guid>
+      <description>WSGI  Web Server Gateway Interface
+ WSGI란  분류: 미들웨어, WAS
+ 웹 서버와 웹어플리케이션이 어떤 방식으로 통신하는지에 대한 방식을 정의한 프로토콜(인터페이스)을 정의해주며, 해당 인터페이스를 돌려주는 프레임워크들과 비슷한 맥락에서 사용된다. 관련 용어(기능)로는 어플리케이션 인터페이스, 미들웨어 인터페이스이 있다.
+WSGI 종류  Bjoern uWSGI mod_wsgi Gunicorn  Unix용 Python WSGI HTTP Server이다    uWSGI WSGI 규격에 맞춘 코드를 실행해주는 프로그램의 일종이다.
+ 기능 요약  WSGI 한 종류로 호스팅 서버를 구축할 수 있는 Full Stak 지원 타 언어나 플랫폼을 다룰 수 있도록 Pluggable architecture지원 (C, C++ 등)    참고자료  uWSGI 제대로 배워보자  </description>
+    </item>
+    
   </channel>
 </rss>

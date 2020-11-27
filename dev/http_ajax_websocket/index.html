@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="minkj1992@gmail.com leoo.j ">
+<meta name="description" content="HTTP, AJAX, WEBSOCKET  참고자료
+ TL; DR  HTTP는 통신 제약이 있는 약속입니다. AJAX로 HTTP의 통신 제약으로부터 조금 벗어날 수 있었습니다. Websocket은 HTTP의 통신 제약을 해결한 새로운 약속입니다.  기존의 HTTP (Naive HTTP) HTTP에서 Transfet Protocol의 대 전제는 &amp;ldquo;URL및 부가정보를 통해 사용자가 원하는 페이지를 서버에 요청하고 서버는 해당 요청에 응답한다.&amp;rdquo; 입니다. 이는 기존에 브라우저가 웹서버에 무언가를 요청하기 위해서는 URL을 통해서 페이지를 이동했어야만 한다는 것을 뜻합니다.
+이러한 HTTP 규약을 뛰어넘기 위해 AJAX를 사용하기 시작합니다." />
+<meta name="keywords" content="timeline hugo template" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://minkj1992.github.io/dev/http_ajax_websocket/" />
+
+
+    <title>
+        
+             :: Leoo&#39;s history  — Timeline
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css"> 
+
+
+
+
+<link rel="stylesheet" href="/main.805b1025016494ee5fd67b55b8ecd5e2b7c4a9f0bdda42e300c62b85ddfef68f.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="css/custom.css">
+    
+
+  
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="HTTP, AJAX, WEBSOCKET  참고자료
+ TL; DR  HTTP는 통신 제약이 있는 약속입니다. AJAX로 HTTP의 통신 제약으로부터 조금 벗어날 수 있었습니다. Websocket은 HTTP의 통신 제약을 해결한 새로운 약속입니다.  기존의 HTTP (Naive HTTP) HTTP에서 Transfet Protocol의 대 전제는 &ldquo;URL및 부가정보를 통해 사용자가 원하는 페이지를 서버에 요청하고 서버는 해당 요청에 응답한다.&rdquo; 입니다. 이는 기존에 브라우저가 웹서버에 무언가를 요청하기 위해서는 URL을 통해서 페이지를 이동했어야만 한다는 것을 뜻합니다.
+이러한 HTTP 규약을 뛰어넘기 위해 AJAX를 사용하기 시작합니다.">
+
+<meta itemprop="wordCount" content="351">
+<meta itemprop="image" content="https://minkj1992.github.io/106"/>
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/106"/>
+
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="HTTP, AJAX, WEBSOCKET  참고자료
+ TL; DR  HTTP는 통신 제약이 있는 약속입니다. AJAX로 HTTP의 통신 제약으로부터 조금 벗어날 수 있었습니다. Websocket은 HTTP의 통신 제약을 해결한 새로운 약속입니다.  기존의 HTTP (Naive HTTP) HTTP에서 Transfet Protocol의 대 전제는 &ldquo;URL및 부가정보를 통해 사용자가 원하는 페이지를 서버에 요청하고 서버는 해당 요청에 응답한다.&rdquo; 입니다. 이는 기존에 브라우저가 웹서버에 무언가를 요청하기 위해서는 URL을 통해서 페이지를 이동했어야만 한다는 것을 뜻합니다.
+이러한 HTTP 규약을 뛰어넘기 위해 AJAX를 사용하기 시작합니다."/>
+
+
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="HTTP, AJAX, WEBSOCKET  참고자료
+ TL; DR  HTTP는 통신 제약이 있는 약속입니다. AJAX로 HTTP의 통신 제약으로부터 조금 벗어날 수 있었습니다. Websocket은 HTTP의 통신 제약을 해결한 새로운 약속입니다.  기존의 HTTP (Naive HTTP) HTTP에서 Transfet Protocol의 대 전제는 &ldquo;URL및 부가정보를 통해 사용자가 원하는 페이지를 서버에 요청하고 서버는 해당 요청에 응답한다.&rdquo; 입니다. 이는 기존에 브라우저가 웹서버에 무언가를 요청하기 위해서는 URL을 통해서 페이지를 이동했어야만 한다는 것을 뜻합니다.
+이러한 HTTP 규약을 뛰어넘기 위해 AJAX를 사용하기 시작합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/dev/http_ajax_websocket/" />
+<meta property="og:image" content="https://minkj1992.github.io/106"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">Leoo&#39;s history</span>
+            <span class="logo__text">$</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://minkj1992.github.io/info/">Info</a></li><li><a href="https://minkj1992.github.io/timeline/">Timeline</a></li><li><a href="https://minkj1992.github.io/dev/">Dev</a></li><li><a href="https://minkj1992.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+             
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post"> 
+
+        <article>
+            <h2 class="post-title"><a href="https://minkj1992.github.io/dev/http_ajax_websocket/"></a></h2>
+
+            
+
+            <div class="post-content">
+                <h1 id="http-ajax-websocket">HTTP, AJAX, WEBSOCKET</h1>
+<blockquote>
+<p><a href="https://medium.com/@chullino/http%EC%97%90%EC%84%9C%EB%B6%80%ED%84%B0-websocket%EA%B9%8C%EC%A7%80-94df91988788">참고자료</a></p>
+</blockquote>
+<h2 id="tl-dr">TL; DR</h2>
+<ul>
+<li>HTTP는 통신 제약이 있는 약속입니다.</li>
+<li>AJAX로 HTTP의 통신 제약으로부터 조금 벗어날 수 있었습니다.</li>
+<li>Websocket은 HTTP의 통신 제약을 해결한 새로운 약속입니다.</li>
+</ul>
+<h2 id="기존의-http-naive-http">기존의 HTTP (Naive HTTP)</h2>
+<p>HTTP에서 Transfet Protocol의 대 전제는 &ldquo;URL및 부가정보를 통해 사용자가 원하는 페이지를 서버에 요청하고 서버는 해당 요청에 응답한다.&rdquo; 입니다. 이는 기존에 브라우저가 웹서버에 무언가를 요청하기 위해서는 URL을 통해서 페이지를 이동했어야만 한다는 것을 뜻합니다.</p>
+<p>이러한 HTTP 규약을 뛰어넘기 위해 <code>AJAX</code>를 사용하기 시작합니다.
+HTTP가 protocol이라면 AJAX는 효과적으로 서버와 소통하기 위한 기술입니다.</p>
+<p>기존에는 요청이 들어왔다면 이 요청에 대해 서버에서 새롭게 HTML을 생성하여 전송해주어 client에서는 페이지가 이동한것 처럼 보이게 만들었다면, Ajax기술은 동일한 웹페이지 내에서 DOM을 변경하게 됩니다. 즉 client 측에서 새로운 값을 작성했다면 JS에서 해당 이름과 내용이 쓰여진 DOM을 읽어 들이고, XMLHttpRequest 객체를 통해 웹서버에 변경된 내용과 tag를 전송합니다. 이후 웹서버는 요청을 처리하고 XML, Text, JSON을 통해 XMLHttpRequest 객체에 전송합니다. 그러면 JS가 해당 응답 정보를 DOM에 rewrite 함으로써 결과 페이지가 만들어집니다. <strong>즉 AJAX를 사용하면 HTML 페이지 전체를 바꿔주는 것이 아닌, 부분적인 DOM만 바꿀 수 있게 되는 것입니다.</strong></p>
+<p>참고로 XMLHttpRequest는 서버와의 연결을 잡아둡니다. 그렇기 때문에 필요한 데이터를 정확한 위치로 서버가 클라이언트로 제공할 수 있습니다.</p>
+<h2 id="naive-http-vs-ajax">Naive HTTP vs AJAX</h2>
+<ol>
+<li>페이지 전체를 변경?
+<ul>
+<li>Naive HTTP: 전체 변경</li>
+<li>AJAX: 부분 변경 (with json, xml, &hellip;)</li>
+</ul>
+</li>
+<li>request 담당자
+<ul>
+<li>HTTP: 웹브라우저가 서버에 request</li>
+<li>AJAX: XMLHttpRequest 객체가 서버에 request</li>
+</ul>
+</li>
+<li>페이지 Update시, 페이지 이동 여부
+<ul>
+<li>HTTP: 항상 새롭게 페이지 생성</li>
+<li>AJAX: 조그마한 변경시, 현재 페이지 내에서 변경 가능</li>
+</ul>
+</li>
+</ol>
+<h2 id="ajax의-한계와-web-socket의-등장">AJAX의 한계와 Web Socket의 등장</h2>
+<p>AJAX또한 <code>요청-&gt;응답</code>의 HTTP 틀에서 벗어나지 못하였기 때문에, <strong>클라이언트의 요청이 없음에도, 서버로부터 응답을 받는 상황</strong> 즉 <strong>서버는 응답밖에 할 수 없었다.</strong>(양방향 통신이 아닌 단방향 통신)이라는 한계점이 존재하였습니다.</p>
+<p>이를 해결하기 위해 <code>Comet</code> (a.k.a <code>Long Polling</code>)이 등장하였고 이를 통해 &ldquo;클라이언트의 요청이 없음에도 서버로부터 응답을 받는 상황&quot;을 만들어 낼 수 있었지만 <code>PUSH</code>방식이 아닌, 클라이언트가 서버에게 요청하는 <code>Polling</code>방식이었습니다.</p>
+<p>이런 애로사항은 HTML5 개발 과정에 녹아들었고, HTML5은 순수 웹 환경에서 실시간 양방향 통신이 가능해지도록 <code>Web Socket</code>을 도입하였습니다.</p>
+<h2 id="web-socket">Web Socket</h2>
+<blockquote>
+<p>웹소켓은 브라우저와 서버가 양방향 통신을 할 수 있도록 지원하는 프로토콜입니다.</p>
+</blockquote>
+<p>웹소켓에서는 서버와 브라우저 사이에 양방향 소통이 가능합니다.</p>
+<ul>
+<li>브라우저는 서버가 PUSH해주는 데이터를 받을 수 있습니다.</li>
+<li>웹사이트로 이동하지 않아도, 최신 데이터가 적용된 웹을 볼 수 있습니다.</li>
+<li><strong>기존의 <code>새로고침</code>하거나, 다른 주소로 이동을 통해서만 새로운 데이터를 제공하는 웹서비스 환경의 본질적인 문제를 풀어준 방법</strong></li>
+</ul>
+ 
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+             
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://minkj1992.github.io/">leoo.j</a></span>
+            
+             
+        </div>
+    </div> 
+</footer>
+<script type="text/javascript">
+    $(function(){
+
+  window.sr = ScrollReveal();
+
+  if ($(window).width() < 768) {
+
+    if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+        $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+    }
+
+    sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  } else {
+    
+    sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  }
+  
+  sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+
+});
+
+</script>
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>
