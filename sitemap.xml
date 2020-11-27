@@ -3,19 +3,86 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://minkj1992.github.io/categories/</loc>
-  </url>
-  
-  <url>
     <loc>https://minkj1992.github.io/</loc>
-  </url>
-  
-  <url>
-    <loc>https://minkj1992.github.io/series/</loc>
+    <lastmod>2020-10-18T18:19:37+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://minkj1992.github.io/tags/</loc>
+    <lastmod>2020-10-18T18:19:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/timeline/</loc>
+    <lastmod>2020-10-18T18:19:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/tags/untagged/</loc>
+    <lastmod>2020-10-18T18:19:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/timeline/%EB%AC%B4%EC%A0%9C/</loc>
+    <lastmod>2020-10-18T18:19:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/timeline/post_test/</loc>
+    <lastmod>2020-10-18T18:17:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/timeline/test/</loc>
+    <lastmod>2020-10-18T18:17:37+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/dev/zsh_bash_pyenv_%EC%B6%A9%EB%8F%8C/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/dev/zsh_vscode_shortcut/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/dev/api_schema/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/dev/django_model/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/dev/fbv_cbv/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/dev/httprequest_httpresponse/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/dev/mixins/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/dev/readme/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/dev/rest_httprequest_httpresponse/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/dev/</loc>
+  </url>
+  
+  <url>
+    <loc>https://minkj1992.github.io/series/</loc>
   </url>
   
 </urlset>

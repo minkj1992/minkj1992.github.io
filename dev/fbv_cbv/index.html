@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="minkj1992@gmail.com leoo.j ">
+<meta name="description" content="FBV vs CBV  link
+  Function Base View (FBV - 함수 기반 뷰)  함수로 구현한 뷰   Class Base View (CBV - 클래스 기반 뷰)  클래스로 함수를 구현한 뷰    FBV from django.shortcuts import get_object_or_404, render def person_detail(request, id): person = get_object_or_404(Person, id=id) return render(request, &amp;#39;person/person_detail.html&amp;#39;,{ &amp;#39;person&amp;#39;: person, }) person_detail(4) CBV  재사용을 위해서 사용하는 일종의 템플릿 (DRY principle)
+ class DetailView: @classmethod def as_view(cls, model): def view_fn(request, id): instance = get_object_or_404(model, id=id) instance_name = model." />
+<meta name="keywords" content="timeline hugo template" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://minkj1992.github.io/dev/fbv_cbv/" />
+
+
+    <title>
+        
+             :: Leoo&#39;s history  — Timeline
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css"> 
+
+
+
+
+<link rel="stylesheet" href="/main.805b1025016494ee5fd67b55b8ecd5e2b7c4a9f0bdda42e300c62b85ddfef68f.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="css/custom.css">
+    
+
+  
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="FBV vs CBV  link
+  Function Base View (FBV - 함수 기반 뷰)  함수로 구현한 뷰   Class Base View (CBV - 클래스 기반 뷰)  클래스로 함수를 구현한 뷰    FBV from django.shortcuts import get_object_or_404, render def person_detail(request, id): person = get_object_or_404(Person, id=id) return render(request, &#39;person/person_detail.html&#39;,{ &#39;person&#39;: person, }) person_detail(4) CBV  재사용을 위해서 사용하는 일종의 템플릿 (DRY principle)
+ class DetailView: @classmethod def as_view(cls, model): def view_fn(request, id): instance = get_object_or_404(model, id=id) instance_name = model.">
+
+<meta itemprop="wordCount" content="205">
+<meta itemprop="image" content="https://minkj1992.github.io/"/>
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/"/>
+
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="FBV vs CBV  link
+  Function Base View (FBV - 함수 기반 뷰)  함수로 구현한 뷰   Class Base View (CBV - 클래스 기반 뷰)  클래스로 함수를 구현한 뷰    FBV from django.shortcuts import get_object_or_404, render def person_detail(request, id): person = get_object_or_404(Person, id=id) return render(request, &#39;person/person_detail.html&#39;,{ &#39;person&#39;: person, }) person_detail(4) CBV  재사용을 위해서 사용하는 일종의 템플릿 (DRY principle)
+ class DetailView: @classmethod def as_view(cls, model): def view_fn(request, id): instance = get_object_or_404(model, id=id) instance_name = model."/>
+
+
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="FBV vs CBV  link
+  Function Base View (FBV - 함수 기반 뷰)  함수로 구현한 뷰   Class Base View (CBV - 클래스 기반 뷰)  클래스로 함수를 구현한 뷰    FBV from django.shortcuts import get_object_or_404, render def person_detail(request, id): person = get_object_or_404(Person, id=id) return render(request, &#39;person/person_detail.html&#39;,{ &#39;person&#39;: person, }) person_detail(4) CBV  재사용을 위해서 사용하는 일종의 템플릿 (DRY principle)
+ class DetailView: @classmethod def as_view(cls, model): def view_fn(request, id): instance = get_object_or_404(model, id=id) instance_name = model." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/dev/fbv_cbv/" />
+<meta property="og:image" content="https://minkj1992.github.io/"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">Leoo&#39;s history</span>
+            <span class="logo__text">$</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://minkj1992.github.io/info/">Info</a></li><li><a href="https://minkj1992.github.io/timeline/">Timeline</a></li><li><a href="https://minkj1992.github.io/dev/">Dev</a></li><li><a href="https://minkj1992.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+             
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post"> 
+
+        <article>
+            <h2 class="post-title"><a href="https://minkj1992.github.io/dev/fbv_cbv/"></a></h2>
+
+            
+
+            <div class="post-content">
+                <h1 id="fbv-vs-cbv">FBV vs CBV</h1>
+<blockquote>
+<p><a href="http://jangwon.io/django/study/2018/03/01/(Django)-FBV%EC%99%80-CBV%EC%9D%98-%EC%A0%95%EC%9D%98/">link</a></p>
+</blockquote>
+<ul>
+<li>Function Base View (FBV - 함수 기반 뷰)
+<ul>
+<li>함수로 구현한 뷰</li>
+</ul>
+</li>
+<li>Class Base View (CBV - 클래스 기반 뷰)
+<ul>
+<li>클래스로 함수를 구현한 뷰</li>
+</ul>
+</li>
+</ul>
+<h2 id="fbv">FBV</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> get_object_or_404, render
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">person_detail</span>(request, id):
+    person <span style="color:#f92672">=</span> get_object_or_404(Person, id<span style="color:#f92672">=</span>id)
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;person/person_detail.html&#39;</span>,{
+        <span style="color:#e6db74">&#39;person&#39;</span>: person,
+    })
+
+person_detail(<span style="color:#ae81ff">4</span>)
+</code></pre></div><h2 id="cbv">CBV</h2>
+<blockquote>
+<p>재사용을 위해서 사용하는 일종의 템플릿 (DRY principle)</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DetailView</span>:
+    <span style="color:#a6e22e">@classmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">as_view</span>(cls, model):
+        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">view_fn</span>(request, id):
+            instance <span style="color:#f92672">=</span> get_object_or_404(model, id<span style="color:#f92672">=</span>id)
+            instance_name <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>_meta<span style="color:#f92672">.</span>model_name
+            app_name <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>_meta<span style="color:#f92672">.</span>app_label
+            template_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{}/{}_detail.html&#39;</span><span style="color:#f92672">.</span>format(app_name, instance_name)
+            <span style="color:#66d9ef">return</span> render(request, template_name, {
+                instance_name: instance_name,
+            })
+        <span style="color:#66d9ef">return</span> view_fn
+
+DetailView<span style="color:#f92672">.</span>as_view(Person, <span style="color:#ae81ff">4</span>)
+</code></pre></div><h3 id="cbvs-method-type-3">CBV&rsquo;s Method type (3)</h3>
+<ul>
+<li>
+<p>instance method : instance를 통한 호출. 첫번째 인자로 instance가 자동 지정 (self에 대입)</p>
+</li>
+<li>
+<p>class method : class를 통한 호출. 첫번째 인자로 Class가 자동 지정 (cls에 대입)</p>
+</li>
+<li>
+<p>static method : class를 통한 호출. 자동으로 지정되는 인자가 없음. 활용은 class method와 동일.</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> random
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>:
+    <span style="color:#66d9ef">def</span> __init__(self, name, gender, country):
+        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+        self<span style="color:#f92672">.</span>gender <span style="color:#f92672">=</span> gender
+        self<span style="color:#f92672">.</span>country <span style="color:#f92672">=</span> country
+    
+    <span style="color:#75715e"># instance method</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_hello</span>(self):
+        <span style="color:#66d9ef">return</span> f<span style="color:#e6db74">&#39;Hi this is {self.name}[{self.gender}] from {self.country}&#39;</span>
+    
+    <span style="color:#75715e"># class method</span>
+    <span style="color:#a6e22e">@classmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">new_boy</span>(cls, name, country):
+        <span style="color:#66d9ef">return</span> Person(name, <span style="color:#e6db74">&#34;boy&#34;</span>, country)
+    
+    <span style="color:#a6e22e">@classmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">new_girl</span>(cls, name, country):
+        <span style="color:#66d9ef">return</span> Person(name, <span style="color:#e6db74">&#34;girl&#34;</span>, country)
+    
+    <span style="color:#75715e"># static method</span>
+    <span style="color:#a6e22e">@staticmethod</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">random_name</span>(gender, country, level <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>):
+        random_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span><span style="color:#f92672">.</span>join(random<span style="color:#f92672">.</span>choice(gender<span style="color:#f92672">+</span>country) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(level))
+        <span style="color:#66d9ef">return</span> Person(random_name, gender, country)
+</code></pre></div> 
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+             
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://minkj1992.github.io/">leoo.j</a></span>
+            
+             
+        </div>
+    </div> 
+</footer>
+<script type="text/javascript">
+    $(function(){
+
+  window.sr = ScrollReveal();
+
+  if ($(window).width() < 768) {
+
+    if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+        $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+    }
+
+    sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  } else {
+    
+    sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  }
+  
+  sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+
+});
+
+</script>
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>
