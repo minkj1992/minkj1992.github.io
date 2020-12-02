@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="minkj1992@gmail.com leoo.j ">
+<meta name="description" content="1. 예측 범위 내의 요구사항  Predictable Demands pattern, 다음은 OREILLY의 쿠버네티스 패턴 2장을 요약한 내용입니다.
+  1. 예측 범위 내의 요구사항  1.1. 문제 1.2. 해결 1.3. 런타임 의존성  1.3.1. 파일 스토리지 1.3.2. 포트 1.3.3. 설정(Configuration)   1.4. 자원 프로파일 (QoS) 1.5. 파드 우선순위 (Priority) 1.6. QoS vs Pod priority 1.7. 프로젝트 자원    Predictable Demands pattern은 hard runtime(물리적으로 필요한 런타임 환경) 의존성이나리소스 요구사항과 상관 없이, 애플리케이션 요구사항을 선언하는 방법이다." />
+<meta name="keywords" content="timeline hugo template" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://minkj1992.github.io/dev/predictable_demands_pattern/" />
+
+
+    <title>
+        
+             :: Leoo&#39;s history  — Timeline
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css"> 
+
+
+
+
+<link rel="stylesheet" href="/main.805b1025016494ee5fd67b55b8ecd5e2b7c4a9f0bdda42e300c62b85ddfef68f.css">
+
+
+    
+        <link rel="stylesheet" type="text/css" href="css/custom.css">
+    
+
+  
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="1. 예측 범위 내의 요구사항  Predictable Demands pattern, 다음은 OREILLY의 쿠버네티스 패턴 2장을 요약한 내용입니다.
+  1. 예측 범위 내의 요구사항  1.1. 문제 1.2. 해결 1.3. 런타임 의존성  1.3.1. 파일 스토리지 1.3.2. 포트 1.3.3. 설정(Configuration)   1.4. 자원 프로파일 (QoS) 1.5. 파드 우선순위 (Priority) 1.6. QoS vs Pod priority 1.7. 프로젝트 자원    Predictable Demands pattern은 hard runtime(물리적으로 필요한 런타임 환경) 의존성이나리소스 요구사항과 상관 없이, 애플리케이션 요구사항을 선언하는 방법이다.">
+
+<meta itemprop="wordCount" content="761">
+<meta itemprop="image" content="https://minkj1992.github.io/106"/>
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/106"/>
+
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="1. 예측 범위 내의 요구사항  Predictable Demands pattern, 다음은 OREILLY의 쿠버네티스 패턴 2장을 요약한 내용입니다.
+  1. 예측 범위 내의 요구사항  1.1. 문제 1.2. 해결 1.3. 런타임 의존성  1.3.1. 파일 스토리지 1.3.2. 포트 1.3.3. 설정(Configuration)   1.4. 자원 프로파일 (QoS) 1.5. 파드 우선순위 (Priority) 1.6. QoS vs Pod priority 1.7. 프로젝트 자원    Predictable Demands pattern은 hard runtime(물리적으로 필요한 런타임 환경) 의존성이나리소스 요구사항과 상관 없이, 애플리케이션 요구사항을 선언하는 방법이다."/>
+
+
+
+    <meta property="og:title" content="" />
+<meta property="og:description" content="1. 예측 범위 내의 요구사항  Predictable Demands pattern, 다음은 OREILLY의 쿠버네티스 패턴 2장을 요약한 내용입니다.
+  1. 예측 범위 내의 요구사항  1.1. 문제 1.2. 해결 1.3. 런타임 의존성  1.3.1. 파일 스토리지 1.3.2. 포트 1.3.3. 설정(Configuration)   1.4. 자원 프로파일 (QoS) 1.5. 파드 우선순위 (Priority) 1.6. QoS vs Pod priority 1.7. 프로젝트 자원    Predictable Demands pattern은 hard runtime(물리적으로 필요한 런타임 환경) 의존성이나리소스 요구사항과 상관 없이, 애플리케이션 요구사항을 선언하는 방법이다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/dev/predictable_demands_pattern/" />
+<meta property="og:image" content="https://minkj1992.github.io/106"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">Leoo&#39;s history</span>
+            <span class="logo__text">$</span>
+            <span class="logo__cursor" style=
+                  "
+                   
+                   ">
+            </span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://minkj1992.github.io/info/">Info</a></li><li><a href="https://minkj1992.github.io/timeline/">Timeline</a></li><li><a href="https://minkj1992.github.io/dev/">Dev</a></li><li><a href="https://minkj1992.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+             
+            <span class="theme-toggle unselectable"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post"> 
+
+        <article>
+            <h2 class="post-title"><a href="https://minkj1992.github.io/dev/predictable_demands_pattern/"></a></h2>
+
+            
+
+            <div class="post-content">
+                <h1 id="1-예측-범위-내의-요구사항">1. 예측 범위 내의 요구사항</h1>
+<blockquote>
+<p>Predictable Demands pattern, <em>다음은 OREILLY의 쿠버네티스 패턴 2장을 요약한 내용입니다.</em></p>
+</blockquote>
+<!-- TOC -->
+<ul>
+<li><a href="#1-%EC%98%88%EC%B8%A1-%EB%B2%94%EC%9C%84-%EB%82%B4%EC%9D%98-%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD">1. 예측 범위 내의 요구사항</a>
+<ul>
+<li><a href="#11-%EB%AC%B8%EC%A0%9C">1.1. 문제</a></li>
+<li><a href="#12-%ED%95%B4%EA%B2%B0">1.2. 해결</a></li>
+<li><a href="#13-%EB%9F%B0%ED%83%80%EC%9E%84-%EC%9D%98%EC%A1%B4%EC%84%B1">1.3. 런타임 의존성</a>
+<ul>
+<li><a href="#131-%ED%8C%8C%EC%9D%BC-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80">1.3.1. 파일 스토리지</a></li>
+<li><a href="#132-%ED%8F%AC%ED%8A%B8">1.3.2. 포트</a></li>
+<li><a href="#133-%EC%84%A4%EC%A0%95configuration">1.3.3. 설정(Configuration)</a></li>
+</ul>
+</li>
+<li><a href="#14-%EC%9E%90%EC%9B%90-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC-qos">1.4. 자원 프로파일 (QoS)</a></li>
+<li><a href="#15-%ED%8C%8C%EB%93%9C-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84-priority">1.5. 파드 우선순위 (Priority)</a></li>
+<li><a href="#16-qos-vs-pod-priority">1.6. QoS vs Pod priority</a></li>
+<li><a href="#17-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EC%9E%90%EC%9B%90">1.7. 프로젝트 자원</a></li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<p><code>Predictable Demands pattern</code>은 <code>hard runtime</code>(물리적으로 필요한 런타임 환경) 의존성이나리소스 요구사항과 상관 없이, 애플리케이션 요구사항을 선언하는 방법이다. 해당 요구사항 선언은 <strong>쿠버네티스가 클러스터 내에서 애플리케이션에 적합한 노드를 찾기 위해 반드시 필요하다.</strong></p>
+<h2 id="11-문제">1.1. 문제</h2>
+<p>다양한 언어/프레임워크들로 생성된 애플리케이션을 컨테이너를 사용해 관리하게 되면 <strong>컨테이너가 최적의 기능을 수행하는 데 필요한 자원량을 예측하기 어려워진다.</strong></p>
+<p>특정 자원량 외에도 애플리케이션 별로 특정 포트 번호를 사용해야 작동하는 서비스들도 존재한다.</p>
+<p>이 처럼 <code>애플리케이션 런타임</code>은 리소스 요구사항, 데이터 스토리지, 애플리케이션 설정 같은 플랫폼 관리 기능이 필요하다.</p>
+<h2 id="12-해결">1.2. 해결</h2>
+<blockquote>
+<p>해결: 컨테이너 런타임 요구사항을 미리 알려준다.</p>
+</blockquote>
+<ol>
+<li>효율적인 컨테이너 지능적인 배치(placement)
+<ul>
+<li>모든 런타임 의존성과 자원 요구량, 우선순위가 미리 계산되면, 쿠버네티스는 클러스터 내에 컨테이너 실행 위치를 효과적으로 배치 가능하다.</li>
+</ul>
+</li>
+<li>컨테이너 <code>자원 프로파일</code>이 제공 되면 용량 계획이 가능.
+<ul>
+<li>성공적인 클러스터 관리를 위해선 서비스 자원 프로파일과 용량 계획을 장기적으로 함꼐 진행해야 함. (런타임 의존성과 관련)</li>
+</ul>
+</li>
+</ol>
+<h2 id="13-런타임-의존성">1.3. 런타임 의존성</h2>
+<ul>
+<li><code>tl;dr</code>
+<ul>
+<li>스토리지와 포트 번호 의존성은 파드가 스케줄링되는 위치를 제한한다.</li>
+<li>컨피그맵/시크릿 의존성은 파드가 시작하는 부분까지도 막을 수 있다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="131-파일-스토리지">1.3.1. 파일 스토리지</h3>
+<blockquote>
+<p>애플리케이션 상태를 저장하는 데 사용</p>
+</blockquote>
+<ol>
+<li>
+<p>emptyDir</p>
+<ul>
+<li>가장 간단한 볼륨 타입</li>
+<li>일시적이며 파드가 종료되면 삭제</li>
+</ul>
+</li>
+<li>
+<p>persistentVolumeClaim</p>
+<ul>
+<li>파드 레벨 스토리지</li>
+<li>파드 restart 후에도 데이터 저장</li>
+</ul>
+</li>
+</ol>
+<p><code>스케줄러</code>는 파드가 요청한 볼륨 종류룰 판단하며, 만약 클러스터의 워커노드가 제공하지 않는 볼륨을 파드가 필요로 하면 <strong>파드는 결코 스케줄링 되지 않는다.</strong></p>
+<h3 id="132-포트">1.3.2. 포트</h3>
+<blockquote>
+<p>호스트 시스템의 특정 포트로 컨테이너 포트 노출을 요청</p>
+</blockquote>
+<ol>
+<li><code>hostProt</code>
+<ul>
+<li>클러스터에서 각 노드에 해당 포트를 예약하고 노드 하나당 최대 하나의 파드만 스케줄링 되게 제한 한다.</li>
+<li>포트 충돌 때문에 <strong>쿠버네티스 클러스터 노드 수만큼만 파드 확장 가능</strong></li>
+</ul>
+</li>
+</ol>
+<h3 id="133-설정configuration">1.3.3. 설정(Configuration)</h3>
+<ol>
+<li><code>ConfigMap</code> / <code>Secret</code>
+<ul>
+<li>요청한 모든 컨피그맵이 생성되지 않으면 컨테이너는 노드에 스케줄링 될 수 있지만, 시작되지 않도록 막을 수도 있다.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">ConfigMap</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">random-generator-config</span>
+<span style="color:#f92672">data</span>:
+  <span style="color:#f92672">pattern</span>: <span style="color:#ae81ff">Predictable Demands</span>
+---
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">random-generator</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">containers</span>:
+  - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">k8spatterns/random-generator:1.0</span>
+    <span style="color:#f92672">name</span>: <span style="color:#ae81ff">random-generator</span>
+    <span style="color:#f92672">env</span>:
+    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">PATTERN</span>
+      <span style="color:#f92672">valueFrom</span>:
+        <span style="color:#75715e"># First Hard requirement for a config map to exist.</span>
+        <span style="color:#f92672">configMapKeyRef</span>:
+          <span style="color:#f92672">name</span>: <span style="color:#ae81ff">random-generator-config</span>
+          <span style="color:#f92672">key</span>: <span style="color:#ae81ff">pattern</span>
+</code></pre></div><h2 id="14-자원-프로파일-qos">1.4. 자원 프로파일 (QoS)</h2>
+<blockquote>
+<p>쿠버네티스 컨텍스 내에서 compute resource라고 함은 컨테이너에 의해 요청/할당/소비 되는 무언가이다.</p>
+</blockquote>
+<ul>
+<li>종류
+<ol>
+<li>압축 가능 자원(compressible resource)
+<ul>
+<li>cpu, 네트워크 대역폭 처럼 제어 가능</li>
+<li><strong>너무 많이 소비할 경우, 병목 현상</strong></li>
+</ul>
+</li>
+<li>압축 불가능 자원(incompressible resource)
+<ul>
+<li>메모리 처럼 제어 불가능</li>
+<li>너무 많이 소비하면 컨테이너 kill(애플리케이션에 할당된 메모리 해제 요청할 방법이 없기 때문)</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<p>쿠버네티스는 최소 자원량(request), 최대 자원량(limits)를 통하여 cpu/ 메모리 양을 지정할 수 있다. (linux의 soft/hard와 유사)</p>
+<p>특히 reuqests는 <strong>스케줄러가 파드를 노드에 배치시킬 때 사용</strong>되며, 스케줄러는 해당 파드와 파드 안의 모든 컨테이너 요청 자원량을 합산해 충분히 수용 가능한 노드들만 고려한다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">
+<span style="color:#75715e"># DeploymentConfig for starting up the random-generator</span>
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">apps/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Deployment</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">random-generator</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">replicas</span>: <span style="color:#ae81ff">1</span>
+  <span style="color:#f92672">selector</span>:
+    <span style="color:#f92672">matchLabels</span>:
+      <span style="color:#f92672">app</span>: <span style="color:#ae81ff">random-generator</span>
+  <span style="color:#f92672">template</span>:
+    <span style="color:#f92672">metadata</span>:
+      <span style="color:#f92672">labels</span>:
+        <span style="color:#f92672">app</span>: <span style="color:#ae81ff">random-generator</span>
+    <span style="color:#f92672">spec</span>:
+      <span style="color:#f92672">containers</span>:
+      - <span style="color:#f92672">image</span>: <span style="color:#ae81ff">k8spatterns/random-generator:1.0</span>
+        <span style="color:#f92672">name</span>: <span style="color:#ae81ff">random-generator</span>
+        <span style="color:#f92672">ports</span>:
+        - <span style="color:#f92672">containerPort</span>: <span style="color:#ae81ff">8080</span>
+          <span style="color:#f92672">protocol</span>: <span style="color:#ae81ff">TCP</span>
+        <span style="color:#f92672">resources</span>:
+          <span style="color:#75715e"># Initial resource request for CPU and memory</span>
+          <span style="color:#f92672">requests</span>:
+            <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">100m</span>
+            <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">100Mi</span>
+          <span style="color:#75715e"># Upper limit until we want our application to grow at max</span>
+          <span style="color:#f92672">limits</span>:
+            <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">200m</span>
+            <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">200Mi</span>
+</code></pre></div><p>requests나 limits을 통해서 다음과 같은 여러 종류의 서비스 품질(QoS)를 지원한다.</p>
+<ol>
+<li>최선적 파드(Best Effort)
+<ul>
+<li>requests나 limits을 포함하지 않는다.</li>
+<li>가장 낮은 우선순위</li>
+<li><code>incompressible resource</code> 고갈 시 가장 먼저 죽는다.</li>
+</ul>
+</li>
+<li>확장 가능 파드(Burstable)
+<ul>
+<li>requests와 limits의 값이 다르다. (보통 requests &lt; limits)</li>
+<li>지정한 범위 만큼 자원 소비</li>
+<li><code>incompressible resource</code> 압박이 있을경우, Best Effort가 없다면 죽을 확률이 높다.</li>
+</ul>
+</li>
+<li>보장된 파드(Guaranteed)
+<ul>
+<li>request = limits 동일하게 지정</li>
+<li>가장 우선순위가 높은 파드</li>
+<li>셋 중 가장 나중에 죽는다.</li>
+</ul>
+</li>
+</ol>
+<h2 id="15-파드-우선순위-priority">1.5. 파드 우선순위 (Priority)</h2>
+<ul>
+<li><code>PriorityClass</code></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">scheduling.k8s.io/v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">PriorityClass</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">high-priority</span>
+<span style="color:#f92672">value</span>: <span style="color:#ae81ff">1000000</span>
+<span style="color:#f92672">globalDefault</span>: <span style="color:#66d9ef">false</span>
+<span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;매우 높은 우선순위의 pod Class&#34;</span>
+---
+<span style="color:#f92672">apiVersion</span>: <span style="color:#ae81ff">v1</span>
+<span style="color:#f92672">kind</span>: <span style="color:#ae81ff">Pod</span>
+<span style="color:#f92672">metadata</span>:
+  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+  <span style="color:#f92672">labels</span>:
+    <span style="color:#f92672">env</span>: <span style="color:#ae81ff">test</span>
+<span style="color:#f92672">spec</span>:
+  <span style="color:#f92672">containers</span>:
+  - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">nginx</span>
+    <span style="color:#f92672">image</span>: <span style="color:#ae81ff">nginx</span>
+  <span style="color:#f92672">priorityClassName</span>: <span style="color:#ae81ff">high-priority</span> <span style="color:#75715e"># 자원에 적용될 우선순위 클래스</span>
+</code></pre></div><p>파드 우선순위 기능이 활성화되면 스케줄러가 파드를 노드에 배치하는 순서에 영향을 준다.</p>
+<p><strong>파드를 배치하기에 충분한 용량을 가진 노드가 하나도 없다면 스케줄러는 자원을 확보하고 우선순위가 높은 파드를 배치하기 위해 노드에서 실행되고 있는 우선순위가 낮은 파드를 제거한다.</strong></p>
+<h2 id="16-qos-vs-pod-priority">1.6. QoS vs Pod priority</h2>
+<blockquote>
+<p>Pod QoS와 Pod priority 서로 연관되지 않고, orthogonal(직교)하는 기능이다.</p>
+</blockquote>
+<ul>
+<li>QoS(서비스 품질)는 사용 가능한 컴퓨팅 자원이 낮을 때 노드의 안정성을 유지하기 위해 kubelet에 의해 주로 사용된다. kubelet은 파드를 축출(eviction, <em>다른 노드로 파드를 옮기기 위해 현재 노드에 있는 파드를 삭제하는 것</em>)하기 전에 1) QoS 2) PriorityClass를 순서로 판단한다.</li>
+<li>반면 스케줄러 eviction 로직은 선점 대상 선택 시, Priority만을 고려한다.</li>
+</ul>
+<h2 id="17-프로젝트-자원">1.7. 프로젝트 자원</h2>
+<ul>
+<li>관련 키워드
+<ul>
+<li>ResourceQuota: 네임스페이스별 컴퓨팅 자원 제한</li>
+<li>LimitRange: 최소/최대 자원량 설정</li>
+<li>overcommit level: request/limit 비율 제어</li>
+</ul>
+</li>
+</ul>
+<p>requests와 limit차이가 크면 노드에 오버커밋할 가능성이 크고, 많은 컨테이너가 처음 요청 값보다 더 많은 자원을 동시에 필요로 할 경우 애플리케이션 성능이 낮아질 수 있다.</p>
+ 
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+
+             
+  		</div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2020</span>
+            
+                <span><a href="https://minkj1992.github.io/">leoo.j</a></span>
+            
+             
+        </div>
+    </div> 
+</footer>
+<script type="text/javascript">
+    $(function(){
+
+  window.sr = ScrollReveal();
+
+  if ($(window).width() < 768) {
+
+    if ($('.timeline-content').hasClass('js--fadeInLeft')) {
+        $('.timeline-content').removeClass('js--fadeInLeft').addClass('js--fadeInRight');
+    }
+
+    sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  } else {
+    
+    sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+  }
+  
+  sr.reveal('.js--fadeInLeft', {
+        origin: 'left',
+        distance: '300px',
+          easing: 'ease-in-out',
+        duration: 800,
+      });
+
+      sr.reveal('.js--fadeInRight', {
+        origin: 'right',
+        distance: '300px',
+        easing: 'ease-in-out',
+        duration: 800,
+      });
+
+
+});
+
+</script>
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.dc716e9092c9820b77f96da294d0120aeeb189b5bcea9752309ebea27fd53bbe6b13cffb2aca8ecf32525647ceb7001f76091de4199ac5a3caa432c070247f5b.js" integrity="sha512-3HFukJLJggt3&#43;W2ilNASCu6xibW86pdSMJ6&#43;on/VO75rE8/7KsqOzzJSVkfOtwAfdgkd5BmaxaPKpDLAcCR/Ww=="></script>
+
+
+
+    </body>
+</html>
