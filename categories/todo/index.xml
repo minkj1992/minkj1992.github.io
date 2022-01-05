@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>todo - Category - The Serious blog</title>
+        <link>https://minkj1992.github.io/categories/todo/</link>
+        <description>todo - Category - The Serious blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 02 Jan 2022 15:09:49 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/todo/" rel="self" type="application/rss+xml" /><item>
+    <title>Todo List</title>
+    <link>https://minkj1992.github.io/todo/</link>
+    <pubDate>Sun, 02 Jan 2022 15:09:49 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/todo/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/todo_list.jpeg" referrerpolicy="no-referrer">
+            </div>Note This article is a simple list of todos that I will write to blog in my future. 1. TODO LIST 1.1. Plan 21년 회고 22년 목표 1.2. Diary 나는 누구이고, 지금 어디에 존재하는가? 오쇼 글귀 정리 과거 네이버 / 커스텀 블로]]></description>
+</item></channel>
+</rss>

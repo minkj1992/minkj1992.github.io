@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>dev - Category - The Serious blog</title>
+        <link>https://minkj1992.github.io/categories/dev/</link>
+        <description>dev - Category - The Serious blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 03 Jan 2022 18:56:15 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>홍정모의 따라하며 배우는 C&#43;&#43;</title>
+    <link>https://minkj1992.github.io/hong_modern_cpp/</link>
+    <pubDate>Mon, 03 Jan 2022 18:56:15 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/hong_modern_cpp/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/cpp.jpeg" referrerpolicy="no-referrer">
+            </div>1. Terminology 1. Terminology 1.0.1. Basic C++ prototype forward declaration header guards (=include guards) 중복될 경우 한번만 include해라 (#pragma once) #pragma once 기 정의된 preprocessor의 일종 macro conditional compilation macro의 #ifdef, #ifndef, #else, #endif fundamental data types]]></description>
+</item></channel>
+</rss>

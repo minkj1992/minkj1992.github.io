@@ -1,15 +1,42 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All Posts - &lt;strong&gt;A serious blog&lt;/strong&gt;</title>
+        <title>All Posts - The Serious blog</title>
         <link>https://minkj1992.github.io/posts/</link>
-        <description>All Posts | &lt;strong&gt;A serious blog&lt;/strong&gt;</description>
+        <description>All Posts | The Serious blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 01 Jan 2022 23:00:00 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>This is for test</title>
-    <link>https://minkj1992.github.io/initial_post/</link>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 03 Jan 2022 18:56:15 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>홍정모의 따라하며 배우는 C&#43;&#43;</title>
+    <link>https://minkj1992.github.io/hong_modern_cpp/</link>
+    <pubDate>Mon, 03 Jan 2022 18:56:15 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/hong_modern_cpp/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/cpp.jpeg" referrerpolicy="no-referrer">
+            </div>1. Terminology 1. Terminology 1.0.1. Basic C++ prototype forward declaration header guards (=include guards) 중복될 경우 한번만 include해라 (#pragma once) #pragma once 기 정의된 preprocessor의 일종 macro conditional compilation macro의 #ifdef, #ifndef, #else, #endif fundamental data types]]></description>
+</item><item>
+    <title>Todo List</title>
+    <link>https://minkj1992.github.io/todo/</link>
+    <pubDate>Sun, 02 Jan 2022 15:09:49 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/todo/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/todo_list.jpeg" referrerpolicy="no-referrer">
+            </div>Note This article is a simple list of todos that I will write to blog in my future. 1. TODO LIST 1.1. Plan 21년 회고 22년 목표 1.2. Diary 나는 누구이고, 지금 어디에 존재하는가? 오쇼 글귀 정리 과거 네이버 / 커스텀 블로]]></description>
+</item><item>
+    <title>Let&#39;s create blog with Hugo</title>
+    <link>https://minkj1992.github.io/initial_hugo/</link>
+    <pubDate>Sun, 02 Jan 2022 14:59:43 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/initial_hugo/</guid>
+    <description><![CDATA[Note This article describes a series of technical steps to building this serious blog using the hugo framework. 사실 Hugo는 20년도에 혼자 제주도 여행을 가면서, 생각을 정리하고 싶어서 눈여겨 봤던 프레임워크이다. 당시 go를]]></description>
+</item><item>
+    <title>Initial Post</title>
+    <link>https://minkj1992.github.io/first_post/</link>
     <pubDate>Sat, 01 Jan 2022 23:00:00 &#43;0900</pubDate>
     <author>Author</author>
-    <guid>https://minkj1992.github.io/initial_post/</guid>
-    <description><![CDATA[<p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files.</p>]]></description>
+    <guid>https://minkj1992.github.io/first_post/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/featured-image.jpeg" referrerpolicy="no-referrer">
+            </div><p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files.</p>]]></description>
 </item></channel>
 </rss>

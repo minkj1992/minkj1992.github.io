@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>hugo - Tag - The Serious blog</title>
+        <link>https://minkj1992.github.io/tags/hugo/</link>
+        <description>hugo - Tag - The Serious blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 02 Jan 2022 14:59:43 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/hugo/" rel="self" type="application/rss+xml" /><item>
+    <title>Let&#39;s create blog with Hugo</title>
+    <link>https://minkj1992.github.io/initial_hugo/</link>
+    <pubDate>Sun, 02 Jan 2022 14:59:43 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/initial_hugo/</guid>
+    <description><![CDATA[Note This article describes a series of technical steps to building this serious blog using the hugo framework. 사실 Hugo는 20년도에 혼자 제주도 여행을 가면서, 생각을 정리하고 싶어서 눈여겨 봤던 프레임워크이다. 당시 go를]]></description>
+</item></channel>
+</rss>
