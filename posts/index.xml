@@ -4,12 +4,21 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | The Serious blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 06 Jan 2022 12:38:28 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Algorithm</title>
-    <link>https://minkj1992.github.io/algorithm/</link>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 06 Jan 2022 19:42:58 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>DFS and BFS</title>
+    <link>https://minkj1992.github.io/dfs_bfs/</link>
+    <pubDate>Thu, 06 Jan 2022 19:42:58 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/dfs_bfs/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/dfs_bfs.png" referrerpolicy="no-referrer">
+            </div>Note 간단하게 bfs와 dfs를 python으로 구현해보고, 상황별 장단점을 분석해본다. 1. Graph Traverse 1.1. BFS 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 from collections import deque]]></description>
+</item><item>
+    <title>Binary Tree</title>
+    <link>https://minkj1992.github.io/binary_tree/</link>
     <pubDate>Thu, 06 Jan 2022 12:38:28 &#43;0900</pubDate>
     <author>Author</author>
-    <guid>https://minkj1992.github.io/algorithm/</guid>
+    <guid>https://minkj1992.github.io/binary_tree/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/tree.jpeg" referrerpolicy="no-referrer">
             </div>Binary Tree child &gt; 2면 안된다. parent &gt; 1이면 안된다. root(부모가 없는 노드)는 한개만 존재해야 한다. array로 구현하면 편의를 위해 0인덱스를 비워둔다. parent =]]></description>
