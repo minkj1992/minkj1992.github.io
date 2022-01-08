@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - The Serious blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 06 Jan 2022 19:42:58 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 08 Jan 2022 18:58:54 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Binary Search and BST</title>
+    <link>https://minkj1992.github.io/binary_search/</link>
+    <pubDate>Sat, 08 Jan 2022 18:58:54 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/binary_search/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/binary_search.png" referrerpolicy="no-referrer">
+            </div>Note Binary Search와 BST에 대해서 정리합니다. Binary Search는 divide conquer의 일종으로 검색 범위를 binary하게 줄여나가면서 원하는 데이터를 검]]></description>
+</item><item>
     <title>DFS and BFS</title>
     <link>https://minkj1992.github.io/dfs_bfs/</link>
     <pubDate>Thu, 06 Jan 2022 19:42:58 &#43;0900</pubDate>

@@ -38,8 +38,3 @@
     - O(logn) = 트리 최대 높이 = heapify시 depth
     - n = 모든 노드들에 대하여 검사
 
-## BST ( Binary Search Tree )
-
-@TODO
-
-
