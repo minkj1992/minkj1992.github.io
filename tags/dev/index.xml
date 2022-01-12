@@ -4,7 +4,25 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - The Serious blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 08 Jan 2022 18:58:54 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 12 Jan 2022 20:21:33 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Sorting algorithms</title>
+    <link>https://minkj1992.github.io/sorting/</link>
+    <pubDate>Wed, 12 Jan 2022 20:21:33 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/sorting/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/sorting.jpeg" referrerpolicy="no-referrer">
+            </div>tl;dr index sorting name time space description 1 Bubble O(n^2) O(1) 루프당 max가 가장 뒤, swap O(n^2) 2 Selection O(n^2) O(1) 루프당 min 맨 앞, swap O(n) 3 Insertion O(n^2) O(1) I까지 sort 보장, 정렬이 어느정도 되어있다면 사용할 것 4 Merge O(nlogn) O(n) nlogn 알]]></description>
+</item><item>
+    <title>All Basic Computer Science</title>
+    <link>https://minkj1992.github.io/interview/</link>
+    <pubDate>Mon, 10 Jan 2022 11:41:50 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/interview/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/interview.jpeg" referrerpolicy="no-referrer">
+            </div>Operating System &hellip; Network 웹 통신의 큰 흐름: https://www.google.com/ 을 접속할 때 일어나는 일 키워드: dhcp, dns, nat, isp, 3-way / 4-way handshake, ssl (ssl handshake) Process 가장 먼저 브라우저가 url에 적힌 값을 파싱해서 HTTP Request Message를]]></description>
+</item><item>
     <title>Binary Search and BST</title>
     <link>https://minkj1992.github.io/binary_search/</link>
     <pubDate>Sat, 08 Jan 2022 18:58:54 &#43;0900</pubDate>

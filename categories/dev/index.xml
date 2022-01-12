@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/categories/dev/</link>
         <description>dev - Category - The Serious blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 03 Jan 2022 18:56:15 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 10 Jan 2022 11:41:50 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>All Basic Computer Science</title>
+    <link>https://minkj1992.github.io/interview/</link>
+    <pubDate>Mon, 10 Jan 2022 11:41:50 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/interview/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/interview.jpeg" referrerpolicy="no-referrer">
+            </div>Operating System &hellip; Network 웹 통신의 큰 흐름: https://www.google.com/ 을 접속할 때 일어나는 일 키워드: dhcp, dns, nat, isp, 3-way / 4-way handshake, ssl (ssl handshake) Process 가장 먼저 브라우저가 url에 적힌 값을 파싱해서 HTTP Request Message를]]></description>
+</item><item>
     <title>홍정모의 따라하며 배우는 C&#43;&#43;</title>
     <link>https://minkj1992.github.io/hong_modern_cpp/</link>
     <pubDate>Mon, 03 Jan 2022 18:56:15 &#43;0900</pubDate>
