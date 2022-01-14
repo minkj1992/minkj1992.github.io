@@ -1,9 +1,10 @@
 # Binary Search and BST
 
 
-{{< admonition >}}
-Binary Search와 BST에 대해서 정리합니다.
-{{< /admonition >}}
+> Binary Search와 BST에 대해서 정리합니다.
+
+<!--more-->
+
 
 `Binary Search`는 `divide conquer`의 일종으로 검색 범위를 binary하게 줄여나가면서 원하는 데이터를 검색하는 알고리즘입니다.
 

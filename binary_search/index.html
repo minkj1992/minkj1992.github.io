@@ -18,9 +18,7 @@
 <meta name="twitter:title" content="Binary Search and BST"/>
 <meta name="twitter:description" content="About Binary Search and BST"/>
 <meta name="application-name" content="Leoo">
-<meta name="apple-mobile-web-app-title" content="Leoo"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/binary_search/" /><link rel="prev" href="https://minkj1992.github.io/dfs_bfs/" /><link rel="next" href="https://minkj1992.github.io/interview/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+<meta name="apple-mobile-web-app-title" content="Leoo"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://minkj1992.github.io/binary_search/" /><link rel="prev" href="https://minkj1992.github.io/dfs_bfs/" /><link rel="next" href="https://minkj1992.github.io/sorting/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/minkj1992.github.io\/binary_search\/"
-        },"image": ["https:\/\/minkj1992.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "algorithm, dev","wordcount":  1853 ,
+        },"image": ["https:\/\/minkj1992.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "algorithm, dev","wordcount":  1852 ,
         "url": "https:\/\/minkj1992.github.io\/binary_search\/","datePublished": "2022-01-08T18:58:54+09:00","dateModified": "2022-01-08T20:58:37+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minwook","logo": {
@@ -51,7 +49,7 @@
             <a href="/" title="The Serious blog"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/categories/documentation/"> Docs </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="어서 누르기나 하라구"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/" title="나란 녀석 꽤 멋⭐질⭐지도?"> About </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw"></i>
@@ -94,7 +92,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/categories/documentation/" title="">Docs</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/posts/" title="어서 누르기나 하라구">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="나란 녀석 꽤 멋⭐질⭐지도?">About</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
@@ -111,7 +109,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Binary Search and BST</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/algorithm/"><i class="far fa-folder fa-fw"></i>algorithm</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-08">2022-01-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1853 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-08">2022-01-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1852 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;<span id="/binary_search/" class="leancloud_visitors" data-flag-title="Binary Search and BST">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
@@ -143,14 +141,9 @@
     <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><div class="details admonition note open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">Binary Search와 BST에 대해서 정리합니다.</div>
-        </div>
-    </div>
+            </div><div class="content" id="content"><blockquote>
+<p>Binary Search와 BST에 대해서 정리합니다.</p>
+</blockquote>
 <p><code>Binary Search</code>는 <code>divide conquer</code>의 일종으로 검색 범위를 binary하게 줄여나가면서 원하는 데이터를 검색하는 알고리즘입니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -500,8 +493,7 @@ successor: 삭제 대상 노드의 오른쪽 서브트리 가운데 최소값</p
 <li><a href="https://github.com/minkj1992/algorithm/tree/main/practice/leetcode/binarySearch" target="_blank" rel="noopener noreffer">binary search</a>
 에 정리를 해두었습니다.</li>
 </ul>
-<center> - 끝 - </center>
-</div><div class="post-footer" id="post-footer">
+<center> - 끝 - </center></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -528,7 +520,7 @@ successor: 삭제 대상 노드의 오른쪽 서브트리 가운데 최소값</p
     </div>
 
     <div class="post-nav"><a href="/dfs_bfs/" class="prev" rel="prev" title="DFS and BFS"><i class="fas fa-angle-left fa-fw"></i>DFS and BFS</a>
-            <a href="/interview/" class="next" rel="next" title="All Basic Computer Science">All Basic Computer Science<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/sorting/" class="next" rel="next" title="Sorting algorithms">Sorting algorithms<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.

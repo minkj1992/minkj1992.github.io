@@ -1,8 +1,9 @@
 # DFS and BFS
 
-{{< admonition >}}
-간단하게 bfs와 dfs를 `python`으로 구현해보고, 상황별 장단점을 분석해본다.
-{{< /admonition >}}
+
+> 간단하게 bfs와 dfs를 `python`으로 구현해보고, 상황별 장단점을 분석해본다.
+
+<!--more-->
 
 ## 1. Graph Traverse
 ### 1.1. BFS

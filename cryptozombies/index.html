@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Cryptozombies - The Serious blog</title><meta name="Description" content="Learn Solidity step by step"><meta property="og:title" content="Cryptozombies" />
+<meta property="og:description" content="Learn Solidity step by step" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/cryptozombies/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-14T15:07:46+09:00" />
+<meta property="article:modified_time" content="2022-01-14T15:07:46+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Cryptozombies"/>
+<meta name="twitter:description" content="Learn Solidity step by step"/>
+<meta name="application-name" content="Leoo">
+<meta name="apple-mobile-web-app-title" content="Leoo"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://minkj1992.github.io/cryptozombies/" /><link rel="prev" href="https://minkj1992.github.io/sorting/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cryptozombies",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/cryptozombies\/"
+        },"image": ["https:\/\/minkj1992.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "solidity, dev","wordcount":  1949 ,
+        "url": "https:\/\/minkj1992.github.io\/cryptozombies\/","datePublished": "2022-01-14T15:07:46+09:00","dateModified": "2022-01-14T15:07:46+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minwook","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": "Learn Solidity step by step"
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious blog"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="어서 누르기나 하라구"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/" title="나란 녀석 꽤 멋⭐질⭐지도?"> About </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious blog"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="어서 누르기나 하라구">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="나란 녀석 꽤 멋⭐질⭐지도?">About</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Cryptozombies</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/blockchain/"><i class="far fa-folder fa-fw"></i>blockchain</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-14">2022-01-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1949 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;<span id="/cryptozombies/" class="leancloud_visitors" data-flag-title="Cryptozombies">
+                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/zombie.png"
+        data-srcset="/images/zombie.png, images/zombie.png 1.5x, /images/zombie.png 2x"
+        data-sizes="auto"
+        alt="/images/zombie.png"
+        title="Learn Solidity step by step" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#solidity-path-beginner-to-intermediate-smart-contracts">Solidity Path: Beginner to Intermediate Smart Contracts</a></li>
+    <li><a href="#ch01-making-the-zombie-factory">CH01 Making the Zombie Factory</a>
+      <ul>
+        <li><a href="#summary">Summary</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><div class="details admonition quote open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><a href="https://cryptozombies.io/" target="_blank" rel="noopener noreffer">크립토 좀비</a>에서 <code>Solidity</code>를 학습해보자.</div>
+        </div>
+    </div>
+<p><br/><br/><br/></p>
+<h2 id="solidity-path-beginner-to-intermediate-smart-contracts">Solidity Path: Beginner to Intermediate Smart Contracts</h2>
+<ul>
+<li><i class="far fa-check-square fa-fw"></i> Making the Zombie Factory</li>
+<li><i class="far fa-square fa-fw"></i> Zombies Attack Their Victims</li>
+<li><i class="far fa-square fa-fw"></i> Advanced Solidity Concepts</li>
+<li><i class="far fa-square fa-fw"></i> Zombie Battle System</li>
+<li><i class="far fa-square fa-fw"></i> ERC721 &amp; Crypto-Collectibles</li>
+<li><i class="far fa-square fa-fw"></i> App Front-ends &amp; Web3.js</li>
+</ul>
+<h2 id="ch01-making-the-zombie-factory">CH01 Making the Zombie Factory</h2>
+<blockquote>
+<p>챕터1을 통과하게 되면 <a href="https://share.cryptozombies.io/ko/lesson/1/share/leoo?id=Y3p8MTcwMTU4" target="_blank" rel="noopener noreffer">나만의 좀비</a>를 가질 수 있다. :)</p>
+</blockquote>
+<p>솔리디티 코드는 <code>Contract</code>안에 싸여져 있다. 컨트랙트는 이더리움 app의 기본 구성 요소로, 모든 변수/함수는 하나의 컨트랙트안에 속해 있어야 한다.
+즉 컨트랙트는 모든 프로젝트의 시작 지점이라고 할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>모든 솔리디티 코드는 솔리디티의 버전을 선언 해주어야 한다. 이를 통해 새로운 컴파일러 버전이 나오더라도 코드가 깨지지 않도록 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+
+<span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>솔리디티에서 <code>state variable</code>는 컨트랙트 저장소에 영구적으로 저장된다. 즉 이더리움 블록체인에 기록이 된다.
+<code>uint</code>는 unsigned 즉 부호가 없는 정수로, <strong>음이 아닌 정수</strong>이다.  (&lt;-&gt; <code>int</code>)
+<code>uint</code>는 <code>uint256</code>를 의미하며, 256비트 정수를 표현한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+
+<span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+    <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+    <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>솔리디티는 c++과 마찬가지롤 <code>struct</code>를 제공한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+
+<span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+    <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+    <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>array안에 크기를 주지 않으면 동적할당 가능하다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="c1">// 2개의 원소를 담을 수 있는 고정 길이의 배열:
+</span><span class="c1"></span><span class="kt">uint</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">fixedArray</span><span class="p">;</span>
+<span class="c1">// 또다른 고정 배열으로 5개의 스트링을 담을 수 있다:
+</span><span class="c1"></span><span class="kt">string</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">stringArray</span><span class="p">;</span>
+<span class="c1">// 동적 배열은 고정된 크기가 없으며 계속 크기가 커질 수 있다:
+</span><span class="c1"></span><span class="kt">uint</span><span class="p">[]</span> <span class="n">dynamicArray</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>public으로 배열을 선언할 수 있으며 <code>솔리디티</code>는 이런 배열을 위해 getter 메소드를 자동적으로 생성해준다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="n">Person</span><span class="p">[]</span> <span class="k">public</span> <span class="n">people</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>함수의 경우 <code>param명</code>을  <code>언더스코어(_)</code>로 시작해서 전역 변수와 구별하는 것이 관례이다. 마찬가지로 <code>private 함수명</code> 또한 _를 쓰는 것이 convention이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol">    <span class="kd">function</span> <span class="nf">_createZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_dna</span><span class="p">)</span> <span class="k">private</span> <span class="p">{</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nf">createRandomZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>참고로 솔리디티에서 함수는 기본적으로 public이다.</p>
+<ul>
+<li>누구나 또는 다른 컨트랙트가 나의 컨트랙트 함수를 호출하고 코드를 실행할 수 있다.</li>
+</ul>
+<p>솔라디티는 함수가 데이터를 read만 하고 state change를 하지 않을 때
+<code>view 함수</code>를 사용한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">function</span> <span class="nf">sayHello</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>또한 <code>pure 함수</code>도 가지고 있는데, 이는 함수가 앱에서 어떤 데이터도 접근하지 않는(read, write둘다 하지 x) 것을 의미한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">function</span> <span class="nf">_multiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">b</span><span class="p">)</span> <span class="k">private</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>이더리움은 <code>SHA3</code>의 버전 중 하나인 <code>keccak256</code>를 내장 해시 함수로 가지고 있다. 해시 함수는 기본적으로 입력 스트링을 <code>랜덤 256bit 16진수</code>로 매핑한다.</p>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw"></i>Question<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">블록체인에서 <strong>안전한 의사 난수 발생기</strong>는 어려운 문제라고 한다고 하는데 <code>hash collision</code>과 관련해서 어렵다고 하는 걸까? 아니면 안전하다고 하는게 <code>Oracle</code>?과 관련이 있는 걸까?</div>
+        </div>
+    </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="c1">//6e91ec6b618bb462a4a6ee5aa2cb0e9cf30f7a052bb467b0ba58b8748c00d2e5
+</span><span class="c1"></span><span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;aaaab&#34;</span><span class="p">);</span>
+<span class="c1">//b1f078126895a1424524de5321b339ab00408010b7cf0e6ed451514981e58aa9
+</span><span class="c1"></span><span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;aaaac&#34;</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>event</code>는 생성한 컨트랙트가 블록체인 상에서 앱에 접근하는 사용자 layer에서 액션이 발생했을 때, 통신하는 방법이다. 컨트랙트는 특정 이벤트가 일어나는지 &ldquo;listen&quot;하며, 그 이벤트가 발생하면 <code>action</code>을 취한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="c1">// 이벤트를 선언한다
+</span><span class="c1"></span><span class="kd">event</span> <span class="nc">IntegersAdded</span><span class="p">(</span><span class="kt">uint</span> <span class="n">x</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">y</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">result</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nf">add</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_x</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_y</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+  <span class="kt">uint</span> <span class="n">result</span> <span class="o">=</span> <span class="n">_x</span> <span class="o">+</span> <span class="n">_y</span><span class="p">;</span>
+  <span class="c1">// 이벤트를 실행하여 앱에게 add 함수가 실행되었음을 알린다:
+</span><span class="c1"></span>  <span class="n">IntegersAdded</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="summary">Summary</h3>
+<p>지금까지의 과정을 정리하면 아래와 같은 코드가 최종적으로 만들어진다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+
+<span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+
+    <span class="kd">event</span> <span class="nc">NewZombie</span><span class="p">(</span><span class="kt">uint</span> <span class="n">zombieId</span><span class="p">,</span> <span class="kt">string</span> <span class="nb">name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">dna</span><span class="p">);</span>
+
+
+    <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+    <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
+
+    <span class="kd">struct</span> <span class="nc">Zombie</span> <span class="p">{</span>
+        <span class="kt">string</span> <span class="nb">name</span><span class="p">;</span>
+        <span class="kt">uint</span> <span class="n">dna</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">Zombie</span><span class="p">[]</span> <span class="k">public</span> <span class="n">zombies</span><span class="p">;</span>
+
+    <span class="kd">function</span> <span class="nf">_createZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_dna</span><span class="p">)</span> <span class="k">private</span> <span class="p">{</span>
+        <span class="kt">uint</span> <span class="n">id</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">Zombie</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">_dna</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// push returns length
+</span><span class="c1"></span>        <span class="n">NewZombie</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_name</span><span class="p">,</span> <span class="n">_dna</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nf">_generateRandomDna</span><span class="p">(</span><span class="kt">string</span> <span class="n">_str</span><span class="p">)</span> <span class="k">private</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">uint</span> <span class="n">rand</span> <span class="o">=</span> <span class="kt">uint</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_str</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">rand</span> <span class="o">%</span> <span class="n">dnaModulus</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nf">createRandomZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="kt">uint</span> <span class="n">randDna</span> <span class="o">=</span> <span class="n">_generateRandomDna</span><span class="p">(</span><span class="n">_name</span><span class="p">);</span>
+        <span class="n">_createZombie</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">randDna</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 여기에 우리가 만든 컨트랙트에 접근하는 방법을 제시한다:
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">abi</span> <span class="o">=</span> <span class="cm">/* abi generated by the compiler */</span>
+<span class="kd">var</span> <span class="nx">ZombieFactoryContract</span> <span class="o">=</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">contract</span><span class="p">(</span><span class="nx">abi</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">contractAddress</span> <span class="o">=</span> <span class="cm">/* our contract address on Ethereum after deploying */</span>
+<span class="kd">var</span> <span class="nx">ZombieFactory</span> <span class="o">=</span> <span class="nx">ZombieFactoryContract</span><span class="p">.</span><span class="nx">at</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">)</span>
+<span class="c1">// `ZombieFactory`는 우리 컨트랙트의 public 함수와 이벤트에 접근할 수 있다.
+</span><span class="c1"></span>
+<span class="c1">// 일종의 이벤트 리스너가 텍스트 입력값을 취한다:
+</span><span class="c1"></span><span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#ourButton&#34;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#nameInput&#34;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+  <span class="c1">// 우리 컨트랙트의 `createRandomZombie`함수를 호출한다:
+</span><span class="c1"></span>  <span class="nx">ZombieFactory</span><span class="p">.</span><span class="nx">createRandomZombie</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// `NewZombie` 이벤트가 발생하면 사용자 인터페이스를 업데이트한다
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">ZombieFactory</span><span class="p">.</span><span class="nx">NewZombie</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span>
+  <span class="nx">generateZombie</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">zombieId</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">dna</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// 좀비 DNA 값을 받아서 이미지를 업데이트한다
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">generateZombie</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">dna</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">dnaStr</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">dna</span><span class="p">)</span>
+  <span class="c1">// DNA 값이 16자리 수보다 작은 경우 앞 자리를 0으로 채운다
+</span><span class="c1"></span>  <span class="k">while</span> <span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">)</span>
+    <span class="nx">dnaStr</span> <span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="o">+</span> <span class="nx">dnaStr</span>
+
+  <span class="kd">let</span> <span class="nx">zombieDetails</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// 첫 2자리는 머리의 타입을 결정한다. 머리 타입에는 7가지가 있다. 그래서 모듈로(%) 7 연산을 하여
+</span><span class="c1"></span>    <span class="c1">// 0에서 6 중 하나의 값을 얻고 여기에 1을 더해서 1에서 7까지의 숫자를 만든다. 
+</span><span class="c1"></span>    <span class="c1">// 이를 기초로 &#34;head1.png&#34;에서 &#34;head7.png&#34; 중 하나의 이미지를 불러온다:
+</span><span class="c1"></span>    <span class="nx">headChoice</span><span class="o">:</span> <span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="c1">// 두번째 2자리는 눈 모양을 결정한다. 눈 모양에는 11가지가 있다:
+</span><span class="c1"></span>    <span class="nx">eyeChoice</span><span class="o">:</span> <span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">%</span> <span class="mi">11</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="c1">// 셔츠 타입에는 6가지가 있다:
+</span><span class="c1"></span>    <span class="nx">shirtChoice</span><span class="o">:</span> <span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="c1">// 마지막 6자리는 색깔을 결정하며, 360도(degree)까지 지원하는 CSS의 &#34;filter: hue-rotate&#34;를 이용하여 아래와 같이 업데이트된다:
+</span><span class="c1"></span>    <span class="nx">skinColorChoice</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">360</span><span class="p">),</span>
+    <span class="nx">eyeColorChoice</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">360</span><span class="p">),</span>
+    <span class="nx">clothesColorChoice</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">360</span><span class="p">),</span>
+    <span class="nx">zombieName</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+    <span class="nx">zombieDescription</span><span class="o">:</span> <span class="s2">&#34;A Level 1 CryptoZombie&#34;</span><span class="p">,</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">zombieDetails</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-01-14</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/cryptozombies/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/cryptozombies/" data-title="Cryptozombies" data-hashtags="solidity,dev"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/cryptozombies/" data-hashtag="solidity"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/cryptozombies/" data-title="Cryptozombies"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/cryptozombies/" data-title="Cryptozombies"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/cryptozombies/" data-title="Cryptozombies" data-image="images/zombie.png"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/solidity/">solidity</a>,&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/sorting/" class="prev" rel="prev" title="Sorting algorithms"><i class="fas fa-angle-left fa-fw"></i>Sorting algorithms</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["minkj1992"],"clientID":"ed5c1cf7b0456f1ca4c7","clientSecret":"4eb129d40ccf8f5791013a19ac93234d65fb54ea","id":"2022-01-14T15:07:46+09:00","owner":"minkj1992","repo":"The serious","title":"Cryptozombies"},"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"en","pageSize":10,"placeholder":"Your comment ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

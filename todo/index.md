@@ -1,9 +1,9 @@
 # Todo List
 
 
-{{< admonition >}}
-This article is a simple list of todos that I will write to blog in my future.
-{{< /admonition >}}
+
+> This article is a simple list of todos that I will write to blog in my future.
+<!--more-->
 
 
 ## 1. TODO LIST

@@ -10,6 +10,10 @@
     <pubDate>Sun, 02 Jan 2022 14:59:43 &#43;0900</pubDate>
     <author>Author</author>
     <guid>https://minkj1992.github.io/initial_hugo/</guid>
-    <description><![CDATA[Note This article describes a series of technical steps to building this serious blog using the hugo framework. 사실 Hugo는 20년도에 혼자 제주도 여행을 가면서, 생각을 정리하고 싶어서 눈여겨 봤던 프레임워크이다. 당시 go를]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/hugo-logo-wide.svg" referrerpolicy="no-referrer">
+            </div><blockquote>
+<p>This article describes a series of technical steps to building this <code>serious</code> blog using the <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer">hugo framework</a>.</p>
+</blockquote>]]></description>
 </item></channel>
 </rss>

@@ -18,9 +18,7 @@
 <meta name="twitter:title" content="DFS and BFS"/>
 <meta name="twitter:description" content="About DFS and BFS"/>
 <meta name="application-name" content="Leoo">
-<meta name="apple-mobile-web-app-title" content="Leoo"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/dfs_bfs/" /><link rel="prev" href="https://minkj1992.github.io/binary_tree/" /><link rel="next" href="https://minkj1992.github.io/binary_search/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+<meta name="apple-mobile-web-app-title" content="Leoo"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://minkj1992.github.io/dfs_bfs/" /><link rel="prev" href="https://minkj1992.github.io/binary_tree/" /><link rel="next" href="https://minkj1992.github.io/binary_search/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +27,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/minkj1992.github.io\/dfs_bfs\/"
-        },"image": ["https:\/\/minkj1992.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "algorithm, dev","wordcount":  1038 ,
+        },"image": ["https:\/\/minkj1992.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "algorithm, dev","wordcount":  1037 ,
         "url": "https:\/\/minkj1992.github.io\/dfs_bfs\/","datePublished": "2022-01-06T19:42:58+09:00","dateModified": "2022-01-06T19:50:57+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minwook","logo": {
@@ -51,7 +49,7 @@
             <a href="/" title="The Serious blog"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/categories/documentation/"> Docs </a><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="어서 누르기나 하라구"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/" title="나란 녀석 꽤 멋⭐질⭐지도?"> About </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw"></i>
@@ -94,7 +92,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/categories/documentation/" title="">Docs</a><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/posts/" title="어서 누르기나 하라구">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="나란 녀석 꽤 멋⭐질⭐지도?">About</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
@@ -111,7 +109,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">DFS and BFS</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/algorithm/"><i class="far fa-folder fa-fw"></i>algorithm</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-06">2022-01-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1038 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-06">2022-01-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1037 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;<span id="/dfs_bfs/" class="leancloud_visitors" data-flag-title="DFS and BFS">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
                     </span>&nbsp;</div>
@@ -139,14 +137,9 @@
     <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><div class="details admonition note open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">간단하게 bfs와 dfs를 <code>python</code>으로 구현해보고, 상황별 장단점을 분석해본다.</div>
-        </div>
-    </div>
+            </div><div class="content" id="content"><blockquote>
+<p>간단하게 bfs와 dfs를 <code>python</code>으로 구현해보고, 상황별 장단점을 분석해본다.</p>
+</blockquote>
 <h2 id="1-graph-traverse">1. Graph Traverse</h2>
 <h3 id="11-bfs">1.1. BFS</h3>
 <div class="highlight"><div class="chroma">
@@ -337,8 +330,7 @@
 <h2 id="conclusion">Conclusion</h2>
 <p>필자는 왠만하면 <code>bfs</code>를 좀 더 선호하는 경향이 있는데, 과거의 경험을 떠올려 보면, (정확하게 기억은 나지 않지만) path가 연속적으로 이어져야하는 로직에서 bfs가 불편했던 것 같다. <code>DFS</code>의 경우에는 처음부터 끝까지 연속적으로 탐색하기 때문에 비교적 쉽게 구현이 되었는데, <code>BFS</code>는 spread 하면서 이동하기 때문에 해당 상황에서 불리 했던 것 같다.</p>
 <p>dfs, bfs를 언제 써야하는지 개인적으로 헷갈렸었는데 표로 정리하고 나니 나중에도 유용하게 볼 것 같다.</p>
-<center> - 끝 - </center>
-</div><div class="post-footer" id="post-footer">
+<center> - 끝 - </center></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

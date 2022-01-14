@@ -12,6 +12,8 @@
     <guid>https://minkj1992.github.io/first_post/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image.jpeg" referrerpolicy="no-referrer">
-            </div><p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files.</p>]]></description>
+            </div><blockquote>
+<p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files.</p>
+</blockquote>]]></description>
 </item></channel>
 </rss>

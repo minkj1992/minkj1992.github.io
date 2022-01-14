@@ -12,6 +12,8 @@
     <guid>https://minkj1992.github.io/hong_modern_cpp/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/cpp.jpeg" referrerpolicy="no-referrer">
-            </div>1. Terminology 1. Terminology 1.0.1. Basic C++ prototype forward declaration header guards (=include guards) 중복될 경우 한번만 include해라 (#pragma once) #pragma once 기 정의된 preprocessor의 일종 macro conditional compilation macro의 #ifdef, #ifndef, #else, #endif fundamental data types]]></description>
+            </div><blockquote>
+<p><code>Modern c++</code>을 학습하고 기억할만한 요소들을 정리합니다.</p>
+</blockquote>]]></description>
 </item></channel>
 </rss>
