@@ -8,11 +8,7 @@
 {{< /admonition >}}
 
 <!--more-->
-<br/><br/><br/>
-
-
-
-
+<br/>
 
 ## Solidity Path: Beginner to Intermediate Smart Contracts
 

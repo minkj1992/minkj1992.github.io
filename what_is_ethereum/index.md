@@ -6,7 +6,7 @@
 <!--more-->
 
 
-## tl;dr
+### tl;dr
 - **Ethereum is a Blockchain Platform.**
 
 이더리움을 블록체인 생태계에서 포지션을 생각한다면 플랫폼으로 구분할 수 있습니다.
@@ -17,17 +17,13 @@
 
 
 
-## What is Ethereum
+## 1. What is Ethereum
 
 {{< admonition quote >}}
 Ethereum is often described as "the world computer"
 {{< /admonition >}}
 
-이더리움 진영에서 정의하는 이더리움이란 (탈 중앙화된) 월드 컴퓨터입니다. 
-
-`World`와 `Computer`에 집중해본다면,  `World`라는 단어처럼 이더리움은 "전세계를 하나로 묶어줄 수 있는 connection"을 제공해주어야 할 것으로 보입니다. 묶어준 다는 점에서 p2p 네트워크가 필요해 보입니다. 
-
- `Computer`라는 단어는 `program`, 그리고 이 프로그램을 개발할 수 있는 `language`가 필요해 보입니다. 또한 그 프로그램은 decentralized 성격을 가져야 하기 때문에, 일반 프로그램과 비교해 특별한 성질을 가질 것으로 보입니다.
+이더리움 진영에서 정의하는 이더리움이란 (탈 중앙화된) 월드 컴퓨터입니다. `World`와 `Computer`에 집중해본다면, `World`라는 단어처럼 이더리움은 "전세계를 하나로 묶어줄 수 있는 connection"을 제공해주어야 할 것으로 보입니다. 묶어준 다는 점에서 p2p 네트워크가 필요해 보입니다. `Computer`라는 단어는 `program`, 그리고 이 프로그램을 개발할 수 있는 `language`가 필요해 보입니다. 또한 그 프로그램은 decentralized 성격을 가져야 하기 때문에, 일반 프로그램과 비교해 특별한 성질을 가질 것으로 보입니다.
 
 > Ethereum is an open source with globally decentralized computing infrastructure that executes programs called `smart contracts`. It uses a blockchain to synchronize and store the system's state changes.
 
@@ -41,9 +37,9 @@ Ethereum is a deterministic but practically `unbounded state machine`, Which mea
 
 p2p로 퍼져있으면서도, 하나의 컴퓨터로 동작하기 위해서 스마트 컨트랙트는 `globally accessible singleton state`와 virtual machine 개념이 존재합니다.
 
-> it uses a blockchain to synchronize and store the system's state changes, along with a cryptocurrency called `ether` to meter and constrain execution resource costs.
+> It uses a blockchain to synchronize and store the system's state changes, along with a cryptocurrency called `ether` to meter and constrain execution resource costs.
 
-## Compared to `Bitcoin`
+## 2. Compared to `Bitcoin`
 
 - `in common`
   - p2p network connecting participants.
@@ -71,11 +67,29 @@ So, if somebody says "my new thing is Turing Complete" that means in principle (
 + 프로그래밍 언어는 이와 비슷하게 `Turing complete`하다 왜냐하면 프로그램이 실행될 충분한 메모리와 시간이 주어진다면 특정 computational problem을 풀어낼 수 있기 때문이다.
 {{< /admonition >}}
 
-`김혐남`님의 말을 빌리자면, 이더리움을 간단히 **블록체인의 플랫폼**이라 소개합니다. 블록체인 플랫폼이 되려다보니 이더리움은 블록체인 튜링 완전 프로그래밍이 가능해야 했고, `Turing Complete`해지니 `application`을 만들 수 있게 되었고, 이 앱은 `block chain` 위에서 실행되니 블록체인의 특성을 지닌 앱이 될 수 있었습니다. 
+`김혐남`님의 말을 빌리자면, 이더리움을 간단히 **블록체인의 플랫폼**이라 소개합니다. 블록체인 플랫폼이 되려다보니 이더리움은 블록체인 튜링 완전 프로그래밍이 가능해야 했고, `Turing Complete`해지니 `application`을 만들 수 있게 되었고, 이 앱은 `block chain` 위에서 실행되니 블록체인의 특성을 지닌 앱이 될 수 있었습니다. 이더리움은 이런 블록체인의 기능을 플랫폼처럼 추상화 시켜, 참여하는 개발자들이 쉽게 블록체인의 특성을 지닌 애플리케이션을 개발할 수 있도록 도와줍니다.
 
-이더리움은 이런 블록체인의 기능을 플랫폼처럼 추사화 시켜 개발자들이 쉽게 애플리케이션을 개발할 수 있도록 도와줍니다.
+## 3. Components of a Blockchain
+The components of an open, public blockchain are:
 
-## 이더리움의 탄생
+
+1. A peer-to-peer (P2P) network connecting participants and propagating transactions and blocks of verified transactions, based on a standardized "gossip" protocol
+
+2. Messages, in the form of transactions, representing state transitions
+
+3. A set of consensus rules, governing what constitutes a transaction and what makes for a valid state transition
+
+4. A state machine that processes transactions according to the consensus rules
+
+5. A chain of cryptographically secured blocks that acts as a journal of all the verified and accepted state transitions
+
+6. A consensus algorithm that decentralizes control over the blockchain, by forcing participants to cooperate in the enforcement of the consensus rules
+
+7. A game-theoretically sound incentivization scheme (e.g., proof-of-work costs plus block rewards) to economically secure the state machine in an open environment
+
+8. One or more open source software implementations of the above ("clients")
+
+## 4. The Birth of Ethereum
 
 > 이더리움 창립자들은 프로그래밍을 통해 다양한 애플리케이션을 지원할 수 있는 특정 목적에 국한되지 않는 블록체인에 대해 생각하고 있었다. 이 생각은 이더리움과 같은 범용 블록체인을 사용하여 개발자가 피어투피어 네트워크, 블록체인, 합의 알고리즘 등의 기본 메커니즘을 구현하지 않고도, 특정 애플리케이션을 프로그래밍할 수 있다는 것이다. 이더리움 플랫폼은 **세부사항을 추상화하고 탈중앙화 블록체인 애플리케이션을 위한** 결정적이고 안전한 프로그래밍 환경을 제공한다.
 
@@ -87,5 +101,5 @@ So, if somebody says "my new thing is Turing Complete" that means in principle (
 
 > The original blockchain, namely Bitcoin’s blockchain, tracks the state of units of bitcoin and their ownership. You can think of Bitcoin as a distributed consensus state machine, where transactions cause a global state transition, altering the ownership of coins. The state transitions are constrained by the rules of consensus, allowing all participants to (eventually) converge on a common (consensus) state of the system, after several blocks are mined. 
 
-> **Ethereum answers the question: “What if we could track any arbitrary state and program the state machine to create a world-wide computer operating under consensus?“**
+> **Ethereum answers the question: "What if we could track any arbitrary state and program the state machine to create a world-wide computer operating under consensus?"**
 

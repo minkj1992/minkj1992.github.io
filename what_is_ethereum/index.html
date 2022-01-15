@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/what_is_ethereum/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-15T16:52:01+09:00" />
-<meta property="article:modified_time" content="2022-01-15T16:52:01+09:00" />
+<meta property="article:modified_time" content="2022-01-15T19:04:27+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -27,8 +27,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/minkj1992.github.io\/what_is_ethereum\/"
-        },"image": ["https:\/\/minkj1992.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "dev, ethereum","wordcount":  1489 ,
-        "url": "https:\/\/minkj1992.github.io\/what_is_ethereum\/","datePublished": "2022-01-15T16:52:01+09:00","dateModified": "2022-01-15T16:52:01+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/minkj1992.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "dev, ethereum","wordcount":  1633 ,
+        "url": "https:\/\/minkj1992.github.io\/what_is_ethereum\/","datePublished": "2022-01-15T16:52:01+09:00","dateModified": "2022-01-15T19:04:27+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minwook","logo": {
                     "@type": "ImageObject",
@@ -109,10 +109,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">[마스터링 이더리움 CH01] 이더리움이란 무엇인가</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/blockchain/"><i class="far fa-folder fa-fw"></i>blockchain</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-15">2022-01-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1489 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;<span id="/what_is_ethereum/" class="leancloud_visitors" data-flag-title="[마스터링 이더리움 CH01] 이더리움이란 무엇인가">
-                        <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;views
-                    </span>&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-15">2022-01-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1633 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -127,14 +125,19 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#tldr">tl;dr</a></li>
-    <li><a href="#what-is-ethereum">What is Ethereum</a></li>
-    <li><a href="#compared-to-bitcoin">Compared to <code>Bitcoin</code></a></li>
-    <li><a href="#이더리움의-탄생">이더리움의 탄생</a></li>
+    <li>
+      <ul>
+        <li><a href="#tldr">tl;dr</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-what-is-ethereum">1. What is Ethereum</a></li>
+    <li><a href="#2-compared-to-bitcoin">2. Compared to <code>Bitcoin</code></a></li>
+    <li><a href="#3-components-of-a-blockchain">3. Components of a Blockchain</a></li>
+    <li><a href="#4-the-birth-of-ethereum">4. The Birth of Ethereum</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>이번장에서는 <code>Mastering Ethereum</code>과 <a href="http://www.umlcert.com/mastering_ethereum-1/" target="_blank" rel="noopener noreffer">김혐남님의 세미나 내용</a>을 기반으로 이더리움이란 무엇인가에 대해서 정리합니다.</p>
-<h2 id="tldr">tl;dr</h2>
+<h3 id="tldr">tl;dr</h3>
 <ul>
 <li><strong>Ethereum is a Blockchain Platform.</strong></li>
 </ul>
@@ -143,7 +146,7 @@
 <li><strong>Ethereum is &ldquo;the world computer&rdquo;</strong></li>
 </ul>
 <p>이더리움 진영에서 내새우는 정의는 (합의를 기반으로 동작하는) <code>World Computer</code>입니다.</p>
-<h2 id="what-is-ethereum">What is Ethereum</h2>
+<h2 id="1-what-is-ethereum">1. What is Ethereum</h2>
 <div class="details admonition quote open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
@@ -152,9 +155,7 @@
             <div class="admonition-content">Ethereum is often described as &ldquo;the world computer&rdquo;</div>
         </div>
     </div>
-<p>이더리움 진영에서 정의하는 이더리움이란 (탈 중앙화된) 월드 컴퓨터입니다.</p>
-<p><code>World</code>와 <code>Computer</code>에 집중해본다면,  <code>World</code>라는 단어처럼 이더리움은 &ldquo;전세계를 하나로 묶어줄 수 있는 connection&quot;을 제공해주어야 할 것으로 보입니다. 묶어준 다는 점에서 p2p 네트워크가 필요해 보입니다.</p>
-<p><code>Computer</code>라는 단어는 <code>program</code>, 그리고 이 프로그램을 개발할 수 있는 <code>language</code>가 필요해 보입니다. 또한 그 프로그램은 decentralized 성격을 가져야 하기 때문에, 일반 프로그램과 비교해 특별한 성질을 가질 것으로 보입니다.</p>
+<p>이더리움 진영에서 정의하는 이더리움이란 (탈 중앙화된) 월드 컴퓨터입니다. <code>World</code>와 <code>Computer</code>에 집중해본다면, <code>World</code>라는 단어처럼 이더리움은 &ldquo;전세계를 하나로 묶어줄 수 있는 connection&quot;을 제공해주어야 할 것으로 보입니다. 묶어준 다는 점에서 p2p 네트워크가 필요해 보입니다. <code>Computer</code>라는 단어는 <code>program</code>, 그리고 이 프로그램을 개발할 수 있는 <code>language</code>가 필요해 보입니다. 또한 그 프로그램은 decentralized 성격을 가져야 하기 때문에, 일반 프로그램과 비교해 특별한 성질을 가질 것으로 보입니다.</p>
 <blockquote>
 <p>Ethereum is an open source with globally decentralized computing infrastructure that executes programs called <code>smart contracts</code>. It uses a blockchain to synchronize and store the system&rsquo;s state changes.</p>
 </blockquote>
@@ -169,9 +170,9 @@
     </div>
 <p>p2p로 퍼져있으면서도, 하나의 컴퓨터로 동작하기 위해서 스마트 컨트랙트는 <code>globally accessible singleton state</code>와 virtual machine 개념이 존재합니다.</p>
 <blockquote>
-<p>it uses a blockchain to synchronize and store the system&rsquo;s state changes, along with a cryptocurrency called <code>ether</code> to meter and constrain execution resource costs.</p>
+<p>It uses a blockchain to synchronize and store the system&rsquo;s state changes, along with a cryptocurrency called <code>ether</code> to meter and constrain execution resource costs.</p>
 </blockquote>
-<h2 id="compared-to-bitcoin">Compared to <code>Bitcoin</code></h2>
+<h2 id="2-compared-to-bitcoin">2. Compared to <code>Bitcoin</code></h2>
 <ul>
 <li><code>in common</code>
 <ul>
@@ -216,9 +217,36 @@
 </div>
         </div>
     </div>
-<p><code>김혐남</code>님의 말을 빌리자면, 이더리움을 간단히 <strong>블록체인의 플랫폼</strong>이라 소개합니다. 블록체인 플랫폼이 되려다보니 이더리움은 블록체인 튜링 완전 프로그래밍이 가능해야 했고, <code>Turing Complete</code>해지니 <code>application</code>을 만들 수 있게 되었고, 이 앱은 <code>block chain</code> 위에서 실행되니 블록체인의 특성을 지닌 앱이 될 수 있었습니다.</p>
-<p>이더리움은 이런 블록체인의 기능을 플랫폼처럼 추사화 시켜 개발자들이 쉽게 애플리케이션을 개발할 수 있도록 도와줍니다.</p>
-<h2 id="이더리움의-탄생">이더리움의 탄생</h2>
+<p><code>김혐남</code>님의 말을 빌리자면, 이더리움을 간단히 <strong>블록체인의 플랫폼</strong>이라 소개합니다. 블록체인 플랫폼이 되려다보니 이더리움은 블록체인 튜링 완전 프로그래밍이 가능해야 했고, <code>Turing Complete</code>해지니 <code>application</code>을 만들 수 있게 되었고, 이 앱은 <code>block chain</code> 위에서 실행되니 블록체인의 특성을 지닌 앱이 될 수 있었습니다. 이더리움은 이런 블록체인의 기능을 플랫폼처럼 추상화 시켜, 참여하는 개발자들이 쉽게 블록체인의 특성을 지닌 애플리케이션을 개발할 수 있도록 도와줍니다.</p>
+<h2 id="3-components-of-a-blockchain">3. Components of a Blockchain</h2>
+<p>The components of an open, public blockchain are:</p>
+<ol>
+<li>
+<p>A peer-to-peer (P2P) network connecting participants and propagating transactions and blocks of verified transactions, based on a standardized &ldquo;gossip&rdquo; protocol</p>
+</li>
+<li>
+<p>Messages, in the form of transactions, representing state transitions</p>
+</li>
+<li>
+<p>A set of consensus rules, governing what constitutes a transaction and what makes for a valid state transition</p>
+</li>
+<li>
+<p>A state machine that processes transactions according to the consensus rules</p>
+</li>
+<li>
+<p>A chain of cryptographically secured blocks that acts as a journal of all the verified and accepted state transitions</p>
+</li>
+<li>
+<p>A consensus algorithm that decentralizes control over the blockchain, by forcing participants to cooperate in the enforcement of the consensus rules</p>
+</li>
+<li>
+<p>A game-theoretically sound incentivization scheme (e.g., proof-of-work costs plus block rewards) to economically secure the state machine in an open environment</p>
+</li>
+<li>
+<p>One or more open source software implementations of the above (&ldquo;clients&rdquo;)</p>
+</li>
+</ol>
+<h2 id="4-the-birth-of-ethereum">4. The Birth of Ethereum</h2>
 <blockquote>
 <p>이더리움 창립자들은 프로그래밍을 통해 다양한 애플리케이션을 지원할 수 있는 특정 목적에 국한되지 않는 블록체인에 대해 생각하고 있었다. 이 생각은 이더리움과 같은 범용 블록체인을 사용하여 개발자가 피어투피어 네트워크, 블록체인, 합의 알고리즘 등의 기본 메커니즘을 구현하지 않고도, 특정 애플리케이션을 프로그래밍할 수 있다는 것이다. 이더리움 플랫폼은 <strong>세부사항을 추상화하고 탈중앙화 블록체인 애플리케이션을 위한</strong> 결정적이고 안전한 프로그래밍 환경을 제공한다.</p>
 </blockquote>
@@ -231,12 +259,13 @@
 <p>The original blockchain, namely Bitcoin’s blockchain, tracks the state of units of bitcoin and their ownership. You can think of Bitcoin as a distributed consensus state machine, where transactions cause a global state transition, altering the ownership of coins. The state transitions are constrained by the rules of consensus, allowing all participants to (eventually) converge on a common (consensus) state of the system, after several blocks are mined.</p>
 </blockquote>
 <blockquote>
-<p><strong>Ethereum answers the question: “What if we could track any arbitrary state and program the state machine to create a world-wide computer operating under consensus?“</strong></p>
+<p><strong>Ethereum answers the question: &ldquo;What if we could track any arbitrary state and program the state machine to create a world-wide computer operating under consensus?&quot;</strong></p>
 </blockquote></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-01-15</span>
+                <span>Updated on 2022-01-15&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/c25e1b4efddf1b6f5d06e4e70be2072ffb3fe85f" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) c25e1b4efddf1b6f5d06e4e70be2072ffb3fe85f: rebuilding site 2022년 1월 15일 토요일 19시 04분 27초 KST">
+                                    <i class="fas fa-hashtag fa-fw"></i>c25e1b4</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -259,10 +288,8 @@
 
     <div class="post-nav"><a href="/cryptozombies/" class="prev" rel="prev" title="Cryptozombies"><i class="fas fa-angle-left fa-fw"></i>Cryptozombies</a></div>
 </div>
-<div id="comments"><div id="gitalk" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
-            </noscript><div id="valine" class="comment"></div><noscript>
-                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
@@ -275,5 +302,5 @@
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/valine/valine.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"gitalk":{"admin":["minkj1992"],"clientID":"ed5c1cf7b0456f1ca4c7","clientSecret":"4eb129d40ccf8f5791013a19ac93234d65fb54ea","id":"2022-01-15T16:52:01+09:00","owner":"minkj1992","repo":"The serious","title":"[마스터링 이더리움 CH01] 이더리움이란 무엇인가"},"valine":{"appId":"QGzwQXOqs5JOhN4RGPOkR2mR-MdYXbMMI","appKey":"WBmoGyJtbqUswvfLh6L8iEBr","avatar":"mp","el":"#valine","emojiCDN":"https://cdn.jsdelivr.net/npm/emoji-datasource-google@5.0.1/img/google/64/","emojiMaps":{"100":"1f4af.png","alien":"1f47d.png","anger":"1f4a2.png","angry":"1f620.png","anguished":"1f627.png","astonished":"1f632.png","black_heart":"1f5a4.png","blue_heart":"1f499.png","blush":"1f60a.png","bomb":"1f4a3.png","boom":"1f4a5.png","broken_heart":"1f494.png","brown_heart":"1f90e.png","clown_face":"1f921.png","cold_face":"1f976.png","cold_sweat":"1f630.png","confounded":"1f616.png","confused":"1f615.png","cry":"1f622.png","crying_cat_face":"1f63f.png","cupid":"1f498.png","dash":"1f4a8.png","disappointed":"1f61e.png","disappointed_relieved":"1f625.png","dizzy":"1f4ab.png","dizzy_face":"1f635.png","drooling_face":"1f924.png","exploding_head":"1f92f.png","expressionless":"1f611.png","face_vomiting":"1f92e.png","face_with_cowboy_hat":"1f920.png","face_with_hand_over_mouth":"1f92d.png","face_with_head_bandage":"1f915.png","face_with_monocle":"1f9d0.png","face_with_raised_eyebrow":"1f928.png","face_with_rolling_eyes":"1f644.png","face_with_symbols_on_mouth":"1f92c.png","face_with_thermometer":"1f912.png","fearful":"1f628.png","flushed":"1f633.png","frowning":"1f626.png","ghost":"1f47b.png","gift_heart":"1f49d.png","green_heart":"1f49a.png","grimacing":"1f62c.png","grin":"1f601.png","grinning":"1f600.png","hankey":"1f4a9.png","hear_no_evil":"1f649.png","heart":"2764-fe0f.png","heart_decoration":"1f49f.png","heart_eyes":"1f60d.png","heart_eyes_cat":"1f63b.png","heartbeat":"1f493.png","heartpulse":"1f497.png","heavy_heart_exclamation_mark_ornament":"2763-fe0f.png","hole":"1f573-fe0f.png","hot_face":"1f975.png","hugging_face":"1f917.png","hushed":"1f62f.png","imp":"1f47f.png","innocent":"1f607.png","japanese_goblin":"1f47a.png","japanese_ogre":"1f479.png","joy":"1f602.png","joy_cat":"1f639.png","kiss":"1f48b.png","kissing":"1f617.png","kissing_cat":"1f63d.png","kissing_closed_eyes":"1f61a.png","kissing_heart":"1f618.png","kissing_smiling_eyes":"1f619.png","laughing":"1f606.png","left_speech_bubble":"1f5e8-fe0f.png","love_letter":"1f48c.png","lying_face":"1f925.png","mask":"1f637.png","money_mouth_face":"1f911.png","nauseated_face":"1f922.png","nerd_face":"1f913.png","neutral_face":"1f610.png","no_mouth":"1f636.png","open_mouth":"1f62e.png","orange_heart":"1f9e1.png","partying_face":"1f973.png","pensive":"1f614.png","persevere":"1f623.png","pleading_face":"1f97a.png","pouting_cat":"1f63e.png","purple_heart":"1f49c.png","rage":"1f621.png","relaxed":"263a-fe0f.png","relieved":"1f60c.png","revolving_hearts":"1f49e.png","right_anger_bubble":"1f5ef-fe0f.png","robot_face":"1f916.png","rolling_on_the_floor_laughing":"1f923.png","scream":"1f631.png","scream_cat":"1f640.png","see_no_evil":"1f648.png","shushing_face":"1f92b.png","skull":"1f480.png","skull_and_crossbones":"2620-fe0f.png","sleeping":"1f634.png","sleepy":"1f62a.png","slightly_frowning_face":"1f641.png","slightly_smiling_face":"1f642.png","smile":"1f604.png","smile_cat":"1f638.png","smiley":"1f603.png","smiley_cat":"1f63a.png","smiling_face_with_3_hearts":"1f970.png","smiling_imp":"1f608.png","smirk":"1f60f.png","smirk_cat":"1f63c.png","sneezing_face":"1f927.png","sob":"1f62d.png","space_invader":"1f47e.png","sparkling_heart":"1f496.png","speak_no_evil":"1f64a.png","speech_balloon":"1f4ac.png","star-struck":"1f929.png","stuck_out_tongue":"1f61b.png","stuck_out_tongue_closed_eyes":"1f61d.png","stuck_out_tongue_winking_eye":"1f61c.png","sunglasses":"1f60e.png","sweat":"1f613.png","sweat_drops":"1f4a6.png","sweat_smile":"1f605.png","thinking_face":"1f914.png","thought_balloon":"1f4ad.png","tired_face":"1f62b.png","triumph":"1f624.png","two_hearts":"1f495.png","unamused":"1f612.png","upside_down_face":"1f643.png","weary":"1f629.png","white_frowning_face":"2639-fe0f.png","white_heart":"1f90d.png","wink":"1f609.png","woozy_face":"1f974.png","worried":"1f61f.png","yawning_face":"1f971.png","yellow_heart":"1f49b.png","yum":"1f60b.png","zany_face":"1f92a.png","zipper_mouth_face":"1f910.png","zzz":"1f4a4.png"},"enableQQ":false,"highlight":true,"lang":"en","pageSize":10,"placeholder":"Your comment ...","recordIP":true,"serverURLs":"https://leancloud.hugoloveit.com","visitor":true}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>
