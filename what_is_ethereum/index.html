@@ -5,20 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>[마스터링 이더리움 CH01] 이더리움이란 무엇인가 - The Serious blog</title><meta name="Description" content="About Seroius"><meta property="og:title" content="[마스터링 이더리움 CH01] 이더리움이란 무엇인가" />
+        <title>[마스터링 이더리움 CH01] 이더리움이란 무엇인가 - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="[마스터링 이더리움 CH01] 이더리움이란 무엇인가" />
 <meta property="og:description" content="이번장에서는 Mastering Ethereum과 김혐남님의 세미나 내용을 기반으로 이더리움이란 무엇인가에 대해서 정리합니다." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/what_is_ethereum/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-15T16:52:01+09:00" />
-<meta property="article:modified_time" content="2022-01-15T19:04:27+09:00" />
+<meta property="article:modified_time" content="2022-01-15T20:05:55+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
 
 <meta name="twitter:title" content="[마스터링 이더리움 CH01] 이더리움이란 무엇인가"/>
 <meta name="twitter:description" content="이번장에서는 Mastering Ethereum과 김혐남님의 세미나 내용을 기반으로 이더리움이란 무엇인가에 대해서 정리합니다."/>
-<meta name="application-name" content="Leoo">
-<meta name="apple-mobile-web-app-title" content="Leoo"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://minkj1992.github.io/what_is_ethereum/" /><link rel="prev" href="https://minkj1992.github.io/cryptozombies/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/what_is_ethereum/" /><link rel="prev" href="https://minkj1992.github.io/cryptozombies/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -27,10 +27,15 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/minkj1992.github.io\/what_is_ethereum\/"
-        },"image": ["https:\/\/minkj1992.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "dev, ethereum","wordcount":  1633 ,
-        "url": "https:\/\/minkj1992.github.io\/what_is_ethereum\/","datePublished": "2022-01-15T16:52:01+09:00","dateModified": "2022-01-15T19:04:27+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, ethereum","wordcount":  1633 ,
+        "url": "https:\/\/minkj1992.github.io\/what_is_ethereum\/","datePublished": "2022-01-15T16:52:01+09:00","dateModified": "2022-01-15T20:05:55+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
-            "name": "minwook","logo": {
+            "name": "The Serious","logo": {
                     "@type": "ImageObject",
                     "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
                     "width":  1362 ,
@@ -41,15 +46,15 @@
             },"description": ""
     }
     </script></head>
-    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/" title="The Serious blog"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
         </div>
         <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/" title="어서 누르기나 하라구"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/" title="나란 녀석 꽤 멋⭐질⭐지도?"> About </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="어서 누르기나 하라구"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
                         <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
                         <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
                             <i class="fas fa-search fa-fw"></i>
@@ -70,7 +75,7 @@
     <div class="header-container">
         <div class="header-wrapper">
             <div class="header-title">
-                <a href="/" title="The Serious blog"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
@@ -92,7 +97,7 @@
                     <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
                         Cancel
                     </a>
-                </div><a class="menu-item" href="/posts/" title="어서 누르기나 하라구">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="나란 녀석 꽤 멋⭐질⭐지도?">About</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                </div><a class="menu-item" href="/posts/" title="어서 누르기나 하라구">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
                 <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
@@ -264,8 +269,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-01-15&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/c25e1b4efddf1b6f5d06e4e70be2072ffb3fe85f" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) c25e1b4efddf1b6f5d06e4e70be2072ffb3fe85f: rebuilding site 2022년 1월 15일 토요일 19시 04분 27초 KST">
-                                    <i class="fas fa-hashtag fa-fw"></i>c25e1b4</a></span>
+                <span>Updated on 2022-01-15&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/66540c8cbd34590fb303497fac4c4ba4eeb535a1" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 66540c8cbd34590fb303497fac4c4ba4eeb535a1: rebuilding site 2022년 1월 15일 토요일 20시 05분 55초 KST">
+                                    <i class="fas fa-hashtag fa-fw"></i>66540c8</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
