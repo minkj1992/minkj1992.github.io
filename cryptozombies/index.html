@@ -32,7 +32,7 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "solidity, dev","wordcount":  1949 ,
+                        }],"genre": "posts","keywords": "solidity, dev","wordcount":  3442 ,
         "url": "https:\/\/minkj1992.github.io\/cryptozombies\/","datePublished": "2022-01-14T15:07:46+09:00","dateModified": "2022-01-15T20:05:55+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
@@ -114,8 +114,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Cryptozombies</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/blockchain/"><i class="far fa-folder fa-fw"></i>blockchain</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-14">2022-01-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1949 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-14">2022-01-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3442 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -136,6 +136,18 @@
         <li><a href="#summary">Summary</a></li>
       </ul>
     </li>
+    <li><a href="#zombies-attack-their-victims">Zombies Attack Their Victims</a>
+      <ul>
+        <li><a href="#mappings-and-addresses"><code>Mappings</code> and <code>Addresses</code></a></li>
+        <li><a href="#msgsender"><code>Msg.sender</code></a></li>
+        <li><a href="#require"><code>Require</code></a></li>
+        <li><a href="#inheritance"><code>Inheritance</code></a></li>
+        <li><a href="#import"><code>Import</code></a></li>
+        <li><a href="#storage-vs-memory">Storage vs Memory</a></li>
+        <li><a href="#extra-function-visibility">Extra Function Visibility</a></li>
+        <li><a href="#interface">interface</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><div class="details admonition quote open">
@@ -149,12 +161,12 @@
 <br/>
 <h2 id="solidity-path-beginner-to-intermediate-smart-contracts">Solidity Path: Beginner to Intermediate Smart Contracts</h2>
 <ul>
-<li><i class="far fa-check-square fa-fw"></i> Making the Zombie Factory</li>
-<li><i class="far fa-square fa-fw"></i> Zombies Attack Their Victims</li>
-<li><i class="far fa-square fa-fw"></i> Advanced Solidity Concepts</li>
-<li><i class="far fa-square fa-fw"></i> Zombie Battle System</li>
-<li><i class="far fa-square fa-fw"></i> ERC721 &amp; Crypto-Collectibles</li>
-<li><i class="far fa-square fa-fw"></i> App Front-ends &amp; Web3.js</li>
+<li><i class="far fa-check-square fa-fw"></i> ch01 Making the Zombie Factory</li>
+<li><i class="far fa-check-square fa-fw"></i> ch02 Zombies Attack Their Victims</li>
+<li><i class="far fa-square fa-fw"></i> ch03 Advanced Solidity Concepts</li>
+<li><i class="far fa-square fa-fw"></i> ch04 Zombie Battle System</li>
+<li><i class="far fa-square fa-fw"></i> ch05 ERC721 &amp; Crypto-Collectibles</li>
+<li><i class="far fa-square fa-fw"></i> ch06 App Front-ends &amp; Web3.js</li>
 </ul>
 <h2 id="ch01-making-the-zombie-factory">CH01 Making the Zombie Factory</h2>
 <blockquote>
@@ -519,7 +531,277 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h2 id="zombies-attack-their-victims">Zombies Attack Their Victims</h2>
+<h3 id="mappings-and-addresses"><code>Mappings</code> and <code>Addresses</code></h3>
+<p>이더리움 블록체인은 은행계좌와 같은 <code>account</code>를 사용해서 유저를 식별합니다.
+이때 각 <code>account</code>들은 이더리움 블록체인상의 coin인 <code>ether</code>를 단위로 <code>balance</code>를 가지게 됩니다.
+이를 <code>통화</code>를 통해 각 계정은 송금/인출 등의 은행과 같은 기능들을 할 수 있습니다. 이를 위해 이더리움에서 각 계정은 은행 계좌 번호와 같은 <code>address</code>를 가지고 있으며,</p>
+<p>여기서 말하는 <code>address</code>는 <code>EOA</code>(Extenally Owned Account)의 address입니다. 보통은 <code>EOA</code>간의 메세지는 이더를 보내지만, EOA는 컨트랙트 어카운트에 메세지를 보내 해당 코드를 실행 시킬 수 도 있습니다.</p>
+<p><code>Mapping</code>은 기본적으로 python의 <code>dict</code>와 같은 key-value 저장소입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+
+    <span class="p">...</span>
+    <span class="kd">mapping</span> <span class="p">(</span><span class="kt">uint</span> <span class="o">=&gt;</span> <span class="kt">address</span><span class="p">)</span> <span class="k">public</span> <span class="n">zombieToOwner</span><span class="p">;</span>
+    <span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">ownerZombieCount</span><span class="p">;</span>
+
+    <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="msgsender"><code>Msg.sender</code></h3>
+<p><code>solidity</code>에는 모든 함수에서 이용 가능한 특정 전역 변수들이 있는데, 그 중의 하나가 <strong>현재 함수를 호출한 사람 (혹은 스마트 컨트랙트)의 주소</strong>를 가리키는 <code>msg.sender</code>이다.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><code>solidity</code>에서 함수 실행은 항상 <code>external caller</code>(외부 호출자)가 시작하며, 컨트랙트는 외부에서 함수를 호출  하기 전까지 블록체인 상에서 아무것도 하지 않는다.</p>
+<p>즉 스마트 컨트랙트는 <code>msg.sender</code>(호출자)가 항상 존재합니다.</p>
+</div>
+        </div>
+    </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">favoriteNumber</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nf">setMyNumber</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_myNumber</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+  <span class="n">favoriteNumber</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">_myNumber</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nf">getMyNumber</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">favoriteNumber</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="require"><code>Require</code></h3>
+<p>특정 조건이 True가 아닐 경우, 에러를 발생시키고 함수를 벗어나게 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">function</span> <span class="nf">sayHiToLeoo</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// solidity는 고유의 스트링 비교 기능이 없다. 그러므로 keccak256 해시값을 
+</span><span class="c1"></span>  <span class="c1">// 비교해 스트링이 같은 값인지 판단하는 코드
+</span><span class="c1"></span>  <span class="nb">require</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_name</span><span class="p">)</span> <span class="o">==</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;Leoo.j&#34;</span><span class="p">));</span>
+  
+  <span class="k">return</span> <span class="s">&#34;Hi&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="inheritance"><code>Inheritance</code></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">Animal</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nf">cry</span><span class="p">()</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">&#34;Default cry&#34;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">contract</span> <span class="nc">Dog</span> <span class="k">is</span> <span class="n">Animal</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nf">cry</span><span class="p">()</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">&#34;Bark&#34;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="import"><code>Import</code></h3>
+<p>파일들로 코드를 분리하고, 다른 파일에 있는 코드를 불러오고 싶을 때, 솔리디티는 <code>import</code>라는 keyword를 사용합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kn">import</span> <span class="s">&#34;./someothercontract.sol&#34;</span><span class="p">;</span> <span class="c1">// SomeOtherContract
+</span><span class="c1"></span>
+<span class="kd">contract</span> <span class="nc">newContract</span> <span class="k">is</span> <span class="n">SomeOtherContract</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="storage-vs-memory">Storage vs Memory</h3>
+<p><code>solidity</code>가 변수를 저장할 수 있는 공간에는 2가지 종류가 있습니다.</p>
+<ul>
+<li><code>storage</code></li>
+<li><code>memory</code></li>
+</ul>
+<p><code>Storage</code>는 블록체인 상에 영구적으로 저장되는 변수들입니다. <code>state variable</code>(함수 외부에 선언된 변수)인 경우 초기 설정상 <code>Storage</code>로 관리되어 블록체인 상에 영구적으로 저장됩니다.</p>
+<p>이와 반대로 함수 내부에 선언된 변수는 <code>memory</code>로 자동 선언되어 함수 호출 종료시 사라지게 됩니다.</p>
+<p>단 명시적으로 <code>storage</code>, <code>memory</code> 키워드들을 사용해주어야 하는 상황이 존재하는데, 바로 함수 내에서 <code>struct</code>, <code>배열</code>을 처리할 때 입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">SandwichFactory</span> <span class="p">{</span>
+  <span class="kd">struct</span> <span class="nc">Sandwich</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="nb">name</span><span class="p">;</span>
+    <span class="kt">string</span> <span class="n">status</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="n">Sandwich</span><span class="p">[]</span> <span class="n">sandwiches</span><span class="p">;</span> <span class="c1">// state variable (storage)
+</span><span class="c1"></span>
+  <span class="kd">function</span> <span class="nf">eat</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_idx</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+    <span class="kt">string</span> <span class="n">defaultState</span> <span class="o">=</span> <span class="s">&#34;NOT EATEN&#34;</span><span class="p">;</span> <span class="c1">// implicit memory
+</span><span class="c1"></span>    <span class="n">Sandwich</span> <span class="k">storage</span> <span class="n">mySandwich</span> <span class="o">=</span> <span class="n">sandwiches</span><span class="p">[</span><span class="n">_idx</span><span class="p">];</span> <span class="c1">// arr should explict
+</span><span class="c1"></span>
+    <span class="n">Sandwich</span> <span class="k">memory</span> <span class="n">anotherSandwich</span> <span class="o">=</span> <span class="n">sandwiches</span><span class="p">[</span><span class="n">_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+    <span class="n">sandwiches</span><span class="p">[</span><span class="n">_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">anotherSandwich</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="s">&#34;./zombiefactory.sol&#34;</span><span class="p">;</span>
+
+<span class="kd">contract</span> <span class="nc">ZombieFeeding</span> <span class="k">is</span> <span class="n">ZombieFactory</span> <span class="p">{</span>
+
+  <span class="kd">function</span> <span class="nf">feedAndMultiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_targetDna</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+      <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
+      <span class="n">Zombie</span> <span class="k">storage</span> <span class="n">myZombie</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">];</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="extra-function-visibility">Extra Function Visibility</h3>
+<p><code>solidity</code>에는 public과 private 이외에도 <code>internal</code>과 <code>external</code>이라는 함수 접근 제어자가 있다.</p>
+<ul>
+<li><code>internal</code>
+<ul>
+<li>상속하는 컨트랙트에서도 접근 가능 (java protected와 비슷해 보임?)</li>
+<li>나머지는 private과 동의</li>
+</ul>
+</li>
+<li><code>external</code>
+<ul>
+<li>컨트랙트 바깥에서만 호출 될 수 있음</li>
+<li>컨트랙트 내의 다른 함수에 의해 호출될 수 없다.</li>
+<li>나머지는 public과 동의</li>
+</ul>
+</li>
+</ul>
+<p><code>internal</code>은 상속하는 컨트랙트에서도 접근 가능하다는 점을 제외하면 private과 같다. 느낌 상 java의 <code>protected</code>와 유사해 보이며, <code>state variable</code>은 default로 internal 접근자를 가진다.</p>
+<p><code>external</code>은 <strong>함수가 컨트랙트 바깥에서만 호출</strong> 될 수 있고 <strong>컨트랙트 내의 다른 함수에 의해서 호출 될 수 없다</strong>는 부분만 제외하면 public과 같다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">Sandwich</span> <span class="p">{</span>
+  <span class="kt">uint</span> <span class="k">private</span> <span class="n">sandwichesEaten</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nf">eat</span><span class="p">()</span> <span class="k">internal</span> <span class="p">{</span>
+    <span class="n">sandwichesEaten</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">contract</span> <span class="nc">BLT</span> <span class="k">is</span> <span class="n">Sandwich</span> <span class="p">{</span>
+  <span class="kt">uint</span> <span class="k">private</span> <span class="n">baconSandwichesEaten</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nf">eatWithBacon</span><span class="p">()</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">baconSandwichesEaten</span><span class="o">++</span><span class="p">;</span>
+    <span class="c1">// eat 함수가 internal로 선언되었기 때문에 여기서 호출이 가능하다 
+</span><span class="c1"></span>    <span class="n">eat</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="interface">interface</h3></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

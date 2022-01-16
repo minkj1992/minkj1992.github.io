@@ -12,12 +12,12 @@
 
 ## Solidity Path: Beginner to Intermediate Smart Contracts
 
-- [x] Making the Zombie Factory
-- [ ] Zombies Attack Their Victims
-- [ ] Advanced Solidity Concepts
-- [ ] Zombie Battle System
-- [ ] ERC721 & Crypto-Collectibles
-- [ ] App Front-ends & Web3.js
+- [x] ch01 Making the Zombie Factory
+- [x] ch02 Zombies Attack Their Victims
+- [ ] ch03 Advanced Solidity Concepts
+- [ ] ch04 Zombie Battle System
+- [ ] ch05 ERC721 & Crypto-Collectibles
+- [ ] ch06 App Front-ends & Web3.js
 
 ## CH01 Making the Zombie Factory
 > 챕터1을 통과하게 되면 [나만의 좀비](https://share.cryptozombies.io/ko/lesson/1/share/leoo?id=Y3p8MTcwMTU4)를 가질 수 있다. :)
@@ -225,3 +225,176 @@ function generateZombie(id, name, dna) {
   return zombieDetails
 }
 ```
+
+## Zombies Attack Their Victims
+
+### `Mappings` and `Addresses`
+
+이더리움 블록체인은 은행계좌와 같은 `account`를 사용해서 유저를 식별합니다. 
+이때 각 `account`들은 이더리움 블록체인상의 coin인 `ether`를 단위로 `balance`를 가지게 됩니다.
+이를 `통화`를 통해 각 계정은 송금/인출 등의 은행과 같은 기능들을 할 수 있습니다. 이를 위해 이더리움에서 각 계정은 은행 계좌 번호와 같은 `address`를 가지고 있으며, 
+
+여기서 말하는 `address`는 `EOA`(Extenally Owned Account)의 address입니다. 보통은 `EOA`간의 메세지는 이더를 보내지만, EOA는 컨트랙트 어카운트에 메세지를 보내 해당 코드를 실행 시킬 수 도 있습니다. 
+
+`Mapping`은 기본적으로 python의 `dict`와 같은 key-value 저장소입니다.
+
+```sol
+contract ZombieFactory {
+
+    ...
+    mapping (uint => address) public zombieToOwner;
+    mapping (address => uint) ownerZombieCount;
+
+    ...
+}
+```
+
+### `Msg.sender`
+
+`solidity`에는 모든 함수에서 이용 가능한 특정 전역 변수들이 있는데, 그 중의 하나가 **현재 함수를 호출한 사람 (혹은 스마트 컨트랙트)의 주소**를 가리키는 `msg.sender`이다.
+
+
+{{< admonition tip>}}
+`solidity`에서 함수 실행은 항상 `external caller`(외부 호출자)가 시작하며, 컨트랙트는 외부에서 함수를 호출  하기 전까지 블록체인 상에서 아무것도 하지 않는다.
+
+즉 스마트 컨트랙트는 `msg.sender`(호출자)가 항상 존재합니다.
+{{< /admonition >}}
+
+```sol
+mapping (address => uint) favoriteNumber;
+
+function setMyNumber(uint _myNumber) public {
+  favoriteNumber[msg.sender] = _myNumber;
+}
+
+function getMyNumber() public view returns (uint) {
+  return favoriteNumber[msg.sender];
+}
+```
+
+### `Require` 
+특정 조건이 True가 아닐 경우, 에러를 발생시키고 함수를 벗어나게 됩니다. 
+
+```sol
+function sayHiToLeoo(string _name) public returns (string) {
+  // solidity는 고유의 스트링 비교 기능이 없다. 그러므로 keccak256 해시값을 
+  // 비교해 스트링이 같은 값인지 판단하는 코드
+  require(keccak256(_name) == keccak256("Leoo.j"));
+  
+  return "Hi";
+}
+```
+
+### `Inheritance`
+
+```sol
+contract Animal {
+  function cry() public returns (string) {
+    return "Default cry";
+  }
+}
+
+contract Dog is Animal {
+  function cry() public returns (string) {
+    return "Bark";
+  }
+}
+```
+
+### `Import`
+
+파일들로 코드를 분리하고, 다른 파일에 있는 코드를 불러오고 싶을 때, 솔리디티는 `import`라는 keyword를 사용합니다.
+
+```sol
+import "./someothercontract.sol"; // SomeOtherContract
+
+contract newContract is SomeOtherContract {
+
+}
+```
+
+### Storage vs Memory
+
+`solidity`가 변수를 저장할 수 있는 공간에는 2가지 종류가 있습니다.
+
+- `storage`
+- `memory`
+
+`Storage`는 블록체인 상에 영구적으로 저장되는 변수들입니다. `state variable`(함수 외부에 선언된 변수)인 경우 초기 설정상 `Storage`로 관리되어 블록체인 상에 영구적으로 저장됩니다.
+
+이와 반대로 함수 내부에 선언된 변수는 `memory`로 자동 선언되어 함수 호출 종료시 사라지게 됩니다.
+
+단 명시적으로 `storage`, `memory` 키워드들을 사용해주어야 하는 상황이 존재하는데, 바로 함수 내에서 `struct`, `배열`을 처리할 때 입니다.
+
+
+```sol
+contract SandwichFactory {
+  struct Sandwich {
+    string name;
+    string status;
+  }
+
+  Sandwich[] sandwiches; // state variable (storage)
+
+  function eat(uint _idx) public {
+    string defaultState = "NOT EATEN"; // implicit memory
+    Sandwich storage mySandwich = sandwiches[_idx]; // arr should explict
+
+    Sandwich memory anotherSandwich = sandwiches[_idx + 1];
+    sandwiches[_idx + 1] = anotherSandwich;
+  }
+}
+```
+
+```sol
+pragma solidity ^0.4.19;
+
+import "./zombiefactory.sol";
+
+contract ZombieFeeding is ZombieFactory {
+
+  function feedAndMultiply(uint _zombieId, uint _targetDna) public {
+      require(msg.sender == zombieToOwner[_zombieId]);
+      Zombie storage myZombie = zombies[_zombieId];
+  }
+
+}
+```
+
+### Extra Function Visibility
+
+`solidity`에는 public과 private 이외에도 `internal`과 `external`이라는 함수 접근 제어자가 있다.
+
+- `internal`
+  - 상속하는 컨트랙트에서도 접근 가능 (java protected와 비슷해 보임?)
+  - 나머지는 private과 동의
+- `external`
+  - 컨트랙트 바깥에서만 호출 될 수 있음
+  - 컨트랙트 내의 다른 함수에 의해 호출될 수 없다.
+  - 나머지는 public과 동의
+
+`internal`은 상속하는 컨트랙트에서도 접근 가능하다는 점을 제외하면 private과 같다. 느낌 상 java의 `protected`와 유사해 보이며, `state variable`은 default로 internal 접근자를 가진다.
+
+`external`은 **함수가 컨트랙트 바깥에서만 호출** 될 수 있고 **컨트랙트 내의 다른 함수에 의해서 호출 될 수 없다**는 부분만 제외하면 public과 같다.
+
+```sol
+contract Sandwich {
+  uint private sandwichesEaten = 0;
+
+  function eat() internal {
+    sandwichesEaten++;
+  }
+}
+
+contract BLT is Sandwich {
+  uint private baconSandwichesEaten = 0;
+
+  function eatWithBacon() public returns (string) {
+    baconSandwichesEaten++;
+    // eat 함수가 internal로 선언되었기 때문에 여기서 호출이 가능하다 
+    eat();
+  }
+}
+```
+
+### interface
