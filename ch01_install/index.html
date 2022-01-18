@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>[ch01] Ros2 Foxy install - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="[ch01] Ros2 Foxy install" />
+<meta property="og:description" content="ros2 Foxy를 mac pro 로컬 환경에 설치해봅니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/ch01_install/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-18T11:12:09+09:00" />
+<meta property="article:modified_time" content="2022-01-18T11:12:09+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="[ch01] Ros2 Foxy install"/>
+<meta name="twitter:description" content="ros2 Foxy를 mac pro 로컬 환경에 설치해봅니다."/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/ch01_install/" /><link rel="prev" href="https://minkj1992.github.io/what_is_ethereum/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "[ch01] Ros2 Foxy install",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/ch01_install\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  1498 ,
+        "url": "https:\/\/minkj1992.github.io\/ch01_install\/","datePublished": "2022-01-18T11:12:09+09:00","dateModified": "2022-01-18T11:12:09+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="어서 누르기나 하라구"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="어서 누르기나 하라구">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">[ch01] Ros2 Foxy install</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/ros/"><i class="far fa-folder fa-fw"></i>ros</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-18">2022-01-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1498 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ros_foxy.png"
+        data-srcset="/images/ros_foxy.png, /images/ros_foxy.png 1.5x, /images/ros_foxy.png 2x"
+        data-sizes="auto"
+        alt="/images/ros_foxy.png"
+        title="/images/ros_foxy.png" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-tldr">1. tl;dr</a></li>
+    <li><a href="#2-setup-on-virtual-box-">2. setup on <code>virtual box</code> (✅)</a>
+      <ul>
+        <li><a href="#21-ubuntu-iso-download">2.1. ubuntu iso download</a></li>
+        <li><a href="#22-vritualbox-download">2.2. vritualbox download</a></li>
+        <li><a href="#23-virtual-box-셋업">2.3. virtual box 셋업</a>
+          <ul>
+            <li><a href="#231-iso-등록">2.3.1. iso 등록</a></li>
+            <li><a href="#232-일반--기본">2.3.2. 일반 &gt; 기본</a></li>
+            <li><a href="#233-일반--고급">2.3.3. 일반 &gt; 고급</a></li>
+            <li><a href="#234-시스템--마더보드">2.3.4. 시스템 &gt; 마더보드</a></li>
+            <li><a href="#235-시스템--프로세서">2.3.5. 시스템 &gt; 프로세서</a></li>
+            <li><a href="#236-디스플레이">2.3.6. 디스플레이</a></li>
+            <li><a href="#237-공유폴더-설정">2.3.7. 공유폴더 설정</a></li>
+            <li><a href="#238-전체-설정">2.3.8. 전체 설정</a></li>
+          </ul>
+        </li>
+        <li><a href="#24-ubuntu-install">2.4. ubuntu install</a></li>
+        <li><a href="#25-install-ros-dependencies">2.5. install ros dependencies</a></li>
+        <li><a href="#26-install-ros2-binary">2.6. install ros2 binary</a>
+          <ul>
+            <li><a href="#261-vm에서-동작하는-화면">2.6.1. vm에서 동작하는 화면</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#3-setup-with-docker-">3. setup with <code>Docker</code> (🚫)</a></li>
+    <li><a href="#4-setup-on-host-">4. setup on <code>Host</code> (🚫)</a>
+      <ul>
+        <li><a href="#41-pre-install-ros2-on-mac">4.1. Pre-Install ROS2 on mac</a></li>
+        <li><a href="#42-install-ros2-on-mac">4.2. Install ROS2 on mac</a></li>
+        <li><a href="#43-download-ros-foxy-binary">4.3. Download ROS Foxy Binary</a></li>
+        <li><a href="#44-check-installed">4.4. Check installed</a></li>
+        <li><a href="#45-error">4.5. Error</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><code>ros2 Foxy</code>를 <code>mac pro</code> 로컬 환경에 설치해봅니다.</p>
+<br />
+<h2 id="1-tldr">1. tl;dr</h2>
+<ul>
+<li>실행환경: virtualbox(ubuntu 20.04)</li>
+<li>mount: 현재 디렉토리</li>
+<li>코드작성
+<ul>
+<li>vm vs code에서 실행</li>
+<li>host에서 코드 작성을 하려하였으나, lint와 링크 기능이 제대로 동작하지 않음</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-setup-on-virtual-box-">2. setup on <code>virtual box</code> (✅)</h2>
+<blockquote>
+<p><a href="https://bradwhittington.wordpress.com/2011/04/08/copy-paste-with-cmd-c-cmd-v-virtualbox-ubuntu-os/" target="_blank" rel="noopener noreffer">setup mac like keyboard on virtual box</a></p>
+</blockquote>
+<p>최종적으로 성공한 방식은 <code>vm</code>에 <code>ubuntu</code>를 설치해서 <code>foxy</code>를 실행하는 방식입니다. 아래 절차를 거쳐 세팅을 진행하였습니다.</p>
+<h3 id="21-ubuntu-iso-download">2.1. ubuntu iso download</h3>
+<p>가장 먼저 ubuntu iso 이미지를 다운 받습니다.
+<a href="https://mirror.kakao.com/ubuntu-releases/focal/" target="_blank" rel="noopener noreffer">https://mirror.kakao.com/ubuntu-releases/focal/</a> 에서 ubuntu 20.04 lts download</p>
+<h3 id="22-vritualbox-download">2.2. vritualbox download</h3>
+<p>다음으로 <a href="https://www.virtualbox.org/" target="_blank" rel="noopener noreffer">virtualbox</a>를 최신버전으로 다운 받습니다.</p>
+<h3 id="23-virtual-box-셋업">2.3. virtual box 셋업</h3>
+<p>가장 먼저 설치한 iso를 연결해줍니다.</p>
+<h4 id="231-iso-등록">2.3.1. iso 등록</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ros/0.png"
+        data-srcset="/images/ros/0.png, /images/ros/0.png 1.5x, /images/ros/0.png 2x"
+        data-sizes="auto"
+        alt="/images/ros/0.png"
+        title="/images/ros/0.png" /></p>
+<p>다음으로 아래 스펙으로 virtualbox를 세팅해줍니다.</p>
+<ol>
+<li>mem: 8192MB</li>
+<li>HDD: 30 GB</li>
+<li>키보드 / 드래그앤 드롭 Bidirectional 설정</li>
+</ol>
+<h4 id="232-일반--기본">2.3.2. 일반 &gt; 기본</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ros/1_1.png"
+        data-srcset="/images/ros/1_1.png, /images/ros/1_1.png 1.5x, /images/ros/1_1.png 2x"
+        data-sizes="auto"
+        alt="/images/ros/1_1.png"
+        title="/images/ros/1_1.png" /></p>
+<h4 id="233-일반--고급">2.3.3. 일반 &gt; 고급</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ros/1_2.png"
+        data-srcset="/images/ros/1_2.png, /images/ros/1_2.png 1.5x, /images/ros/1_2.png 2x"
+        data-sizes="auto"
+        alt="/images/ros/1_2.png"
+        title="/images/ros/1_2.png" /></p>
+<h4 id="234-시스템--마더보드">2.3.4. 시스템 &gt; 마더보드</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ros/2_1.png"
+        data-srcset="/images/ros/2_1.png, /images/ros/2_1.png 1.5x, /images/ros/2_1.png 2x"
+        data-sizes="auto"
+        alt="/images/ros/2_1.png"
+        title="/images/ros/2_1.png" /></p>
+<h4 id="235-시스템--프로세서">2.3.5. 시스템 &gt; 프로세서</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ros/2_2.png"
+        data-srcset="/images/ros/2_2.png, /images/ros/2_2.png 1.5x, /images/ros/2_2.png 2x"
+        data-sizes="auto"
+        alt="/images/ros/2_2.png"
+        title="/images/ros/2_2.png" /></p>
+<h4 id="236-디스플레이">2.3.6. 디스플레이</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ros/3_1.png"
+        data-srcset="/images/ros/3_1.png, /images/ros/3_1.png 1.5x, /images/ros/3_1.png 2x"
+        data-sizes="auto"
+        alt="/images/ros/3_1.png"
+        title="/images/ros/3_1.png" /></p>
+<h4 id="237-공유폴더-설정">2.3.7. 공유폴더 설정</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ros/4.png"
+        data-srcset="/images/ros/4.png, /images/ros/4.png 1.5x, /images/ros/4.png 2x"
+        data-sizes="auto"
+        alt="/images/ros/4.png"
+        title="/images/ros/4.png" /></p>
+<h4 id="238-전체-설정">2.3.8. 전체 설정</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ros/5.png"
+        data-srcset="/images/ros/5.png, /images/ros/5.png 1.5x, /images/ros/5.png 2x"
+        data-sizes="auto"
+        alt="/images/ros/5.png"
+        title="/images/ros/5.png" /></p>
+<p>여기까지 기본적인 ubuntu 설정이 완료되었습니다. 다음으로 ubuntu 자체 설정을 해주겠습니다.</p>
+<h3 id="24-ubuntu-install">2.4. ubuntu install</h3>
+<p>ubuntu는 한글설정 / 맥북 키보드 shortcut 설정 / zsh 등, 처음 세팅하게 되면 설정해주어야 할 것들이 존재합니다.</p>
+<p>가장 먼저는 apt 저장소를 <a href="https://memostack.tistory.com/217" target="_blank" rel="noopener noreffer">카카오 미러</a>로 변경해주세요. (이렇게 하면 더 빠르게 apt 설치가 가능합니다.)</p>
+<ol>
+<li><a href="https://superuser.com/a/829588" target="_blank" rel="noopener noreffer">virtual box cmd right로 변경</a></li>
+<li>[키보드 세팅(mac like)]</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">    $ sudo apt-get install keyboard-configuration
+    $ sudo dpkg-reconfigure keyboard-configuration
+
+    <span class="c1"># select macbook pro(intel)</span>
+    <span class="c1"># MacIntosh</span>
+    <span class="c1"># English</span>
+    <span class="c1"># English (Macintosh)</span>
+    <span class="c1"># Both Alt keys</span>
+    <span class="c1"># No compose key</span>
+    <span class="c1"># Terminal preference에서 copy &amp; paste 설정</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>mount host folder(소스코드) to ubuntu</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 이건 임시이며, 항상 mount시키고 싶다면, vmware에 공유 폴더 설정해주어야 한다.</span>
+$ sudo mount -t vboxsf ros2-sandbox /home/leoo/shared/ros2-sandbox/
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="25-install-ros-dependencies">2.5. install ros dependencies</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo apt update
+$ sudo apt install build-essential gcc make perl dkms
+$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt upgrade
+$ sudo apt install terminator
+$ sudo add-apt-repository universe
+$ sudo apt-get update
+$ sudo apt-get install python3-pip
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="26-install-ros2-binary">2.6. install ros2 binary</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ locale  <span class="c1"># check for UTF-8</span>
+
+$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt install locales
+$ sudo locale-gen en_US en_US.UTF-8
+$ sudo update-locale <span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8 <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+$ <span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+$ locale  <span class="c1"># verify settings</span>
+
+$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt install curl gnupg2 lsb-release
+$ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
+$ <span class="nb">echo</span> <span class="s2">&#34;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu </span><span class="k">$(</span>lsb_release -cs<span class="k">)</span><span class="s2"> main&#34;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/ros2.list &gt; /dev/null
+
+$ sudo apt update
+$ sudo apt install ros-foxy-desktop
+$ <span class="nb">echo</span> <span class="s1">&#39;source /opt/ros/foxy/setup.bash&#39;</span> &gt;&gt; ~/.bashrc
+$ sudo apt install python3-argcomplete
+</code></pre></td></tr></table>
+</div>
+</div><p>만약 이렇게 세팅하였을 때 자신의 vm이 너무 느리다고 판단 된다면 <a href="https://mkyong.com/mac/virtualbox-running-slow-and-lag-on-macos-macbook-pro/" target="_blank" rel="noopener noreffer">vm 설정방법</a>을 참고해주세요.</p>
+<p>지금까지 세팅을 완료하였으면 예쁘게 동작하는 vm을 보실 수 있습니다. :)</p>
+<h4 id="261-vm에서-동작하는-화면">2.6.1. vm에서 동작하는 화면</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ros/virtualbox.png"
+        data-srcset="/images/ros/virtualbox.png, /images/ros/virtualbox.png 1.5x, /images/ros/virtualbox.png 2x"
+        data-sizes="auto"
+        alt="/images/ros/virtualbox.png"
+        title="/images/ros/virtualbox.png" /></p>
+<h2 id="3-setup-with-docker-">3. setup with <code>Docker</code> (🚫)</h2>
+<blockquote>
+<p><a href="https://roomedia.tistory.com/entry/1%EC%9D%BC%EC%B0%A8-macOS-Catalina-10155%EC%97%90-ros2-foxy-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0" target="_blank" rel="noopener noreffer">docker 설치 refs</a></p>
+</blockquote>
+<p>Host로 설정하는 방식이 실패하여, 그 다음으로 선택한 방식입니다. 도커를 사용한 방식은 문제없이 동작하였지만, 추후 터미널을 여러개 띄워 네트워크 통신이 많아지는 걸 고려하면, 추가적으로 설정해야 할 부분들이 많아 보였습니다. 추가로 문서 또한 리눅스 문서들이 많으므로 vm ware 사용</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ docker pull osrf/ros:noetic-desktop-full-buster
+$ brew install socat
+
+<span class="c1"># https://www.cyberciti.biz/faq/apple-osx-mountain-lion-mavericks-install-xquartz-server/</span>
+$ brew install --cask xquartz
+$ sudo reboot
+<span class="c1"># xquartz 보안 설정 모두 열어주기</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>host 터미널에서 아래 명령어 실행</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ip 확인 후 xhost에 추가</span>
+$ <span class="nv">ip</span><span class="o">=</span><span class="k">$(</span>ifconfig en0 <span class="p">|</span> grep inet <span class="p">|</span> awk <span class="s1">&#39;$1==&#34;inet&#34; {print $2}&#39;</span><span class="k">)</span>
+$ xhost + <span class="nv">$ip</span>
+
+<span class="c1"># 컨테이너 생성</span>
+$ docker run -it -e <span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$ip</span>:0 --name ros osrf/ros:noetic-desktop-full-buster
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-setup-on-host-">4. setup on <code>Host</code> (🚫)</h2>
+<blockquote>
+<p><strong>This was failed</strong></p>
+</blockquote>
+<p>이 방식은 맥북에 바로 설치하는 방식으로 <code>mac os</code>에 ros에 필요한 dependencies들을 바로 추가해주었습니다.</p>
+<h3 id="41-pre-install-ros2-on-mac">4.1. Pre-Install ROS2 on mac</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ brew doctor
+
+$ softwareupdate --all --install --force
+$ sudo rm -rf /Library/Developer/CommandLineTools
+$ sudo xcode-select --install
+$ brew link kubernetes-cli
+$ brew link python@3.9
+$ <span class="nb">echo</span> <span class="s1">&#39;export PATH=&#34;/usr/local/sbin:$PATH&#34;&#39;</span> &gt;&gt; ~/.zshrc
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="42-install-ros2-on-mac">4.2. Install ROS2 on mac</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">brew install python@3.8
+brew unlink python <span class="o">&amp;&amp;</span> brew link --force python@3.8
+<span class="nb">echo</span> <span class="s1">&#39;export PATH=&#34;/usr/local/opt/python@3.8/bin:$PATH&#34;&#39;</span> &gt;&gt; ~/.zshrc
+<span class="nb">export</span> <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&#34;-L/usr/local/opt/python@3.8/lib&#34;</span>
+<span class="nb">export</span> <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span><span class="s2">&#34;/usr/local/opt/python@3.8/lib/pkgconfig&#34;</span>
+
+brew install asio tinyxml2 tinyxml eigen pcre poco
+brew install openssl <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;export OPENSSL_ROOT_DIR=</span><span class="k">$(</span>brew --prefix openssl<span class="k">)</span><span class="s2">&#34;</span> &gt;&gt; ~/.zshrc
+brew install qt freetype assimp sip pyqt5
+brew install console_bridge log4cxx spdlog cunit graphviz
+
+python3 -m pip install pygraphviz pydot catkin_pkg empy ifcfg lark-parser lxml netifaces numpy pyparsing pyyaml setuptools argcomplete
+
+pip3 install -U colcon-common-extensions
+
+<span class="c1"># OpenCV는 필수는 아닙니다. 설치시 시간이 엄청 오래 걸리니 고민해보세요.</span>
+brew install opencv
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="43-download-ros-foxy-binary">4.3. Download ROS Foxy Binary</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># https://github.com/ros2/ros2/releases</span>
+
+mkdir -p ~/ros2_foxy
+<span class="nb">cd</span> ~/ros2_foxy
+tar xf ~/Downloads/ros2-foxy-20211013-macos-amd64.tar.bz2
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="44-check-installed">4.4. Check installed</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ . ~/ros2_foxy/ros2-osx/local_setup.zsh
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="45-error">4.5. Error</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> $ . ~/ros2_foxy/ros2-osx/local_setup.zsh
+[connext_cmake_module] Warning: The location at which Connext was found when the workspace was built [[/Applications/rti_connext_dds-5.3.1]] does not point to a valid directory, and the NDDSHOME environment variable has not been set. Support for Connext will not be available.
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>csrutil disable</code>로 시도해보았지만 실패</li>
+<li>ros2 바이너리 버전을 낮춰서 시도해보았지만 역시 실패</li>
+<li>big sur과 맞지 않는 source code에러가 있는 듯하다.</li>
+</ul>
+<p>아래는 host에 설치하기 위해서 참조했던 문서들입니다.</p>
+<ul>
+<li><a href="https://docs.ros.org/en/foxy/Installation/macOS-Install-Binary.html" target="_blank" rel="noopener noreffer">공식</a></li>
+<li><a href="https://snowdeer.github.io/ros2/2020/09/15/how-to-install-ros2-foxy-on-macos/" target="_blank" rel="noopener noreffer">how-to-install-ros2-foxy-on-macos</a></li>
+<li><a href="http://mamykin.com/posts/building-ros2-on-macos-big-sur-m1/" target="_blank" rel="noopener noreffer">building-ros2-on-macos-big-sur-m1</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-01-18</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/ch01_install/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/ch01_install/" data-title="[ch01] Ros2 Foxy install" data-hashtags="dev"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/ch01_install/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/ch01_install/" data-title="[ch01] Ros2 Foxy install"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/ch01_install/" data-title="[ch01] Ros2 Foxy install"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/ch01_install/" data-title="[ch01] Ros2 Foxy install" data-image="/images/ros_foxy.png"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/what_is_ethereum/" class="prev" rel="prev" title="[마스터링 이더리움 CH01] 이더리움이란 무엇인가"><i class="fas fa-angle-left fa-fw"></i>[마스터링 이더리움 CH01] 이더리움이란 무엇인가</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
