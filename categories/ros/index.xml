@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/categories/ros/</link>
         <description>ros - Category - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 18 Jan 2022 11:12:09 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/ros/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 18 Jan 2022 12:34:09 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/ros/" rel="self" type="application/rss+xml" /><item>
+    <title>[ch02] Ros2 개발 환경 setup</title>
+    <link>https://minkj1992.github.io/ch02_setup/</link>
+    <pubDate>Tue, 18 Jan 2022 12:34:09 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/ch02_setup/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ros_melodic.png" referrerpolicy="no-referrer">
+            </div><p><code>ros2 Foxy</code> 실행에 필요한 개발 환경을 <code>ubuntu</code>, <code>vm</code>환경에 세팅해봅니다.</p>]]></description>
+</item><item>
     <title>[ch01] Ros2 Foxy install</title>
     <link>https://minkj1992.github.io/ch01_install/</link>
     <pubDate>Tue, 18 Jan 2022 11:12:09 &#43;0900</pubDate>
