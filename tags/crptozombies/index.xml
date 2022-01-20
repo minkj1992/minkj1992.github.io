@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>crptozombies - Tag - The Serious</title>
+        <link>https://minkj1992.github.io/tags/crptozombies/</link>
+        <description>crptozombies - Tag - The Serious</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 20 Jan 2022 20:53:46 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/crptozombies/" rel="self" type="application/rss+xml" /><item>
+    <title>[Cryptozombies02] Zombies Attack Their Victims</title>
+    <link>https://minkj1992.github.io/ch02/</link>
+    <pubDate>Thu, 20 Jan 2022 20:53:46 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/ch02/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/cat_zombie.png" referrerpolicy="no-referrer">
+            </div>[ch02] Zombies Attack Their Victims 이번 장을 마치면 다음과 같은 고양이를 먹은 좀비를 생성할 수 있다. Mappings and Addresses 이더리움 블록체인은 은행계좌와 같은 account를 사용해서 유저를 식별합]]></description>
+</item></channel>
+</rss>
