@@ -4,7 +4,23 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 20 Jan 2022 20:53:46 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 21 Jan 2022 13:06:52 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>[Cryptozombies03] dAdvanced Solidity Concepts</title>
+    <link>https://minkj1992.github.io/ch03/</link>
+    <pubDate>Fri, 21 Jan 2022 13:06:52 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/ch03/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/zombie_army.png" referrerpolicy="no-referrer">
+            </div><div class="details admonition quote open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">나만의 좀d비 덱을 만들어보자.</div>
+        </div>
+    </div>]]></description>
+</item><item>
     <title>[Cryptozombies02] Zombies Attack Their Victims</title>
     <link>https://minkj1992.github.io/ch02/</link>
     <pubDate>Thu, 20 Jan 2022 20:53:46 &#43;0900</pubDate>
@@ -99,17 +115,6 @@
                 <img src="/images/tree.jpeg" referrerpolicy="no-referrer">
             </div><blockquote>
 <p>Binary Tree관련 알고리즘들을 학습하고 정리합니다.</p>
-</blockquote>]]></description>
-</item><item>
-    <title>홍정모의 따라하며 배우는 C&#43;&#43;</title>
-    <link>https://minkj1992.github.io/hong_modern_cpp/</link>
-    <pubDate>Mon, 03 Jan 2022 18:56:15 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://minkj1992.github.io/hong_modern_cpp/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/cpp.jpeg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p><code>Modern c++</code>을 학습하고 기억할만한 요소들을 정리합니다.</p>
 </blockquote>]]></description>
 </item></channel>
 </rss>
