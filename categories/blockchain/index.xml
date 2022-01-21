@@ -5,7 +5,7 @@
         <description>blockchain - Category - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
             <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 21 Jan 2022 13:06:52 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/blockchain/" rel="self" type="application/rss+xml" /><item>
-    <title>[Cryptozombies03] dAdvanced Solidity Concepts</title>
+    <title>[Cryptozombies03] Advanced Solidity Concepts</title>
     <link>https://minkj1992.github.io/ch03/</link>
     <pubDate>Fri, 21 Jan 2022 13:06:52 &#43;0900</pubDate>
     <author>Author</author>
@@ -17,7 +17,7 @@
             <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content">나만의 좀d비 덱을 만들어보자.</div>
+            <div class="admonition-content">나만의 좀비 덱을 만들어보자.</div>
         </div>
     </div>]]></description>
 </item><item>
@@ -28,7 +28,14 @@
     <guid>https://minkj1992.github.io/ch02/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/cat_zombie.png" referrerpolicy="no-referrer">
-            </div>[ch02] Zombies Attack Their Victims 이번 장을 마치면 다음과 같은 고양이를 먹은 좀비를 생성할 수 있다. Mappings and Addresses 이더리움 블록체인은 은행계좌와 같은 account를 사용해서 유저를 식별합]]></description>
+            </div><div class="details admonition quote open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">좀비에게 먹이를 주어서 조합이 가능하게 해보자.</div>
+        </div>
+    </div>]]></description>
 </item><item>
     <title>[마스터링 이더리움 CH01] 이더리움이란 무엇인가</title>
     <link>https://minkj1992.github.io/what_is_ethereum/</link>

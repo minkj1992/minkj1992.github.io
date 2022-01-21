@@ -2,6 +2,12 @@
 
 
 
+{{< admonition quote>}}
+좀비에게 먹이를 주어서 조합이 가능하게 해보자.
+{{< /admonition >}}
+
+<!--more-->
+<br/>
 
 ## [ch02] Zombies Attack Their Victims
 

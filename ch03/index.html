@@ -5,24 +5,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>[Cryptozombies03] dAdvanced Solidity Concepts - The Serious</title><meta name="Description" content="Learn Solidity step by step"><meta property="og:title" content="[Cryptozombies03] dAdvanced Solidity Concepts" />
+        <title>[Cryptozombies03] Advanced Solidity Concepts - The Serious</title><meta name="Description" content="Learn Solidity step by step"><meta property="og:title" content="[Cryptozombies03] Advanced Solidity Concepts" />
 <meta property="og:description" content="Learn Solidity step by step" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/ch03/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-21T13:06:52+09:00" />
-<meta property="article:modified_time" content="2022-01-20T23:00:01+09:00" />
+<meta property="article:modified_time" content="2022-01-21T13:10:02+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
 
-<meta name="twitter:title" content="[Cryptozombies03] dAdvanced Solidity Concepts"/>
+<meta name="twitter:title" content="[Cryptozombies03] Advanced Solidity Concepts"/>
 <meta name="twitter:description" content="Learn Solidity step by step"/>
 <meta name="application-name" content="serious">
 <meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/ch03/" /><link rel="prev" href="https://minkj1992.github.io/ch02/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "[Cryptozombies03] dAdvanced Solidity Concepts",
+        "headline": "[Cryptozombies03] Advanced Solidity Concepts",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -32,8 +32,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "solidity, dev, crptozombies","wordcount":  1983 ,
-        "url": "https:\/\/minkj1992.github.io\/ch03\/","datePublished": "2022-01-21T13:06:52+09:00","dateModified": "2022-01-20T23:00:01+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "solidity, dev, crptozombies","wordcount":  1996 ,
+        "url": "https:\/\/minkj1992.github.io\/ch03\/","datePublished": "2022-01-21T13:06:52+09:00","dateModified": "2022-01-21T13:10:02+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -112,9 +112,9 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">[Cryptozombies03] dAdvanced Solidity Concepts</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">[Cryptozombies03] Advanced Solidity Concepts</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/blockchain/"><i class="far fa-folder fa-fw"></i>blockchain</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-21">2022-01-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1983 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-21">2022-01-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1996 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -145,7 +145,7 @@
             <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content">나만의 좀d비 덱을 만들어보자.</div>
+            <div class="admonition-content">나만의 좀비 덱을 만들어보자.</div>
         </div>
     </div>
 <br/>
@@ -155,7 +155,6 @@
 </blockquote>
 <h3 id="ownable-contracts"><code>Ownable Contracts</code></h3>
 <p>external function으로 setter를 열어두게 되면, 아무나 내 컨트랙트 안의 state variable을 수정할 수 있게 되는 보안적인 이슈가 생기게 된다. 이를 대처하기 위해 주로 사용하는 방식은 <code>contract</code>를 <code>ownable</code>하게 만들어 <strong>특별한 권리를 가지는 특정 소유자가 있음을 지정할 수 있다.</strong></p>
-<p>아래는</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -246,20 +245,20 @@
 <p>이런 시스템이기 때문에 코드 최적화가 암묵적으로 강제된다 할 수 있습니다. 가스는 함수를 실행하는 사용자들이 실제 돈을 쓰기 때문에 코드 최적화가 되지 않았다면 당연히 많은 사용자들이 생성한 코드를 사용하지 않게 됩니다.</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>Gas가<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw"></i>Gas가필요한이유<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
             <div class="admonition-content"><p>이더리움 진영에서는 이더림움을 <code>World Computer</code>라고 소개합니다.</p>
 <p>전세계에 퍼져있는 개별 노드들이 누군가가 만든 함수를 실행할 때 네트워크 상의 모든 노드 각각이 함수의 output을 검증하기 위해 그 함수를 실행해야 합니다.</p>
-<p>이더리움은 <code>Turing complete</code>하기 때문에 무한 루프와 같이 컴퓨팅 자원을 많이 소모되는 코드가 악의적으로 생성된다면 이더리움이라는 하나의 컴퓨터에 악영향을 끼칠것입니다. 이런 이유로 이더리움 개발자들은 연산 처리에 각각 비용을 할당했으며 사용자들은 space / time에 비례하여 gas를 지불해야 합니다.</p>
-<ul>
-<li>크립토 좀비에 따르면 <code>side-chain</code>에서는 반드시 gas를 지불하지는 않는다고 하네요, <code>Loom Network</code>를 사용하는 크립토 좀비가 대표적인 예시라고 합니다. 이더리움 메인넷에서 월드 오브 워크래프트 같은 게임을 직접적으로 돌리는 것은 절대 말이 되지 않기 때문이다. (엄청 높은 가스 비용) 하지만 다른 합의 알고리즘을 가진 사이드체인에서는 가능할 수 있지.</li>
-</ul>
+<p>이더리움은 <code>Turing complete</code>하기 때문에 무한 루프와 같이 컴퓨팅 자원을 많이 소모되는 코드가 악의적으로 생성된다면 이더리움이라는 하나의 컴퓨터에 악영향을 끼칠것입니다. 이런 이유로 이더리움 개발자들은 연산 처리에 각각 비용을 할당했으며 사용자들은 space / time complexity에 비례하여 gas를 지불해야 합니다.</p>
+<p>추가로 크립토 좀비에 따르면 <code>side-chain</code>에서는 반드시 gas를 지불하지는 않는다고 하네요, <code>Loom Network</code>를 사용하는 크립토 좀비가 대표적인 예시라고 합니다.
+이더리움 메인넷에서 롤 같은 게임을 직접 돌리게 되면 말도 안되게 엄청 높은 가스 비용이 들테니까요. 하지만 다른 합의 알고리즘을 가진 사이드체인에서는 가능하다고 합니다.</p>
 </div>
         </div>
     </div>
 <h3 id="gas비-절약법"><code>Gas</code>비 절약법</h3>
-<p>기본적으로 <code>uint256</code>이 아닌 <code>uint8</code>과 같은하위 타입들로 저장소를 절약하는 것은 아무런 이득이 없다고 합니다. 왜냐면 솔리디티에서 uint의 크기에 상관없이 <code>256bit</code> 저장공간을 미리 잡아두기 때문입니다.</p>
+<p>기본적으로 <code>uint256</code>이 아닌 <code>uint8</code>과 같은하위 타입들로 저장소를 절약하는 것은 아무런 이득이 없다고 합니다.
+왜냐면 솔리디티에서 uint의 크기에 상관없이 <code>256bit</code> 저장공간을 미리 잡아두기 때문입니다.</p>
 <p>단 <code>struct</code> 안에서 <code>uint</code>를 사용한다면 더 작은 크기를 사용할 때, storage 절약이 가능하다고 합니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -297,29 +296,25 @@
 <span class="n">MiniMe</span> <span class="n">mini</span> <span class="o">=</span> <span class="n">MiniMe</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span> 
 </code></pre></td></tr></table>
 </div>
-</div><p>이런 이유로, 구<strong>조체 안에서는 가능한 작은 크기의 정수 타입을 쓰는 것이 좋다</strong>고 할 수 있다.</p>
-<p>또한 <strong>동일한 데이터 타입은 하나로 묶어놓는 것이 좋다</strong>. 즉, 구조체에서 서로 옆에 있도록 선언하면 솔리디티에서 사용하는 저장 공간을 최소화해준다고 합니다. 예를 들면, <code>uint c; uint32 a; uint32 b;</code>라는 필드로 구성된 구조체가 <code>uint32 a; uint c; uint32 b;</code> 필드로 구성된 구조체보다 가스를 덜 소모합니다. uint32 필드가 묶여있기 때문이지.</p>
+</div><p>이런 이유로, <strong>구조체 안에서는 가능한 작은 크기의 정수 타입을 쓰는 것이 좋다</strong>고 할 수 있습니다.또한 <strong>동일한 데이터 타입은 하나로 묶어놓는 것이 좋다</strong>.</p>
+<p>즉 구조체에서 서로 가까이 있도록 선언하면 솔리디티에서 사용하는 저장 공간을 최소화해줍니다.
+예를 들면, <code>uint c; uint32 a; uint32 b;</code>라는 필드로 구성된 구조체가 <code>uint32 a; uint c; uint32 b;</code> 필드로 구성된 구조체보다 uint32 필드들이 묶여있기 때문에 가스를 덜 소모합니다.</p>
 <h3 id="time-units"><code>Time Units</code></h3>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>2038년<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw"></i>2038년_문제<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://ko.wikipedia.org/wiki/2038%EB%85%84_%EB%AC%B8%EC%A0%9C"
-        data-srcset="https://ko.wikipedia.org/wiki/2038%EB%85%84_%EB%AC%B8%EC%A0%9C, https://ko.wikipedia.org/wiki/2038%EB%85%84_%EB%AC%B8%EC%A0%9C 1.5x, https://ko.wikipedia.org/wiki/2038%EB%85%84_%EB%AC%B8%EC%A0%9C 2x"
-        data-sizes="auto"
-        alt="https://ko.wikipedia.org/wiki/2038%EB%85%84_%EB%AC%B8%EC%A0%9C"
-        title="year 2038 problem" />  POSIX 시간 표기법은 시간을 1970년 1월 1일 자정 UTC 이후 경과된 초 시간을 이용하여 표현하는데,대부분의 32비트 시스템에서 초 시간을 저장하는 데 이용되는 time_t 자료 형식은 부호 있는 32비트 정수형이다. 즉 이 형식을 이용하여 나타낼 수 있는 <strong>최후의 시각은 1970년 1월 1일 자정에서 정확히 2147483647초가 지난 2038년 1월 19일 화요일 03:14:07 UTC이다.</strong> 이 시각 이후의 시각은 범위를 초과하여 내부적으로 음수로 표현되며, 프로그램의 이상 작동을 유발하는데, 왜냐하면 이러한 값은 2038년 대신 프로그램의 구현 방법에 따라 1970년 또는 1901년을 가리키기 때문이다</div>
+            <div class="admonition-content"><p><a href="https://ko.wikipedia.org/wiki/2038%EB%85%84_%EB%AC%B8%EC%A0%9C" target="_blank" rel="noopener noreffer">year 2038 problem</a>란?</p>
+<p>POSIX 시간 표기법은 시간을 1970년 1월 1일 자정 UTC 이후 경과된 초 시간을 이용하여 표현하는데,대부분의 32비트 시스템에서 초 시간을 저장하는 데 이용되는 time_t 자료 형식은 부호 있는 32비트 정수형이다. 즉 이 형식을 이용하여 나타낼 수 있는 <strong>최후의 시각은 1970년 1월 1일 자정에서 정확히 2147483647초가 지난 2038년 1월 19일 화요일 03:14:07 UTC이다.</strong> 이 시각 이후의 시각은 범위를 초과하여 내부적으로 음수로 표현되며, 프로그램의 이상 작동을 유발하는데, 왜냐하면 이러한 값은 2038년 대신 프로그램의 구현 방법에 따라 1970년 또는 1901년을 가리키기 때문입니다.</p>
+</div>
         </div>
     </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-01-20&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/e28967455b32bb31f37fefa3729bbbebca6f71d3" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) e28967455b32bb31f37fefa3729bbbebca6f71d3: rebuilding site 2022년 1월 20일 목요일 23시 00분 01초 KST">
-                                    <i class="fas fa-hashtag fa-fw"></i>e289674</a></span>
+                <span>Updated on 2022-01-21&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/81224b3b68185945cb09c2a2f1805182fe78b1bc" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 81224b3b68185945cb09c2a2f1805182fe78b1bc: rebuilding site 2022년 1월 21일 금요일 13시 10분 02초 KST">
+                                    <i class="fas fa-hashtag fa-fw"></i>81224b3</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -328,7 +323,7 @@
                             <a class="link-to-markdown" href="/ch03/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/ch03/" data-title="[Cryptozombies03] dAdvanced Solidity Concepts" data-hashtags="solidity,dev,crptozombies"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/ch03/" data-hashtag="solidity"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/ch03/" data-title="[Cryptozombies03] dAdvanced Solidity Concepts"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/ch03/" data-title="[Cryptozombies03] dAdvanced Solidity Concepts"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/ch03/" data-title="[Cryptozombies03] dAdvanced Solidity Concepts" data-image="/images/zombie_army.png"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/ch03/" data-title="[Cryptozombies03] Advanced Solidity Concepts" data-hashtags="solidity,dev,crptozombies"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/ch03/" data-hashtag="solidity"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/ch03/" data-title="[Cryptozombies03] Advanced Solidity Concepts"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/ch03/" data-title="[Cryptozombies03] Advanced Solidity Concepts"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/ch03/" data-title="[Cryptozombies03] Advanced Solidity Concepts" data-image="/images/zombie_army.png"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
