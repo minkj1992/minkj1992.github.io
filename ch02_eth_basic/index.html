@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/ch02_eth_basic/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-28T12:45:10+09:00" />
-<meta property="article:modified_time" content="2022-01-28T18:25:44+09:00" />
+<meta property="article:modified_time" content="2022-01-28T19:02:34+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -32,8 +32,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, ethereum","wordcount":  2854 ,
-        "url": "https:\/\/minkj1992.github.io\/ch02_eth_basic\/","datePublished": "2022-01-28T12:45:10+09:00","dateModified": "2022-01-28T18:25:44+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, ethereum","wordcount":  3895 ,
+        "url": "https:\/\/minkj1992.github.io\/ch02_eth_basic\/","datePublished": "2022-01-28T12:45:10+09:00","dateModified": "2022-01-28T19:02:34+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -114,8 +114,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">[마스터링 이더리움 CH02] Ethereum Basics</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/blockchain/"><i class="far fa-folder fa-fw"></i>blockchain</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-28">2022-01-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2854 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-28">2022-01-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3895 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -137,6 +137,9 @@
     <li><a href="#introducing-the-world-computer">Introducing the World Computer</a></li>
     <li><a href="#externally-owned-accounts-eoas-and-contracts">Externally Owned Accounts (EOAs) and Contracts</a></li>
     <li><a href="#a-simple-contract-a-test-ether-faucet">A Simple Contract: A Test Ether Faucet</a></li>
+    <li><a href="#compiling-the-faucet-contract">Compiling the Faucet Contract</a></li>
+    <li><a href="#creating-the-contract-on-the-blockchain">Creating the Contract on the Blockchain</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>이번장에서는 [마스터링 이더리움 CH02] 이더리움 기초를 정리합니다. 인용글들은 <a href="https://github.com/ethereumbook/ethereumbook/blob/develop/02intro.asciidoc" target="_blank" rel="noopener noreffer">원문</a>을 참조하였습니다.</p>
@@ -476,18 +479,149 @@ a.k.a default function이라고도 불리며, 이름 그대로 대비책 함수�
 <pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol">        <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">.</span><span class="nb">transfer</span><span class="p">(</span><span class="n">withdraw_amount</span><span class="p">);</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><code>msg</code> object는 one of the inputs로 모든 contracts가 접근 가능한 객체입니다. transaction이 실행되도록 trigger 시킨 주체를 의미합니다.</p>
-<p>attribute인 <code>sender</code>는 <code>sender address of the transaction</code>를 의미합니다.</p>
-<p><code>transfer()</code>는 built-in 함수로 <code>ether</code>를 current contract -&gt; <code>누군가</code>.transfer()의 <code>누군가</code>에게 전달하는 것을 의미하며 이 코드에서 <code>누군가</code>는 <code>address of the sender</code>입니다.</p>
-<p>즉 코드를 한줄로 설명하면 <code>contract --eth--&gt; msg.sender</code>입니다.</p>
+</div><p><code>msg</code> object는 one of the inputs로 모든 contracts가 접근 가능한 객체입니다. transaction이 실행되도록 trigger 시킨 주체를 의미합니다. 또한 attribute인 <code>sender</code>는 <code>sender address of the transaction</code>를 의미합니다. 마지막으로 <code>transfer()</code>는 built-in 함수로 <code>ether</code>를 current contract -&gt; <code>누군가</code>.transfer()의 <code>누군가</code>에게 전달하는 것을 의미하며 이 코드에서 <code>누군가</code>는 <code>address of the sender</code>입니다. 즉 코드를 한줄로 설명하면 <code>contract --eth--&gt; msg.sender</code>로 작동해라는 명령어 입니다.</p>
 <blockquote>
 <p><em>This meas transfer ether from current contract to the sender of the msg that triggered this contract execution</em></p>
-</blockquote></div><div class="post-footer" id="post-footer">
+</blockquote>
+<h2 id="compiling-the-faucet-contract">Compiling the Faucet Contract</h2>
+<p>자 이제 우리가 처음 작성한 스마트 컨트랙트 코드를 Solidity Compiler를 통해 EVM bytecode로 변환을 하여 EVM에서 실행 될 수 있도록 만들어보겠습니다.</p>
+<p>Solidity Compiler로는 대표적으로 아래의 것들이 있습니다. 저희는 이 중 solidity 공식문서에서 권유하는 <code>Remix IDE</code>를 사용해보겠습니다.</p>
+<blockquote>
+<p>We recommend Remix for small contracts and for quickly learning Solidity.</p>
+</blockquote>
+<p>참고로 대안으로 급부상하고 있는 <a href="https://hardhat.org/hardhat-network/#how-does-it-work" target="_blank" rel="noopener noreffer"><code>Hardhat</code></a>이라는 개발환경 또한 존재합니다.</p>
+<ul>
+<li>web3.js 대신 (<a href="https://docs.ethers.io/v5/" target="_blank" rel="noopener noreffer">ethers.js</a>)를 default로 사용함.</li>
+</ul>
+<p>Remix에서 코드를 작성한 뒤, Remix 좌측 2번째 탭을 클릭한 뒤, 적절한 compiler 버전(이번 예제는 0.6.4)를 설정해주고 compile Faucet.sol 버튼을 클릭해주면
+아래와 같은 화면을 볼 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/10.png"
+        data-srcset="/images/metamask/10.png, /images/metamask/10.png 1.5x, /images/metamask/10.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/10.png"
+        title="/images/metamask/10.png" /></p>
+<h2 id="creating-the-contract-on-the-blockchain">Creating the Contract on the Blockchain</h2>
+<blockquote>
+<p><em>Now, we need to “register” the contract on the Ethereum blockchain.</em></p>
+</blockquote>
+<p>이제 robsten test 네트워크에 생성해준 contract를 등록해보겠습니다.</p>
+<blockquote>
+<p><em>Registering a contract on the blockchain involves creating a special transaction whose destination is the address 0x0000000000000000000000000000000000000000, also known as the zero address. The zero address is a special address that tells the Ether‐ eum blockchain that you want to register a contract. Fortunately, the Remix IDE will handle all of that for you and send the transaction to MetaMask.</em></p>
+</blockquote>
+<p>자 Remix의 3번째 탭(DEPLOY &amp; RUN TRANSACTIONS)을 클릭하여 아래와 같이 세팅해줍니다. Account는 앞서 metamask에서 계정을 생성해주었다면 remix에서 metamask 요청페이지를 열어주어, 계정을 연결시켜줄 것입니다.</p>
+<p>여기에서 &ldquo;Deploy&quot;버튼을 누르게 되면</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/11.png"
+        data-srcset="/images/metamask/11.png, /images/metamask/11.png 1.5x, /images/metamask/11.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/11.png"
+        title="/images/metamask/11.png" /></p>
+</center>
+이렇게 Deployed Contract가 등록요청하는 metamask 창이 열리고 확인을 누릅니다.
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/12.png"
+        data-srcset="/images/metamask/12.png, /images/metamask/12.png 1.5x, /images/metamask/12.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/12.png"
+        title="/images/metamask/12.png" /></p>
+</center>
+<p>확인을 눌러주면 Remix상에서 contract가 생성된 것을 보실 수 있습니다.</p>
+<p>우측의 copy버튼을 눌러 Contract address를 복사해서 etherscan에서 확인해보겠습니다.</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/13.png"
+        data-srcset="/images/metamask/13.png, /images/metamask/13.png 1.5x, /images/metamask/13.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/13.png"
+        title="/images/metamask/13.png" /></p>
+</center>
+<p><a href="https://ropsten.etherscan.io/address/0x8726C3D2F253332767Abd7268a11291df4A2f40d" target="_blank" rel="noopener noreffer">생성한 컨트렉트</a>에서 보여지듯이 잘 생성된 것을 확인하실 수 있습니다.
+자 그럼 1eth를 해당 컨트랙트로 보내보겠습니다.</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/15.png"
+        data-srcset="/images/metamask/15.png, /images/metamask/15.png 1.5x, /images/metamask/15.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/15.png"
+        title="/images/metamask/15.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/16.png"
+        data-srcset="/images/metamask/16.png, /images/metamask/16.png 1.5x, /images/metamask/16.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/16.png"
+        title="/images/metamask/16.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/17.png"
+        data-srcset="/images/metamask/17.png, /images/metamask/17.png 1.5x, /images/metamask/17.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/17.png"
+        title="/images/metamask/17.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/18.png"
+        data-srcset="/images/metamask/18.png, /images/metamask/18.png 1.5x, /images/metamask/18.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/18.png"
+        title="/images/metamask/18.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/19.png"
+        data-srcset="/images/metamask/19.png, /images/metamask/19.png 1.5x, /images/metamask/19.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/19.png"
+        title="/images/metamask/19.png" /></p>
+</center>
+<p>metamask를 통해서 이더를 보낸뒤, etherscan을 통해서 확인해보면 정상적으로 value 1eth가 전송된 것을 확인할 수 있습니다. 자 이제 튜토리얼의 마지막 단계인 0.1eth를 회수 해보겠습니다.</p>
+<p>Remix의 버튼에 &ldquo;100000000000000000&rdquo; (10*17 wei = 0.1eth)를 기입하고 withdraw버튼을 클릭해줍니다.</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/20.png"
+        data-srcset="/images/metamask/20.png, /images/metamask/20.png 1.5x, /images/metamask/20.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/20.png"
+        title="/images/metamask/20.png" /></p>
+</center>
+<p>etherscan을 통해서 보면 다음과 같이 0.1 eth를 전송한 트랜잭션을 확인할 수 있습니다.</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/metamask/21.png"
+        data-srcset="/images/metamask/21.png, /images/metamask/21.png 1.5x, /images/metamask/21.png 2x"
+        data-sizes="auto"
+        alt="/images/metamask/21.png"
+        title="/images/metamask/21.png" /></p>
+</center>
+<h2 id="conclusion">Conclusion</h2>
+<p>이상으로 마스터링 이더리움 ch02인 기초적인 이더리움에 대해서 정리해보았습니다. 개인적으로 스마트 컨트랙트가 어떻게 배포되는 지 궁금했었는데
+staging 개념으로 테스트를 해볼 수 있는 테스트넷이 있다는 점과, 실제 컨트랙트를 배포해서 metamask 계정과 연동해서 동작시켜볼 수 있었던 점이 재밌었던 것 같습니다.</p>
+<center> - 끝 - </center></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-01-28&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/2092c80ec83e501fe47c725ccaad2a81a1df3666" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 2092c80ec83e501fe47c725ccaad2a81a1df3666: rebuilding site 2022년 1월 28일 금요일 18시 25분 44초 KST">
-                                    <i class="fas fa-hashtag fa-fw"></i>2092c80</a></span>
+                <span>Updated on 2022-01-28&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/5b8d777cc49fd79f0ae51d188ce91e63c5a0738a" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 5b8d777cc49fd79f0ae51d188ce91e63c5a0738a: rebuilding site 2022년 1월 28일 금요일 19시 02분 34초 KST">
+                                    <i class="fas fa-hashtag fa-fw"></i>5b8d777</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

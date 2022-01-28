@@ -214,13 +214,97 @@ a.k.a default function이라고도 불리며, 이름 그대로 대비책 함수�
         msg.sender.transfer(withdraw_amount);
 ```
 
-`msg` object는 one of the inputs로 모든 contracts가 접근 가능한 객체입니다. transaction이 실행되도록 trigger 시킨 주체를 의미합니다.
-
-attribute인 `sender`는 `sender address of the transaction`를 의미합니다.
-
-`transfer()`는 built-in 함수로 `ether`를 current contract -> `누군가`.transfer()의 `누군가`에게 전달하는 것을 의미하며 이 코드에서 `누군가`는 `address of the sender`입니다.
-
-즉 코드를 한줄로 설명하면 `contract --eth--> msg.sender`입니다.
+`msg` object는 one of the inputs로 모든 contracts가 접근 가능한 객체입니다. transaction이 실행되도록 trigger 시킨 주체를 의미합니다. 또한 attribute인 `sender`는 `sender address of the transaction`를 의미합니다. 마지막으로 `transfer()`는 built-in 함수로 `ether`를 current contract -> `누군가`.transfer()의 `누군가`에게 전달하는 것을 의미하며 이 코드에서 `누군가`는 `address of the sender`입니다. 즉 코드를 한줄로 설명하면 `contract --eth--> msg.sender`로 작동해라는 명령어 입니다.
 
 > _This meas transfer ether from current contract to the sender of the msg that triggered this contract execution_
+
+## Compiling the Faucet Contract
+
+자 이제 우리가 처음 작성한 스마트 컨트랙트 코드를 Solidity Compiler를 통해 EVM bytecode로 변환을 하여 EVM에서 실행 될 수 있도록 만들어보겠습니다.
+
+Solidity Compiler로는 대표적으로 아래의 것들이 있습니다. 저희는 이 중 solidity 공식문서에서 권유하는 `Remix IDE`를 사용해보겠습니다.
+
+> We recommend Remix for small contracts and for quickly learning Solidity.
+
+참고로 대안으로 급부상하고 있는 [`Hardhat`](https://hardhat.org/hardhat-network/#how-does-it-work)이라는 개발환경 또한 존재합니다.
+
+- web3.js 대신 ([ethers.js](https://docs.ethers.io/v5/))를 default로 사용함.
+
+Remix에서 코드를 작성한 뒤, Remix 좌측 2번째 탭을 클릭한 뒤, 적절한 compiler 버전(이번 예제는 0.6.4)를 설정해주고 compile Faucet.sol 버튼을 클릭해주면
+아래와 같은 화면을 볼 수 있습니다.
+
+![](/images/metamask/10.png)
+
+## Creating the Contract on the Blockchain
+
+> _Now, we need to “register” the contract on the Ethereum blockchain._
+
+이제 robsten test 네트워크에 생성해준 contract를 등록해보겠습니다.
+
+> _Registering a contract on the blockchain involves creating a special transaction whose destination is the address 0x0000000000000000000000000000000000000000, also known as the zero address. The zero address is a special address that tells the Ether‐ eum blockchain that you want to register a contract. Fortunately, the Remix IDE will handle all of that for you and send the transaction to MetaMask._
+
+자 Remix의 3번째 탭(DEPLOY & RUN TRANSACTIONS)을 클릭하여 아래와 같이 세팅해줍니다. Account는 앞서 metamask에서 계정을 생성해주었다면 remix에서 metamask 요청페이지를 열어주어, 계정을 연결시켜줄 것입니다.
+
+여기에서 "Deploy"버튼을 누르게 되면
+
+<center>
+
+![](/images/metamask/11.png)
+
+</center>
+이렇게 Deployed Contract가 등록요청하는 metamask 창이 열리고 확인을 누릅니다.
+
+<center>
+
+![](/images/metamask/12.png)
+
+</center>
+
+확인을 눌러주면 Remix상에서 contract가 생성된 것을 보실 수 있습니다.
+
+우측의 copy버튼을 눌러 Contract address를 복사해서 etherscan에서 확인해보겠습니다.
+
+<center>
+
+![](/images/metamask/13.png)
+
+</center>
+
+[생성한 컨트렉트](https://ropsten.etherscan.io/address/0x8726C3D2F253332767Abd7268a11291df4A2f40d)에서 보여지듯이 잘 생성된 것을 확인하실 수 있습니다.
+자 그럼 1eth를 해당 컨트랙트로 보내보겠습니다.
+
+<center>
+
+![](/images/metamask/15.png)
+![](/images/metamask/16.png)
+![](/images/metamask/17.png)
+![](/images/metamask/18.png)
+![](/images/metamask/19.png)
+
+</center>
+
+metamask를 통해서 이더를 보낸뒤, etherscan을 통해서 확인해보면 정상적으로 value 1eth가 전송된 것을 확인할 수 있습니다. 자 이제 튜토리얼의 마지막 단계인 0.1eth를 회수 해보겠습니다.
+
+Remix의 버튼에 "100000000000000000" (10\*17 wei = 0.1eth)를 기입하고 withdraw버튼을 클릭해줍니다.
+
+<center>
+
+![](/images/metamask/20.png)
+
+</center>
+
+etherscan을 통해서 보면 다음과 같이 0.1 eth를 전송한 트랜잭션을 확인할 수 있습니다.
+
+<center>
+
+![](/images/metamask/21.png)
+
+</center>
+
+## Conclusion
+
+이상으로 마스터링 이더리움 ch02인 기초적인 이더리움에 대해서 정리해보았습니다. 개인적으로 스마트 컨트랙트가 어떻게 배포되는 지 궁금했었는데
+staging 개념으로 테스트를 해볼 수 있는 테스트넷이 있다는 점과, 실제 컨트랙트를 배포해서 metamask 계정과 연동해서 동작시켜볼 수 있었던 점이 재밌었던 것 같습니다.
+
+<center> - 끝 - </center>
 
