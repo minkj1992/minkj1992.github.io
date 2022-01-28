@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/ch03/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-21T13:06:52+09:00" />
-<meta property="article:modified_time" content="2022-01-21T13:28:08+09:00" />
+<meta property="article:modified_time" content="2022-01-21T19:59:10+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -32,8 +32,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "solidity, dev, crptozombies","wordcount":  4467 ,
-        "url": "https:\/\/minkj1992.github.io\/ch03\/","datePublished": "2022-01-21T13:06:52+09:00","dateModified": "2022-01-21T13:28:08+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "solidity, dev, crptozombies","wordcount":  5141 ,
+        "url": "https:\/\/minkj1992.github.io\/ch03\/","datePublished": "2022-01-21T13:06:52+09:00","dateModified": "2022-01-21T19:59:10+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -114,8 +114,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">[Cryptozombies03] Advanced Solidity Concepts</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/blockchain/"><i class="far fa-folder fa-fw"></i>blockchain</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-21">2022-01-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;4467 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-21">2022-01-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;5141 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;11 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -142,7 +142,11 @@
             <li><a href="#zombiehelpersol">zombieHelper.sol</a></li>
           </ul>
         </li>
-        <li><a href="#saving-gas-with-view-functions">Saving Gas With &lsquo;View&rsquo; Functions</a></li>
+        <li><a href="#saving-gas-with-view-functions">Saving Gas With &lsquo;View&rsquo; Functions</a>
+          <ul>
+            <li><a href="#declaring-arrays-in-memory">Declaring arrays in memory</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -298,12 +302,12 @@
   <span class="kt">uint</span> <span class="n">c</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c1">// `mini`는 구조체 압축을 했기 때문에 `normal`보다 가스를 조금 사용하게 된다.
+<span class="c1">// `mini`는 구조체 압축을 했기 때문에 `normal`보다 가스를 조금 사용하게 됩니다.
 </span><span class="c1"></span><span class="n">NormalStruct</span> <span class="n">normal</span> <span class="o">=</span> <span class="n">NormalStruct</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
 <span class="n">MiniMe</span> <span class="n">mini</span> <span class="o">=</span> <span class="n">MiniMe</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span> 
 </code></pre></td></tr></table>
 </div>
-</div><p>이런 이유로, <strong>구조체 안에서는 가능한 작은 크기의 정수 타입을 쓰는 것이 좋다</strong>고 할 수 있습니다.또한 <strong>동일한 데이터 타입은 하나로 묶어놓는 것이 좋다</strong>.</p>
+</div><p>이런 이유로, <strong>구조체 안에서는 가능한 작은 크기의 정수 타입을 쓰는 것이 좋다</strong>고 할 수 있습니다.또한 <strong>동일한 데이터 타입은 하나로 묶어놓는 것이 좋습니다</strong>.</p>
 <p>즉 구조체에서 서로 가까이 있도록 선언하면 솔리디티에서 사용하는 저장 공간을 최소화해줍니다.
 예를 들면, <code>uint c; uint32 a; uint32 b;</code>라는 필드로 구성된 구조체가 <code>uint32 a; uint c; uint32 b;</code> 필드로 구성된 구조체보다 uint32 필드들이 묶여있기 때문에 가스를 덜 소모합니다.</p>
 <h3 id="time-units"><code>Time Units</code></h3>
@@ -632,8 +636,8 @@
 <p>View functions don&rsquo;t cost gas</p>
 </blockquote>
 <p><strong>view 함수는 사용자에 의해 외부에서 호출되었을 때 가스를 전혀 소모하지 않는다.</strong></p>
-<p>블록체인에 상태를 기록한다는 것은, 모든 <code>single node</code>들에게 트랜잭션이 추가되어야 한다는 것을 의미한다. 하지만 반대로 view / pure function의 경우 블록체인 상에 어떤 것도 수정하지 않기 때문에 gas 소모가 없습니다.</p>
-<p>만약 web3.js에게 view function를 호출해달라 요청하는 것은 실제로는 로컬 이더리움 노드에 query만 날리면 되기 때문에 가스 소모가 없게 된다.</p>
+<p>블록체인에 상태를 기록한다는 것은, 모든 <code>single node</code>들에게 트랜잭션이 추가되어야 한다는 것을 의미합니다. 하지만 반대로 view / pure function의 경우 블록체인 상에 어떤 것도 수정하지 않기 때문에 gas 소모가 없습니다.</p>
+<p>만약 web3.js에게 view function를 호출해달라 요청하는 것은 실제로는 로컬 이더리움 노드에 query만 날리면 되기 때문에 가스 소모가 없게 됩니다.</p>
 <div class="details admonition warning open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-exclamation-triangle fa-fw"></i>Warning<i class="details-icon fas fa-angle-right fa-fw"></i>
@@ -642,16 +646,74 @@
             <div class="admonition-content"><p>앞부분 설명을 보다보니 문득 view function gas가 들지 않는다면, view function을 infinite 호출하게되면 이더리움 망가뜨릴수 있지 않을까하는 생각에 검색하게 되었고 확인해보니 pure / view function은 internally call 해주게 되면 gas비가 든다고 한다. 즉 크립토좀비가 이번 세션에서 설명하는 것은 blockchain 외부(i.g web3.js)에서 호출하면 free gas cost라는 의미이다.</p>
 <p><strong>Pure and view functions still cost gas if they are called internally</strong> from another function. They are only free if they are called externally, from outside of the blockchain.</p>
 <p>This <a href="https://ethereum.stackexchange.com/questions/52885/view-pure-gas-usage-cost-gas-if-called-internally-by-another-function/52887#52887" target="_blank" rel="noopener noreffer">View/Pure Gas usage - Cost gas if called internally by another function?</a> goes into greater depth on this topic.</p>
-<p>자세히 보니 크립토 좀비 <strong>참고</strong>에 만약 view 함수가 동일 컨트랙트 내에 있는, view 함수가 아닌 다른 함수에서 내부적으로 호출될 경우, 여전히 가스를 소모할 것이네. 이것은 다른 함수가 이더리움에 트랜잭션을 생성하고, 이는 모든 개별 노드에서 검증되어야 하기 때문이네. 그러니 view 함수는 외부에서 호출됐을 때에만 무료라네. 라고 작성 되어있다.</p>
 </div>
         </div>
     </div>
-<p>이제 우리의 좀비 DApp에 사용자의 전체 좀비 군대를 볼 수 있는 메소드를 추가해보자. <code>getZombiesByOwner()</code>라는 네이밍에 <code>external view function</code>으로 만들어 보겠습니다.</p></div><div class="post-footer" id="post-footer">
+<p>자세히 보니 크립토 좀비의 <strong>참고</strong>에도 아래와 같은 hint가 작성되어있네요. (데헷 😧)</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">만약 view 함수가 동일 컨트랙트 내에 있는, view 함수가 아닌 다른 함수에서 내부적으로 호출될 경우, 여전히 가스를 소모할 것이네. 이것은 다른 함수가 이더리움에 트랜잭션을 생성하고, 이는 모든 개별 노드에서 검증되어야 하기 때문이네. 그러니 view 함수는 외부에서 호출됐을 때에만 무료라네.</div>
+        </div>
+    </div>
+<p>이제 우리의 좀비 DApp에 사용자의 전체 좀비 군대를 볼 수 있는 메소드를 추가해보자. <code>getZombiesByOwner()</code>라는 네이밍에 <code>external view function</code>으로 만들어 보겠습니다.</p>
+<h4 id="declaring-arrays-in-memory">Declaring arrays in memory</h4>
+<p>솔리디티에서 <code>storage</code>에 write하는 것은 비싼 연산 중 하나입니다. 이더리움은 <code>World computer</code>이기 때문에 main-net기준으로 storage를 사용할 경우, 연결되어 있는 전세계 수많은 node들에 update를 시키게 되기 때문이죠. 이러다 보니 대부분의 프로그래밍 언어가 크기가 상당한 collection에 각각 접근( <code>O(N)</code> )하는 것을 지양하는 것과 달리, 솔리디티는 그 접근이 <code>external view</code>함수라면 storage를 쓰는 것보다 <code>memoery</code>를 써서 각각 element에 접근하는 것이 더 저렴한 방법입니다. (이는 gas비 때문인데, 훗날 이더리움 가격이 떨어진다면 달라질지도)</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>생각해보니 실제로 storage에 write하는 것은 O(N) * per_gas_cost는 아닌것 같네요.</p>
+<p>만약 1만명이 사용하는 contract라고 가정했을 떄 N=element갯수라면, <code>gas_cost = (O(N) * 하나의_write_연산에_사용되는_gas_cost) * 10000</code>이 되기 때문에 만약 1만명이 아닌 사용하고자 하는 사람의 숫자가 많아진다면, 즉 <code>if 10000 &gt;= storage's element size</code>라면 <code>N</code>의 정의가 달라지게 될 것 같습니다.</p>
+</div>
+        </div>
+    </div>
+<p><code>Storage</code>에 아무것도 쓰지 않고도 함수 안에서 새로운 배열을 만들기 위해서는 <code>memory</code>키워드를 사용하면 됩니다. 이는 <code>storage</code>배열을 직접 업데이트하는 것보다 gas_cost 측면에서 훨씬 (크립토 좀비에 따르면)  저렴하다고 합니다. 그러므로 <strong>collection을 storage로 관리하지 말고 memory로 전환하여 관리합시다.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="s">&#34;./zombiefeeding.sol&#34;</span><span class="p">;</span>
+
+<span class="kd">contract</span> <span class="nc">ZombieHelper</span> <span class="k">is</span> <span class="n">ZombieFeeding</span> <span class="p">{</span>
+
+  <span class="p">...</span> <span class="err">중략</span> <span class="p">...</span>
+
+  <span class="kd">function</span> <span class="nf">getZombiesByOwner</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span><span class="p">(</span><span class="kt">uint</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">uint</span><span class="p">[]</span> <span class="k">memory</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">uint</span><span class="p">[](</span><span class="n">ownerZombieCount</span><span class="p">[</span><span class="n">_owner</span><span class="p">]);</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-01-21&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/05220bb81bb0d833237683b56b5fab07693216b6" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 05220bb81bb0d833237683b56b5fab07693216b6: rebuilding site 2022년 1월 21일 금요일 13시 28분 08초 KST">
-                                    <i class="fas fa-hashtag fa-fw"></i>05220bb</a></span>
+                <span>Updated on 2022-01-21&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/e91738020ebdff725ae25bd5153f5c770cd74286" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) e91738020ebdff725ae25bd5153f5c770cd74286: rebuilding site 2022년 1월 21일 금요일 19시 59분 10초 KST">
+                                    <i class="fas fa-hashtag fa-fw"></i>e917380</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -688,5 +750,5 @@
             </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
                 <i class="fas fa-comment fa-fw"></i>
             </a>
-        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

@@ -86,8 +86,7 @@ Person[] public people;
 참고로 솔리디티에서 함수는 기본적으로 public이다.
   - 누구나 또는 다른 컨트랙트가 나의 컨트랙트 함수를 호출하고 코드를 실행할 수 있다.
 
-솔라디티는 함수가 데이터를 read만 하고 state change를 하지 않을 때 
-`view 함수`를 사용한다.
+솔라디티는 함수가 데이터를 read만 하고 state change를 하지 않을 때 `view 함수`를 사용한다.
 
 ```sol
 function sayHello() public view returns (string) {

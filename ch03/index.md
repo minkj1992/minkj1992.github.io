@@ -108,12 +108,12 @@ struct MiniMe {
   uint c;
 }
 
-// `mini`는 구조체 압축을 했기 때문에 `normal`보다 가스를 조금 사용하게 된다.
+// `mini`는 구조체 압축을 했기 때문에 `normal`보다 가스를 조금 사용하게 됩니다.
 NormalStruct normal = NormalStruct(10, 20, 30);
 MiniMe mini = MiniMe(10, 20, 30); 
 ```
 
-이런 이유로, **구조체 안에서는 가능한 작은 크기의 정수 타입을 쓰는 것이 좋다**고 할 수 있습니다.또한 **동일한 데이터 타입은 하나로 묶어놓는 것이 좋다**. 
+이런 이유로, **구조체 안에서는 가능한 작은 크기의 정수 타입을 쓰는 것이 좋다**고 할 수 있습니다.또한 **동일한 데이터 타입은 하나로 묶어놓는 것이 좋습니다**. 
 
 즉 구조체에서 서로 가까이 있도록 선언하면 솔리디티에서 사용하는 저장 공간을 최소화해줍니다. 
 예를 들면, `uint c; uint32 a; uint32 b;`라는 필드로 구성된 구조체가 `uint32 a; uint c; uint32 b;` 필드로 구성된 구조체보다 uint32 필드들이 묶여있기 때문에 가스를 덜 소모합니다. 
@@ -313,9 +313,9 @@ contract ZombieHelper is ZombieFeeding {
 
 **view 함수는 사용자에 의해 외부에서 호출되었을 때 가스를 전혀 소모하지 않는다.**
 
-블록체인에 상태를 기록한다는 것은, 모든 `single node`들에게 트랜잭션이 추가되어야 한다는 것을 의미한다. 하지만 반대로 view / pure function의 경우 블록체인 상에 어떤 것도 수정하지 않기 때문에 gas 소모가 없습니다. 
+블록체인에 상태를 기록한다는 것은, 모든 `single node`들에게 트랜잭션이 추가되어야 한다는 것을 의미합니다. 하지만 반대로 view / pure function의 경우 블록체인 상에 어떤 것도 수정하지 않기 때문에 gas 소모가 없습니다.
 
-만약 web3.js에게 view function를 호출해달라 요청하는 것은 실제로는 로컬 이더리움 노드에 query만 날리면 되기 때문에 가스 소모가 없게 된다.
+만약 web3.js에게 view function를 호출해달라 요청하는 것은 실제로는 로컬 이더리움 노드에 query만 날리면 되기 때문에 가스 소모가 없게 됩니다.
 
 
 
@@ -326,12 +326,47 @@ contract ZombieHelper is ZombieFeeding {
 
 This [View/Pure Gas usage - Cost gas if called internally by another function?](https://ethereum.stackexchange.com/questions/52885/view-pure-gas-usage-cost-gas-if-called-internally-by-another-function/52887#52887) goes into greater depth on this topic.
 
+{{< /admonition >}}
 
-자세히 보니 크립토 좀비 **참고**에 만약 view 함수가 동일 컨트랙트 내에 있는, view 함수가 아닌 다른 함수에서 내부적으로 호출될 경우, 여전히 가스를 소모할 것이네. 이것은 다른 함수가 이더리움에 트랜잭션을 생성하고, 이는 모든 개별 노드에서 검증되어야 하기 때문이네. 그러니 view 함수는 외부에서 호출됐을 때에만 무료라네. 라고 작성 되어있다.
+자세히 보니 크립토 좀비의 **참고**에도 아래와 같은 hint가 작성되어있네요. (데헷 😧)
+
+{{< admonition tip >}}
+만약 view 함수가 동일 컨트랙트 내에 있는, view 함수가 아닌 다른 함수에서 내부적으로 호출될 경우, 여전히 가스를 소모할 것이네. 이것은 다른 함수가 이더리움에 트랜잭션을 생성하고, 이는 모든 개별 노드에서 검증되어야 하기 때문이네. 그러니 view 함수는 외부에서 호출됐을 때에만 무료라네.
 {{< /admonition >}}
 
 이제 우리의 좀비 DApp에 사용자의 전체 좀비 군대를 볼 수 있는 메소드를 추가해보자. `getZombiesByOwner()`라는 네이밍에 `external view function`으로 만들어 보겠습니다.
 
+
+
+#### Declaring arrays in memory
+
+솔리디티에서 `storage`에 write하는 것은 비싼 연산 중 하나입니다. 이더리움은 `World computer`이기 때문에 main-net기준으로 storage를 사용할 경우, 연결되어 있는 전세계 수많은 node들에 update를 시키게 되기 때문이죠. 이러다 보니 대부분의 프로그래밍 언어가 크기가 상당한 collection에 각각 접근( `O(N)` )하는 것을 지양하는 것과 달리, 솔리디티는 그 접근이 `external view`함수라면 storage를 쓰는 것보다 `memoery`를 써서 각각 element에 접근하는 것이 더 저렴한 방법입니다. (이는 gas비 때문인데, 훗날 이더리움 가격이 떨어진다면 달라질지도)
+
+{{< admonition tip >}}
+생각해보니 실제로 storage에 write하는 것은 O(N) * per_gas_cost는 아닌것 같네요.
+
+만약 1만명이 사용하는 contract라고 가정했을 떄 N=element갯수라면, `gas_cost = (O(N) * 하나의_write_연산에_사용되는_gas_cost) * 10000`이 되기 때문에 만약 1만명이 아닌 사용하고자 하는 사람의 숫자가 많아진다면, 즉 `if 10000 >= storage's element size`라면 `N`의 정의가 달라지게 될 것 같습니다.
+{{< /admonition >}}
+
+`Storage`에 아무것도 쓰지 않고도 함수 안에서 새로운 배열을 만들기 위해서는 `memory`키워드를 사용하면 됩니다. 이는 `storage`배열을 직접 업데이트하는 것보다 gas_cost 측면에서 훨씬 (크립토 좀비에 따르면)  저렴하다고 합니다. 그러므로 **collection을 storage로 관리하지 말고 memory로 전환하여 관리합시다.**
+
+```sol
+pragma solidity ^0.4.19;
+
+import "./zombiefeeding.sol";
+
+contract ZombieHelper is ZombieFeeding {
+
+  ... 중략 ...
+
+  function getZombiesByOwner(address _owner) external view returns(uint[]) {
+    uint[] memory result = new uint[](ownerZombieCount[_owner]);
+    return result;
+  }
+
+}
+
+```
 
 
 

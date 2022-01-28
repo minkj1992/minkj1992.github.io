@@ -58,10 +58,10 @@
             </div><p><code>ros2 Foxy</code>를 <code>mac pro</code> 로컬 환경에 설치해봅니다.</p>]]></description>
 </item><item>
     <title>[마스터링 이더리움 CH01] 이더리움이란 무엇인가</title>
-    <link>https://minkj1992.github.io/what_is_ethereum/</link>
+    <link>https://minkj1992.github.io/ch01_what_is_ethereum/</link>
     <pubDate>Sat, 15 Jan 2022 16:52:01 &#43;0900</pubDate>
     <author>Author</author>
-    <guid>https://minkj1992.github.io/what_is_ethereum/</guid>
+    <guid>https://minkj1992.github.io/ch01_what_is_ethereum/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/ethereum.webp" referrerpolicy="no-referrer">
             </div><p>이번장에서는 <code>Mastering Ethereum</code>과 <a href="http://www.umlcert.com/mastering_ethereum-1/" target="_blank" rel="noopener noreffer">김혐남님의 세미나 내용</a>을 기반으로 이더리움이란 무엇인가에 대해서 정리합니다.</p>]]></description>

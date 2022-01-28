@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>[마스터링 이더리움 CH01] 이더리움이란 무엇인가 - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="[마스터링 이더리움 CH01] 이더리움이란 무엇인가" />
+<meta property="og:description" content="이번장에서는 Mastering Ethereum과 김혐남님의 세미나 내용을 기반으로 이더리움이란 무엇인가에 대해서 정리합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/ch01_what_is_ethereum/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-15T16:52:01+09:00" />
+<meta property="article:modified_time" content="2022-01-15T16:52:01+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="[마스터링 이더리움 CH01] 이더리움이란 무엇인가"/>
+<meta name="twitter:description" content="이번장에서는 Mastering Ethereum과 김혐남님의 세미나 내용을 기반으로 이더리움이란 무엇인가에 대해서 정리합니다."/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/ch01_what_is_ethereum/" /><link rel="prev" href="https://minkj1992.github.io/ch01/" /><link rel="next" href="https://minkj1992.github.io/ch01_install/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "[마스터링 이더리움 CH01] 이더리움이란 무엇인가",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/ch01_what_is_ethereum\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, ethereum","wordcount":  1633 ,
+        "url": "https:\/\/minkj1992.github.io\/ch01_what_is_ethereum\/","datePublished": "2022-01-15T16:52:01+09:00","dateModified": "2022-01-15T16:52:01+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="어서 누르기나 하라구"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="어서 누르기나 하라구">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">[마스터링 이더리움 CH01] 이더리움이란 무엇인가</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/blockchain/"><i class="far fa-folder fa-fw"></i>blockchain</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-15">2022-01-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1633 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ethereum.webp"
+        data-srcset="/images/ethereum.webp, /images/ethereum.webp 1.5x, /images/ethereum.webp 2x"
+        data-sizes="auto"
+        alt="/images/ethereum.webp"
+        title="/images/ethereum.webp" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#tldr">tl;dr</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-what-is-ethereum">1. What is Ethereum</a></li>
+    <li><a href="#2-compared-to-bitcoin">2. Compared to <code>Bitcoin</code></a></li>
+    <li><a href="#3-components-of-a-blockchain">3. Components of a Blockchain</a></li>
+    <li><a href="#4-the-birth-of-ethereum">4. The Birth of Ethereum</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>이번장에서는 <code>Mastering Ethereum</code>과 <a href="http://www.umlcert.com/mastering_ethereum-1/" target="_blank" rel="noopener noreffer">김혐남님의 세미나 내용</a>을 기반으로 이더리움이란 무엇인가에 대해서 정리합니다.</p>
+<h3 id="tldr">tl;dr</h3>
+<ul>
+<li><strong>Ethereum is a Blockchain Platform.</strong></li>
+</ul>
+<p>이더리움을 블록체인 생태계에서 포지션을 생각한다면 플랫폼으로 구분할 수 있습니다.</p>
+<ul>
+<li><strong>Ethereum is &ldquo;the world computer&rdquo;</strong></li>
+</ul>
+<p>이더리움 진영에서 내새우는 정의는 (합의를 기반으로 동작하는) <code>World Computer</code>입니다.</p>
+<h2 id="1-what-is-ethereum">1. What is Ethereum</h2>
+<div class="details admonition quote open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Ethereum is often described as &ldquo;the world computer&rdquo;</div>
+        </div>
+    </div>
+<p>이더리움 진영에서 정의하는 이더리움이란 (탈 중앙화된) 월드 컴퓨터입니다. <code>World</code>와 <code>Computer</code>에 집중해본다면, <code>World</code>라는 단어처럼 이더리움은 &ldquo;전세계를 하나로 묶어줄 수 있는 connection&quot;을 제공해주어야 할 것으로 보입니다. 묶어준 다는 점에서 p2p 네트워크가 필요해 보입니다. <code>Computer</code>라는 단어는 <code>program</code>, 그리고 이 프로그램을 개발할 수 있는 <code>language</code>가 필요해 보입니다. 또한 그 프로그램은 decentralized 성격을 가져야 하기 때문에, 일반 프로그램과 비교해 특별한 성질을 가질 것으로 보입니다.</p>
+<blockquote>
+<p>Ethereum is an open source with globally decentralized computing infrastructure that executes programs called <code>smart contracts</code>. It uses a blockchain to synchronize and store the system&rsquo;s state changes.</p>
+</blockquote>
+<p><code>smart contract</code>라는 특별한 program을 사용해 globally decentralized computing infrastructure 이면서도, 하나의 world computer 즉 state가 sync되는 시스템을 구현합니다.</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Ethereum is a deterministic but practically <code>unbounded state machine</code>, Which means consisting of a <strong>globally accessible singleton state</strong> and a virtual machine.</div>
+        </div>
+    </div>
+<p>p2p로 퍼져있으면서도, 하나의 컴퓨터로 동작하기 위해서 스마트 컨트랙트는 <code>globally accessible singleton state</code>와 virtual machine 개념이 존재합니다.</p>
+<blockquote>
+<p>It uses a blockchain to synchronize and store the system&rsquo;s state changes, along with a cryptocurrency called <code>ether</code> to meter and constrain execution resource costs.</p>
+</blockquote>
+<h2 id="2-compared-to-bitcoin">2. Compared to <code>Bitcoin</code></h2>
+<ul>
+<li><code>in common</code>
+<ul>
+<li>p2p network connecting participants.</li>
+<li>to synchronize <code>PoW</code> they uses <code>Byzantine fault-tolerant consensus</code> algorithm.</li>
+<li>uses <code>cryptographic primitives</code>
+<ul>
+<li>hashes</li>
+<li>digital signatures</li>
+<li>digital currency</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>PoW</code>(proof of work) is a form of adding new blocks of transactions to a cryptocurrency&rsquo;s blockchain.</div>
+        </div>
+    </div>
+<ul>
+<li><code>in contrast</code>
+<ul>
+<li>Ethereum&rsquo;s purpose is not primarily to be a digital currency payment network. <code>ether</code> is intended as a <code>utility currency</code> to pay for use of the Ethereum platform as the world computer.</li>
+<li>Bitcoin&rsquo;s Script language is intentionally constrained to simple true/false evaluation of spending conditions, but ethereum&rsquo;s language is <code>Turing complete</code></li>
+</ul>
+</li>
+</ul>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>A <code>Turing complete system</code> means a system in which a program can be written that will find an answer (although with no guarantees regarding runtime or memory).</p>
+<p>So, if somebody says &ldquo;my new thing is Turing Complete&rdquo; that means in principle (although often not in practice) it could be used to solve any computation problem.</p>
+<ul>
+<li>프로그래밍 언어는 이와 비슷하게 <code>Turing complete</code>하다 왜냐하면 프로그램이 실행될 충분한 메모리와 시간이 주어진다면 특정 computational problem을 풀어낼 수 있기 때문이다.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<p><code>김혐남</code>님의 말을 빌리자면, 이더리움을 간단히 <strong>블록체인의 플랫폼</strong>이라 소개합니다. 블록체인 플랫폼이 되려다보니 이더리움은 블록체인 튜링 완전 프로그래밍이 가능해야 했고, <code>Turing Complete</code>해지니 <code>application</code>을 만들 수 있게 되었고, 이 앱은 <code>block chain</code> 위에서 실행되니 블록체인의 특성을 지닌 앱이 될 수 있었습니다. 이더리움은 이런 블록체인의 기능을 플랫폼처럼 추상화 시켜, 참여하는 개발자들이 쉽게 블록체인의 특성을 지닌 애플리케이션을 개발할 수 있도록 도와줍니다.</p>
+<h2 id="3-components-of-a-blockchain">3. Components of a Blockchain</h2>
+<p>The components of an open, public blockchain are:</p>
+<ol>
+<li>
+<p>A peer-to-peer (P2P) network connecting participants and propagating transactions and blocks of verified transactions, based on a standardized &ldquo;gossip&rdquo; protocol</p>
+</li>
+<li>
+<p>Messages, in the form of transactions, representing state transitions</p>
+</li>
+<li>
+<p>A set of consensus rules, governing what constitutes a transaction and what makes for a valid state transition</p>
+</li>
+<li>
+<p>A state machine that processes transactions according to the consensus rules</p>
+</li>
+<li>
+<p>A chain of cryptographically secured blocks that acts as a journal of all the verified and accepted state transitions</p>
+</li>
+<li>
+<p>A consensus algorithm that decentralizes control over the blockchain, by forcing participants to cooperate in the enforcement of the consensus rules</p>
+</li>
+<li>
+<p>A game-theoretically sound incentivization scheme (e.g., proof-of-work costs plus block rewards) to economically secure the state machine in an open environment</p>
+</li>
+<li>
+<p>One or more open source software implementations of the above (&ldquo;clients&rdquo;)</p>
+</li>
+</ol>
+<h2 id="4-the-birth-of-ethereum">4. The Birth of Ethereum</h2>
+<blockquote>
+<p>이더리움 창립자들은 프로그래밍을 통해 다양한 애플리케이션을 지원할 수 있는 특정 목적에 국한되지 않는 블록체인에 대해 생각하고 있었다. 이 생각은 이더리움과 같은 범용 블록체인을 사용하여 개발자가 피어투피어 네트워크, 블록체인, 합의 알고리즘 등의 기본 메커니즘을 구현하지 않고도, 특정 애플리케이션을 프로그래밍할 수 있다는 것이다. 이더리움 플랫폼은 <strong>세부사항을 추상화하고 탈중앙화 블록체인 애플리케이션을 위한</strong> 결정적이고 안전한 프로그래밍 환경을 제공한다.</p>
+</blockquote>
+<p>이더리움은 범용 블록체인(=블록체인 플랫폼)으로서 위치하고 있다는 것을 확인할 수 있습니다.</p>
+<blockquote>
+<p>탈중앙화의 첫 번째 대상은 ‘가치의 이동’입니다. 디파이라 불리는 탈중앙 금융이 블록체인의 성공적인 킬러 앱이 될 수 있는 이유는 바로 가치의 이동에서 찾을 수 있습니다.</p>
+</blockquote>
+<p>블록체인이 왜 탈중앙화할 수 밖에 없었는지를 고민해 보면 <code>정보의 이동</code>이 아닌 핵심은 <code>가치의 이동</code>이 필요했기 때문입니다.</p>
+<blockquote>
+<p>The original blockchain, namely Bitcoin’s blockchain, tracks the state of units of bitcoin and their ownership. You can think of Bitcoin as a distributed consensus state machine, where transactions cause a global state transition, altering the ownership of coins. The state transitions are constrained by the rules of consensus, allowing all participants to (eventually) converge on a common (consensus) state of the system, after several blocks are mined.</p>
+</blockquote>
+<blockquote>
+<p><strong>Ethereum answers the question: &ldquo;What if we could track any arbitrary state and program the state machine to create a world-wide computer operating under consensus?&quot;</strong></p>
+</blockquote></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-01-15</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/ch01_what_is_ethereum/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/ch01_what_is_ethereum/" data-title="[마스터링 이더리움 CH01] 이더리움이란 무엇인가" data-hashtags="dev,ethereum"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/ch01_what_is_ethereum/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/ch01_what_is_ethereum/" data-title="[마스터링 이더리움 CH01] 이더리움이란 무엇인가"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/ch01_what_is_ethereum/" data-title="[마스터링 이더리움 CH01] 이더리움이란 무엇인가"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/ch01_what_is_ethereum/" data-title="[마스터링 이더리움 CH01] 이더리움이란 무엇인가" data-image="/images/ethereum.webp"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/ethereum/">ethereum</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/ch01/" class="prev" rel="prev" title="[Cryptozombies01] Making the Zombie Factory"><i class="fas fa-angle-left fa-fw"></i>[Cryptozombies01] Making the Zombie Factory</a>
+            <a href="/ch01_install/" class="next" rel="next" title="[ch01] Ros2 Foxy install">[ch01] Ros2 Foxy install<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
