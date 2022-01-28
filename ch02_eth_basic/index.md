@@ -160,3 +160,67 @@ EOA는 사용자의 private key를 소유하고 있으며, 이는 contract 또�
 Note that because a contract account does not have a private key, it cannot initiate a transaction. Only EOAs can initiate transactions, but contracts can react to transactions by calling other contracts, building complex execution paths.
 {{< /admonition >}}
 
+## A Simple Contract: A Test Ether Faucet
+
+```sol
+// SPDX-License-Identifier: CC-BY-SA-4.0
+
+// Version of Solidity compiler this program was written for
+pragma solidity 0.6.4;
+
+// Our first contract is a faucet!
+contract Faucet {
+    // Accept any incoming amount
+    receive() external payable {} // receive는 키워드
+
+    // Give out ether to anyone who asks
+    function withdraw(uint withdraw_amount) public {
+        // Limit withdrawal amount
+        require(withdraw_amount <= 100000000000000000);
+
+        // Send the amount to the address that requested it
+        msg.sender.transfer(withdraw_amount);
+    }
+}
+```
+
+```sol
+receive() external payable {} // receive는 키워드
+```
+
+`solidity 0.6` 버전 이후 `fallback`기능은 2가지로 나눠지게 되었습니다.
+
+- `receive() external payable` — for empty calldata (and any value)
+- `fallback() external payable` — when no other function matches (not even the receive function). Optionally payable.
+
+{{< admonition tip >}}
+**fallback**
+a.k.a default function이라고도 불리며, 이름 그대로 대비책 함수입니다.
+
+특징
+
+1. 먼저 무기명 함수, 이름이 없는 함수입니다.
+2. external 필수
+3. payable 필수
+
+왜 쓰는가 ?
+
+1. 스마트 컨트랙이 이더를 받을 수 있게 한다.
+2. 이더 받고 난 후 어떠한 행동을 취하게 할 수 있다.
+3. call함수로 없는 함수가 불려질때, 어떠한 행동을 취하게 할 수 있다.
+   {{< /admonition >}}
+
+```sol
+        msg.sender.transfer(withdraw_amount);
+```
+
+`msg` object는 one of the inputs로 모든 contracts가 접근 가능한 객체입니다. transaction이 실행되도록 trigger 시킨 주체를 의미합니다.
+
+attribute인 `sender`는 `sender address of the transaction`를 의미합니다.
+
+`transfer()`는 built-in 함수로 `ether`를 current contract -> `누군가`.transfer()의 `누군가`에게 전달하는 것을 의미하며 이 코드에서 `누군가`는 `address of the sender`입니다.
+
+즉 코드를 한줄로 설명하면 `contract --eth--> msg.sender`입니다.
+
+> _This meas transfer ether from current contract to the sender of the msg that triggered this contract execution_
+

@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/ch02_eth_basic/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-28T12:45:10+09:00" />
-<meta property="article:modified_time" content="2022-01-28T13:35:58+09:00" />
+<meta property="article:modified_time" content="2022-01-28T18:25:44+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -32,8 +32,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, ethereum","wordcount":  2307 ,
-        "url": "https:\/\/minkj1992.github.io\/ch02_eth_basic\/","datePublished": "2022-01-28T12:45:10+09:00","dateModified": "2022-01-28T13:35:58+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, ethereum","wordcount":  2854 ,
+        "url": "https:\/\/minkj1992.github.io\/ch02_eth_basic\/","datePublished": "2022-01-28T12:45:10+09:00","dateModified": "2022-01-28T18:25:44+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -114,8 +114,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">[마스터링 이더리움 CH02] Ethereum Basics</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/blockchain/"><i class="far fa-folder fa-fw"></i>blockchain</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-28">2022-01-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2307 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-28">2022-01-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2854 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -136,6 +136,7 @@
     <li><a href="#wallet">Wallet</a></li>
     <li><a href="#introducing-the-world-computer">Introducing the World Computer</a></li>
     <li><a href="#externally-owned-accounts-eoas-and-contracts">Externally Owned Accounts (EOAs) and Contracts</a></li>
+    <li><a href="#a-simple-contract-a-test-ether-faucet">A Simple Contract: A Test Ether Faucet</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>이번장에서는 [마스터링 이더리움 CH02] 이더리움 기초를 정리합니다. 인용글들은 <a href="https://github.com/ethereumbook/ethereumbook/blob/develop/02intro.asciidoc" target="_blank" rel="noopener noreffer">원문</a>을 참조하였습니다.</p>
@@ -386,12 +387,107 @@
         <div class="details-content">
             <div class="admonition-content">Note that because a contract account does not have a private key, it cannot initiate a transaction. Only EOAs can initiate transactions, but contracts can react to transactions by calling other contracts, building complex execution paths.</div>
         </div>
-    </div></div><div class="post-footer" id="post-footer">
+    </div>
+<h2 id="a-simple-contract-a-test-ether-faucet">A Simple Contract: A Test Ether Faucet</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="c1">// SPDX-License-Identifier: CC-BY-SA-4.0
+</span><span class="c1"></span>
+<span class="c1">// Version of Solidity compiler this program was written for
+</span><span class="c1"></span><span class="k">pragma solidity</span> <span class="mi">0</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">4</span><span class="p">;</span>
+
+<span class="c1">// Our first contract is a faucet!
+</span><span class="c1"></span><span class="kd">contract</span> <span class="nc">Faucet</span> <span class="p">{</span>
+    <span class="c1">// Accept any incoming amount
+</span><span class="c1"></span>    <span class="n">receive</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{}</span> <span class="c1">// receive는 키워드
+</span><span class="c1"></span>
+    <span class="c1">// Give out ether to anyone who asks
+</span><span class="c1"></span>    <span class="kd">function</span> <span class="nf">withdraw</span><span class="p">(</span><span class="kt">uint</span> <span class="n">withdraw_amount</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+        <span class="c1">// Limit withdrawal amount
+</span><span class="c1"></span>        <span class="nb">require</span><span class="p">(</span><span class="n">withdraw_amount</span> <span class="o">&lt;=</span> <span class="mi">100000000000000000</span><span class="p">);</span>
+
+        <span class="c1">// Send the amount to the address that requested it
+</span><span class="c1"></span>        <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">.</span><span class="nb">transfer</span><span class="p">(</span><span class="n">withdraw_amount</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="n">receive</span><span class="p">()</span> <span class="k">external</span> <span class="k">payable</span> <span class="p">{}</span> <span class="c1">// receive는 키워드
+</span></code></pre></td></tr></table>
+</div>
+</div><p><code>solidity 0.6</code> 버전 이후 <code>fallback</code>기능은 2가지로 나눠지게 되었습니다.</p>
+<ul>
+<li><code>receive() external payable</code> — for empty calldata (and any value)</li>
+<li><code>fallback() external payable</code> — when no other function matches (not even the receive function). Optionally payable.</li>
+</ul>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Tip<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><strong>fallback</strong>
+a.k.a default function이라고도 불리며, 이름 그대로 대비책 함수입니다.</p>
+<p>특징</p>
+<ol>
+<li>먼저 무기명 함수, 이름이 없는 함수입니다.</li>
+<li>external 필수</li>
+<li>payable 필수</li>
+</ol>
+<p>왜 쓰는가 ?</p>
+<ol>
+<li>스마트 컨트랙이 이더를 받을 수 있게 한다.</li>
+<li>이더 받고 난 후 어떠한 행동을 취하게 할 수 있다.</li>
+<li>call함수로 없는 함수가 불려질때, 어떠한 행동을 취하게 할 수 있다.</li>
+</ol>
+</div>
+        </div>
+    </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol">        <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">.</span><span class="nb">transfer</span><span class="p">(</span><span class="n">withdraw_amount</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>msg</code> object는 one of the inputs로 모든 contracts가 접근 가능한 객체입니다. transaction이 실행되도록 trigger 시킨 주체를 의미합니다.</p>
+<p>attribute인 <code>sender</code>는 <code>sender address of the transaction</code>를 의미합니다.</p>
+<p><code>transfer()</code>는 built-in 함수로 <code>ether</code>를 current contract -&gt; <code>누군가</code>.transfer()의 <code>누군가</code>에게 전달하는 것을 의미하며 이 코드에서 <code>누군가</code>는 <code>address of the sender</code>입니다.</p>
+<p>즉 코드를 한줄로 설명하면 <code>contract --eth--&gt; msg.sender</code>입니다.</p>
+<blockquote>
+<p><em>This meas transfer ether from current contract to the sender of the msg that triggered this contract execution</em></p>
+</blockquote></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-01-28&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/546e4fd9c9ab1f7282df17abeb362b4047fd3828" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 546e4fd9c9ab1f7282df17abeb362b4047fd3828: rebuilding site 2022년 1월 28일 금요일 13시 35분 58초 KST">
-                                    <i class="fas fa-hashtag fa-fw"></i>546e4fd</a></span>
+                <span>Updated on 2022-01-28&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/2092c80ec83e501fe47c725ccaad2a81a1df3666" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 2092c80ec83e501fe47c725ccaad2a81a1df3666: rebuilding site 2022년 1월 28일 금요일 18시 25분 44초 KST">
+                                    <i class="fas fa-hashtag fa-fw"></i>2092c80</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
