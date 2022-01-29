@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/tags/ethereum/</link>
         <description>ethereum - Tag - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 28 Jan 2022 12:45:10 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/ethereum/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 29 Jan 2022 16:27:53 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/ethereum/" rel="self" type="application/rss+xml" /><item>
+    <title>[마스터링 이더리움 CH03] Ethereum Client</title>
+    <link>https://minkj1992.github.io/ch03_eth_client/</link>
+    <pubDate>Sat, 29 Jan 2022 16:27:53 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/ch03_eth_client/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/eth_wallet.webp" referrerpolicy="no-referrer">
+            </div><p>이번장에서는 [마스터링 이더리움 CH03] 이더리움 기초를 정리합니다. 인용글들은 <a href="https://github.com/ethereumbook/ethereumbook/blob/develop/03clients.asciidoc" target="_blank" rel="noopener noreffer">원문</a>을 참조하였습니다.</p>]]></description>
+</item><item>
     <title>[마스터링 이더리움 CH02] Ethereum Basics</title>
     <link>https://minkj1992.github.io/ch02_eth_basic/</link>
     <pubDate>Fri, 28 Jan 2022 12:45:10 &#43;0900</pubDate>

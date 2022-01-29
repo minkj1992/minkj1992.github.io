@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>[마스터링 이더리움 CH03] Ethereum Client - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="[마스터링 이더리움 CH03] Ethereum Client" />
+<meta property="og:description" content="이번장에서는 [마스터링 이더리움 CH03] 이더리움 기초를 정리합니다. 인용글들은 원문을 참조하였습니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/ch03_eth_client/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-29T16:27:53+09:00" />
+<meta property="article:modified_time" content="2022-01-29T16:27:53+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="[마스터링 이더리움 CH03] Ethereum Client"/>
+<meta name="twitter:description" content="이번장에서는 [마스터링 이더리움 CH03] 이더리움 기초를 정리합니다. 인용글들은 원문을 참조하였습니다."/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/ch03_eth_client/" /><link rel="prev" href="https://minkj1992.github.io/ch02_eth_basic/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "[마스터링 이더리움 CH03] Ethereum Client",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/ch03_eth_client\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, ethereum","wordcount":  1789 ,
+        "url": "https:\/\/minkj1992.github.io\/ch03_eth_client\/","datePublished": "2022-01-29T16:27:53+09:00","dateModified": "2022-01-29T16:27:53+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="어서 누르기나 하라구"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="어서 누르기나 하라구">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">[마스터링 이더리움 CH03] Ethereum Client</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/blockchain/"><i class="far fa-folder fa-fw"></i>blockchain</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-29">2022-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1789 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/eth_wallet.webp"
+        data-srcset="/images/eth_wallet.webp, /images/eth_wallet.webp 1.5x, /images/eth_wallet.webp 2x"
+        data-sizes="auto"
+        alt="/images/eth_wallet.webp"
+        title="/images/eth_wallet.webp" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#ethereum-networks">Ethereum Networks</a></li>
+    <li><a href="#should-i-run-a-full-node">Should I Run a Full Node?</a></li>
+    <li><a href="#the-json-rpc-interface">The JSON-RPC interface</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>이번장에서는 [마스터링 이더리움 CH03] 이더리움 기초를 정리합니다. 인용글들은 <a href="https://github.com/ethereumbook/ethereumbook/blob/develop/03clients.asciidoc" target="_blank" rel="noopener noreffer">원문</a>을 참조하였습니다.</p>
+<br />
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>An Ethereum client is a software application that implements the Ethereum specification and communicates over the peer-to-peer network with other Ethereum clients
+&hellip; 중략 &hellip;
+Ethereum is defined by a formal specification called the &ldquo;Yellow Paper&rdquo; (see [references]).</em></div>
+        </div>
+    </div>
+<p>이더리움 클라이언트는 sw application으로 <a href="https://ethereum.github.io/yellowpaper/paper.pdf" target="_blank" rel="noopener noreffer">yellowpaper</a>에 명시된 ethereum spec들을 만족시키는 구현체입니다. p2p network상에서 서로 통신하며 이더리움 생태계를 이끌어갑니다.</p>
+<blockquote>
+<p>This is in contrast to, for example, Bitcoin, which is not defined in any formal way.</p>
+</blockquote>
+<h2 id="ethereum-networks">Ethereum Networks</h2>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>There exist a variety of Ethereum-based networks that largely conform to the formal specification defined in the Ethereum Yellow Paper
+&hellip; 중략 &hellip;
+Among these Ethereum-based networks are Ethereum, Ethereum Classic, Ella, Expanse, Ubiq, Musicoin, and many others.</em></div>
+        </div>
+    </div>
+<p>Yellow Paper에 기제된 스펙을 기반으로 구현된 Ethereum based 네트워크들은 많이 존재합니다. (Ethereum, Ethereum Classic, Ella, Expanse, Ubiq, Musicoin&hellip;)
+대부분 프로토콜 수준에서는 호환되지만, 각 네트워크 마다 세세한 부분에서 다른 점들이 존재하기 때문에 이더리움 클라이언트 <code>maintainers</code>들이 각 네트워크를 지원하기 위해 약간씩의 코드 변경작업이 필요합니다. 이 때문에 모든 버전의 이더리움 클라이언트 소프트웨어가 모든 이더리움 기반 블록체인을 실행하는 것은 아닙니다.</p>
+<p>책에서 소개하는 대표적인 <code>Ethereum protocol</code> 구현체는 다음과 같습니다.</p>
+<ul>
+<li><strong>Parity</strong>, written in Rust</li>
+<li><strong>Geth</strong>, written in Go</li>
+<li>cpp-ethereum, written in C++
+<ul>
+<li>현재는 <code>aleth</code>라고 레포가 되어있으며 deprecated됨</li>
+</ul>
+</li>
+<li>pyethereum, written in Python
+<ul>
+<li>현재는 <code>py-evm</code>로 관리되고 있습니다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="should-i-run-a-full-node">Should I Run a Full Node?</h2>
+<blockquote>
+<p><em>The health, resilience, and censorship resistance of blockchains depend on them having many independently operated and geographically dispersed full nodes. Each full node can help other new nodes obtain the block data to bootstrap their operation, as well as offering the operator an authoritative and independent verification of all transactions and contracts.</em></p>
+</blockquote>
+<p>글을 읽고 보니, 이더리움에서 말하는 <code>Node</code>와 <code>Client</code>개념이 헷갈려 먼저 정리하고 들어가겠습니다.</p>
+<p><a href="https://ethereum.org/en/developers/docs/nodes-and-clients/" target="_blank" rel="noopener noreffer">Client vs Node 공식문서</a>에 따르면</p>
+<ul>
+<li><code>Node</code>
+<ul>
+<li>분산된 이더리움 네트워크 컴퓨터들에서 동작하는 소프트웨어를 지칭합니다.</li>
+<li>&ldquo;Node&rdquo; refers to a running piece of client software.</li>
+<li>features: verify blocks, transaction data</li>
+<li>Types
+<ul>
+<li>full node: block 전부 copy</li>
+<li>light node: header만 copy</li>
+<li>archive node</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>Client</code>
+<ul>
+<li>사용자들의 컴퓨터에서 node를 실행할 수 있도록 하는 application을 뜻합니다</li>
+<li>node는 piece of client입니다.</li>
+<li>A client is an implementation of Ethereum that verifies all transactions in each block, keeping the network secure and the data accurate.</li>
+</ul>
+</li>
+</ul>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>
+<p><strong>Full client</strong>
+Full clients store the entire Ethereum blockchain; a process that can take several days to synchronize and requires a huge amount of disk space – over 1 Terabyte to be exact, according to the latest figures. Full clients allow connected nodes to perform all tasks on the network, including mining, transaction and block-header validation and running smart contracts.</p>
+</li>
+<li>
+<p><strong>Light client</strong>
+Ethereum clients may be implemented in full or in part. The above overview gives an explanation of how a “full” client works, however it is important to know that you don’t always need to run a full client. Typically when data storage and speed are at issue, developers will elect to use what are called “light clients.”</p>
+<p>Light clients offer a subset of the functionality of a full client. Light clients can provide faster speeds and free up data storage availability because, unlike the full clients, they do not store the full Ethereum blockchain.</p>
+<p>The scope of a light client’s functionality is tailored toward the goals of the Ethereum client. For example, light clients are frequently used for private keys and Ethereum address management within a wallet. Additionally, they tend to handle smart contract interactions and transaction broadcasts. Other uses for remote clients include web3 instances within JavaScript objects, dapp browsers and retrieving exchange rate data.</p>
+</li>
+<li>
+<p><strong>Remote client</strong>
+There is a third type of client called a remote client which is similar to a light client. The main difference being, a remote client does not store its own copy of the blockchain, nor does it validate transactions or block headers. Instead, remote clients fully rely on a full or light client to provide them with access to the Ethereum blockchain network. These types of clients are predominantly used as a wallet for sending and receiving transactions.</p>
+</li>
+</ol>
+</div>
+        </div>
+    </div>
+<blockquote>
+<p>The terms &ldquo;remote client&rdquo; and &ldquo;wallet&rdquo; are used interchangeably, though there are some differences. Usually, a remote client offers an API (such as the web3.js API) in addition to the transaction functionality of a wallet</p>
+</blockquote>
+<p>참고로 <code>remote client</code>라는 용어와 <code>wallet</code>은 interchangeably하게 사용되는데, 둘의 미묘한 차이점으로는 <code>remote client</code>는 api(such as web3.js)를 제공한다는 점이다.</p>
+<center>
+<p><strong>remote client = wallet + api</strong></p>
+</center>
+<blockquote>
+<p>Ethereum remote clients do not validate block headers or transactions. They entirely trust a full client to give them access to the blockchain, and hence lose significant security and anonymity guarantees.</p>
+</blockquote>
+<p>이더리움 <code>remote clients</code>는 <code>light client</code> 처럼 block header 검증하지 않습니다. 이 덕분에 local hw 스펙을 줄일 수 있으나, 외부 full client들에게 depend한다는 특징이 있습니다.</p>
+<h2 id="the-json-rpc-interface">The JSON-RPC interface</h2>
+<blockquote>
+<p><a href="https://www.getoutsidedoor.com/2019/08/10/%EC%99%9C-json-rpc%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%A0%EA%B9%8C/" target="_blank" rel="noopener noreffer">왜 JSON-RPC를 사용할까?</a></p>
+</blockquote>
+<p>글을 읽다가 왜 이더리움은 <code>json-rpc</code>를 사용하는지 궁금해서 찾아보게 되었습니다. REST와 json-rpc의 차이점에 대해서 정리하겠습니다.</p>
+<ul>
+<li>
+<p><code>JSON-RPC</code>: tcp base로 원격/로컬 프로세스 procedure(함수)에 직접 접근하는 방식</p>
+<ul>
+<li>over tcp</li>
+<li>only single endpoint</li>
+<li>crud외 표현 가능</li>
+</ul>
+</li>
+<li>
+<p><code>REST</code></p>
+<ul>
+<li>over http(s)</li>
+<li>crud(http method)를 벗어난 표현에 제한적이다.</li>
+</ul>
+</li>
+</ul>
+<p>rpc는 소스코드 &gt; idl(interface definition language) &gt; rpcgen&gt; stub 코드 생성 &gt; <code>rpc runtime</code>을 통한 packet 통신 (tcp L4) 과정을 통해서 서버와 클라이언트간 통신을 하게 만듭니다.
+http(L7)보다 더 낮은 레벨(L4)에서 동작하기 때문에 기능이 덜 할 수 있지만, 제약이 덜합니다.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>뭔가 3장은 내심 겉할기 식의 설명들이 많았던 것 같습니다. <code>rpc-json</code>을 굳이 쓰는 이유도 없었고 client와 node에 대한 설명도 크게 와닿지 않은 것 같아 답답하네요. 예를 들면 full client를 실행하는 방법을 알려주면서, full client를 사용자가 왜 운용해야하는지를 light client와 비교하는 핵심이 빠진 느낌이 듭니다. (full client를 사용해야지 reward가 들어오는 걸까요..? 좀 더 공부가 필요하네요)</p>
+<center> - 끝 - </center></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-01-29</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/ch03_eth_client/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/ch03_eth_client/" data-title="[마스터링 이더리움 CH03] Ethereum Client" data-hashtags="dev,ethereum"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/ch03_eth_client/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/ch03_eth_client/" data-title="[마스터링 이더리움 CH03] Ethereum Client"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/ch03_eth_client/" data-title="[마스터링 이더리움 CH03] Ethereum Client"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/ch03_eth_client/" data-title="[마스터링 이더리움 CH03] Ethereum Client" data-image="/images/eth_wallet.webp"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/ethereum/">ethereum</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/ch02_eth_basic/" class="prev" rel="prev" title="[마스터링 이더리움 CH02] Ethereum Basics"><i class="fas fa-angle-left fa-fw"></i>[마스터링 이더리움 CH02] Ethereum Basics</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
