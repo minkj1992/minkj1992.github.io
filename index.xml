@@ -4,9 +4,18 @@
         <link>https://minkj1992.github.io/</link>
         <description>About Seroius</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 29 Jan 2022 16:27:53 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 02 Feb 2022 18:15:43 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Hardhat</title>
+    <link>https://minkj1992.github.io/hardhat/</link>
+    <pubDate>Wed, 02 Feb 2022 18:15:43 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/hardhat/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/hard.png" referrerpolicy="no-referrer">
+            </div><p><code>Hardhat</code>를 통해 local에서 스마트 컨트랙트를 작성해본 뒤, contract를 upgrade시켜봅니다. 이후 <code>rinkeby</code> 테스트넷에 proxy 컨트랙트를 배포해보고, <code>verify</code>시켜봅니다.</p>]]></description>
+</item><item>
     <title>[마스터링 이더리움 CH03] Ethereum Client</title>
     <link>https://minkj1992.github.io/ch03_eth_client/</link>
     <pubDate>Sat, 29 Jan 2022 16:27:53 &#43;0900</pubDate>
@@ -109,17 +118,6 @@
                 <img src="/images/sorting.jpeg" referrerpolicy="no-referrer">
             </div><blockquote>
 <p>Let&rsquo;s summary list of Sorting Algorithms</p>
-</blockquote>]]></description>
-</item><item>
-    <title>Binary Search and BST</title>
-    <link>https://minkj1992.github.io/binary_search/</link>
-    <pubDate>Sat, 08 Jan 2022 18:58:54 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://minkj1992.github.io/binary_search/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/binary_search.png" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>Binary Search와 BST에 대해서 정리합니다.</p>
 </blockquote>]]></description>
 </item></channel>
 </rss>

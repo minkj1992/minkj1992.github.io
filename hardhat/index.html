@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Hardhat - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="Hardhat" />
+<meta property="og:description" content="Hardhat를 통해 local에서 스마트 컨트랙트를 작성해본 뒤, contract를 upgrade시켜봅니다. 이후 rinkeby 테스트넷에 proxy 컨트랙트를 배포해보고, verify시켜봅니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/hardhat/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-02T18:15:43+09:00" />
+<meta property="article:modified_time" content="2022-02-02T18:15:43+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Hardhat"/>
+<meta name="twitter:description" content="Hardhat를 통해 local에서 스마트 컨트랙트를 작성해본 뒤, contract를 upgrade시켜봅니다. 이후 rinkeby 테스트넷에 proxy 컨트랙트를 배포해보고, verify시켜봅니다."/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/hardhat/" /><link rel="prev" href="https://minkj1992.github.io/ch03_eth_client/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Hardhat",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/hardhat\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  1056 ,
+        "url": "https:\/\/minkj1992.github.io\/hardhat\/","datePublished": "2022-02-02T18:15:43+09:00","dateModified": "2022-02-02T18:15:43+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="어서 누르기나 하라구"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="어서 누르기나 하라구">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Hardhat</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw"></i>Categories</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-02">2022-02-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1056 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/hard.png"
+        data-srcset="/images/hard.png, /images/hard.png 1.5x, /images/hard.png 2x"
+        data-sizes="auto"
+        alt="/images/hard.png"
+        title="/images/hard.png" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#setup">setup</a>
+      <ul>
+        <li><a href="#init">init</a></li>
+        <li><a href="#test">test</a></li>
+        <li><a href="#deploy">deploy</a></li>
+        <li><a href="#deploy-to-remote-network">deploy to remote network</a>
+          <ul>
+            <li><a href="#hardhatconfigjs">hardhat.config.js</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#deploy-remote-blockchain-network">deploy remote blockchain network</a></li>
+    <li><a href="#verify-implementation">verify implementation</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><code>Hardhat</code>를 통해 local에서 스마트 컨트랙트를 작성해본 뒤, contract를 upgrade시켜봅니다. 이후 <code>rinkeby</code> 테스트넷에 proxy 컨트랙트를 배포해보고, <code>verify</code>시켜봅니다.</p>
+<br />
+<p>환경에 사용된 레포는 <a href="https://github.com/minkj1992/hardhat_demo" target="_blank" rel="noopener noreffer">github link</a>입니다.</p>
+<ul>
+<li><code>hardhat</code>과 <code>openzeppelin</code> 환경에서 간단한 Upgradable contract를 생성해봅니다.</li>
+</ul>
+<h2 id="setup">setup</h2>
+<p>먼저 프로젝트 환경을 로컬에서 세팅해줍니다.</p>
+<h3 id="init">init</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ yarn init -y
+$ yarn add hardhat --dev
+$ yarn add @openzeppelin/hardhat-upgrades --dev
+</code></pre></td></tr></table>
+</div>
+</div><p>테스트는 다음과 같이 할 수 있습니다.</p>
+<h3 id="test">test</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat <span class="nb">test</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="deploy">deploy</h3>
+<p>로컬에서 <code>ganache</code>같은 내부 노드를 실행할 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat node
+</code></pre></td></tr></table>
+</div>
+</div><p>로컬에서 이제 배포를 해봅시다.</p>
+<ul>
+<li>deploy</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat run --network localhost ./scripts/SimpleStorageUpgrade.deploy.js
+SimpleStorageUpgrade deployed to: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+</code></pre></td></tr></table>
+</div>
+</div><p>런타임에 콘솔에서 붙어서 제대로 배포되었는지 검증해봅니다.</p>
+<ul>
+<li>check</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat console --network localhost
+
+Welcome to Node.js v14.15.1.
+Type <span class="s2">&#34;.help&#34;</span> <span class="k">for</span> more information.
+&gt; const <span class="nv">f</span> <span class="o">=</span> await ethers.getContractFactory<span class="o">(</span><span class="s2">&#34;SimpleStorageUpgrade&#34;</span><span class="o">)</span>
+undefined
+&gt; const <span class="nv">ssu</span> <span class="o">=</span> await f.attach<span class="o">(</span><span class="s2">&#34;0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0&#34;</span><span class="o">)</span>
+undefined
+&gt; ssu.address
+<span class="s1">&#39;0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0&#39;</span>
+&gt; <span class="o">(</span>await ssu.get<span class="o">())</span>.toString<span class="o">()</span>
+<span class="s1">&#39;500&#39;</span>
+&gt; <span class="nb">let</span> <span class="nv">tx</span> <span class="o">=</span> await ssu.set<span class="o">(</span>1000<span class="o">)</span>
+undefined
+&gt; <span class="o">(</span>await ssu.get<span class="o">())</span>.toString<span class="o">()</span>
+<span class="s1">&#39;1000&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>다음과 같이 활용하면 스마트 컨트랙트를 upgrade 시켜줄 수 있습니다.</strong></p>
+<ul>
+<li>upgrade contract version</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat run --network localhost ./scripts/SimpleStorageUpgradeV2.deploy.js
+Compiling <span class="m">1</span> file with 0.8.4
+Solidity compilation finished successfully
+SimpleStorageUpgrade version <span class="m">2</span> deployed to: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="deploy-to-remote-network">deploy to remote network</h3>
+<blockquote>
+<p><a href="https://hardhat.org/config/" target="_blank" rel="noopener noreffer">hardhat docs</a></p>
+</blockquote>
+<p>이제 실제 remote 환경에서 배포해보겠습니다.</p>
+<h4 id="hardhatconfigjs">hardhat.config.js</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">require</span><span class="p">(</span><span class="s2">&#34;dotenv&#34;</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span> <span class="c1">// yarn add dotenv
+</span><span class="c1"></span>
+<span class="c1">// ... 중략 ...
+</span><span class="c1"></span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">networks</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">rinkeby</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">url</span><span class="o">:</span> <span class="sb">`https://eth-rinkeby.alchemyapi.io/v2/</span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ALCHEMY_API_KEY</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+      <span class="c1">// 0x20CE8B2190949f48F5D32d5BbbfE7E3760811F61
+</span><span class="c1"></span>      <span class="nx">accounts</span><span class="o">:</span> <span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">TEST_ACCOUNT_PRIVATE_KEY</span><span class="p">],</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="nx">solidity</span><span class="o">:</span> <span class="s2">&#34;0.8.4&#34;</span><span class="p">,</span>
+
+  <span class="nx">etherscan</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">apiKey</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ETHERSCAN_API_KEY</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>ALCHEMY_API_KEY</code>: <a href="https://www.alchemyapi.io" target="_blank" rel="noopener noreffer">alchemy</a>에서 demo app을 생성하게 될 경우 view key를 하면 확인가능합니다.</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/hardhat/1.png"
+        data-srcset="/images/hardhat/1.png, /images/hardhat/1.png 1.5x, /images/hardhat/1.png 2x"
+        data-sizes="auto"
+        alt="/images/hardhat/1.png"
+        title="/images/hardhat/1.png" /></p>
+<ul>
+<li><code>TEST_ACCOUNT_PRIVATE_KEY</code>: metamask에서 <code>rinkeby</code> 네트워크에 계정을 생성한 뒤 아래와 같이 비공개키 export를 누르면 확인 가능합니다.</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/hardhat/6.png"
+        data-srcset="/images/hardhat/6.png, /images/hardhat/6.png 1.5x, /images/hardhat/6.png 2x"
+        data-sizes="auto"
+        alt="/images/hardhat/6.png"
+        title="/images/hardhat/6.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/hardhat/7.png"
+        data-srcset="/images/hardhat/7.png, /images/hardhat/7.png 1.5x, /images/hardhat/7.png 2x"
+        data-sizes="auto"
+        alt="/images/hardhat/7.png"
+        title="/images/hardhat/7.png" /></p>
+<ul>
+<li><code>ETHERSCAN_API_KEY</code>
+<ol>
+<li><a href="https://etherscan.io/register" target="_blank" rel="noopener noreffer">register etherscan</a>에서 회원 가입을 한 뒤</li>
+<li><a href="https://etherscan.io/myapikey" target="_blank" rel="noopener noreffer">create etherscan api key</a>에서 <code>My API Keys</code> &gt; <code>+ Add</code>해주어서 얻어줍니다.</li>
+</ol>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/hardhat/5.png"
+        data-srcset="/images/hardhat/5.png, /images/hardhat/5.png 1.5x, /images/hardhat/5.png 2x"
+        data-sizes="auto"
+        alt="/images/hardhat/5.png"
+        title="/images/hardhat/5.png" /></p>
+<p>추가로 <a href="https://faucets.chain.link/" target="_blank" rel="noopener noreffer">rinkeby faucet</a>에 들어가게되면 address 기반으로 rinkeby 계정에 이더를 넣어줄 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/hardhat/2.png"
+        data-srcset="/images/hardhat/2.png, /images/hardhat/2.png 1.5x, /images/hardhat/2.png 2x"
+        data-sizes="auto"
+        alt="/images/hardhat/2.png"
+        title="/images/hardhat/2.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/hardhat/3.png"
+        data-srcset="/images/hardhat/3.png, /images/hardhat/3.png 1.5x, /images/hardhat/3.png 2x"
+        data-sizes="auto"
+        alt="/images/hardhat/3.png"
+        title="/images/hardhat/3.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/hardhat/4.png"
+        data-srcset="/images/hardhat/4.png, /images/hardhat/4.png 1.5x, /images/hardhat/4.png 2x"
+        data-sizes="auto"
+        alt="/images/hardhat/4.png"
+        title="/images/hardhat/4.png" /></p>
+<h2 id="deploy-remote-blockchain-network">deploy remote blockchain network</h2>
+<blockquote>
+<p><code>rinkeby</code> network (test-net)</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat run --network rinkeby ./scripts/SimpleStorageUpgrade.deploy.js
+Downloading compiler 0.8.4
+Compiling <span class="m">3</span> files with 0.8.4
+Solidity compilation finished successfully
+
+SimpleStorageUpgrade deployed to: 0xCe93de7572e3346F1f91Ad39ce06e8F6c6312b69
+</code></pre></td></tr></table>
+</div>
+</div><p>테스트넷이기 때문에 약간의 시간이 소요됩니다. (약 30초) 이후 deploy된 address는 <a href="https://rinkeby.etherscan.io/" target="_blank" rel="noopener noreffer">rinkeby etherscan</a>에서 확인가능합니다.</p>
+<ul>
+<li><a href="https://rinkeby.etherscan.io/address/0xCe93de7572e3346F1f91Ad39ce06e8F6c6312b69" target="_blank" rel="noopener noreffer">https://rinkeby.etherscan.io/address/0xCe93de7572e3346F1f91Ad39ce06e8F6c6312b69</a></li>
+</ul>
+<p><a href="https://rinkeby.etherscan.io/proxyContractChecker" target="_blank" rel="noopener noreffer">proxy contract check</a></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/hardhat/8.png"
+        data-srcset="/images/hardhat/8.png, /images/hardhat/8.png 1.5x, /images/hardhat/8.png 2x"
+        data-sizes="auto"
+        alt="/images/hardhat/8.png"
+        title="/images/hardhat/8.png" /></p>
+<blockquote>
+<p>The implementation contract at 0x92a949706c10fd221b9a073f4284b4bdbc47e6d7 does not seem to be verified.</p>
+</blockquote>
+<p>아직 implementation이 검증되지 않았다고 뜬다. 이렇게 proxy가 아닌 implementation contract를 검증해주기 위해서는 아래와 같이 추가 작업해주면 됩니다.</p>
+<h2 id="verify-implementation">verify implementation</h2>
+<blockquote>
+<p><a href="https://hardhat.org/plugins/nomiclabs-hardhat-etherscan.html" target="_blank" rel="noopener noreffer">docs</a></p>
+</blockquote>
+<p>먼저 hardhat에서 제공해주는 etherscan 의존성을 설치해줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ yarn add @nomiclabs/hardhat-etherscan --dev
+</code></pre></td></tr></table>
+</div>
+</div><p>이후 아래 명령어를 통해서, <strong>로컬의 deploy된 컨트랙트와 실제 rinkeby에 배포된 컨트랙트를 비교해서 검증해주는 로직을 타줍니다.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">//npx hardhat verify --network rinkeby <span class="s2">&#34;&lt;리모트 배포된 implementation address&gt;&#34;</span>
+$ npx hardhat verify --network rinkeby <span class="s2">&#34;0x92a949706c10fd221b9a073f4284b4bdbc47e6d7&#34;</span>
+Compiling <span class="m">3</span> files with 0.8.4
+Solidity compilation finished successfully
+Compiling <span class="m">1</span> file with 0.8.4
+Successfully submitted <span class="nb">source</span> code <span class="k">for</span> contract
+contracts/SimpleStorageUpgrade.sol:SimpleStorageUpgrade at 0x92a949706c10fd221b9a073f4284b4bdbc47e6d7
+<span class="k">for</span> verification on the block explorer. Waiting <span class="k">for</span> verification result...
+
+Successfully verified contract SimpleStorageUpgrade on Etherscan.
+https://rinkeby.etherscan.io/address/0x92a949706c10fd221b9a073f4284b4bdbc47e6d7#code
+</code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/hardhat/9.png"
+        data-srcset="/images/hardhat/9.png, /images/hardhat/9.png 1.5x, /images/hardhat/9.png 2x"
+        data-sizes="auto"
+        alt="/images/hardhat/9.png"
+        title="/images/hardhat/9.png" /></p>
+<p>이상으로 <a href="https://rinkeby.etherscan.io/address/0x92a949706c10fd221b9a073f4284b4bdbc47e6d7#code" target="_blank" rel="noopener noreffer">배포된 컨트랙트</a>에서 정상적으로 배포된 컨트랙트를 확인할 수 있습니다.</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-02-02</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/hardhat/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/hardhat/" data-title="Hardhat" data-hashtags="dev"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/hardhat/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/hardhat/" data-title="Hardhat"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/hardhat/" data-title="Hardhat"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/hardhat/" data-title="Hardhat" data-image="/images/hard.png"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/ch03_eth_client/" class="prev" rel="prev" title="[마스터링 이더리움 CH03] Ethereum Client"><i class="fas fa-angle-left fa-fw"></i>[마스터링 이더리움 CH03] Ethereum Client</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
