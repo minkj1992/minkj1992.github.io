@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>[일주일 만에 배우는 GO] CH.1 Go Language Design - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="[일주일 만에 배우는 GO] CH.1 Go Language Design" />
+<meta property="og:description" content="Go 공식문서에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/ch01_go_basic/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-05T16:52:53+09:00" />
+<meta property="article:modified_time" content="2022-02-05T17:07:14+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="[일주일 만에 배우는 GO] CH.1 Go Language Design"/>
+<meta name="twitter:description" content="Go 공식문서에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다."/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/ch01_go_basic/" /><link rel="prev" href="https://minkj1992.github.io/go_study_plan/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "[일주일 만에 배우는 GO] CH.1 Go Language Design",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/ch01_go_basic\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, go","wordcount":  3514 ,
+        "url": "https:\/\/minkj1992.github.io\/ch01_go_basic\/","datePublished": "2022-02-05T16:52:53+09:00","dateModified": "2022-02-05T17:07:14+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/" title="어서 누르기나 하라구"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="어서 누르기나 하라구">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">[일주일 만에 배우는 GO] CH.1 Go Language Design</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw"></i>go</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-05">2022-02-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3514 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/golang/google_go.jpeg"
+        data-srcset="/images/golang/google_go.jpeg, /images/golang/google_go.jpeg 1.5x, /images/golang/google_go.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/golang/google_go.jpeg"
+        title="/images/golang/google_go.jpeg" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">tl;dr</a></li>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#pain-points">Pain points</a></li>
+    <li><a href="#cf-go는-왜--를-사용하나요">c.f go는 왜 { }를 사용하나요?</a></li>
+    <li><a href="#dependencies-in-go">Dependencies in Go</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#remote-package">remote package</a></li>
+    <li><a href="#syntax">Syntax</a></li>
+    <li><a href="#useful-references">Useful references</a></li>
+    <li><a href="#conclustion">conclustion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><code>Go</code> 공식문서에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다.</p>
+<br />
+<h2 id="tldr">tl;dr</h2>
+<blockquote>
+<p>Go is a compiled, concurrent, garbage-collected, statically typed language developed at Google</p>
+</blockquote>
+<h2 id="introduction">Introduction</h2>
+<blockquote>
+<p>웹 서비스가 많아지고 컴퓨터 환경이 발전하면서 관리해야 할 코드와 서비스가 많아졌고 이를 효율적으로 관리하기 위해 go는 만들어졌습니다.</p>
+</blockquote>
+<p>공식문서의 go 디자인 레퍼런스를 발견해, 이를 토대로 분석글을 작성합니다.<a href="https://go.dev/talks/2012/splash.article" target="_blank" rel="noopener noreffer">Go at Google: Language Design in the Service of Software Engineering</a> 추가로 <a href="https://go.dev/doc/faq" target="_blank" rel="noopener noreffer">FAQ</a>를 참조하였습니다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>go를 개발한 이유<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>The Go programming language was conceived in late 2007</em></p>
+<p>&hellip; 중략 &hellip;</p>
+<p><em>mostly C++, Java, and Python, had been created</em></p>
+<p>&hellip; 중략 &hellip;</p>
+<p><em>We were not alone in our concerns. After many years with a pretty quiet landscape for programming languages, Go was among the first of several new languages—Rust, Elixir, Swift, and more—that have made programming language development an active, almost mainstream field again.</em></p>
+<p>&hellip; 중략 &hellip;</p>
+<p><em>The problems introduced by multicore processors, networked systems, massive computation clusters, and the web programming model were being worked around rather than addressed head-on. Moreover, the scale has changed: today&rsquo;s server programs comprise tens of millions of lines of code, are worked on by hundreds or even thousands of programmers, and are updated literally every day. To make matters worse, build times, even on large compilation clusters, have stretched to many minutes, even hours.</em></p>
+</div>
+        </div>
+    </div>
+<p>go는 2007년에 만들어졌습니다. 이 당시의 언어로써는 다음과 같은 문제들을 해결하기 어려웠기 때문에 go를 개발하기 시작했다고 보입니다.</p>
+<ol>
+<li>multicore processors 고려</li>
+<li>개발자들의 수요 증가(코드의 scale 증가 -&gt; 깔끔한 코드 니즈 증가)</li>
+<li>서버 scale increase</li>
+<li>build time too long</li>
+</ol>
+<p>이때는 참고로 Rust, Elixir, Swift 같은 대안 언어들이 없었다고 합니다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>go 디자인 목표<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Go was designed and developed to make working in this environment more productive. Besides its better-known aspects such as built-in concurrency and garbage collection, Go&rsquo;s design considerations include rigorous dependency management, the adaptability of software architecture as systems grow, and robustness across the boundaries between components.</em></div>
+        </div>
+    </div>
+<ul>
+<li>built-in concurrency</li>
+<li>garbage collection</li>
+<li>dependency management</li>
+<li>adaptability of software architecture</li>
+</ul>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>google at go<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>The goals of the Go project were to eliminate the slowness and clumsiness of software development at Google, and thereby to make the process more productive and scalable. The language was designed by and for people who write—and read and debug and maintain—large software systems.</em></div>
+        </div>
+    </div>
+<p>구글의 현존하는 수많은 legacy 코드들과 앞으로 늘어날 코드들을 효율적으로 관리하기 위해서 go를 개발하기 시작했다고 합니다.</p>
+<h2 id="pain-points">Pain points</h2>
+<p>아래는 go를 만들 때 고려되었던 <code>pain point</code>들입니다.</p>
+<ul>
+<li>slow builds</li>
+<li>uncontrolled dependencies</li>
+<li>each programmer using a different subset of the language</li>
+<li>poor program understanding (code hard to read, poorly documented, and so on)</li>
+<li>duplication of effort</li>
+<li>cost of updates</li>
+<li>version skew</li>
+<li>difficulty of writing automatic tools</li>
+<li>cross-language builds</li>
+</ul>
+<h2 id="cf-go는-왜--를-사용하나요">c.f go는 왜 { }를 사용하나요?</h2>
+<center>
+<p><strong>안정성과 신뢰성을 위해 python style indentation 편의성을 포기하고 <code>{}</code>를 그래도 도입함.</strong></p>
+</center>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>go는 왜 { }를 사용하나요? <i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Our position is therefore that, although spaces for indentation is nice for small programs, it doesn&rsquo;t scale well, and the bigger and more heterogeneous the code base, the more trouble it can cause. It is better to forgo convenience for safety and dependability, so Go has brace-bounded blocks.</em></div>
+        </div>
+    </div>
+<p>구글이 가진 노하우에 따르면 작은 프로그램에서는 <code>python</code>의 indentation이 좋지만, 코드 기반이 클수록 &amp; cross-language build 환경에서는 python 스타일이 좋지 않기 때문에 <code>{ }</code>를 그대로 쓰기로 결정했다고 합니다.</p>
+<h2 id="dependencies-in-go">Dependencies in Go</h2>
+<blockquote>
+<p>go가 의존성을 대하는 전략에 대해서 정리합니다.</p>
+</blockquote>
+<p>아래와 같은 c의 guard기능으로 인해 불필요하게 의존성을 읽어들이는 현상이 발생했습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cm">/* Large copyright and licensing notice */</span>
+
+<span class="cp">#ifndef _SYS_STAT_H_
+</span><span class="cp">#define _SYS_STAT_H_
+</span><span class="cp"></span>
+<span class="cm">/* Types and other definitions */</span>
+<span class="cp">#endif
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>The first step to making Go scale, dependency-wise, is that the language defines that unused dependencies are a compile-time error (not a warning, an error).</em></p>
+<p>&hellip; 중략 &hellip;</p>
+<p><em>This guarantees by construction that the dependency tree for any Go program is precise, that it has no extraneous edges. That, in turn, guarantees that no extra code will be compiled when building the program, which minimizes compilation time.</em></p>
+</div>
+        </div>
+    </div>
+<p>구글 같이 코드 베이스가 많은 경우, 빌드타임이 오래걸리는 것은 업무의 효율성을 떨어뜨리기 때문에 <strong><code>go</code>에서는 사용하지 않는 dependency들에 대해서 compile-time error를 뱉어내도록 하고 있습니다.</strong></p>
+<p>더 나아가서 <code>go</code>는 <code>include of include file</code>와 같은 상황에도 효율적인 전략을 취하고 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">A</span> <span class="nx">imports</span> <span class="kn">package</span> <span class="nx">B</span><span class="p">;</span>
+<span class="kn">package</span> <span class="nx">B</span> <span class="nx">imports</span> <span class="kn">package</span> <span class="nx">C</span><span class="p">;</span>
+<span class="kn">package</span> <span class="nx">A</span> <span class="nx">does</span> <span class="nx">not</span> <span class="kn">import</span> <span class="kn">package</span> <span class="nx">C</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>다음과 같이 A에서 B를 직접 참조하고, C는 간접적으로 참조하는 상황이 있을 때, go 컴파일러는 2가지 전략을 취합니다.</p>
+<ol>
+<li><strong>C -&gt; B -&gt; A 순으로 compile한다.</strong></li>
+<li><strong>A에서 B를 참조할 때, 컴파일 시 생성된 B <code>Object 파일</code>에 B public interface가 영향받을 dependency들의 <code>type information</code>을 넣어둔다.</strong></li>
+</ol>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>In other words, when B is compiled, the generated object file includes type information for all dependencies of B that affect the public interface of B.</em></div>
+        </div>
+    </div>
+<p>예를 들어서 A에서 B안에 들어있는 <code>I/O package</code>를 import하고, B안에 들어있는 I/O 패키지는 C에 정의되어있는 <code>buffered I/O</code>를 사용해서 구현(implementation)되어있을 때,
+C -&gt; B -&gt; A 순으로 컴파일되면서 link됩니다. 이때 A가 컴파일될 때 컴파일러는 B의 <code>Object file</code>을 읽어(주의! 소스코드를 읽는게 아님)들이는데, 이때 해당 파일에는 A에서 <code>import B</code>를 실행할 때 컴파일러에 필요한 필요한 모든 타입 정보가 들어있습니다.</p>
+<blockquote>
+<p><em>This is, of course, reminiscent of the Plan 9 C (as opposed to ANSI C) approach to dependency management, except that, in effect, the compiler writes the header file when the Go source file is compiled</em></p>
+</blockquote>
+<p>이런 종속성 관리 접근 방식은 <code>Plan 9 C(ANSI C와 반대)</code> 접근 방식과 유사하며, 단 실제로 Go 소스 파일이 컴파일될 때 컴파일러가 헤더 파일을 작성해 준다는 점만 다릅니다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>To make compilation even more efficient, the object file is arranged so the export data is the first thing in the file, so the compiler can stop reading as soon as it reaches the end of that section.</em></div>
+        </div>
+    </div>
+<p>참고로 컴파일 할 때 고언어 컴파일러는 export할 data를 Object file 맨 앞단에 위치시켜서 export 해줄 정보만 빠르게 찾아볼 수 있도록 구현되어 있다고 합니다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Go places the export data in the object file; some languages require the author to write or the compiler to generate a second file with that information. That&rsquo;s twice as many files to open. In Go there is only one file to open to import a package. Also, the single file approach means that the export data (or header file, in C/C++) can never go out of date relative to the object file.</em></div>
+        </div>
+    </div>
+<p>또한 export data를 object파일에 위치시키기 때문에 import package시킬 때, 컴파일러는 파일 당 하나의 object 파일만 읽어들이면 되며 부가적으로 관리해야 할 포인트가 하나로 줄어든다는 장점이 있습니다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>Another feature of the Go dependency graph is that it has no cycles.</em></p>
+<p>&hellip;중략&hellip;</p>
+<p><em>The lack of circular imports causes occasional annoyance but keeps the tree clean, forcing a clear demarcation between packages. As with many of the design decisions in Go, it forces the programmer to think earlier about a larger-scale issue (in this case, package boundaries) that if left until later may never be addressed satisfactorily.</em></p>
+</div>
+        </div>
+    </div>
+<p><strong>마지막으로 go언어는 <code>circular import</code>(= <code>cyclic import</code>)를 컴파일 타임에 에러를 내 줌으로써 효율적인 <code>package boundaries</code>에 대해서 개발자가 고민할 수 있도록 해줍니다.</strong></p>
+<p>이런 방식들을 통해 go는 기존 언어보다 획기적으로 build time을 줄일 수 있었습니다.</p>
+<h2 id="packages">Packages</h2>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>It&rsquo;s important to recognize that package paths are unique, but there is no such requirement for package names. The path must uniquely identify the package to be imported, while the name is just a convention for how clients of the package can refer to its contents. The package name need not be unique and can be overridden in each importing source file by providing a local identifier in the import clause. These two imports both reference packages that call themselves package log, but to import them in a single source file one must be (locally) renamed:</em></div>
+        </div>
+    </div>
+<ul>
+<li>package의 path는 unique해야 합니다.</li>
+<li>package name은 unique할 필요없으며, 중복 될 경우 이를 사용하는(import) 영역에서 naming을 override해서 사용합니다.</li>
+</ul>
+<h2 id="remote-package">remote package</h2>
+<p>개인적으로 신기했던 부분인데, go에서는 import 해주는 package path가 <code>url</code>이 될 수도 있습니다.</p>
+<p>예를 들어서 github에서 doozer 패키지를 가져오고 싶으면 아래와 같이 해주면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ go get github.com/4ad/doozer // Shell <span class="nb">command</span> to fetch package
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">import</span> <span class="s">&#34;github.com/4ad/doozer&#34;</span> <span class="c1">// Doozer client&#39;s import statement
+</span><span class="c1"></span>
+<span class="kd">var</span> <span class="nx">client</span> <span class="nx">doozer</span><span class="p">.</span><span class="nx">Conn</span>         <span class="c1">// Client&#39;s use of package
+</span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게 한번 fetch(package를 install)해주면 그 다음부터는 일반적인 package와 마찬가지로 import 해주면 됩니다.</p>
+<p>이런 방식을 도입함으로써 explicit하게 dependencies들을 보여줄 수 있게 되었습니다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Also, the allocation of the space of import paths is delegated to URLs, which makes the naming of packages decentralized and therefore scalable, in contrast to centralized registries used by other languages.</em></div>
+        </div>
+    </div>
+<p><strong>또한 URL로 <code>allocation of the space of import paths</code>가 위임됨으로써, package의 naming이 decentralized &amp; scalable하게 만들었습니다.</strong> (저는 allocation of the space of import paths라는 뜻을 url의 unique한 장점을 <code>package path</code>로 그대로 가져와서 global하게 unique한 decentralized system을 만들었다고 이해했습니다.)</p>
+<h2 id="syntax">Syntax</h2>
+<blockquote>
+<p><em>Go was therefore designed with clarity and tooling in mind, and has a clean syntax.</em></p>
+</blockquote>
+<p>go declaration(선언) 문법중에서 C 스타일 프로그래머들을 놀라게 하는 부분이 있습니다.</p>
+<ul>
+<li>go style</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var fn func([]int) int
+type T struct { a, b int }
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>c style</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">fn</span><span class="p">)(</span><span class="kt">int</span><span class="p">[]);</span>
+<span class="k">struct</span> <span class="n">T</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>The declared name appears before the type and there are more keywords.</p>
+</blockquote>
+<p>이런 <code>Declarations introduced by keyword</code> 문법은 <code>Pascal</code>에 더 가깝다고 합니다. 이를 통해 개발자는 더 수월하게 코드 분석이 가능하며, <code>type syntax</code>를 가지는 것이 C언어 같이 <code>expression syntax</code> 보다 컴퓨터가 parsing 성능에 상당히 더 유리하다고 합니다.</p>
+<p><strong>go는 <code>type syntax</code>라는 문법을 추가해서 코드가 늘어나지만, 이를 통해 모호성을 제거하였습니다.</strong> 단 편의를 위해 go에서는 var 키워드를 삭제하고 <code>:=</code>라는 키워드를 관용적으로 사용합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">buf</span> <span class="o">*</span><span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span> <span class="p">=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">NewBuffer</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="c1">// explicit
+</span><span class="c1"></span><span class="nx">buf</span> <span class="o">:=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">NewBuffer</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="c1">// derived
+</span></code></pre></td></tr></table>
+</div>
+</div><p>마지막으로 Go에서는 <code>default function arguments</code>를 의도적으로 누락시켰습니다. 기본 인자가 가지는 모호성으로 코드를 사용하는 부분이 명시적이지 못할 경우가 많다는 단점이 있기 때문입니다. 물론 같은 네이밍을 가질 함수가 가질 수 있는 모든 interface(function signature)를 구현해줘야 한다는 단점을 가지긴합니다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Those functions all need separate names, too, which makes it clear which combinations exist, as well as encouraging more thought about naming, a critical aspect of clarity and readability.</em></div>
+        </div>
+    </div>
+<p>엇? java 처럼 오버로딩을 하는게 아니라 signature 바뀔때마다 모두 새로운 함수명을 만들어줘야한다는 의미일까요? 아무튼 go는 clarity를 가장 최우선으로 두는 것 같습니다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>개인적으로 default argument가 사라진 건 너무 좋은 것 같은게, python기준으로 함수가 여기저기 많이 사용될수록 default argument 때문에 불필요하게 사용되는 모든 코드들을 뒤져야 할 때가 많았습니다.</p>
+<p>예를 들어</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+   <span class="o">...</span>
+   <span class="k">else</span><span class="p">:</span>
+   <span class="o">...</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>이런 함수가 있고 이 함수 관련해서 에러가 나면 <code>create_person</code>를 호출하는 모든 코드들을 다 뒤져봐야 할 경우가 있었습니다. 특히 mongodb처럼 데이터의 스키마가 고정되지 않은 데이터를 함수의 dto로 받는 경우에는 정말 짜증납니다. (카카오콘 mcard&hellip;)</p>
+</div>
+        </div>
+    </div>
+<h2 id="useful-references">Useful references</h2>
+<ul>
+<li><a href="https://go.dev/talks/2012/splash.article" target="_blank" rel="noopener noreffer">Go at Google: Language Design in the Service of Software Engineering</a></li>
+<li><a href="https://github.com/a8m/golang-cheat-sheet" target="_blank" rel="noopener noreffer">golang cheat sheet</a></li>
+<li><a href="https://github.com/gin-gonic/gin" target="_blank" rel="noopener noreffer">gin</a></li>
+</ul>
+<h2 id="conclustion">conclustion</h2>
+<center>- 끝 -</center>
+````</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-02-05&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/5c4164db4185ba69bb79682ffa4eea077058e810" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 5c4164db4185ba69bb79682ffa4eea077058e810: rebuilding site 2022년 2월  5일 토요일 17시 07분 14초 KST">
+                                    <i class="fas fa-hashtag fa-fw"></i>5c4164d</a></span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/ch01_go_basic/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/ch01_go_basic/" data-title="[일주일 만에 배우는 GO] CH.1 Go Language Design" data-hashtags="dev,go"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/ch01_go_basic/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/ch01_go_basic/" data-title="[일주일 만에 배우는 GO] CH.1 Go Language Design"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/ch01_go_basic/" data-title="[일주일 만에 배우는 GO] CH.1 Go Language Design"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/ch01_go_basic/" data-title="[일주일 만에 배우는 GO] CH.1 Go Language Design" data-image="/images/golang/google_go.jpeg"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/go/">go</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/go_study_plan/" class="prev" rel="prev" title="[일주일 만에 배우는 GO] CH.0 Go study plan"><i class="fas fa-angle-left fa-fw"></i>[일주일 만에 배우는 GO] CH.0 Go study plan</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
