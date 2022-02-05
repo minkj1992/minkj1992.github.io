@@ -233,7 +233,7 @@ _Those functions all need separate names, too, which makes it clear which combin
 
 엇? java 처럼 오버로딩을 하는게 아니라 signature 바뀔때마다 모두 새로운 함수명을 만들어줘야한다는 의미일까요? 아무튼 go는 clarity를 가장 최우선으로 두는 것 같습니다.
 
-{{< admonition >}}
+{{< admonition tip >}}
 개인적으로 default argument가 사라진 건 너무 좋은 것 같은게, python기준으로 함수가 여기저기 많이 사용될수록 default argument 때문에 불필요하게 사용되는 모든 코드들을 뒤져야 할 때가 많았습니다.
 
 예를 들어
@@ -258,5 +258,4 @@ def create_person(name, age=30):
 ## conclustion
 
 <center>- 끝 -</center>
-````
 
