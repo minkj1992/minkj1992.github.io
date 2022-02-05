@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>go - Category - The Serious</title>
+        <link>https://minkj1992.github.io/categories/go/</link>
+        <description>go - Category - The Serious</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 05 Feb 2022 16:12:53 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/go/" rel="self" type="application/rss+xml" /><item>
+    <title>[일주일 만에 배우는 GO] CH.0 Go study plan</title>
+    <link>https://minkj1992.github.io/go_study_plan/</link>
+    <pubDate>Sat, 05 Feb 2022 16:12:53 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/go_study_plan/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/golang/golang.png" referrerpolicy="no-referrer">
+            </div><p>새로운 언어를 공부하다보면, 생각보다 기초를 공부하는 시간이 소모적이라는 생각이 들어 조금 더 효율적인 학습방법을 정리해보고 싶어 글로 남겨둡니다.</p>]]></description>
+</item></channel>
+</rss>

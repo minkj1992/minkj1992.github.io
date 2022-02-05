@@ -4,9 +4,18 @@
         <link>https://minkj1992.github.io/</link>
         <description>About Seroius</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 02 Feb 2022 18:15:43 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 05 Feb 2022 16:12:53 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>[일주일 만에 배우는 GO] CH.0 Go study plan</title>
+    <link>https://minkj1992.github.io/go_study_plan/</link>
+    <pubDate>Sat, 05 Feb 2022 16:12:53 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/go_study_plan/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/golang/golang.png" referrerpolicy="no-referrer">
+            </div><p>새로운 언어를 공부하다보면, 생각보다 기초를 공부하는 시간이 소모적이라는 생각이 들어 조금 더 효율적인 학습방법을 정리해보고 싶어 글로 남겨둡니다.</p>]]></description>
+</item><item>
     <title>Hardhat</title>
     <link>https://minkj1992.github.io/hardhat/</link>
     <pubDate>Wed, 02 Feb 2022 18:15:43 &#43;0900</pubDate>
@@ -108,16 +117,5 @@
             <div class="admonition-content"><a href="https://cryptozombies.io/" target="_blank" rel="noopener noreffer">크립토 좀비</a>에서 <code>Solidity</code>를 학습해보자.</div>
         </div>
     </div>]]></description>
-</item><item>
-    <title>Sorting algorithms</title>
-    <link>https://minkj1992.github.io/sorting/</link>
-    <pubDate>Wed, 12 Jan 2022 20:21:33 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://minkj1992.github.io/sorting/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/sorting.jpeg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>Let&rsquo;s summary list of Sorting Algorithms</p>
-</blockquote>]]></description>
 </item></channel>
 </rss>
