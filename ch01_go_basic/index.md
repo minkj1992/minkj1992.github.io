@@ -1,7 +1,7 @@
 # [일주일 만에 배우는 GO] CH.1 Go Language Design
 
 
-`Go` 공식문서에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다.
+[Go at Google: Language Design in the Service of Software Engineering](https://go.dev/talks/2012/splash.article)를 기반으로`Go`에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다.
 
 <!--more-->
 <br />
@@ -227,6 +227,28 @@ buf := bytes.NewBuffer(x) // derived
 
 마지막으로 Go에서는 `default function arguments`를 의도적으로 누락시켰습니다. 기본 인자가 가지는 모호성으로 코드를 사용하는 부분이 명시적이지 못할 경우가 많다는 단점이 있기 때문입니다. 물론 같은 네이밍을 가질 함수가 가질 수 있는 모든 interface(function signature)를 구현해줘야 한다는 단점을 가지긴합니다.
 
+아래는 go에서 함수 / 메서드를 표현하는 방법입니다. 코트린 처럼 `fun`을 키워드로 가졌으면 더 좋았을 것 같네요.
+
+```go
+func Abs(x T) float64      // function declaration
+func (x T) Abs() float64   // method declaration
+```
+
+go는 `first-class` function / closures를 지원합니다.
+
+```go
+negativeAbs := func(x T) float64 { return -Abs(x)} // lambda
+```
+
+go는 multiple value return이 가능합니다.
+
+```go
+func ReadByte() (c byte, err error)
+
+c, err := ReadByte()
+if err != nil { ... }
+```
+
 {{< admonition  >}}
 _Those functions all need separate names, too, which makes it clear which combinations exist, as well as encouraging more thought about naming, a critical aspect of clarity and readability._
 {{< /admonition >}}
@@ -246,8 +268,95 @@ def create_person(name, age=30):
    ...
 ```
 
-이런 함수가 있고 이 함수 관련해서 에러가 나면 `create_person`를 호출하는 모든 코드들을 다 뒤져봐야 할 경우가 있었습니다. 특히 mongodb처럼 데이터의 스키마가 고정되지 않은 데이터를 함수의 dto로 받는 경우에는 정말 짜증납니다. (카카오콘 mcard...)
+이런 함수가 있고 이 함수 관련해서 에러가 나면 `create_person`를 호출하는 모든 코드들을 다 뒤져봐야 할 경우가 있었습니다. 특히 mongodb처럼 데이터의 스키마가 고정되지 않은 데이터를 함수의 dto로 받는 경우에는 정말 짜증납니다. (kotlin migration 과정에서 엄청 스트레스를 줬던 콘 `mcard`...)
 {{< /admonition >}}
+
+## Naming
+
+`Go`에서는 신기하게도 `visibility of an identifier`를 대소문자로 구별합니다. (타 언어에서는 private / public따위의 키워드를 씀)
+
+{{< admonition note "name as visibility identifier" >}}
+_Go the name itself carries the information: the case of the initial letter of the identifier determines the visibility. If the initial character is an upper case letter, the identifier is exported (public); otherwise it is not:_
+{{< /admonition  >}}
+
+- upper case initial letter: Name is visible to clients of package
+- otherwise: name (or `_Name`) is not visible to clients of package
+
+이런 rule은 모든 곳에 적용됩니다.
+
+- variables
+- types
+- functions
+- methods
+- constants
+- fields
+
+이런 특이한 전략을 취한데에는 naming으로 visibility를 관리하는 것이 identifier에 비해 더욱 깔끔한 Public api관리에 도움되는 전략이라고 판단한 google의 노하우가 반영되었다고 합니다.
+
+개인적으로는 코드 검색을 할 때, identifier를 가지고 public한 api를 하면 편하게 확인이 가능한 반면 네이밍으로 visibility를 관리하면 정확한 네이밍을 알아야 가능하다는 점에서 솔직히 별로 인 것 같습니다.
+
+{{< admonition note "scope hierarchy" >}}
+_Another simplification is that Go has a very compact scope hierarchy:_
+{{< /admonition  >}}
+
+- `universe` (predeclared identifiers such as int and string)
+- `package` (all the source files of a package live at the same scope)
+- `file` (for package import renames only)
+- `function`
+- `block`
+
+{{< admonition note "naming scope" >}}
+_There is no scope for name space or class or other wrapping construct. Names come from very few places in Go, and all names follow the same scope hierarchy: at any given location in the source, an identifier denotes exactly one language object, independent of how it is used. (The only exception is statement labels, the targets of break statements and the like; they always have function scope.)_
+
+...중략...
+
+_top-level predefined names such as int, (the first component of) every name is always declared in the current package._
+
+{{< /admonition  >}}
+
+go에서는 일부 예외(`statement labels`, `argets of break statements`는 function scope)를 제외하면 naming은 `package scope`로 관리됩니다.
+
+{{< admonition note "package scope로 naming이 관리되는 이유" >}}
+_exported name to a package can never break a client of that package. The naming rules decouple packages, providing scaling, clarity, and robustness._
+{{< /admonition  >}}
+
+{{< admonition note "function / method 오버로딩 불가능" >}}
+_method lookup is always by name only, not by signature (type) of the method. In other words, a single type can never have two methods with the same name_
+{{< /admonition  >}}
+
+`java`와 달리 `go`에서는 function signature만 다르고 네이밍이 같은 메서드 / 함수를 만드는 것은 불가능합니다. 개발자가 네이밍을 좀 더 신경써야 된다는 불편함은 있겠지만, 개인적으로 더 깔끔하게 함수들을 관리할 수 있는 방법이라고 생각되네요 (왠지 function naming관련된 convention tip들이 있을 것 같음)
+
+- [effective go about Functions](https://go.dev/doc/effective_go#functions)
+
+## Semantics
+
+go는 기본적으로 `c`와 많이 닮아 있지만, modern언어에 익숙한 개발자들을 위해 몇가지 차이점을 두었습니다.
+
+- there is no pointer arithmetic
+- there are no implicit numeric conversions
+- array bounds are always checked
+- there are no type aliases (after type X int, X and int are distinct types not aliases)
+- ++ and -- are statements not expressions
+- assignment is not an expression
+- it is legal (encouraged even) to take the address of a stack variable
+
+아래는 C, C++, and even Java와 비교했을 때, 크게 변화한 부분입니다. (참고로 go 초기 개발자인 Robert Griesemer). Java hotspot compiler(JVM)을 개발했었습니다. )
+
+- concurrency
+- gc
+- interface type
+- reflection
+- type switches
+
+## Concurrency
+
+> **Go is not purely memory safe in the presence of concurrency. Sharing is legal and passing a pointer over a channel is idiomatic (and efficient).**
+
+`Go`는 [Communicating sequential processes, CSP](https://en.wikipedia.org/wiki/Communicating_sequential_processes)의 `first-class channel`개념을 가져왔습니다. (which is about message passing via channels in concurrent system)
+
+{{< admonition note "Don't communicate by sharing memory, share memory by communicating" >}}
+_Some concurrency and functional programming experts are disappointed that Go does not take a write-once approach to value semantics in the context of concurrent computation, that Go is not more like Erlang for example. Again, the reason is largely about familiarity and suitability for the problem domain. Go's concurrent features work well in a context familiar to most programmers. Go enables simple, safe concurrent programming but does not forbid bad programming. We compensate by convention, training programmers to think about message passing as a version of ownership control._
+{{< /admonition  >}}
 
 ## Useful references
 

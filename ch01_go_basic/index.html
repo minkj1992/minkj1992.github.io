@@ -6,7 +6,7 @@
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>[일주일 만에 배우는 GO] CH.1 Go Language Design - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="[일주일 만에 배우는 GO] CH.1 Go Language Design" />
-<meta property="og:description" content="Go 공식문서에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다." />
+<meta property="og:description" content="Go at Google: Language Design in the Service of Software Engineering를 기반으로Go에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/ch01_go_basic/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-05T16:52:53+09:00" />
@@ -16,7 +16,7 @@
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
 
 <meta name="twitter:title" content="[일주일 만에 배우는 GO] CH.1 Go Language Design"/>
-<meta name="twitter:description" content="Go 공식문서에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다."/>
+<meta name="twitter:description" content="Go at Google: Language Design in the Service of Software Engineering를 기반으로Go에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다."/>
 <meta name="application-name" content="serious">
 <meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/ch01_go_basic/" /><link rel="prev" href="https://minkj1992.github.io/go_study_plan/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
@@ -32,7 +32,7 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, go","wordcount":  1723 ,
+                        }],"genre": "posts","keywords": "dev, go","wordcount":  2447 ,
         "url": "https:\/\/minkj1992.github.io\/ch01_go_basic\/","datePublished": "2022-02-05T16:52:53+09:00","dateModified": "2022-02-06T17:51:39+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
@@ -114,8 +114,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">[일주일 만에 배우는 GO] CH.1 Go Language Design</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw"></i>go</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-05">2022-02-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1723 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-05">2022-02-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2447 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -138,11 +138,14 @@
     <li><a href="#packages">Packages</a></li>
     <li><a href="#remote-package">remote package</a></li>
     <li><a href="#syntax">Syntax</a></li>
+    <li><a href="#naming">Naming</a></li>
+    <li><a href="#semantics">Semantics</a></li>
+    <li><a href="#concurrency">Concurrency</a></li>
     <li><a href="#useful-references">Useful references</a></li>
     <li><a href="#conclustion">conclustion</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p><code>Go</code> 공식문서에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다.</p>
+            </div><div class="content" id="content"><p><a href="https://go.dev/talks/2012/splash.article" target="_blank" rel="noopener noreffer">Go at Google: Language Design in the Service of Software Engineering</a>를 기반으로<code>Go</code>에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다.</p>
 <br />
 <h2 id="tldr">tl;dr</h2>
 <blockquote>
@@ -419,7 +422,42 @@ type T struct { a, b int }
 </span></code></pre></td></tr></table>
 </div>
 </div><p>마지막으로 Go에서는 <code>default function arguments</code>를 의도적으로 누락시켰습니다. 기본 인자가 가지는 모호성으로 코드를 사용하는 부분이 명시적이지 못할 경우가 많다는 단점이 있기 때문입니다. 물론 같은 네이밍을 가질 함수가 가질 수 있는 모든 interface(function signature)를 구현해줘야 한다는 단점을 가지긴합니다.</p>
-<div class="details admonition note open">
+<p>아래는 go에서 함수 / 메서드를 표현하는 방법입니다. 코트린 처럼 <code>fun</code>을 키워드로 가졌으면 더 좋았을 것 같네요.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Abs</span><span class="p">(</span><span class="nx">x</span> <span class="nx">T</span><span class="p">)</span> <span class="kt">float64</span>      <span class="c1">// function declaration
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">x</span> <span class="nx">T</span><span class="p">)</span> <span class="nf">Abs</span><span class="p">()</span> <span class="kt">float64</span>   <span class="c1">// method declaration
+</span></code></pre></td></tr></table>
+</div>
+</div><p>go는 <code>first-class</code> function / closures를 지원합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">negativeAbs</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">x</span> <span class="nx">T</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span> <span class="k">return</span> <span class="o">-</span><span class="nf">Abs</span><span class="p">(</span><span class="nx">x</span><span class="p">)}</span> <span class="c1">// lambda
+</span></code></pre></td></tr></table>
+</div>
+</div><p>go는 multiple value return이 가능합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">ReadByte</span><span class="p">()</span> <span class="p">(</span><span class="nx">c</span> <span class="kt">byte</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span>
+
+<span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">ReadByte</span><span class="p">()</span>
+<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-pencil-alt fa-fw"></i>Note<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
@@ -451,8 +489,112 @@ type T struct { a, b int }
    <span class="o">...</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>이런 함수가 있고 이 함수 관련해서 에러가 나면 <code>create_person</code>를 호출하는 모든 코드들을 다 뒤져봐야 할 경우가 있었습니다. 특히 mongodb처럼 데이터의 스키마가 고정되지 않은 데이터를 함수의 dto로 받는 경우에는 정말 짜증납니다. (카카오콘 mcard&hellip;)</p>
+</div><p>이런 함수가 있고 이 함수 관련해서 에러가 나면 <code>create_person</code>를 호출하는 모든 코드들을 다 뒤져봐야 할 경우가 있었습니다. 특히 mongodb처럼 데이터의 스키마가 고정되지 않은 데이터를 함수의 dto로 받는 경우에는 정말 짜증납니다. (kotlin migration 과정에서 엄청 스트레스를 줬던 콘 <code>mcard</code>&hellip;)</p>
 </div>
+        </div>
+    </div>
+<h2 id="naming">Naming</h2>
+<p><code>Go</code>에서는 신기하게도 <code>visibility of an identifier</code>를 대소문자로 구별합니다. (타 언어에서는 private / public따위의 키워드를 씀)</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>name as visibility identifier<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Go the name itself carries the information: the case of the initial letter of the identifier determines the visibility. If the initial character is an upper case letter, the identifier is exported (public); otherwise it is not:</em></div>
+        </div>
+    </div>
+<ul>
+<li>upper case initial letter: Name is visible to clients of package</li>
+<li>otherwise: name (or <code>_Name</code>) is not visible to clients of package</li>
+</ul>
+<p>이런 rule은 모든 곳에 적용됩니다.</p>
+<ul>
+<li>variables</li>
+<li>types</li>
+<li>functions</li>
+<li>methods</li>
+<li>constants</li>
+<li>fields</li>
+</ul>
+<p>이런 특이한 전략을 취한데에는 naming으로 visibility를 관리하는 것이 identifier에 비해 더욱 깔끔한 Public api관리에 도움되는 전략이라고 판단한 google의 노하우가 반영되었다고 합니다.</p>
+<p>개인적으로는 코드 검색을 할 때, identifier를 가지고 public한 api를 하면 편하게 확인이 가능한 반면 네이밍으로 visibility를 관리하면 정확한 네이밍을 알아야 가능하다는 점에서 솔직히 별로 인 것 같습니다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>scope hierarchy<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Another simplification is that Go has a very compact scope hierarchy:</em></div>
+        </div>
+    </div>
+<ul>
+<li><code>universe</code> (predeclared identifiers such as int and string)</li>
+<li><code>package</code> (all the source files of a package live at the same scope)</li>
+<li><code>file</code> (for package import renames only)</li>
+<li><code>function</code></li>
+<li><code>block</code></li>
+</ul>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>naming scope<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>There is no scope for name space or class or other wrapping construct. Names come from very few places in Go, and all names follow the same scope hierarchy: at any given location in the source, an identifier denotes exactly one language object, independent of how it is used. (The only exception is statement labels, the targets of break statements and the like; they always have function scope.)</em></p>
+<p>&hellip;중략&hellip;</p>
+<p><em>top-level predefined names such as int, (the first component of) every name is always declared in the current package.</em></p>
+</div>
+        </div>
+    </div>
+<p>go에서는 일부 예외(<code>statement labels</code>, <code>argets of break statements</code>는 function scope)를 제외하면 naming은 <code>package scope</code>로 관리됩니다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>package scope로 naming이 관리되는 이유<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>exported name to a package can never break a client of that package. The naming rules decouple packages, providing scaling, clarity, and robustness.</em></div>
+        </div>
+    </div>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>function / method 오버로딩 불가능<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>method lookup is always by name only, not by signature (type) of the method. In other words, a single type can never have two methods with the same name</em></div>
+        </div>
+    </div>
+<p><code>java</code>와 달리 <code>go</code>에서는 function signature만 다르고 네이밍이 같은 메서드 / 함수를 만드는 것은 불가능합니다. 개발자가 네이밍을 좀 더 신경써야 된다는 불편함은 있겠지만, 개인적으로 더 깔끔하게 함수들을 관리할 수 있는 방법이라고 생각되네요 (왠지 function naming관련된 convention tip들이 있을 것 같음)</p>
+<ul>
+<li><a href="https://go.dev/doc/effective_go#functions" target="_blank" rel="noopener noreffer">effective go about Functions</a></li>
+</ul>
+<h2 id="semantics">Semantics</h2>
+<p>go는 기본적으로 <code>c</code>와 많이 닮아 있지만, modern언어에 익숙한 개발자들을 위해 몇가지 차이점을 두었습니다.</p>
+<ul>
+<li>there is no pointer arithmetic</li>
+<li>there are no implicit numeric conversions</li>
+<li>array bounds are always checked</li>
+<li>there are no type aliases (after type X int, X and int are distinct types not aliases)</li>
+<li>++ and &ndash; are statements not expressions</li>
+<li>assignment is not an expression</li>
+<li>it is legal (encouraged even) to take the address of a stack variable</li>
+</ul>
+<p>아래는 C, C++, and even Java와 비교했을 때, 크게 변화한 부분입니다. (참고로 go 초기 개발자인 Robert Griesemer). Java hotspot compiler(JVM)을 개발했었습니다. )</p>
+<ul>
+<li>concurrency</li>
+<li>gc</li>
+<li>interface type</li>
+<li>reflection</li>
+<li>type switches</li>
+</ul>
+<h2 id="concurrency">Concurrency</h2>
+<blockquote>
+<p><strong>Go is not purely memory safe in the presence of concurrency. Sharing is legal and passing a pointer over a channel is idiomatic (and efficient).</strong></p>
+</blockquote>
+<p><code>Go</code>는 <a href="https://en.wikipedia.org/wiki/Communicating_sequential_processes" target="_blank" rel="noopener noreffer">Communicating sequential processes, CSP</a>의 <code>first-class channel</code>개념을 가져왔습니다. (which is about message passing via channels in concurrent system)</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>Don&#39;t communicate by sharing memory, share memory by communicating<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Some concurrency and functional programming experts are disappointed that Go does not take a write-once approach to value semantics in the context of concurrent computation, that Go is not more like Erlang for example. Again, the reason is largely about familiarity and suitability for the problem domain. Go&rsquo;s concurrent features work well in a context familiar to most programmers. Go enables simple, safe concurrent programming but does not forbid bad programming. We compensate by convention, training programmers to think about message passing as a version of ownership control.</em></div>
         </div>
     </div>
 <h2 id="useful-references">Useful references</h2>
