@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>All Basic Computer Science - The Serious</title><meta name="Description" content="All Basic Computer Science"><meta property="og:title" content="All Basic Computer Science" />
+<meta property="og:description" content="All Basic Computer Science" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/interview/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-06T22:00:50+09:00" />
+<meta property="article:modified_time" content="2022-01-14T19:19:37+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="All Basic Computer Science"/>
+<meta name="twitter:description" content="All Basic Computer Science"/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/interview/" /><link rel="prev" href="https://minkj1992.github.io/ch01_go_basic/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "All Basic Computer Science",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/interview\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, cs, interview","wordcount":  705 ,
+        "url": "https:\/\/minkj1992.github.io\/interview\/","datePublished": "2022-02-06T22:00:50+09:00","dateModified": "2022-01-14T19:19:37+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": "All Basic Computer Science"
+    }
+    </script></head>
+    <body header-desktop="auto" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">All Basic Computer Science</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw"></i>dev</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-06">2022-02-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;705 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/interview.jpeg"
+        data-srcset="/images/interview.jpeg, /images/interview.jpeg 1.5x, /images/interview.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/interview.jpeg"
+        title="All Basic Computer Science" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#operating-system">Operating System</a></li>
+    <li><a href="#network">Network</a></li>
+    <li><a href="#database">Database</a></li>
+    <li><a href="#consistent-read"><code>Consistent read</code></a></li>
+    <li><a href="#software-engineering">Software Engineering</a></li>
+    <li><a href="#design-pattern">Design Pattern</a></li>
+    <li><a href="#language">Language</a></li>
+    <li><a href="#computer-architecture">Computer Architecture</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>Let&rsquo;s prepare basic computer science interview questions.</p>
+</blockquote>
+<h2 id="operating-system">Operating System</h2>
+<p>&hellip;</p>
+<h2 id="network">Network</h2>
+<details>
+<summary>웹 통신의 큰 흐름: https://www.google.com/ 을 접속할 때 일어나는 일</summary>
+</br>
+<blockquote>
+<p>키워드: <code>dhcp</code>, <code>dns</code>, <code>nat</code>, <code>isp</code>, <code>3-way / 4-way handshake</code>, <code>ssl (ssl handshake)</code></p>
+</blockquote>
+<h4>Process</h4>
+<ol>
+<li>
+<p>가장 먼저 브라우저가 url에 적힌 값을 파싱해서 <code>HTTP Request Message</code>를 만들고, OS에 전송 요청을 합니다.</p>
+</li>
+<li>
+<p><strong>OS는 <code>DNS Lookup</code>을 수행합니다.</strong>
+룩업 과정은 etc/hosts &gt; DNS Cache &gt; Cache가 없을 경우 dns server로 ip를 얻어옵니다.</p>
+</li>
+<li>
+<p><strong>DNS server로 ip request</strong>
+이때 DNS server IP는 1차적으로 <code>isp</code>(internet service provider, ex kt, skt&hellip;)가 제공하는 정보들이 <code>dhcp</code>에 의해 컴퓨터에 세팅됩니다.</p>
+</li>
+</ol>
+<p><code>dhcp</code>는 wifi를 쓸 경우, 공유기에 연결되어있는 <code>gateway ip</code>와 <code>router</code>의 <code>NAT</code>을 통해 <code>사설 ip</code>(private ip)를 할당 받으며, 외부 통신을 할 경우 router의 <code>Public ip</code>을 사용합니다.</p>
+<p>ISP에 의해 세팅되어 있는 dns server로 아래 형식의 요청을 보내어, 도메인에 매핑된 ip를 받아옵니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">- from: router ip(nat ip)
+- to: 받아온 ip
+- 게이트웨이 ip : wifi이면 공유기 연결 게이트웨이 ip / 스마트폰이면 자체 ip
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li><strong>루트 도메인서버에서부터 서브도메인 서버순으로 dns query</strong>
+이제 DNS Server로 DNS Query를 요청하게 되면 DNS 서버는 <code>Root name server</code>에 해당 도메인을 질의하고, <code>.com</code> <code>name server</code>의 ip를 받아오게 됩니다.</li>
+</ol>
+<p>그 후 <code>.com 네임 서버</code>에 도메인 Query하게되면 <code>google.com</code>의 ip주소를 받고 최종적으로 <code>www.google.com</code>의 ip를 받아오게 됩니다.</p>
+<ol start="5">
+<li>pc는 최종 서버 ip로 HTTP Request를 보낸다.</li>
+</ol>
+<ul>
+<li>
+<p>3-way handshake</p>
+<blockquote>
+<p>syn &gt; ack, syn &gt; ack</p>
+</blockquote>
+</li>
+<li>
+<p>4-way handshake</p>
+<blockquote>
+<p>fin &gt; ack(close wait) &gt; fin(last_ack) &gt; ack</p>
+</blockquote>
+</li>
+<li>
+<p><a href="https://www.cloudflare.com/ko-kr/learning/ssl/what-happens-in-a-tls-handshake/" target="_blank" rel="noopener noreffer">tls/ssl</a></p>
+</li>
+<li>
+<p><a href="https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/" target="_blank" rel="noopener noreffer">좀 더 자세한 과정 설명</a></p>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/rsa_ssl.jpeg"
+        data-srcset="/images/rsa_ssl.jpeg, /images/rsa_ssl.jpeg 1.5x, /images/rsa_ssl.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/rsa_ssl.jpeg"
+        title="/images/rsa_ssl.jpeg" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># RSA 키 교환 알고리즘
+1. client hello (protocol version, 암호 알고리즘, 압축 방식, 클라 난수)
+2. server hello (세션 ID, ca 인증서, 서버난수)
+3. verify ca and get public key
+4. 클라는 난수(pre master secret) 생성 후 public key로 암호화 후 서버 전달
+5. 클라 세션키 생성 및 서버는 난수를 private key로 복호화 하여 대칭키(세션 키) 생성
+6. 클라는 세션키(대칭키)로 암호화한 fin message를 서버로 전달
+7. 서버 또한 세션키로 암호화한 fin message를 전달
+8. 이후 세션키를 통해 통신 계속 진행
+</code></pre></td></tr></table>
+</div>
+</div></details>
+<details>
+<summary>TCP vs UDP</summary>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">TCP</th>
+<th style="text-align:center">UDP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">연결방식</td>
+<td style="text-align:center">연결형서비스</td>
+<td style="text-align:center">비 연결형 서비스</td>
+</tr>
+<tr>
+<td style="text-align:center">패킷 교환 방식</td>
+<td style="text-align:center">가상 회선 방식</td>
+<td style="text-align:center">데이터그램 방식</td>
+</tr>
+<tr>
+<td style="text-align:center">전송 순서</td>
+<td style="text-align:center">전송 순서 보장</td>
+<td style="text-align:center">전송 순서가 바뀔 수 있음</td>
+</tr>
+<tr>
+<td style="text-align:center">수신 여부 확인</td>
+<td style="text-align:center">수신 여부를 확인함</td>
+<td style="text-align:center">수신 여부를 확인하지 않음</td>
+</tr>
+<tr>
+<td style="text-align:center">통신 방식</td>
+<td style="text-align:center">1:1 통신만 가능</td>
+<td style="text-align:center">1:1 / 1:N / N:N 통신 모두 가능</td>
+</tr>
+<tr>
+<td style="text-align:center">신뢰성</td>
+<td style="text-align:center">높음</td>
+<td style="text-align:center">낮음</td>
+</tr>
+<tr>
+<td style="text-align:center">속도</td>
+<td style="text-align:center">느림</td>
+<td style="text-align:center">빠름</td>
+</tr>
+</tbody>
+</table>
+</details>
+<details>
+<summary>Web Socket Handshake</summary>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/API/WebSockets_API/Writing_WebSocket_servers" target="_blank" rel="noopener noreffer">web socket mdn</a></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/websocket.png"
+        data-srcset="/images/websocket.png, /images/websocket.png 1.5x, /images/websocket.png 2x"
+        data-sizes="auto"
+        alt="/images/websocket.png"
+        title="/images/websocket.png" /></p>
+<p>클라와 서버가 서로 TCP/IP 4계층 레이어에서 통신한다. 즉 conneciton을 들고 있다.</p>
+<ul>
+<li>http 요청 이후, upgrade요청 한다.</li>
+<li>ping을 지속적으로 쏴서, health-check</li>
+</ul>
+</details>
+<details>
+<summary>로드 밸런싱(Load Balancing)</summary>
+<p>로드 밸런싱이란 여러 서버에게 균등하게 트래픽을 분산 시켜주는 것이다.</p>
+<p>nginx의 경우 기본적으로 라운드 로빈 방식으로 동작합니다.</p>
+<ul>
+<li>scale-out</li>
+<li>scale-up</li>
+</ul>
+</details>
+<details>
+<summary>Nginx가 10k problem을 해결한 방식</summary>
+<p>기존 방식은 request당 하나의 process 또는 thread를 사용해서 요청들을 처리했습니다. 이에 반해 nginx는 worker pool을 두고 request가 들어올 때 마다, async하게 worker(default cpu 당 1)에게 task를 위임합니다.</p>
+<p>이렇게 하게 될 경우 process/thread에 비해, pcb/tcb를 만드는데 들어가는 비용을 줄일 수 있으며 또한 사용자의 요청이 많아질 경우, 상대적으로 context switching에 사용되는 비용을 줄일 수 있습니다. 마지막으로 os가 스케쥴링에 들어가는 비용이 줄어듭니다.</p>
+<p>즉 지정된 갯수의 미리생성된 process(thread) 워커를 사용함으로써, 기존의 request가 늘어날 때마다, os 리소스가 급격히 늘어나는 것을 방지하여, 이에 대한 side effect(스케쥴링, context-switching등에 대한 오버헤드를 막아줍니다.) 또한 워커에 필요한 리소스들을 미리 생성해두기 때문에 Process 생성에 들어가는 오버헤드를 줄여줍니다.</p>
+</details>
+<h2 id="database">Database</h2>
+<details>
+<summary>DB 트랜잭션이란?</summary>
+<blockquote>
+<p>트랜잭션은 데이터베이스의 데이터를 조작하는 논리적인 작업의 단위(unit of work)입니다.</p>
+</blockquote>
+<ul>
+<li>트랜잭션은 ACID
+<ul>
+<li>Atomicity
+<ul>
+<li>all or nothing (rollback)</li>
+<li>db transaction, rollback으로 보장</li>
+</ul>
+</li>
+<li>Consistency
+<ul>
+<li>transaction이 commit 되어도 DB의 여러 제약 조건에 맞는 상태를 보장하는 성질이다. 송금하는 사람의 계좌 잔고가 0보다 작아지면 안 된다.</li>
+</ul>
+</li>
+<li>Isolation
+<ul>
+<li>transaction이 진행되는 중간 상태의 데이터를 다른 transaction이 볼 수 없도록 보장하는 성질이다. 송금하는 사람의 계좌에서 돈은 빠져나갔는데 받는 사람의 계좌에 돈이 아직 들어가지 않은 DB 상황을 다른 transaction이 읽으면 안 된다.</li>
+<li>lock으로 구현</li>
+</ul>
+</li>
+<li>Durability
+<ul>
+<li>transaction이 Commit했을 경우 해당 결과가 영구적으로 적용됨을 보장하는 성질이다</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</details>
+<details>
+<summary>트랜잭션과 lock에 대해서 isolation과 연결 지어 설명해주세요</summary>
+<p>DB엔진은 ACID 원칙을 희생하여 동시성을 얻을 수 있는 방법을 제공합니다.</p>
+<ul>
+<li>Row level lock
+<ul>
+<li>shared lock: read lock</li>
+<li>exclusive lock: write lock</li>
+</ul>
+</li>
+<li>Record lock
+<ul>
+<li>s lock: read index lock</li>
+<li>x lock: write index lock</li>
+</ul>
+</li>
+<li>Gap lock: db index record의 gap에 걸리는 lock (gap = db에 실제 record가 없는 부분)</li>
+</ul>
+<p>lock은 모두 transaction이 commit 되거나 rollback 될 때 함께 unlock</p>
+<ul>
+<li>
+<h2 id="consistent-read"><code>Consistent read</code></h2>
+</li>
+<li>Isolation</li>
+</ul>
+</details>
+<ul>
+<li>
+<p><a href="https://s1107.tistory.com/45" target="_blank" rel="noopener noreffer">https://s1107.tistory.com/45</a></p>
+</li>
+<li>
+<p><a href="http://labs.brandi.co.kr/2019/06/19/hansj.html" target="_blank" rel="noopener noreffer">http://labs.brandi.co.kr/2019/06/19/hansj.html</a></p>
+</li>
+<li>
+<p><a href="https://suhwan.dev/2019/06/09/transaction-isolation-level-and-lock/" target="_blank" rel="noopener noreffer">https://suhwan.dev/2019/06/09/transaction-isolation-level-and-lock/</a></p>
+</li>
+<li>
+<p>index</p>
+<ul>
+<li><a href="https://idea-sketch.tistory.com/43?category=547413" target="_blank" rel="noopener noreffer">https://idea-sketch.tistory.com/43?category=547413</a></li>
+<li><a href="https://idea-sketch.tistory.com/45" target="_blank" rel="noopener noreffer">https://idea-sketch.tistory.com/45</a></li>
+</ul>
+</li>
+</ul>
+<details>
+<summary>DB index에 대해 설명해주세요</summary>
+<p><a href="https://idea-sketch.tistory.com/43?category=547413" target="_blank" rel="noopener noreffer">https://idea-sketch.tistory.com/43?category=547413</a></p>
+</details>
+<ul>
+<li>dirty read, Non-Repeatable Read, Phantom Read</li>
+<li>optimistic lock, pessimistic lock</li>
+<li>slow query</li>
+<li></li>
+<li>Index</li>
+</ul>
+<h2 id="software-engineering">Software Engineering</h2>
+<h2 id="design-pattern">Design Pattern</h2>
+<h2 id="language">Language</h2>
+<h2 id="computer-architecture">Computer Architecture</h2></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-01-14&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/9e797cf3a1a35e1501bae4555f2b79e25cc8d015" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 9e797cf3a1a35e1501bae4555f2b79e25cc8d015: rebuilding site 2022년 1월 14일 금요일 19시 19분 37초 KST">
+                                    <i class="fas fa-hashtag fa-fw"></i>9e797cf</a></span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/interview/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/interview/" data-title="All Basic Computer Science" data-hashtags="dev,cs,interview"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/interview/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/interview/" data-title="All Basic Computer Science"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/interview/" data-title="All Basic Computer Science"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/interview/" data-title="All Basic Computer Science" data-image="/images/interview.jpeg"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/cs/">cs</a>,&nbsp;<a href="/tags/interview/">interview</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/ch01_go_basic/" class="prev" rel="prev" title="[일주일 만에 배우는 GO] CH.1 Go Language Design"><i class="fas fa-angle-left fa-fw"></i>[일주일 만에 배우는 GO] CH.1 Go Language Design</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
