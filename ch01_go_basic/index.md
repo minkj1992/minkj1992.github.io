@@ -79,7 +79,7 @@ _The goals of the Go project were to eliminate the slowness and clumsiness of so
 
 </center>
 
-{{< admonition note "go는 왜 { }를 사용하나요? ">}}
+{{< admonition note "go는 왜 중괄호를 사용하나요? ">}}
 _Our position is therefore that, although spaces for indentation is nice for small programs, it doesn't scale well, and the bigger and more heterogeneous the code base, the more trouble it can cause. It is better to forgo convenience for safety and dependability, so Go has brace-bounded blocks._
 {{< /admonition >}}
 
