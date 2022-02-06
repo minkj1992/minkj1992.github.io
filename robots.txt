@@ -59,3 +59,5 @@ User-agent: ZoominfoBot
 Disallow: /
 
 Sitemap: https://minkj1992.github.io/sitemap.xml
+
+#DaumWebMasterTool:5ab1ebd9a400d3ec97b4e3dd1468c8a52837edca752c25a1e63731c8f30a9d13:a9P/ZTkENEPS5y7b2kg1yA==
