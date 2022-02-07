@@ -466,21 +466,154 @@ leaving: b
 
 Go에는 메모리를 할당하는 두가지 기본 방식이 있는데, 내장(built-in) 함수인 `new`와 `make`이다.
 
-```go
+- `new`: 새로 제로값으로 할당된 타입 T를 가리키는 포인터를 반환
+  - `new(File)` == `&File{}`
+- `make`: 내부 데이터 구조를 초기화하고 사용될 값을 준비한다.
 
-```
+먼저 new부터 살펴보면, 내장 함수로 메모리를 할당하지만 다른 언어에 존재하는 같은 이름의 기능과는 다르게 메모리를 초기화하지 않고, 단지 값을 제로화(zero) 한다. **다시 말하면, new(T)는 타입 T의 새로운 객체에 제로값이 저장된 공간(zeroed storage)을 할당하고 그 객체의 주소인, `*T`값을 반환한다.**
 
-```go
-
-```
-
-```go
-
-```
+제로값의 유용함은 전이적인(transitive) 특성이 있다.
 
 ```go
+type SyncedBuffer struct {
+    lock    sync.Mutex
+    buffer  bytes.Buffer
+}
 
+p := new(SyncedBuffer)  // type *SyncedBuffer
+var v SyncedBuffer      // type  SyncedBuffer
 ```
+
+### Constructors and composite literals(합성 리터럴)
+
+때로 제로값만으로는 충분치 않고 생성자(constructor)로 초기화해야 할 필요가 생긴다.
+
+먼저 불필요한 boiler plate 코드 부터 확인해보자.
+
+```go
+func NewFile(fd int, name string) *File {
+    if fd < 0 {
+        return nil
+    }
+    f := new(File)
+    f.fd = fd
+    f.name = name
+    f.dirinfo = nil
+    f.nepipe = 0
+    return f
+}
+```
+
+아래는 constructor를 활용한 방식이다.
+
+```go
+func NewFile(fd int, name string) *File {
+    if fd < 0 {
+        return nil
+    }
+    f := File{fd, name, nil, 0}
+    return &f
+}
+```
+
+C와는 달리, 로컬 변수의 주소를 반환해도 아무 문제가 없음을 주목하라; 변수에 연결된 저장공간은 함수가 반환해도 살아 남는다. 실제로, 합성 리터럴의 주소를 취하는 표현은 매번 실행될 때마다 새로운 인스턴스에 연결된다. 그러므로 마지막 두 줄을 묶어 버릴 수 있다.
+
+```go
+    return &File{fd, name, nil, 0}
+```
+
+합성 리터럴의 필드들은 순서대로 배열되고 반드시 입력해야 한다. 하지만, 요소들에 레이블을 붙여 필드:값 식으로 명시적으로 짝을 만들면, 초기화는 순서에 관계 없이 나타날 수 있다. 입력되지 않은 요소들은 각자에 맞는 제로값을 갖는다. 그러므로 아래와 같이 쓸 수 있다.
+
+```go
+    return &File{fd: fd, name: name}
+```
+
+{{< admonition tip "Composite literals(합성 리터럴)이란?" >}}
+_Composite literals are used to construct the values for arrays, structs, slices, and maps_
+
+```go
+a := [...]string   {Enone: "no error", Eio: "Eio", Einval: "invalid argument"} // array
+s := []string      {Enone: "no error", Eio: "Eio", Einval: "invalid argument"} // slice
+m := map[int]string{Enone: "no error", Eio: "Eio", Einval: "invalid argument"} // map
+```
+
+{{< /admonition  >}}
+
+### Allocation with make
+
+`new`와 달리 `make`는 slices, maps, 그리고 channels에만 사용하고 (`*T`가 아닌) 타입 T의 (제로값이 아닌) 초기화된 값을 반환한다. 아래는 new와 make의 차이점을 보여준다.
+
+```go
+var p *[]int = new([]int)       // slice 구조체를 할당한다; *p == nil; 거의 유용하지 않다
+var v  []int = make([]int, 100) // slice v는 이제 100개의 int를 갖는 배열을 참조한다
+
+// 불필요하게 복잡한 경우:
+var p *[]int = new([]int)
+*p = make([]int, 100, 100)
+
+// Go 언어다운 경우:
+v := make([]int, 100)
+```
+
+**make는 maps, slices 그리고 channels에만 적용되며 포인터를 반환하지 않음을 기억해야 합니다. 포인터를 얻고 싶으면 new를 사용해서 메모리를 할당하거나 변수의 주소를 명시적으로 취해야 합니다.**
+
+### Arrays
+
+Go와 C에서는 배열의 작동원리에 큰 차이가 있다. Go에서는,
+
+- 배열은 값이다.
+- 한 배열을 다른 배열에 assign할 때 모든 값이 복사된다.
+- 함수의 argument로 배열을 패스하면, 포인터가 아닌 copy된 array를 받는다.
+- 배열의 크기는 타입의 한 부분이다. 타입 [10]int과 [20]int는 서로 다르다.
+
+> 개인적으로 `배열의 크기는 타입의 한 부분이다. 타입 [10]int과 [20]int는 서로 다르다.`가 무슨 말인지 잘 모르겠다.
+
+배열을 값(value)으로 사용하는 것이 유용할 수도 있지만 또한 비용이 큰 연산이 될 수도 있다; 만약 C와 같은 실행이나 효율성을 원한다면, 아래와 같이 배열 포인터를 보낼 수도 있다.
+
+```go
+func Sum(a *[3]float64) (sum float64) {
+    for _, v := range *a {
+        sum += v
+    }
+    return
+}
+
+array := [...]float64{7.0, 8.5, 9.1}
+x := Sum(&array)  // 명시적인 주소 연산자(&)를 주목하라.
+```
+
+**하지만 이런 스타일조차 Go언어 답지는 않다. 대신 slice를 사용하라.**
+
+### Slices
+
+Go에서는 변환 메스릭스와 같이 뚜렷한 차원(dimension)을 갖고 있는 항목들을 제외하고는, 거의 모든 배열 프로그래밍은 단순한 배열보다는 `slice`를 사용한다.
+
+Slice는 내부의 배열을 가리키는 레퍼런스를 쥐고 있어, 만약에 다른 slice에 할당(assign)되어도, 둘 다 같은 배열을 가리킨다. 함수가 slice를 받아 그 요소에 변화를 주면 호출자도 볼 수 있는데, 이것은 내부의 배열를 가리키는 포인터를 함수에 보내는 것과 유사하다.
+
+slice의 용량은, 내장함수 cap을 통해 얻을 수 있는데, slice가 가질 수 있는 최대 크기를 보고한다. 아래를 보면 slice에 데이터를 부착(append)할 수 있는 함수가 있다. 만약 데이터가 용량을 초과하면, slice의 메모리는 재할당된다. 결과물인 slice는 반환된다.
+
+```go
+func Append(slice, data []byte) []byte {
+    l := len(slice)
+    if l + len(data) > cap(slice) { // 재할당의 경우
+        doubleLength := (l+len(data))*2
+        newSlice := make([]byte, doubleLength)
+
+        // copy 함수는 사전에 선언되어 있고 어떤 slice 타입에도 사용될 수 있다.
+        copy(newSlice, slice)
+        slice = newSlice
+    }
+    slice = slice[0: l + len(data)]
+    copy(slice[1:], data)
+    return slice
+}
+```
+
+**slice는 꼭 처리후 반환되어야 한다.** Append가 slice의 요소들을 변경할 수 있지만, slice 자체(포인터, 크기, 용량을 갖고 있는 런타임 데이터 구조)는 값으로 패스되었기 때문이다. 참고로 slice에는 append가 구현되어있다.
+
+### Two-dimensional slices
+
+> https://gosudaweb.gitbooks.io/effective-go-in-korean/content/data.html#%EC%9D%B4%EC%B0%A8%EC%9B%90-slices
 
 ## conclustion
 

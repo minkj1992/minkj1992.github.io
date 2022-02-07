@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/ch02_go_basic/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-07T16:55:21+09:00" />
-<meta property="article:modified_time" content="2022-02-07T16:55:21+09:00" />
+<meta property="article:modified_time" content="2022-02-07T19:15:22+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -32,8 +32,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, go","wordcount":  1714 ,
-        "url": "https:\/\/minkj1992.github.io\/ch02_go_basic\/","datePublished": "2022-02-07T16:55:21+09:00","dateModified": "2022-02-07T16:55:21+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, go","wordcount":  2473 ,
+        "url": "https:\/\/minkj1992.github.io\/ch02_go_basic\/","datePublished": "2022-02-07T16:55:21+09:00","dateModified": "2022-02-07T19:15:22+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -114,8 +114,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">[일주일 만에 배우는 GO] CH.2 Go Basic</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw"></i>go</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-07">2022-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1714 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;9 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-07">2022-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2473 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -160,6 +160,11 @@
     <li><a href="#data">Data</a>
       <ul>
         <li><a href="#allocation-with-new">Allocation with new</a></li>
+        <li><a href="#constructors-and-composite-literals합성-리터럴">Constructors and composite literals(합성 리터럴)</a></li>
+        <li><a href="#allocation-with-make">Allocation with make</a></li>
+        <li><a href="#arrays">Arrays</a></li>
+        <li><a href="#slices">Slices</a></li>
+        <li><a href="#two-dimensional-slices">Two-dimensional slices</a></li>
       </ul>
     </li>
     <li><a href="#conclustion">conclustion</a></li>
@@ -905,44 +910,241 @@ leaving: b
 <h2 id="data">Data</h2>
 <h3 id="allocation-with-new">Allocation with new</h3>
 <p>Go에는 메모리를 할당하는 두가지 기본 방식이 있는데, 내장(built-in) 함수인 <code>new</code>와 <code>make</code>이다.</p>
+<ul>
+<li><code>new</code>: 새로 제로값으로 할당된 타입 T를 가리키는 포인터를 반환
+<ul>
+<li><code>new(File)</code> == <code>&amp;File{}</code></li>
+</ul>
+</li>
+<li><code>make</code>: 내부 데이터 구조를 초기화하고 사용될 값을 준비한다.</li>
+</ul>
+<p>먼저 new부터 살펴보면, 내장 함수로 메모리를 할당하지만 다른 언어에 존재하는 같은 이름의 기능과는 다르게 메모리를 초기화하지 않고, 단지 값을 제로화(zero) 한다. <strong>다시 말하면, new(T)는 타입 T의 새로운 객체에 제로값이 저장된 공간(zeroed storage)을 할당하고 그 객체의 주소인, <code>*T</code>값을 반환한다.</strong></p>
+<p>제로값의 유용함은 전이적인(transitive) 특성이 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">SyncedBuffer</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">lock</span>    <span class="nx">sync</span><span class="p">.</span><span class="nx">Mutex</span>
+    <span class="nx">buffer</span>  <span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span>
+<span class="p">}</span>
+
+<span class="nx">p</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">SyncedBuffer</span><span class="p">)</span>  <span class="c1">// type *SyncedBuffer
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">v</span> <span class="nx">SyncedBuffer</span>      <span class="c1">// type  SyncedBuffer
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="constructors-and-composite-literals합성-리터럴">Constructors and composite literals(합성 리터럴)</h3>
+<p>때로 제로값만으로는 충분치 않고 생성자(constructor)로 초기화해야 할 필요가 생긴다.</p>
+<p>먼저 불필요한 boiler plate 코드 부터 확인해보자.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewFile</span><span class="p">(</span><span class="nx">fd</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">File</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">fd</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+    <span class="p">}</span>
+    <span class="nx">f</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">File</span><span class="p">)</span>
+    <span class="nx">f</span><span class="p">.</span><span class="nx">fd</span> <span class="p">=</span> <span class="nx">fd</span>
+    <span class="nx">f</span><span class="p">.</span><span class="nx">name</span> <span class="p">=</span> <span class="nx">name</span>
+    <span class="nx">f</span><span class="p">.</span><span class="nx">dirinfo</span> <span class="p">=</span> <span class="kc">nil</span>
+    <span class="nx">f</span><span class="p">.</span><span class="nx">nepipe</span> <span class="p">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="nx">f</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>아래는 constructor를 활용한 방식이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewFile</span><span class="p">(</span><span class="nx">fd</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="o">*</span><span class="nx">File</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">fd</span> <span class="p">&lt;</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">nil</span>
+    <span class="p">}</span>
+    <span class="nx">f</span> <span class="o">:=</span> <span class="nx">File</span><span class="p">{</span><span class="nx">fd</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">f</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>C와는 달리, 로컬 변수의 주소를 반환해도 아무 문제가 없음을 주목하라; 변수에 연결된 저장공간은 함수가 반환해도 살아 남는다. 실제로, 합성 리터럴의 주소를 취하는 표현은 매번 실행될 때마다 새로운 인스턴스에 연결된다. 그러므로 마지막 두 줄을 묶어 버릴 수 있다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go">    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">File</span><span class="p">{</span><span class="nx">fd</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><p>합성 리터럴의 필드들은 순서대로 배열되고 반드시 입력해야 한다. 하지만, 요소들에 레이블을 붙여 필드:값 식으로 명시적으로 짝을 만들면, 초기화는 순서에 관계 없이 나타날 수 있다. 입력되지 않은 요소들은 각자에 맞는 제로값을 갖는다. 그러므로 아래와 같이 쓸 수 있다.</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go">    <span class="k">return</span> <span class="o">&amp;</span><span class="nx">File</span><span class="p">{</span><span class="nx">fd</span><span class="p">:</span> <span class="nx">fd</span><span class="p">,</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">name</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div><div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Composite literals(합성 리터럴)이란?<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>Composite literals are used to construct the values for arrays, structs, slices, and maps</em></p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go">
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">a</span> <span class="o">:=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="kt">string</span>   <span class="p">{</span><span class="nx">Enone</span><span class="p">:</span> <span class="s">&#34;no error&#34;</span><span class="p">,</span> <span class="nx">Eio</span><span class="p">:</span> <span class="s">&#34;Eio&#34;</span><span class="p">,</span> <span class="nx">Einval</span><span class="p">:</span> <span class="s">&#34;invalid argument&#34;</span><span class="p">}</span> <span class="c1">// array
+</span><span class="c1"></span><span class="nx">s</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span>      <span class="p">{</span><span class="nx">Enone</span><span class="p">:</span> <span class="s">&#34;no error&#34;</span><span class="p">,</span> <span class="nx">Eio</span><span class="p">:</span> <span class="s">&#34;Eio&#34;</span><span class="p">,</span> <span class="nx">Einval</span><span class="p">:</span> <span class="s">&#34;invalid argument&#34;</span><span class="p">}</span> <span class="c1">// slice
+</span><span class="c1"></span><span class="nx">m</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span><span class="nx">Enone</span><span class="p">:</span> <span class="s">&#34;no error&#34;</span><span class="p">,</span> <span class="nx">Eio</span><span class="p">:</span> <span class="s">&#34;Eio&#34;</span><span class="p">,</span> <span class="nx">Einval</span><span class="p">:</span> <span class="s">&#34;invalid argument&#34;</span><span class="p">}</span> <span class="c1">// map
+</span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div class="chroma">
+</div></div>
+        </div>
+    </div>
+<h3 id="allocation-with-make">Allocation with make</h3>
+<p><code>new</code>와 달리 <code>make</code>는 slices, maps, 그리고 channels에만 사용하고 (<code>*T</code>가 아닌) 타입 T의 (제로값이 아닌) 초기화된 값을 반환한다. 아래는 new와 make의 차이점을 보여준다.</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">p</span> <span class="o">*</span><span class="p">[]</span><span class="kt">int</span> <span class="p">=</span> <span class="nb">new</span><span class="p">([]</span><span class="kt">int</span><span class="p">)</span>       <span class="c1">// slice 구조체를 할당한다; *p == nil; 거의 유용하지 않다
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">v</span>  <span class="p">[]</span><span class="kt">int</span> <span class="p">=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="c1">// slice v는 이제 100개의 int를 갖는 배열을 참조한다
+</span><span class="c1"></span>
+<span class="c1">// 불필요하게 복잡한 경우:
+</span><span class="c1"></span><span class="kd">var</span> <span class="nx">p</span> <span class="o">*</span><span class="p">[]</span><span class="kt">int</span> <span class="p">=</span> <span class="nb">new</span><span class="p">([]</span><span class="kt">int</span><span class="p">)</span>
+<span class="o">*</span><span class="nx">p</span> <span class="p">=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1">// Go 언어다운 경우:
+</span><span class="c1"></span><span class="nx">v</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="conclustion">conclustion</h2>
+</div><p><strong>make는 maps, slices 그리고 channels에만 적용되며 포인터를 반환하지 않음을 기억해야 합니다. 포인터를 얻고 싶으면 new를 사용해서 메모리를 할당하거나 변수의 주소를 명시적으로 취해야 합니다.</strong></p>
+<h3 id="arrays">Arrays</h3>
+<p>Go와 C에서는 배열의 작동원리에 큰 차이가 있다. Go에서는,</p>
+<ul>
+<li>배열은 값이다.</li>
+<li>한 배열을 다른 배열에 assign할 때 모든 값이 복사된다.</li>
+<li>함수의 argument로 배열을 패스하면, 포인터가 아닌 copy된 array를 받는다.</li>
+<li>배열의 크기는 타입의 한 부분이다. 타입 [10]int과 [20]int는 서로 다르다.</li>
+</ul>
+<blockquote>
+<p>개인적으로 <code>배열의 크기는 타입의 한 부분이다. 타입 [10]int과 [20]int는 서로 다르다.</code>가 무슨 말인지 잘 모르겠다.</p>
+</blockquote>
+<p>배열을 값(value)으로 사용하는 것이 유용할 수도 있지만 또한 비용이 큰 연산이 될 수도 있다; 만약 C와 같은 실행이나 효율성을 원한다면, 아래와 같이 배열 포인터를 보낼 수도 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Sum</span><span class="p">(</span><span class="nx">a</span> <span class="o">*</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">float64</span><span class="p">)</span> <span class="p">(</span><span class="nx">sum</span> <span class="kt">float64</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">v</span> <span class="o">:=</span> <span class="k">range</span> <span class="o">*</span><span class="nx">a</span> <span class="p">{</span>
+        <span class="nx">sum</span> <span class="o">+=</span> <span class="nx">v</span>
+    <span class="p">}</span>
+    <span class="k">return</span>
+<span class="p">}</span>
+
+<span class="nx">array</span> <span class="o">:=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="kt">float64</span><span class="p">{</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">,</span> <span class="mf">9.1</span><span class="p">}</span>
+<span class="nx">x</span> <span class="o">:=</span> <span class="nf">Sum</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">array</span><span class="p">)</span>  <span class="c1">// 명시적인 주소 연산자(&amp;)를 주목하라.
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>하지만 이런 스타일조차 Go언어 답지는 않다. 대신 slice를 사용하라.</strong></p>
+<h3 id="slices">Slices</h3>
+<p>Go에서는 변환 메스릭스와 같이 뚜렷한 차원(dimension)을 갖고 있는 항목들을 제외하고는, 거의 모든 배열 프로그래밍은 단순한 배열보다는 <code>slice</code>를 사용한다.</p>
+<p>Slice는 내부의 배열을 가리키는 레퍼런스를 쥐고 있어, 만약에 다른 slice에 할당(assign)되어도, 둘 다 같은 배열을 가리킨다. 함수가 slice를 받아 그 요소에 변화를 주면 호출자도 볼 수 있는데, 이것은 내부의 배열를 가리키는 포인터를 함수에 보내는 것과 유사하다.</p>
+<p>slice의 용량은, 내장함수 cap을 통해 얻을 수 있는데, slice가 가질 수 있는 최대 크기를 보고한다. 아래를 보면 slice에 데이터를 부착(append)할 수 있는 함수가 있다. 만약 데이터가 용량을 초과하면, slice의 메모리는 재할당된다. 결과물인 slice는 반환된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span> <span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+    <span class="nx">l</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">l</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">&gt;</span> <span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 재할당의 경우
+</span><span class="c1"></span>        <span class="nx">doubleLength</span> <span class="o">:=</span> <span class="p">(</span><span class="nx">l</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span><span class="o">*</span><span class="mi">2</span>
+        <span class="nx">newSlice</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">doubleLength</span><span class="p">)</span>
+
+        <span class="c1">// copy 함수는 사전에 선언되어 있고 어떤 slice 타입에도 사용될 수 있다.
+</span><span class="c1"></span>        <span class="nb">copy</span><span class="p">(</span><span class="nx">newSlice</span><span class="p">,</span> <span class="nx">slice</span><span class="p">)</span>
+        <span class="nx">slice</span> <span class="p">=</span> <span class="nx">newSlice</span>
+    <span class="p">}</span>
+    <span class="nx">slice</span> <span class="p">=</span> <span class="nx">slice</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="nx">l</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">)]</span>
+    <span class="nb">copy</span><span class="p">(</span><span class="nx">slice</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="nx">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">slice</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>slice는 꼭 처리후 반환되어야 한다.</strong> Append가 slice의 요소들을 변경할 수 있지만, slice 자체(포인터, 크기, 용량을 갖고 있는 런타임 데이터 구조)는 값으로 패스되었기 때문이다. 참고로 slice에는 append가 구현되어있다.</p>
+<h3 id="two-dimensional-slices">Two-dimensional slices</h3>
+<blockquote>
+<p><a href="https://gosudaweb.gitbooks.io/effective-go-in-korean/content/data.html#%EC%9D%B4%EC%B0%A8%EC%9B%90-slices" target="_blank" rel="noopener noreffer">https://gosudaweb.gitbooks.io/effective-go-in-korean/content/data.html#%EC%9D%B4%EC%B0%A8%EC%9B%90-slices</a></p>
+</blockquote>
+<h2 id="conclustion">conclustion</h2>
 <center>- 끝 -</center></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-02-07</span>
+                <span>Updated on 2022-02-07&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/870d6c413d1fac540f108a7981fbb678d5f65a70" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 870d6c413d1fac540f108a7981fbb678d5f65a70: rebuilding site 2022년 2월  7일 월요일 19시 15분 22초 KST">
+                                    <i class="fas fa-hashtag fa-fw"></i>870d6c4</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
