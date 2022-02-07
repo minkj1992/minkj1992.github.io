@@ -293,7 +293,7 @@ _Go the name itself carries the information: the case of the initial letter of t
 
 이런 특이한 전략을 취한데에는 naming으로 visibility를 관리하는 것이 identifier에 비해 더욱 깔끔한 Public api관리에 도움되는 전략이라고 판단한 google의 노하우가 반영되었다고 합니다.
 
-개인적으로는 코드 검색을 할 때, identifier를 가지고 public한 api를 하면 편하게 확인이 가능한 반면 네이밍으로 visibility를 관리하면 정확한 네이밍을 알아야 가능하다는 점에서 솔직히 별로 인 것 같습니다.
+개인적으로는 코드 검색을 할 때, identifier를 가지고 검색하면 관련 identifier 리스트들을 한번에 확인이 가능한 반면 네이밍으로 visibility를 관리하면 정확한 네이밍을 알아야 가능하다는 점에서 솔직히 별로 인 것 같습니다.
 
 {{< admonition note "scope hierarchy" >}}
 _Another simplification is that Go has a very compact scope hierarchy:_
@@ -340,7 +340,7 @@ go는 기본적으로 `c`와 많이 닮아 있지만, modern언어에 익숙한 
 - assignment is not an expression
 - it is legal (encouraged even) to take the address of a stack variable
 
-아래는 C, C++, and even Java와 비교했을 때, 크게 변화한 부분입니다. (참고로 go 초기 개발자인 Robert Griesemer). Java hotspot compiler(JVM)을 개발했었습니다. )
+아래는 C, C++, and even Java와 비교했을 때, 크게 변화한 부분입니다. (참고로 go 초기 개발자인 Robert Griesemer. Java hotspot compiler(JVM)을 개발했었습니다. )
 
 - concurrency
 - gc
@@ -358,6 +358,103 @@ go는 기본적으로 `c`와 많이 닮아 있지만, modern언어에 익숙한 
 _Some concurrency and functional programming experts are disappointed that Go does not take a write-once approach to value semantics in the context of concurrent computation, that Go is not more like Erlang for example. Again, the reason is largely about familiarity and suitability for the problem domain. Go's concurrent features work well in a context familiar to most programmers. Go enables simple, safe concurrent programming but does not forbid bad programming. We compensate by convention, training programmers to think about message passing as a version of ownership control._
 {{< /admonition  >}}
 
+Go는 concurrency context에 `write-once` 접근을 하지 않습니다. 이는 의도적으로 bad programming을 막지 않은 것인데요, convention으로 이런 bad practice를 방지하고, 프로그래머들이 message passing에 대해서 더 생각하도록 유도하기 위함이라고 합니다.
+
+이런 철학은 go의 motto에서도 드러나 있습니다.
+
+<center>
+
+**"Don't communicate by sharing memory, share memory by communicating."**
+
+</center>
+
+## Garbage collection
+
+go는 jvm 개발자가 있어서 그런지 c / c++ / rust와 달리 gc를 가져왔습니다.
+
+{{< admonition note "interior pointer" >}}
+_The X.buf field in the example above lives within the struct but it is legal to capture the address of this inner field, for instance to pass it to an I/O routine. In Java, as in many garbage-collected languages, it is not possible to construct an interior pointer like this, but in Go it is idiomatic._
+{{< /admonition  >}}
+
+java와 비교해 `interior pointers`(interior pointers to objects allocated in the heap) 기능을 추가해 커스텀하게 gc 기능이 동작하도록 적용했다고 합니다.
+
+{{< admonition note "interior 디자인이 끼칠 영향" >}}
+_This design point affects which collection algorithms can be used, and may make them more difficult, but after careful thought we decided that it was necessary to allow interior pointers because of the benefits to the programmer and the ability to reduce pressure on the (perhaps harder to implement) collector._
+
+... 중략 ...
+
+_The garbage collector remains an active area of development. The current design is a parallel mark-and-sweep collector and there remain opportunities to improve its performance or perhaps even its design. (The language specification does not mandate any particular implementation of the collector.) Still, if the programmer takes care to use memory wisely, the current implementation works well for production use._
+
+{{< /admonition  >}}
+
+듣기로는 gc기능이 퍼포먼스 이슈가 있어 Discord에서는 기존에 go로 짜여있는 코드들을 rust로 옮겼다고 하네요.
+
+## Composition not inheritance
+
+> _there is no type hierarchy_
+
+go에는 기존 oop 언어들과 달리 `type hierarchy`가 없습니다.
+
+{{< admonition note "interface" >}}
+_In Go an interface is just a set of methods_
+
+...중략...
+
+_All data types that implement these methods satisfy this interface implicitly; there is no implements declaration. That said, **interface satisfaction is statically checked at compile time so despite this decoupling interfaces are type-safe.**_
+{{< /admonition  >}}
+
+자바와 달리 고의 interface는 behavior만 정의하며 subclassing이 없으므로 **상속이란 개념이 존재하지 않습니다.** 대신 `composition`(embedding)을 활용한다고 합니다.
+
+{{< admonition tip "subclassing vsv subtyping" >}}
+`go`에는 `subclassing`이 없다고 하는데요, subclassing이 무엇인지 그리고 subtyping 또한 무엇인지 비교해보겠습니다.
+
+- 서브클래싱은 구현되어 있는 클래스를 상속하는 것
+- 서브타이핑은 정의되어 있는 인터페이스를 구현하는 것
+
+먼저 좀 더 Subclassing이란 ? Superr Class에 구현된 코드와 내부 표현 구조를 Sub Class(하위 클래스)가 이어받는 기능을 뜻합니다. 클래스 inheritance라고도 불리며, 이를 통해 하위클래스에서 슈퍼 클래스에 구현된 코드의 재사용이 가능합니다. 그렇기 때문에 sub class는 overriding을 통해 같은 이름의 비슷하지만 커스텀한 행동들을 정의할 수 있습니다.
+
+이와 달리 Subtying이란, Super Type의 객체가 수행할 행동(behavior only)의 약속(프로토콜, api)를 Sub Type이 이어 받습니다.
+행동들을 공통된 타입으로 묶어 runtime에 super type의 객체의 타입으로 sub type을 대체가능하도록 합니다. 이를 통해 프로그램 변경에 대한 영향을 최소화 할 수 있습니다. 즉 core한 behavior들을 공통적으로 관리 가능합니다.
+{{< /admonition  >}}
+
+{{< admonition note "go가 inheritance를 버린 이유" >}}
+_**that the behavior of data can be generalized independently of the representation of that data. The model works best when the behavior (method set) is fixed, but once you subclass a type and add a method, the behaviors are no longer identical.** If instead the set of behaviors is fixed, such as in Go's statically defined interfaces, the uniformity of behavior enables data and programs to be composed uniformly, orthogonally, and safely._
+{{< /admonition  >}}
+
+이런 전략을 취했던 이유는 behavior가 fix되어 코드가 작성되면 data representation을 담당하는 model이 works best한다는 철학이 녹아들어있다고 합니다.
+
+TODO: 글을 읽다보니 composition에 대해서는 어느정도 이해가 되는데, 이런 철학이 왜 고려되어야 하는지가 정확하게 와닫지는 않는 것 같아서 나머지 부분은 실제 코드를 만져보고 다시 읽어보려고 합니다.
+
+[Composition not inheritance](https://go.dev/talks/2012/splash.article#TOC_15.)
+
+## Errors
+
+Go에는 일반적인 의미의 예외 기능이 없습니다. 즉, 오류 처리와 관련된 제어 구조가 없습니다.
+
+{{< admonition note "go가 error를 보는 방식" >}}
+_Errors are just values and programs compute with them as they would compute with values of any other type_
+{{< /admonition  >}}
+
+{{< admonition note "go가 error를 value로 취급하는 첫번째 이유" >}}
+_First, there is nothing truly exceptional about errors in computer programs. For instance, the inability to open a file is a common issue that does not deserve special linguistic constructs; if and return are fine._
+
+```go
+f, err := os.Open(fileName)
+if err != nil {
+    return err
+}
+```
+
+{{< /admonition  >}}
+
+go 철학에서는 error를 특별한 예외라고 생각할 필요가 전혀 없다고 생각하기 떄문입니다. 그냥 value가 return되고 if 분기로 이를 핸들링해주면 그만이라고 주장합니다.
+
+{{< admonition note "go가 error를 value로 취급하는 두번째 이유" >}}
+_There is no question the resulting code can be longer, but the clarity and simplicity of such code offsets its verbosity. Explicit error checking forces the programmer to think about errors—and deal with them—when they arise._
+{{< /admonition  >}}
+
+결과 코드가 더 길어질 수 있다는 점에는 의심의 여지가 없지만 그러한 코드의 명확성과 단순성은 장황함을 상쇄합니다. 명시적 오류 검사는 프로그래머가 오류에 대해 생각하고 오류가 발생할 때 처리하도록 합니다.
+
 ## Useful references
 
 - [Go at Google: Language Design in the Service of Software Engineering](https://go.dev/talks/2012/splash.article)
@@ -365,6 +462,8 @@ _Some concurrency and functional programming experts are disappointed that Go do
 - [gin](https://github.com/gin-gonic/gin)
 
 ## conclustion
+
+이상으로 go의 디자인 철학에 대해서 분석해보았습니다. 개인적으로 하루정도를 투자하려 했지만, 실제로는 와닿지 않는 내용들 때문에 시간이 조금 더 지체되었던 것 같네요 (소요시간: 대략 2일)
 
 <center>- 끝 -</center>
 

@@ -18,6 +18,17 @@
 <p>Let&rsquo;s prepare basic computer science interview questions.</p>
 </blockquote>]]></description>
 </item><item>
+    <title>Robotics Coding Challenge</title>
+    <link>https://minkj1992.github.io/coding_challenge/</link>
+    <pubDate>Sun, 06 Feb 2022 13:49:15 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/coding_challenge/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/robot.jpeg" referrerpolicy="no-referrer">
+            </div><blockquote>
+<p>This document records the series of experiences that a back-end server developer has experienced when moving to robotics in the second half of the year 2021. (2021.12.25 - 2022.01)</p>
+</blockquote>]]></description>
+</item><item>
     <title>[일주일 만에 배우는 GO] CH.1 Go Language Design</title>
     <link>https://minkj1992.github.io/ch01_go_basic/</link>
     <pubDate>Sat, 05 Feb 2022 16:52:53 &#43;0900</pubDate>
@@ -103,14 +114,5 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/ros_melodic.png" referrerpolicy="no-referrer">
             </div><p><code>ros2 Foxy</code> 실행에 필요한 개발 환경을 <code>ubuntu</code>, <code>vm</code>환경에 세팅해봅니다.</p>]]></description>
-</item><item>
-    <title>[ch01] Ros2 Foxy install</title>
-    <link>https://minkj1992.github.io/ch01_install/</link>
-    <pubDate>Tue, 18 Jan 2022 11:12:09 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://minkj1992.github.io/ch01_install/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/ros_foxy.png" referrerpolicy="no-referrer">
-            </div><p><code>ros2 Foxy</code>를 <code>mac pro</code> 로컬 환경에 설치해봅니다.</p>]]></description>
 </item></channel>
 </rss>
