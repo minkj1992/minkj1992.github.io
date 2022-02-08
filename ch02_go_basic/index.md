@@ -1,7 +1,7 @@
 # [일주일 만에 배우는 GO] CH.2 Go Basic
 
 
-[Effective go](https://go.dev/doc/effective_go)를 통해 go 핵심 문법을 빠르게 배워보겠습니다.
+[Effective go](https://go.dev/doc/effective_go)를 통해 go 핵심 문법을 빠르게 배워보겠습니다. 또한 나중에 레퍼런스 개념으로 개발할 때 찾아보기 위해서 필요해 보이는 정보들을 모으는 개념으로 글을 작성합니다.
 
 <!--more-->
 <br />
@@ -80,6 +80,7 @@ bytes.Buffer // usage
 _bufio 패키지에 있는 버퍼 리더는 BufReader가 아닌 Reader로 불린다. 왜냐하면 사용자는 이를 bufio.Reader로 보게되며, 이것이 더 명확하고 간결하기 때문이다. 게다가 임포트된 객체들은 항상 패키지명과 함께 불려지기 때문에 bufio.Reader는 io.Reader와 충돌하지 않는다._
 
 ... 중략 ...
+
 _Go에 존재하는 ring.Ring이라는 구조체의 인스턴스를 만드는 함수는 보통은 NewRing으로 불릴테지만, Ring은 패키지 밖으로 노출된 유일한 타입이며, 패키지가 ring으로 불리기 때문에, 이 함수는 그냥 New라고 부르고 ring.New와 같이 사용한다._
 {{< /admonition  >}}
 
@@ -613,7 +614,283 @@ func Append(slice, data []byte) []byte {
 
 ### Two-dimensional slices
 
-> https://gosudaweb.gitbooks.io/effective-go-in-korean/content/data.html#%EC%9D%B4%EC%B0%A8%EC%9B%90-slices
+다음은 `go`에서 이차원 slices 또는 배열을 정의하고 init하는 방법입니다.
+
+```go
+type Transform [3][3]float64
+type LinesOfText [][]byte
+
+text := LinesOfText{
+    []byte("Leoo is awesome"),
+    []byte("Life is fun"),
+    []byte("Life is full of love"),
+    []byte("Let's give our love and fire to the world")
+}
+```
+
+예를 들어 사진을 스캔하는 상황이 온다면 2가지 방식으로 이를 해결할 수 있다.
+
+- 일반적으로 2차원 배열을 만들어 사용하는 방식
+
+```go
+height := 300
+width := 300
+
+picture := make([][]uint8, height)
+for i:= range picture {
+    picture[i] = make([]uint8, width)
+}
+```
+
+- 하나의 긴 slice에 width만큼 자르면서 이차원 배열에 포인터를 전달하는 방식
+
+```go
+picture := make([][]uint8, height)
+pixels := make([]uint8, width * height)
+
+for i := range picture {
+    picture[i], pixels = pixels[:width], pixels[width:]
+}
+```
+
+### Maps
+
+> {key: value}
+
+`key`는 `equality`연산이 정의되어 있는 어떤 타입이라도 가능하다.
+
+- int
+- float
+- string
+- pointer
+- interface(equality 구현된)
+- structs
+- array
+
+`slice`의 경우에는 map의 key로 사용이 될 수 없는데, 이유는 equality가 정의되어 있지 않기 때문이다.
+
+{{< admonition question "왜 slice에는 equality가 없을까?" >}}
+[go에 제시되었던 issue](https://github.com/golang/go/issues/21829)에 레퍼런스된 [slice equality에 대한 golang discussion 링크](https://groups.google.com/g/golang-nuts/c/ajXzEM6lqJI)를 보면서 일부분을 정리하면, **slice가 value로 비교해야할지, pointer타입으로 비교해야할지 혼돈을 줄 수 있기 때문이라고 합니다.**
+
+_This would probably introduce unnecessary confusion. People are used to the equality operator comparing values in go, as opposed to references. It's much better if the slices finally support the equality operator, even though the comparison speed will depend on the number of items in the slices._
+{{< /admonition  >}}
+
+Slice와 마찬가지로 map 역시 내부 데이터 구조를 가진다. 함수에 map을 입력하고 map의 내용물을 변경하면, 그 변화는 호출자에게도 보인다.
+
+Map 또한 콜론으로 분리된 key-value 짝을 이용한 합성 리터럴로 생성될 수 있으며, 초기화중에 쉽게 만들 수 있다.
+
+```go
+var timeZone = map[string]int{
+    "UTC":  0*60*60,
+    "EST": -5*60*60,
+    "CST": -6*60*60,
+    "MST": -7*60*60,
+    "PST": -8*60*60,
+}
+```
+
+```go
+offset := timeZone["EST"]
+```
+
+go는 keyError를 내지 않고 타입별로 0을 의미하는 값을 리턴한다. 그러므로 아래와 같은 경우가 가능하다.
+
+```go
+attended := map[string]bool{
+    "Ann": true,
+    "Joe": true,
+    ...
+}
+
+if attended[person] { // 만약 person이 맵에 없다면 false일 것이다.
+    fmt.Println(person, "was at the meeting")
+}
+```
+
+만약 value가 bool인 경우같이 keyError와 value(false)를 구분하고 싶다면 아래와 같이한다. 이것을 "comma ok" 관용구라고 부른다. 이 예제에서, 만약 tz가 있다면, seconds는 적절히 세팅될 것이고 ok는 true가 된다
+
+```go
+var seconds int
+var ok bool
+seconds, ok = timeZone[tz]
+```
+
+다음은 에러헨들링 하는 방식이다.
+
+```go
+func offset(tz string) int {
+    if seconds, ok := timeZone[tz]; ok {
+        return seconds
+    }
+    log.Println("unknown time zone:", tz)
+    return 0
+}
+```
+
+값이 필요없다면 이렇게 한다.
+
+```go
+_, present := timeZone[tz]
+```
+
+Map의 엔트리를 제거하기 위해서는, 내장 함수 delete을 쓰는데, map과 제거할 key를 인수로 쓴다. map에 key가 이미 부재하는 경우에도 안전하게 사용할 수 있다.
+
+```go
+delete(timeZone, "PDT")  // Now on Standard Time
+```
+
+### Printing
+
+정수(integer)를 소수로 바꾸는 예와 같은 기본적인 변환을 원할 경우는, 다목적 용도 포맷인 %v(value라는 의미로)를 사용할 수 있다
+
+```go
+fmt.Printf("%v\n", timeZone)  // or just fmt.Println(timeZone)
+
+// map[CST:-21600 PST:-28800 EST:-18000 UTC:0 MST:-25200]
+```
+
+물론, map의 경우 key들은 무작위로 출력될 수 있다. struct를 출력할 때는, 수정된 포맷인 `%+v`를 통해 구조체의 필드에 주석으로 이름을 달며, 대안 포맷인 `%#v`를 사용하면 어떤 값이든 완전한 Go 문법을 출력한다.
+
+```go
+type T struct {
+    a int
+    b float64
+    c string
+}
+
+t := &T{ 7, -2.35, "abc\tdef" }
+fmt.Printf("%v\n", t)
+fmt.Printf("%+v\n", t)
+fmt.Printf("%#v\n", t)
+fmt.Printf("%#v\n", timeZone)
+```
+
+```
+&{7 -2.35 abc   def}
+&{a:7 b:-2.35 c:abc     def}
+&main.T{a:7, b:-2.35, c:"abc\tdef"}
+map[string] int{"CST":-21600, "PST":-28800, "EST":-18000, "UTC":0, "MST":-25200}
+```
+
+또 다른 유용한 포맷은 %T로, 값의 타입을 출력한다.
+
+```go
+fmt.Printf("%T\n", timeZone)
+
+// map[string] int
+```
+
+{{< admonition note "커스텀 타입 print 포맷 지정하는 방법" >}}
+
+커스텀 타입의 기본 포맷을 조종하기 위해 해야할 것은 단지 String() string의 시그너처를 갖는 메서드를 정의해 주는 것이다. (위에 정의된) 단순한 타입 T는 아래와 같은 포맷을 가질 수 있다.
+
+```go
+func (t *T) String() string {
+    return fmt.Sprintf("%d/%g/%q", t.a, t.b, t.c)
+}
+fmt.Printf("%v\n", t)
+
+// 7/-2.35/"abc\tdef"
+```
+
+{{< /admonition  >}}
+
+위에 예제에서 struct 타입에 포인터를 사용한 이유는 더 효율적이고 Go 언어다운 선택이기 때문이다.
+
+**String 메서드가 Sprintf를 호출할 수 있는 이유는 print 루틴들의 재진입(reentrant)이 충분히 가능하고 예제와 같이 감싸도 되기 때문이다**. 하지만 이 방식에 대해 한가지 이해하고 넘어가야 하는 매우 중요한 디테일이 있는데: **String 매서드를 만들면서 Sprintf를 호출할 때 다시 String 매서드로 영구히 재귀하는 방식은 안 된다는 것이다.** Sprintf가 리시버를 string처럼 직접 출력하는 경우에 이런 일이 발생할 수 있는데, 그렇게 되면 다시 같은 메서드를 호출하게 되고 말 것이다. 흔하고 쉽게 하는 실수로, 다음의 예제에서 살펴보자.
+
+```go
+package main
+
+import "fmt"
+
+type MyString string
+
+func (m MyString) String() string {
+	return fmt.Sprintf("MyString=%s", m) // 에러: 영원히 재귀할 것임.
+}
+
+func main() {
+	var s MyString = "test"
+	fmt.Printf("%v\n", s)
+}
+```
+
+해결책은 `string()` 시켜주면 된다. 인수를 기본적인 문자열 타입으로 변환하면, 같은 메서드가 없기 때문이다.
+
+```go
+package main
+
+import "fmt"
+
+type MyString string
+
+func (m MyString) String() string {
+	return fmt.Sprintf("MyString=%s", string(m))
+}
+
+func main() {
+	var s MyString = "test"
+	fmt.Printf("%v\n", s)
+}
+```
+
+또 다른 출력 기법으로는 출력 루틴의 인수들을 직접 또 다른 유사한 루틴으로 대입하는 것이다. Printf의 시그너처는 마지막 인수로 임의적인 숫자의 파라미터가 포맷 다음에 나타날 수 있음을 명시하기 위해 타입 `...interface{}`를 사용한다.
+
+```go
+// Println 함수는 fmt.Println처럼 표준 로거에 출력한다.
+func Println(v ...interface{}) {
+    std.Output(2, fmt.Sprintln(v...))  // Output 함수는 (int, string) 파라미터를 받게된다.
+}
+```
+
+```go
+log.Println("Hello", "世界", 1, 2, 3, 4, 5, 6, 7, 8)
+
+// 2009/11/10 23:00:00 Hello 世界 1 2 3 4 5 6 7 8
+```
+
+`Sprintln`을 부르는 중첩된 호출안에 v 다음에 오는 `...`는 컴파일러에게 v를 인수 리스트로 취급하라고 말하는 것이고; 그렇지 않은 경우는 v를 하나의 slice 인수로 대입한다.
+
+`...` 파라미터는 특정한 타입을 가질 수도 있는데, 예로 integer 리스트에서 최소값을 선택하는 함수인 min에 대한 `...int`를 살펴보자
+
+```go
+func Min(a ...int) int {
+    min := int(^uint(0) &gt; &gt; 1) // wtf????
+    for _, i := range a {
+        if i < min {
+            min = i
+        }
+    }
+    return min
+}
+```
+
+### Append
+
+go에 내장되어있는 append 함수의 signature는 다음과 같다.
+
+```go
+// slice는
+func append(slice []T, elements ...T) []T
+```
+
+기본적인 사용법
+
+```go
+x := []int{1,2,3}
+x = append(x, 4, 5, 6)
+fmt.Println(x)
+```
+
+slice 끼리 append
+
+```go
+x := []int{1,2,3}
+y := []int{4,5,6}
+x = append(x, y...)
+fmt.Println(x)
+```
 
 ## conclustion
 
