@@ -1259,7 +1259,12 @@ func (f HandlerFunc) ServeHTTP(w ResponseWriter, req *Request) {
 }
 ```
 
-`HandlerFunc`는 `ServeHTTP`라는 매서드를 같는 타입으로, 이 타입의 값은 HTTP request에 서비스를 제공한다. 메서드의 구현을 한번 살펴 보라: 리시버는 함수, f이고 메서드가 f를 부른다. 이상해 보일 수도 있지만, 리시버가 채널이고 메서드가 채널에 데이터를 보내는 예와 비교해도 크게 다르지 않다.
+`HandlerFunc`는 `ServeHTTP`라는 매서드를 같는 타입으로, 이 타입의 값은 HTTP request에 서비스를 제공한다.
+
+메서드의 구현을 한번 살펴 보자.
+
+- 리시버는 함수, f이고 메서드가 f를 부른다.
+- 이상해 보일 수도 있지만, 리시버가 채널이고 메서드가 채널에 데이터를 보내는 예와 비교해도 크게 다르지 않다.
 
 ## The blank identifier
 
