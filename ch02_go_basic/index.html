@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/ch02_go_basic/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-07T16:55:21+09:00" />
-<meta property="article:modified_time" content="2022-02-07T19:55:36+09:00" />
+<meta property="article:modified_time" content="2022-02-08T17:05:11+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -32,8 +32,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, go","wordcount":  3540 ,
-        "url": "https:\/\/minkj1992.github.io\/ch02_go_basic\/","datePublished": "2022-02-07T16:55:21+09:00","dateModified": "2022-02-07T19:55:36+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, go","wordcount":  5247 ,
+        "url": "https:\/\/minkj1992.github.io\/ch02_go_basic\/","datePublished": "2022-02-07T16:55:21+09:00","dateModified": "2022-02-08T17:05:11+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -114,8 +114,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">[일주일 만에 배우는 GO] CH.2 Go Basic</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw"></i>go</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-07">2022-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;3540 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;17 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-02-07">2022-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;5247 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;25 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -170,6 +170,33 @@
         <li><a href="#append">Append</a></li>
       </ul>
     </li>
+    <li><a href="#initialization">Initialization</a>
+      <ul>
+        <li><a href="#constants">Constants</a></li>
+        <li><a href="#variables">Variables</a></li>
+        <li><a href="#init">init()</a></li>
+      </ul>
+    </li>
+    <li><a href="#methods">Methods</a>
+      <ul>
+        <li><a href="#pointer-vs-value">Pointer vs Value</a></li>
+      </ul>
+    </li>
+    <li><a href="#interface-1">Interface</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#sortinterface">sort.Interface</a></li>
+            <li><a href="#stringer">Stringer</a></li>
+            <li><a href="#sortinterface와-stringer를-만족하는-type">sort.Interface와 Stringer를 만족하는 type</a></li>
+          </ul>
+        </li>
+        <li><a href="#interface-conversions-and-type-assertions"><code>Interface conversions</code> and <code>type assertions</code></a></li>
+        <li><a href="#generality">Generality</a></li>
+        <li><a href="#interfaces-and-methods">Interfaces and methods</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-blank-identifier">The blank identifier</a></li>
     <li><a href="#conclustion">conclustion</a></li>
   </ul>
 </nav></div>
@@ -1601,13 +1628,625 @@ map[string] int{&#34;CST&#34;:-21600, &#34;PST&#34;:-28800, &#34;EST&#34;:-18000
 <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="conclustion">conclustion</h2>
+</div><h2 id="initialization">Initialization</h2>
+<h3 id="constants">Constants</h3>
+<p>상수는 -함수 내에서 지역적으로 정의된 상수조차도- 컴파일할 때 생성되며, 아래 중 하나가 되어야 한다.</p>
+<ul>
+<li>숫자(number)</li>
+<li>문자(rune)</li>
+<li>문자열(string)</li>
+<li>참/거짓(boolean)</li>
+</ul>
+<p>상수를 정의하는 표현식은 컴파일 타임에 실행가능한 <code>constant expression</code>이어야 한다.</p>
+<p>예를 들어 <code>1&lt;&lt;3</code>은 상수 표현식이지만 <code>math.Sin(math.Pi/4)</code>는 상수 표현식이 아니다. math 패키지의 Sin 함수에 대한 호출이 런타임 시에만 가능하기 때문이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">ByteSize</span> <span class="kt">float64</span>
+
+<span class="kd">const</span> <span class="p">(</span>
+    <span class="nx">_</span>           <span class="p">=</span> <span class="kc">iota</span> <span class="c1">// 공백 식별자를 이용해서 값인 0을 무시
+</span><span class="c1"></span>    <span class="nx">KB</span> <span class="nx">ByteSize</span> <span class="p">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="kc">iota</span><span class="p">)</span>
+    <span class="nx">MB</span>
+    <span class="nx">GB</span>
+    <span class="nx">TB</span>
+    <span class="nx">PB</span>
+    <span class="nx">EB</span>
+    <span class="nx">ZB</span>
+    <span class="nx">YB</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">b</span> <span class="nx">ByteSize</span><span class="p">)</span> <span class="nf">String</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="nx">b</span> <span class="o">&gt;=</span> <span class="nx">YB</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%.2fYB&#34;</span><span class="p">,</span> <span class="nx">b</span><span class="o">/</span><span class="nx">YB</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nx">b</span> <span class="o">&gt;=</span> <span class="nx">ZB</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%.2fZB&#34;</span><span class="p">,</span> <span class="nx">b</span><span class="o">/</span><span class="nx">ZB</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nx">b</span> <span class="o">&gt;=</span> <span class="nx">EB</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%.2fEB&#34;</span><span class="p">,</span> <span class="nx">b</span><span class="o">/</span><span class="nx">EB</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nx">b</span> <span class="o">&gt;=</span> <span class="nx">PB</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%.2fPB&#34;</span><span class="p">,</span> <span class="nx">b</span><span class="o">/</span><span class="nx">PB</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nx">b</span> <span class="o">&gt;=</span> <span class="nx">TB</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%.2fTB&#34;</span><span class="p">,</span> <span class="nx">b</span><span class="o">/</span><span class="nx">TB</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nx">b</span> <span class="o">&gt;=</span> <span class="nx">GB</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%.2fGB&#34;</span><span class="p">,</span> <span class="nx">b</span><span class="o">/</span><span class="nx">GB</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nx">b</span> <span class="o">&gt;=</span> <span class="nx">MB</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%.2fMB&#34;</span><span class="p">,</span> <span class="nx">b</span><span class="o">/</span><span class="nx">MB</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nx">b</span> <span class="o">&gt;=</span> <span class="nx">KB</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%.2fKB&#34;</span><span class="p">,</span> <span class="nx">b</span><span class="o">/</span><span class="nx">KB</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%.2fB&#34;</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="variables">Variables</h3>
+<p>변수의 초기화는 상수와 같은 방식이지만, 초기화는 런타임에 계산되는 일반적인 표현식이어도 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">home</span>   <span class="p">=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;HOME&#34;</span><span class="p">)</span>
+    <span class="nx">user</span>   <span class="p">=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;USER&#34;</span><span class="p">)</span>
+    <span class="nx">gopath</span> <span class="p">=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Getenv</span><span class="p">(</span><span class="s">&#34;GOPATH&#34;</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="init">init()</h3>
+<p>최종적으로, 각 소스파일은 필요한 어떤 상태든지 셋업하기 위해서 각자의 init 함수를 정의할 수 있다. 여기서 &ldquo;최종적으로&rdquo; 라는 말은 정말로 마지막을 가리킨다: init 함수는 모든 임포트된 패키지들이 초기화되고 패키지 내의 모든 변수 선언이 평가된 이후에 호출된다.</p>
+<p>선언의 형태로 표현할 수 없는 것들을 초기화하는 것 외에도, init 함수는 실제 프로그램의 실행이 일어나기 전에 프로그램의 상태를 검증하고 올바르게 복구하는데 자주 사용된다.</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>init<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>init 함수는 매개변수를 가지지 않으며, 각 파일은 여러 개의 init 함수를 가질 수 있다</em></div>
+        </div>
+    </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nx">user</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="s">&#34;$USER not set&#34;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="nx">home</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+        <span class="nx">home</span> <span class="p">=</span> <span class="s">&#34;/home/&#34;</span> <span class="o">+</span> <span class="nx">user</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="nx">gopath</span> <span class="o">==</span> <span class="s">&#34;&#34;</span> <span class="p">{</span>
+        <span class="nx">gopath</span> <span class="p">=</span> <span class="nx">home</span> <span class="o">+</span> <span class="s">&#34;/go&#34;</span>
+    <span class="p">}</span>
+    <span class="c1">// gopath may be overridden by --gopath flag on command line.
+</span><span class="c1"></span>    <span class="nx">flag</span><span class="p">.</span><span class="nf">StringVar</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">gopath</span><span class="p">,</span> <span class="s">&#34;gopath&#34;</span><span class="p">,</span> <span class="nx">gopath</span><span class="p">,</span> <span class="s">&#34;override default GOPATH&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="methods">Methods</h2>
+<h3 id="pointer-vs-value">Pointer vs Value</h3>
+<p>이전에 만들었던 append 함수와 비교하며 새로운 append 함수를 정의해보자. 들어가기 앞서 앞전에 만들었던 Append 부터 다시 살펴보자</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Append</span><span class="p">(</span><span class="nx">slice</span><span class="p">,</span> <span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+    <span class="nx">l</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">l</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">&gt;</span> <span class="nb">cap</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 재할당의 경우
+</span><span class="c1"></span>        <span class="nx">doubleLength</span> <span class="o">:=</span> <span class="p">(</span><span class="nx">l</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">))</span><span class="o">*</span><span class="mi">2</span>
+        <span class="nx">newSlice</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">doubleLength</span><span class="p">)</span>
+
+        <span class="c1">// copy 함수는 사전에 선언되어 있고 어떤 slice 타입에도 사용될 수 있다.
+</span><span class="c1"></span>        <span class="nb">copy</span><span class="p">(</span><span class="nx">newSlice</span><span class="p">,</span> <span class="nx">slice</span><span class="p">)</span>
+        <span class="nx">slice</span> <span class="p">=</span> <span class="nx">newSlice</span>
+    <span class="p">}</span>
+    <span class="nx">slice</span> <span class="p">=</span> <span class="nx">slice</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span> <span class="nx">l</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">)]</span>
+    <span class="nb">copy</span><span class="p">(</span><span class="nx">slice</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="nx">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nx">slice</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>자 이제 append함수를 슬라이스의 메서드로 재정의 하는 방법</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">ByteSlice</span> <span class="p">[]</span><span class="kt">byte</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">slice</span> <span class="nx">ByteSlice</span><span class="p">)</span> <span class="nf">Append</span><span class="p">(</span><span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>
+    <span class="o">...</span> <span class="nx">이전과</span> <span class="nx">동일</span> <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>위와 같이 할 경우, 값을 return해서 재할당 시켜줘야한다. 이를 피하기 위해 포인터를 사용할 수도 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ByteSlice</span><span class="p">)</span> <span class="nf">Append</span><span class="p">(</span><span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">slice</span> <span class="o">:=</span> <span class="o">*</span><span class="nx">p</span>
+    <span class="c1">// 함수 내용은 위와 같지만, return이 없다.
+</span><span class="c1"></span>    <span class="o">*</span><span class="nx">p</span> <span class="p">=</span> <span class="nx">slice</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>마지막으로 <code>표준 write</code> 메서드 처럼 구현을 해보면 더 멋진 코드를 만들 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="nx">ByteSlice</span><span class="p">)</span> <span class="nf">Write</span><span class="p">(</span><span class="nx">data</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="p">(</span><span class="nx">n</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">slice</span> <span class="o">:=</span> <span class="o">*</span><span class="nx">p</span>
+    <span class="c1">// 내용은 위와 같다.
+</span><span class="c1"></span>    <span class="o">*</span><span class="nx">p</span> <span class="p">=</span> <span class="nx">slice</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nx">data</span><span class="p">),</span> <span class="kc">nil</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>타입 <code>*ByteSlice</code>는 표준 인터페이스 <code>io.Writer</code>를 따르게되며, 다루기가 편해진다. 예를 들면, 다음처럼 ByteSlice에 값을 넣을 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">b</span> <span class="nx">ByteSlice</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">b</span><span class="p">,</span> <span class="s">&#34;This hour has %d days\n&#34;</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">b</span><span class="p">,</span> <span class="s">&#34;This hour has %d days\n&#34;</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>ByteSlice의 주소만 넘긴 이유는, 오직 포인터 타입인 <code>*ByteSlice</code>만이 <code>io.Writer</code> 인터페이스를 만족시키기 때문이다. <strong>리시버로 포인터를 쓸 것인가 값을 쓸 것인가에 대한 규칙은 값을 사용하는 메서드는 포인터와 값에서 모두 사용할 수 있으며, 포인터 메서드의 경우 포인터에서만 사용이 가능하다는 것이다.</strong></p>
+<p>이러한 규칙은 포인터 메서드는 리시버를 변형시킬 수 있는데 메서드를 값에서 호출하게 되면 값의 복사본을 받기 때문에 원래값을 변형할 수 없기 때문에 생겨났다. Go언어는 이러한 실수(값에서 포인터 메서드를 실행하는 일)를 허용하지 않는다. <strong>하지만 편리한 예외도 있다. 주소를 얻을 수 있는 값의 경우에, Go언어는 포인터 메서드를 값 위에서 실행할 경우 자동으로 주소 연산을 넣어준다.</strong> 위의 예시에서, 변수 b는 주소로 접근이 가능하기 때문에 단순히 b.Write만으로 Write메서드를 호출할 수 있다. 컴파일러는 이것을 (&amp;b).Write로 재작성할 것이다.</p>
+<h2 id="interface-1">Interface</h2>
+<p>Go언어의 인터페이스는 객체의 행위(behavior)를 지정해 주는 하나의 방법이다: 만약 어떤 객체가 정해진 행동를 할 수 있다면 호환되는 타입으로 쓸 수 있다는 뜻이다. (<strong>Duck typing, Go는 런타임에 duck typing하는 파이썬과 달리 Compile time duck typing이 가능하므로, 성능의 문제가 없다</strong>)</p>
+<ul>
+<li>인터페이스의 이름(명사)은 보통 메서드(동사)에서 파생된다: Write 메서드를 구현하면 io.Writer가 인터페이스의 이름이 되는 경우.</li>
+</ul>
+<p><strong>타입은 복수개의 인터페이스를 구현할 수 있다.</strong></p>
+<p><a href="https://pkg.go.dev/sort#Interface" target="_blank" rel="noopener noreffer">sort.Interface</a>와 <code>Stringer</code> 두개의 interface를 구현하는 타입의 예시를 보자면 아래와 같다.</p>
+<h4 id="sortinterface">sort.Interface</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Interface</span> <span class="kd">interface</span> <span class="p">{</span>
+	<span class="nf">Len</span><span class="p">()</span> <span class="kt">int</span>
+	<span class="nf">Less</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span>
+	<span class="nf">Swap</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="stringer">Stringer</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Stringer</span> <span class="kd">interface</span> <span class="p">{</span>
+    <span class="nf">String</span><span class="p">()</span> <span class="kt">string</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="sortinterface와-stringer를-만족하는-type">sort.Interface와 Stringer를 만족하는 type</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Sequence</span> <span class="p">[]</span><span class="kt">int</span>
+
+<span class="c1">// sort.Interface
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="nx">Sequence</span><span class="p">)</span> <span class="nf">Len</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="nx">Sequence</span><span class="p">)</span> <span class="nf">Less</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">&lt;</span> <span class="nx">s</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="nx">Sequence</span><span class="p">)</span> <span class="nf">Swap</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="nx">s</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="p">=</span> <span class="nx">s</span><span class="p">[</span><span class="nx">j</span><span class="p">],</span> <span class="nx">s</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1">// Stringer
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="nx">Sequence</span><span class="p">)</span> <span class="nf">String</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="nx">sort</span><span class="p">.</span><span class="nf">Sort</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
+
+    <span class="c1">// Sequence 타입은 []int와 네이밍 외에는 모두같은 타입이기 때문에 변환 가능하다.
+</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprint</span><span class="p">([]</span><span class="nb">int</span><span class="p">(</span><span class="nx">s</span><span class="p">))</span> <span class="c1">// type converted (Sequence -&gt; []int)
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>위의 코드의 Len(), Less(), Swap() 함수는 실제로, <code>sort.Sort()</code>에 들어가는 sort.Interface를 만족시키기 위해 사용하기 위해 작성된 메서드들이다.</strong> 그러므로 아래와 같이 간단하게 코드를 간소화 시킬 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Sequence</span> <span class="p">[]</span><span class="kt">int</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">s</span> <span class="nx">Sequence</span><span class="p">)</span> <span class="nf">String</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="nx">sort</span><span class="p">.</span><span class="nf">IntSlice</span><span class="p">(</span><span class="nx">s</span><span class="p">).</span><span class="nf">Sort</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Spring</span><span class="p">([]</span><span class="nb">int</span><span class="p">(</span><span class="nx">s</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="interface-conversions-and-type-assertions"><code>Interface conversions</code> and <code>type assertions</code></h3>
+<p>타입 스위치는 <code>Interface conversions</code>(변환)의 한 형태이다: 인터페이스를 받았을 때, switch문의 각 case에 맞게 타입 변환을 한다</p>
+<p>아래 예제는 fmt.Printf가 타입 스위치를 써서 어떻게 주어진 값을 string으로 변환시키는 지를 단순화된 버전으로 보여 주고 있다. 만약에 값이 이미 string인 경우는 인터페이스가 잡고 있는 실제 string 값을 원하고, 그렇지 않고 값이 String 메서드를 가지고 있을 경우는 메서드를 실행한 결과를 원한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Stringer</span> <span class="kd">interface</span> <span class="p">{</span>
+    <span class="nf">String</span><span class="p">()</span> <span class="kt">string</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">value</span> <span class="kd">interface</span><span class="p">{}</span>
+<span class="k">switch</span> <span class="nx">str</span> <span class="o">:=</span> <span class="nx">value</span><span class="p">.(</span><span class="kd">type</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">case</span> <span class="kt">string</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nx">str</span>
+<span class="k">case</span> <span class="nx">Stringer</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>오로지 한 타입만에만 관심이 있는 경우는 어떨까? 만약 주어진 값이 string을 저장하는 걸 알고 있고 그냥 그 string 값을 추출하고자 한다면? <strong>단 하나의 case만을 갖는 타입 스위치면 해결 할 수 있지만 타입 단언 표현을 쓸 수도 있다.</strong></p>
+<p><code>Type Assertion</code>(타입 단언)은 인테페이스 값을 가지고 지정된 명확한 타입의 값을 추출한다. 문법은 타입 스위치를 열 때와 비슷하지만 type 키워드 대신 명확한 타입을 사용한다</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">//value.(typeName)
+</span><span class="c1"></span><span class="nx">str</span> <span class="o">:=</span> <span class="nx">value</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>여기에서 typeName은 static type이다. 만약 위의 예시에서 value가 string 타입을 가지고 있지 않을 경우, 프로그램은 런타임 에러를 내고 죽는다.</strong> 이런 참사에 대비하기 위해서, &ldquo;comma, ok&rdquo; 관용구를 사용하여 안전하게 값이 string인지 검사 해야 한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">str</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">value</span><span class="p">.(</span><span class="kt">string</span><span class="p">)</span>
+<span class="k">if</span> <span class="nx">ok</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;string value is: %q\n&#34;</span><span class="p">,</span> <span class="nx">str</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value is not a string\n&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>아래는 위에서 보여준 타입 스위치와 동일한 기능을 하는 if-else문 예시이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="k">if</span> <span class="nx">str</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">value</span><span class="p">.(</span><span class="kt">string</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">str</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">str</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">value</span><span class="p">.(</span><span class="nx">Stringer</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">str</span><span class="p">.</span><span class="nf">String</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="generality">Generality</h3>
+<p>만약 어떤 타입이 오로지 인터페이스를 구현하기 위해서만 존재한다면, 즉 인터페이스외 어떤 메서드도 외부에 노츨시키지 않은 경우, 타입 자체를 노출 시킬 필요가 없다. <strong>그런 경우에, constructor는 구현 타입보다는 인터페이스 값을 반환해야 한다.</strong></p>
+<p>설명에 좋은 예시가 있어 인용하자면</p>
+<div class="details admonition quote open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>각종 crypto 패키지내의 스트리밍 cipher 알고리즘들을, 이들이 연결해 쓰는 block cipher들로 부터 분리시킬 수 있다. crypto/cipher 패키지내 Block 인터페이스는 한 block의 데이터를 암호화하는 block cipher의 행위를 정의한다. 그런 다음, bufio 패키지에서 유추해 볼 수 있듯이, Block 인터페이스를 구현하는 cipher 패키지들은, Stream 인터페이스로 대표되는 스트리밍 cipher들을 건설할 때, block 암호화의 자세한 내용을 알지 못하더라도, 사용될 수 있다.</em></div>
+        </div>
+    </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Block</span> <span class="kd">interface</span> <span class="p">{</span>
+    <span class="nf">BlockSize</span><span class="p">()</span> <span class="kt">int</span>
+    <span class="nf">Encrypt</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">dst</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span>
+    <span class="nf">Decrypt</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">dst</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">type</span> <span class="nx">Stream</span> <span class="kd">interface</span> <span class="p">{</span>
+    <span class="nf">XORKeyStream</span><span class="p">(</span><span class="nx">dst</span><span class="p">,</span> <span class="nx">src</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>block cipher를 스트리밍 cipher로 바꾸어 주는 카운터 모드 (CTR) 스트림의 정의가 있다. 주의해야할 점은 input과 output이 모두 interface 타입이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// NewCTR은 카운더 모드로 주어진 Block을 이용하여 암호화하고/해독하는 스트림을 반환한다.
+</span><span class="c1">// iv의 길이는 Block의 block 크기와 같아야 한다.
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">NewCTR</span><span class="p">(</span><span class="nx">block</span> <span class="nx">Block</span><span class="p">,</span> <span class="nx">iv</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="nx">Stream</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="interfaces-and-methods">Interfaces and methods</h3>
+<div class="details admonition quote open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Since almost anything can have methods attached, almost anything can satisfy an interface.</em></div>
+        </div>
+    </div>
+<p>거의 모든 것에 메서드를 첨부할 수 있다는 말은 거의 모든 것이 인터페이스를 만족 시킬 수 있다는 말이기도 합니다. 심지어 함수에도 메서드를 첨부시킬 수 있다. 대표적인 예가 <a href="https://pkg.go.dev/net/http" target="_blank" rel="noopener noreffer">http</a>패키지이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Handler</span> <span class="kd">interface</span> <span class="p">{</span>
+    <span class="nf">ServeHTTP</span><span class="p">(</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="o">*</span><span class="nx">Request</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="o">...</span>
+
+<span class="c1">// 단순한 카운터 서버.
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Counter</span> <span class="kt">int</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">ctr</span> <span class="o">*</span><span class="nx">Counter</span><span class="p">)</span> <span class="nf">ServeHTTP</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">req</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">*</span><span class="nx">ctr</span><span class="o">++</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprintf</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;counter = %d\n&#34;</span><span class="p">,</span> <span class="o">*</span><span class="nx">ctr</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="o">...</span>
+
+<span class="kn">import</span> <span class="s">&#34;net/http&#34;</span>
+<span class="o">...</span>
+
+<span class="nx">ctr</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="nx">Counter</span><span class="p">)</span>
+<span class="nx">http</span><span class="p">.</span><span class="nf">Handle</span><span class="p">(</span><span class="s">&#34;/counter&#34;</span><span class="p">,</span> <span class="nx">ctr</span><span class="p">)</span>
+
+
+<span class="o">...</span>
+
+<span class="c1">// 채널이 매 방문마다 알린다.
+</span><span class="c1">// (아마 이 채널에는 버퍼를 사용해야 할 것이다.)
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Chan</span> <span class="kd">chan</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">ch</span> <span class="nx">Chan</span><span class="p">)</span> <span class="nf">ServeHTTP</span><span class="p">(</span><span class="nx">w</span> <span class="nx">http</span><span class="p">.</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">req</span> <span class="o">*</span><span class="nx">http</span><span class="p">.</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">ch</span> <span class="o">&lt;-</span> <span class="nx">req</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Fprint</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="s">&#34;notification sent&#34;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// 마지막으로, 서버를 구동할 때 사용한 명령줄 인수들을 /args에 보여주려는 경우를 상상해 보자.
+</span><span class="c1">// 명령줄 인수를 출력하는 함수를 쓰는 것은 간단하다.
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">ArgServer</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">os</span><span class="p">.</span><span class="nx">Args</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>이것을 어떻게 HTTP 서버로 바꿀 수 있을까? 어떤 타입에다가 값은 무시하면서 ArgServer를 메서드로 만들 수 있을 것이다. 하지만 더 좋은 방법이 있다. 포인터와 인터페이스만 빼고는 어떤 타입에도 메서드를 정의할 수 있는 사실을 이용해서, 함수에 메서드를 쓸 수 있다. http 패키지에 다음과 같은 코드가 있다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// HandlerFunc는 어뎁터로써 평범한 함수를 HTTP handler로 쓸 수 있게 해 준다.
+</span><span class="c1">// 만약에 f가 적절한 함수 signature를 가지면,
+</span><span class="c1">// HandlerFunc(f)는 f를 부르는 Handler 객체인 것이다.
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">HandlerFunc</span> <span class="kd">func</span><span class="p">(</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="o">*</span><span class="nx">Request</span><span class="p">)</span>
+
+<span class="c1">// ServeHTTP calls f(w, req).
+</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">f</span> <span class="nx">HandlerFunc</span><span class="p">)</span> <span class="nf">ServeHTTP</span><span class="p">(</span><span class="nx">w</span> <span class="nx">ResponseWriter</span><span class="p">,</span> <span class="nx">req</span> <span class="o">*</span><span class="nx">Request</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">f</span><span class="p">(</span><span class="nx">w</span><span class="p">,</span> <span class="nx">req</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>HandlerFunc</code>는 <code>ServeHTTP</code>라는 매서드를 같는 타입으로, 이 타입의 값은 HTTP request에 서비스를 제공한다. 메서드의 구현을 한번 살펴 보라: 리시버는 함수, f이고 메서드가 f를 부른다. 이상해 보일 수도 있지만, 리시버가 채널이고 메서드가 채널에 데이터를 보내는 예와 비교해도 크게 다르지 않다.</p>
+<h2 id="the-blank-identifier">The blank identifier</h2>
+<blockquote>
+<p><a href="https://gosudaweb.gitbooks.io/effective-go-in-korean/content/the_blank_identifier.html" target="_blank" rel="noopener noreffer">https://gosudaweb.gitbooks.io/effective-go-in-korean/content/the_blank_identifier.html</a></p>
+</blockquote>
+<h2 id="conclustion">conclustion</h2>
+<p>[2022-02-08T19:21:29+09:00] effective go로 공부하니까, 문서가 정말 좋긴한데, 예상보다 몇시간은 더 걸렸던 것 같습니다. 하지만 양질의 정보를 이렇게 빠르게 읽을 수 있어서 유익한 시간인 것 같네요.</p>
 <center>- 끝 -</center></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-02-07&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/5dfc0fad44bbb0e8b95384d959a4cccf1a0aea2d" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 5dfc0fad44bbb0e8b95384d959a4cccf1a0aea2d: rebuilding site 2022년 2월  7일 월요일 19시 55분 36초 KST">
-                                    <i class="fas fa-hashtag fa-fw"></i>5dfc0fa</a></span>
+                <span>Updated on 2022-02-08&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/66c6be1f05f874d2b4d276316ff0553f2d0a634b" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 66c6be1f05f874d2b4d276316ff0553f2d0a634b: rebuilding site 2022년 2월  8일 화요일 17시 05분 11초 KST">
+                                    <i class="fas fa-hashtag fa-fw"></i>66c6be1</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

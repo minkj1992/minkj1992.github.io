@@ -892,7 +892,382 @@ x = append(x, y...)
 fmt.Println(x)
 ```
 
+## Initialization
+
+### Constants
+
+상수는 -함수 내에서 지역적으로 정의된 상수조차도- 컴파일할 때 생성되며, 아래 중 하나가 되어야 한다.
+
+- 숫자(number)
+- 문자(rune)
+- 문자열(string)
+- 참/거짓(boolean)
+
+상수를 정의하는 표현식은 컴파일 타임에 실행가능한 `constant expression`이어야 한다.
+
+예를 들어 `1<<3`은 상수 표현식이지만 `math.Sin(math.Pi/4)`는 상수 표현식이 아니다. math 패키지의 Sin 함수에 대한 호출이 런타임 시에만 가능하기 때문이다.
+
+```go
+type ByteSize float64
+
+const (
+    _           = iota // 공백 식별자를 이용해서 값인 0을 무시
+    KB ByteSize = 1 << (10 * iota)
+    MB
+    GB
+    TB
+    PB
+    EB
+    ZB
+    YB
+)
+```
+
+```go
+func (b ByteSize) String() string {
+    switch {
+    case b >= YB:
+        return fmt.Sprintf("%.2fYB", b/YB)
+    case b >= ZB:
+        return fmt.Sprintf("%.2fZB", b/ZB)
+    case b >= EB:
+        return fmt.Sprintf("%.2fEB", b/EB)
+    case b >= PB:
+        return fmt.Sprintf("%.2fPB", b/PB)
+    case b >= TB:
+        return fmt.Sprintf("%.2fTB", b/TB)
+    case b >= GB:
+        return fmt.Sprintf("%.2fGB", b/GB)
+    case b >= MB:
+        return fmt.Sprintf("%.2fMB", b/MB)
+    case b >= KB:
+        return fmt.Sprintf("%.2fKB", b/KB)
+    }
+    return fmt.Sprintf("%.2fB", b)
+}
+```
+
+### Variables
+
+변수의 초기화는 상수와 같은 방식이지만, 초기화는 런타임에 계산되는 일반적인 표현식이어도 된다.
+
+```go
+var (
+    home   = os.Getenv("HOME")
+    user   = os.Getenv("USER")
+    gopath = os.Getenv("GOPATH")
+)
+```
+
+### init()
+
+최종적으로, 각 소스파일은 필요한 어떤 상태든지 셋업하기 위해서 각자의 init 함수를 정의할 수 있다. 여기서 "최종적으로" 라는 말은 정말로 마지막을 가리킨다: init 함수는 모든 임포트된 패키지들이 초기화되고 패키지 내의 모든 변수 선언이 평가된 이후에 호출된다.
+
+선언의 형태로 표현할 수 없는 것들을 초기화하는 것 외에도, init 함수는 실제 프로그램의 실행이 일어나기 전에 프로그램의 상태를 검증하고 올바르게 복구하는데 자주 사용된다.
+
+{{< admonition note "init" >}}
+_init 함수는 매개변수를 가지지 않으며, 각 파일은 여러 개의 init 함수를 가질 수 있다_
+{{< /admonition  >}}
+
+```go
+func init() {
+    if user == "" {
+        log.Fatal("$USER not set")
+    }
+    if home == "" {
+        home = "/home/" + user
+    }
+    if gopath == "" {
+        gopath = home + "/go"
+    }
+    // gopath may be overridden by --gopath flag on command line.
+    flag.StringVar(&gopath, "gopath", gopath, "override default GOPATH")
+}
+```
+
+## Methods
+
+### Pointer vs Value
+
+이전에 만들었던 append 함수와 비교하며 새로운 append 함수를 정의해보자. 들어가기 앞서 앞전에 만들었던 Append 부터 다시 살펴보자
+
+```go
+func Append(slice, data []byte) []byte {
+    l := len(slice)
+    if l + len(data) > cap(slice) { // 재할당의 경우
+        doubleLength := (l+len(data))*2
+        newSlice := make([]byte, doubleLength)
+
+        // copy 함수는 사전에 선언되어 있고 어떤 slice 타입에도 사용될 수 있다.
+        copy(newSlice, slice)
+        slice = newSlice
+    }
+    slice = slice[0: l + len(data)]
+    copy(slice[1:], data)
+    return slice
+}
+```
+
+자 이제 append함수를 슬라이스의 메서드로 재정의 하는 방법
+
+```go
+type ByteSlice []byte
+
+func (slice ByteSlice) Append(data []byte) []byte {
+    ... 이전과 동일 ...
+}
+```
+
+위와 같이 할 경우, 값을 return해서 재할당 시켜줘야한다. 이를 피하기 위해 포인터를 사용할 수도 있다.
+
+```go
+func (p *ByteSlice) Append(data []byte) {
+    slice := *p
+    // 함수 내용은 위와 같지만, return이 없다.
+    *p = slice
+}
+```
+
+마지막으로 `표준 write` 메서드 처럼 구현을 해보면 더 멋진 코드를 만들 수 있다.
+
+```go
+func (p *ByteSlice) Write(data []byte) (n int, err error) {
+    slice := *p
+    // 내용은 위와 같다.
+    *p = slice
+    return len(data), nil
+}
+```
+
+타입 `*ByteSlice`는 표준 인터페이스 `io.Writer`를 따르게되며, 다루기가 편해진다. 예를 들면, 다음처럼 ByteSlice에 값을 넣을 수 있다.
+
+```go
+var b ByteSlice
+fmt.Fprintf(&b, "This hour has %d days\n", 7)
+fmt.Fprintf(&b, "This hour has %d days\n", 7)
+```
+
+ByteSlice의 주소만 넘긴 이유는, 오직 포인터 타입인 `*ByteSlice`만이 `io.Writer` 인터페이스를 만족시키기 때문이다. **리시버로 포인터를 쓸 것인가 값을 쓸 것인가에 대한 규칙은 값을 사용하는 메서드는 포인터와 값에서 모두 사용할 수 있으며, 포인터 메서드의 경우 포인터에서만 사용이 가능하다는 것이다.**
+
+이러한 규칙은 포인터 메서드는 리시버를 변형시킬 수 있는데 메서드를 값에서 호출하게 되면 값의 복사본을 받기 때문에 원래값을 변형할 수 없기 때문에 생겨났다. Go언어는 이러한 실수(값에서 포인터 메서드를 실행하는 일)를 허용하지 않는다. **하지만 편리한 예외도 있다. 주소를 얻을 수 있는 값의 경우에, Go언어는 포인터 메서드를 값 위에서 실행할 경우 자동으로 주소 연산을 넣어준다.** 위의 예시에서, 변수 b는 주소로 접근이 가능하기 때문에 단순히 b.Write만으로 Write메서드를 호출할 수 있다. 컴파일러는 이것을 (&b).Write로 재작성할 것이다.
+
+## Interface
+
+Go언어의 인터페이스는 객체의 행위(behavior)를 지정해 주는 하나의 방법이다: 만약 어떤 객체가 정해진 행동를 할 수 있다면 호환되는 타입으로 쓸 수 있다는 뜻이다. (**Duck typing, Go는 런타임에 duck typing하는 파이썬과 달리 Compile time duck typing이 가능하므로, 성능의 문제가 없다**)
+
+- 인터페이스의 이름(명사)은 보통 메서드(동사)에서 파생된다: Write 메서드를 구현하면 io.Writer가 인터페이스의 이름이 되는 경우.
+
+**타입은 복수개의 인터페이스를 구현할 수 있다.**
+
+[sort.Interface](https://pkg.go.dev/sort#Interface)와 `Stringer` 두개의 interface를 구현하는 타입의 예시를 보자면 아래와 같다.
+
+#### sort.Interface
+
+```go
+type Interface interface {
+	Len() int
+	Less(i, j int) bool
+	Swap(i, j int)
+}
+```
+
+#### Stringer
+
+```go
+type Stringer interface {
+    String() string
+}
+```
+
+#### sort.Interface와 Stringer를 만족하는 type
+
+```go
+type Sequence []int
+
+// sort.Interface
+func (s Sequence) Len() int {
+    return len(s)
+}
+func (s Sequence) Less(i, j int) bool {
+    return s[i] < s[j]
+}
+func (s Sequence) Swap(i, j int) {
+    s[i], s[j] = s[j], s[i]
+}
+
+// Stringer
+func (s Sequence) String() string {
+    sort.Sort(s)
+
+    // Sequence 타입은 []int와 네이밍 외에는 모두같은 타입이기 때문에 변환 가능하다.
+    return fmt.Sprint([]int(s)) // type converted (Sequence -> []int)
+}
+```
+
+**위의 코드의 Len(), Less(), Swap() 함수는 실제로, `sort.Sort()`에 들어가는 sort.Interface를 만족시키기 위해 사용하기 위해 작성된 메서드들이다.** 그러므로 아래와 같이 간단하게 코드를 간소화 시킬 수 있다.
+
+```go
+type Sequence []int
+
+func (s Sequence) String() string {
+    sort.IntSlice(s).Sort()
+    return fmt.Spring([]int(s))
+}
+```
+
+### `Interface conversions` and `type assertions`
+
+타입 스위치는 `Interface conversions`(변환)의 한 형태이다: 인터페이스를 받았을 때, switch문의 각 case에 맞게 타입 변환을 한다
+
+아래 예제는 fmt.Printf가 타입 스위치를 써서 어떻게 주어진 값을 string으로 변환시키는 지를 단순화된 버전으로 보여 주고 있다. 만약에 값이 이미 string인 경우는 인터페이스가 잡고 있는 실제 string 값을 원하고, 그렇지 않고 값이 String 메서드를 가지고 있을 경우는 메서드를 실행한 결과를 원한다.
+
+```go
+type Stringer interface {
+    String() string
+}
+
+var value interface{}
+switch str := value.(type) {
+case string:
+    return str
+case Stringer:
+    return str.String()
+}
+```
+
+오로지 한 타입만에만 관심이 있는 경우는 어떨까? 만약 주어진 값이 string을 저장하는 걸 알고 있고 그냥 그 string 값을 추출하고자 한다면? **단 하나의 case만을 갖는 타입 스위치면 해결 할 수 있지만 타입 단언 표현을 쓸 수도 있다.**
+
+`Type Assertion`(타입 단언)은 인테페이스 값을 가지고 지정된 명확한 타입의 값을 추출한다. 문법은 타입 스위치를 열 때와 비슷하지만 type 키워드 대신 명확한 타입을 사용한다
+
+```go
+//value.(typeName)
+str := value.(string)
+```
+
+**여기에서 typeName은 static type이다. 만약 위의 예시에서 value가 string 타입을 가지고 있지 않을 경우, 프로그램은 런타임 에러를 내고 죽는다.** 이런 참사에 대비하기 위해서, "comma, ok" 관용구를 사용하여 안전하게 값이 string인지 검사 해야 한다.
+
+```go
+str, ok := value.(string)
+if ok {
+    fmt.Printf("string value is: %q\n", str)
+} else {
+    fmt.Printf("value is not a string\n")
+}
+```
+
+아래는 위에서 보여준 타입 스위치와 동일한 기능을 하는 if-else문 예시이다.
+
+```go
+if str, ok := value.(string); ok {
+    return str
+} else if str, ok := value.(Stringer); ok {
+    return str.String()
+}
+```
+
+### Generality
+
+만약 어떤 타입이 오로지 인터페이스를 구현하기 위해서만 존재한다면, 즉 인터페이스외 어떤 메서드도 외부에 노츨시키지 않은 경우, 타입 자체를 노출 시킬 필요가 없다. **그런 경우에, constructor는 구현 타입보다는 인터페이스 값을 반환해야 한다.**
+
+설명에 좋은 예시가 있어 인용하자면
+
+{{< admonition quote >}}
+_각종 crypto 패키지내의 스트리밍 cipher 알고리즘들을, 이들이 연결해 쓰는 block cipher들로 부터 분리시킬 수 있다. crypto/cipher 패키지내 Block 인터페이스는 한 block의 데이터를 암호화하는 block cipher의 행위를 정의한다. 그런 다음, bufio 패키지에서 유추해 볼 수 있듯이, Block 인터페이스를 구현하는 cipher 패키지들은, Stream 인터페이스로 대표되는 스트리밍 cipher들을 건설할 때, block 암호화의 자세한 내용을 알지 못하더라도, 사용될 수 있다._
+{{< /admonition  >}}
+
+```go
+type Block interface {
+    BlockSize() int
+    Encrypt(src, dst []byte)
+    Decrypt(src, dst []byte)
+}
+
+type Stream interface {
+    XORKeyStream(dst, src []byte)
+}
+```
+
+block cipher를 스트리밍 cipher로 바꾸어 주는 카운터 모드 (CTR) 스트림의 정의가 있다. 주의해야할 점은 input과 output이 모두 interface 타입이다.
+
+```go
+// NewCTR은 카운더 모드로 주어진 Block을 이용하여 암호화하고/해독하는 스트림을 반환한다.
+// iv의 길이는 Block의 block 크기와 같아야 한다.
+func NewCTR(block Block, iv []byte) Stream
+```
+
+### Interfaces and methods
+
+{{< admonition quote >}}
+_Since almost anything can have methods attached, almost anything can satisfy an interface._
+{{< /admonition  >}}
+
+거의 모든 것에 메서드를 첨부할 수 있다는 말은 거의 모든 것이 인터페이스를 만족 시킬 수 있다는 말이기도 합니다. 심지어 함수에도 메서드를 첨부시킬 수 있다. 대표적인 예가 [http](https://pkg.go.dev/net/http)패키지이다.
+
+```go
+type Handler interface {
+    ServeHTTP(ResponseWriter, *Request)
+}
+
+...
+
+// 단순한 카운터 서버.
+type Counter int
+
+func (ctr *Counter) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+    *ctr++
+    fmt.Fprintf(w, "counter = %d\n", *ctr)
+}
+
+...
+
+import "net/http"
+...
+
+ctr := new(Counter)
+http.Handle("/counter", ctr)
+
+
+...
+
+// 채널이 매 방문마다 알린다.
+// (아마 이 채널에는 버퍼를 사용해야 할 것이다.)
+type Chan chan *http.Request
+
+func (ch Chan) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+    ch <- req
+    fmt.Fprint(w, "notification sent")
+}
+
+// 마지막으로, 서버를 구동할 때 사용한 명령줄 인수들을 /args에 보여주려는 경우를 상상해 보자.
+// 명령줄 인수를 출력하는 함수를 쓰는 것은 간단하다.
+func ArgServer() {
+    fmt.Println(os.Args)
+}
+```
+
+이것을 어떻게 HTTP 서버로 바꿀 수 있을까? 어떤 타입에다가 값은 무시하면서 ArgServer를 메서드로 만들 수 있을 것이다. 하지만 더 좋은 방법이 있다. 포인터와 인터페이스만 빼고는 어떤 타입에도 메서드를 정의할 수 있는 사실을 이용해서, 함수에 메서드를 쓸 수 있다. http 패키지에 다음과 같은 코드가 있다:
+
+```go
+// HandlerFunc는 어뎁터로써 평범한 함수를 HTTP handler로 쓸 수 있게 해 준다.
+// 만약에 f가 적절한 함수 signature를 가지면,
+// HandlerFunc(f)는 f를 부르는 Handler 객체인 것이다.
+type HandlerFunc func(ResponseWriter, *Request)
+
+// ServeHTTP calls f(w, req).
+func (f HandlerFunc) ServeHTTP(w ResponseWriter, req *Request) {
+    f(w, req)
+}
+```
+
+`HandlerFunc`는 `ServeHTTP`라는 매서드를 같는 타입으로, 이 타입의 값은 HTTP request에 서비스를 제공한다. 메서드의 구현을 한번 살펴 보라: 리시버는 함수, f이고 메서드가 f를 부른다. 이상해 보일 수도 있지만, 리시버가 채널이고 메서드가 채널에 데이터를 보내는 예와 비교해도 크게 다르지 않다.
+
+## The blank identifier
+
+> https://gosudaweb.gitbooks.io/effective-go-in-korean/content/the_blank_identifier.html
+
 ## conclustion
+
+[2022-02-08T19:21:29+09:00] effective go로 공부하니까, 문서가 정말 좋긴한데, 예상보다 몇시간은 더 걸렸던 것 같습니다. 하지만 양질의 정보를 이렇게 빠르게 읽을 수 있어서 유익한 시간인 것 같네요.
 
 <center>- 끝 -</center>
 
