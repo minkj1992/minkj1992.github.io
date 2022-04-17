@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="DFS and BFS"/>
 <meta name="twitter:description" content="About DFS and BFS"/>
 <meta name="application-name" content="serious">
-<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/dfs_bfs/" /><link rel="prev" href="https://minkj1992.github.io/coding_challenge/" /><link rel="next" href="https://minkj1992.github.io/interview/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/dfs_bfs/" /><link rel="prev" href="https://minkj1992.github.io/binary_tree/" /><link rel="next" href="https://minkj1992.github.io/interview/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -170,28 +170,28 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
-<span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;5&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;7&#39;</span><span class="p">],</span>
-  <span class="s1">&#39;3&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">],</span>
-  <span class="s1">&#39;7&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;8&#39;</span><span class="p">],</span>
-  <span class="s1">&#39;2&#39;</span> <span class="p">:</span> <span class="p">[],</span>
-  <span class="s1">&#39;4&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;8&#39;</span><span class="p">],</span>
-  <span class="s1">&#39;8&#39;</span> <span class="p">:</span> <span class="p">[]</span>
-<span class="p">}</span>
-
-
-<span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">start_node</span><span class="o">=</span><span class="s2">&#34;5&#34;</span><span class="p">):</span>
-    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start_node</span><span class="p">,])</span>
-    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
-        <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span><span class="k">continue</span>
-        
-        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
-            <span class="n">queue</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+</span></span><span class="line"><span class="cl"><span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;5&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;7&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;3&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;7&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;8&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;2&#39;</span> <span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;4&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;8&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;8&#39;</span> <span class="p">:</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">start_node</span><span class="o">=</span><span class="s2">&#34;5&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start_node</span><span class="p">,])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span><span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">queue</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="12-dfs">1.2. DFS</h3>
 <div class="highlight"><div class="chroma">
@@ -219,28 +219,28 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;5&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;7&#39;</span><span class="p">],</span>
-  <span class="s1">&#39;3&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">],</span>
-  <span class="s1">&#39;7&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;8&#39;</span><span class="p">],</span>
-  <span class="s1">&#39;2&#39;</span> <span class="p">:</span> <span class="p">[],</span>
-  <span class="s1">&#39;4&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;8&#39;</span><span class="p">],</span>
-  <span class="s1">&#39;8&#39;</span> <span class="p">:</span> <span class="p">[]</span>
-<span class="p">}</span>
-
-<span class="c1"># 5 8 7 3 4 2</span>
-<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">start_node</span><span class="o">=</span><span class="s2">&#34;5&#34;</span><span class="p">):</span>
-    <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">start_node</span><span class="p">,]</span>
-    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-
-    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
-        <span class="n">node</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span><span class="k">continue</span>
-
-        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
-            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">graph</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;5&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;7&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;3&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;7&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;8&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;2&#39;</span> <span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;4&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;8&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="s1">&#39;8&#39;</span> <span class="p">:</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 5 8 7 3 4 2</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">start_node</span><span class="o">=</span><span class="s2">&#34;5&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">start_node</span><span class="p">,]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span><span class="k">continue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">neighbor</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -252,13 +252,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">recursive_dfs</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="s2">&#34;5&#34;</span><span class="p">,</span> <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()):</span>
-    <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
-        <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span> <span class="k">continue</span>
-        <span class="n">recursive_dfs</span><span class="p">(</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">visited</span><span class="p">)</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">recursive_dfs</span><span class="p">(</span><span class="n">node</span><span class="o">=</span><span class="s2">&#34;5&#34;</span><span class="p">,</span> <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span> <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        <span class="n">recursive_dfs</span><span class="p">(</span><span class="n">neighbor</span><span class="p">,</span> <span class="n">visited</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="13-bfs-vs-dfs">1.3. BFS vs DFS</h3>
 <blockquote>
@@ -359,14 +359,14 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/coding_challenge/" class="prev" rel="prev" title="Robotics Coding Challenge"><i class="fas fa-angle-left fa-fw"></i>Robotics Coding Challenge</a>
+    <div class="post-nav"><a href="/binary_tree/" class="prev" rel="prev" title="Binary Tree"><i class="fas fa-angle-left fa-fw"></i>Binary Tree</a>
             <a href="/interview/" class="next" rel="next" title="All Basic Computer Science">All Basic Computer Science<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

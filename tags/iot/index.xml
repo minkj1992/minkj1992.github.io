@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>iot - Tag - The Serious</title>
+        <link>https://minkj1992.github.io/tags/iot/</link>
+        <description>iot - Tag - The Serious</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 16 Apr 2022 21:20:15 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/iot/" rel="self" type="application/rss+xml" /><item>
+    <title>[GCP] Iot core</title>
+    <link>https://minkj1992.github.io/iot_core/</link>
+    <pubDate>Sat, 16 Apr 2022 21:20:15 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/iot_core/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/wall_e.jpeg" referrerpolicy="no-referrer">
+            </div><p>referenced <a href="https://cloud.google.com/architecture/iot-overview" target="_blank" rel="noopener noreffer">Technical overview of Internet of Things</a> article.</p>]]></description>
+</item></channel>
+</rss>

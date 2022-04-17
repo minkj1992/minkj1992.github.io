@@ -162,10 +162,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ yarn init -y
-$ yarn add hardhat --dev
-$ yarn add @openzeppelin/hardhat-upgrades --dev
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ yarn init -y
+</span></span><span class="line"><span class="cl">$ yarn add hardhat --dev
+</span></span><span class="line"><span class="cl">$ yarn add @openzeppelin/hardhat-upgrades --dev
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>테스트는 다음과 같이 할 수 있습니다.</p>
 <h3 id="test">test</h3>
@@ -174,8 +174,8 @@ $ yarn add @openzeppelin/hardhat-upgrades --dev
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat <span class="nb">test</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ npx hardhat <span class="nb">test</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="deploy">deploy</h3>
 <p>로컬에서 <code>ganache</code>같은 내부 노드를 실행할 수 있습니다.</p>
@@ -184,8 +184,8 @@ $ yarn add @openzeppelin/hardhat-upgrades --dev
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat node
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ npx hardhat node
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>로컬에서 이제 배포를 해봅시다.</p>
 <ul>
@@ -197,9 +197,9 @@ $ yarn add @openzeppelin/hardhat-upgrades --dev
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat run --network localhost ./scripts/SimpleStorageUpgrade.deploy.js
-SimpleStorageUpgrade deployed to: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ npx hardhat run --network localhost ./scripts/SimpleStorageUpgrade.deploy.js
+</span></span><span class="line"><span class="cl">SimpleStorageUpgrade deployed to: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>런타임에 콘솔에서 붙어서 제대로 배포되었는지 검증해봅니다.</p>
 <ul>
@@ -225,23 +225,23 @@ SimpleStorageUpgrade deployed to: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat console --network localhost
-
-Welcome to Node.js v14.15.1.
-Type <span class="s2">&#34;.help&#34;</span> <span class="k">for</span> more information.
-&gt; const <span class="nv">f</span> <span class="o">=</span> await ethers.getContractFactory<span class="o">(</span><span class="s2">&#34;SimpleStorageUpgrade&#34;</span><span class="o">)</span>
-undefined
-&gt; const <span class="nv">ssu</span> <span class="o">=</span> await f.attach<span class="o">(</span><span class="s2">&#34;0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0&#34;</span><span class="o">)</span>
-undefined
-&gt; ssu.address
-<span class="s1">&#39;0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0&#39;</span>
-&gt; <span class="o">(</span>await ssu.get<span class="o">())</span>.toString<span class="o">()</span>
-<span class="s1">&#39;500&#39;</span>
-&gt; <span class="nb">let</span> <span class="nv">tx</span> <span class="o">=</span> await ssu.set<span class="o">(</span>1000<span class="o">)</span>
-undefined
-&gt; <span class="o">(</span>await ssu.get<span class="o">())</span>.toString<span class="o">()</span>
-<span class="s1">&#39;1000&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ npx hardhat console --network localhost
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Welcome to Node.js v14.15.1.
+</span></span><span class="line"><span class="cl">Type <span class="s2">&#34;.help&#34;</span> <span class="k">for</span> more information.
+</span></span><span class="line"><span class="cl">&gt; const <span class="nv">f</span> <span class="o">=</span> await ethers.getContractFactory<span class="o">(</span><span class="s2">&#34;SimpleStorageUpgrade&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">undefined
+</span></span><span class="line"><span class="cl">&gt; const <span class="nv">ssu</span> <span class="o">=</span> await f.attach<span class="o">(</span><span class="s2">&#34;0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0&#34;</span><span class="o">)</span>
+</span></span><span class="line"><span class="cl">undefined
+</span></span><span class="line"><span class="cl">&gt; ssu.address
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0&#39;</span>
+</span></span><span class="line"><span class="cl">&gt; <span class="o">(</span>await ssu.get<span class="o">())</span>.toString<span class="o">()</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;500&#39;</span>
+</span></span><span class="line"><span class="cl">&gt; <span class="nb">let</span> <span class="nv">tx</span> <span class="o">=</span> await ssu.set<span class="o">(</span>1000<span class="o">)</span>
+</span></span><span class="line"><span class="cl">undefined
+</span></span><span class="line"><span class="cl">&gt; <span class="o">(</span>await ssu.get<span class="o">())</span>.toString<span class="o">()</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;1000&#39;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>다음과 같이 활용하면 스마트 컨트랙트를 upgrade 시켜줄 수 있습니다.</strong></p>
 <ul>
@@ -255,11 +255,11 @@ undefined
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat run --network localhost ./scripts/SimpleStorageUpgradeV2.deploy.js
-Compiling <span class="m">1</span> file with 0.8.4
-Solidity compilation finished successfully
-SimpleStorageUpgrade version <span class="m">2</span> deployed to: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ npx hardhat run --network localhost ./scripts/SimpleStorageUpgradeV2.deploy.js
+</span></span><span class="line"><span class="cl">Compiling <span class="m">1</span> file with 0.8.4
+</span></span><span class="line"><span class="cl">Solidity compilation finished successfully
+</span></span><span class="line"><span class="cl">SimpleStorageUpgrade version <span class="m">2</span> deployed to: 0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="deploy-to-remote-network">deploy to remote network</h3>
 <blockquote>
@@ -289,25 +289,25 @@ SimpleStorageUpgrade version <span class="m">2</span> deployed to: 0x9fE46736679
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="nx">require</span><span class="p">(</span><span class="s2">&#34;dotenv&#34;</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span> <span class="c1">// yarn add dotenv
-</span><span class="c1"></span>
-<span class="c1">// ... 중략 ...
-</span><span class="c1"></span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="nx">networks</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">rinkeby</span><span class="o">:</span> <span class="p">{</span>
-      <span class="nx">url</span><span class="o">:</span> <span class="sb">`https://eth-rinkeby.alchemyapi.io/v2/</span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ALCHEMY_API_KEY</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
-      <span class="c1">// 0x20CE8B2190949f48F5D32d5BbbfE7E3760811F61
-</span><span class="c1"></span>      <span class="nx">accounts</span><span class="o">:</span> <span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">TEST_ACCOUNT_PRIVATE_KEY</span><span class="p">],</span>
-    <span class="p">},</span>
-  <span class="p">},</span>
-  <span class="nx">solidity</span><span class="o">:</span> <span class="s2">&#34;0.8.4&#34;</span><span class="p">,</span>
-
-  <span class="nx">etherscan</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">apiKey</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ETHERSCAN_API_KEY</span><span class="p">,</span>
-  <span class="p">},</span>
-<span class="p">};</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">require</span><span class="p">(</span><span class="s2">&#34;dotenv&#34;</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span> <span class="c1">// yarn add dotenv
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// ... 중략 ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">networks</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rinkeby</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">url</span><span class="o">:</span> <span class="sb">`https://eth-rinkeby.alchemyapi.io/v2/</span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ALCHEMY_API_KEY</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 0x20CE8B2190949f48F5D32d5BbbfE7E3760811F61
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">accounts</span><span class="o">:</span> <span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">TEST_ACCOUNT_PRIVATE_KEY</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">solidity</span><span class="o">:</span> <span class="s2">&#34;0.8.4&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">etherscan</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">apiKey</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ETHERSCAN_API_KEY</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li><code>ALCHEMY_API_KEY</code>: <a href="https://www.alchemyapi.io" target="_blank" rel="noopener noreffer">alchemy</a>에서 demo app을 생성하게 될 경우 view key를 하면 확인가능합니다.</li>
@@ -394,13 +394,13 @@ SimpleStorageUpgrade version <span class="m">2</span> deployed to: 0x9fE46736679
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ npx hardhat run --network rinkeby ./scripts/SimpleStorageUpgrade.deploy.js
-Downloading compiler 0.8.4
-Compiling <span class="m">3</span> files with 0.8.4
-Solidity compilation finished successfully
-
-SimpleStorageUpgrade deployed to: 0xCe93de7572e3346F1f91Ad39ce06e8F6c6312b69
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ npx hardhat run --network rinkeby ./scripts/SimpleStorageUpgrade.deploy.js
+</span></span><span class="line"><span class="cl">Downloading compiler 0.8.4
+</span></span><span class="line"><span class="cl">Compiling <span class="m">3</span> files with 0.8.4
+</span></span><span class="line"><span class="cl">Solidity compilation finished successfully
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">SimpleStorageUpgrade deployed to: 0xCe93de7572e3346F1f91Ad39ce06e8F6c6312b69
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>테스트넷이기 때문에 약간의 시간이 소요됩니다. (약 30초) 이후 deploy된 address는 <a href="https://rinkeby.etherscan.io/" target="_blank" rel="noopener noreffer">rinkeby etherscan</a>에서 확인가능합니다.</p>
 <ul>
@@ -429,8 +429,8 @@ SimpleStorageUpgrade deployed to: 0xCe93de7572e3346F1f91Ad39ce06e8F6c6312b69
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ yarn add @nomiclabs/hardhat-etherscan --dev
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ yarn add @nomiclabs/hardhat-etherscan --dev
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이후 아래 명령어를 통해서, <strong>로컬의 deploy된 컨트랙트와 실제 rinkeby에 배포된 컨트랙트를 비교해서 검증해주는 로직을 타줍니다.</strong></p>
 <div class="highlight"><div class="chroma">
@@ -448,18 +448,18 @@ SimpleStorageUpgrade deployed to: 0xCe93de7572e3346F1f91Ad39ce06e8F6c6312b69
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">//npx hardhat verify --network rinkeby <span class="s2">&#34;&lt;리모트 배포된 implementation address&gt;&#34;</span>
-$ npx hardhat verify --network rinkeby <span class="s2">&#34;0x92a949706c10fd221b9a073f4284b4bdbc47e6d7&#34;</span>
-Compiling <span class="m">3</span> files with 0.8.4
-Solidity compilation finished successfully
-Compiling <span class="m">1</span> file with 0.8.4
-Successfully submitted <span class="nb">source</span> code <span class="k">for</span> contract
-contracts/SimpleStorageUpgrade.sol:SimpleStorageUpgrade at 0x92a949706c10fd221b9a073f4284b4bdbc47e6d7
-<span class="k">for</span> verification on the block explorer. Waiting <span class="k">for</span> verification result...
-
-Successfully verified contract SimpleStorageUpgrade on Etherscan.
-https://rinkeby.etherscan.io/address/0x92a949706c10fd221b9a073f4284b4bdbc47e6d7#code
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">//npx hardhat verify --network rinkeby <span class="s2">&#34;&lt;리모트 배포된 implementation address&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">$ npx hardhat verify --network rinkeby <span class="s2">&#34;0x92a949706c10fd221b9a073f4284b4bdbc47e6d7&#34;</span>
+</span></span><span class="line"><span class="cl">Compiling <span class="m">3</span> files with 0.8.4
+</span></span><span class="line"><span class="cl">Solidity compilation finished successfully
+</span></span><span class="line"><span class="cl">Compiling <span class="m">1</span> file with 0.8.4
+</span></span><span class="line"><span class="cl">Successfully submitted <span class="nb">source</span> code <span class="k">for</span> contract
+</span></span><span class="line"><span class="cl">contracts/SimpleStorageUpgrade.sol:SimpleStorageUpgrade at 0x92a949706c10fd221b9a073f4284b4bdbc47e6d7
+</span></span><span class="line"><span class="cl"><span class="k">for</span> verification on the block explorer. Waiting <span class="k">for</span> verification result...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Successfully verified contract SimpleStorageUpgrade on Etherscan.
+</span></span><span class="line"><span class="cl">https://rinkeby.etherscan.io/address/0x92a949706c10fd221b9a073f4284b4bdbc47e6d7#code
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img
         class="lazyload"
@@ -502,7 +502,7 @@ https://rinkeby.etherscan.io/address/0x92a949706c10fd221b9a073f4284b4bdbc47e6d7#
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

@@ -247,14 +247,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cm">/* Large copyright and licensing notice */</span>
-
-<span class="cp">#ifndef _SYS_STAT_H_
-</span><span class="cp">#define _SYS_STAT_H_
-</span><span class="cp"></span>
-<span class="cm">/* Types and other definitions */</span>
-<span class="cp">#endif
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Large copyright and licensing notice */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#ifndef _SYS_STAT_H_
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define _SYS_STAT_H_
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* Types and other definitions */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition note open">
         <div class="details-summary admonition-title">
@@ -276,10 +276,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">A</span> <span class="nx">imports</span> <span class="kn">package</span> <span class="nx">B</span><span class="p">;</span>
-<span class="kn">package</span> <span class="nx">B</span> <span class="nx">imports</span> <span class="kn">package</span> <span class="nx">C</span><span class="p">;</span>
-<span class="kn">package</span> <span class="nx">A</span> <span class="nx">does</span> <span class="nx">not</span> <span class="kn">import</span> <span class="kn">package</span> <span class="nx">C</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">A</span> <span class="nx">imports</span> <span class="kn">package</span> <span class="nx">B</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">B</span> <span class="nx">imports</span> <span class="kn">package</span> <span class="nx">C</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">A</span> <span class="nx">does</span> <span class="nx">not</span> <span class="kn">import</span> <span class="kn">package</span> <span class="nx">C</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>다음과 같이 A에서 B를 직접 참조하고, C는 간접적으로 참조하는 상황이 있을 때, go 컴파일러는 2가지 전략을 취합니다.</p>
 <ol>
@@ -352,8 +352,8 @@ C -&gt; B -&gt; A 순으로 컴파일되면서 link됩니다. 이때 A가 컴파
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ go get github.com/4ad/doozer // Shell <span class="nb">command</span> to fetch package
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ go get github.com/4ad/doozer // Shell <span class="nb">command</span> to fetch package
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -362,10 +362,10 @@ C -&gt; B -&gt; A 순으로 컴파일되면서 link됩니다. 이때 A가 컴파
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">import</span> <span class="s">&#34;github.com/4ad/doozer&#34;</span> <span class="c1">// Doozer client&#39;s import statement
-</span><span class="c1"></span>
-<span class="kd">var</span> <span class="nx">client</span> <span class="nx">doozer</span><span class="p">.</span><span class="nx">Conn</span>         <span class="c1">// Client&#39;s use of package
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;github.com/4ad/doozer&#34;</span> <span class="c1">// Doozer client&#39;s import statement
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">client</span> <span class="nx">doozer</span><span class="p">.</span><span class="nx">Conn</span>         <span class="c1">// Client&#39;s use of package
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>이렇게 한번 fetch(package를 install)해주면 그 다음부터는 일반적인 package와 마찬가지로 import 해주면 됩니다.</p>
 <p>이런 방식을 도입함으로써 explicit하게 dependencies들을 보여줄 수 있게 되었습니다.</p>
@@ -392,9 +392,9 @@ C -&gt; B -&gt; A 순으로 컴파일되면서 link됩니다. 이때 A가 컴파
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var fn func([]int) int
-type T struct { a, b int }
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var fn func([]int) int
+</span></span><span class="line"><span class="cl">type T struct { a, b int }
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>c style</li>
@@ -405,9 +405,9 @@ type T struct { a, b int }
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">fn</span><span class="p">)(</span><span class="kt">int</span><span class="p">[]);</span>
-<span class="k">struct</span> <span class="n">T</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">fn</span><span class="p">)(</span><span class="kt">int</span><span class="p">[]);</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">T</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>The declared name appears before the type and there are more keywords.</p>
@@ -420,9 +420,9 @@ type T struct { a, b int }
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">buf</span> <span class="o">*</span><span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span> <span class="p">=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">NewBuffer</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="c1">// explicit
-</span><span class="c1"></span><span class="nx">buf</span> <span class="o">:=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">NewBuffer</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="c1">// derived
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">buf</span> <span class="o">*</span><span class="nx">bytes</span><span class="p">.</span><span class="nx">Buffer</span> <span class="p">=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">NewBuffer</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="c1">// explicit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">buf</span> <span class="o">:=</span> <span class="nx">bytes</span><span class="p">.</span><span class="nf">NewBuffer</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="c1">// derived
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>마지막으로 Go에서는 <code>default function arguments</code>를 의도적으로 누락시켰습니다. 기본 인자가 가지는 모호성으로 코드를 사용하는 부분이 명시적이지 못할 경우가 많다는 단점이 있기 때문입니다. 물론 같은 네이밍을 가질 함수가 가질 수 있는 모든 interface(function signature)를 구현해줘야 한다는 단점을 가지긴합니다.</p>
 <p>아래는 go에서 함수 / 메서드를 표현하는 방법입니다. 코트린 처럼 <code>fun</code>을 키워드로 가졌으면 더 좋았을 것 같네요.</p>
@@ -432,9 +432,9 @@ type T struct { a, b int }
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Abs</span><span class="p">(</span><span class="nx">x</span> <span class="nx">T</span><span class="p">)</span> <span class="kt">float64</span>      <span class="c1">// function declaration
-</span><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">x</span> <span class="nx">T</span><span class="p">)</span> <span class="nf">Abs</span><span class="p">()</span> <span class="kt">float64</span>   <span class="c1">// method declaration
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Abs</span><span class="p">(</span><span class="nx">x</span> <span class="nx">T</span><span class="p">)</span> <span class="kt">float64</span>      <span class="c1">// function declaration
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">x</span> <span class="nx">T</span><span class="p">)</span> <span class="nf">Abs</span><span class="p">()</span> <span class="kt">float64</span>   <span class="c1">// method declaration
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>go는 <code>first-class</code> function / closures를 지원합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -442,8 +442,8 @@ type T struct { a, b int }
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">negativeAbs</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">x</span> <span class="nx">T</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span> <span class="k">return</span> <span class="o">-</span><span class="nf">Abs</span><span class="p">(</span><span class="nx">x</span><span class="p">)}</span> <span class="c1">// lambda
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">negativeAbs</span> <span class="o">:=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">x</span> <span class="nx">T</span><span class="p">)</span> <span class="kt">float64</span> <span class="p">{</span> <span class="k">return</span> <span class="o">-</span><span class="nf">Abs</span><span class="p">(</span><span class="nx">x</span><span class="p">)}</span> <span class="c1">// lambda
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>go는 multiple value return이 가능합니다.</p>
 <div class="highlight"><div class="chroma">
@@ -454,11 +454,11 @@ type T struct { a, b int }
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">ReadByte</span><span class="p">()</span> <span class="p">(</span><span class="nx">c</span> <span class="kt">byte</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span>
-
-<span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">ReadByte</span><span class="p">()</span>
-<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">ReadByte</span><span class="p">()</span> <span class="p">(</span><span class="nx">c</span> <span class="kt">byte</span><span class="p">,</span> <span class="nx">err</span> <span class="kt">error</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">c</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nf">ReadByte</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition note open">
         <div class="details-summary admonition-title">
@@ -485,12 +485,12 @@ type T struct { a, b int }
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">create_person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
-   <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
-   <span class="o">...</span>
-   <span class="k">else</span><span class="p">:</span>
-   <span class="o">...</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="o">...</span>
+</span></span><span class="line"><span class="cl">   <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">   <span class="o">...</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이런 함수가 있고 이 함수 관련해서 에러가 나면 <code>create_person</code>를 호출하는 모든 코드들을 다 뒤져봐야 할 경우가 있었습니다. 특히 mongodb처럼 데이터의 스키마가 고정되지 않은 데이터를 함수의 dto로 받는 경우에는 정말 짜증납니다. (kotlin migration 과정에서 엄청 스트레스를 줬던 콘 <code>mcard</code>&hellip;)</p>
 </div>
@@ -603,7 +603,7 @@ type T struct { a, b int }
 <p>Go는 concurrency context에 <code>write-once</code> 접근을 하지 않습니다. 이는 의도적으로 bad programming을 막지 않은 것인데요, convention으로 이런 bad practice를 방지하고, 프로그래머들이 message passing에 대해서 더 생각하도록 유도하기 위함이라고 합니다.</p>
 <p>이런 철학은 go의 motto에서도 드러나 있습니다.</p>
 <center>
-<p><strong>&ldquo;Don&rsquo;t communicate by sharing memory, share memory by communicating.&quot;</strong></p>
+<p><strong>&ldquo;Don&rsquo;t communicate by sharing memory, share memory by communicating.&rdquo;</strong></p>
 </center>
 <h2 id="garbage-collection">Garbage collection</h2>
 <p>go는 jvm 개발자가 있어서 그런지 c / c++ / rust와 달리 gc를 가져왔습니다.</p>
@@ -696,11 +696,11 @@ type T struct { a, b int }
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">f</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span>
-<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">err</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">f</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Open</span><span class="p">(</span><span class="nx">fileName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">err</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
         </div>
@@ -756,7 +756,7 @@ type T struct { a, b int }
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

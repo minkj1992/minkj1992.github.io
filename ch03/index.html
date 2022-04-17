@@ -32,7 +32,7 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "solidity, dev, crptozombies","wordcount":  1967 ,
+                        }],"genre": "posts","keywords": "solidity, dev, crptozombies","wordcount":  1965 ,
         "url": "https:\/\/minkj1992.github.io\/ch03\/","datePublished": "2022-01-21T13:06:52+09:00","dateModified": "2022-01-28T13:35:58+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
@@ -114,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">[Cryptozombies03] Advanced Solidity Concepts</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/blockchain/"><i class="far fa-folder fa-fw"></i>blockchain</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-21">2022-01-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1967 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-01-21">2022-01-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;1965 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;10 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -205,42 +205,42 @@
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="cm">/**
-</span><span class="cm"> * @title Ownable
-</span><span class="cm"> * @dev The Ownable contract has an owner address, and provides basic authorization control
-</span><span class="cm"> * functions, this simplifies the implementation of &#34;user permissions&#34;.
-</span><span class="cm"> */</span>
-<span class="kd">contract</span> <span class="nc">Ownable</span> <span class="p">{</span>
-  <span class="kt">address</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
-  <span class="kd">event</span> <span class="nc">OwnershipTransferred</span><span class="p">(</span><span class="kt">address</span> <span class="k">indexed</span> <span class="n">previousOwner</span><span class="p">,</span> <span class="kt">address</span> <span class="k">indexed</span> <span class="n">newOwner</span><span class="p">);</span>
-
-  <span class="cm">/**
-</span><span class="cm">   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
-</span><span class="cm">   * account.
-</span><span class="cm">   */</span>
-  <span class="kd">function</span> <span class="nf">Ownable</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
-    <span class="n">owner</span> <span class="o">=</span> <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="cm">/**
-</span><span class="cm">   * @dev Throws if called by any account other than the owner.
-</span><span class="cm">   */</span>
-  <span class="kd">modifier</span> <span class="nf">onlyOwner</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">owner</span><span class="p">);</span>
-    <span class="k">_</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="cm">/**
-</span><span class="cm">   * @dev Allows the current owner to transfer control of the contract to a newOwner.
-</span><span class="cm">   * @param newOwner The address to transfer ownership to.
-</span><span class="cm">   */</span>
-  <span class="kd">function</span> <span class="nf">transferOwnership</span><span class="p">(</span><span class="kt">address</span> <span class="n">newOwner</span><span class="p">)</span> <span class="k">public</span> <span class="n">onlyOwner</span> <span class="p">{</span>
-    <span class="nb">require</span><span class="p">(</span><span class="n">newOwner</span> <span class="o">!=</span> <span class="kt">address</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
-    <span class="n">OwnershipTransferred</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="n">newOwner</span><span class="p">);</span>
-    <span class="n">owner</span> <span class="o">=</span> <span class="n">newOwner</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @title Ownable
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @dev The Ownable contract has an owner address, and provides basic authorization control
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * functions, this simplifies the implementation of &#34;user permissions&#34;.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">Ownable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">address</span> <span class="k">public</span> <span class="n">owner</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">event</span> <span class="nc">OwnershipTransferred</span><span class="p">(</span><span class="kt">address</span> <span class="k">indexed</span> <span class="n">previousOwner</span><span class="p">,</span> <span class="kt">address</span> <span class="k">indexed</span> <span class="n">newOwner</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @dev The Ownable constructor sets the original `owner` of the contract to the sender
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * account.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">Ownable</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">owner</span> <span class="o">=</span> <span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @dev Throws if called by any account other than the owner.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">modifier</span> <span class="nf">onlyOwner</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">owner</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @dev Allows the current owner to transfer control of the contract to a newOwner.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param newOwner The address to transfer ownership to.
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">transferOwnership</span><span class="p">(</span><span class="kt">address</span> <span class="n">newOwner</span><span class="p">)</span> <span class="k">public</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="n">newOwner</span> <span class="o">!=</span> <span class="kt">address</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">OwnershipTransferred</span><span class="p">(</span><span class="n">owner</span><span class="p">,</span> <span class="n">newOwner</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">owner</span> <span class="o">=</span> <span class="n">newOwner</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>function Ownable()</code>는 <code>Constructor</code>(생성자)입니다. 컨트랙트와 동일한 이름을 가졌으며 default로 제공되어 특별한 작업을 할 게 아니라면 생략가능합니다. 생성자는 컨트랙트 생성시 단 한번만 실행됩니다.</p>
 <p><code>modifier onlyOwner()</code>에서 modifier는 <code>function modifier</code>(함수 제어자)입니다. 함수에 대한 접근을 제어하기 위해 사용되는 함수의 일종으로, <strong>보통 함수 실행 전 요구사항 충족여부를 확인하는 데 사용됩니다.</strong></p>
@@ -290,22 +290,22 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">struct</span> <span class="nc">NormalStruct</span> <span class="p">{</span>
-  <span class="kt">uint</span> <span class="n">a</span><span class="p">;</span>
-  <span class="kt">uint</span> <span class="n">b</span><span class="p">;</span>
-  <span class="kt">uint</span> <span class="n">c</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kd">struct</span> <span class="nc">MiniMe</span> <span class="p">{</span>
-  <span class="kt">uint32</span> <span class="n">a</span><span class="p">;</span>
-  <span class="kt">uint32</span> <span class="n">b</span><span class="p">;</span>
-  <span class="kt">uint</span> <span class="n">c</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// `mini`는 구조체 압축을 했기 때문에 `normal`보다 가스를 조금 사용하게 됩니다.
-</span><span class="c1"></span><span class="n">NormalStruct</span> <span class="n">normal</span> <span class="o">=</span> <span class="n">NormalStruct</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
-<span class="n">MiniMe</span> <span class="n">mini</span> <span class="o">=</span> <span class="n">MiniMe</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span> 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">NormalStruct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">struct</span> <span class="nc">MiniMe</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint32</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// `mini`는 구조체 압축을 했기 때문에 `normal`보다 가스를 조금 사용하게 됩니다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">NormalStruct</span> <span class="n">normal</span> <span class="o">=</span> <span class="n">NormalStruct</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">MiniMe</span> <span class="n">mini</span> <span class="o">=</span> <span class="n">MiniMe</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">);</span> 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이런 이유로, <strong>구조체 안에서는 가능한 작은 크기의 정수 타입을 쓰는 것이 좋다</strong>고 할 수 있습니다.또한 <strong>동일한 데이터 타입은 하나로 묶어놓는 것이 좋습니다</strong>.</p>
 <p>즉 구조체에서 서로 가까이 있도록 선언하면 솔리디티에서 사용하는 저장 공간을 최소화해줍니다.
@@ -342,18 +342,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kt">uint</span> <span class="n">lastUpdated</span><span class="p">;</span>
-
-<span class="c1">// `lastUpdated`를 `now`로 설정
-</span><span class="c1"></span><span class="kd">function</span> <span class="nf">updateTimestamp</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
-  <span class="n">lastUpdated</span> <span class="o">=</span> <span class="nb">now</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// 마지막으로 `updateTimestamp`가 호출된 뒤 5분이 지났으면 `true`를, 5분이 아직 지나지 않았으면 `false`를 반환
-</span><span class="c1"></span><span class="kd">function</span> <span class="nf">fiveMinutesHavePassed</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="p">(</span><span class="nb">now</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">lastUpdated</span> <span class="o">+</span> <span class="mi">5</span> <span class="kc">minutes</span><span class="p">));</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kt">uint</span> <span class="n">lastUpdated</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// `lastUpdated`를 `now`로 설정
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nf">updateTimestamp</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">lastUpdated</span> <span class="o">=</span> <span class="nb">now</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 마지막으로 `updateTimestamp`가 호출된 뒤 5분이 지났으면 `true`를, 5분이 아직 지나지 않았으면 `false`를 반환
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nf">fiveMinutesHavePassed</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span><span class="nb">now</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="n">lastUpdated</span> <span class="o">+</span> <span class="mi">5</span> <span class="kc">minutes</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="passing-structs-as-arguments">Passing structs as arguments</h3>
 <p><strong>솔리디티에서는 <code>private</code> 또는 <code>internal</code> 함수의 인자로서 구조체의 <code>storage 포인터</code>를 전달할 수 있습니다.</strong></p>
@@ -378,27 +378,25 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">FirstSurprise</span> <span class="p">{</span>
- 
- <span class="kd">struct</span> <span class="nc">Camper</span> <span class="p">{</span>
-   <span class="kt">bool</span> <span class="n">isHappy</span><span class="p">;</span>
- <span class="p">}</span>
- 
- <span class="kd">mapping</span><span class="p">(</span><span class="kt">uint</span> <span class="o">=&gt;</span> <span class="n">Camper</span><span class="p">)</span> <span class="k">public</span> <span class="n">campers</span><span class="p">;</span>
- 
- <span class="kd">function</span> <span class="nf">setHappy</span><span class="p">(</span><span class="kt">uint</span> <span class="n">index</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-   <span class="n">campers</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">isHappy</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
- <span class="p">}</span>
- <span class="kd">function</span> <span class="nf">surpriseOne</span><span class="p">(</span><span class="kt">uint</span> <span class="n">index</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-   <span class="n">Camper</span> <span class="n">c</span> <span class="o">=</span> <span class="n">campers</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
-   <span class="n">c</span><span class="p">.</span><span class="n">isHappy</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
- <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">FirstSurprise</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> <span class="kd">struct</span> <span class="nc">Camper</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">bool</span> <span class="n">isHappy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> <span class="kd">mapping</span><span class="p">(</span><span class="kt">uint</span> <span class="o">=&gt;</span> <span class="n">Camper</span><span class="p">)</span> <span class="k">public</span> <span class="n">campers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> <span class="kd">function</span> <span class="nf">setHappy</span><span class="p">(</span><span class="kt">uint</span> <span class="n">index</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">campers</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">isHappy</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="kd">function</span> <span class="nf">surpriseOne</span><span class="p">(</span><span class="kt">uint</span> <span class="n">index</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Camper</span> <span class="n">c</span> <span class="o">=</span> <span class="n">campers</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">   <span class="n">c</span><span class="p">.</span><span class="n">isHappy</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>setHappy</code>를 통하지 않고도, <code>surpriseOne()</code>의 <code>Camper c = campers[index]</code> c가 <code>storage pointer</code>타입이기 때문에 side-effect가 생길 수 있다는 점이 핵심인 듯합니다.</p>
 <p>최근에 이런 목소리를 반영해서 solidity compiler는 이런 상황일 때 아래와 같은 warning을 띄워준다고 합니다.</p>
@@ -413,10 +411,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">function</span> <span class="nf">_doStuff</span><span class="p">(</span><span class="n">Zombie</span> <span class="k">storage</span> <span class="n">_zombie</span><span class="p">)</span> <span class="k">internal</span> <span class="p">{</span>
-  <span class="c1">// _zombie로 할 수 있는 것들을 처리
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">_doStuff</span><span class="p">(</span><span class="n">Zombie</span> <span class="k">storage</span> <span class="n">_zombie</span><span class="p">)</span> <span class="k">internal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// _zombie로 할 수 있는 것들을 처리
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>그럼 이런 배경지식을 기억한채 다시 좀비로 넘어와보겠습니다.
 우리는 좀비들이 끊임없이 kitty를 먹고 증식하는 것을 막기 위해서 <code>feedAndMultiply</code>에 다음 제약조건을 추가해보려고 합니다.</p>
@@ -482,61 +480,61 @@
 </span><span class="lnt">54
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="s">&#34;./zombiefactory.sol&#34;</span><span class="p">;</span>
-
-<span class="kd">contract</span> <span class="nc">KittyInterface</span> <span class="p">{</span>
-  <span class="kd">function</span> <span class="nf">getKitty</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_id</span><span class="p">)</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span>
-    <span class="kt">bool</span> <span class="n">isGestating</span><span class="p">,</span>
-    <span class="kt">bool</span> <span class="n">isReady</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">cooldownIndex</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">nextActionAt</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">siringWithId</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">birthTime</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">matronId</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">sireId</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">generation</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">genes</span>
-  <span class="p">);</span>
-<span class="p">}</span>
-
-<span class="kd">contract</span> <span class="nc">ZombieFeeding</span> <span class="k">is</span> <span class="n">ZombieFactory</span> <span class="p">{</span>
-
-  <span class="n">KittyInterface</span> <span class="n">kittyContract</span><span class="p">;</span>
-
-  <span class="kd">function</span> <span class="nf">setKittyContractAddress</span><span class="p">(</span><span class="kt">address</span> <span class="n">_address</span><span class="p">)</span> <span class="k">external</span> <span class="n">onlyOwner</span> <span class="p">{</span>
-    <span class="n">kittyContract</span> <span class="o">=</span> <span class="n">KittyInterface</span><span class="p">(</span><span class="n">_address</span><span class="p">);</span>
-  <span class="p">}</span>
-
-  <span class="kd">function</span> <span class="nf">_triggerCooldown</span><span class="p">(</span><span class="n">Zombie</span> <span class="k">storage</span> <span class="n">_zombie</span><span class="p">)</span> <span class="k">internal</span> <span class="p">{</span>
-    <span class="n">_zombie</span><span class="p">.</span><span class="n">readyTime</span> <span class="o">=</span> <span class="kt">uint32</span><span class="p">(</span><span class="nb">now</span> <span class="o">+</span> <span class="n">cooldownTime</span><span class="p">);</span>
-  <span class="p">}</span>
-
-  <span class="kd">function</span> <span class="nf">_isReady</span><span class="p">(</span><span class="n">Zombie</span> <span class="k">storage</span> <span class="n">_zombie</span><span class="p">)</span> <span class="k">internal</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="p">(</span><span class="n">_zombie</span><span class="p">.</span><span class="n">readyTime</span> <span class="o">&lt;=</span> <span class="nb">now</span><span class="p">);</span>
-  <span class="p">}</span>
-
-  <span class="kd">function</span> <span class="nf">feedAndMultiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_targetDna</span><span class="p">,</span> <span class="kt">string</span> <span class="n">_species</span><span class="p">)</span> <span class="k">internal</span> <span class="p">{</span>
-    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
-    <span class="n">Zombie</span> <span class="k">storage</span> <span class="n">myZombie</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">];</span>
-    <span class="nb">require</span><span class="p">(</span><span class="n">_isReady</span><span class="p">(</span><span class="n">myZombie</span><span class="p">));</span> <span class="c1">// 새로 추가 된정보
-</span><span class="c1"></span>    <span class="n">_targetDna</span> <span class="o">=</span> <span class="n">_targetDna</span> <span class="o">%</span> <span class="n">dnaModulus</span><span class="p">;</span>
-    <span class="kt">uint</span> <span class="n">newDna</span> <span class="o">=</span> <span class="p">(</span><span class="n">myZombie</span><span class="p">.</span><span class="n">dna</span> <span class="o">+</span> <span class="n">_targetDna</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_species</span><span class="p">)</span> <span class="o">==</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;kitty&#34;</span><span class="p">))</span> <span class="p">{</span>
-      <span class="n">newDna</span> <span class="o">=</span> <span class="n">newDna</span> <span class="o">-</span> <span class="n">newDna</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">99</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">_createZombie</span><span class="p">(</span><span class="s">&#34;NoName&#34;</span><span class="p">,</span> <span class="n">newDna</span><span class="p">);</span>
-    <span class="n">_triggerCooldown</span><span class="p">(</span><span class="n">myZombie</span><span class="p">);</span> <span class="c1">// 새로 추가 된정보
-</span><span class="c1"></span>  <span class="p">}</span>
-
-  <span class="kd">function</span> <span class="nf">feedOnKitty</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_kittyId</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-    <span class="kt">uint</span> <span class="n">kittyDna</span><span class="p">;</span>
-    <span class="p">(,,,,,,,,,</span><span class="n">kittyDna</span><span class="p">)</span> <span class="o">=</span> <span class="n">kittyContract</span><span class="p">.</span><span class="n">getKitty</span><span class="p">(</span><span class="n">_kittyId</span><span class="p">);</span>
-    <span class="n">feedAndMultiply</span><span class="p">(</span><span class="n">_zombieId</span><span class="p">,</span> <span class="n">kittyDna</span><span class="p">,</span> <span class="s">&#34;kitty&#34;</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./zombiefactory.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">KittyInterface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">getKitty</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_id</span><span class="p">)</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isGestating</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isReady</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">cooldownIndex</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">nextActionAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">siringWithId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">birthTime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">matronId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">sireId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">generation</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">genes</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFeeding</span> <span class="k">is</span> <span class="n">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">KittyInterface</span> <span class="n">kittyContract</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">setKittyContractAddress</span><span class="p">(</span><span class="kt">address</span> <span class="n">_address</span><span class="p">)</span> <span class="k">external</span> <span class="n">onlyOwner</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kittyContract</span> <span class="o">=</span> <span class="n">KittyInterface</span><span class="p">(</span><span class="n">_address</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">_triggerCooldown</span><span class="p">(</span><span class="n">Zombie</span> <span class="k">storage</span> <span class="n">_zombie</span><span class="p">)</span> <span class="k">internal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_zombie</span><span class="p">.</span><span class="n">readyTime</span> <span class="o">=</span> <span class="kt">uint32</span><span class="p">(</span><span class="nb">now</span> <span class="o">+</span> <span class="n">cooldownTime</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">_isReady</span><span class="p">(</span><span class="n">Zombie</span> <span class="k">storage</span> <span class="n">_zombie</span><span class="p">)</span> <span class="k">internal</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="p">(</span><span class="n">_zombie</span><span class="p">.</span><span class="n">readyTime</span> <span class="o">&lt;=</span> <span class="nb">now</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">feedAndMultiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_targetDna</span><span class="p">,</span> <span class="kt">string</span> <span class="n">_species</span><span class="p">)</span> <span class="k">internal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Zombie</span> <span class="k">storage</span> <span class="n">myZombie</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="n">_isReady</span><span class="p">(</span><span class="n">myZombie</span><span class="p">));</span> <span class="c1">// 새로 추가 된정보
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">_targetDna</span> <span class="o">=</span> <span class="n">_targetDna</span> <span class="o">%</span> <span class="n">dnaModulus</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">newDna</span> <span class="o">=</span> <span class="p">(</span><span class="n">myZombie</span><span class="p">.</span><span class="n">dna</span> <span class="o">+</span> <span class="n">_targetDna</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_species</span><span class="p">)</span> <span class="o">==</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;kitty&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">newDna</span> <span class="o">=</span> <span class="n">newDna</span> <span class="o">-</span> <span class="n">newDna</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">99</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_createZombie</span><span class="p">(</span><span class="s">&#34;NoName&#34;</span><span class="p">,</span> <span class="n">newDna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_triggerCooldown</span><span class="p">(</span><span class="n">myZombie</span><span class="p">);</span> <span class="c1">// 새로 추가 된정보
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">feedOnKitty</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_kittyId</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">kittyDna</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(,,,,,,,,,</span><span class="n">kittyDna</span><span class="p">)</span> <span class="o">=</span> <span class="n">kittyContract</span><span class="p">.</span><span class="n">getKitty</span><span class="p">(</span><span class="n">_kittyId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">feedAndMultiply</span><span class="p">(</span><span class="n">_zombieId</span><span class="p">,</span> <span class="n">kittyDna</span><span class="p">,</span> <span class="s">&#34;kitty&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>우선 <code>Zombie</code> storage pointer를 인자로 받는 <code>_isReady()</code>, <code>_triggerCooldown()</code>함수를 만듭니다.</p>
 <ul>
@@ -563,18 +561,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="c1">// usrId =&gt; age mapping
-</span><span class="c1"></span><span class="kd">mapping</span> <span class="p">(</span><span class="kt">uint</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="k">public</span> <span class="n">age</span><span class="p">;</span>
-
-<span class="kd">modifier</span> <span class="nf">olderThan</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_age</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_userId</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nb">require</span><span class="p">(</span><span class="n">age</span><span class="p">[</span><span class="n">_userId</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">_age</span><span class="p">);</span>
-  <span class="k">_</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kd">function</span> <span class="nf">buyCigarette</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_userId</span><span class="p">)</span> <span class="k">public</span> <span class="n">olderthan</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="n">_userId</span><span class="p">)</span> <span class="p">{</span>
-  <span class="err">🚬</span><span class="p">()</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// usrId =&gt; age mapping
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">mapping</span> <span class="p">(</span><span class="kt">uint</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="k">public</span> <span class="n">age</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">modifier</span> <span class="nf">olderThan</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_age</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_userId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">require</span><span class="p">(</span><span class="n">age</span><span class="p">[</span><span class="n">_userId</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">_age</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">buyCigarette</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_userId</span><span class="p">)</span> <span class="k">public</span> <span class="n">olderthan</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="n">_userId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="err">🚬</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>위의 코드는 담배를 판매하는 간단한 contract입니다. <code>functio nmodifier</code>의 인자로 나이와 userId를 제공하여 나이를 검사를 구현해주었습니다.</p>
 <p>이 기능을 활용하여 우리의 <code>zombie</code>에게 level 속성을 부여해보고, 속성에 따라서 아래와 같은 능력치 제한을 두는 modifier를 만들어보겠습니다.</p>
@@ -608,28 +606,28 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="s">&#34;./zombiefeeding.sol&#34;</span><span class="p">;</span>
-
-<span class="kd">contract</span> <span class="nc">ZombieHelper</span> <span class="k">is</span> <span class="n">ZombieFeeding</span> <span class="p">{</span>
-
-  <span class="kd">modifier</span> <span class="nf">aboveLevel</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_level</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nb">require</span><span class="p">(</span><span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">].</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="n">_level</span><span class="p">);</span>
-    <span class="k">_</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="kd">function</span> <span class="nf">changeName</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">string</span> <span class="n">_newName</span><span class="p">)</span> <span class="k">external</span> <span class="n">aboveLevel</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
-    <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">].</span><span class="nb">name</span> <span class="o">=</span> <span class="n">_newName</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="kd">function</span> <span class="nf">changeDna</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_newDna</span><span class="p">)</span> <span class="k">external</span> <span class="n">aboveLevel</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
-    <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">].</span><span class="n">dna</span> <span class="o">=</span> <span class="n">_newDna</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./zombiefeeding.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieHelper</span> <span class="k">is</span> <span class="n">ZombieFeeding</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">modifier</span> <span class="nf">aboveLevel</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_level</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">].</span><span class="n">level</span> <span class="o">&gt;=</span> <span class="n">_level</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">changeName</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">string</span> <span class="n">_newName</span><span class="p">)</span> <span class="k">external</span> <span class="n">aboveLevel</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">].</span><span class="nb">name</span> <span class="o">=</span> <span class="n">_newName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">changeDna</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_newDna</span><span class="p">)</span> <span class="k">external</span> <span class="n">aboveLevel</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">_zombieId</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">].</span><span class="n">dna</span> <span class="o">=</span> <span class="n">_newDna</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="saving-gas-with-view-functions">Saving Gas With &lsquo;View&rsquo; Functions</h3>
 <blockquote>
@@ -688,25 +686,23 @@
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="s">&#34;./zombiefeeding.sol&#34;</span><span class="p">;</span>
-
-<span class="kd">contract</span> <span class="nc">ZombieHelper</span> <span class="k">is</span> <span class="n">ZombieFeeding</span> <span class="p">{</span>
-
-  <span class="p">...</span> <span class="err">중략</span> <span class="p">...</span>
-
-  <span class="kd">function</span> <span class="nf">getZombiesByOwner</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span><span class="p">(</span><span class="kt">uint</span><span class="p">[])</span> <span class="p">{</span>
-    <span class="kt">uint</span><span class="p">[]</span> <span class="k">memory</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">uint</span><span class="p">[](</span><span class="n">ownerZombieCount</span><span class="p">[</span><span class="n">_owner</span><span class="p">]);</span>
-    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-  <span class="p">}</span>
-
-<span class="p">}</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./zombiefeeding.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieHelper</span> <span class="k">is</span> <span class="n">ZombieFeeding</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">...</span> <span class="err">중략</span> <span class="p">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">getZombiesByOwner</span><span class="p">(</span><span class="kt">address</span> <span class="n">_owner</span><span class="p">)</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span><span class="p">(</span><span class="kt">uint</span><span class="p">[])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span><span class="p">[]</span> <span class="k">memory</span> <span class="n">result</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">uint</span><span class="p">[](</span><span class="n">ownerZombieCount</span><span class="p">[</span><span class="n">_owner</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -741,7 +737,7 @@
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

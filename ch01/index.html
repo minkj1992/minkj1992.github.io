@@ -166,9 +166,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>모든 솔리디티 코드는 솔리디티의 버전을 선언 해주어야 한다. 이를 통해 새로운 컴파일러 버전이 나오더라도 코드가 깨지지 않도록 한다.</p>
 <div class="highlight"><div class="chroma">
@@ -179,11 +179,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
-
-<span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>솔리디티에서 <code>state variable</code>는 컨트랙트 저장소에 영구적으로 저장된다. 즉 이더리움 블록체인에 기록이 된다.
 <code>uint</code>는 unsigned 즉 부호가 없는 정수로, <strong>음이 아닌 정수</strong>이다.  (&lt;-&gt; <code>int</code>)
@@ -198,13 +198,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
-
-<span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
-    <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
-    <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>솔리디티는 c++과 마찬가지롤 <code>struct</code>를 제공한다.</p>
 <div class="highlight"><div class="chroma">
@@ -217,13 +217,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
-
-<span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
-    <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
-    <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>array안에 크기를 주지 않으면 동적할당 가능하다.</p>
 <div class="highlight"><div class="chroma">
@@ -236,13 +236,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="c1">// 2개의 원소를 담을 수 있는 고정 길이의 배열:
-</span><span class="c1"></span><span class="kt">uint</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">fixedArray</span><span class="p">;</span>
-<span class="c1">// 또다른 고정 배열으로 5개의 스트링을 담을 수 있다:
-</span><span class="c1"></span><span class="kt">string</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">stringArray</span><span class="p">;</span>
-<span class="c1">// 동적 배열은 고정된 크기가 없으며 계속 크기가 커질 수 있다:
-</span><span class="c1"></span><span class="kt">uint</span><span class="p">[]</span> <span class="n">dynamicArray</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// 2개의 원소를 담을 수 있는 고정 길이의 배열:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">uint</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">fixedArray</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 또다른 고정 배열으로 5개의 스트링을 담을 수 있다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">string</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="n">stringArray</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 동적 배열은 고정된 크기가 없으며 계속 크기가 커질 수 있다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">uint</span><span class="p">[]</span> <span class="n">dynamicArray</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>public으로 배열을 선언할 수 있으며 <code>솔리디티</code>는 이런 배열을 위해 getter 메소드를 자동적으로 생성해준다.</p>
 <div class="highlight"><div class="chroma">
@@ -250,8 +250,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="n">Person</span><span class="p">[]</span> <span class="k">public</span> <span class="n">people</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="n">Person</span><span class="p">[]</span> <span class="k">public</span> <span class="n">people</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>함수의 경우 <code>param명</code>을  <code>언더스코어(_)</code>로 시작해서 전역 변수와 구별하는 것이 관례이다. 마찬가지로 <code>private 함수명</code> 또한 _를 쓰는 것이 convention이다.</p>
 <div class="highlight"><div class="chroma">
@@ -263,12 +263,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol">    <span class="kd">function</span> <span class="nf">_createZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_dna</span><span class="p">)</span> <span class="k">private</span> <span class="p">{</span>
-    <span class="p">}</span>
-
-    <span class="kd">function</span> <span class="nf">createRandomZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-    <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nf">_createZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_dna</span><span class="p">)</span> <span class="k">private</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nf">createRandomZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>참고로 솔리디티에서 함수는 기본적으로 public이다.</p>
 <ul>
@@ -281,9 +281,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">function</span> <span class="nf">sayHello</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">sayHello</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>또한 <code>pure 함수</code>도 가지고 있는데, 이는 함수가 앱에서 어떤 데이터도 접근하지 않는(read, write둘다 하지 x) 것을 의미한다.</p>
 <div class="highlight"><div class="chroma">
@@ -293,10 +293,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">function</span> <span class="nf">_multiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">b</span><span class="p">)</span> <span class="k">private</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">_multiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">a</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">b</span><span class="p">)</span> <span class="k">private</span> <span class="k">pure</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>이더리움은 <code>SHA3</code>의 버전 중 하나인 <code>keccak256</code>를 내장 해시 함수로 가지고 있다. 해시 함수는 기본적으로 입력 스트링을 <code>랜덤 256bit 16진수</code>로 매핑한다.</p>
 <div class="details admonition question open">
@@ -315,11 +315,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="c1">//6e91ec6b618bb462a4a6ee5aa2cb0e9cf30f7a052bb467b0ba58b8748c00d2e5
-</span><span class="c1"></span><span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;aaaab&#34;</span><span class="p">);</span>
-<span class="c1">//b1f078126895a1424524de5321b339ab00408010b7cf0e6ed451514981e58aa9
-</span><span class="c1"></span><span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;aaaac&#34;</span><span class="p">);</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">//6e91ec6b618bb462a4a6ee5aa2cb0e9cf30f7a052bb467b0ba58b8748c00d2e5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;aaaab&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//b1f078126895a1424524de5321b339ab00408010b7cf0e6ed451514981e58aa9
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;aaaac&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>event</code>는 생성한 컨트랙트가 블록체인 상에서 앱에 접근하는 사용자 layer에서 액션이 발생했을 때, 통신하는 방법이다. 컨트랙트는 특정 이벤트가 일어나는지 &ldquo;listen&quot;하며, 그 이벤트가 발생하면 <code>action</code>을 취한다.</p>
 <div class="highlight"><div class="chroma">
@@ -335,16 +335,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="c1">// 이벤트를 선언한다
-</span><span class="c1"></span><span class="kd">event</span> <span class="nc">IntegersAdded</span><span class="p">(</span><span class="kt">uint</span> <span class="n">x</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">y</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">result</span><span class="p">);</span>
-
-<span class="kd">function</span> <span class="nf">add</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_x</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_y</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-  <span class="kt">uint</span> <span class="n">result</span> <span class="o">=</span> <span class="n">_x</span> <span class="o">+</span> <span class="n">_y</span><span class="p">;</span>
-  <span class="c1">// 이벤트를 실행하여 앱에게 add 함수가 실행되었음을 알린다:
-</span><span class="c1"></span>  <span class="n">IntegersAdded</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
-  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// 이벤트를 선언한다
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">event</span> <span class="nc">IntegersAdded</span><span class="p">(</span><span class="kt">uint</span> <span class="n">x</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">y</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">add</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_x</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_y</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="n">result</span> <span class="o">=</span> <span class="n">_x</span> <span class="o">+</span> <span class="n">_y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 이벤트를 실행하여 앱에게 add 함수가 실행되었음을 알린다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">IntegersAdded</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="summary">Summary</h3>
 <p>지금까지의 과정을 정리하면 아래와 같은 코드가 최종적으로 만들어진다.</p>
@@ -385,40 +385,40 @@
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
-
-<span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
-
-    <span class="kd">event</span> <span class="nc">NewZombie</span><span class="p">(</span><span class="kt">uint</span> <span class="n">zombieId</span><span class="p">,</span> <span class="kt">string</span> <span class="nb">name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">dna</span><span class="p">);</span>
-
-
-    <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
-    <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
-
-    <span class="kd">struct</span> <span class="nc">Zombie</span> <span class="p">{</span>
-        <span class="kt">string</span> <span class="nb">name</span><span class="p">;</span>
-        <span class="kt">uint</span> <span class="n">dna</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">Zombie</span><span class="p">[]</span> <span class="k">public</span> <span class="n">zombies</span><span class="p">;</span>
-
-    <span class="kd">function</span> <span class="nf">_createZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_dna</span><span class="p">)</span> <span class="k">private</span> <span class="p">{</span>
-        <span class="kt">uint</span> <span class="n">id</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">Zombie</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">_dna</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// push returns length
-</span><span class="c1"></span>        <span class="n">NewZombie</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_name</span><span class="p">,</span> <span class="n">_dna</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="kd">function</span> <span class="nf">_generateRandomDna</span><span class="p">(</span><span class="kt">string</span> <span class="n">_str</span><span class="p">)</span> <span class="k">private</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">uint</span> <span class="n">rand</span> <span class="o">=</span> <span class="kt">uint</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_str</span><span class="p">));</span>
-        <span class="k">return</span> <span class="n">rand</span> <span class="o">%</span> <span class="n">dnaModulus</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kd">function</span> <span class="nf">createRandomZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-        <span class="kt">uint</span> <span class="n">randDna</span> <span class="o">=</span> <span class="n">_generateRandomDna</span><span class="p">(</span><span class="n">_name</span><span class="p">);</span>
-        <span class="n">_createZombie</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">randDna</span><span class="p">);</span>
-    <span class="p">}</span>
-
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">event</span> <span class="nc">NewZombie</span><span class="p">(</span><span class="kt">uint</span> <span class="n">zombieId</span><span class="p">,</span> <span class="kt">string</span> <span class="nb">name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">dna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">dnaDigits</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">dnaModulus</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">dnaDigits</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">struct</span> <span class="nc">Zombie</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">string</span> <span class="nb">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint</span> <span class="n">dna</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Zombie</span><span class="p">[]</span> <span class="k">public</span> <span class="n">zombies</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nf">_createZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_dna</span><span class="p">)</span> <span class="k">private</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint</span> <span class="n">id</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">Zombie</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">_dna</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// push returns length
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">NewZombie</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">_name</span><span class="p">,</span> <span class="n">_dna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nf">_generateRandomDna</span><span class="p">(</span><span class="kt">string</span> <span class="n">_str</span><span class="p">)</span> <span class="k">private</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint</span> <span class="n">rand</span> <span class="o">=</span> <span class="kt">uint</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_str</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">rand</span> <span class="o">%</span> <span class="n">dnaModulus</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nf">createRandomZombie</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint</span> <span class="n">randDna</span> <span class="o">=</span> <span class="n">_generateRandomDna</span><span class="p">(</span><span class="n">_name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_createZombie</span><span class="p">(</span><span class="n">_name</span><span class="p">,</span> <span class="n">randDna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -469,52 +469,52 @@
 </span><span class="lnt">45
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="c1">// 여기에 우리가 만든 컨트랙트에 접근하는 방법을 제시한다:
-</span><span class="c1"></span><span class="kd">var</span> <span class="nx">abi</span> <span class="o">=</span> <span class="cm">/* abi generated by the compiler */</span>
-<span class="kd">var</span> <span class="nx">ZombieFactoryContract</span> <span class="o">=</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">contract</span><span class="p">(</span><span class="nx">abi</span><span class="p">)</span>
-<span class="kd">var</span> <span class="nx">contractAddress</span> <span class="o">=</span> <span class="cm">/* our contract address on Ethereum after deploying */</span>
-<span class="kd">var</span> <span class="nx">ZombieFactory</span> <span class="o">=</span> <span class="nx">ZombieFactoryContract</span><span class="p">.</span><span class="nx">at</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">)</span>
-<span class="c1">// `ZombieFactory`는 우리 컨트랙트의 public 함수와 이벤트에 접근할 수 있다.
-</span><span class="c1"></span>
-<span class="c1">// 일종의 이벤트 리스너가 텍스트 입력값을 취한다:
-</span><span class="c1"></span><span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#ourButton&#34;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#nameInput&#34;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
-  <span class="c1">// 우리 컨트랙트의 `createRandomZombie`함수를 호출한다:
-</span><span class="c1"></span>  <span class="nx">ZombieFactory</span><span class="p">.</span><span class="nx">createRandomZombie</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
-<span class="p">})</span>
-
-<span class="c1">// `NewZombie` 이벤트가 발생하면 사용자 인터페이스를 업데이트한다
-</span><span class="c1"></span><span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">ZombieFactory</span><span class="p">.</span><span class="nx">NewZombie</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span>
-  <span class="nx">generateZombie</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">zombieId</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">dna</span><span class="p">)</span>
-<span class="p">})</span>
-
-<span class="c1">// 좀비 DNA 값을 받아서 이미지를 업데이트한다
-</span><span class="c1"></span><span class="kd">function</span> <span class="nx">generateZombie</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">dna</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">dnaStr</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">dna</span><span class="p">)</span>
-  <span class="c1">// DNA 값이 16자리 수보다 작은 경우 앞 자리를 0으로 채운다
-</span><span class="c1"></span>  <span class="k">while</span> <span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">)</span>
-    <span class="nx">dnaStr</span> <span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="o">+</span> <span class="nx">dnaStr</span>
-
-  <span class="kd">let</span> <span class="nx">zombieDetails</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// 첫 2자리는 머리의 타입을 결정한다. 머리 타입에는 7가지가 있다. 그래서 모듈로(%) 7 연산을 하여
-</span><span class="c1"></span>    <span class="c1">// 0에서 6 중 하나의 값을 얻고 여기에 1을 더해서 1에서 7까지의 숫자를 만든다. 
-</span><span class="c1"></span>    <span class="c1">// 이를 기초로 &#34;head1.png&#34;에서 &#34;head7.png&#34; 중 하나의 이미지를 불러온다:
-</span><span class="c1"></span>    <span class="nx">headChoice</span><span class="o">:</span> <span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="c1">// 두번째 2자리는 눈 모양을 결정한다. 눈 모양에는 11가지가 있다:
-</span><span class="c1"></span>    <span class="nx">eyeChoice</span><span class="o">:</span> <span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">%</span> <span class="mi">11</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="c1">// 셔츠 타입에는 6가지가 있다:
-</span><span class="c1"></span>    <span class="nx">shirtChoice</span><span class="o">:</span> <span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="c1">// 마지막 6자리는 색깔을 결정하며, 360도(degree)까지 지원하는 CSS의 &#34;filter: hue-rotate&#34;를 이용하여 아래와 같이 업데이트된다:
-</span><span class="c1"></span>    <span class="nx">skinColorChoice</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">360</span><span class="p">),</span>
-    <span class="nx">eyeColorChoice</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">360</span><span class="p">),</span>
-    <span class="nx">clothesColorChoice</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">360</span><span class="p">),</span>
-    <span class="nx">zombieName</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-    <span class="nx">zombieDescription</span><span class="o">:</span> <span class="s2">&#34;A Level 1 CryptoZombie&#34;</span><span class="p">,</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="nx">zombieDetails</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 여기에 우리가 만든 컨트랙트에 접근하는 방법을 제시한다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">abi</span> <span class="o">=</span> <span class="cm">/* abi generated by the compiler */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">ZombieFactoryContract</span> <span class="o">=</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">contract</span><span class="p">(</span><span class="nx">abi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">contractAddress</span> <span class="o">=</span> <span class="cm">/* our contract address on Ethereum after deploying */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">ZombieFactory</span> <span class="o">=</span> <span class="nx">ZombieFactoryContract</span><span class="p">.</span><span class="nx">at</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// `ZombieFactory`는 우리 컨트랙트의 public 함수와 이벤트에 접근할 수 있다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 일종의 이벤트 리스너가 텍스트 입력값을 취한다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#ourButton&#34;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&#34;#nameInput&#34;</span><span class="p">).</span><span class="nx">val</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 우리 컨트랙트의 `createRandomZombie`함수를 호출한다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">ZombieFactory</span><span class="p">.</span><span class="nx">createRandomZombie</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// `NewZombie` 이벤트가 발생하면 사용자 인터페이스를 업데이트한다
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="nx">ZombieFactory</span><span class="p">.</span><span class="nx">NewZombie</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">generateZombie</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">zombieId</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">dna</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 좀비 DNA 값을 받아서 이미지를 업데이트한다
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">generateZombie</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">dna</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">dnaStr</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="nx">dna</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// DNA 값이 16자리 수보다 작은 경우 앞 자리를 0으로 채운다
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">while</span> <span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">16</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">dnaStr</span> <span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="o">+</span> <span class="nx">dnaStr</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">zombieDetails</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 첫 2자리는 머리의 타입을 결정한다. 머리 타입에는 7가지가 있다. 그래서 모듈로(%) 7 연산을 하여
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 0에서 6 중 하나의 값을 얻고 여기에 1을 더해서 1에서 7까지의 숫자를 만든다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 이를 기초로 &#34;head1.png&#34;에서 &#34;head7.png&#34; 중 하나의 이미지를 불러온다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">headChoice</span><span class="o">:</span> <span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 두번째 2자리는 눈 모양을 결정한다. 눈 모양에는 11가지가 있다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">eyeChoice</span><span class="o">:</span> <span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">%</span> <span class="mi">11</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 셔츠 타입에는 6가지가 있다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">shirtChoice</span><span class="o">:</span> <span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">%</span> <span class="mi">6</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 마지막 6자리는 색깔을 결정하며, 360도(degree)까지 지원하는 CSS의 &#34;filter: hue-rotate&#34;를 이용하여 아래와 같이 업데이트된다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">skinColorChoice</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">360</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">eyeColorChoice</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">360</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">clothesColorChoice</span><span class="o">:</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">dnaStr</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="o">*</span> <span class="mi">360</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">zombieName</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">zombieDescription</span><span class="o">:</span> <span class="s2">&#34;A Level 1 CryptoZombie&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">zombieDetails</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -549,7 +549,7 @@
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

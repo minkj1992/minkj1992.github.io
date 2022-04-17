@@ -293,17 +293,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">    $ sudo apt-get install keyboard-configuration
-    $ sudo dpkg-reconfigure keyboard-configuration
-
-    <span class="c1"># select macbook pro(intel)</span>
-    <span class="c1"># MacIntosh</span>
-    <span class="c1"># English</span>
-    <span class="c1"># English (Macintosh)</span>
-    <span class="c1"># Both Alt keys</span>
-    <span class="c1"># No compose key</span>
-    <span class="c1"># Terminal preference에서 copy &amp; paste 설정</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">    $ sudo apt-get install keyboard-configuration
+</span></span><span class="line"><span class="cl">    $ sudo dpkg-reconfigure keyboard-configuration
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># select macbook pro(intel)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># MacIntosh</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># English</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># English (Macintosh)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Both Alt keys</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># No compose key</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Terminal preference에서 copy &amp; paste 설정</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="3">
 <li>mount host folder(소스코드) to ubuntu</li>
@@ -314,9 +314,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 이건 임시이며, 항상 mount시키고 싶다면, vmware에 공유 폴더 설정해주어야 한다.</span>
-$ sudo mount -t vboxsf ros2-sandbox /home/leoo/shared/ros2-sandbox/
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 이건 임시이며, 항상 mount시키고 싶다면, vmware에 공유 폴더 설정해주어야 한다.</span>
+</span></span><span class="line"><span class="cl">$ sudo mount -t vboxsf ros2-sandbox /home/leoo/shared/ros2-sandbox/
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="25-install-ros-dependencies">2.5. install ros dependencies</h3>
 <div class="highlight"><div class="chroma">
@@ -330,14 +330,14 @@ $ sudo mount -t vboxsf ros2-sandbox /home/leoo/shared/ros2-sandbox/
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ sudo apt update
-$ sudo apt install build-essential gcc make perl dkms
-$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt upgrade
-$ sudo apt install terminator
-$ sudo add-apt-repository universe
-$ sudo apt-get update
-$ sudo apt-get install python3-pip
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt update
+</span></span><span class="line"><span class="cl">$ sudo apt install build-essential gcc make perl dkms
+</span></span><span class="line"><span class="cl">$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt upgrade
+</span></span><span class="line"><span class="cl">$ sudo apt install terminator
+</span></span><span class="line"><span class="cl">$ sudo add-apt-repository universe
+</span></span><span class="line"><span class="cl">$ sudo apt-get update
+</span></span><span class="line"><span class="cl">$ sudo apt-get install python3-pip
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="26-install-ros2-binary">2.6. install ros2 binary</h3>
 <div class="highlight"><div class="chroma">
@@ -360,23 +360,23 @@ $ sudo apt-get install python3-pip
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ locale  <span class="c1"># check for UTF-8</span>
-
-$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt install locales
-$ sudo locale-gen en_US en_US.UTF-8
-$ sudo update-locale <span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8 <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
-$ <span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
-$ locale  <span class="c1"># verify settings</span>
-
-$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt install curl gnupg2 lsb-release
-$ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
-$ <span class="nb">echo</span> <span class="s2">&#34;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu </span><span class="k">$(</span>lsb_release -cs<span class="k">)</span><span class="s2"> main&#34;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/ros2.list &gt; /dev/null
-
-$ sudo apt update
-$ sudo apt install ros-foxy-desktop
-$ <span class="nb">echo</span> <span class="s1">&#39;source /opt/ros/foxy/setup.bash&#39;</span> &gt;&gt; ~/.bashrc
-$ sudo apt install python3-argcomplete
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ locale  <span class="c1"># check for UTF-8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt install locales
+</span></span><span class="line"><span class="cl">$ sudo locale-gen en_US en_US.UTF-8
+</span></span><span class="line"><span class="cl">$ sudo update-locale <span class="nv">LC_ALL</span><span class="o">=</span>en_US.UTF-8 <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+</span></span><span class="line"><span class="cl">$ <span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>en_US.UTF-8
+</span></span><span class="line"><span class="cl">$ locale  <span class="c1"># verify settings</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo apt update <span class="o">&amp;&amp;</span> sudo apt install curl gnupg2 lsb-release
+</span></span><span class="line"><span class="cl">$ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s2">&#34;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu </span><span class="k">$(</span>lsb_release -cs<span class="k">)</span><span class="s2"> main&#34;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/ros2.list &gt; /dev/null
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ sudo apt update
+</span></span><span class="line"><span class="cl">$ sudo apt install ros-foxy-desktop
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s1">&#39;source /opt/ros/foxy/setup.bash&#39;</span> &gt;&gt; ~/.bashrc
+</span></span><span class="line"><span class="cl">$ sudo apt install python3-argcomplete
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>만약 이렇게 세팅하였을 때 자신의 vm이 너무 느리다고 판단 된다면 <a href="https://mkyong.com/mac/virtualbox-running-slow-and-lag-on-macos-macbook-pro/" target="_blank" rel="noopener noreffer">vm 설정방법</a>을 참고해주세요.</p>
 <p>지금까지 세팅을 완료하였으면 예쁘게 동작하는 vm을 보실 수 있습니다. :)</p>
@@ -405,14 +405,14 @@ $ sudo apt install python3-argcomplete
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ docker pull osrf/ros:noetic-desktop-full-buster
-$ brew install socat
-
-<span class="c1"># https://www.cyberciti.biz/faq/apple-osx-mountain-lion-mavericks-install-xquartz-server/</span>
-$ brew install --cask xquartz
-$ sudo reboot
-<span class="c1"># xquartz 보안 설정 모두 열어주기</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ docker pull osrf/ros:noetic-desktop-full-buster
+</span></span><span class="line"><span class="cl">$ brew install socat
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># https://www.cyberciti.biz/faq/apple-osx-mountain-lion-mavericks-install-xquartz-server/</span>
+</span></span><span class="line"><span class="cl">$ brew install --cask xquartz
+</span></span><span class="line"><span class="cl">$ sudo reboot
+</span></span><span class="line"><span class="cl"><span class="c1"># xquartz 보안 설정 모두 열어주기</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>host 터미널에서 아래 명령어 실행</li>
@@ -427,13 +427,13 @@ $ sudo reboot
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ip 확인 후 xhost에 추가</span>
-$ <span class="nv">ip</span><span class="o">=</span><span class="k">$(</span>ifconfig en0 <span class="p">|</span> grep inet <span class="p">|</span> awk <span class="s1">&#39;$1==&#34;inet&#34; {print $2}&#39;</span><span class="k">)</span>
-$ xhost + <span class="nv">$ip</span>
-
-<span class="c1"># 컨테이너 생성</span>
-$ docker run -it -e <span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$ip</span>:0 --name ros osrf/ros:noetic-desktop-full-buster
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ip 확인 후 xhost에 추가</span>
+</span></span><span class="line"><span class="cl">$ <span class="nv">ip</span><span class="o">=</span><span class="k">$(</span>ifconfig en0 <span class="p">|</span> grep inet <span class="p">|</span> awk <span class="s1">&#39;$1==&#34;inet&#34; {print $2}&#39;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">$ xhost + <span class="nv">$ip</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 컨테이너 생성</span>
+</span></span><span class="line"><span class="cl">$ docker run -it -e <span class="nv">DISPLAY</span><span class="o">=</span><span class="nv">$ip</span>:0 --name ros osrf/ros:noetic-desktop-full-buster
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="4-setup-on-host-">4. setup on <code>Host</code> (🚫)</h2>
 <blockquote>
@@ -453,15 +453,15 @@ $ docker run -it -e <span class="nv">DISPLAY</span><span class="o">=</span><span
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ brew doctor
-
-$ softwareupdate --all --install --force
-$ sudo rm -rf /Library/Developer/CommandLineTools
-$ sudo xcode-select --install
-$ brew link kubernetes-cli
-$ brew link python@3.9
-$ <span class="nb">echo</span> <span class="s1">&#39;export PATH=&#34;/usr/local/sbin:$PATH&#34;&#39;</span> &gt;&gt; ~/.zshrc
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ brew doctor
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ softwareupdate --all --install --force
+</span></span><span class="line"><span class="cl">$ sudo rm -rf /Library/Developer/CommandLineTools
+</span></span><span class="line"><span class="cl">$ sudo xcode-select --install
+</span></span><span class="line"><span class="cl">$ brew link kubernetes-cli
+</span></span><span class="line"><span class="cl">$ brew link python@3.9
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s1">&#39;export PATH=&#34;/usr/local/sbin:$PATH&#34;&#39;</span> &gt;&gt; ~/.zshrc
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="42-install-ros2-on-mac">4.2. Install ROS2 on mac</h3>
 <div class="highlight"><div class="chroma">
@@ -485,24 +485,24 @@ $ <span class="nb">echo</span> <span class="s1">&#39;export PATH=&#34;/usr/local
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">brew install python@3.8
-brew unlink python <span class="o">&amp;&amp;</span> brew link --force python@3.8
-<span class="nb">echo</span> <span class="s1">&#39;export PATH=&#34;/usr/local/opt/python@3.8/bin:$PATH&#34;&#39;</span> &gt;&gt; ~/.zshrc
-<span class="nb">export</span> <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&#34;-L/usr/local/opt/python@3.8/lib&#34;</span>
-<span class="nb">export</span> <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span><span class="s2">&#34;/usr/local/opt/python@3.8/lib/pkgconfig&#34;</span>
-
-brew install asio tinyxml2 tinyxml eigen pcre poco
-brew install openssl <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;export OPENSSL_ROOT_DIR=</span><span class="k">$(</span>brew --prefix openssl<span class="k">)</span><span class="s2">&#34;</span> &gt;&gt; ~/.zshrc
-brew install qt freetype assimp sip pyqt5
-brew install console_bridge log4cxx spdlog cunit graphviz
-
-python3 -m pip install pygraphviz pydot catkin_pkg empy ifcfg lark-parser lxml netifaces numpy pyparsing pyyaml setuptools argcomplete
-
-pip3 install -U colcon-common-extensions
-
-<span class="c1"># OpenCV는 필수는 아닙니다. 설치시 시간이 엄청 오래 걸리니 고민해보세요.</span>
-brew install opencv
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">brew install python@3.8
+</span></span><span class="line"><span class="cl">brew unlink python <span class="o">&amp;&amp;</span> brew link --force python@3.8
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;export PATH=&#34;/usr/local/opt/python@3.8/bin:$PATH&#34;&#39;</span> &gt;&gt; ~/.zshrc
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&#34;-L/usr/local/opt/python@3.8/lib&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span><span class="s2">&#34;/usr/local/opt/python@3.8/lib/pkgconfig&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">brew install asio tinyxml2 tinyxml eigen pcre poco
+</span></span><span class="line"><span class="cl">brew install openssl <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&#34;export OPENSSL_ROOT_DIR=</span><span class="k">$(</span>brew --prefix openssl<span class="k">)</span><span class="s2">&#34;</span> &gt;&gt; ~/.zshrc
+</span></span><span class="line"><span class="cl">brew install qt freetype assimp sip pyqt5
+</span></span><span class="line"><span class="cl">brew install console_bridge log4cxx spdlog cunit graphviz
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">python3 -m pip install pygraphviz pydot catkin_pkg empy ifcfg lark-parser lxml netifaces numpy pyparsing pyyaml setuptools argcomplete
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pip3 install -U colcon-common-extensions
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># OpenCV는 필수는 아닙니다. 설치시 시간이 엄청 오래 걸리니 고민해보세요.</span>
+</span></span><span class="line"><span class="cl">brew install opencv
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="43-download-ros-foxy-binary">4.3. Download ROS Foxy Binary</h3>
 <div class="highlight"><div class="chroma">
@@ -514,12 +514,12 @@ brew install opencv
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># https://github.com/ros2/ros2/releases</span>
-
-mkdir -p ~/ros2_foxy
-<span class="nb">cd</span> ~/ros2_foxy
-tar xf ~/Downloads/ros2-foxy-20211013-macos-amd64.tar.bz2
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># https://github.com/ros2/ros2/releases</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mkdir -p ~/ros2_foxy
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~/ros2_foxy
+</span></span><span class="line"><span class="cl">tar xf ~/Downloads/ros2-foxy-20211013-macos-amd64.tar.bz2
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="44-check-installed">4.4. Check installed</h3>
 <div class="highlight"><div class="chroma">
@@ -527,8 +527,8 @@ tar xf ~/Downloads/ros2-foxy-20211013-macos-amd64.tar.bz2
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">$ . ~/ros2_foxy/ros2-osx/local_setup.zsh
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ . ~/ros2_foxy/ros2-osx/local_setup.zsh
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="45-error">4.5. Error</h3>
 <div class="highlight"><div class="chroma">
@@ -537,9 +537,9 @@ tar xf ~/Downloads/ros2-foxy-20211013-macos-amd64.tar.bz2
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> $ . ~/ros2_foxy/ros2-osx/local_setup.zsh
-[connext_cmake_module] Warning: The location at which Connext was found when the workspace was built [[/Applications/rti_connext_dds-5.3.1]] does not point to a valid directory, and the NDDSHOME environment variable has not been set. Support for Connext will not be available.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> $ . ~/ros2_foxy/ros2-osx/local_setup.zsh
+</span></span><span class="line"><span class="cl">[connext_cmake_module] Warning: The location at which Connext was found when the workspace was built [[/Applications/rti_connext_dds-5.3.1]] does not point to a valid directory, and the NDDSHOME environment variable has not been set. Support for Connext will not be available.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li><code>csrutil disable</code>로 시도해보았지만 실패</li>
@@ -584,7 +584,7 @@ tar xf ~/Downloads/ros2-foxy-20211013-macos-amd64.tar.bz2
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/categories/go/</link>
         <description>go - Category - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 07 Feb 2022 16:55:21 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/go/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 12 Feb 2022 10:43:42 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/go/" rel="self" type="application/rss+xml" /><item>
+    <title>[일주일 만에 배우는 GO] CH.3 Real World Go</title>
+    <link>https://minkj1992.github.io/ch03_real_world/</link>
+    <pubDate>Sat, 12 Feb 2022 10:43:42 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/ch03_real_world/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/golang/effective_go.png" referrerpolicy="no-referrer">
+            </div><p>gin framework로 crud 서버를 만들며 배운 내용들을 기록해보겠습니다.</p>]]></description>
+</item><item>
     <title>[일주일 만에 배우는 GO] CH.2 Go Basic</title>
     <link>https://minkj1992.github.io/ch02_go_basic/</link>
     <pubDate>Mon, 07 Feb 2022 16:55:21 &#43;0900</pubDate>

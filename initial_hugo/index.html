@@ -191,13 +191,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Install brew </span>
-$ ruby -e <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">&#34;</span>
-<span class="c1"># download hugo</span>
-$ brew install hugo
-<span class="c1"># check hugo is successfully downloaded</span>
-$ hugo version
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># Install brew </span>
+</span></span><span class="line"><span class="cl">$ ruby -e <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># download hugo</span>
+</span></span><span class="line"><span class="cl">$ brew install hugo
+</span></span><span class="line"><span class="cl"><span class="c1"># check hugo is successfully downloaded</span>
+</span></span><span class="line"><span class="cl">$ hugo version
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="12-select-hugo-templaate">1.2. Select hugo templaate</h3>
 <ol>
@@ -270,20 +270,20 @@ $ hugo version
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># hugo new site &lt;YOUR FOLDER NAME&gt;</span>
-$ hugo new site love
-$ <span class="nb">cd</span> love
-$ git init
-$ git branch -M main
-<span class="c1"># git remote add origin &lt;YOUR ROOT REPOSITORY&gt;</span>
-$ git remote add origin https://github.com/minkj1992/love.git
-<span class="c1"># git submodule add &lt;THEME REPOSITORY&gt; themes/&lt;THEME_NAME&gt;</span>
-$ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
-
-<span class="c1"># + 사내 계정이라 config 변경</span>
-$ git config user.email minkj1992@gmail.com
-$ git config user.name <span class="s2">&#34;minkj1992&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># hugo new site &lt;YOUR FOLDER NAME&gt;</span>
+</span></span><span class="line"><span class="cl">$ hugo new site love
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> love
+</span></span><span class="line"><span class="cl">$ git init
+</span></span><span class="line"><span class="cl">$ git branch -M main
+</span></span><span class="line"><span class="cl"><span class="c1"># git remote add origin &lt;YOUR ROOT REPOSITORY&gt;</span>
+</span></span><span class="line"><span class="cl">$ git remote add origin https://github.com/minkj1992/love.git
+</span></span><span class="line"><span class="cl"><span class="c1"># git submodule add &lt;THEME REPOSITORY&gt; themes/&lt;THEME_NAME&gt;</span>
+</span></span><span class="line"><span class="cl">$ git submodule add https://github.com/dillonzq/LoveIt.git themes/LoveIt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># + 사내 계정이라 config 변경</span>
+</span></span><span class="line"><span class="cl">$ git config user.email minkj1992@gmail.com
+</span></span><span class="line"><span class="cl">$ git config user.name <span class="s2">&#34;minkj1992&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>필자의 경우 <code>github page</code>를 사용해서 블로그를 운영할 것이기 때문에, 미리 생성했던 <code>YOUR_ID.github.io</code>레포지토리를 <code>submodule</code>로 등록한다.</p>
 <div class="highlight"><div class="chroma">
@@ -292,9 +292,9 @@ $ git config user.name <span class="s2">&#34;minkj1992&#34;</span>
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># git submodule add &lt;YOUR_ID.github.io&gt; public</span>
-$ git submodule add https://github.com/minkj1992/minkj1992.github.io public
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># git submodule add &lt;YOUR_ID.github.io&gt; public</span>
+</span></span><span class="line"><span class="cl">$ git submodule add https://github.com/minkj1992/minkj1992.github.io public
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition warning open">
         <div class="details-summary admonition-title">
@@ -319,15 +319,15 @@ $ git submodule add https://github.com/minkj1992/minkj1992.github.io public
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ cp ./themes/LoveIt/exampleSite/config.toml ./config.toml
-
-<span class="c1"># if you want to add image to site home</span>
-$ mkdir -p assets/images
-<span class="c1"># after this command, paste your profile &amp; log image to images and change config.toml</span>
-
-<span class="c1"># (OPTIONAL) If you want to change css font-famiully and size, customize scss file.</span>
-$ touch assets/_override.scss
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ cp ./themes/LoveIt/exampleSite/config.toml ./config.toml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># if you want to add image to site home</span>
+</span></span><span class="line"><span class="cl">$ mkdir -p assets/images
+</span></span><span class="line"><span class="cl"><span class="c1"># after this command, paste your profile &amp; log image to images and change config.toml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># (OPTIONAL) If you want to change css font-famiully and size, customize scss file.</span>
+</span></span><span class="line"><span class="cl">$ touch assets/_override.scss
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>자 이제 첫 글을 작성해보자. 주의할점은 draft:false가 되어있어야 hugo를 github page 배포했을 때, 깨지지 않고 배포 된다.</p>
 <div class="highlight"><div class="chroma">
@@ -336,9 +336,9 @@ $ touch assets/_override.scss
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># *.md draft must be falsed!</span>
-$ hugo new posts/initial_post.md
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># *.md draft must be falsed!</span>
+</span></span><span class="line"><span class="cl">$ hugo new posts/initial_post.md
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>글을 작성했다면, 로컬에서 실행시켜보자 (hot-reload적용 됨)
 참고로 commit이 안되서, 실행이 안된다고 하니 이쯤에서 우선 커밋 먼저 해준다. (<code>fatal: your current branch 'main' does not have any commits yet</code>)</p>
@@ -350,11 +350,11 @@ $ hugo new posts/initial_post.md
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ git add . <span class="o">&amp;&amp;</span> git commit -m<span class="s2">&#34;Initial commit&#34;</span>
-
-<span class="c1"># hot reload debug run server</span>
-$ hugo server -D
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git add . <span class="o">&amp;&amp;</span> git commit -m<span class="s2">&#34;Initial commit&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># hot reload debug run server</span>
+</span></span><span class="line"><span class="cl">$ hugo server -D
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>정상적으로 블로그가 동작하는걸 확인했다면 배포를 해보자.
 배포는 아래 과정을 거쳐 진행된다.</p>
@@ -421,58 +421,58 @@ $ hugo server -D
 </span><span class="lnt">51
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
-</span><span class="cp"></span>
-<span class="c1"># If a command fails then the deploy stops</span>
-<span class="nb">set</span> -e
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32m I Love Leoo.j \033[0m\n&#34;</span>
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m\n&#34;</span>
-
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32mBuild the project.\033[0m\n&#34;</span>
-hugo -D
-<span class="c1"># hugo -t timeline # if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`</span>
-
-
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Go To Public folder \033[0m\n&#34;</span>
-<span class="nb">cd</span> public
-
-
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Setting for submodule commit \033[0m\n&#34;</span>
-git config --local user.name <span class="s2">&#34;minkj1992&#34;</span>
-git config --local user.email <span class="s2">&#34;minkj1992@gmail.com&#34;</span>
-git submodule update --init --recursive
-
-
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Add changes to git. \033[0m\n&#34;</span>
-git add .
-
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Commit changes.. \033[0m\n&#34;</span>
-<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
-<span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-	<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span>
-<span class="k">fi</span>
-git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
-
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Push blog(presentation) source and build repos. \033[0m\n&#34;</span>
-git push origin main
-
-
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Come Back up to the Project Root \033[0m\n&#34;</span>
-<span class="nb">cd</span> ..
-<span class="nb">echo</span> <span class="nv">$pwd</span>
-
-<span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  root repository Commit &amp; Push. \033[0m\n&#34;</span>
-git add .
-
-<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site `date`&#34;</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">1</span> <span class="o">]</span>
-  <span class="k">then</span> <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
-<span class="k">fi</span>
-
-git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
-
-git push origin main
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1"># If a command fails then the deploy stops</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> -e
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32m I Love Leoo.j \033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32mDeploying updates to GitHub...\033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32mBuild the project.\033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl">hugo -D
+</span></span><span class="line"><span class="cl"><span class="c1"># hugo -t timeline # if using a theme, replace with `hugo -t &lt;YOURTHEME&gt;`</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Go To Public folder \033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> public
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Setting for submodule commit \033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl">git config --local user.name <span class="s2">&#34;minkj1992&#34;</span>
+</span></span><span class="line"><span class="cl">git config --local user.email <span class="s2">&#34;minkj1992@gmail.com&#34;</span>
+</span></span><span class="line"><span class="cl">git submodule update --init --recursive
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Add changes to git. \033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Commit changes.. \033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> -n <span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">	<span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$*</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Push blog(presentation) source and build repos. \033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl">git push origin main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  Come Back up to the Project Root \033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ..
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">$pwd</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">printf</span> <span class="s2">&#34;\033[0;32m  root repository Commit &amp; Push. \033[0m\n&#34;</span>
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;rebuilding site `date`&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">1</span> <span class="o">]</span>
+</span></span><span class="line"><span class="cl">  <span class="k">then</span> <span class="nv">msg</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$1</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;</span><span class="nv">$msg</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git push origin main
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>shell을 만들었다면, 이제 배포 해보자.</p>
 <div class="highlight"><div class="chroma">
@@ -480,8 +480,8 @@ git push origin main
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">$ sh git-push.sh &lt;COMMIT_MSG&gt;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ sh git-push.sh &lt;COMMIT_MSG&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition tip open">
         <div class="details-summary admonition-title">
@@ -529,7 +529,7 @@ git push origin main
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

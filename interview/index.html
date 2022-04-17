@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/interview/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-06T22:00:50+09:00" />
-<meta property="article:modified_time" content="2022-02-07T19:15:22+09:00" />
+<meta property="article:modified_time" content="2022-02-17T22:04:16+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -33,7 +33,7 @@
                             "width":  1078 ,
                             "height":  1082 
                         }],"genre": "posts","keywords": "dev, cs, interview","wordcount":  705 ,
-        "url": "https:\/\/minkj1992.github.io\/interview\/","datePublished": "2022-01-06T22:00:50+09:00","dateModified": "2022-02-07T19:15:22+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/minkj1992.github.io\/interview\/","datePublished": "2022-01-06T22:00:50+09:00","dateModified": "2022-02-17T22:04:16+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -131,9 +131,23 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#operating-system">Operating System</a></li>
-    <li><a href="#network">Network</a></li>
-    <li><a href="#database">Database</a></li>
-    <li><a href="#consistent-read"><code>Consistent read</code></a></li>
+    <li><a href="#network">Network</a>
+      <ul>
+        <li><a href="#웹-통신의-큰-흐름-httpswwwgooglecom-을-접속할-때-일어나는-일">웹 통신의 큰 흐름: <a href="https://www.google.com/">https://www.google.com/</a> 을 접속할 때 일어나는 일</a></li>
+        <li><a href="#tcp-vs-udp">TCP vs UDP</a></li>
+        <li><a href="#web-socket-handshake">Web Socket Handshake</a></li>
+        <li><a href="#로드-밸런싱load-balancing">로드 밸런싱(Load Balancing)</a></li>
+        <li><a href="#nginx가-10k-problem을-해결한-방식">Nginx가 10k problem을 해결한 방식</a></li>
+      </ul>
+    </li>
+    <li><a href="#database">Database</a>
+      <ul>
+        <li><a href="#db-트랜잭션이란">DB 트랜잭션이란?</a></li>
+        <li><a href="#트랜잭션과-lock에-대해서-isolation과-연결-지어-설명해주세요">트랜잭션과 lock에 대해서 isolation과 연결 지어 설명해주세요</a></li>
+        <li><a href="#db-index에-대해-설명해주세요">DB index에 대해 설명해주세요</a></li>
+        <li><a href="#todo">todo</a></li>
+      </ul>
+    </li>
     <li><a href="#software-engineering">Software Engineering</a></li>
     <li><a href="#design-pattern">Design Pattern</a></li>
     <li><a href="#language">Language</a></li>
@@ -146,13 +160,10 @@
 <h2 id="operating-system">Operating System</h2>
 <p>&hellip;</p>
 <h2 id="network">Network</h2>
-<details>
-<summary>웹 통신의 큰 흐름: https://www.google.com/ 을 접속할 때 일어나는 일</summary>
-</br>
+<h3 id="웹-통신의-큰-흐름-httpswwwgooglecom-을-접속할-때-일어나는-일">웹 통신의 큰 흐름: <a href="https://www.google.com/" target="_blank" rel="noopener noreffer">https://www.google.com/</a> 을 접속할 때 일어나는 일</h3>
 <blockquote>
 <p>키워드: <code>dhcp</code>, <code>dns</code>, <code>nat</code>, <code>isp</code>, <code>3-way / 4-way handshake</code>, <code>ssl (ssl handshake)</code></p>
 </blockquote>
-<h4>Process</h4>
 <ol>
 <li>
 <p>가장 먼저 브라우저가 url에 적힌 값을 파싱해서 <code>HTTP Request Message</code>를 만들고, OS에 전송 요청을 합니다.</p>
@@ -175,10 +186,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">- from: router ip(nat ip)
-- to: 받아온 ip
-- 게이트웨이 ip : wifi이면 공유기 연결 게이트웨이 ip / 스마트폰이면 자체 ip
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">- from: router ip(nat ip)
+</span></span><span class="line"><span class="cl">- to: 받아온 ip
+</span></span><span class="line"><span class="cl">- 게이트웨이 ip : wifi이면 공유기 연결 게이트웨이 ip / 스마트폰이면 자체 ip
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="4">
 <li><strong>루트 도메인서버에서부터 서브도메인 서버순으로 dns query</strong>
@@ -229,20 +240,18 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># RSA 키 교환 알고리즘
-1. client hello (protocol version, 암호 알고리즘, 압축 방식, 클라 난수)
-2. server hello (세션 ID, ca 인증서, 서버난수)
-3. verify ca and get public key
-4. 클라는 난수(pre master secret) 생성 후 public key로 암호화 후 서버 전달
-5. 클라 세션키 생성 및 서버는 난수를 private key로 복호화 하여 대칭키(세션 키) 생성
-6. 클라는 세션키(대칭키)로 암호화한 fin message를 서버로 전달
-7. 서버 또한 세션키로 암호화한 fin message를 전달
-8. 이후 세션키를 통해 통신 계속 진행
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># RSA 키 교환 알고리즘
+</span></span><span class="line"><span class="cl">1. client hello (protocol version, 암호 알고리즘, 압축 방식, 클라 난수)
+</span></span><span class="line"><span class="cl">2. server hello (세션 ID, ca 인증서, 서버난수)
+</span></span><span class="line"><span class="cl">3. verify ca and get public key
+</span></span><span class="line"><span class="cl">4. 클라는 난수(pre master secret) 생성 후 public key로 암호화 후 서버 전달
+</span></span><span class="line"><span class="cl">5. 클라 세션키 생성 및 서버는 난수를 private key로 복호화 하여 대칭키(세션 키) 생성
+</span></span><span class="line"><span class="cl">6. 클라는 세션키(대칭키)로 암호화한 fin message를 서버로 전달
+</span></span><span class="line"><span class="cl">7. 서버 또한 세션키로 암호화한 fin message를 전달
+</span></span><span class="line"><span class="cl">8. 이후 세션키를 통해 통신 계속 진행
+</span></span></code></pre></td></tr></table>
 </div>
-</div></details>
-<details>
-<summary>TCP vs UDP</summary>
+</div><h3 id="tcp-vs-udp">TCP vs UDP</h3>
 <table>
 <thead>
 <tr>
@@ -289,9 +298,7 @@
 </tr>
 </tbody>
 </table>
-</details>
-<details>
-<summary>Web Socket Handshake</summary>
+<h3 id="web-socket-handshake">Web Socket Handshake</h3>
 <p><a href="https://developer.mozilla.org/ko/docs/Web/API/WebSockets_API/Writing_WebSocket_servers" target="_blank" rel="noopener noreffer">web socket mdn</a></p>
 <p><img
         class="lazyload"
@@ -306,25 +313,19 @@
 <li>http 요청 이후, upgrade요청 한다.</li>
 <li>ping을 지속적으로 쏴서, health-check</li>
 </ul>
-</details>
-<details>
-<summary>로드 밸런싱(Load Balancing)</summary>
+<h3 id="로드-밸런싱load-balancing">로드 밸런싱(Load Balancing)</h3>
 <p>로드 밸런싱이란 여러 서버에게 균등하게 트래픽을 분산 시켜주는 것이다.</p>
 <p>nginx의 경우 기본적으로 라운드 로빈 방식으로 동작합니다.</p>
 <ul>
 <li>scale-out</li>
 <li>scale-up</li>
 </ul>
-</details>
-<details>
-<summary>Nginx가 10k problem을 해결한 방식</summary>
+<h3 id="nginx가-10k-problem을-해결한-방식">Nginx가 10k problem을 해결한 방식</h3>
 <p>기존 방식은 request당 하나의 process 또는 thread를 사용해서 요청들을 처리했습니다. 이에 반해 nginx는 worker pool을 두고 request가 들어올 때 마다, async하게 worker(default cpu 당 1)에게 task를 위임합니다.</p>
 <p>이렇게 하게 될 경우 process/thread에 비해, pcb/tcb를 만드는데 들어가는 비용을 줄일 수 있으며 또한 사용자의 요청이 많아질 경우, 상대적으로 context switching에 사용되는 비용을 줄일 수 있습니다. 마지막으로 os가 스케쥴링에 들어가는 비용이 줄어듭니다.</p>
 <p>즉 지정된 갯수의 미리생성된 process(thread) 워커를 사용함으로써, 기존의 request가 늘어날 때마다, os 리소스가 급격히 늘어나는 것을 방지하여, 이에 대한 side effect(스케쥴링, context-switching등에 대한 오버헤드를 막아줍니다.) 또한 워커에 필요한 리소스들을 미리 생성해두기 때문에 Process 생성에 들어가는 오버헤드를 줄여줍니다.</p>
-</details>
 <h2 id="database">Database</h2>
-<details>
-<summary>DB 트랜잭션이란?</summary>
+<h3 id="db-트랜잭션이란">DB 트랜잭션이란?</h3>
 <blockquote>
 <p>트랜잭션은 데이터베이스의 데이터를 조작하는 논리적인 작업의 단위(unit of work)입니다.</p>
 </blockquote>
@@ -356,9 +357,7 @@
 </ul>
 </li>
 </ul>
-</details>
-<details>
-<summary>트랜잭션과 lock에 대해서 isolation과 연결 지어 설명해주세요</summary>
+<h3 id="트랜잭션과-lock에-대해서-isolation과-연결-지어-설명해주세요">트랜잭션과 lock에 대해서 isolation과 연결 지어 설명해주세요</h3>
 <p>DB엔진은 ACID 원칙을 희생하여 동시성을 얻을 수 있는 방법을 제공합니다.</p>
 <ul>
 <li>Row level lock
@@ -378,12 +377,11 @@
 <p>lock은 모두 transaction이 commit 되거나 rollback 될 때 함께 unlock</p>
 <ul>
 <li>
-<h2 id="consistent-read"><code>Consistent read</code></h2>
-</li>
+<p><code>Consistent read</code></p>
+<ul>
 <li>Isolation</li>
 </ul>
-</details>
-<ul>
+</li>
 <li>
 <p><a href="https://s1107.tistory.com/45" target="_blank" rel="noopener noreffer">https://s1107.tistory.com/45</a></p>
 </li>
@@ -401,15 +399,15 @@
 </ul>
 </li>
 </ul>
-<details>
-<summary>DB index에 대해 설명해주세요</summary>
+<h3 id="db-index에-대해-설명해주세요">DB index에 대해 설명해주세요</h3>
+<blockquote>
 <p><a href="https://idea-sketch.tistory.com/43?category=547413" target="_blank" rel="noopener noreffer">https://idea-sketch.tistory.com/43?category=547413</a></p>
-</details>
+</blockquote>
+<h3 id="todo">todo</h3>
 <ul>
 <li>dirty read, Non-Repeatable Read, Phantom Read</li>
 <li>optimistic lock, pessimistic lock</li>
 <li>slow query</li>
-<li></li>
 <li>Index</li>
 </ul>
 <h2 id="software-engineering">Software Engineering</h2>
@@ -419,8 +417,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-02-07&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/870d6c413d1fac540f108a7981fbb678d5f65a70" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 870d6c413d1fac540f108a7981fbb678d5f65a70: rebuilding site 2022년 2월  7일 월요일 19시 15분 22초 KST">
-                                    <i class="fas fa-hashtag fa-fw"></i>870d6c4</a></span>
+                <span>Updated on 2022-02-17&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/cb324c895c03df45c912e3cba8af91d14212af0f" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) cb324c895c03df45c912e3cba8af91d14212af0f: docs: just pushed my drafts">
+                                    <i class="fas fa-hashtag fa-fw"></i>cb324c8</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -448,7 +446,7 @@
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

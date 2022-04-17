@@ -186,15 +186,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
-
-    <span class="p">...</span>
-    <span class="kd">mapping</span> <span class="p">(</span><span class="kt">uint</span> <span class="o">=&gt;</span> <span class="kt">address</span><span class="p">)</span> <span class="k">public</span> <span class="n">zombieToOwner</span><span class="p">;</span>
-    <span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">ownerZombieCount</span><span class="p">;</span>
-
-    <span class="p">...</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">mapping</span> <span class="p">(</span><span class="kt">uint</span> <span class="o">=&gt;</span> <span class="kt">address</span><span class="p">)</span> <span class="k">public</span> <span class="n">zombieToOwner</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">ownerZombieCount</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="msgsender"><code>Msg.sender</code></h3>
 <p><code>solidity</code>에는 모든 함수에서 이용 가능한 특정 전역 변수들이 있는데, 그 중의 하나가 <strong>현재 함수를 호출한 사람 (혹은 스마트 컨트랙트)의 주소</strong>를 가리키는 <code>msg.sender</code>이다.</p>
@@ -221,16 +221,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">favoriteNumber</span><span class="p">;</span>
-
-<span class="kd">function</span> <span class="nf">setMyNumber</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_myNumber</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-  <span class="n">favoriteNumber</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">_myNumber</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kd">function</span> <span class="nf">getMyNumber</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">favoriteNumber</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">];</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">mapping</span> <span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">favoriteNumber</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">setMyNumber</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_myNumber</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">favoriteNumber</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">_myNumber</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">getMyNumber</span><span class="p">()</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">favoriteNumber</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="require"><code>Require</code></h3>
 <p>특정 조건이 True가 아닐 경우, 에러를 발생시키고 함수를 벗어나게 됩니다.</p>
@@ -245,14 +245,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">function</span> <span class="nf">sayHiToLeoo</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// solidity는 고유의 스트링 비교 기능이 없다. 그러므로 keccak256 해시값을 
-</span><span class="c1"></span>  <span class="c1">// 비교해 스트링이 같은 값인지 판단하는 코드
-</span><span class="c1"></span>  <span class="nb">require</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_name</span><span class="p">)</span> <span class="o">==</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;Leoo.j&#34;</span><span class="p">));</span>
-  
-  <span class="k">return</span> <span class="s">&#34;Hi&#34;</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nf">sayHiToLeoo</span><span class="p">(</span><span class="kt">string</span> <span class="n">_name</span><span class="p">)</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// solidity는 고유의 스트링 비교 기능이 없다. 그러므로 keccak256 해시값을 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 비교해 스트링이 같은 값인지 판단하는 코드
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nb">require</span><span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_name</span><span class="p">)</span> <span class="o">==</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;Leoo.j&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="s">&#34;Hi&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="inheritance"><code>Inheritance</code></h3>
 <div class="highlight"><div class="chroma">
@@ -270,18 +270,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">Animal</span> <span class="p">{</span>
-  <span class="kd">function</span> <span class="nf">cry</span><span class="p">()</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="s">&#34;Default cry&#34;</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">contract</span> <span class="nc">Dog</span> <span class="k">is</span> <span class="n">Animal</span> <span class="p">{</span>
-  <span class="kd">function</span> <span class="nf">cry</span><span class="p">()</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="s">&#34;Bark&#34;</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">Animal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">cry</span><span class="p">()</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;Default cry&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">Dog</span> <span class="k">is</span> <span class="n">Animal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">cry</span><span class="p">()</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;Bark&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="import"><code>Import</code></h3>
 <p>파일들로 코드를 분리하고, 다른 파일에 있는 코드를 불러오고 싶을 때, 솔리디티는 <code>import</code>라는 keyword를 사용합니다.</p>
@@ -294,12 +294,12 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kn">import</span> <span class="s">&#34;./someothercontract.sol&#34;</span><span class="p">;</span> <span class="c1">// SomeOtherContract
-</span><span class="c1"></span>
-<span class="kd">contract</span> <span class="nc">newContract</span> <span class="k">is</span> <span class="n">SomeOtherContract</span> <span class="p">{</span>
-
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./someothercontract.sol&#34;</span><span class="p">;</span> <span class="c1">// SomeOtherContract
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">newContract</span> <span class="k">is</span> <span class="n">SomeOtherContract</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="storage-vs-memory">Storage vs Memory</h3>
 <p><code>solidity</code>가 변수를 저장할 수 있는 공간에는 2가지 종류가 있습니다.</p>
@@ -330,23 +330,23 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">SandwichFactory</span> <span class="p">{</span>
-  <span class="kd">struct</span> <span class="nc">Sandwich</span> <span class="p">{</span>
-    <span class="kt">string</span> <span class="nb">name</span><span class="p">;</span>
-    <span class="kt">string</span> <span class="n">status</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="n">Sandwich</span><span class="p">[]</span> <span class="n">sandwiches</span><span class="p">;</span> <span class="c1">// state variable (storage)
-</span><span class="c1"></span>
-  <span class="kd">function</span> <span class="nf">eat</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_idx</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-    <span class="kt">string</span> <span class="n">defaultState</span> <span class="o">=</span> <span class="s">&#34;NOT EATEN&#34;</span><span class="p">;</span> <span class="c1">// implicit memory
-</span><span class="c1"></span>    <span class="n">Sandwich</span> <span class="k">storage</span> <span class="n">mySandwich</span> <span class="o">=</span> <span class="n">sandwiches</span><span class="p">[</span><span class="n">_idx</span><span class="p">];</span> <span class="c1">// arr should explict
-</span><span class="c1"></span>
-    <span class="n">Sandwich</span> <span class="k">memory</span> <span class="n">anotherSandwich</span> <span class="o">=</span> <span class="n">sandwiches</span><span class="p">[</span><span class="n">_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
-    <span class="n">sandwiches</span><span class="p">[</span><span class="n">_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">anotherSandwich</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">SandwichFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">struct</span> <span class="nc">Sandwich</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="nb">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">status</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Sandwich</span><span class="p">[]</span> <span class="n">sandwiches</span><span class="p">;</span> <span class="c1">// state variable (storage)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">eat</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_idx</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">defaultState</span> <span class="o">=</span> <span class="s">&#34;NOT EATEN&#34;</span><span class="p">;</span> <span class="c1">// implicit memory
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Sandwich</span> <span class="k">storage</span> <span class="n">mySandwich</span> <span class="o">=</span> <span class="n">sandwiches</span><span class="p">[</span><span class="n">_idx</span><span class="p">];</span> <span class="c1">// arr should explict
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="n">Sandwich</span> <span class="k">memory</span> <span class="n">anotherSandwich</span> <span class="o">=</span> <span class="n">sandwiches</span><span class="p">[</span><span class="n">_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sandwiches</span><span class="p">[</span><span class="n">_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">anotherSandwich</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -364,19 +364,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
-
-<span class="kn">import</span> <span class="s">&#34;./zombiefactory.sol&#34;</span><span class="p">;</span>
-
-<span class="kd">contract</span> <span class="nc">ZombieFeeding</span> <span class="k">is</span> <span class="n">ZombieFactory</span> <span class="p">{</span>
-
-  <span class="kd">function</span> <span class="nf">feedAndMultiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_targetDna</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-      <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
-      <span class="n">Zombie</span> <span class="k">storage</span> <span class="n">myZombie</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">];</span>
-  <span class="p">}</span>
-
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./zombiefactory.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFeeding</span> <span class="k">is</span> <span class="n">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">feedAndMultiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_targetDna</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Zombie</span> <span class="k">storage</span> <span class="n">myZombie</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="extra-function-visibility">Extra Function Visibility</h3>
 <p><code>solidity</code>에는 public과 private 이외에도 <code>internal</code>과 <code>external</code>이라는 함수 접근 제어자가 있다.</p>
@@ -418,24 +418,24 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">Sandwich</span> <span class="p">{</span>
-  <span class="kt">uint</span> <span class="k">private</span> <span class="n">sandwichesEaten</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-  <span class="kd">function</span> <span class="nf">eat</span><span class="p">()</span> <span class="k">internal</span> <span class="p">{</span>
-    <span class="n">sandwichesEaten</span><span class="o">++</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">contract</span> <span class="nc">BLT</span> <span class="k">is</span> <span class="n">Sandwich</span> <span class="p">{</span>
-  <span class="kt">uint</span> <span class="k">private</span> <span class="n">baconSandwichesEaten</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-  <span class="kd">function</span> <span class="nf">eatWithBacon</span><span class="p">()</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">baconSandwichesEaten</span><span class="o">++</span><span class="p">;</span>
-    <span class="c1">// eat 함수가 internal로 선언되었기 때문에 여기서 호출이 가능하다 
-</span><span class="c1"></span>    <span class="n">eat</span><span class="p">();</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">Sandwich</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="k">private</span> <span class="n">sandwichesEaten</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">eat</span><span class="p">()</span> <span class="k">internal</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sandwichesEaten</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">BLT</span> <span class="k">is</span> <span class="n">Sandwich</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">uint</span> <span class="k">private</span> <span class="n">baconSandwichesEaten</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">eatWithBacon</span><span class="p">()</span> <span class="k">public</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">baconSandwichesEaten</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// eat 함수가 internal로 선언되었기 때문에 여기서 호출이 가능하다 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">eat</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="interface">interface</h3>
 <p>블록체인 상에서, 다른 컨트랙트와 상호작용을 하고 싶다면 <code>Interface</code>를 정의해야 합니다.</p>
@@ -453,17 +453,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">LuckyNumber</span> <span class="p">{</span>
-  <span class="kd">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">numbers</span><span class="p">;</span>
-
-  <span class="kd">function</span> <span class="nf">setNum</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_num</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-    <span class="n">numbers</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">_num</span><span class="p">;</span>
-  <span class="p">}</span>
-  <span class="kd">function</span> <span class="nf">getNum</span><span class="p">(</span><span class="kt">address</span> <span class="n">_myAddress</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">numbers</span><span class="p">[</span><span class="n">_myAddress</span><span class="p">];</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">LuckyNumber</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">mapping</span><span class="p">(</span><span class="kt">address</span> <span class="o">=&gt;</span> <span class="kt">uint</span><span class="p">)</span> <span class="n">numbers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">setNum</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_num</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">numbers</span><span class="p">[</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">]</span> <span class="o">=</span> <span class="n">_num</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">getNum</span><span class="p">(</span><span class="kt">address</span> <span class="n">_myAddress</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">numbers</span><span class="p">[</span><span class="n">_myAddress</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>예를 들어 다음과 같은 외부 컨트랙트가 있다고 가정 할 때, 우리는 다음과 같은 interface를 만들 수 있습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -474,11 +474,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="c1">// 예시에서는 contract NumberInterface {}를 사용한다.
-</span><span class="c1"></span><span class="kd">interface</span> <span class="nc">NumberInterface</span> <span class="p">{</span>
-  <span class="kd">function</span> <span class="nf">getNum</span><span class="p">(</span><span class="kt">address</span> <span class="n">_myAddress</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="c1">// 예시에서는 contract NumberInterface {}를 사용한다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">interface</span> <span class="nc">NumberInterface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">getNum</span><span class="p">(</span><span class="kt">address</span> <span class="n">_myAddress</span><span class="p">)</span> <span class="k">public</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span><span class="kt">uint</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>크립토 좀비에 제공된 예시에서는 contract NumberInterface {}를 사용하고 있는데, <code>interface</code>키워드가 추가 된 것인지 아니면 contract보다 interface가 제약조건이 많기 때문에 간단하게 contract로 구현했는지 모르겠지만, 좀 더 명확한 표현이 좋아서 예제를 변경하였습니다. 실제 interface 사용은 다음과 같습니다.</p>
 <div class="highlight"><div class="chroma">
@@ -497,19 +497,19 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="kd">contract</span> <span class="nc">MyContract</span> <span class="p">{</span>
-  <span class="kt">address</span> <span class="n">NumberInterfaceAddress</span> <span class="o">=</span> <span class="mh">0xab38</span><span class="p">...</span>
-  <span class="c1">// ^ 이더리움상의 FavoriteNumber 컨트랙트 주소이다
-</span><span class="c1"></span>  <span class="n">NumberInterface</span> <span class="n">numberContract</span> <span class="o">=</span> <span class="n">NumberInterface</span><span class="p">(</span><span class="n">NumberInterfaceAddress</span><span class="p">)</span>
-  <span class="c1">// 이제 `numberContract`는 다른 컨트랙트를 가리키고 있다.
-</span><span class="c1"></span>
-  <span class="kd">function</span> <span class="nf">someFunction</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
-    <span class="c1">// 이제 `numberContract`가 가리키고 있는 컨트랙트에서 `getNum` 함수를 호출할 수 있다:
-</span><span class="c1"></span>    <span class="kt">uint</span> <span class="n">num</span> <span class="o">=</span> <span class="n">numberContract</span><span class="p">.</span><span class="n">getNum</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">);</span>
-    <span class="c1">// ...그리고 여기서 `num`으로 무언가를 할 수 있다
-</span><span class="c1"></span>  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">MyContract</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">address</span> <span class="n">NumberInterfaceAddress</span> <span class="o">=</span> <span class="mh">0xab38</span><span class="p">...</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ^ 이더리움상의 FavoriteNumber 컨트랙트 주소이다
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">NumberInterface</span> <span class="n">numberContract</span> <span class="o">=</span> <span class="n">NumberInterface</span><span class="p">(</span><span class="n">NumberInterfaceAddress</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 이제 `numberContract`는 다른 컨트랙트를 가리키고 있다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">someFunction</span><span class="p">()</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 이제 `numberContract`가 가리키고 있는 컨트랙트에서 `getNum` 함수를 호출할 수 있다:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">uint</span> <span class="n">num</span> <span class="o">=</span> <span class="n">numberContract</span><span class="p">.</span><span class="n">getNum</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...그리고 여기서 `num`으로 무언가를 할 수 있다
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>interface</code>라는 키워드는 아래와 같은 제약조건이 있습니다.</p>
 <ul>
@@ -569,45 +569,45 @@
 </span><span class="lnt">38
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
-<span class="kn">import</span> <span class="s">&#34;./zombiefactory.sol&#34;</span><span class="p">;</span>
-<span class="kd">contract</span> <span class="nc">KittyInterface</span> <span class="p">{</span>
-  <span class="kd">function</span> <span class="nf">getKitty</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_id</span><span class="p">)</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span>
-    <span class="kt">bool</span> <span class="n">isGestating</span><span class="p">,</span>
-    <span class="kt">bool</span> <span class="n">isReady</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">cooldownIndex</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">nextActionAt</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">siringWithId</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">birthTime</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">matronId</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">sireId</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">generation</span><span class="p">,</span>
-    <span class="kt">uint256</span> <span class="n">genes</span>
-  <span class="p">);</span>
-<span class="p">}</span>
-<span class="kd">contract</span> <span class="nc">ZombieFeeding</span> <span class="k">is</span> <span class="n">ZombieFactory</span> <span class="p">{</span>
-
-  <span class="kt">address</span> <span class="n">ckAddress</span> <span class="o">=</span> <span class="mh">0x06012c8cf97BEaD5deAe237070F9587f8E7A266d</span><span class="p">;</span>
-  <span class="n">KittyInterface</span> <span class="n">kittyContract</span> <span class="o">=</span> <span class="n">KittyInterface</span><span class="p">(</span><span class="n">ckAddress</span><span class="p">);</span>
-
-  <span class="kd">function</span> <span class="nf">feedAndMultiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_targetDna</span><span class="p">,</span> <span class="kt">string</span> <span class="n">_species</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
-    <span class="n">Zombie</span> <span class="k">storage</span> <span class="n">myZombie</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">];</span>
-    <span class="n">_targetDna</span> <span class="o">=</span> <span class="n">_targetDna</span> <span class="o">%</span> <span class="n">dnaModulus</span><span class="p">;</span>
-    <span class="kt">uint</span> <span class="n">newDna</span> <span class="o">=</span> <span class="p">(</span><span class="n">myZombie</span><span class="p">.</span><span class="n">dna</span> <span class="o">+</span> <span class="n">_targetDna</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_species</span><span class="p">)</span> <span class="o">==</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;kitty&#34;</span><span class="p">))</span> <span class="p">{</span>
-      <span class="n">newDna</span> <span class="o">=</span> <span class="n">newDna</span> <span class="o">-</span> <span class="n">newDna</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">99</span><span class="p">;</span>  <span class="c1">// 끝에 2자리를 99로 변경한다.
-</span><span class="c1"></span>    <span class="p">}</span>
-    <span class="n">_createZombie</span><span class="p">(</span><span class="s">&#34;NoName&#34;</span><span class="p">,</span> <span class="n">newDna</span><span class="p">);</span>
-  <span class="p">}</span>
-
-  <span class="kd">function</span> <span class="nf">feedOnKitty</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_kittyId</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
-    <span class="kt">uint</span> <span class="n">kittyDna</span><span class="p">;</span>
-    <span class="p">(,,,,,,,,,</span><span class="n">kittyDna</span><span class="p">)</span> <span class="o">=</span> <span class="n">kittyContract</span><span class="p">.</span><span class="n">getKitty</span><span class="p">(</span><span class="n">_kittyId</span><span class="p">);</span>
-    <span class="n">feedAndMultiply</span><span class="p">(</span><span class="n">_zombieId</span><span class="p">,</span> <span class="n">kittyDna</span><span class="p">,</span> <span class="s">&#34;kitty&#34;</span><span class="p">);</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sol" data-lang="sol"><span class="line"><span class="cl"><span class="k">pragma solidity</span> <span class="o">^</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="mi">19</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;./zombiefactory.sol&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">KittyInterface</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">getKitty</span><span class="p">(</span><span class="kt">uint256</span> <span class="n">_id</span><span class="p">)</span> <span class="k">external</span> <span class="k">view</span> <span class="k">returns</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isGestating</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">isReady</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">cooldownIndex</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">nextActionAt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">siringWithId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">birthTime</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">matronId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">sireId</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">generation</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint256</span> <span class="n">genes</span>
+</span></span><span class="line"><span class="cl">  <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">contract</span> <span class="nc">ZombieFeeding</span> <span class="k">is</span> <span class="n">ZombieFactory</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">address</span> <span class="n">ckAddress</span> <span class="o">=</span> <span class="mh">0x06012c8cf97BEaD5deAe237070F9587f8E7A266d</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">KittyInterface</span> <span class="n">kittyContract</span> <span class="o">=</span> <span class="n">KittyInterface</span><span class="p">(</span><span class="n">ckAddress</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">feedAndMultiply</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_targetDna</span><span class="p">,</span> <span class="kt">string</span> <span class="n">_species</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">require</span><span class="p">(</span><span class="nb">msg</span><span class="p">.</span><span class="nb">sender</span> <span class="o">==</span> <span class="n">zombieToOwner</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Zombie</span> <span class="k">storage</span> <span class="n">myZombie</span> <span class="o">=</span> <span class="n">zombies</span><span class="p">[</span><span class="n">_zombieId</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_targetDna</span> <span class="o">=</span> <span class="n">_targetDna</span> <span class="o">%</span> <span class="n">dnaModulus</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">newDna</span> <span class="o">=</span> <span class="p">(</span><span class="n">myZombie</span><span class="p">.</span><span class="n">dna</span> <span class="o">+</span> <span class="n">_targetDna</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nb">keccak256</span><span class="p">(</span><span class="n">_species</span><span class="p">)</span> <span class="o">==</span> <span class="nb">keccak256</span><span class="p">(</span><span class="s">&#34;kitty&#34;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">newDna</span> <span class="o">=</span> <span class="n">newDna</span> <span class="o">-</span> <span class="n">newDna</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">99</span><span class="p">;</span>  <span class="c1">// 끝에 2자리를 99로 변경한다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_createZombie</span><span class="p">(</span><span class="s">&#34;NoName&#34;</span><span class="p">,</span> <span class="n">newDna</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">function</span> <span class="nf">feedOnKitty</span><span class="p">(</span><span class="kt">uint</span> <span class="n">_zombieId</span><span class="p">,</span> <span class="kt">uint</span> <span class="n">_kittyId</span><span class="p">)</span> <span class="k">public</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint</span> <span class="n">kittyDna</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(,,,,,,,,,</span><span class="n">kittyDna</span><span class="p">)</span> <span class="o">=</span> <span class="n">kittyContract</span><span class="p">.</span><span class="n">getKitty</span><span class="p">(</span><span class="n">_kittyId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">feedAndMultiply</span><span class="p">(</span><span class="n">_zombieId</span><span class="p">,</span> <span class="n">kittyDna</span><span class="p">,</span> <span class="s">&#34;kitty&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>요구사항
@@ -652,38 +652,38 @@
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">abi</span> <span class="o">=</span> <span class="cm">/* abi generated by the compiler */</span>
-<span class="kd">var</span> <span class="nx">ZombieFeedingContract</span> <span class="o">=</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">contract</span><span class="p">(</span><span class="nx">abi</span><span class="p">)</span>
-<span class="kd">var</span> <span class="nx">contractAddress</span> <span class="o">=</span> <span class="cm">/* our contract address on Ethereum after deploying */</span>
-<span class="kd">var</span> <span class="nx">ZombieFeeding</span> <span class="o">=</span> <span class="nx">ZombieFeedingContract</span><span class="p">.</span><span class="nx">at</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">)</span>
-
-<span class="c1">// 우리 좀비의 ID와 타겟 고양이 ID를 가지고 있다고 가정하면 
-</span><span class="c1"></span><span class="kd">let</span> <span class="nx">zombieId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="kd">let</span> <span class="nx">kittyId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-
-<span class="c1">// 크립토키티의 이미지를 얻기 위해 웹 API에 쿼리를 할 필요가 있다. 
-</span><span class="c1">// 이 정보는 블록체인이 아닌 크립토키티 웹 서버에 저장되어 있다.
-</span><span class="c1">// 모든 것이 블록체인에 저장되어 있으면 서버가 다운되거나 크립토키티 API가 바뀌는 것이나 
-</span><span class="c1">// 크립토키티 회사가 크립토좀비를 싫어해서 고양이 이미지를 로딩하는 걸 막는 등을 걱정할 필요가 없다 ;) 
-</span><span class="c1"></span><span class="kd">let</span> <span class="nx">apiUrl</span> <span class="o">=</span> <span class="s2">&#34;https://api.cryptokitties.co/kitties/&#34;</span> <span class="o">+</span> <span class="nx">kittyId</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">apiUrl</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">imgUrl</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">image_url</span>
-  <span class="c1">// 이미지를 제시하기 위해 무언가를 한다 
-</span><span class="c1"></span><span class="p">})</span>
-
-<span class="c1">// 유저가 고양이를 클릭할 때:
-</span><span class="c1"></span><span class="nx">$</span><span class="p">(</span><span class="s2">&#34;.kittyImage&#34;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// 우리 컨트랙트의 `feedOnKitty` 메소드를 호출한다 
-</span><span class="c1"></span>  <span class="nx">ZombieFeeding</span><span class="p">.</span><span class="nx">feedOnKitty</span><span class="p">(</span><span class="nx">zombieId</span><span class="p">,</span> <span class="nx">kittyId</span><span class="p">)</span>
-<span class="p">})</span>
-
-<span class="c1">// 우리의 컨트랙트에서 발생 가능한 NewZombie 이벤트에 귀를 기울여서 이벤트 발생 시 이벤트를 제시할 수 있도록 한다: 
-</span><span class="c1"></span><span class="nx">ZombieFactory</span><span class="p">.</span><span class="nx">NewZombie</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span>
-  <span class="c1">// 이 함수는 레슨 1에서와 같이 좀비를 제시한다: 
-</span><span class="c1"></span>  <span class="nx">generateZombie</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">zombieId</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">dna</span><span class="p">)</span>
-<span class="p">})</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">abi</span> <span class="o">=</span> <span class="cm">/* abi generated by the compiler */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">ZombieFeedingContract</span> <span class="o">=</span> <span class="nx">web3</span><span class="p">.</span><span class="nx">eth</span><span class="p">.</span><span class="nx">contract</span><span class="p">(</span><span class="nx">abi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">contractAddress</span> <span class="o">=</span> <span class="cm">/* our contract address on Ethereum after deploying */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">ZombieFeeding</span> <span class="o">=</span> <span class="nx">ZombieFeedingContract</span><span class="p">.</span><span class="nx">at</span><span class="p">(</span><span class="nx">contractAddress</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 우리 좀비의 ID와 타겟 고양이 ID를 가지고 있다고 가정하면 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="nx">zombieId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">kittyId</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 크립토키티의 이미지를 얻기 위해 웹 API에 쿼리를 할 필요가 있다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 이 정보는 블록체인이 아닌 크립토키티 웹 서버에 저장되어 있다.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 모든 것이 블록체인에 저장되어 있으면 서버가 다운되거나 크립토키티 API가 바뀌는 것이나 
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 크립토키티 회사가 크립토좀비를 싫어해서 고양이 이미지를 로딩하는 걸 막는 등을 걱정할 필요가 없다 ;) 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="nx">apiUrl</span> <span class="o">=</span> <span class="s2">&#34;https://api.cryptokitties.co/kitties/&#34;</span> <span class="o">+</span> <span class="nx">kittyId</span>
+</span></span><span class="line"><span class="cl"><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">apiUrl</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">imgUrl</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">image_url</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 이미지를 제시하기 위해 무언가를 한다 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 유저가 고양이를 클릭할 때:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">$</span><span class="p">(</span><span class="s2">&#34;.kittyImage&#34;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 우리 컨트랙트의 `feedOnKitty` 메소드를 호출한다 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">ZombieFeeding</span><span class="p">.</span><span class="nx">feedOnKitty</span><span class="p">(</span><span class="nx">zombieId</span><span class="p">,</span> <span class="nx">kittyId</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 우리의 컨트랙트에서 발생 가능한 NewZombie 이벤트에 귀를 기울여서 이벤트 발생 시 이벤트를 제시할 수 있도록 한다: 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">ZombieFactory</span><span class="p">.</span><span class="nx">NewZombie</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">return</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 이 함수는 레슨 1에서와 같이 좀비를 제시한다: 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">generateZombie</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">zombieId</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">dna</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -718,7 +718,7 @@
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.91.2">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

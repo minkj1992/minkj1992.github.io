@@ -11,13 +11,9 @@
 
 ## Network
 
-<details>
-<summary>웹 통신의 큰 흐름: https://www.google.com/ 을 접속할 때 일어나는 일</summary>
-</br>
+### 웹 통신의 큰 흐름: https://www.google.com/ 을 접속할 때 일어나는 일
 
 > 키워드: `dhcp`, `dns`, `nat`, `isp`, `3-way / 4-way handshake`, `ssl (ssl handshake)`
-
-<h4>Process</h4>
 
 1. 가장 먼저 브라우저가 url에 적힌 값을 파싱해서 `HTTP Request Message`를 만들고, OS에 전송 요청을 합니다.
 
@@ -69,10 +65,7 @@ ISP에 의해 세팅되어 있는 dns server로 아래 형식의 요청을 보�
 8. 이후 세션키를 통해 통신 계속 진행
 ```
 
-</details>
-
-<details>
-<summary>TCP vs UDP</summary>
+### TCP vs UDP
 
 |                |        TCP         |              UDP               |
 | :------------: | :----------------: | :----------------------------: |
@@ -84,10 +77,7 @@ ISP에 의해 세팅되어 있는 dns server로 아래 형식의 요청을 보�
 |     신뢰성     |        높음        |              낮음              |
 |      속도      |        느림        |              빠름              |
 
-</details>
-
-<details>
-<summary>Web Socket Handshake</summary>
+### Web Socket Handshake
 
 [web socket mdn](https://developer.mozilla.org/ko/docs/Web/API/WebSockets_API/Writing_WebSocket_servers)
 
@@ -98,10 +88,7 @@ ISP에 의해 세팅되어 있는 dns server로 아래 형식의 요청을 보�
 - http 요청 이후, upgrade요청 한다.
 - ping을 지속적으로 쏴서, health-check
 
-</details>
-
-<details>
-<summary>로드 밸런싱(Load Balancing)</summary>
+### 로드 밸런싱(Load Balancing)
 
 로드 밸런싱이란 여러 서버에게 균등하게 트래픽을 분산 시켜주는 것이다.
 
@@ -110,10 +97,7 @@ nginx의 경우 기본적으로 라운드 로빈 방식으로 동작합니다.
 - scale-out
 - scale-up
 
-</details>
-
-<details>
-<summary>Nginx가 10k problem을 해결한 방식</summary>
+### Nginx가 10k problem을 해결한 방식
 
 기존 방식은 request당 하나의 process 또는 thread를 사용해서 요청들을 처리했습니다. 이에 반해 nginx는 worker pool을 두고 request가 들어올 때 마다, async하게 worker(default cpu 당 1)에게 task를 위임합니다.
 
@@ -121,12 +105,9 @@ nginx의 경우 기본적으로 라운드 로빈 방식으로 동작합니다.
 
 즉 지정된 갯수의 미리생성된 process(thread) 워커를 사용함으로써, 기존의 request가 늘어날 때마다, os 리소스가 급격히 늘어나는 것을 방지하여, 이에 대한 side effect(스케쥴링, context-switching등에 대한 오버헤드를 막아줍니다.) 또한 워커에 필요한 리소스들을 미리 생성해두기 때문에 Process 생성에 들어가는 오버헤드를 줄여줍니다.
 
-</details>
-
 ## Database
 
-<details>
-<summary>DB 트랜잭션이란?</summary>
+### DB 트랜잭션이란?
 
 > 트랜잭션은 데이터베이스의 데이터를 조작하는 논리적인 작업의 단위(unit of work)입니다.
 
@@ -142,10 +123,7 @@ nginx의 경우 기본적으로 라운드 로빈 방식으로 동작합니다.
   - Durability
     - transaction이 Commit했을 경우 해당 결과가 영구적으로 적용됨을 보장하는 성질이다
 
-</details>
-
-<details>
-<summary>트랜잭션과 lock에 대해서 isolation과 연결 지어 설명해주세요</summary>
+### 트랜잭션과 lock에 대해서 isolation과 연결 지어 설명해주세요
 
 DB엔진은 ACID 원칙을 희생하여 동시성을 얻을 수 있는 방법을 제공합니다.
 
@@ -159,10 +137,8 @@ DB엔진은 ACID 원칙을 희생하여 동시성을 얻을 수 있는 방법을
 
 lock은 모두 transaction이 commit 되거나 rollback 될 때 함께 unlock
 
-- ## `Consistent read`
-- Isolation
-</details>
-
+- `Consistent read`
+  - Isolation
 - https://s1107.tistory.com/45
 - http://labs.brandi.co.kr/2019/06/19/hansj.html
 - https://suhwan.dev/2019/06/09/transaction-isolation-level-and-lock/
@@ -171,17 +147,15 @@ lock은 모두 transaction이 commit 되거나 rollback 될 때 함께 unlock
   - https://idea-sketch.tistory.com/43?category=547413
   - https://idea-sketch.tistory.com/45
 
-<details>
-<summary>DB index에 대해 설명해주세요</summary>
+### DB index에 대해 설명해주세요
 
-https://idea-sketch.tistory.com/43?category=547413
+> https://idea-sketch.tistory.com/43?category=547413
 
-</details>
+### todo
 
 - dirty read, Non-Repeatable Read, Phantom Read
 - optimistic lock, pessimistic lock
 - slow query
--
 - Index
 
 ## Software Engineering
