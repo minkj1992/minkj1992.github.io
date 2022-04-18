@@ -23,6 +23,12 @@ This is base vscode settings related format, python
         "editor.codeActionsOnSave": {
             "source.organizeImports": true,
         },
+        "editor.rulers": [
+            {
+                "column": 80,
+                "color": "#5a5a5a80"
+            },
+        ]
     },
 }
 ```
