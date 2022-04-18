@@ -6,17 +6,112 @@ Describes python google style editor settings on `vscode`
 <!--more-->
 <br />
 
-This is base vscode settings related format, python 
 
+## tl;dr
+> full settings.json
 *settings.json*
 ```json
 {
-...
+    "security.workspace.trust.banner": "always",
+    "security.workspace.trust.untrustedFiles": "open",
+    "python.formatting.yapfPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/yapf",
+    "python.sortImports.path": "/Library/Frameworks/Python.framework/Versions/3.7/bin/isort",
+    "python.linting.pylintPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/pylint",
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "text.html.markdown.journal.task.open.bullet",
+                "settings": {
+                    "foreground": "#FFFF00"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.task.open.marker",
+                "settings": {
+                    "foreground": "#FFFF00"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.task.open.keyword",
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.task.open.text",
+                "settings": {}
+            },
+            {
+                "scope": "text.html.markdown.journal.task.completed.keyword",
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.task.completed.marker",
+                "settings": {
+                    "foreground": "#AAAAAA"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.task.completed.text",
+                "settings": {
+                    "foreground": "#AAAAAA"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.task.completed.bullet",
+                "settings": {
+                    "foreground": "#FFFF00"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.memo.keyword",
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.memo.bullet",
+                "settings": {
+                    "foreground": "#FFFF00"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.scope",
+                "settings": {
+                    "foreground": "#FFFF00"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.link.keyword",
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "scope": "text.html.markdown.journal.link.bullet",
+                "settings": {
+                    "foreground": "#FFFF00"
+                }
+            }
+        ]
+    },
     "editor.fontSize": 13,
+    "terminal.integrated.fontFamily": "'MesloLGS NF'",
+    "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace",
     "editor.tabCompletion": "on",
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "[markdown]": {
+        "editor.tabCompletion": "onlySnippets",
+        "editor.quickSuggestions": {
+            "other": "on",
+            "comments": "on",
+            "strings": "on"
+        }
 
+    },
     "[python]": {
         "editor.defaultFormatter": "ms-python.python",
         "editor.formatOnSave": true,
@@ -29,6 +124,30 @@ This is base vscode settings related format, python
                 "color": "#5a5a5a80"
             },
         ]
+    },
+
+    "python.formatting.provider": "yapf",
+    // or "python.linting.pylintPath": "${workspaceFolder}/.venv/bin/yapf",
+    "python.formatting.yapfArgs": [
+        "--style",
+        "google",
+    ],
+    // or "python.sortImports.path": "${workspaceFolder}/.venv/bin/isort",
+    "python.sortImports.args": [
+        "--settings-file=${workspaceFolder}/.isort.cfg",
+    ],
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.linting.pylintEnabled": true,
+    // or "python.linting.pylintPath": "${workspaceFolder}/.venv/bin/pylint",
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_django",
+        "pylint_quotes", // related string quotes
+    ],
+    "workbench.colorTheme": "Community Material Theme Palenight High Contrast",
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
     },
 }
 ```
