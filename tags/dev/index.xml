@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 12 Feb 2022 10:43:42 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 17 Apr 2022 12:34:49 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Google like python on vscode</title>
+    <link>https://minkj1992.github.io/python_formatter/</link>
+    <pubDate>Sun, 17 Apr 2022 12:34:49 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/python_formatter/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/google-python.jpeg" referrerpolicy="no-referrer">
+            </div><p>Describes python google style editor settings on <code>vscode</code></p>]]></description>
+</item><item>
     <title>[일주일 만에 배우는 GO] CH.3 Real World Go</title>
     <link>https://minkj1992.github.io/ch03_real_world/</link>
     <pubDate>Sat, 12 Feb 2022 10:43:42 &#43;0900</pubDate>
@@ -99,14 +108,5 @@
             <div class="admonition-content">좀비에게 먹이를 주어서 조합이 가능하게 해보자.</div>
         </div>
     </div>]]></description>
-</item><item>
-    <title>[ch02] Ros2 개발 환경 setup</title>
-    <link>https://minkj1992.github.io/ch02_setup/</link>
-    <pubDate>Tue, 18 Jan 2022 12:34:09 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://minkj1992.github.io/ch02_setup/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/ros_melodic.png" referrerpolicy="no-referrer">
-            </div><p><code>ros2 Foxy</code> 실행에 필요한 개발 환경을 <code>ubuntu</code>, <code>vm</code>환경에 세팅해봅니다.</p>]]></description>
 </item></channel>
 </rss>
