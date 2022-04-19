@@ -194,9 +194,11 @@ Describes python google style editor settings on `vscode`
 [settings]
 py_version=37
 profile=google
-src_paths=api,common,core,infra,logs,tests
+src_paths=api,common,core,infra,logs,tests,universe_z
+
+# 3 - Vertical Hanging Indent
 multi_line_output=3
-use_parentheses=True
+include_trailing_comma=True
 force_single_line=False
 
 # profile google default
