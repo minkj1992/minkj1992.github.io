@@ -1,7 +1,7 @@
 # [GCP] Iot core
 
 
-referenced [Technical overview of Internet of Things](https://cloud.google.com/architecture/iot-overview) article.
+
 
 <!--more-->
 <br />
@@ -9,6 +9,8 @@ referenced [Technical overview of Internet of Things](https://cloud.google.com/a
 ## tl;dr
 
 ## Terminology
+> referenced [Technical overview of Internet of Things](https://cloud.google.com/architecture/iot-overview) article.
+
 
 - top-level components(3)
 
@@ -55,8 +57,40 @@ referenced [Technical overview of Internet of Things](https://cloud.google.com/a
 - OTA update
   - over the air updates
 
-## Next
+## GCP IoT Core conecpts
+> [Devices, Configuration and State](https://cloud.google.com/iot/docs/concepts/devices)
 
-- mqtt
-- iot core gcp
+### 1. Device metadata
+> metadata serves primarily as a label or identifier for devices. (or classifies devices)
 
+- more secure than device state or device configuration because device metadata is never sent to or from a device
+- shouldn't change often (best: update it no more often than once per day)
+- 500 key-value pairs (each key must be unique)
+- Cloud IoT Core does not interpret or index device metadata
+- e.g. hardware thumbprint, serial number, manufacturer information
+
+### 2. Device configuration
+> IoT Core → device
+> Sends desired state to robot with pre-defined commands like [e.g.](https://cloud.google.com/iot/docs/concepts/devices#structuring_configuration_data)
+
+- Device configuration is an arbitrary, user-defined blob of data sent from Cloud IoT Core to a device
+- Device configuration is persisted in storage by Cloud IoT Core (64KB)
+- After a configuration has been applied to a device, the device can report its [state](https://cloud.google.com/iot/docs/how-tos/config/getting-state) to Cloud IoT Core.
+- A device configuration should focus on desired values or results, rather than on a sequence of commands
+- Updates a device's state by sending the expected state as a configuration
+- **Note that a device is not guaranteed to receive every configuration update**
+  - If a configuration is being updated rapidly, devices may not receive intermediate versions.
+
+#### Configuration versions
+
+- A device receives configurations only in increasing order of version numbers; in other words, it will never be sent a configuration older than its current version
+- If the device reconnects to the MQTT bridge, it may receive an older configuration than it did during the earlier connection (rare case)
+
+### 3. Device state
+> device → IoT Core
+> Captures the current status of the device, not the environment
+
+- Devices can describe their state with an arbitrary user-defined blob of data sent from the device to the cloud
+- Device state information is not updated frequently.
+- `Configuration` and `state` data can have the same schema and encoding, or they can be different
+- e.g. health of the device or its firmware version

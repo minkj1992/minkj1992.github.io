@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 17 Apr 2022 12:34:49 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 23 Apr 2022 12:41:55 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>[GCP] Iot core</title>
+    <link>https://minkj1992.github.io/iot_core/</link>
+    <pubDate>Sat, 23 Apr 2022 12:41:55 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/iot_core/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/wall_e.jpeg" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item><item>
     <title>Google like python on vscode</title>
     <link>https://minkj1992.github.io/python_formatter/</link>
     <pubDate>Sun, 17 Apr 2022 12:34:49 &#43;0900</pubDate>
@@ -13,15 +22,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/google-python.jpeg" referrerpolicy="no-referrer">
             </div><p>Describes python google style editor settings on <code>vscode</code></p>]]></description>
-</item><item>
-    <title>[GCP] Iot core</title>
-    <link>https://minkj1992.github.io/iot_core/</link>
-    <pubDate>Sat, 16 Apr 2022 21:20:15 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://minkj1992.github.io/iot_core/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/wall_e.jpeg" referrerpolicy="no-referrer">
-            </div><p>referenced <a href="https://cloud.google.com/architecture/iot-overview" target="_blank" rel="noopener noreffer">Technical overview of Internet of Things</a> article.</p>]]></description>
 </item><item>
     <title>[일주일 만에 배우는 GO] CH.3 Real World Go</title>
     <link>https://minkj1992.github.io/ch03_real_world/</link>
