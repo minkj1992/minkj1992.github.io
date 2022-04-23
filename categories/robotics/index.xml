@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/categories/robotics/</link>
         <description>robotics - Category - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 23 Apr 2022 12:41:55 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/robotics/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 23 Apr 2022 12:46:44 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/robotics/" rel="self" type="application/rss+xml" /><item>
+    <title>(WIP) [GCP] Iot core inpractice</title>
+    <link>https://minkj1992.github.io/iot_in_practice/</link>
+    <pubDate>Sat, 23 Apr 2022 12:46:44 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/iot_in_practice/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ros_think.png" referrerpolicy="no-referrer">
+            </div><p>Let&rsquo;s generate IoT service with gcp iot core and pub/sub.</p>]]></description>
+</item><item>
     <title>[GCP] Iot core</title>
     <link>https://minkj1992.github.io/iot_core/</link>
     <pubDate>Sat, 23 Apr 2022 12:41:55 &#43;0900</pubDate>

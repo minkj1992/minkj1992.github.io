@@ -5,35 +5,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>[GCP] Iot core - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="[GCP] Iot core" />
-<meta property="og:description" content="" />
+        <title>(WIP) [GCP] Iot core inpractice - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="(WIP) [GCP] Iot core inpractice" />
+<meta property="og:description" content="Let&rsquo;s generate IoT service with gcp iot core and pub/sub." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://minkj1992.github.io/iot_core/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-04-23T12:41:55+09:00" />
-<meta property="article:modified_time" content="2022-04-23T12:45:12+09:00" />
+<meta property="og:url" content="https://minkj1992.github.io/iot_in_practice/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-23T12:46:44+09:00" />
+<meta property="article:modified_time" content="2022-04-23T12:46:44+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
 
-<meta name="twitter:title" content="[GCP] Iot core"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="(WIP) [GCP] Iot core inpractice"/>
+<meta name="twitter:description" content="Let&rsquo;s generate IoT service with gcp iot core and pub/sub."/>
 <meta name="application-name" content="serious">
-<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/iot_core/" /><link rel="prev" href="https://minkj1992.github.io/python_formatter/" /><link rel="next" href="https://minkj1992.github.io/iot_in_practice/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/iot_in_practice/" /><link rel="prev" href="https://minkj1992.github.io/iot_core/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "[GCP] Iot core",
+        "headline": "(WIP) [GCP] Iot core inpractice",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/minkj1992.github.io\/iot_core\/"
+            "@id": "https:\/\/minkj1992.github.io\/iot_in_practice\/"
         },"image": [{
                             "@type": "ImageObject",
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "iot, gcp, robotics","wordcount":  539 ,
-        "url": "https:\/\/minkj1992.github.io\/iot_core\/","datePublished": "2022-04-23T12:41:55+09:00","dateModified": "2022-04-23T12:45:12+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "iot, gcp, robotics","wordcount":  42 ,
+        "url": "https:\/\/minkj1992.github.io\/iot_in_practice\/","datePublished": "2022-04-23T12:46:44+09:00","dateModified": "2022-04-23T12:46:44+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -112,18 +112,18 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">[GCP] Iot core</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">(WIP) [GCP] Iot core inpractice</h1><h2 class="single-subtitle">Let&#39;s serve robot controll system with iot-core</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/robotics/"><i class="far fa-folder fa-fw"></i>robotics</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-23">2022-04-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;539 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-23">2022-04-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;42 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/wall_e.jpeg"
-        data-srcset="/images/wall_e.jpeg, /images/wall_e.jpeg 1.5x, /images/wall_e.jpeg 2x"
+        data-src="/images/ros_think.png"
+        data-srcset="/images/ros_think.png, /images/ros_think.png 1.5x, /images/ros_think.png 2x"
         data-sizes="auto"
-        alt="/images/wall_e.jpeg"
-        title="/images/wall_e.jpeg" /></div><div class="details toc" id="toc-static"  kept="">
+        alt="/images/ros_think.png"
+        title="/images/ros_think.png" /></div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
@@ -131,174 +131,38 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#tldr">tl;dr</a></li>
-    <li><a href="#terminology">Terminology</a></li>
-    <li><a href="#gcp-iot-core-conecpts">GCP IoT Core conecpts</a>
-      <ul>
-        <li><a href="#1-device-metadata">1. Device metadata</a></li>
-        <li><a href="#2-device-configuration">2. Device configuration</a>
-          <ul>
-            <li><a href="#configuration-versions">Configuration versions</a></li>
-          </ul>
-        </li>
-        <li><a href="#3-device-state">3. Device state</a></li>
-      </ul>
-    </li>
+    <li><a href="#steps">steps</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><br />
+            </div><div class="content" id="content"><p>Let&rsquo;s generate IoT service with gcp iot core and pub/sub.</p>
+<br />
 <h2 id="tldr">tl;dr</h2>
-<h2 id="terminology">Terminology</h2>
-<blockquote>
-<p>referenced <a href="https://cloud.google.com/architecture/iot-overview" target="_blank" rel="noopener noreffer">Technical overview of Internet of Things</a> article.</p>
-</blockquote>
-<ul>
-<li>
-<p>top-level components(3)</p>
-<ul>
-<li>device: hardware itself and sw</li>
-<li>gateway: connect to cloud services without internet</li>
-<li>cloud: google cloud</li>
-</ul>
-</li>
-<li>
-<p>type of message</p>
-<ul>
-<li>state information(data)
-<ul>
-<li>current status of the device</li>
-<li>read/write</li>
-</ul>
-</li>
-<li><code>telemetry</code>
-<ul>
-<li>device metric (i.g sensor data, gps &hellip;)</li>
-<li>read only</li>
-<li>Each source of telemetry results in a channel</li>
-<li><code>Telemetry data</code> might be preserved as a stateful variable on the device or in the cloud.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>commnads</p>
-<ul>
-<li>actions performed by a device.</li>
-<li>commands are often not idempotent</li>
-<li>which means each duplicate message usually results in a different outcome</li>
-</ul>
-</li>
-<li>
-<p>operational information</p>
-<ul>
-<li>i.g. CPU operating temperature and battery state</li>
-<li>can be transmitted as <code>telemetry</code> or state data.</li>
-</ul>
-</li>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Serial_communication" target="_blank" rel="noopener noreffer">serial interface</a></p>
-<ul>
-<li>process of sending data one bit at a time, sequentially, over a communication channel or computer bus</li>
-<li>contrast to parallel communication</li>
-</ul>
-</li>
-<li>
-<p>GPIO</p>
-<ul>
-<li>General-purpose input/output pin</li>
-<li>can be designed to carry digital or analog signals, and digital pins have only two states: HIGH or LOW.</li>
-</ul>
-</li>
-<li>
-<p><a href="https://en.wikipedia.org/wiki/Pulse-width_modulation" target="_blank" rel="noopener noreffer">PWM</a></p>
-<ul>
-<li>pulse width modulation</li>
-<li>The effect in the device can be a lower or higher power level</li>
-</ul>
-</li>
-<li>
-<p>ADC</p>
-<ul>
-<li>analog to digital conversion</li>
-<li>analog -&gt; binary</li>
-</ul>
-</li>
-<li>
-<p>I2C</p>
-<ul>
-<li>Inter Integrated Circuit</li>
-<li>Inter-Integrated Circuit serial bus uses a protocol that enables multiple modules to be assigned a discrete address on the bus</li>
-<li>pronounced &ldquo;I two C&rdquo;, &ldquo;I-I-C&rdquo;, or &ldquo;I squared C&rdquo;.</li>
-</ul>
-</li>
-<li>
-<p>OTA update</p>
-<ul>
-<li>over the air updates</li>
-</ul>
-</li>
-</ul>
-<h2 id="gcp-iot-core-conecpts">GCP IoT Core conecpts</h2>
-<blockquote>
-<p><a href="https://cloud.google.com/iot/docs/concepts/devices" target="_blank" rel="noopener noreffer">Devices, Configuration and State</a></p>
-</blockquote>
-<h3 id="1-device-metadata">1. Device metadata</h3>
-<blockquote>
-<p>metadata serves primarily as a label or identifier for devices. (or classifies devices)</p>
-</blockquote>
-<ul>
-<li>more secure than device state or device configuration because device metadata is never sent to or from a device</li>
-<li>shouldn&rsquo;t change often (best: update it no more often than once per day)</li>
-<li>500 key-value pairs (each key must be unique)</li>
-<li>Cloud IoT Core does not interpret or index device metadata</li>
-<li>e.g. hardware thumbprint, serial number, manufacturer information</li>
-</ul>
-<h3 id="2-device-configuration">2. Device configuration</h3>
-<blockquote>
-<p>IoT Core → device
-Sends desired state to robot with pre-defined commands like <a href="https://cloud.google.com/iot/docs/concepts/devices#structuring_configuration_data" target="_blank" rel="noopener noreffer">e.g.</a></p>
-</blockquote>
-<ul>
-<li>Device configuration is an arbitrary, user-defined blob of data sent from Cloud IoT Core to a device</li>
-<li>Device configuration is persisted in storage by Cloud IoT Core (64KB)</li>
-<li>After a configuration has been applied to a device, the device can report its <a href="https://cloud.google.com/iot/docs/how-tos/config/getting-state" target="_blank" rel="noopener noreffer">state</a> to Cloud IoT Core.</li>
-<li>A device configuration should focus on desired values or results, rather than on a sequence of commands</li>
-<li>Updates a device&rsquo;s state by sending the expected state as a configuration</li>
-<li><strong>Note that a device is not guaranteed to receive every configuration update</strong>
-<ul>
-<li>If a configuration is being updated rapidly, devices may not receive intermediate versions.</li>
-</ul>
-</li>
-</ul>
-<h4 id="configuration-versions">Configuration versions</h4>
-<ul>
-<li>A device receives configurations only in increasing order of version numbers; in other words, it will never be sent a configuration older than its current version</li>
-<li>If the device reconnects to the MQTT bridge, it may receive an older configuration than it did during the earlier connection (rare case)</li>
-</ul>
-<h3 id="3-device-state">3. Device state</h3>
-<blockquote>
-<p>device → IoT Core
-Captures the current status of the device, not the environment</p>
-</blockquote>
-<ul>
-<li>Devices can describe their state with an arbitrary user-defined blob of data sent from the device to the cloud</li>
-<li>Device state information is not updated frequently.</li>
-<li><code>Configuration</code> and <code>state</code> data can have the same schema and encoding, or they can be different</li>
-<li>e.g. health of the device or its firmware version</li>
-</ul></div><div class="post-footer" id="post-footer">
+<ol>
+<li>generate iot gcp</li>
+<li>controll robot with commands</li>
+<li>pub/sub with robots (robot needs )</li>
+</ol>
+<h2 id="steps">steps</h2>
+<ol>
+<li>quick start <a href="https://cloud.google.com/iot/docs/create-device-registry" target="_blank" rel="noopener noreffer">https://cloud.google.com/iot/docs/create-device-registry</a></li>
+<li>mqtt serves</li>
+<li>generate robot signaller (demo) docker</li>
+<li>generate robot commands</li>
+<li>realtime robot controller (websocket)</li>
+</ol></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-04-23&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/73797fc54c4f4bda7ccc61e2a71cd482df3ae949" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 73797fc54c4f4bda7ccc61e2a71cd482df3ae949: rebuilding site 2022년 4월 23일 토요일 12시 45분 12초 KST">
-                                    <i class="fas fa-hashtag fa-fw"></i>73797fc</a></span>
+                <span>Updated on 2022-04-23</span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/iot_core/index.md" target="_blank">Read Markdown</a>
+                            <a class="link-to-markdown" href="/iot_in_practice/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/iot_core/" data-title="[GCP] Iot core" data-hashtags="iot,gcp,robotics"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/iot_core/" data-hashtag="iot"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/iot_core/" data-title="[GCP] Iot core"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/iot_core/" data-title="[GCP] Iot core"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/iot_core/" data-title="[GCP] Iot core" data-image="/images/wall_e.jpeg"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/iot_in_practice/" data-title="(WIP) [GCP] Iot core inpractice" data-hashtags="iot,gcp,robotics"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/iot_in_practice/" data-hashtag="iot"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/iot_in_practice/" data-title="(WIP) [GCP] Iot core inpractice"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/iot_in_practice/" data-title="(WIP) [GCP] Iot core inpractice"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/iot_in_practice/" data-title="(WIP) [GCP] Iot core inpractice" data-image="/images/ros_think.png"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
@@ -310,8 +174,7 @@ Captures the current status of the device, not the environment</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/python_formatter/" class="prev" rel="prev" title="Google like python on vscode"><i class="fas fa-angle-left fa-fw"></i>Google like python on vscode</a>
-            <a href="/iot_in_practice/" class="next" rel="next" title="(WIP) [GCP] Iot core inpractice">(WIP) [GCP] Iot core inpractice<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/iot_core/" class="prev" rel="prev" title="[GCP] Iot core"><i class="fas fa-angle-left fa-fw"></i>[GCP] Iot core</a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.

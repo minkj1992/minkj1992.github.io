@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 23 Apr 2022 12:41:55 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 23 Apr 2022 12:46:44 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>(WIP) [GCP] Iot core inpractice</title>
+    <link>https://minkj1992.github.io/iot_in_practice/</link>
+    <pubDate>Sat, 23 Apr 2022 12:46:44 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/iot_in_practice/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ros_think.png" referrerpolicy="no-referrer">
+            </div><p>Let&rsquo;s generate IoT service with gcp iot core and pub/sub.</p>]]></description>
+</item><item>
     <title>[GCP] Iot core</title>
     <link>https://minkj1992.github.io/iot_core/</link>
     <pubDate>Sat, 23 Apr 2022 12:41:55 &#43;0900</pubDate>
@@ -85,21 +94,5 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/doge-computer.webp" referrerpolicy="no-referrer">
             </div><p>이번장에서는 [마스터링 이더리움 CH02] 이더리움 기초를 정리합니다. 인용글들은 <a href="https://github.com/ethereumbook/ethereumbook/blob/develop/02intro.asciidoc" target="_blank" rel="noopener noreffer">원문</a>을 참조하였습니다.</p>]]></description>
-</item><item>
-    <title>[Cryptozombies03] Advanced Solidity Concepts</title>
-    <link>https://minkj1992.github.io/ch03/</link>
-    <pubDate>Fri, 21 Jan 2022 13:06:52 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://minkj1992.github.io/ch03/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/zombie_army.png" referrerpolicy="no-referrer">
-            </div><div class="details admonition quote open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">나만의 좀비 덱을 만들어보자.</div>
-        </div>
-    </div>]]></description>
 </item></channel>
 </rss>

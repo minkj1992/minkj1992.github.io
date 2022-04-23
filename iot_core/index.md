@@ -94,3 +94,5 @@
 - Device state information is not updated frequently.
 - `Configuration` and `state` data can have the same schema and encoding, or they can be different
 - e.g. health of the device or its firmware version
+
+
