@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 17 Apr 2022 12:34:49 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 23 Apr 2022 17:14:25 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Depp dive into shell script line by line</title>
+    <link>https://minkj1992.github.io/shell_script/</link>
+    <pubDate>Sat, 23 Apr 2022 17:14:25 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/shell_script/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/bash.png" referrerpolicy="no-referrer">
+            </div><p>Useful shell script commands :)</p>]]></description>
+</item><item>
     <title>Google like python on vscode</title>
     <link>https://minkj1992.github.io/python_formatter/</link>
     <pubDate>Sun, 17 Apr 2022 12:34:49 &#43;0900</pubDate>
@@ -90,22 +99,6 @@
         </div>
         <div class="details-content">
             <div class="admonition-content">나만의 좀비 덱을 만들어보자.</div>
-        </div>
-    </div>]]></description>
-</item><item>
-    <title>[Cryptozombies02] Zombies Attack Their Victims</title>
-    <link>https://minkj1992.github.io/ch02/</link>
-    <pubDate>Thu, 20 Jan 2022 20:53:46 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://minkj1992.github.io/ch02/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/cat_zombie.png" referrerpolicy="no-referrer">
-            </div><div class="details admonition quote open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-quote-right fa-fw"></i>Quote<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content">좀비에게 먹이를 주어서 조합이 가능하게 해보자.</div>
         </div>
     </div>]]></description>
 </item></channel>
