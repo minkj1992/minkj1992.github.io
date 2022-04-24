@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Gevent - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="Gevent" />
+<meta property="og:description" content="Let&rsquo;s deep dive into gevent based python programming" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/gevent/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-24T12:39:29+09:00" />
+<meta property="article:modified_time" content="2022-04-24T12:39:29+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Gevent"/>
+<meta name="twitter:description" content="Let&rsquo;s deep dive into gevent based python programming"/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/gevent/" /><link rel="prev" href="https://minkj1992.github.io/daoist/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Gevent",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/gevent\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, robotics","wordcount":  2175 ,
+        "url": "https:\/\/minkj1992.github.io\/gevent\/","datePublished": "2022-04-24T12:39:29+09:00","dateModified": "2022-04-24T12:39:29+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="auto" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Gevent</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>leoo.j</a></span>&nbsp;<span class="post-category">included in <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>python</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-04-24">2022-04-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;2175 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;11 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/gevent.png"
+        data-srcset="/images/gevent.png, /images/gevent.png 1.5x, /images/gevent.png 2x"
+        data-sizes="auto"
+        alt="/images/gevent.png"
+        title="/images/gevent.png" /></div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">tl;dr</a></li>
+    <li><a href="#gevent"><code>gevent</code></a></li>
+    <li><a href="#intro">Intro</a>
+      <ul>
+        <li><a href="#gevent-vs-eventlet"><code>gevent</code> vs <code>eventlet</code></a></li>
+        <li><a href="#backgrounds">backgrounds</a></li>
+      </ul>
+    </li>
+    <li><a href="#key-features">key features</a>
+      <ul>
+        <li><a href="#synchronous--asynchronous-execution-on-gevent">Synchronous &amp; Asynchronous Execution on gevent</a></li>
+        <li><a href="#determinism">Determinism</a></li>
+        <li><a href="#spawning-greenlets">Spawning Greenlets</a></li>
+        <li><a href="#greenlet-state">Greenlet State</a></li>
+        <li><a href="#program-shutdown">Program Shutdown</a></li>
+        <li><a href="#timeouts">Timeouts</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#queues">Queues</a></li>
+        <li><a href="#groups-and-pools">Groups and Pools</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Let&rsquo;s deep dive into gevent based python programming</p>
+<br />
+<h2 id="tldr">tl;dr</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">event</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">joinall</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">queue</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sleep</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">threadpool</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Timeout</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">wait</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kill</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">get_hub</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">signal</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="gevent"><code>gevent</code></h2>
+<p><em>gevent is a coroutine-based Python networking library that uses greenlet to provide a high-level synchronous API on top of the libev or libuv event loop.</em></p>
+<ul>
+<li><strong>deterministic</strong></li>
+<li></li>
+</ul>
+<h2 id="intro">Intro</h2>
+<h3 id="gevent-vs-eventlet"><code>gevent</code> vs <code>eventlet</code></h3>
+<p>gevent is inspired by eventlet has some diff</p>
+<ol>
+<li>gevent is built on top of <code>libevent</code> event loop</li>
+</ol>
+<ul>
+<li>epoll on Linux</li>
+<li>Signal handling is integrated with the event loop.</li>
+<li>Other libevent-based libraries can integrate with your app through single event loop.</li>
+<li>DNS requests are resolved asynchronously rather than via a threadpool of blocking calls.</li>
+<li>WSGI server is based on the libevent’s built-in HTTP server</li>
+</ul>
+<ol start="2">
+<li>gevent’s interface follows the conventions set by the standard library</li>
+</ol>
+<h3 id="backgrounds">backgrounds</h3>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>greenlet<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><strong>Greenlet은 C 확장 모듈 형태로 제공되는 경량 코루틴 입니다</strong>. Greenlet들은 메인 프로그램을 실행하는 OS process 안에서 모두 실행되지만 상호작용하며 스케줄링됩니다. 운영체제에 의해 스케줄링되는 process들과 POSIX 쓰레드들을 사용하여 실제로 병렬로 실행되는 multiprocessing 나 threading을 이용한 병렬처리들과는 달리 <strong>한 번에 오직 하나의 greenlet만이 실행됩니다.</strong></p>
+<p>greenlet은 deterministic 합니다. 같은 greenlet 세팅과 같은 입력이 주어졌을때, 언제나 같은 결과를 출력합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">echo</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Non Deterministic Process Pool</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">multiprocessing.pool</span> <span class="kn">import</span> <span class="n">Pool</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">run1</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">echo</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">run2</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">echo</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">run3</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">echo</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">run4</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">echo</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">run1</span> <span class="o">==</span> <span class="n">run2</span> <span class="o">==</span> <span class="n">run3</span> <span class="o">==</span> <span class="n">run4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Deterministic Gevent Pool</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent.pool</span> <span class="kn">import</span> <span class="n">Pool</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">p</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">run1</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">echo</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">run2</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">echo</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">run3</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">echo</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl"><span class="n">run4</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">imap_unordered</span><span class="p">(</span><span class="n">echo</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">run1</span> <span class="o">==</span> <span class="n">run2</span> <span class="o">==</span> <span class="n">run3</span> <span class="o">==</span> <span class="n">run4</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kc">False</span>
+</span></span><span class="line"><span class="cl"><span class="kc">True</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>libev vs libuv vs libevent<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>The three network libraries Libevent , libev , and libuv are all asynchronous event libraries implemented in C language. ( Asynchronousevent library ).</p>
+<ul>
+<li>
+<p><code>Libevent</code>: the most famous, most widely used and long-standing cross-platform event library;</p>
+</li>
+<li>
+<p><code>libev</code>: Compared with libevent , the design is more concise and the performance is better, but the support for Windows is not good enough;</p>
+</li>
+<li>
+<p><code>libuv</code>: A cross-platform event library is needed in the process of developing node . They preferred libev , but they also need to support Windows , so they repackaged a set, implemented with libev under Linux , and IOCP under Windows</p>
+</li>
+</ul>
+</div>
+        </div>
+    </div>
+<h2 id="key-features">key features</h2>
+<blockquote>
+<p><a href="http://leekchan.com/gevent-tutorial-ko/" target="_blank" rel="noopener noreffer">refs</a></p>
+</blockquote>
+<h3 id="synchronous--asynchronous-execution-on-gevent">Synchronous &amp; Asynchronous Execution on gevent</h3>
+<p>동시성 처리의 핵심 개념은 큰 단위의 task를 한번에 동기로 처리하는 대신, 작은 단위의 subtask들로 쪼개서 동시에 비동기로 실행시키는 것입니다. 두 subtask간의 스위칭을 컨텍스트 스위칭이라고 합니다.
+<strong>gevent에서는 컨텍스트 스위칭을 yielding을 이용해서 합니다.</strong></p>
+<p>gevent의 진짜 힘은 상호작용 하며 스케쥴링 될 수 있는 네트워크와 IO bound 함수들을 작성할때 발휘됩니다. <strong>gevent는 네트워크 라이브러리들이 암시적으로 greenlet 컨텍스트들이 가능한 시점에 암시적으로 yield 하도록 보장합니다.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">select</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">tic</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;at </span><span class="si">%1.1f</span><span class="s1"> seconds&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">gr1</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Busy waits for a second, but we don&#39;t want to stick around...</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Started Polling: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">tic</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">select</span><span class="o">.</span><span class="n">select</span><span class="p">([],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ended Polling: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">tic</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">gr2</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Busy waits for a second, but we don&#39;t want to stick around...</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Started Polling: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">tic</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">select</span><span class="o">.</span><span class="n">select</span><span class="p">([],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ended Polling: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">tic</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">gr3</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Hey lets do some stuff while the greenlets poll, </span><span class="si">%s</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">tic</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;gr3 fin&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">gr1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">gr2</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">gr3</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Started</span> <span class="n">Polling</span><span class="p">:</span> <span class="n">at</span> <span class="mf">0.0</span> <span class="n">seconds</span>
+</span></span><span class="line"><span class="cl"><span class="n">Started</span> <span class="n">Polling</span><span class="p">:</span> <span class="n">at</span> <span class="mf">0.0</span> <span class="n">seconds</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hey</span> <span class="n">lets</span> <span class="n">do</span> <span class="n">some</span> <span class="n">stuff</span> <span class="k">while</span> <span class="n">the</span> <span class="n">greenlets</span> <span class="n">poll</span><span class="p">,</span> <span class="n">at</span> <span class="mf">0.0</span> <span class="n">seconds</span>
+</span></span><span class="line"><span class="cl"><span class="n">Ended</span> <span class="n">Polling</span><span class="p">:</span> <span class="n">at</span> <span class="mf">2.0</span> <span class="n">seconds</span>
+</span></span><span class="line"><span class="cl"><span class="n">Ended</span> <span class="n">Polling</span><span class="p">:</span> <span class="n">at</span> <span class="mf">2.0</span> <span class="n">seconds</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="determinism">Determinism</h3>
+<p>greenlet은 deterministic 합니다. 같은 greenlet 세팅과 같은 입력이 주어졌을때, 언제나 같은 결과를 출력합니다.</p>
+<p>gevent가 일반적으로 deterministic 하다고 해도, 소켓과 파일과 같은 외부 서비스와 연동할 때 non-deterministic한 입력들이 들어올 수 있습니다. 그러므로 green 쓰레드가 &ldquo;deterministic concurrency&rdquo; 형태라고 해도, POSIX 쓰레드들과 프로세스들을 다룰 때 만나는 문제들을 경험할 수 있습니다.</p>
+<p>동시성을 다룰 때 만날 수 있는 문제로 race condition이 있습니다. 간단히 요약하자면, race condition은 두 개의 동시에 실행되는 쓰레드나 프로세스들이 같은 공유 자원을 수정하려고 할 때 발생합니다. 이때 해당 공유자원의 결과 값은 실행 순서에 따라 달라지게 됩니다. 이런 결과는 non-deterministic한 프로그램 동작을 야기하기 때문에 발생시키지 않기 위해 노력해야 합니다.
+<strong>Best practice는 공유자원을 사용하지 않도록 하는 것입니다.</strong></p>
+<h3 id="spawning-greenlets">Spawning Greenlets</h3>
+<p>gevent는 greenlet 초기화를 위한 몇 가지 wrapper들을 제공합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">Greenlet</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">c1</span> <span class="o">=</span> <span class="n">Greenlet</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="s2">&#34;Hello&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">c2</span> <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="s2">&#34;Hello2&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">c3</span> <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">coroutines</span> <span class="o">=</span> <span class="p">[</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span> <span class="n">c3</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">(</span><span class="n">coroutines</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hello</span>
+</span></span><span class="line"><span class="cl"><span class="n">Hello2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Greenlet 클래스를 상속하고 _run 함수를 override 하는 방법도 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">Greenlet</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyGreenlet</span><span class="p">(</span><span class="n">Greenlet</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Greenlet</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="o">=</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">g</span> <span class="o">=</span> <span class="n">MyGreenlet</span><span class="p">(</span><span class="s2">&#34;Hi there!&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">g</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Hi</span> <span class="n">there</span><span class="err">!</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="greenlet-state">Greenlet State</h3>
+<p>다른 코드 예시들처럼, greenlet도 다양한 경우에 실패할 수 있습니다. greenlet은 예외를 발생시키는것이 실패하거나, 정지에 실패할 수도 있고, 시스템 자원을 과도하게 사용할 수도 있습니다.</p>
+<p><strong>greenlet의 내부 상태는 대체로 time-dependent합니다. greenlet에는 쓰레드의 상태를 모니터링 할 수 있는 다양한 flag들이 있습니다.</strong></p>
+<ul>
+<li>started: bool
+<ul>
+<li>Greenlet이 실행되었는지 여부를 나타냅니다</li>
+</ul>
+</li>
+<li>ready(): bool
+<ul>
+<li>Greenlet이 정지되었는지 여부를 나타냅니다</li>
+</ul>
+</li>
+<li>successful(): bool
+<ul>
+<li>Greenlet이 예외를 발생시키지 않고 정지되었는지 여부를 나타냅니다.</li>
+</ul>
+</li>
+<li>value: Any
+<ul>
+<li>Greenlet에 의해서 리턴된 값입니다.</li>
+</ul>
+</li>
+<li>exception: Exception
+<ul>
+<li>Greenlet안에서 발생한 예외입니다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">win</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;You win!&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">fail</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;You fail at failing.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">winner</span> <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">loser</span> <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">fail</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="o">.</span><span class="n">started</span><span class="p">)</span> <span class="c1"># True</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">loser</span><span class="o">.</span><span class="n">started</span><span class="p">)</span>  <span class="c1"># True</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">([</span><span class="n">winner</span><span class="p">,</span> <span class="n">loser</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This will never be reached&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="c1"># &#39;You win!&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">loser</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>  <span class="c1"># None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="o">.</span><span class="n">ready</span><span class="p">())</span> <span class="c1"># True</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">loser</span><span class="o">.</span><span class="n">ready</span><span class="p">())</span>  <span class="c1"># True</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">winner</span><span class="o">.</span><span class="n">successful</span><span class="p">())</span> <span class="c1"># True</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">loser</span><span class="o">.</span><span class="n">successful</span><span class="p">())</span>  <span class="c1"># False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># It is possible though to raise the exception again outside</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># raise loser.exception</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># or with</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># loser.get()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">loser</span><span class="o">.</span><span class="n">exception</span><span class="p">)</span> <span class="c1"># You fail at failing.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="program-shutdown">Program Shutdown</h3>
+<p>메인 프로그램이 SIGQUIT 시그널을 받은 시점에 yield를 실패한 Greenlet은 예상보다 오래 실행이 정지되어 있을 수 있습니다. 이런 프로세스는 &ldquo;좀비 프로세스&quot;라고 불리고, 파이썬 인터프리터 외부에서 kill되어야 합니다.</p>
+<p>일반적인 패턴은 메인 프로그램에서 SIGQUIT 시그널에 대기하고 있다가 프로그램이 종료되기 전에
+gevent.shutdown 호출하는 것입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">signal</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">run_forever</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># gevent.signal(signal.SIGQUIT, gevent.shutdown)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGQUIT</span><span class="p">,</span> <span class="n">gevent</span><span class="o">.</span><span class="n">kill</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">thread</span> <span class="o">=</span> <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">run_forever</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>아래는 realworld example입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;--start&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">action</span><span class="o">=</span><span class="s2">&#34;something start&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Launch the processes&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">threading</span><span class="o">.</span><span class="n">currentThread</span><span class="p">()</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="s1">&#39;something&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">launcher</span> <span class="o">=</span> <span class="n">Launcher</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">launcher</span><span class="o">.</span><span class="n">setup_procmanager</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">start</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">launcher</span><span class="o">.</span><span class="n">start_proc_manager</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">gevent</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">,</span> <span class="n">sig_handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">signal</span><span class="p">(</span><span class="n">gevent</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">,</span> <span class="n">sig_handler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shutdown requested. Exiting...&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">launcher</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="timeouts">Timeouts</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">Timeout</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">seconds</span> <span class="o">=</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">timeout</span> <span class="o">=</span> <span class="n">Timeout</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">timeout</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">wait</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">except</span> <span class="n">Timeout</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Could not complete&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>with statement</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent</span> <span class="kn">import</span> <span class="n">Timeout</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">time_to_wait</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># seconds</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TooLong</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">pass</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="n">Timeout</span><span class="p">(</span><span class="n">time_to_wait</span><span class="p">,</span> <span class="n">TooLong</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="events">Events</h3>
+<p>Event는 Greenlet 간의 비동기 통신에 사용됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent.event</span> <span class="kn">import</span> <span class="n">Event</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s1">Illustrates the use of events
+</span></span></span><span class="line"><span class="cl"><span class="s1">&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">evt</span> <span class="o">=</span> <span class="n">Event</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">setter</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;After 3 seconds, wake all threads waiting on the value of evt&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A: Hey wait for me, I have to do something&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Ok, I&#39;m done&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">evt</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">waiter</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;&#39;&#39;After 3 seconds the get call will unblock&#39;&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;I&#39;ll wait for you&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">evt</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>  <span class="c1"># blocking</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;It&#39;s about time&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">setter</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">waiter</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">waiter</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">waiter</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">waiter</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">waiter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">A</span><span class="p">:</span> <span class="n">Hey</span> <span class="n">wait</span> <span class="k">for</span> <span class="n">me</span><span class="p">,</span> <span class="n">I</span> <span class="n">have</span> <span class="n">to</span> <span class="n">do</span> <span class="n">something</span>
+</span></span><span class="line"><span class="cl"><span class="n">I</span><span class="s1">&#39;ll wait for you</span>
+</span></span><span class="line"><span class="cl"><span class="n">I</span><span class="s1">&#39;ll wait for you</span>
+</span></span><span class="line"><span class="cl"><span class="n">I</span><span class="s1">&#39;ll wait for you</span>
+</span></span><span class="line"><span class="cl"><span class="n">I</span><span class="s1">&#39;ll wait for you</span>
+</span></span><span class="line"><span class="cl"><span class="n">I</span><span class="s1">&#39;ll wait for you</span>
+</span></span><span class="line"><span class="cl"><span class="n">Ok</span><span class="p">,</span> <span class="n">I</span><span class="s1">&#39;m done</span>
+</span></span><span class="line"><span class="cl"><span class="n">It</span><span class="s1">&#39;s about time</span>
+</span></span><span class="line"><span class="cl"><span class="n">It</span><span class="s1">&#39;s about time</span>
+</span></span><span class="line"><span class="cl"><span class="n">It</span><span class="s1">&#39;s about time</span>
+</span></span><span class="line"><span class="cl"><span class="n">It</span><span class="s1">&#39;s about time</span>
+</span></span><span class="line"><span class="cl"><span class="n">It</span><span class="s1">&#39;s about time</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Event 객체의 확장은 wakeup call과 함께 값을 전송할 수 있는 <code>AsyncResult</code>입니다. AsyncResult는 임의의 시간에 할당될 미래 값에 대한 레퍼런스를 갖고 있기 때문에, <strong>때때로 <code>future</code>나 <code>deferred</code>로 불리기도 합니다.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent.event</span> <span class="kn">import</span> <span class="n">AsyncResult</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">AsyncResult</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">setter</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;leoo is cool&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;minwook is cool&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">waiter</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">setter</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">waiter</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">leoo</span> <span class="ow">is</span> <span class="n">cool</span>
+</span></span><span class="line"><span class="cl"><span class="n">minwook</span> <span class="ow">is</span> <span class="n">cool</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="queues">Queues</h3>
+<p>Queue는 일반적인 put 과 get 연산을 지원하지만 Greenlet 사이에서 안전하게 조작되는 것이 보장되는 순서를 가진 데이터들의 집합입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent.queue</span> <span class="kn">import</span> <span class="n">Queue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tasks</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="ow">not</span> <span class="n">tasks</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Worker </span><span class="si">%s</span><span class="s1"> got task </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">task</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quitting time!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">boss</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">25</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tasks</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">boss</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">&#39;steve&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">&#39;john&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">&#39;nancy&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">nancy</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">nancy</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">7</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">nancy</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">9</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">11</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">nancy</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">12</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">13</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">14</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">nancy</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">15</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">16</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">17</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">nancy</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">18</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">19</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">20</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">nancy</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">21</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">22</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">23</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">nancy</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">24</span>
+</span></span><span class="line"><span class="cl"><span class="n">Quitting</span> <span class="n">time</span><span class="err">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">Quitting</span> <span class="n">time</span><span class="err">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">Quitting</span> <span class="n">time</span><span class="err">!</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>즉 Queue는 put이나 get 연산 시 block 됩니다.</strong>
+만약 <em>non-blocking 연산이 필요할 때는 block이 되지 않는 put_nowait과 get_nowait을 사용할 수 있습니다. 대신 연산이 불가능할 때는 <code>gevent.queue.Empty</code> 나 <code>gevent.queue.Full</code> 예외를 발생시킵니다.</em></p>
+<p>아래 코드는 상사가 3명의 작업자(steve, john, nancy)에게 동시에 일을 시키는데 Queue가 3개 이상의 요소를 담지 않도록 제한하는 예시입니다. 이 제한은 put연산이 Queue에 남은 공간이 있을 때 까지 block 되어야 함을 의미합니다. 반대로 get 연산은 Queue에 요소가 없으면 block 되는데, 일정 시간이 지날 때 까지 요소가 들어오지 않으면 gevent.queue.Empty 예외를 발생시키면서 종료될 수 있도록 타임아웃 파라미터를 설정할 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">gevent</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">gevent.queue</span> <span class="kn">import</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">Empty</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">tasks</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">task</span> <span class="o">=</span> <span class="n">tasks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># decrements queue size by 1</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Worker </span><span class="si">%s</span><span class="s1"> got task </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">task</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gevent</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">Empty</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quitting time!&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">boss</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Boss will wait to hand out work until a individual worker is
+</span></span></span><span class="line"><span class="cl"><span class="s2">    free since the maxsize of the task queue is 3.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tasks</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Assigned all work in iteration 1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tasks</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Assigned all work in iteration 2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">gevent</span><span class="o">.</span><span class="n">joinall</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">boss</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">&#39;steve&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">&#39;john&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">gevent</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="n">worker</span><span class="p">,</span> <span class="s1">&#39;bob&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">bob</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">bob</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">6</span>
+</span></span><span class="line"><span class="cl"><span class="n">Assigned</span> <span class="nb">all</span> <span class="n">work</span> <span class="ow">in</span> <span class="n">iteration</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">7</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">bob</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">9</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">10</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">11</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">bob</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">12</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">13</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">14</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">bob</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">15</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">16</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">john</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">17</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">bob</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">18</span>
+</span></span><span class="line"><span class="cl"><span class="n">Assigned</span> <span class="nb">all</span> <span class="n">work</span> <span class="ow">in</span> <span class="n">iteration</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Worker</span> <span class="n">steve</span> <span class="n">got</span> <span class="n">task</span> <span class="mi">19</span>
+</span></span><span class="line"><span class="cl"><span class="n">Quitting</span> <span class="n">time</span><span class="err">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">Quitting</span> <span class="n">time</span><span class="err">!</span>
+</span></span><span class="line"><span class="cl"><span class="n">Quitting</span> <span class="n">time</span><span class="err">!</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="groups-and-pools">Groups and Pools</h3></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-04-24</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/gevent/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/gevent/" data-title="Gevent" data-hashtags="dev,robotics"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/gevent/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/gevent/" data-title="Gevent"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/gevent/" data-title="Gevent"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/gevent/" data-title="Gevent" data-image="/images/gevent.png"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/robotics/">robotics</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/daoist/" class="prev" rel="prev" title="Daoist"><i class="fas fa-angle-left fa-fw"></i>Daoist</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.97.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

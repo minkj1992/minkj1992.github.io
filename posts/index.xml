@@ -4,7 +4,16 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 24 Apr 2022 12:02:36 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 24 Apr 2022 12:39:29 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Gevent</title>
+    <link>https://minkj1992.github.io/gevent/</link>
+    <pubDate>Sun, 24 Apr 2022 12:39:29 &#43;0900</pubDate>
+    <author>Author</author>
+    <guid>https://minkj1992.github.io/gevent/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/gevent.png" referrerpolicy="no-referrer">
+            </div><p>Let&rsquo;s deep dive into gevent based python programming</p>]]></description>
+</item><item>
     <title>Daoist</title>
     <link>https://minkj1992.github.io/daoist/</link>
     <pubDate>Sun, 24 Apr 2022 12:02:36 &#43;0900</pubDate>
@@ -105,14 +114,5 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/golang/golang.jpeg" referrerpolicy="no-referrer">
             </div><p>새로운 언어를 공부하다보면, 생각보다 기초를 공부하는 시간이 소모적이라는 생각이 들어 조금 더 효율적인 학습방법을 정리해보고 싶어 글로 남겨둡니다.</p>]]></description>
-</item><item>
-    <title>Hardhat</title>
-    <link>https://minkj1992.github.io/hardhat/</link>
-    <pubDate>Wed, 02 Feb 2022 18:15:43 &#43;0900</pubDate>
-    <author>Author</author>
-    <guid>https://minkj1992.github.io/hardhat/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/hard.png" referrerpolicy="no-referrer">
-            </div><p><code>Hardhat</code>를 통해 local에서 스마트 컨트랙트를 작성해본 뒤, contract를 upgrade시켜봅니다. 이후 <code>rinkeby</code> 테스트넷에 proxy 컨트랙트를 배포해보고, <code>verify</code>시켜봅니다.</p>]]></description>
 </item></channel>
 </rss>
