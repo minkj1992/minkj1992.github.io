@@ -8,12 +8,14 @@
     <title>Let&#39;s create blog with Hugo</title>
     <link>https://minkj1992.github.io/initial_hugo/</link>
     <pubDate>Sun, 02 Jan 2022 14:59:43 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/initial_hugo/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/hugo-logo-wide.svg" referrerpolicy="no-referrer">
             </div><blockquote>
-<p>This article describes a series of technical steps to building this <code>serious</code> blog using the <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer">hugo framework</a>.</p>
+<p>This article describes a series of technical steps to building this <code>serious</code> blog using the <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer">hugo framework</a>
+.</p>
 </blockquote>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

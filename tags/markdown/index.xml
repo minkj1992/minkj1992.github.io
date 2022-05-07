@@ -8,12 +8,13 @@
     <title>Initial Post</title>
     <link>https://minkj1992.github.io/first_post/</link>
     <pubDate>Sat, 01 Jan 2022 23:00:00 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/first_post/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/featured-image.jpeg" referrerpolicy="no-referrer">
             </div><blockquote>
 <p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files.</p>
 </blockquote>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

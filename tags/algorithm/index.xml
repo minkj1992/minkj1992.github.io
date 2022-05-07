@@ -8,45 +8,49 @@
     <title>Sorting algorithms</title>
     <link>https://minkj1992.github.io/sorting/</link>
     <pubDate>Wed, 12 Jan 2022 20:21:33 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/sorting/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/sorting.jpeg" referrerpolicy="no-referrer">
             </div><blockquote>
 <p>Let&rsquo;s summary list of Sorting Algorithms</p>
 </blockquote>]]></description>
-</item><item>
+</item>
+<item>
     <title>Binary Search and BST</title>
     <link>https://minkj1992.github.io/binary_search/</link>
     <pubDate>Sat, 08 Jan 2022 18:58:54 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/binary_search/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/binary_search.png" referrerpolicy="no-referrer">
             </div><blockquote>
 <p>Binary Search와 BST에 대해서 정리합니다.</p>
 </blockquote>]]></description>
-</item><item>
+</item>
+<item>
     <title>DFS and BFS</title>
     <link>https://minkj1992.github.io/dfs_bfs/</link>
     <pubDate>Thu, 06 Jan 2022 19:42:58 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/dfs_bfs/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/dfs_bfs.png" referrerpolicy="no-referrer">
             </div><blockquote>
 <p>간단하게 bfs와 dfs를 <code>python</code>으로 구현해보고, 상황별 장단점을 분석해본다.</p>
 </blockquote>]]></description>
-</item><item>
+</item>
+<item>
     <title>Binary Tree</title>
     <link>https://minkj1992.github.io/binary_tree/</link>
     <pubDate>Thu, 06 Jan 2022 12:38:28 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/binary_tree/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/tree.jpeg" referrerpolicy="no-referrer">
             </div><blockquote>
 <p>Binary Tree관련 알고리즘들을 학습하고 정리합니다.</p>
 </blockquote>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

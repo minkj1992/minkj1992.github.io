@@ -8,12 +8,13 @@
     <title>Todo List</title>
     <link>https://minkj1992.github.io/todo/</link>
     <pubDate>Sun, 02 Jan 2022 15:09:49 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/todo/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/todo_list.jpeg" referrerpolicy="no-referrer">
             </div><blockquote>
 <p>This article is a simple list of todos that I will write to blog in my future.</p>
 </blockquote>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

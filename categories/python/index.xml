@@ -8,19 +8,21 @@
     <title>Gevent</title>
     <link>https://minkj1992.github.io/gevent/</link>
     <pubDate>Sun, 24 Apr 2022 12:39:29 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/gevent/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/gevent.png" referrerpolicy="no-referrer">
             </div><p>Let&rsquo;s deep dive into gevent based python programming</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>Google like python on vscode</title>
     <link>https://minkj1992.github.io/python_formatter/</link>
     <pubDate>Sun, 17 Apr 2022 12:34:49 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/python_formatter/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/google-python.jpeg" referrerpolicy="no-referrer">
             </div><p>Describes python google style editor settings on <code>vscode</code></p>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

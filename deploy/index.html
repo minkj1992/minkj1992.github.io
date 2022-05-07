@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Deploy Golang Web server on google cloud run - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="Deploy Golang Web server on google cloud run" />
+<meta property="og:description" content="Google Cloud Run을 사용해서, golang으로 만들어진 gin server를 배포하는 모든 과정을 작성합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/deploy/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-26T14:30:58+09:00" />
+<meta property="article:modified_time" content="2022-04-16T22:56:26+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Deploy Golang Web server on google cloud run"/>
+<meta name="twitter:description" content="Google Cloud Run을 사용해서, golang으로 만들어진 gin server를 배포하는 모든 과정을 작성합니다."/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/deploy/" /><link rel="prev" href="https://minkj1992.github.io/ch03_real_world/" /><link rel="next" href="https://minkj1992.github.io/python_formatter/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Deploy Golang Web server on google cloud run",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/deploy\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  253 ,
+        "url": "https:\/\/minkj1992.github.io\/deploy\/","datePublished": "2022-02-26T14:30:58+09:00","dateModified": "2022-04-16T22:56:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Deploy Golang Web server on google cloud run</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-02-26">2022-02-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;253 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/golang/golang.jpeg"
+        data-srcset="/images/golang/golang.jpeg, /images/golang/golang.jpeg 1.5x, /images/golang/golang.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/golang/golang.jpeg"
+        title="/images/golang/golang.jpeg" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">tl;dr</a></li>
+    <li><a href="#why-google-cloud">Why Google Cloud?</a></li>
+    <li><a href="#spec">Spec</a></li>
+    <li><a href="#go-앱을-cloud-run에-배포">Go 앱을 Cloud Run에 배포</a></li>
+    <li><a href="#cloud-sql">Cloud SQL</a></li>
+    <li><a href="#cicd">CI/CD</a></li>
+    <li><a href="#cloud-run">Cloud Run</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><code>Google Cloud Run</code>을 사용해서, <code>golang</code>으로 만들어진 <code>gin server</code>를 배포하는 모든 과정을 작성합니다.</p>
+<br />
+<h2 id="tldr">tl;dr</h2>
+<h2 id="why-google-cloud">Why Google Cloud?</h2>
+<p><a href="https://dev.to/pcraig3/cloud-run-vs-app-engine-a-head-to-head-comparison-using-facts-and-science-1225" target="_blank" rel="noopener noreffer">Cloud Run vs App Engine</a>
+</p>
+<p>위 글내용을 정리하면 cloud run은 req당 가격을 측정하며, 컨테이너가 req가 종료되면 동작하지 않기 때문에 가격적인 장점이 있지만, app-engine과 비교하여 성능적인 차이가 있긴합니다. (ping test 기준 56ms)</p>
+<p>제가 빌드할 서비스는 트래픽이 많이 필요한 서비스는 아니기 때문에 가격적으로 유리한 cloud run을 사용하기로 했습니다. (심지어 $0.09/month로, heroku $7 hobby plan보다 유리함)</p>
+<ul>
+<li><a href="https://cloud.google.com/run/pricing#tables" target="_blank" rel="noopener noreffer">google cloud run 가격</a>
+</li>
+</ul>
+<p>아래는 cloud run에 대한 장점입니다.</p>
+<ol>
+<li>인스턴스 자동확장 (max 1k request per container)</li>
+<li>https 제공</li>
+<li>가격 저렴 / req당 가격을 측정</li>
+<li>200만회 request / month 항상 무료</li>
+</ol>
+<h2 id="spec">Spec</h2>
+<p>최종적으로 적용할 서비스 리스트는 아래와 같습니다.</p>
+<ul>
+<li><code>Cloud run rest APIs</code></li>
+<li><code>Cloud SQL</code>: sql db
+<ul>
+<li>mysql의 json field 제공 (Google Cloud SQL is more than MySQL v5.7.11.)</li>
+</ul>
+</li>
+<li><code>Cloud Code</code> &amp; <code>Cloud Build</code>: CI/CD</li>
+<li><code>Cloud Storage FUSE</code>: image / audio server</li>
+<li>devops
+<ul>
+<li><code>Cloud Monitoring</code></li>
+<li><code>Cloud Logging</code></li>
+<li><code>Cloud Trace</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="go-앱을-cloud-run에-배포">Go 앱을 Cloud Run에 배포</h2>
+<ul>
+<li><a href="https://cloud.google.com/run/docs/quickstarts/build-and-deploy#clean-up" target="_blank" rel="noopener noreffer">Quick Start go with Cloud Run</a>
+</li>
+<li><a href="https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-go-service#clean-up" target="_blank" rel="noopener noreffer">컨테이너 이미지의 Go 앱을 Cloud Run에 배포</a>
+</li>
+</ul>
+<p>실제 프로젝트 진행은 qwiklabs.com을 통해서 가상 컴퓨팅환경에서 진행하였습니다.</p>
+<ul>
+<li><a href="https://www.qwiklabs.com/focuses/5162?parent=catalog" target="_blank" rel="noopener noreffer">Qwiklabs의 데모 계정</a>
+
+<ul>
+<li>$8를 결제하였다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="cloud-sql">Cloud SQL</h2>
+<blockquote>
+<p><a href="https://cloud.google.com/sql/docs/mysql/connect-instance-cloud-shell?hl=ko" target="_blank" rel="noopener noreffer">Cloud SQL 빠른 시작</a>
+</p>
+</blockquote>
+<ul>
+<li>cloud shell에서 mysql 연결</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">gcloud sql connect voda --user<span class="o">=</span>root
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">(</span>SQL<span class="o">)</span> create database voda<span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다음으로 cloud build를 적용해서 깃헙 소스코드에서 cloud run을 지속적으로 배포해보겠습니다.</p>
+<h2 id="cicd">CI/CD</h2>
+<ul>
+<li><a href="https://cloud.google.com/run/docs/continuous-deployment-with-cloud-build" target="_blank" rel="noopener noreffer">Cloud Build를 사용하여 Git에서 지속적 배포</a>
+</li>
+</ul>
+<ol>
+<li>exchange-diary 깃헙 레포에 cloud build 앱 다운</li>
+<li>build configuration:
+<ol>
+<li>현재는 모든 브랜치에 적용(<code>^develop$</code>)</li>
+<li>build type: <code>/Dockerfile</code></li>
+</ol>
+</li>
+</ol>
+<h2 id="cloud-run">Cloud Run</h2>
+<ol>
+<li>인그레스: 모든 트래픽 허용 (추후 변경)</li>
+<li>cloud run build를 통해서 앱 배포</li>
+<li>Cloud SQL을 어떻게 업데이트 해줄 수 있을까?</li>
+</ol></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-04-16&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/871b739c319f01a9701e040ab28906de764a5ef3" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 871b739c319f01a9701e040ab28906de764a5ef3: rebuilding site 2022년 4월 16일 토요일 22시 56분 26초 KST">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>871b739</a></span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/deploy/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/deploy/" data-title="Deploy Golang Web server on google cloud run" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/deploy/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/deploy/" data-title="Deploy Golang Web server on google cloud run"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/deploy/" data-title="Deploy Golang Web server on google cloud run"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/deploy/" data-title="Deploy Golang Web server on google cloud run" data-image="/images/golang/golang.jpeg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/ch03_real_world/" class="prev" rel="prev" title="[일주일 만에 배우는 GO] CH.3 Real World Go"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>[일주일 만에 배우는 GO] CH.3 Real World Go</a>
+            <a href="/python_formatter/" class="next" rel="next" title="Google like python on vscode">Google like python on vscode<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

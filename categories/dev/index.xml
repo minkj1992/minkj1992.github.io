@@ -8,23 +8,25 @@
     <title>All Basic Computer Science</title>
     <link>https://minkj1992.github.io/interview/</link>
     <pubDate>Thu, 06 Jan 2022 22:00:50 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/interview/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/interview.jpeg" referrerpolicy="no-referrer">
             </div><blockquote>
 <p>Let&rsquo;s prepare basic computer science interview questions.</p>
 </blockquote>]]></description>
-</item><item>
+</item>
+<item>
     <title>홍정모의 따라하며 배우는 C&#43;&#43;</title>
     <link>https://minkj1992.github.io/hong_modern_cpp/</link>
     <pubDate>Mon, 03 Jan 2022 18:56:15 &#43;0900</pubDate>
-    <author>Author</author>
+    <author>leoo.j</author>
     <guid>https://minkj1992.github.io/hong_modern_cpp/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/cpp.jpeg" referrerpolicy="no-referrer">
             </div><blockquote>
 <p><code>Modern c++</code>을 학습하고 기억할만한 요소들을 정리합니다.</p>
 </blockquote>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>
