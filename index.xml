@@ -4,9 +4,31 @@
         <link>https://minkj1992.github.io/</link>
         <description>About Seroius</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 24 Apr 2022 12:39:29 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 13 May 2022 21:18:00 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Coursera Gcp Iot</title>
+    <link>https://minkj1992.github.io/coursera-gcp-iot/</link>
+    <pubDate>Fri, 13 May 2022 21:18:00 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/coursera-gcp-iot/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/" referrerpolicy="no-referrer">
+            </div><p>This post is a summary of <a href="https://www.coursera.org/learn/iiot-google-cloud-platform/lecture/sMtHo/industrial-iot-on-google-cloud" target="_blank" rel="noopener noreffer">lectures</a>
+ taken in coursera on the topic of <code>Google IoT core</code>.</p>]]></description>
+</item>
+<item>
+    <title>Courage</title>
+    <link>https://minkj1992.github.io/courage/</link>
+    <pubDate>Sat, 07 May 2022 22:07:01 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/courage/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/courage.jpg" referrerpolicy="no-referrer">
+            </div>About Courage Quotes Don’t call it uncertainty, call it wonder. Don’t call it insecurity, call it freedom
+ Life goes on moving with a thousand and one uncertainties. That’s its freedom. Don’t call it insecurity.]]></description>
+</item>
+<item>
     <title>Gevent</title>
     <link>https://minkj1992.github.io/gevent/</link>
     <pubDate>Sun, 24 Apr 2022 12:39:29 &#43;0900</pubDate>
@@ -106,27 +128,6 @@
                 <img src="/images/golang/effective_go.png" referrerpolicy="no-referrer">
             </div><p><a href="https://go.dev/doc/effective_go" target="_blank" rel="noopener noreffer">Effective go</a>
 를 통해 go 핵심 문법을 빠르게 배워보겠습니다. 또한 나중에 레퍼런스 개념으로 개발할 때 찾아보기 위해서 필요해 보이는 정보들을 모으는 개념으로 글을 작성합니다.</p>]]></description>
-</item>
-<item>
-    <title>[일주일 만에 배우는 GO] CH.1 Go Language Design</title>
-    <link>https://minkj1992.github.io/ch01_go_design/</link>
-    <pubDate>Sat, 05 Feb 2022 16:52:53 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/ch01_go_design/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/golang/google_go.jpeg" referrerpolicy="no-referrer">
-            </div><p><a href="https://go.dev/talks/2012/splash.article" target="_blank" rel="noopener noreffer">Go at Google: Language Design in the Service of Software Engineering</a>
-를 기반으로<code>Go</code>에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다.</p>]]></description>
-</item>
-<item>
-    <title>[일주일 만에 배우는 GO] CH.0 Go study plan</title>
-    <link>https://minkj1992.github.io/go_study_plan/</link>
-    <pubDate>Sat, 05 Feb 2022 16:12:53 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/go_study_plan/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/golang/golang.jpeg" referrerpolicy="no-referrer">
-            </div><p>새로운 언어를 공부하다보면, 생각보다 기초를 공부하는 시간이 소모적이라는 생각이 들어 조금 더 효율적인 학습방법을 정리해보고 싶어 글로 남겨둡니다.</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -4,7 +4,18 @@
         <link>https://minkj1992.github.io/tags/gcp/</link>
         <description>gcp - Tag - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 23 Apr 2022 12:46:44 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/gcp/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 13 May 2022 21:18:00 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/gcp/" rel="self" type="application/rss+xml" /><item>
+    <title>Coursera Gcp Iot</title>
+    <link>https://minkj1992.github.io/coursera-gcp-iot/</link>
+    <pubDate>Fri, 13 May 2022 21:18:00 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/coursera-gcp-iot/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/" referrerpolicy="no-referrer">
+            </div><p>This post is a summary of <a href="https://www.coursera.org/learn/iiot-google-cloud-platform/lecture/sMtHo/industrial-iot-on-google-cloud" target="_blank" rel="noopener noreffer">lectures</a>
+ taken in coursera on the topic of <code>Google IoT core</code>.</p>]]></description>
+</item>
+<item>
     <title>(WIP) [GCP] Iot core inpractice</title>
     <link>https://minkj1992.github.io/iot_in_practice/</link>
     <pubDate>Sat, 23 Apr 2022 12:46:44 &#43;0900</pubDate>
