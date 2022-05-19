@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/coursera-gcp-iot/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-13T21:18:00+09:00" />
-<meta property="article:modified_time" content="2022-05-16T21:31:14+09:00" />
+<meta property="article:modified_time" content="2022-05-16T21:32:46+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, gcp, iot, coursera","wordcount":  539 ,
-        "url": "https:\/\/minkj1992.github.io\/coursera-gcp-iot\/","datePublished": "2022-05-13T21:18:00+09:00","dateModified": "2022-05-16T21:31:14+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, gcp, iot, coursera","wordcount":  1127 ,
+        "url": "https:\/\/minkj1992.github.io\/coursera-gcp-iot\/","datePublished": "2022-05-13T21:18:00+09:00","dateModified": "2022-05-16T21:32:46+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -114,8 +114,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Coursera Gcp Iot</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/iot/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>iot</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-13">2022-05-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;539 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-13">2022-05-13</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1127 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -142,6 +142,12 @@
       <ul>
         <li><a href="#types-of-sensors">Types of sensors</a></li>
         <li><a href="#devices">Devices</a></li>
+        <li><a href="#device-commands">Device commands</a></li>
+        <li><a href="#defining-devices">Defining devices</a></li>
+        <li><a href="#google-iot-developer-prototyping-kits">Google IoT developer prototyping kits</a></li>
+        <li><a href="#mqtt-protocol">MQTT protocol</a></li>
+        <li><a href="#http-protocl">HTTP protocl</a></li>
+        <li><a href="#comparison-of-mqtt-and-http-general-features">Comparison of MQTT and HTTP general features</a></li>
       </ul>
     </li>
   </ul>
@@ -264,12 +270,160 @@ environment</li>
 <li>can be read/write. It is updated, but usually not frequently.</li>
 </ol>
 </li>
-</ol></div><div class="post-footer" id="post-footer">
+</ol>
+<h3 id="device-commands">Device commands</h3>
+<ul>
+<li>
+<p><code>Commands</code> are actions performed by a device. So tye should include a time-to-live(TTL) or other expiration value</p>
+</li>
+<li>
+<p><code>Operational information</code> is data that&rsquo;s most relevant to the operation of the device as opposed to the business application.</p>
+<ul>
+<li>This might include things such as CPU operating temperature and battery state.</li>
+<li>it has short-term value to help maintain the os</li>
+<li><strong>It can be transmitted as <code>telemetry</code> or <code>state data</code></strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="defining-devices">Defining devices</h3>
+<p>For example, consider a project for monitoring the temperature in hotel rooms. Each room
+has three sensors: one near the floor, one near the bed, and one near the ceiling.</p>
+<p>option1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="err">deviceID:</span> <span class="nt">&#34;dh28dslkja&#34;</span><span class="p">,</span> <span class="nt">&#34;location&#34;</span><span class="p">:</span> <span class="s2">&#34;floor&#34;</span><span class="p">,</span> <span class="nt">&#34;room&#34;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="nt">&#34;temp&#34;</span><span class="p">:</span> <span class="mi">22</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="err">deviceID:</span> <span class="nt">&#34;8d3kiuhs8a&#34;</span><span class="p">,</span> <span class="nt">&#34;location&#34;</span><span class="p">:</span> <span class="s2">&#34;bedside&#34;</span><span class="p">,</span> <span class="nt">&#34;room&#34;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="nt">&#34;temp&#34;</span><span class="p">:</span> <span class="mi">24</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="err">deviceID:</span> <span class="nt">&#34;kd8s8hh3o&#34;</span><span class="p">,</span> <span class="nt">&#34;location&#34;</span><span class="p">:</span> <span class="s2">&#34;ceiling&#34;</span><span class="p">,</span> <span class="nt">&#34;room&#34;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="nt">&#34;temp&#34;</span><span class="p">:</span> <span class="mi">20</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>option2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="err">deviceID:</span> <span class="nt">&#34;dh28dslkja&#34;</span><span class="p">,</span> <span class="nt">&#34;room&#34;</span><span class="p">:</span> <span class="mi">128</span><span class="p">,</span> <span class="nt">&#34;temp_floor&#34;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="nt">&#34;temp_bedside&#34;</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span> <span class="nt">&#34;temp_ceiling&#34;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&#34;average_temp&#34;</span><span class="p">:</span> <span class="mi">22</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="google-iot-developer-prototyping-kits">Google IoT developer prototyping kits</h3>
+<p>Google works with partners to build device starter kits that make connecting to Google Cloud IoT Platform easy for developers. At this time, Google has partnered with fourteen companies to offer a wide variety of <a href="https://d3c33hcgiwev3.cloudfront.net/r0yj9QAaRl2Mo_UAGjZdFw_354538e7a78d48d79048afcdd3b1bea1_10.-Google-IoT-Developer-Prototyping-Kits.pdf?Expires=1653091200&amp;Signature=gkcQBVgHOXNjN3ueT4CtMIMAfaZYDouIdi8G7RHaBCi~hhNKrI~c483dhbf~UtRPeF5ZBR6qryCvRXNzdh0PYQk1ih2o3QgmhAMqLqCuCjK9DCWsG2tfVSVW--04PgzzrvFnK-GpIKiv8SHze8Xwzkif~fFax-WAZ5j-1euA7W4_&amp;Key-Pair-Id=APKAJLTNE6QMUY6HBC5A" target="_blank" rel="noopener noreffer">IoT developer prototyping kits</a>
+.</p>
+<h3 id="mqtt-protocol">MQTT protocol</h3>
+<blockquote>
+<p><a href="https://cloud.google.com/iot/docs/concepts/protocols" target="_blank" rel="noopener noreffer">https://cloud.google.com/iot/docs/concepts/protocols</a>
+</p>
+</blockquote>
+<p>MQTT is an industry-standard IoT protocol (Message Queue Telelmetry Transport).</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/mqtt.png"
+        data-srcset="/images/mqtt.png, /images/mqtt.png 1.5x, /images/mqtt.png 2x"
+        data-sizes="auto"
+        alt="/images/mqtt.png"
+        title="/images/mqtt.png" /></p>
+<p>Messages include the topic in the message, which is used for routing information by the broker. <strong>This means that subscribers do not need to know the publisher, because all communication is done through messages</strong></p>
+<ul>
+<li>Messages are pushed to subscribers, so there must be an open TCP connection to the broker (subscriber &lt;-&gt; broker)
+<ul>
+<li>If the connection is broken, the broker can hold messages for later transmission.</li>
+</ul>
+</li>
+</ul>
+<h3 id="http-protocl">HTTP protocl</h3>
+<blockquote>
+<p>HTTP is a &ldquo;connectionless&rdquo; protocol: with the HTTP bridge, devices do not maintain a connection
+to the cloud.</p>
+</blockquote>
+<p>In connectionless communication, client requests are sent without having to first check that the recipient is available. Therefore devices have no way of knowing whether they are in a conversation with the server, and vice versa.</p>
+<p><strong>This means some of the features that Cloud IoT Core provides, for example, last Heartbeat detected, will not be available with an HTTP connection.</strong></p>
+<h3 id="comparison-of-mqtt-and-http-general-features">Comparison of MQTT and HTTP general features</h3>
+<blockquote>
+<p>MQTT is considered to be data focused, while HTTP is document focused. Which means <strong>MQTT is better suited to the rigors of IoT</strong>.</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/mqtt_vs_http.png"
+        data-srcset="/images/mqtt_vs_http.png, /images/mqtt_vs_http.png 1.5x, /images/mqtt_vs_http.png 2x"
+        data-sizes="auto"
+        alt="/images/mqtt_vs_http.png"
+        title="/images/mqtt_vs_http.png" /></p>
+<p>In addition, MQTT has three levels of service(QoS)</p>
+<ol>
+<li>At most once.
+<ul>
+<li>Guarantees at least one attempt at delivery, (no guarantee of delivery).</li>
+</ul>
+</li>
+<li>At least once.
+<ul>
+<li>Guarantees the message will be delivered at least once.</li>
+</ul>
+</li>
+<li>Exactly once.
+<ul>
+<li>Guarantees the message is delivered only once.</li>
+</ul>
+</li>
+</ol>
+<p>MQTT also has</p>
+<ul>
+<li><code>Last will and testament</code>(유언, <code>LWT</code>). If a client (ie device) is disconnected unexpectedly, the subscribers will be notified by the MQTT broker.</li>
+<li><strong>Retained(보관) messages. New subscribers will get an immediate status update.</strong></li>
+</ul>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>LWT<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>통신에서 중요하지만 구현이 까다로운 문제로 &ldquo;상대방이 예상치 못한 상황으로 인하여 접속이 끊어졌을때&quot;의 처리가 있다.</p>
+<p>그래서 전통적 방식으로는 자신의 생존 여부를 계속 ping을 통해 서버가 물어보고 timeout 시간안에 pong이 안올 경우 서버에서 접속 종료를 인식하는 번거로운 방식을 취하는데,</p>
+<p><strong>MQTT의 경우 subscribe 시점에서 자신이 접속 종료가 되었을 때 특정 topic으로 지정한 메시지를 보내도록 미리 설정할 수 있다.
+이를 LWT(Last will and testament) 라고 한다. 선언을 먼저하고 브로커가 처리하게 하는 방식인 것이다.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">mqtt</span> <span class="n">help</span> <span class="n">subscribe</span>
+</span></span><span class="line"><span class="cl"><span class="n">Usage</span><span class="p">:</span> <span class="n">mqtt</span> <span class="n">subscribe</span> <span class="p">[</span><span class="n">opts</span><span class="p">]</span> <span class="p">[</span><span class="n">topic</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Available</span> <span class="n">options</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">...</span> <span class="n">중략</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">will</span><span class="o">-</span><span class="n">topic</span> <span class="n">TOPIC</span>    <span class="n">the</span> <span class="n">will</span> <span class="n">topic</span>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">will</span><span class="o">-</span><span class="n">message</span> <span class="n">BODY</span>   <span class="n">the</span> <span class="n">will</span> <span class="n">message</span>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">will</span><span class="o">-</span><span class="n">qos</span> <span class="mi">0</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span>      <span class="n">the</span> <span class="n">will</span> <span class="n">qos</span>
+</span></span><span class="line"><span class="cl">  <span class="o">--</span><span class="n">will</span><span class="o">-</span><span class="n">retain</span>         <span class="n">send</span> <span class="n">a</span> <span class="n">will</span> <span class="n">retained</span> <span class="n">message</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p>Both MQTT and HTTP use pub key(asymmetric) device authentication, and JWT. <a href="https://cloud.google.com/iot/docs/concepts/device-security" target="_blank" rel="noopener noreffer">In more detail</a>
+</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-05-16&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/59628e6de7617273d043304fc7e375d64c6aa80b" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 59628e6de7617273d043304fc7e375d64c6aa80b: rebuilding site Mon May 16 21:31:14 KST 2022">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>59628e6</a></span>
+                <span>Updated on 2022-05-16&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/5db04ba1f5116e7bcdc6fa8a6679e7cb7709c013" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 5db04ba1f5116e7bcdc6fa8a6679e7cb7709c013: rebuilding site Mon May 16 21:32:46 KST 2022">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>5db04ba</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
