@@ -200,4 +200,116 @@ Available options:
 
 Both MQTT and HTTP use pub key(asymmetric) device authentication, and JWT. [In more detail](https://cloud.google.com/iot/docs/concepts/device-security)
 
+## Day4: Google Cloud's IoT Platform
+> This section covers the ingest and process stages of IoT architecture.
 
+
+Learning Objectives
+
+- Create Cloud IoT registries and devices
+- Create Pub/Sub topics and sobscriptions
+- Create and manage Cloud Storage buckets
+- Manage device credentials and access control
+- Create a Dataflow pipeline
+
+![](/images/gcp_overview.png)
+
+### Pub/Sub
+
+![](/images/pubsub1.png)
+
+- The Subscriber sends the acknowledgement to the Subscription
+
+![](/images/pubsub2.png)
+![](/images/pubsub3.png)
+![](/images/pubsub4.png)
+
+Use Cases
+
+- Balancing workloads in network clusters
+- **Implementing async workflows**
+- **Distirbuting event notifications**
+- Refreshing distributed caches
+- Logging to multiple systems
+- **Data streaming from various processes or devices**
+- Reliabiltiy(신뢰할 수 있음) improvement
+
+{{< admonition note "FYI use case" >}}
+- Balancing workloads in network clusters, for example, a large queue of tasks can be efficiently distributed among multiple workers such as Google Compute Engine instances. 
+- Implementing asynchronous workflows, for example, an order processing application can place an order on a topic from which it can be processed by one or more workers. 
+- Distributing event notifications, for example, a service that accepts user sign-ups can send notifications whenever a new user registers and a downstream services can subscribe to receive notifications of the event. 
+- Refreshing distributed caches, for example, an application can publish invalidation(캐시 무효화) events to update the IDs of objects that have changed. 
+- Logging into multiple systems, for example, a Google Compute Engine instance can write logs to the monitoring system, to a database for later querying and so on. 
+- Data streaming from various processes or devices, for example, a residential(주거, 숙박) sensor can stream data to backend services hosted in the Cloud. 
+- Also, reliability improvement, for example, a single-zone Compute Engine service can operate in additional zones by subscribing to a common topic to recover from failures in a zone or region.
+{{< /admonition >}}
+
+
+- TODO: [gcp pubsub labs](https://www.cloudskillsboost.google/catalog?keywords=Google%20Cloud%20Pub%2FSub&qlcampaign=yt18-gsp095-11078&ransack=true&utm_source=youtube&utm_campaign=ytcc110&utm_medium=video)
+
+### Cloud IoT Core
+
+Full Ingest and Process and Analyze process
+![](/images/ingest_process_analyze.png)
+
+Cloud IoT combines both protocol bridge and device manager.
+
+- Protocol Bridge
+  - MQTT protocol with single Global endpoint(mqtt.googleapis.com)
+  - Automatic load balancing
+  - Global data access with Pub/Sub
+- Device Manager
+  - Configure individual devices
+  - Update and control devices
+  - Role level access control (authrization)
+  - Console and APIs for device deployment and monitoring
+
+#### Cloud IoT Core fully integrates your devices
+
+1. make decision
+  - **Device telemetry data is forwarded to a Pub/Sub topic, which can then be used to trigger Cloud Functions. You can also perform streaming analysis with Dataflow or custom analysis with your own subscribers.**
+2. secure
+  - Cloud IoT uses automatic load balancing and horizontal scaling to ensure smooth data ingestion under any condition. Cloud IoT Core follows industry-standard security protocols.
+
+#### Registration connects devices to Google IoT Cloud
+
+tl;dr
+
+- `Device registry`: belong to cloud project so single region
+- `Device`: belong to device registry so single region (**registry : device = 1 : n**)
+- `topic`: global single endpoint (belong to pubsub)
+
+---
+
+![](/images/device_registry_iot.png)
+
+1. In order for a device to connect, it must first be registered in the device manager. The device
+manager lets you create and configure device registries and the devices within them.
+
+2. A device registry is a container of devices. When you create a device registry, you select which
+protocols to enable: MQTT, HTTP, or both.
+  - Each device registry is created in a specific cloud region and belongs to a cloud project.
+  - A registry is identified in the cloudiot.googleapis.com service by its full name.
+  - as **`projects/{project-id}/locations/{cloud-region}/registries/{registry-id}`**
+3. The device registry is configured with one or more Pub/Sub topics to which telemetry
+events are published for all devices in that registry.
+4. A single topic can be used to collect
+data across all regions.
+5. Cloud monitoring is automatically enabled for each registry.
+
+For details, see[DeviceRegistry resource reference](https://cloud.google.com/iot/docs/reference/cloudiot/rest/v1/projects.locations.registries)
+
+#### Protocol bridges
+> Devices communicate with Cloud IoT Core across a "bridge" — either the MQTT bridge or the HTTP bridge.
+
+![](/images/protocol_bridges.png)
+
+Note that GCP Cloud IoT Core supports HTTP 1.1 only.
+
+![](/images/protocol_bridge_vs.png)
+
+### Cloud Storage
+
+
+
+### Dataflow
