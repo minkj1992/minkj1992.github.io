@@ -1,4 +1,4 @@
-# Coursera Gcp Iot
+# Coursera Google IoT
 
 
 This post is a summary of [lectures](https://www.coursera.org/learn/iiot-google-cloud-platform/lecture/sMtHo/industrial-iot-on-google-cloud) taken in coursera on the topic of `Google IoT core`.
@@ -245,7 +245,9 @@ Use Cases
 {{< /admonition >}}
 
 
-- TODO: [gcp pubsub labs](https://www.cloudskillsboost.google/catalog?keywords=Google%20Cloud%20Pub%2FSub&qlcampaign=yt18-gsp095-11078&ransack=true&utm_source=youtube&utm_campaign=ytcc110&utm_medium=video)
+- [gcp pubsub labs](https://www.cloudskillsboost.google/catalog?keywords=Google%20Cloud%20Pub%2FSub&qlcampaign=yt18-gsp095-11078&ransack=true&utm_source=youtube&utm_campaign=ytcc110&utm_medium=video) in practice
+   - https://minkj1992.github.io/pubsub/
+
 
 ### Cloud IoT Core
 

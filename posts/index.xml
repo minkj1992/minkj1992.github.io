@@ -4,8 +4,18 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 13 May 2022 21:18:00 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Coursera Gcp Iot</title>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 21 May 2022 20:51:52 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Google Cloud Pub/Sub</title>
+    <link>https://minkj1992.github.io/pubsub/</link>
+    <pubDate>Sat, 21 May 2022 20:51:52 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/pubsub/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/pubsub.jpeg" referrerpolicy="no-referrer">
+            </div><p>Let&rsquo;s get familiar with basic features of Google pubsub service by practicing.</p>]]></description>
+</item>
+<item>
+    <title>Coursera Google IoT</title>
     <link>https://minkj1992.github.io/coursera-gcp-iot/</link>
     <pubDate>Fri, 13 May 2022 21:18:00 &#43;0900</pubDate>
     <author>leoo.j</author>
@@ -115,17 +125,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/golang/effective_go.png" referrerpolicy="no-referrer">
             </div><p>gin framework로 crud 서버를 만들며 배운 내용들을 기록해보겠습니다.</p>]]></description>
-</item>
-<item>
-    <title>[일주일 만에 배우는 GO] CH.2 Go Basic</title>
-    <link>https://minkj1992.github.io/ch02_go_basic/</link>
-    <pubDate>Mon, 07 Feb 2022 16:55:21 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/ch02_go_basic/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/golang/effective_go.png" referrerpolicy="no-referrer">
-            </div><p><a href="https://go.dev/doc/effective_go" target="_blank" rel="noopener noreffer">Effective go</a>
-를 통해 go 핵심 문법을 빠르게 배워보겠습니다. 또한 나중에 레퍼런스 개념으로 개발할 때 찾아보기 위해서 필요해 보이는 정보들을 모으는 개념으로 글을 작성합니다.</p>]]></description>
 </item>
 </channel>
 </rss>
