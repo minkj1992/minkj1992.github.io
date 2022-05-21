@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/pubsub/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-21T20:51:52+09:00" />
-<meta property="article:modified_time" content="2022-05-21T20:51:52+09:00" />
+<meta property="article:modified_time" content="2022-05-21T21:26:54+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -31,8 +31,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  228 ,
-        "url": "https:\/\/minkj1992.github.io\/pubsub\/","datePublished": "2022-05-21T20:51:52+09:00","dateModified": "2022-05-21T20:51:52+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, gcp, pubsub","wordcount":  707 ,
+        "url": "https:\/\/minkj1992.github.io\/pubsub\/","datePublished": "2022-05-21T20:51:52+09:00","dateModified": "2022-05-21T21:26:54+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -111,9 +111,9 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Google Cloud Pub/Sub</h1><h2 class="single-subtitle">Google Cloud Pub/Sub</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-21">2022-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;228 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/iot/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>iot</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-21">2022-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;707 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -130,6 +130,15 @@
   <ul>
     <li><a href="#tldr">tl;dr</a></li>
     <li><a href="#quick-start-pubsub">Quick start <code>pub/sub</code></a></li>
+    <li><a href="#google-cloud-pubsub-qwik-start---command-line">Google Cloud Pub/Sub: Qwik Start - Command Line</a>
+      <ul>
+        <li><a href="#the-pub-basics-crd">The Pub basics (CRD)</a></li>
+        <li><a href="#the-sub-basics-crd">The Sub basics (CRD)</a></li>
+        <li><a href="#pubsub-publishing-and-pulling-a-single-message">Pub/Sub Publishing and Pulling a Single Message</a></li>
+        <li><a href="#pubsub-pulling-all-messages-from-subscriptions-with-flag">Pub/Sub pulling all messages from subscriptions with <strong>flag</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#google-cloud-pubsub-qwik-start---python">Google Cloud Pub/Sub: Qwik Start - Python</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>Let&rsquo;s get familiar with basic features of Google pubsub service by practicing.</p>
@@ -137,6 +146,8 @@
 <h2 id="tldr">tl;dr</h2>
 <ul>
 <li><a href="https://www.cloudskillsboost.google/focuses/3719?catalog_rank=%7B%22rank%22%3A1%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&amp;parent=catalog&amp;qlcampaign=yt18-gsp095-11078" target="_blank" rel="noopener noreffer">Google Cloud Pub/Sub: Qwik Start - Console</a>
+</li>
+<li><a href="https://www.cloudskillsboost.google/focuses/925?catalog_rank=%7B%22rank%22%3A2%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&amp;parent=catalog&amp;qlcampaign=yt18-gsp095-11078" target="_blank" rel="noopener noreffer">Google Cloud Pub/Sub: Qwik Start - Command Line</a>
 </li>
 </ul>
 <h2 id="quick-start-pubsub">Quick start <code>pub/sub</code></h2>
@@ -300,24 +311,205 @@
         data-sizes="auto"
         alt="/images/pubsub_tutorial5.png"
         title="/images/pubsub_tutorial5.png" /></p>
-<hr></div><div class="post-footer" id="post-footer">
+<hr>
+<h2 id="google-cloud-pubsub-qwik-start---command-line">Google Cloud Pub/Sub: Qwik Start - Command Line</h2>
+<h3 id="the-pub-basics-crd">The Pub basics (CRD)</h3>
+<p>A producer publishes messages to a topic and a consumer creates a subscription to a topic to receive messages from it.</p>
+<ol>
+<li>Create topics</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">create</span> <span class="n">myTopic</span>
+</span></span><span class="line"><span class="cl"><span class="n">Created</span> <span class="n">topic</span> <span class="p">[</span><span class="n">projects</span><span class="o">/</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">myTopic</span><span class="p">]</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">create</span> <span class="n">myTopic2</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">create</span> <span class="n">myTopic3</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>When duplicates topcic name, gcp returns error</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">create</span> <span class="n">myTopic2</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">create</span> <span class="n">myTopic2</span>
+</span></span><span class="line"><span class="cl"><span class="n">ERROR</span><span class="p">:</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">create</span> <span class="n">topic</span> <span class="p">[</span><span class="n">projects</span><span class="o">/</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">myTopic2</span><span class="p">]:</span> <span class="n">Resource</span> <span class="n">already</span> <span class="n">exists</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">project</span> <span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="n">myTopic2</span><span class="p">)</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">ERROR</span><span class="p">:</span> <span class="p">(</span><span class="n">gcloud</span><span class="o">.</span><span class="n">pubsub</span><span class="o">.</span><span class="n">topics</span><span class="o">.</span><span class="n">create</span><span class="p">)</span> <span class="n">Failed</span> <span class="n">to</span> <span class="n">create</span> <span class="n">the</span> <span class="n">following</span><span class="p">:</span> <span class="p">[</span><span class="n">myTopic2</span><span class="p">]</span><span class="o">.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>List topics</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="nb">list</span>
+</span></span><span class="line"><span class="cl"><span class="o">---</span>
+</span></span><span class="line"><span class="cl"><span class="n">name</span><span class="p">:</span> <span class="n">projects</span><span class="o">/</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">myTopic3</span>
+</span></span><span class="line"><span class="cl"><span class="o">---</span>
+</span></span><span class="line"><span class="cl"><span class="n">name</span><span class="p">:</span> <span class="n">projects</span><span class="o">/</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">myTopic</span>
+</span></span><span class="line"><span class="cl"><span class="o">---</span>
+</span></span><span class="line"><span class="cl"><span class="n">name</span><span class="p">:</span> <span class="n">projects</span><span class="o">/</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">myTopic2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>Delete topics</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">student_03_89bc281f2314</span><span class="nd">@cloudshell</span><span class="p">:</span><span class="o">~</span> <span class="p">(</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="p">)</span><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">delete</span> <span class="n">myTopic3</span>
+</span></span><span class="line"><span class="cl"><span class="n">Deleted</span> <span class="n">topic</span> <span class="p">[</span><span class="n">projects</span><span class="o">/</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">myTopic3</span><span class="p">]</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">student_03_89bc281f2314</span><span class="nd">@cloudshell</span><span class="p">:</span><span class="o">~</span> <span class="p">(</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="p">)</span><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">delete</span> <span class="n">myTopic2</span>
+</span></span><span class="line"><span class="cl"><span class="n">Deleted</span> <span class="n">topic</span> <span class="p">[</span><span class="n">projects</span><span class="o">/</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">myTopic2</span><span class="p">]</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="n">student_03_89bc281f2314</span><span class="nd">@cloudshell</span><span class="p">:</span><span class="o">~</span> <span class="p">(</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="p">)</span><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="nb">list</span>
+</span></span><span class="line"><span class="cl"><span class="o">---</span>
+</span></span><span class="line"><span class="cl"><span class="n">name</span><span class="p">:</span> <span class="n">projects</span><span class="o">/</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="o">/</span><span class="n">topics</span><span class="o">/</span><span class="n">myTopic</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="the-sub-basics-crd">The Sub basics (CRD)</h3>
+<ol>
+<li>create</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">student_03_89bc281f2314</span><span class="nd">@cloudshell</span><span class="p">:</span><span class="o">~</span> <span class="p">(</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="p">)</span><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">subscriptions</span> <span class="n">create</span> <span class="o">--</span><span class="n">topic</span> <span class="n">myTopic</span> <span class="n">mySubsciption</span>
+</span></span><span class="line"><span class="cl"><span class="n">Created</span> <span class="n">subscription</span> <span class="p">[</span><span class="n">projects</span><span class="o">/</span><span class="n">qwiklabs</span><span class="o">-</span><span class="n">gcp</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">82</span><span class="n">b04dcaac56</span><span class="o">/</span><span class="n">subscriptions</span><span class="o">/</span><span class="n">mySubsciption</span><span class="p">]</span><span class="o">.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>delete</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">subscriptions</span> <span class="n">delete</span> <span class="n">Test1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>list</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="nb">list</span><span class="o">-</span><span class="n">subscriptions</span> <span class="n">myTopic</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pubsub-publishing-and-pulling-a-single-message">Pub/Sub Publishing and Pulling a Single Message</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">publish</span> <span class="n">myTopic</span> <span class="o">--</span><span class="n">message</span> <span class="s2">&#34;Hello&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">publish</span> <span class="n">myTopic</span> <span class="o">--</span><span class="n">message</span> <span class="s2">&#34;Publisher&#39;s name is minwook&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">publish</span> <span class="n">myTopic</span> <span class="o">--</span><span class="n">message</span> <span class="s2">&#34;Publisher likes to eat love&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">topics</span> <span class="n">publish</span> <span class="n">myTopic</span> <span class="o">--</span><span class="n">message</span> <span class="s2">&#34;Publisher thinks Pub/Sub is awesome&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># pull subscription</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">subscriptions</span> <span class="n">pull</span> <span class="n">mySubscription</span> <span class="o">--</span><span class="n">auto</span><span class="o">-</span><span class="n">ack</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>What&rsquo;s going on here? You published 4 messages to your topic, but only 1 was outputted.</p>
+<p>Now there are important features of the <code>pull</code> command that often trip developers up</p>
+<ul>
+<li>Using the pull command without any flags will output only one message, even if you are subscribed to a topic that has more held in it.</li>
+<li>Once an individual message has been outputted from a particular subscription based pull command, you cannot access that message again with the pull command (maybe this happens ack)</li>
+</ul>
+<p><strong>Run the last command three more times. You will see that it will output the other messages you published before.</strong></p>
+<p>Now run the command a 4th time.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gcloud pubsub subscriptions pull mySubscription --auto-ack
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pubsub-pulling-all-messages-from-subscriptions-with-flag">Pub/Sub pulling all messages from subscriptions with <strong>flag</strong></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">gcloud</span> <span class="n">pubsub</span> <span class="n">subscriptions</span> <span class="n">pull</span> <span class="n">mySubscription</span> <span class="o">--</span><span class="n">auto</span><span class="o">-</span><span class="n">ack</span> <span class="o">--</span><span class="n">limit</span><span class="o">=</span><span class="mi">3</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Here, notice that gcp pubsub important features.</p>
+<ul>
+<li>about <code>--auto-ack</code></li>
+</ul>
+<p><em>(BETA) Acknowledges one or more messages as having been successfully received. If a delivered message is not acknowledged within the Subscription&rsquo;s ack deadline, Cloud Pub/Sub will attempt to deliver it again.
+<strong>To automatically acknowledge messages when pulling from a Subscription, you can use the &ndash;auto-ack flag on gcloud pubsub subscriptions pull.</strong></em></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/pubsub_tutorial7.png"
+        data-srcset="/images/pubsub_tutorial7.png, /images/pubsub_tutorial7.png 1.5x, /images/pubsub_tutorial7.png 2x"
+        data-sizes="auto"
+        alt="/images/pubsub_tutorial7.png"
+        title="/images/pubsub_tutorial7.png" /></p>
+<h2 id="google-cloud-pubsub-qwik-start---python">Google Cloud Pub/Sub: Qwik Start - Python</h2></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-05-21</span>
+                <span>Updated on 2022-05-21&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/332df4caa77462be9ff83cd033a4b3221718a80c" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 332df4caa77462be9ff83cd033a4b3221718a80c: rebuilding site Sat May 21 21:26:54 KST 2022">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>332df4c</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/pubsub/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/pubsub/" data-title="Google Cloud Pub/Sub" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/pubsub/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/pubsub/" data-title="Google Cloud Pub/Sub"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/pubsub/" data-title="Google Cloud Pub/Sub"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/pubsub/" data-title="Google Cloud Pub/Sub" data-image="/images/pubsub.jpeg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/pubsub/" data-title="Google Cloud Pub/Sub" data-hashtags="dev,gcp,pubsub"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/pubsub/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/pubsub/" data-title="Google Cloud Pub/Sub"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/pubsub/" data-title="Google Cloud Pub/Sub"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/pubsub/" data-title="Google Cloud Pub/Sub" data-image="/images/pubsub.jpeg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/gcp/">gcp</a>,&nbsp;<a href="/tags/pubsub/">pubsub</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
