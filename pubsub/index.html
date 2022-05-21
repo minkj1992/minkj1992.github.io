@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/pubsub/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-21T20:51:52+09:00" />
-<meta property="article:modified_time" content="2022-05-21T21:26:54+09:00" />
+<meta property="article:modified_time" content="2022-05-21T22:13:46+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -31,8 +31,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, gcp, pubsub","wordcount":  707 ,
-        "url": "https:\/\/minkj1992.github.io\/pubsub\/","datePublished": "2022-05-21T20:51:52+09:00","dateModified": "2022-05-21T21:26:54+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, gcp, pubsub","wordcount":  2989 ,
+        "url": "https:\/\/minkj1992.github.io\/pubsub\/","datePublished": "2022-05-21T20:51:52+09:00","dateModified": "2022-05-21T22:13:46+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -112,8 +112,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Google Cloud Pub/Sub</h1><h2 class="single-subtitle">Google Cloud Pub/Sub</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/iot/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>iot</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-21">2022-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;707 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-21">2022-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2989 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -139,6 +139,7 @@
       </ul>
     </li>
     <li><a href="#google-cloud-pubsub-qwik-start---python">Google Cloud Pub/Sub: Qwik Start - Python</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>Let&rsquo;s get familiar with basic features of Google pubsub service by practicing.</p>
@@ -148,6 +149,8 @@
 <li><a href="https://www.cloudskillsboost.google/focuses/3719?catalog_rank=%7B%22rank%22%3A1%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&amp;parent=catalog&amp;qlcampaign=yt18-gsp095-11078" target="_blank" rel="noopener noreffer">Google Cloud Pub/Sub: Qwik Start - Console</a>
 </li>
 <li><a href="https://www.cloudskillsboost.google/focuses/925?catalog_rank=%7B%22rank%22%3A2%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&amp;parent=catalog&amp;qlcampaign=yt18-gsp095-11078" target="_blank" rel="noopener noreffer">Google Cloud Pub/Sub: Qwik Start - Command Line</a>
+</li>
+<li><a href="https://www.cloudskillsboost.google/focuses/2775?catalog_rank=%7B%22rank%22%3A3%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&amp;parent=catalog&amp;qlcampaign=yt18-gsp095-11078" target="_blank" rel="noopener noreffer">Google Cloud Pub/Sub: Qwik Start - Python</a>
 </li>
 </ul>
 <h2 id="quick-start-pubsub">Quick start <code>pub/sub</code></h2>
@@ -491,12 +494,950 @@
         data-sizes="auto"
         alt="/images/pubsub_tutorial7.png"
         title="/images/pubsub_tutorial7.png" /></p>
-<h2 id="google-cloud-pubsub-qwik-start---python">Google Cloud Pub/Sub: Qwik Start - Python</h2></div><div class="post-footer" id="post-footer">
+<h2 id="google-cloud-pubsub-qwik-start---python">Google Cloud Pub/Sub: Qwik Start - Python</h2>
+<blockquote>
+<p><a href="https://www.cloudskillsboost.google/focuses/2775?catalog_rank=%7B%22rank%22%3A3%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&amp;parent=catalog&amp;qlcampaign=yt18-gsp095-11078" target="_blank" rel="noopener noreffer">https://www.cloudskillsboost.google/focuses/2775?catalog_rank=%7B%22rank%22%3A3%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&parent=catalog&qlcampaign=yt18-gsp095-11078</a>
+</p>
+</blockquote>
+<ul>
+<li>Project setup</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt; git clone https://github.com/googleapis/python-pubsub.git
+</span></span><span class="line"><span class="cl">&gt; <span class="nb">cd</span> python-pubsub/samples/snippets
+</span></span><span class="line"><span class="cl">&gt; ls
+</span></span><span class="line"><span class="cl">README.rst     noxfile.py	  requirements-test.txt  subscriber.py
+</span></span><span class="line"><span class="cl">README.rst.in  noxfile_config.py  requirements.txt	 subscriber_test.py
+</span></span><span class="line"><span class="cl">iam.py	       publisher.py	  resources		 utilities
+</span></span><span class="line"><span class="cl">iam_test.py    publisher_test.py  schema.py
+</span></span><span class="line"><span class="cl">mypy.ini       quickstart	  schema_test.py
+</span></span><span class="line"><span class="cl">&gt; python3 -m venv venv
+</span></span><span class="line"><span class="cl">&gt; <span class="nb">source</span> venv/bin/activate
+</span></span><span class="line"><span class="cl">&gt; pip list
+</span></span><span class="line"><span class="cl">Package    Version
+</span></span><span class="line"><span class="cl">---------- -------
+</span></span><span class="line"><span class="cl">pip        22.0.4
+</span></span><span class="line"><span class="cl">setuptools 47.1.0
+</span></span><span class="line"><span class="cl">WARNING: You are using pip version 22.0.4<span class="p">;</span> however, version 22.1 is available.
+</span></span><span class="line"><span class="cl">You should consider upgrading via the <span class="s1">&#39;/Users/minwook/code/python-pubsub/samples/snippets/venv/bin/python3 -m pip install --upgrade pip&#39;</span> command.
+</span></span><span class="line"><span class="cl">&gt; cat requirements.txt
+</span></span><span class="line"><span class="cl">google-cloud-pubsub<span class="o">==</span>2.12.1
+</span></span><span class="line"><span class="cl"><span class="nv">avro</span><span class="o">==</span>1.11.0
+</span></span><span class="line"><span class="cl">&gt; pip install --upgrade pip
+</span></span><span class="line"><span class="cl">&gt; pip install -r requirements.txt
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Create a topic</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># you must authorize google cloud auth before create a topic</span>
+</span></span><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="nv">$GOOGLE_CLOUD_PROJECT</span>
+</span></span><span class="line"><span class="cl">$ python publisher.py <span class="nv">$GOOGLE_CLOUD_PROJECT</span> create MyTopic
+</span></span><span class="line"><span class="cl">$ python publisher.py <span class="nv">$GOOGLE_CLOUD_PROJECT</span> list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Create a subscription</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ python subscriber.py <span class="nv">$GOOGLE_CLOUD_PROJECT</span> create MyTopic MySub
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>list subscription</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ python subscriber.py <span class="nv">$GOOGLE_CLOUD_PROJECT</span> list-in-project
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Subscribe messages</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ python subscriber.py <span class="nv">$GOOGLE_CLOUD_PROJECT</span> receive MySub
+</span></span><span class="line"><span class="cl">Listening <span class="k">for</span> messages on projects/qwiklabs-gcp-7877af129f04d8b3/subscriptions/MySub
+</span></span><span class="line"><span class="cl">Received message: Message <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  data: <span class="s1">&#39;Publisher thinks Pub/Sub is awesome&#39;</span>
+</span></span><span class="line"><span class="cl">  attributes: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">Received message: Message <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  data: <span class="s1">&#39;Hello&#39;</span>
+</span></span><span class="line"><span class="cl">  attributes: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">Received message: Message <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  data: <span class="s2">&#34;Publisher&#39;s name is Harry&#34;</span>
+</span></span><span class="line"><span class="cl">  attributes: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">Received message: Message <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  data: <span class="s1">&#39;Publisher likes to eat cheese&#39;</span>
+</span></span><span class="line"><span class="cl">  attributes: <span class="o">{}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><em>pub.py</em></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Copyright 2019 Google LLC</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># you may not use this file except in compliance with the License.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># You may obtain a copy of the License at</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># See the License for the specific language governing permissions and</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># limitations under the License.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">pubsub_v1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">pub</span><span class="p">(</span><span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">topic_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Publishes a message to a Pub/Sub topic.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Initialize a Publisher client.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client</span> <span class="o">=</span> <span class="n">pubsub_v1</span><span class="o">.</span><span class="n">PublisherClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create a fully qualified identifier of form `projects/{project_id}/topics/{topic_id}`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">topic_path</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">topic_path</span><span class="p">(</span><span class="n">project_id</span><span class="p">,</span> <span class="n">topic_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Data sent to Cloud Pub/Sub must be a bytestring.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&#34;Hello, World!&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># When you publish a message, the client returns a future.</span>
+</span></span><span class="line"><span class="cl">    <span class="n">api_future</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">topic_path</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">message_id</span> <span class="o">=</span> <span class="n">api_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Published </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">topic_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">message_id</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;project_id&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Google Cloud project ID&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;topic_id&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Pub/Sub topic ID&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">pub</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">project_id</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">topic_id</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Wow.. it looks simple, I think the variable naming <code>api_future</code> is a key to this script. api_future is returned value of <code>google.cloud.pubsub_v1.PublisherClient.publish()</code> and a variable <code>message_id</code> is type of <code>api_future.result()</code></p>
+<p>Let&rsquo;s deep dive into below logics.</p>
+<ul>
+<li>google.cloud.pubsub_v1.PublisherClient.publish()</li>
+<li>google.cloud.pubsub_v1.PublisherClient.publish.result()</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">PublisherClient</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">PublisherClientMeta</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;The service that an application uses to manipulate topics,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    and to send messages to a topic.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">request</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pubsub</span><span class="o">.</span><span class="n">PublishRequest</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">messages</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">pubsub</span><span class="o">.</span><span class="n">PubsubMessage</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">retry</span><span class="p">:</span> <span class="n">OptionalRetry</span> <span class="o">=</span> <span class="n">gapic_v1</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">timeout</span><span class="p">:</span> <span class="n">TimeoutType</span> <span class="o">=</span> <span class="n">gapic_v1</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">metadata</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pubsub</span><span class="o">.</span><span class="n">PublishResponse</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="sa">r</span><span class="s2">&#34;&#34;&#34;Adds one or more messages to the topic. Returns ``NOT_FOUND`` if
+</span></span></span><span class="line"><span class="cl"><span class="s2">        the topic does not exist.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        .. code-block:: python
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">            from google import pubsub_v1
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">            def sample_publish():
+</span></span></span><span class="line"><span class="cl"><span class="s2">                # Create a client
+</span></span></span><span class="line"><span class="cl"><span class="s2">                client = pubsub_v1.PublisherClient()
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">                # Initialize request argument(s)
+</span></span></span><span class="line"><span class="cl"><span class="s2">                request = pubsub_v1.PublishRequest(
+</span></span></span><span class="line"><span class="cl"><span class="s2">                    topic=&#34;topic_value&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                )
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">                # Make the request
+</span></span></span><span class="line"><span class="cl"><span class="s2">                response = client.publish(request=request)
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">                # Handle the response
+</span></span></span><span class="line"><span class="cl"><span class="s2">                print(response)
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        Args:
+</span></span></span><span class="line"><span class="cl"><span class="s2">            request (Union[google.pubsub_v1.types.PublishRequest, dict]):
+</span></span></span><span class="line"><span class="cl"><span class="s2">                The request object. Request for the Publish method.
+</span></span></span><span class="line"><span class="cl"><span class="s2">            topic (str):
+</span></span></span><span class="line"><span class="cl"><span class="s2">                Required. The messages in the request will be published
+</span></span></span><span class="line"><span class="cl"><span class="s2">                on this topic. Format is
+</span></span></span><span class="line"><span class="cl"><span class="s2">                ``projects/</span><span class="si">{project}</span><span class="s2">/topics/</span><span class="si">{topic}</span><span class="s2">``.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">                This corresponds to the ``topic`` field
+</span></span></span><span class="line"><span class="cl"><span class="s2">                on the ``request`` instance; if ``request`` is provided, this
+</span></span></span><span class="line"><span class="cl"><span class="s2">                should not be set.
+</span></span></span><span class="line"><span class="cl"><span class="s2">            messages (Sequence[google.pubsub_v1.types.PubsubMessage]):
+</span></span></span><span class="line"><span class="cl"><span class="s2">                Required. The messages to publish.
+</span></span></span><span class="line"><span class="cl"><span class="s2">                This corresponds to the ``messages`` field
+</span></span></span><span class="line"><span class="cl"><span class="s2">                on the ``request`` instance; if ``request`` is provided, this
+</span></span></span><span class="line"><span class="cl"><span class="s2">                should not be set.
+</span></span></span><span class="line"><span class="cl"><span class="s2">            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                should be retried.
+</span></span></span><span class="line"><span class="cl"><span class="s2">            timeout (TimeoutType):
+</span></span></span><span class="line"><span class="cl"><span class="s2">                The timeout for this request.
+</span></span></span><span class="line"><span class="cl"><span class="s2">            metadata (Sequence[Tuple[str, str]]): Strings which should be
+</span></span></span><span class="line"><span class="cl"><span class="s2">                sent along with the request as metadata.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        Returns:
+</span></span></span><span class="line"><span class="cl"><span class="s2">            google.pubsub_v1.types.PublishResponse:
+</span></span></span><span class="line"><span class="cl"><span class="s2">                Response for the Publish method.
+</span></span></span><span class="line"><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Create or coerce a protobuf request object.</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Quick check: If we got a request object, we should *not* have</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># gotten any keyword arguments that map to the request.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">has_flattened_params</span> <span class="o">=</span> <span class="nb">any</span><span class="p">([</span><span class="n">topic</span><span class="p">,</span> <span class="n">messages</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">request</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">has_flattened_params</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;If the `request` argument is set, then none of &#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;the individual field arguments should be set.&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Minor optimization to avoid making a copy if the user passes</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># in a pubsub.PublishRequest.</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># There&#39;s no risk of modifying the input as we&#39;ve already verified</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># there are no flattened fields.</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pubsub</span><span class="o">.</span><span class="n">PublishRequest</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">request</span> <span class="o">=</span> <span class="n">pubsub</span><span class="o">.</span><span class="n">PublishRequest</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># If we have keyword arguments corresponding to fields on the</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># request, apply these.</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">topic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">request</span><span class="o">.</span><span class="n">topic</span> <span class="o">=</span> <span class="n">topic</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">messages</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">request</span><span class="o">.</span><span class="n">messages</span> <span class="o">=</span> <span class="n">messages</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Wrap the RPC method; this adds retry and timeout information,</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># and friendly error handling.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rpc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">_wrapped_methods</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_transport</span><span class="o">.</span><span class="n">publish</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Certain fields should be provided within the metadata header;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># add these here.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">metadata</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">gapic_v1</span><span class="o">.</span><span class="n">routing_header</span><span class="o">.</span><span class="n">to_grpc_metadata</span><span class="p">(((</span><span class="s2">&#34;topic&#34;</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">topic</span><span class="p">),)),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Send the request.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">response</span> <span class="o">=</span> <span class="n">rpc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">request</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">retry</span><span class="o">=</span><span class="n">retry</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1"># Done; return the response.</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">response</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><em>sub.py</em></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Copyright 2019 Google LLC</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># you may not use this file except in compliance with the License.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># You may obtain a copy of the License at</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># See the License for the specific language governing permissions and</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># limitations under the License.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">pubsub_v1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subscription_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Receives messages from a Pub/Sub subscription.&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Initialize a Subscriber client</span>
+</span></span><span class="line"><span class="cl">    <span class="n">subscriber_client</span> <span class="o">=</span> <span class="n">pubsub_v1</span><span class="o">.</span><span class="n">SubscriberClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># Create a fully qualified identifier in the form of</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># `projects/{project_id}/subscriptions/{subscription_id}`</span>
+</span></span><span class="line"><span class="cl">    <span class="n">subscription_path</span> <span class="o">=</span> <span class="n">subscriber_client</span><span class="o">.</span><span class="n">subscription_path</span><span class="p">(</span><span class="n">project_id</span><span class="p">,</span> <span class="n">subscription_id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">message</span><span class="p">:</span> <span class="n">pubsub_v1</span><span class="o">.</span><span class="n">subscriber</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Received </span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2">.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Acknowledge the message. Unack&#39;ed messages will be redelivered.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">message</span><span class="o">.</span><span class="n">ack</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Acknowledged </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">message_id</span><span class="si">}</span><span class="s2">.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">streaming_pull_future</span> <span class="o">=</span> <span class="n">subscriber_client</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">subscription_path</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">callback</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Listening for messages on </span><span class="si">{</span><span class="n">subscription_path</span><span class="si">}</span><span class="s2">..</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># Calling result() on StreamingPullFuture keeps the main thread from</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># exiting while messages get processed in the callbacks.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">streaming_pull_future</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span><span class="p">:</span>  <span class="c1"># noqa</span>
+</span></span><span class="line"><span class="cl">        <span class="n">streaming_pull_future</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>  <span class="c1"># Trigger the shutdown.</span>
+</span></span><span class="line"><span class="cl">        <span class="n">streaming_pull_future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>  <span class="c1"># Block until the shutdown is complete.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">subscriber_client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawDescriptionHelpFormatter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;project_id&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Google Cloud project ID&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;subscription_id&#34;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Pub/Sub subscription ID&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;timeout&#34;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s2">&#34;?&#34;</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;Pub/Sub subscription ID&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">sub</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">project_id</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">subscription_id</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>about <code>pubsub_v1.SubscriberClient()</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Client</span><span class="p">(</span><span class="n">subscriber_client</span><span class="o">.</span><span class="n">SubscriberClient</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;A subscriber client for Google Cloud Pub/Sub.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    This creates an object that is capable of subscribing to messages.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Generally, you can instantiate this client with no arguments, and you
+</span></span></span><span class="line"><span class="cl"><span class="s2">    get sensible defaults.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Args:
+</span></span></span><span class="line"><span class="cl"><span class="s2">        kwargs: Any additional arguments provided are sent as keyword
+</span></span></span><span class="line"><span class="cl"><span class="s2">            keyword arguments to the underlying
+</span></span></span><span class="line"><span class="cl"><span class="s2">            :class:`~google.cloud.pubsub_v1.gapic.subscriber_client.SubscriberClient`.
+</span></span></span><span class="line"><span class="cl"><span class="s2">            Generally you should not need to set additional keyword
+</span></span></span><span class="line"><span class="cl"><span class="s2">            arguments. Optionally, regional endpoints can be set via
+</span></span></span><span class="line"><span class="cl"><span class="s2">            ``client_options`` that takes a single key-value pair that
+</span></span></span><span class="line"><span class="cl"><span class="s2">            defines the endpoint.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Example:
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    .. code-block:: python
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        from google.cloud import pubsub_v1
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        subscriber_client = pubsub_v1.SubscriberClient(
+</span></span></span><span class="line"><span class="cl"><span class="s2">            # Optional
+</span></span></span><span class="line"><span class="cl"><span class="s2">            client_options = {
+</span></span></span><span class="line"><span class="cl"><span class="s2">                &#34;api_endpoint&#34;: REGIONAL_ENDPOINT
+</span></span></span><span class="line"><span class="cl"><span class="s2">            }
+</span></span></span><span class="line"><span class="cl"><span class="s2">        )
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">...</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">subscription</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="s2">&#34;subscriber.message.Message&#34;</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="n">flow_control</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">FlowControl</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&#34;subscriber.scheduler.ThreadScheduler&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">use_legacy_flow_control</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">await_callbacks_on_shutdown</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">futures</span><span class="o">.</span><span class="n">StreamingPullFuture</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;Asynchronously start receiving messages on a given subscription.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        This method starts a background thread to begin pulling messages from
+</span></span></span><span class="line"><span class="cl"><span class="s2">        a Pub/Sub subscription and scheduling them to be processed using the
+</span></span></span><span class="line"><span class="cl"><span class="s2">        provided ``callback``.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        The ``callback`` will be called with an individual
+</span></span></span><span class="line"><span class="cl"><span class="s2">        :class:`google.cloud.pubsub_v1.subscriber.message.Message`. It is the
+</span></span></span><span class="line"><span class="cl"><span class="s2">        responsibility of the callback to either call ``ack()`` or ``nack()``
+</span></span></span><span class="line"><span class="cl"><span class="s2">        on the message when it finished processing. If an exception occurs in
+</span></span></span><span class="line"><span class="cl"><span class="s2">        the callback during processing, the exception is logged and the message
+</span></span></span><span class="line"><span class="cl"><span class="s2">        is ``nack()`` ed.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        The ``flow_control`` argument can be used to control the rate of at
+</span></span></span><span class="line"><span class="cl"><span class="s2">        which messages are pulled. The settings are relatively conservative by
+</span></span></span><span class="line"><span class="cl"><span class="s2">        default to prevent &#34;message hoarding&#34; - a situation where the client
+</span></span></span><span class="line"><span class="cl"><span class="s2">        pulls a large number of messages but can not process them fast enough
+</span></span></span><span class="line"><span class="cl"><span class="s2">        leading it to &#34;starve&#34; other clients of messages. Increasing these
+</span></span></span><span class="line"><span class="cl"><span class="s2">        settings may lead to faster throughput for messages that do not take
+</span></span></span><span class="line"><span class="cl"><span class="s2">        a long time to process.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        The ``use_legacy_flow_control`` argument disables enforcing flow control
+</span></span></span><span class="line"><span class="cl"><span class="s2">        settings at the Cloud Pub/Sub server, and only the client side flow control
+</span></span></span><span class="line"><span class="cl"><span class="s2">        will be enforced.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        This method starts the receiver in the background and returns a
+</span></span></span><span class="line"><span class="cl"><span class="s2">        *Future* representing its execution. Waiting on the future (calling
+</span></span></span><span class="line"><span class="cl"><span class="s2">        ``result()``) will block forever or until a non-recoverable error
+</span></span></span><span class="line"><span class="cl"><span class="s2">        is encountered (such as loss of network connectivity). Cancelling the
+</span></span></span><span class="line"><span class="cl"><span class="s2">        future will signal the process to shutdown gracefully and exit.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        .. note:: This uses Pub/Sub&#39;s *streaming pull* feature. This feature
+</span></span></span><span class="line"><span class="cl"><span class="s2">            properties that may be surprising. Please take a look at
+</span></span></span><span class="line"><span class="cl"><span class="s2">            https://cloud.google.com/pubsub/docs/pull#streamingpull for
+</span></span></span><span class="line"><span class="cl"><span class="s2">            more details on how streaming pull behaves compared to the
+</span></span></span><span class="line"><span class="cl"><span class="s2">            synchronous pull method.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        Example:
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        .. code-block:: python
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">            from google.cloud import pubsub_v1
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">            subscriber_client = pubsub_v1.SubscriberClient()
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">            # existing subscription
+</span></span></span><span class="line"><span class="cl"><span class="s2">            subscription = subscriber_client.subscription_path(
+</span></span></span><span class="line"><span class="cl"><span class="s2">                &#39;my-project-id&#39;, &#39;my-subscription&#39;)
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">            def callback(message):
+</span></span></span><span class="line"><span class="cl"><span class="s2">                print(message)
+</span></span></span><span class="line"><span class="cl"><span class="s2">                message.ack()
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">            future = subscriber_client.subscribe(
+</span></span></span><span class="line"><span class="cl"><span class="s2">                subscription, callback)
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">            try:
+</span></span></span><span class="line"><span class="cl"><span class="s2">                future.result()
+</span></span></span><span class="line"><span class="cl"><span class="s2">            except KeyboardInterrupt:
+</span></span></span><span class="line"><span class="cl"><span class="s2">                future.cancel()  # Trigger the shutdown.
+</span></span></span><span class="line"><span class="cl"><span class="s2">                future.result()  # Block until the shutdown is complete.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        Args:
+</span></span></span><span class="line"><span class="cl"><span class="s2">            subscription:
+</span></span></span><span class="line"><span class="cl"><span class="s2">                The name of the subscription. The subscription should have already been
+</span></span></span><span class="line"><span class="cl"><span class="s2">                created (for example, by using :meth:`create_subscription`).
+</span></span></span><span class="line"><span class="cl"><span class="s2">            callback:
+</span></span></span><span class="line"><span class="cl"><span class="s2">                The callback function. This function receives the message as
+</span></span></span><span class="line"><span class="cl"><span class="s2">                its only argument and will be called from a different thread/
+</span></span></span><span class="line"><span class="cl"><span class="s2">                process depending on the scheduling strategy.
+</span></span></span><span class="line"><span class="cl"><span class="s2">            flow_control:
+</span></span></span><span class="line"><span class="cl"><span class="s2">                The flow control settings. Use this to prevent situations where you are
+</span></span></span><span class="line"><span class="cl"><span class="s2">                inundated with too many messages at once.
+</span></span></span><span class="line"><span class="cl"><span class="s2">            scheduler:
+</span></span></span><span class="line"><span class="cl"><span class="s2">                An optional *scheduler* to use when executing the callback. This
+</span></span></span><span class="line"><span class="cl"><span class="s2">                controls how callbacks are executed concurrently. This object must not
+</span></span></span><span class="line"><span class="cl"><span class="s2">                be shared across multiple ``SubscriberClient`` instances.
+</span></span></span><span class="line"><span class="cl"><span class="s2">            use_legacy_flow_control (bool):
+</span></span></span><span class="line"><span class="cl"><span class="s2">                If set to ``True``, flow control at the Cloud Pub/Sub server is disabled,
+</span></span></span><span class="line"><span class="cl"><span class="s2">                though client-side flow control is still enabled. If set to ``False``
+</span></span></span><span class="line"><span class="cl"><span class="s2">                (default), both server-side and client-side flow control are enabled.
+</span></span></span><span class="line"><span class="cl"><span class="s2">            await_callbacks_on_shutdown:
+</span></span></span><span class="line"><span class="cl"><span class="s2">                If ``True``, after canceling the returned future, the latter&#39;s
+</span></span></span><span class="line"><span class="cl"><span class="s2">                ``result()`` method will block until the background stream and its
+</span></span></span><span class="line"><span class="cl"><span class="s2">                helper threads have been terminated, and all currently executing message
+</span></span></span><span class="line"><span class="cl"><span class="s2">                callbacks are done processing.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">                If ``False`` (default), the returned future&#39;s ``result()`` method will
+</span></span></span><span class="line"><span class="cl"><span class="s2">                not block after canceling the future. The method will instead return
+</span></span></span><span class="line"><span class="cl"><span class="s2">                immediately after the background stream and its helper threads have been
+</span></span></span><span class="line"><span class="cl"><span class="s2">                terminated, but some of the message callback threads might still be
+</span></span></span><span class="line"><span class="cl"><span class="s2">                running at that point.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">        Returns:
+</span></span></span><span class="line"><span class="cl"><span class="s2">            A future instance that can be used to manage the background stream.
+</span></span></span><span class="line"><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">flow_control</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">FlowControl</span><span class="p">(</span><span class="o">*</span><span class="n">flow_control</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">manager</span> <span class="o">=</span> <span class="n">streaming_pull_manager</span><span class="o">.</span><span class="n">StreamingPullManager</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="bp">self</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">subscription</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">flow_control</span><span class="o">=</span><span class="n">flow_control</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">use_legacy_flow_control</span><span class="o">=</span><span class="n">use_legacy_flow_control</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">await_callbacks_on_shutdown</span><span class="o">=</span><span class="n">await_callbacks_on_shutdown</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">future</span> <span class="o">=</span> <span class="n">futures</span><span class="o">.</span><span class="n">StreamingPullFuture</span><span class="p">(</span><span class="n">manager</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">manager</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">callback</span><span class="o">=</span><span class="n">callback</span><span class="p">,</span> <span class="n">on_callback_error</span><span class="o">=</span><span class="n">future</span><span class="o">.</span><span class="n">set_exception</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">future</span>  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="conclusion">Conclusion</h2>
+<p>This is so impressive that pubsub_v1&rsquo;s client generates Future object which needs client should supports async features. Eventually gcp pubsub_v1&rsquo;s clients inherit <a href="https://docs.python.org/ko/3/library/concurrent.futures.html" target="_blank" rel="noopener noreffer">official python concurrent Future</a>
+ object, so I&rsquo;m wondering that can pubsub_v1 handle python2.x? because python future object is not supported on python2.x version. If it does not support python2.x version than, how do I mock <code>Future based async flow</code> to <code>gevent logic</code>.</p>
+<p><strong>Through this journey, I would like to study Python&rsquo;s concurrent-related features to an advanced level.</strong></p>
+<ul>
+<li><a href="https://docs.python.org/ko/3/library/concurrent.futures.html" target="_blank" rel="noopener noreffer">https://docs.python.org/ko/3/library/concurrent.futures.html</a>
+</li>
+</ul></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-05-21&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/332df4caa77462be9ff83cd033a4b3221718a80c" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 332df4caa77462be9ff83cd033a4b3221718a80c: rebuilding site Sat May 21 21:26:54 KST 2022">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>332df4c</a></span>
+                <span>Updated on 2022-05-21&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/068db1ecb1b85873833e1d55562987680ca1840e" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 068db1ecb1b85873833e1d55562987680ca1840e: rebuilding site Sat May 21 22:13:46 KST 2022">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>068db1e</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
