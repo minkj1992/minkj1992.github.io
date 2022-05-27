@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>arduino - Category - The Serious</title>
+        <link>https://minkj1992.github.io/categories/arduino/</link>
+        <description>arduino - Category - The Serious</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 27 May 2022 22:29:53 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/arduino/" rel="self" type="application/rss+xml" /><item>
+    <title>Arduino step by step</title>
+    <link>https://minkj1992.github.io/arduino_step_by_step/</link>
+    <pubDate>Fri, 27 May 2022 22:29:53 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/arduino_step_by_step/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/arduino/arduino.png" referrerpolicy="no-referrer">
+            </div><p>Learn arduino with <a href="https://www.udemy.com/course/arduino-sbs-17gs" target="_blank" rel="noopener noreffer">Arduino Step by Step: Getting Started by Dr. Peter Dalmaris</a>
+ lecture.</p>]]></description>
+</item>
+</channel>
+</rss>
