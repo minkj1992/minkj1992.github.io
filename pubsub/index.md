@@ -687,4 +687,5 @@ This is so impressive that pubsub_v1's client generates Future object which need
 
 **Through this journey, I would like to study Python's concurrent-related features to an advanced level.**
 
+- 
 - https://docs.python.org/ko/3/library/concurrent.futures.html
