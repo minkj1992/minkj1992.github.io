@@ -158,3 +158,75 @@ I²C는 데이터를 주고 받는 선 하나와 송수신 타이밍 동기화�
 - Master-Slave 구조
 - SPI 통신은 데이터의 송신과 수신이 동시에 이루어지기 때문에 다른 데이터 통신에 비해 속도가 빠르다는 장점이 있어서 이더넷 통신 등에 주로 사용된다.
 - 하나의 마스터에는 여러 개의 슬레이브가 연결 될 수 있지만, 슬레이브마다 각각 하나의 SS 선을 필요로 하기 때문에 슬레이브의 개수가 많아질 경우에는 물리적으로 효율적이지 않다.
+
+## Prototyping basics
+
+### tl;dr
+- breadboard
+- jumper wire
+- power supplies
+- multimeter
+- soldering(납땜)
+- protoboard
+
+### with images
+
+- `breadboard`
+![](/images/arduino/breadboard.png)
+
+- breadboard back
+![](/images/arduino/breadboard_back.png)
+![](/images/arduino/breadboard_back2.png)
+
+- breadboard front
+![](/images/arduino/breadboard_front.png)
+
+
+- `jumper wire`
+  - male
+  - female
+  - aligator clips (=spring clips)
+
+![](/images/arduino/jumperWire.png)
+![](/images/arduino/jumperWire2.png)
+![](/images/arduino/jumperWire3.png)
+![](/images/arduino/jumperWire4.png)
+
+- jumper wire(female)
+
+![](/images/arduino/femaleWire.png)
+
+- jumper wire(aligator clips)
+
+![](/images/arduino/aligatorClip.png)
+![](/images/arduino/aligatorClip2.png)
+
+- `power supplies`
+- `multimeter`
+  - measuring voltage
+  - measuring current
+  - measuring resistance
+
+![](/images/arduino/multimeter.png)
+
+- measuring voltage
+
+![](/images/arduino/multimeter2.png)
+
+- measuring current
+
+![](/images/arduino/multimeter3.png)
+
+- measuring resistance
+
+![](/images/arduino/multimeter4.png)
+
+
+- `soldering`(납땜)
+
+- `protoboard`
+
+![](/images/arduino/protoboard.png)
+![](/images/arduino/protoboard2.png)
+![](/images/arduino/protoboard3.png)
+![](/images/arduino/protoboard4.png)
