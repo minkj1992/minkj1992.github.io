@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/arduino_step_by_step/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-05-27T22:29:53+09:00" />
-<meta property="article:modified_time" content="2022-05-27T23:09:04+09:00" />
+<meta property="article:modified_time" content="2022-05-27T23:26:45+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -33,8 +33,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, iot","wordcount":  336 ,
-        "url": "https:\/\/minkj1992.github.io\/arduino_step_by_step\/","datePublished": "2022-05-27T22:29:53+09:00","dateModified": "2022-05-27T23:09:04+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, iot","wordcount":  668 ,
+        "url": "https:\/\/minkj1992.github.io\/arduino_step_by_step\/","datePublished": "2022-05-27T22:29:53+09:00","dateModified": "2022-05-27T23:26:45+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -114,8 +114,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Arduino step by step</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/arduino/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>arduino</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-27">2022-05-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;336 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-27">2022-05-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;668 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -134,15 +134,21 @@
     <li><a href="#section-2-know-your-arduino">Section 2: Know your Arduino</a>
       <ul>
         <li><a href="#getting-to-know-the-arduino-uno">Getting to know the Arduino Uno</a></li>
+        <li><a href="#gpio">GPIO</a>
+          <ul>
+            <li><a href="#digital-pins">Digital Pins</a></li>
+            <li><a href="#analog-pins">Analog pins</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><a href="#gpio">GPIO</a>
+    <li><a href="#section-3-introduction-to-communications">Section 3: Introduction to communications</a>
       <ul>
-        <li><a href="#using-the-digital-pins">Using the digital pins</a></li>
-        <li><a href="#using-the-analog-pins">Using the analog pins</a></li>
+        <li><a href="#uart">UART</a></li>
+        <li><a href="#ictwi-i2c">I²C(TWI, I2C)</a></li>
+        <li><a href="#spi">SPI</a></li>
       </ul>
     </li>
-    <li><a href="#section-3-introduction-to-communications">Section 3: Introduction to communications</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>Learn arduino with <a href="https://www.udemy.com/course/arduino-sbs-17gs" target="_blank" rel="noopener noreffer">Arduino Step by Step: Getting Started by Dr. Peter Dalmaris</a>
@@ -263,12 +269,14 @@
         alt="/images/arduino/ATmega16U2-2.png"
         title="/images/arduino/ATmega16U2-2.png" /></p>
 <ul>
-<li>
-<h2 id="gpio">GPIO</h2>
-</li>
+<li></li>
 </ul>
-<h3 id="using-the-digital-pins">Using the digital pins</h3>
-<p><img
+<h3 id="gpio">GPIO</h3>
+<h4 id="digital-pins">Digital Pins</h4>
+<ul>
+<li>
+<p>output
+<img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/images/arduino/digitalOutputPins.png"
@@ -276,7 +284,10 @@
         data-sizes="auto"
         alt="/images/arduino/digitalOutputPins.png"
         title="/images/arduino/digitalOutputPins.png" /></p>
-<p><img
+</li>
+<li>
+<p>input
+<img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/images/arduino/digitalInputPins.png"
@@ -284,19 +295,38 @@
         data-sizes="auto"
         alt="/images/arduino/digitalInputPins.png"
         title="/images/arduino/digitalInputPins.png" /></p>
-<h3 id="using-the-analog-pins">Using the analog pins</h3>
-<p><img
+</li>
+</ul>
+<h4 id="analog-pins">Analog pins</h4>
+<ul>
+<li>output
+<img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/images/arduino/analogOutPins.png"
         data-srcset="/images/arduino/analogOutPins.png, /images/arduino/analogOutPins.png 1.5x, /images/arduino/analogOutPins.png 2x"
         data-sizes="auto"
         alt="/images/arduino/analogOutPins.png"
-        title="/images/arduino/analogOutPins.png" /></p>
-<ul>
-<li>PWM(Pulse Width Modulation)</li>
+        title="/images/arduino/analogOutPins.png" /></li>
 </ul>
-<p><img
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>Note<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>PWM(Pulse Width Modulation)</p>
+<ul>
+<li>PWM is not true analog output, however. PWM “fakes” an analog-like result by applying power in pulses, or short bursts of regulated voltage.</li>
+<li>0과 1로만 이뤄진 디지털 신호를 아날로그 신호처럼 흉내낸다.</li>
+<li>즉 중간 값들을 만들어 낼 수 있다.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<ul>
+<li>
+<p>input
+<img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/images/arduino/analogInPins.png"
@@ -304,21 +334,140 @@
         data-sizes="auto"
         alt="/images/arduino/analogInPins.png"
         title="/images/arduino/analogInPins.png" /></p>
+</li>
+<li>
+<p>Potentiometer(가변저항)</p>
 <ul>
-<li>Potentiometer(가변저항)</li>
+<li><code>Ohm's law</code>: V(전압) = I(전류) * R(저항)</li>
+<li>저항이 커지면 전압이 강해진다.</li>
+<li>직관적으로 이해하기에는 일정한 부피에 사람들 잔뜩 집어넣으면 밀도가 올라가서 압력이 쎄진다고 생각함.</li>
+<li><strong>흐르는(일정한 전류) 호수관 입구 손으로 막으면(저항) 압력 더 쎄져서 물 파워(전압) 쎄짐</strong></li>
 </ul>
-<p>위 그림에서 저항 강할 수록 Ground로 전달되니 더 강한 Input을 이끌어 낼 수 있다.</p>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/arduino/potentiometer.gif"
+        data-srcset="/images/arduino/potentiometer.gif, /images/arduino/potentiometer.gif 1.5x, /images/arduino/potentiometer.gif 2x"
+        data-sizes="auto"
+        alt="/images/arduino/potentiometer.gif"
+        title="/images/arduino/potentiometer.gif" /></p>
+<p><code>pot</code>는 시계방향으로 이동시키면 저항길이가 길어져서 더 큰 저항을 줄 수 있다.</p>
 <h2 id="section-3-introduction-to-communications">Section 3: Introduction to communications</h2>
+<h3 id="uart">UART</h3>
+<blockquote>
+<p>Universal asynchronous receiver/transmitter</p>
+</blockquote>
+<p>병렬(parallel) 데이터의 형태를 직렬(async serial) 방식으로 전환하여 데이터를 전송하는 컴퓨터 하드웨어의 일종이다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/arduino/UART.png"
+        data-srcset="/images/arduino/UART.png, /images/arduino/UART.png 1.5x, /images/arduino/UART.png 2x"
+        data-sizes="auto"
+        alt="/images/arduino/UART.png"
+        title="/images/arduino/UART.png" /></p>
 <ul>
-<li>UART</li>
-<li>I2C(TWI)</li>
-<li>SPI</li>
+<li>두 장치 간에 직렬 데이터를 교환하기 위한 프로토콜 또는 규정을 정의합니다. UART는 매우 간단하며 양방향으로 데이터를 송신 및 수신하기 위해 송신기와 수신기 사이에 두 개의 와이어만 사용합니다.</li>
+<li>It is old fashion compare to I2C and SPI.</li>
+<li>simple, cheap, easy to make</li>
+</ul>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>serial communication<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"></div>
+        </div>
+    </div>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw" aria-hidden="true"></i>USART<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><code>USART</code>(Universal Synchronous serial Receiver and Transmitter)를 처리하기 위해서는 동기적으로 송수신 타이밍이 동기화 되어야 한다. 이런 동기화를 위해서 Clock 신호 라인이 필요하다.</p>
+<p>클럭신호로 HIGH, LOW를 한번 반복해 보내는 동안 데이터 핀으로 한 비트의 데이터를 보내게된다. 다음은 100(2진수로 01100100)이라는 값을 보내는 방식이다. 아래를 보면 CLOCK 라인이 존재하는 것을 확인할 수 있다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/arduino/usart.png"
+        data-srcset="/images/arduino/usart.png, /images/arduino/usart.png 1.5x, /images/arduino/usart.png 2x"
+        data-sizes="auto"
+        alt="/images/arduino/usart.png"
+        title="/images/arduino/usart.png" /></p>
+</div>
+        </div>
+    </div>
+<h3 id="ictwi-i2c">I²C(TWI, I2C)</h3>
+<blockquote>
+<p>Inter-Integrated circuit
+Two Wire(sda, sck) Interface
+아이 스퀘어 C</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/arduino/I2C.png"
+        data-srcset="/images/arduino/I2C.png, /images/arduino/I2C.png 1.5x, /images/arduino/I2C.png 2x"
+        data-sizes="auto"
+        alt="/images/arduino/I2C.png"
+        title="/images/arduino/I2C.png" /></p>
+<p>I²C는 데이터를 주고 받는 선 하나와 송수신 타이밍 동기화를 위한 CLOCK 선하나로 이루어진다.</p>
+<ul>
+<li>Master-Slave 구조</li>
+<li>line(2)
+<ul>
+<li>SDA(data): 데이터 송수신</li>
+<li>SCK(clock): Clock</li>
+</ul>
+</li>
+</ul>
+<p>시작 신호와 정지 신호를 가지고 있으며, 슬레이브마다 지정된 주소 값을 가지고 데이터를 주고 받는다. <strong>데이터를 주고 받을 때 반드시 주소 값을 붙여서 보내야 하므로 긴 데이터를 보내기에는 적합하지 않지만</strong>, 통신 타이밍에 구애 받지 않으며 두 개의 선만으로 여러 기기와 통신할 수 있다는 장점 있다.</p>
+<h3 id="spi">SPI</h3>
+<blockquote>
+<p>Serial Peripheral(주변의) Interface</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/arduino/SPI.png"
+        data-srcset="/images/arduino/SPI.png, /images/arduino/SPI.png 1.5x, /images/arduino/SPI.png 2x"
+        data-sizes="auto"
+        alt="/images/arduino/SPI.png"
+        title="/images/arduino/SPI.png" /></p>
+<ul>
+<li>
+<p>line(4)</p>
+<ul>
+<li>MOSI: Master Out, Slave In</li>
+<li>MISO: Master In, Slave Out</li>
+<li>SCK: Clock Line</li>
+<li>SS(CS): Slave Select or Chip Select
+<ul>
+<li>즉 데이터를 수신할 기기 선택 신호</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Full Duplex</p>
+</li>
+<li>
+<p>Master-Slave 구조</p>
+</li>
+<li>
+<p>SPI 통신은 데이터의 송신과 수신이 동시에 이루어지기 때문에 다른 데이터 통신에 비해 속도가 빠르다는 장점이 있어서 이더넷 통신 등에 주로 사용된다.</p>
+</li>
+<li>
+<p>하나의 마스터에는 여러 개의 슬레이브가 연결 될 수 있지만, 슬레이브마다 각각 하나의 SS 선을 필요로 하기 때문에 슬레이브의 개수가 많아질 경우에는 물리적으로 효율적이지 않다.</p>
+</li>
 </ul></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-05-27&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/c3c8f2d45fae29165c5c6f34cb1ad5943d8e4b7e" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) c3c8f2d45fae29165c5c6f34cb1ad5943d8e4b7e: rebuilding site Fri May 27 23:09:04 KST 2022">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c3c8f2d</a></span>
+                <span>Updated on 2022-05-27&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/a1ef026dad10b357c641a6fd38bbbc2e3dc4f48f" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) a1ef026dad10b357c641a6fd38bbbc2e3dc4f48f: rebuilding site Fri May 27 23:26:45 KST 2022">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a1ef026</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
