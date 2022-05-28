@@ -63,7 +63,7 @@ Learn arduino with [Arduino Step by Step: Getting Started by Dr. Peter Dalmaris]
 ![](/images/arduino/ATmega16U2.png)
 ![](/images/arduino/ATmega16U2-2.png)
 
-- 
+
 
 ### GPIO
 #### Digital Pins
@@ -116,10 +116,6 @@ PWM(Pulse Width Modulation)
 - It is old fashion compare to I2C and SPI.
 - simple, cheap, easy to make
 
-{{< admonition tip "serial communication">}}
-
-{{< /admonition >}}
-
 {{< admonition tip "USART">}}
 `USART`(Universal Synchronous serial Receiver and Transmitter)를 처리하기 위해서는 동기적으로 송수신 타이밍이 동기화 되어야 한다. 이런 동기화를 위해서 Clock 신호 라인이 필요하다.
 
@@ -149,7 +145,7 @@ I²C는 데이터를 주고 받는 선 하나와 송수신 타이밍 동기화�
 ### SPI
 > Serial Peripheral(주변의) Interface
 
-![](/images/arduino/SPI.png)
+![](/images/arduino/SPI.jpeg)
 
 - line(4)
   - MOSI: Master Out, Slave In
