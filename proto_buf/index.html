@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Protocol Buffers - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="Protocol Buffers" />
+<meta property="og:description" content="Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/proto_buf/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-01T21:20:23+09:00" />
+<meta property="article:modified_time" content="2022-06-01T21:20:23+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Protocol Buffers"/>
+<meta name="twitter:description" content="Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data."/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/proto_buf/" /><link rel="prev" href="https://minkj1992.github.io/arduino_step_by_step/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Protocol Buffers",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/proto_buf\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  1122 ,
+        "url": "https:\/\/minkj1992.github.io\/proto_buf\/","datePublished": "2022-06-01T21:20:23+09:00","dateModified": "2022-06-01T21:20:23+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Protocol Buffers</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-06-01">2022-06-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1122 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/protocol_buffer.png"
+        data-srcset="/images/protocol_buffer.png, /images/protocol_buffer.png 1.5x, /images/protocol_buffer.png 2x"
+        data-sizes="auto"
+        alt="/images/protocol_buffer.png"
+        title="/images/protocol_buffer.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">tl;dr</a></li>
+    <li><a href="#overview">overview</a>
+      <ul>
+        <li><a href="#languages">languages</a></li>
+        <li><a href="#pros">Pros</a></li>
+        <li><a href="#cons">Cons</a></li>
+        <li><a href="#flow">Flow</a></li>
+        <li><a href="#proto-definition-syntax-3">.proto definition syntax (3)</a></li>
+        <li><a href="#example">Example</a></li>
+        <li><a href="#protobuf-python">protobuf: python</a></li>
+        <li><a href="#protobuf-vs-">protobuf vs &hellip;</a></li>
+        <li><a href="#refs">refs</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.</p>
+<br />
+<h2 id="tldr">tl;dr</h2>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>What are protocol buffers<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Protocol buffers are Google&rsquo;s language-neutral, platform-neutral, extensible mechanism for serializing structured data – think XML, but smaller, faster, and simpler. You define how you want your data to be structured once, then you can use special generated source code to easily write and read your structured data to and from a variety of data streams and using a variety of languages.</em></div>
+        </div>
+    </div>
+<p>How do I start?</p>
+<ol>
+<li><a href="https://github.com/protocolbuffers/protobuf#protocol-compiler-installation" target="_blank" rel="noopener noreffer">Download and install</a>
+ the protocol buffer compiler.</li>
+<li>Read the <a href="https://developers.google.com/protocol-buffers/docs/overview" target="_blank" rel="noopener noreffer">overview</a>
+.</li>
+<li>Try the tutorial for your chosen language. (<a href="https://developers.google.com/protocol-buffers/docs/pythontutorial" target="_blank" rel="noopener noreffer">python</a>
+)</li>
+</ol>
+<h2 id="overview">overview</h2>
+<blockquote>
+<p><a href="https://developers.google.com/protocol-buffers/docs/overview" target="_blank" rel="noopener noreffer">https://developers.google.com/protocol-buffers/docs/overview</a>
+</p>
+</blockquote>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>protobuf<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>It’s like JSON, except it&rsquo;s smaller and faster, and it generates native language bindings.</em></p>
+<p><em>Protocol buffers are a combination of the definition language (created in .proto files), the code that the proto compiler generates to interface with data, language-specific runtime libraries, and the <strong>serialization</strong> format for data that is written to a file (or sent across a network connection).</em></p>
+</div>
+        </div>
+    </div>
+<p>These are protobuf&rsquo;s main components (2)</p>
+<ol>
+<li><code>Protoc</code> (compiler)</li>
+</ol>
+<ul>
+<li>It is for data format compile</li>
+<li>It compiles <code>.proto</code> files</li>
+</ul>
+<ol start="2">
+<li><code>SDK</code></li>
+</ol>
+<ul>
+<li>
+<p>each language support</p>
+</li>
+<li>
+<p>The proto compiler is invoked at build time on .proto files to generate code in various programming languages</p>
+</li>
+<li>
+<p>Each generated class contains simple accessors for each field and methods to serialize and parse the whole structure to and from raw bytes.</p>
+</li>
+</ul>
+<h3 id="languages">languages</h3>
+<p>The following languages are supported directly in the protocol buffers compiler, protoc:</p>
+<ul>
+<li>C++</li>
+<li>C#</li>
+<li>Java</li>
+<li>Kotlin</li>
+<li>Objective-C</li>
+<li>PHP</li>
+<li>Python</li>
+<li>Ruby</li>
+</ul>
+<p>The following languages are supported by Google, but the projects&rsquo; source code resides in GitHub repositories. The protoc compiler uses plugins for these languages</p>
+<ul>
+<li>Dart</li>
+<li>Go</li>
+</ul>
+<p><a href="https://github.com/protocolbuffers/protobuf/blob/main/docs/third_party.md" target="_blank" rel="noopener noreffer">for other languages</a>
+</p>
+<h3 id="pros">Pros</h3>
+<ul>
+<li>language/platform-neutral (low coupling, microsevice)</li>
+<li>Compact data storage</li>
+<li>Fast Parsing (compared to json?)</li>
+<li>Availability in many programming languages</li>
+<li><strong>Optimized functionality through automatically-generated classes</strong></li>
+<li><strong>You can update <code>Proto Definitions</code> without updating code.</strong>
+<ul>
+<li>which refers you can control code(especially data schema) version compatibility.</li>
+</ul>
+</li>
+</ul>
+<h3 id="cons">Cons</h3>
+<ul>
+<li>Protocol buffers tend to assume that entire messages can be loaded into memory at once and are not larger than an object graph. For data that exceeds a few megabytes, consider a different solution; when working with larger data, you may effectively end up with several copies of the data due to serialized copies, which can cause surprising spikes in memory usage.</li>
+<li>When protocol buffers are serialized, the same data can have many different binary serializations. You cannot compare two messages for equality without fully parsing them.</li>
+<li>Messages are not compressed. While messages can be zipped or gzipped like any other file, special-purpose compression algorithms like the ones used by JPEG and PNG will produce much smaller files for data of the appropriate type.</li>
+<li>Protocol buffer messages are less than maximally efficient in both size and speed for many scientific and engineering uses that involve large, multi-dimensional arrays of floating point numbers. For these applications, <code>FITS</code> and similar formats have less overhead.</li>
+<li>Protocol buffers are not well supported in non-object-oriented languages popular in scientific computing, such as Fortran and IDL.</li>
+<li>Protocol buffer messages don&rsquo;t inherently self-describe their data, but they have a fully reflective schema that you can use to implement self-description. That is, you cannot fully interpret one without access to its corresponding <code>.proto</code> file.</li>
+<li>Protocol buffers are not a formal standard of any organization. This makes them unsuitable for use in environments with legal or other requirements to build on top of standards.</li>
+</ul>
+<h3 id="flow">Flow</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/protocol-buffers-concepts.png"
+        data-srcset="/images/protocol-buffers-concepts.png, /images/protocol-buffers-concepts.png 1.5x, /images/protocol-buffers-concepts.png 2x"
+        data-sizes="auto"
+        alt="/images/protocol-buffers-concepts.png"
+        title="/images/protocol-buffers-concepts.png" /></p>
+<h3 id="proto-definition-syntax-3">.proto definition syntax (3)</h3>
+<ol>
+<li>optionality(field rules)</li>
+</ol>
+<ul>
+<li><code>optional</code></li>
+<li><code>repeated</code>
+<ul>
+<li>Repeated fields are represented as an object that acts like a Python sequence</li>
+</ul>
+</li>
+<li><code>singular</code>(proto3, default, 단수형)</li>
+<li><code>required</code>(deprecated)</li>
+<li><code>reversed</code></li>
+</ul>
+<ol start="2">
+<li>field type</li>
+</ol>
+<ul>
+<li><code>message</code>
+<ul>
+<li>you can nest parts of the definition, such as for repeating sets of data.</li>
+</ul>
+</li>
+<li><code>enum</code>
+<ul>
+<li>set of values to choose from.</li>
+</ul>
+</li>
+<li><code>oneof</code>
+<ul>
+<li>which you can use when a message has many optional fields and at most one field will be set at the same time.</li>
+</ul>
+</li>
+<li><code>map</code></li>
+</ul>
+<ol start="3">
+<li>field number</li>
+<li>basic scalar type</li>
+<li><a href="https://developers.google.com/protocol-buffers/docs/overview#common-types" target="_blank" rel="noopener noreffer">additional scalar type</a>
+</li>
+</ol>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>field number<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>Field numbers cannot be repurposed or reused. If you delete a field, you should reserve its field number to prevent someone from accidentally reusing the number.</em></p>
+<ul>
+<li><a href="https://docs.microsoft.com/ko-kr/dotnet/architecture/grpc-for-wcf-developers/protobuf-messages#field-numbers" target="_blank" rel="noopener noreffer">from microsoft description</a>
+</li>
+</ul>
+<p><em>필드 번호는 Protobuf의 중요한 부분입니다. 이진 인코딩된 데이터의 필드를 식별하는 데 사용됩니다. 즉, 서비스 버전에서 버전으로 변경할 수 없습니다. 장점은 이전 버전과의 호환성 및 앞으로 호환성이 가능하다는 것입니다. 클라이언트 및 서비스는 누락된 값의 가능성이 처리되는 한 모르는 필드 번호를 무시합니다.</em></p>
+<p><em>이진 형식에서 필드 번호는 형식 식별자와 결합됩니다. 1에서 15까지의 필드 번호는 해당 형식으로 단일 바이트로 인코딩할 수 있습니다. 16에서 2,047까지의 숫자는 2바이트를 사용합니다. 어떤 이유로든 메시지에 2,047개 이상의 필드가 필요한 경우 더 높아질 수 있습니다. 필드 번호 1에서 15까지의 싱글 바이트 식별자는 더 나은 성능을 제공하므로 가장 기본적으로 자주 사용되는 필드에 사용해야 합니다.</em></p>
+</div>
+        </div>
+    </div>
+<h3 id="example">Example</h3>
+<p>This is the <code>status.proto</code> file used by Google. (<a href="https://github.com/googleapis/googleapis/blob/master/google/rpc/status.proto" target="_blank" rel="noopener noreffer">refs</a>
+)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-protobuf" data-lang="protobuf"><span class="line"><span class="cl"><span class="c1">// Copyright 2020 Google LLC
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// you may not use this file except in compliance with the License.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// You may obtain a copy of the License at
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     http://www.apache.org/licenses/LICENSE-2.0
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// Unless required by applicable law or agreed to in writing, software
+</span></span></span><span class="line"><span class="cl"><span class="c1">// distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+</span></span></span><span class="line"><span class="cl"><span class="c1">// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// See the License for the specific language governing permissions and
+</span></span></span><span class="line"><span class="cl"><span class="c1">// limitations under the License.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="n">syntax</span> <span class="o">=</span> <span class="s">&#34;proto3&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="kn">package</span> <span class="nn">google</span><span class="o">.</span><span class="k">rpc</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">import</span> <span class="s">&#34;google/protobuf/any.proto&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">option</span> <span class="n">cc_enable_arenas</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">option</span> <span class="n">go_package</span> <span class="o">=</span> <span class="s">&#34;google.golang.org/genproto/googleapis/rpc/status;status&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">option</span> <span class="n">java_multiple_files</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">option</span> <span class="n">java_outer_classname</span> <span class="o">=</span> <span class="s">&#34;StatusProto&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">option</span> <span class="n">java_package</span> <span class="o">=</span> <span class="s">&#34;com.google.rpc&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">option</span> <span class="n">objc_class_prefix</span> <span class="o">=</span> <span class="s">&#34;RPC&#34;</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c1">// The `Status` type defines a logical error model that is suitable for
+</span></span></span><span class="line"><span class="cl"><span class="c1">// different programming environments, including REST APIs and RPC APIs. It is
+</span></span></span><span class="line"><span class="cl"><span class="c1">// used by [gRPC](https://github.com/grpc). Each `Status` message contains
+</span></span></span><span class="line"><span class="cl"><span class="c1">// three pieces of data: error code, error message, and error details.
+</span></span></span><span class="line"><span class="cl"><span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1">// You can find out more about this error model and how to work with it in the
+</span></span></span><span class="line"><span class="cl"><span class="c1">// [API Design Guide](https://cloud.google.com/apis/design/errors).
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">message</span> <span class="nc">Status</span> <span class="p">{</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="c1">// The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int32</span> <span class="n">code</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="c1">// A developer-facing error message, which should be in English. Any
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// user-facing error message should be localized and sent in the
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">string</span> <span class="kd">message</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span>  <span class="c1">// A list of messages that carry the error details.  There is a common set of
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// message types for APIs to use.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">repeated</span> <span class="n">google.protobuf.Any</span> <span class="n">details</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="p">}</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="protobuf-python">protobuf: python</h3>
+<blockquote>
+<p><a href="https://developers.google.com/protocol-buffers/docs/reference/python-generated#invocation" target="_blank" rel="noopener noreffer">https://developers.google.com/protocol-buffers/docs/reference/python-generated#invocation</a>
+</p>
+</blockquote>
+<h3 id="protobuf-vs-">protobuf vs &hellip;</h3>
+<ul>
+<li>protobuf(grpc) vs thrift
+<ul>
+<li><a href="https://www.alluxio.io/blog/moving-from-apache-thrift-to-grpc-a-perspective-from-alluxio/" target="_blank" rel="noopener noreffer">grpc vs thrift</a>
+</li>
+</ul>
+</li>
+<li>protobuf(grpc) vs graphql
+<ul>
+<li><a href="https://github.com/google/rejoiner" target="_blank" rel="noopener noreffer">https://github.com/google/rejoiner</a>
+</li>
+<li>구글에서 graphql과 호환 lib 오픈소스화 시킴.</li>
+<li><a href="https://medium.com/@lvdbrink/graphql-meets-protocol-buffers-in-go-cdbf11090934" target="_blank" rel="noopener noreffer">https://medium.com/@lvdbrink/graphql-meets-protocol-buffers-in-go-cdbf11090934</a>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="refs">refs</h3>
+<ul>
+<li><a href="https://github.com/protocolbuffers/protobuf#protocol-compiler-installation" target="_blank" rel="noopener noreffer">protobuf github</a>
+</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-06-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/proto_buf/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/proto_buf/" data-title="Protocol Buffers" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/proto_buf/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/proto_buf/" data-title="Protocol Buffers"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/proto_buf/" data-title="Protocol Buffers"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/proto_buf/" data-title="Protocol Buffers" data-image="/images/protocol_buffer.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/arduino_step_by_step/" class="prev" rel="prev" title="Arduino step by step"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Arduino step by step</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

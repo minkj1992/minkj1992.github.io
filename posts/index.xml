@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 27 May 2022 22:29:53 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Jun 2022 21:20:23 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Protocol Buffers</title>
+    <link>https://minkj1992.github.io/proto_buf/</link>
+    <pubDate>Wed, 01 Jun 2022 21:20:23 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/proto_buf/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/protocol_buffer.png" referrerpolicy="no-referrer">
+            </div><p>Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.</p>]]></description>
+</item>
+<item>
     <title>Arduino step by step</title>
     <link>https://minkj1992.github.io/arduino_step_by_step/</link>
     <pubDate>Fri, 27 May 2022 22:29:53 &#43;0900</pubDate>
@@ -116,16 +126,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/wall_e.jpeg" referrerpolicy="no-referrer">
             </div>]]></description>
-</item>
-<item>
-    <title>Google like python on vscode</title>
-    <link>https://minkj1992.github.io/python_formatter/</link>
-    <pubDate>Sun, 17 Apr 2022 12:34:49 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/python_formatter/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/google-python.jpeg" referrerpolicy="no-referrer">
-            </div><p>Describes python google style editor settings on <code>vscode</code></p>]]></description>
 </item>
 </channel>
 </rss>
