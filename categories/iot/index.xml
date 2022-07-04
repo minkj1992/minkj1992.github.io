@@ -4,7 +4,18 @@
         <link>https://minkj1992.github.io/categories/iot/</link>
         <description>iot - Category - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 21 May 2022 20:51:52 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/iot/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 11 Jun 2022 21:03:27 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/iot/" rel="self" type="application/rss+xml" /><item>
+    <title>MQTT</title>
+    <link>https://minkj1992.github.io/mqtt/</link>
+    <pubDate>Sat, 11 Jun 2022 21:03:27 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/mqtt/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/mqtt-cover.png" referrerpolicy="no-referrer">
+            </div><p><a href="https://mqtt.org/" target="_blank" rel="noopener noreffer">MQTT</a>
+ stands for MQ Telemetry Transport but previously was known as Message Queuing Telemetry Transport.</p>]]></description>
+</item>
+<item>
     <title>Google Cloud Pub/Sub</title>
     <link>https://minkj1992.github.io/pubsub/</link>
     <pubDate>Sat, 21 May 2022 20:51:52 &#43;0900</pubDate>

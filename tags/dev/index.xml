@@ -4,7 +4,30 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Jun 2022 21:20:23 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 04 Jul 2022 20:08:53 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>2022년 상반기를 돌아보며</title>
+    <link>https://minkj1992.github.io/2022_first_half/</link>
+    <pubDate>Mon, 04 Jul 2022 20:08:53 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/2022_first_half/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/2022_2q.jpeg" referrerpolicy="no-referrer">
+            </div><blockquote>
+<p>Life as travel 🛫</p>
+</blockquote>]]></description>
+</item>
+<item>
+    <title>MQTT</title>
+    <link>https://minkj1992.github.io/mqtt/</link>
+    <pubDate>Sat, 11 Jun 2022 21:03:27 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/mqtt/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/mqtt-cover.png" referrerpolicy="no-referrer">
+            </div><p><a href="https://mqtt.org/" target="_blank" rel="noopener noreffer">MQTT</a>
+ stands for MQ Telemetry Transport but previously was known as Message Queuing Telemetry Transport.</p>]]></description>
+</item>
+<item>
     <title>Protocol Buffers</title>
     <link>https://minkj1992.github.io/proto_buf/</link>
     <pubDate>Wed, 01 Jun 2022 21:20:23 &#43;0900</pubDate>
@@ -86,27 +109,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/google-python.jpeg" referrerpolicy="no-referrer">
             </div><p>Describes python google style editor settings on <code>vscode</code></p>]]></description>
-</item>
-<item>
-    <title>[일주일 만에 배우는 GO] CH.3 Real World Go</title>
-    <link>https://minkj1992.github.io/ch03_real_world/</link>
-    <pubDate>Sat, 12 Feb 2022 10:43:42 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/ch03_real_world/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/golang/effective_go.png" referrerpolicy="no-referrer">
-            </div><p>gin framework로 crud 서버를 만들며 배운 내용들을 기록해보겠습니다.</p>]]></description>
-</item>
-<item>
-    <title>[일주일 만에 배우는 GO] CH.2 Go Basic</title>
-    <link>https://minkj1992.github.io/ch02_go_basic/</link>
-    <pubDate>Mon, 07 Feb 2022 16:55:21 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/ch02_go_basic/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/golang/effective_go.png" referrerpolicy="no-referrer">
-            </div><p><a href="https://go.dev/doc/effective_go" target="_blank" rel="noopener noreffer">Effective go</a>
-를 통해 go 핵심 문법을 빠르게 배워보겠습니다. 또한 나중에 레퍼런스 개념으로 개발할 때 찾아보기 위해서 필요해 보이는 정보들을 모으는 개념으로 글을 작성합니다.</p>]]></description>
 </item>
 </channel>
 </rss>
