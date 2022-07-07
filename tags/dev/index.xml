@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 04 Jul 2022 20:08:53 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 07 Jul 2022 11:12:26 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Google Cloud Computing 가격 정책 비교</title>
+    <link>https://minkj1992.github.io/gcp_pricing/</link>
+    <pubDate>Thu, 07 Jul 2022 11:12:26 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/gcp_pricing/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/gcp.png" referrerpolicy="no-referrer">
+            </div><p>사이드 프로젝트를 하면서 GCP로 배포할 때, 서버 비용이 걱정되었다면!</p>]]></description>
+</item>
+<item>
     <title>2022년 상반기를 돌아보며</title>
     <link>https://minkj1992.github.io/2022_first_half/</link>
     <pubDate>Mon, 04 Jul 2022 20:08:53 &#43;0900</pubDate>
@@ -99,16 +109,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/bash.png" referrerpolicy="no-referrer">
             </div><p>Useful shell script commands :)</p>]]></description>
-</item>
-<item>
-    <title>Google like python on vscode</title>
-    <link>https://minkj1992.github.io/python_formatter/</link>
-    <pubDate>Sun, 17 Apr 2022 12:34:49 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/python_formatter/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/google-python.jpeg" referrerpolicy="no-referrer">
-            </div><p>Describes python google style editor settings on <code>vscode</code></p>]]></description>
 </item>
 </channel>
 </rss>

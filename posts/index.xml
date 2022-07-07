@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 04 Jul 2022 20:08:53 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 07 Jul 2022 11:12:26 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Google Cloud Computing 가격 정책 비교</title>
+    <link>https://minkj1992.github.io/gcp_pricing/</link>
+    <pubDate>Thu, 07 Jul 2022 11:12:26 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/gcp_pricing/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/gcp.png" referrerpolicy="no-referrer">
+            </div><p>사이드 프로젝트를 하면서 GCP로 배포할 때, 서버 비용이 걱정되었다면!</p>]]></description>
+</item>
+<item>
     <title>2022년 상반기를 돌아보며</title>
     <link>https://minkj1992.github.io/2022_first_half/</link>
     <pubDate>Mon, 04 Jul 2022 20:08:53 &#43;0900</pubDate>
@@ -119,16 +129,6 @@
   반대편으로 옮겨가지 말라. 중간에 멈춰 서서. 이것이 줄곧 속임수였음을 지켜보라
   그것들이 서로 연결되어 있음을, 한 과정의 양면으로 이어져 있음을 자각하라.
  ]]></description>
-</item>
-<item>
-    <title>Depp dive into shell script line by line</title>
-    <link>https://minkj1992.github.io/shell_script/</link>
-    <pubDate>Sat, 23 Apr 2022 17:14:25 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/shell_script/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/bash.png" referrerpolicy="no-referrer">
-            </div><p>Useful shell script commands :)</p>]]></description>
 </item>
 </channel>
 </rss>
