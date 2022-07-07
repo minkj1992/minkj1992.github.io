@@ -17,17 +17,17 @@
 갑자기 문득 궁금한 생각이 들어, cloud console에 가서 금액을 확인해보니,,
 
 - ₩268,826,, 말이되나?
-![](/images/gcp_price_total)
+![](/images/gcp_price_total.png)
 
 트래픽 없는 해커톤 서비스가, 약 12일 정도 사용했는데 26만원 찍혔다는건 말도 안된다. 
 이에 대한 이유를 분석해보고 다음 `myply` 사이드 프로젝트를 할 떄, 적용해보기 위해서 정리를 해봅니다.
 
 
 - 대부분 cloud sql이 잡아먹고 있었다. (원인: vCPU 4인 default instance가 살아있어서)
-![](/images/gcp_price_cloud_sql)
+![](/images/gcp_price_cloud_sql.png)
 
 - cloud run은 100만건까지는 공짜인줄 알았는데, 500원씩 사용되었다. (원인: min instance count 1로 되어있었다.)
-![](/images/gcp_price_cloud_run)
+![](/images/gcp_price_cloud_run.png)
 
 
 
