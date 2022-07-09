@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 07 Jul 2022 11:12:26 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 09 Jul 2022 11:03:29 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>The cheapest way to build GCP</title>
+    <link>https://minkj1992.github.io/gcp_build/</link>
+    <pubDate>Sat, 09 Jul 2022 11:03:29 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/gcp_build/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/gcp/google_taiwan.png" referrerpolicy="no-referrer">
+            </div><p>In this article, I&rsquo;ll describe the cheapest way to deploy server with GCP in a side project</p>]]></description>
+</item>
+<item>
     <title>Google Cloud Computing 가격 정책 비교</title>
     <link>https://minkj1992.github.io/gcp_pricing/</link>
     <pubDate>Thu, 07 Jul 2022 11:12:26 &#43;0900</pubDate>
@@ -99,16 +109,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/gevent.png" referrerpolicy="no-referrer">
             </div><p>Let&rsquo;s deep dive into gevent based python programming</p>]]></description>
-</item>
-<item>
-    <title>Depp dive into shell script line by line</title>
-    <link>https://minkj1992.github.io/shell_script/</link>
-    <pubDate>Sat, 23 Apr 2022 17:14:25 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/shell_script/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/bash.png" referrerpolicy="no-referrer">
-            </div><p>Useful shell script commands :)</p>]]></description>
 </item>
 </channel>
 </rss>

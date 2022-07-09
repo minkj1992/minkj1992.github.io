@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>The cheapest way to build GCP - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="The cheapest way to build GCP" />
+<meta property="og:description" content="In this article, I&rsquo;ll describe the cheapest way to deploy server with GCP in a side project" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/gcp_build/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-09T11:03:29+09:00" />
+<meta property="article:modified_time" content="2022-07-09T11:03:29+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="The cheapest way to build GCP"/>
+<meta name="twitter:description" content="In this article, I&rsquo;ll describe the cheapest way to deploy server with GCP in a side project"/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/gcp_build/" /><link rel="prev" href="https://minkj1992.github.io/gcp_pricing/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "The cheapest way to build GCP",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/gcp_build\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  604 ,
+        "url": "https:\/\/minkj1992.github.io\/gcp_build\/","datePublished": "2022-07-09T11:03:29+09:00","dateModified": "2022-07-09T11:03:29+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The cheapest way to build GCP</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-07-09">2022-07-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;604 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/gcp/google_taiwan.png"
+        data-srcset="/images/gcp/google_taiwan.png, /images/gcp/google_taiwan.png 1.5x, /images/gcp/google_taiwan.png 2x"
+        data-sizes="auto"
+        alt="/images/gcp/google_taiwan.png"
+        title="/images/gcp/google_taiwan.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">tl;dr</a></li>
+    <li><a href="#deploy-mysql-database-server">Deploy MySQL Database server</a></li>
+    <li><a href="#buil-cicd-pipeline">Buil CI/CD pipeline</a></li>
+    <li><a href="#deploy-api-server">Deploy API server</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>In this article, I&rsquo;ll describe the cheapest way to deploy server with GCP in a side project</p>
+<br />
+<h2 id="tldr">tl;dr</h2>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Deploy API server with <code>Cloud run</code></li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Deploy DB server with <code>Cloud SQL</code></li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Build CI/CD pipeline with <code>github action</code> and <code>Cloub build</code></li>
+</ul>
+<h2 id="deploy-mysql-database-server">Deploy MySQL Database server</h2>
+<blockquote>
+<p>with Cloud SQL in Google cloud platform</p>
+</blockquote>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_1.png"/>
+    <figcaption>
+        <h5>Cloud SQL meta</h5>
+    </figcaption>
+</figure>
+<p>At first fill in your database meta data.</p>
+<ol>
+<li>Set instance id</li>
+<li>Set databse password</li>
+<li>MySQL version</li>
+<li>Region (taiwan)</li>
+<li>Set <code>single zone</code></li>
+</ol>
+<p>The <code>myply</code> mainly serves to korean users, but I selected <code>Taiwan(asia-east1)</code> because of pricing issue. <a href="https://minkj1992.github.io/gcp_pricing/" target="_blank" rel="noopener noreffer">detail price description</a>
+</p>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_2.png"/>
+    <figcaption>
+        <h5>Cloud SQL Status</h5>
+    </figcaption>
+</figure>
+<ul>
+<li>Select <code>db-f1-micro</code></li>
+</ul>
+<p>I set a machine type to <code>Shared core</code> with <code>1vCPU, 0.614</code>. This spec is called <code>db-f1-micro</code>. It costs $7.665 per month, which is the cheapest spec in <code>cloud sql</code>. If I calculated it in <code>₩</code>, the currency of the south korea.</p>
+<blockquote>
+<p>$7.665 * 1300 = ₩9,964 per month</p>
+</blockquote>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw" aria-hidden="true"></i>db-f1-micro<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Based on <a href="https://cloud.google.com/sql/docs/mysql/instance-settings" target="_blank" rel="noopener noreffer">Official cloud sql docs</a>
+</p>
+<p><em>The db-f1-micro and db-g1-small machine types aren&rsquo;t included in the Cloud SQL SLA. These machine types are configured to use a shared-core CPU, and are designed to provide low-cost test and development instances only. Don&rsquo;t use them for production instances.</em></p>
+<p><em>Note: The db-f1-micro and db-g1-small machine types are not included in the Cloud SQL SLA. These machine types are designed to provide low-cost test and development instances only. Do not use them for production instances.</em></p>
+</div>
+        </div>
+    </div>
+<ul>
+<li>Select HDD storage
+<ul>
+<li>10GB is the lowest storage size.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>$0.09 per GB/month * 10GB(min) = ₩1,170 per month</p>
+</blockquote>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_3.png"/>
+    <figcaption>
+        <h5>Cloud SQL misc.1</h5>
+    </figcaption>
+</figure>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_4.png"/>
+    <figcaption>
+        <h5>Cloud SQL misc.2</h5>
+    </figcaption>
+</figure>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_5.png"/>
+    <figcaption>
+        <h5>Cloud SQL misc.3</h5>
+    </figcaption>
+</figure>
+<p><strong>So total <code>GCP cloud SQL</code> database server will cost <code>₩ 11,134</code>($8.56) per month.</strong></p>
+<h2 id="buil-cicd-pipeline">Buil CI/CD pipeline</h2>
+<blockquote>
+<p>with github action and <code>Cloud Build</code></p>
+</blockquote>
+<p>Before deploy <code>cloud run</code>, you should set <code>cloud build</code> to apply <code>continuous integration and continuous deployment(CICD)</code>.</p>
+<br />
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_6.png"/>
+    <figcaption>
+        <h5>Link with github repository</h5>
+    </figcaption>
+</figure>
+<ul>
+<li>Enable Cloud Build API (almost free)</li>
+<li>Enable Container analysis API (free)</li>
+</ul>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_7.png"/>
+    <figcaption>
+        <h5>Install GCP Build plugin to your repository</h5>
+    </figcaption>
+</figure>
+<ul>
+<li>Set your repository to <code>cloud build</code></li>
+</ul>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_8.png"/>
+    <figcaption>
+        <h5></h5>
+    </figcaption>
+</figure>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_9.png"/>
+    <figcaption>
+        <h5>Select branch to be triggered and Dockerfile locaiton</h5>
+    </figcaption>
+</figure>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Select branch to be triggered</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Enter Dockerfile loaction
+<ul>
+<li>If you have multi phase (e.g. <code>local</code>, <code>sandbox</code>, <code>beta</code> ,<code>prod</code>) it would be useful to set dockerfile name as <code>dockerfile.prod</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> golang:1.18-alpine AS builder</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">LABEL</span> <span class="nv">maintainer</span><span class="o">=</span><span class="s2">&#34;leoo.j &lt;minkj1992@gmail.com&gt; (https://minkj1992.github.io)&#34;</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Move to working directory (/build).</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /build</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Copy and download dependency using go mod.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> go.mod go.sum ./<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> go mod download<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Copy the code into the container.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> . .<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Set necessary environment variables needed for our image and build the API server.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">0</span> <span class="nv">GOOS</span><span class="o">=</span>linux <span class="nv">GOARCH</span><span class="o">=</span>amd64
+</span></span><span class="line"><span class="cl"><span class="k">RUN</span> go build -ldflags<span class="o">=</span><span class="s2">&#34;-s -w&#34;</span> -o apiserver ./application/cmd/main.go<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> scratch</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Copy binary and config files from /build to root folder of scratch container.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> --from<span class="o">=</span>builder <span class="o">[</span><span class="s2">&#34;/build/apiserver&#34;</span>, <span class="s2">&#34;/build/.env&#34;</span>, <span class="s2">&#34;/&#34;</span><span class="o">]</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># Command to run when starting the container.</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;/apiserver&#34;</span><span class="p">]</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="deploy-api-server">Deploy API server</h2>
+<blockquote>
+<p>with Cloud run in Google cloud platform</p>
+</blockquote>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_10.png"/>
+    <figcaption>
+        <h5></h5>
+    </figcaption>
+</figure>
+<ul>
+<li>Select <code>Continuously deploy new revisions from a source repository.</code></li>
+<li>Select region as <code>Taiwan(asia-east1)</code></li>
+<li>Select <code>Cpu is only allocated during request processing</code></li>
+<li>Set number of instance (Autoscaling) (0 ~ 4)</li>
+</ul>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_11.png"/>
+    <figcaption>
+        <h5>Set Container status</h5>
+    </figcaption>
+</figure>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Set application server&rsquo;s port number</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Set memory <code>128Mib</code>(lowest)</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Set <code>Number of vCPUs</code> less than 1.</li>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> Set Execution environment to <code>First generation</code> (slower than 2nd generation)</li>
+</ul>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_12.png"/>
+    <figcaption>
+        <h5>Connect Cloud SQL instance</h5>
+    </figcaption>
+</figure>
+<ul>
+<li>Click <code>Connections</code> tab &gt; <code>Cloud SQL connections</code> &gt; <code>+Add Connection</code> button</li>
+</ul>
+<figure>
+    <img width="600" height="450"src="/images/gcp/gcp_13.png"/>
+    <figcaption>
+        <h5>Connect Cloud SQL instance 2</h5>
+    </figcaption>
+</figure>
+<h2 id="conclusion">Conclusion</h2>
+<p>Through the steps so far, I have covered <code>the cheapest way to deploy a gcp service for a side project</code> topic.
+Now if you have followed all the steps so far, go to your github repository and merge it into the main branch.
+Then the service will deployed according to the <code>Dockerfile</code> you set.</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-07-09</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/gcp_build/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/gcp_build/" data-title="The cheapest way to build GCP" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/gcp_build/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/gcp_build/" data-title="The cheapest way to build GCP"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/gcp_build/" data-title="The cheapest way to build GCP"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/gcp_build/" data-title="The cheapest way to build GCP" data-image="/images/gcp/google_taiwan.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/gcp_pricing/" class="prev" rel="prev" title="Google Cloud Computing 가격 정책 비교"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Google Cloud Computing 가격 정책 비교</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
