@@ -52,8 +52,11 @@ func UpdateTodo(c *gin.Context) {
 `c.BindJSON(&todo)`를
 
 ## conclustion
+프로젝트 일정이 다가와서, gin 공식문서는 대충보고 프로젝트를 1달동안 만들어보았습니다.
 
-[2022-02-08T19:21:29+09:00] effective go로 공부하니까, 문서가 정말 좋긴한데, 예상보다 몇시간은 더 걸렸던 것 같습니다. 하지만 양질의 정보를 이렇게 빠르게 읽을 수 있어서 유익한 시간인 것 같네요.
+https://github.com/ExchangeDiary/exchange-diary.
+
+만들면서 배우는게 가장 재밌게 배울 수 있는 거 같아서 만족스럽습니다.
 
 <center>- 끝 -</center>
 

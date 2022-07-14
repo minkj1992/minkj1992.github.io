@@ -201,7 +201,6 @@ ENTRYPOINT ["/apiserver"]
     </figcaption>
 </figure>
 
-
 ## Conclusion
 Through the steps so far, I have covered `the cheapest way to deploy a gcp service for a side project` topic.
 Now if you have followed all the steps so far, go to your github repository and merge it into the main branch.
