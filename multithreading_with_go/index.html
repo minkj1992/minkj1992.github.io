@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Mastering Multithreading Programming with golang - The Serious</title><meta name="Description" content="About Seroius"><meta property="og:title" content="Mastering Multithreading Programming with golang" />
+<meta property="og:description" content="Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/multithreading_with_go/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-09-04T20:25:47+09:00" />
+<meta property="article:modified_time" content="2022-09-04T20:25:47+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Mastering Multithreading Programming with golang"/>
+<meta name="twitter:description" content="Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang."/>
+<meta name="application-name" content="serious">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/multithreading_with_go/" /><link rel="prev" href="https://minkj1992.github.io/the-power-of-the-heart/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Mastering Multithreading Programming with golang",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/multithreading_with_go\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  811 ,
+        "url": "https:\/\/minkj1992.github.io\/multithreading_with_go\/","datePublished": "2022-09-04T20:25:47+09:00","dateModified": "2022-09-04T20:25:47+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "The Serious","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="auto" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="The Serious"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mastering Multithreading Programming with golang</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a>&nbsp;<a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>go</a>&nbsp;<a href="/categories/computer-science/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>computer science</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-09-04">2022-09-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;811 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/golang_channel.jpeg"
+        data-srcset="/images/golang_channel.jpeg, /images/golang_channel.jpeg 1.5x, /images/golang_channel.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/golang_channel.jpeg"
+        title="/images/golang_channel.jpeg" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-introduction">1. Introduction</a>
+      <ul>
+        <li><a href="#amdals-law">Amdal&rsquo;s law</a></li>
+        <li><a href="#gustafsons-law">Gustafson&rsquo;s law</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-creating-and-using-thread">2. Creating and using thread</a>
+      <ul>
+        <li><a href="#process-vs-thread-vs-green-thread">process vs thread vs green thread</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang.</p>
+</br>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>Concurrency의 세계에서는 thread 수를 아무리 높이더라도, 일정 수준이 지나면 병목현상이 생긴다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/parallel/amdal.png"
+        data-srcset="/images/parallel/amdal.png, /images/parallel/amdal.png 1.5x, /images/parallel/amdal.png 2x"
+        data-sizes="auto"
+        alt="/images/parallel/amdal.png"
+        title="/images/parallel/amdal.png" /></p>
+<h3 id="amdals-law">Amdal&rsquo;s law</h3>
+<blockquote>
+<p>Focus on latency (speed up)</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/amdal.png"
+        data-srcset="/images/amdal.png, /images/amdal.png 1.5x, /images/amdal.png 2x"
+        data-sizes="auto"
+        alt="/images/amdal.png"
+        title="/images/amdal.png" /></p>
+<p><code>암달의 법칙</code>은 컴퓨터 시스템의 일부를 개선할 때 전체적으로 얼마만큼의 최대 성능 향상이 있는지 계산하는 데 사용된다.</p>
+<blockquote>
+<p>1 / ((1-p) + (p/s))</p>
+</blockquote>
+<ol>
+<li>작업의 portion이 낮은 작업을 아무리 개선시키더라도, 시스템 전체에 미치는 영향은 미미하다. 즉 전체 작업의 효율을 최대한 증가시키고 싶다면 그 중에 가장 비중이 큰 작업부터 초점을 맞추는 것이 좋다.</li>
+<li>(도표와 같이) 아무리 병렬작업이 늘어나더라도, 병렬화가 불가능한 작업들에 의해 병목현상이 발생하여 <code>speedup</code>의 한계가 정해지게 된다.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">amdahl</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">s</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Amdahl&#39;s law
+</span></span></span><span class="line"><span class="cl"><span class="s2">    
+</span></span></span><span class="line"><span class="cl"><span class="s2">    p is the proportion of execution time that the part benefiting from improved resources originally occupied.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    
+</span></span></span><span class="line"><span class="cl"><span class="s2">    s is the speedup of the part of the task that benefits from improved system resources.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">p</span><span class="o">/</span><span class="n">s</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">simulate</span><span class="p">():</span>    
+</span></span><span class="line"><span class="cl">    <span class="c1"># represents p in amdahl&#39;s law</span>
+</span></span><span class="line"><span class="cl">    <span class="n">portion</span> <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="o">/</span><span class="mi">100</span><span class="p">,</span> <span class="mi">90</span><span class="o">/</span><span class="mi">100</span><span class="p">,</span> <span class="mi">75</span><span class="o">/</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="o">/</span><span class="mi">100</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># represents s in amdahl&#39;s law</span>
+</span></span><span class="line"><span class="cl">    <span class="n">number_of_processors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="mi">8192</span><span class="p">,</span> <span class="mi">16384</span><span class="p">,</span> <span class="mi">32768</span><span class="p">,</span> <span class="mi">65536</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">number_of_processors</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;##################number_of_processors:</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s1">#############&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">portion</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pprint</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;parallel portion:</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s1">, speedup: </span><span class="si">{</span><span class="n">amdahl</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">s</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">simulate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:1#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 1.0&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 1.0&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 1.0&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.0&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:2#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 1.9047619047619047&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 1.8181818181818181&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 1.6&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.3333333333333333&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:4#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 3.478260869565217&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 3.0769230769230775&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 2.2857142857142856&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.6&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:8#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 5.925925925925925&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 4.7058823529411775&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 2.909090909090909&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.7777777777777777&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:16#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 9.142857142857139&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 6.400000000000001&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.3684210526315788&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.8823529411764706&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:32#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 12.54901960784313&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 7.8048780487804885&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.657142857142857&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9393939393939394&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:64#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 15.421686746987941&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 8.767123287671234&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.8208955223880596&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9692307692307693&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:128#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 17.414965986394545&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 9.343065693430658&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.9083969465648853&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9844961240310077&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:256#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 18.618181818181803&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 9.66037735849057&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.9536679536679538&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9922178988326849&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:512#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 19.284369114877574&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 9.827255278310943&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.9766990291262134&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.996101364522417&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:1024#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 19.635666347075723&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 9.912875121006778&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.988315481986368&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9980487804878049&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:2048#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 19.816158684083195&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 9.956246961594557&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.994149195514383&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9990239141044412&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:4096#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 19.90765492102064&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 9.978075517661392&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.9970724566967553&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9995118379301928&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:8192#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 19.953720618682237&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 9.98902572856969&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.998535692495424&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9997558891736849&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:16384#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 19.976833506065944&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 9.994509851765999&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.999267712210899&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9998779371376258&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:32768#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 19.98841004056484&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 9.9972541721329&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.9996338225870436&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9999389667063383&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">##################number_of_processors:65536#############
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.95, speedup: 19.99420334070626&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.9, speedup: 9.998626897551304&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.75, speedup: 3.9998169029127695&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#39;parallel portion:0.5, speedup: 1.9999694828875292&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>intro에서의 한계는 <code>Gustafson's law</code>로도 설명이 가능하다.</p>
+<ul>
+<li>추가로 intro에서의 한계는 문제의 사이즈를 늘리는 방법으로 해결할 수 있다. (E.g FPS 게임에서 60fps 까지만 프레임을 지원할 수 있지만, 나머지 사운드에 대한 연산이나 타 유저와 통신하는 채팅에 대한 연산을 활성화 시킬 수 있다.)</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/parallel/gustaf.png"
+        data-srcset="/images/parallel/gustaf.png, /images/parallel/gustaf.png 1.5x, /images/parallel/gustaf.png 2x"
+        data-sizes="auto"
+        alt="/images/parallel/gustaf.png"
+        title="/images/parallel/gustaf.png" /></p>
+<h3 id="gustafsons-law">Gustafson&rsquo;s law</h3>
+<blockquote>
+<p>Focus on Throughput</p>
+</blockquote>
+<blockquote>
+<p>S(P)=P−a(P−1)</p>
+</blockquote>
+<ul>
+<li>P: 프로세서의 개수</li>
+<li>a: 병렬화되지 않는 부분의 비율</li>
+<li>S(P): 이론상 성능 향상 비율</li>
+</ul>
+<p>성능 향상은 <strong>같은 시간 동안 처리하는 데이터량의 비율</strong>을 의미한다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/gustafsons_law.png"
+        data-srcset="/images/gustafsons_law.png, /images/gustafsons_law.png 1.5x, /images/gustafsons_law.png 2x"
+        data-sizes="auto"
+        alt="/images/gustafsons_law.png"
+        title="/images/gustafsons_law.png" /></p>
+<h2 id="2-creating-and-using-thread">2. Creating and using thread</h2>
+<h3 id="process-vs-thread-vs-green-thread">process vs thread vs green thread</h3>
+<p>먼저 process는 memory space를 isolate하게 관리하며, fork()를 통해서 복사된다.</p>
+<p>thread는 memory space를 공유하기 때문에 isolate하지 않으며, thread간 context switch에 따른 overhead가 발생한다.</p>
+<p>아래는 single processor에서 multi thread를 표현한 그림이다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/parallel/thread.png"
+        data-srcset="/images/parallel/thread.png, /images/parallel/thread.png 1.5x, /images/parallel/thread.png 2x"
+        data-sizes="auto"
+        alt="/images/parallel/thread.png"
+        title="/images/parallel/thread.png" /></p>
+<p>context switch의 오버헤드는 스레드 수가 많지 않다면 큰 비중을 차지 하지 않지만, 스레드 수가 커짐에 따라 문제가 발생한다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/parallel/context_switch.png"
+        data-srcset="/images/parallel/context_switch.png, /images/parallel/context_switch.png 1.5x, /images/parallel/context_switch.png 2x"
+        data-sizes="auto"
+        alt="/images/parallel/context_switch.png"
+        title="/images/parallel/context_switch.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/parallel/context_switch2.png"
+        data-srcset="/images/parallel/context_switch2.png, /images/parallel/context_switch2.png 1.5x, /images/parallel/context_switch2.png 2x"
+        data-sizes="auto"
+        alt="/images/parallel/context_switch2.png"
+        title="/images/parallel/context_switch2.png" /></p>
+<p>이에 대한 대안으로 <code>green thread</code>가 사용되는데, <code>green thread</code>는 쉽게 말해 user level thread로 kernel level thread(흔히 우리가 말하는 thread)과 1:n관계를 가진다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/parallel/green_thread.png"
+        data-srcset="/images/parallel/green_thread.png, /images/parallel/green_thread.png 1.5x, /images/parallel/green_thread.png 2x"
+        data-sizes="auto"
+        alt="/images/parallel/green_thread.png"
+        title="/images/parallel/green_thread.png" /></p>
+<p>하나의 kernel thread안에서 여러 <code>green thread</code>가 존재하기 때문에, 연산중이 kernel thread안에 존재하는 특정 <code>green thread</code>에서 <code>IO</code> 연산이 필요하여 Interrupt가 발생할 경우, io 연산이 불필요한 green thread들 까지 불필요하게 cpu연산을 하지 못하게 된다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/parallel/green_thread2.png"
+        data-srcset="/images/parallel/green_thread2.png, /images/parallel/green_thread2.png 1.5x, /images/parallel/green_thread2.png 2x"
+        data-sizes="auto"
+        alt="/images/parallel/green_thread2.png"
+        title="/images/parallel/green_thread2.png" /></p>
+<p>이를 해결하기 위해 golang에서는 hybrid 방식의 green thread를 사용한다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/parallel/hybrid_groutine.png"
+        data-srcset="/images/parallel/hybrid_groutine.png, /images/parallel/hybrid_groutine.png 1.5x, /images/parallel/hybrid_groutine.png 2x"
+        data-sizes="auto"
+        alt="/images/parallel/hybrid_groutine.png"
+        title="/images/parallel/hybrid_groutine.png" /></p>
+<p>즉 io가 필요한 green trhead가 발생할 경우, 동일한 방식으로 io interrupt를 시키면서</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/parallel/hybrid_groutine2.png"
+        data-srcset="/images/parallel/hybrid_groutine2.png, /images/parallel/hybrid_groutine2.png 1.5x, /images/parallel/hybrid_groutine2.png 2x"
+        data-sizes="auto"
+        alt="/images/parallel/hybrid_groutine2.png"
+        title="/images/parallel/hybrid_groutine2.png" /></p>
+<p>새로운 kernel level thread를 만들어주어, io연산이 불필요한 green thread들을 새로운 스레드로 넣어주어 효과적으로 동작하도록 한다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/parallel/hybrid_groutine3.png"
+        data-srcset="/images/parallel/hybrid_groutine3.png, /images/parallel/hybrid_groutine3.png 1.5x, /images/parallel/hybrid_groutine3.png 2x"
+        data-sizes="auto"
+        alt="/images/parallel/hybrid_groutine3.png"
+        title="/images/parallel/hybrid_groutine3.png" /></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-09-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/multithreading_with_go/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/multithreading_with_go/" data-title="Mastering Multithreading Programming with golang" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/multithreading_with_go/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/multithreading_with_go/" data-title="Mastering Multithreading Programming with golang"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/multithreading_with_go/" data-title="Mastering Multithreading Programming with golang"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/multithreading_with_go/" data-title="Mastering Multithreading Programming with golang" data-image="/images/golang_channel.jpeg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/the-power-of-the-heart/" class="prev" rel="prev" title="[Book] The Power of the Heart by Baptist De Pape"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>[Book] The Power of the Heart by Baptist De Pape</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":" The Serious ","id-2":" The Serious "},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 22 Aug 2022 22:09:37 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 04 Sep 2022 20:25:47 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Mastering Multithreading Programming with golang</title>
+    <link>https://minkj1992.github.io/multithreading_with_go/</link>
+    <pubDate>Sun, 04 Sep 2022 20:25:47 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/multithreading_with_go/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/golang_channel.jpeg" referrerpolicy="no-referrer">
+            </div><p>Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang.</p>]]></description>
+</item>
+<item>
     <title>[Book] The Power of the Heart by Baptist De Pape</title>
     <link>https://minkj1992.github.io/the-power-of-the-heart/</link>
     <pubDate>Mon, 22 Aug 2022 22:09:37 &#43;0900</pubDate>
@@ -100,17 +110,6 @@
                 <img src="/images/boston_dynamics.png" referrerpolicy="no-referrer">
             </div><p>This post is a summary of <a href="https://www.coursera.org/learn/iiot-google-cloud-platform/lecture/sMtHo/industrial-iot-on-google-cloud" target="_blank" rel="noopener noreffer">lectures</a>
  taken in coursera on the topic of <code>Google IoT core</code>.</p>]]></description>
-</item>
-<item>
-    <title>Courage</title>
-    <link>https://minkj1992.github.io/courage/</link>
-    <pubDate>Sat, 07 May 2022 22:07:01 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/courage/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/courage.jpg" referrerpolicy="no-referrer">
-            </div>About Courage Quotes Don’t call it uncertainty, call it wonder. Don’t call it insecurity, call it freedom
- Life goes on moving with a thousand and one uncertainties. That’s its freedom. Don’t call it insecurity.]]></description>
 </item>
 </channel>
 </rss>
