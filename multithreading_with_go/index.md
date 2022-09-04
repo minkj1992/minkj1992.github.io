@@ -187,6 +187,10 @@ context switch의 오버헤드는 스레드 수가 많지 않다면 큰 비중�
 
 하나의 kernel thread안에서 여러 `green thread`가 존재하기 때문에, 연산중이 kernel thread안에 존재하는 특정 `green thread`에서 `IO` 연산이 필요하여 Interrupt가 발생할 경우, io 연산이 불필요한 green thread들 까지 불필요하게 cpu연산을 하지 못하게 된다.
 
+> kernel thread의 green thread중 일부에서 io interrupt이 발생하면 나머지 kernel thread에 존재하는 다른 green thread들도 cpu연산이 block되어서 java나 python계열에서 g-thread를 사용하려면 asnyc로 io를 처리해야 한다.
+
+> *"When a green thread executes a blocking system call, not only is that thread blocked, but all of the threads within the process are blocked. To avoid that problem, green threads must use asynchronous I/O operations, although the increased complexity on the user side can be reduced if the virtual machine implementing the green threads spawns specific I/O processes (hidden to the user) for each I/O operation."* [Wikipedia](https://en.wikipedia.org/wiki/Green_thread#:~:text=When%20a%20green,citation%20needed%5D)
+
 ![](/images/parallel/green_thread2.png)
 
 이를 해결하기 위해 golang에서는 hybrid 방식의 green thread를 사용한다. 
