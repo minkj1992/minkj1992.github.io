@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/multithreading_with_go/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-09-04T20:25:47+09:00" />
-<meta property="article:modified_time" content="2022-09-04T21:24:46+09:00" />
+<meta property="article:modified_time" content="2022-09-04T22:24:11+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -17,7 +17,7 @@
 <meta name="twitter:title" content="Mastering Multithreading Programming with golang"/>
 <meta name="twitter:description" content="Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang."/>
 <meta name="application-name" content="serious">
-<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/multithreading_with_go/" /><link rel="prev" href="https://minkj1992.github.io/the-power-of-the-heart/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+<meta name="apple-mobile-web-app-title" content="serious"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/favicon.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/multithreading_with_go/" /><link rel="prev" href="https://minkj1992.github.io/the-power-of-the-heart/" /><link rel="next" href="https://minkj1992.github.io/hitori-saito/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -31,8 +31,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  904 ,
-        "url": "https:\/\/minkj1992.github.io\/multithreading_with_go\/","datePublished": "2022-09-04T20:25:47+09:00","dateModified": "2022-09-04T21:24:46+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  906 ,
+        "url": "https:\/\/minkj1992.github.io\/multithreading_with_go\/","datePublished": "2022-09-04T20:25:47+09:00","dateModified": "2022-09-04T22:24:11+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "The Serious","logo": {
                     "@type": "ImageObject",
@@ -112,7 +112,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mastering Multithreading Programming with golang</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a>&nbsp;<a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>go</a>&nbsp;<a href="/categories/computer-science/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>computer science</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-09-04">2022-09-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;904 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-09-04">2022-09-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;906 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -425,7 +425,7 @@
 <p>S(P)=P−a(P−1)</p>
 </blockquote>
 <ul>
-<li>P: 프로세서의 개수</li>
+<li>P: 프로세서의 갯수</li>
 <li>a: 병렬화되지 않는 부분의 비율</li>
 <li>S(P): 이론상 성능 향상 비율</li>
 </ul>
@@ -438,6 +438,10 @@
         data-sizes="auto"
         alt="/images/gustafsons_law.png"
         title="/images/gustafsons_law.png" /></p>
+<ul>
+<li><a href="https://bart7449.tistory.com/244" target="_blank" rel="noopener noreffer">Useful refs</a>
+</li>
+</ul>
 <h2 id="2-creating-and-using-thread">2. Creating and using thread</h2>
 <h3 id="process-vs-thread-vs-green-thread">process vs thread vs green thread</h3>
 <p>먼저 process는 memory space를 isolate하게 관리하며, fork()를 통해서 복사된다.</p>
@@ -523,8 +527,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2022-09-04&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/0c4d777d0e2016ee200a8b0be808ed09b272235e" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 0c4d777d0e2016ee200a8b0be808ed09b272235e: rebuilding site Sun Sep  4 21:24:46 KST 2022">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>0c4d777</a></span>
+                <span>Updated on 2022-09-04&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/8effe8989e0e8027fd248439a5af77ab9653fa66" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 8effe8989e0e8027fd248439a5af77ab9653fa66: rebuilding site Sun Sep  4 22:24:11 KST 2022">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8effe89</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
@@ -543,7 +547,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/the-power-of-the-heart/" class="prev" rel="prev" title="[Book] The Power of the Heart by Baptist De Pape"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>[Book] The Power of the Heart by Baptist De Pape</a></div>
+    <div class="post-nav"><a href="/the-power-of-the-heart/" class="prev" rel="prev" title="[Book] The Power of the Heart by Baptist De Pape"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>[Book] The Power of the Heart by Baptist De Pape</a>
+            <a href="/hitori-saito/" class="next" rel="next" title="Hitori Saito">Hitori Saito<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.

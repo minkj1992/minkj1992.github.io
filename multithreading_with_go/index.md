@@ -153,7 +153,7 @@ intro에서의 한계는 `Gustafson's law`로도 설명이 가능하다.
 
 > S(P)=P−a(P−1)
 
-- P: 프로세서의 개수
+- P: 프로세서의 갯수
 - a: 병렬화되지 않는 부분의 비율
 - S(P): 이론상 성능 향상 비율
   
@@ -161,6 +161,8 @@ intro에서의 한계는 `Gustafson's law`로도 설명이 가능하다.
 성능 향상은 **같은 시간 동안 처리하는 데이터량의 비율**을 의미한다.
 
 ![](/images/gustafsons_law.png)
+
+- [Useful refs](https://bart7449.tistory.com/244)
 
 
 ## 2. Creating and using thread
