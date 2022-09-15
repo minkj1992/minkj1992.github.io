@@ -207,3 +207,20 @@ context switch의 오버헤드는 스레드 수가 많지 않다면 큰 비중�
 새로운 kernel level thread를 만들어주어, io연산이 불필요한 green thread들을 새로운 스레드로 넣어주어 효과적으로 동작하도록 한다.
 
 ![](/images/parallel/hybrid_groutine3.png)
+
+### Boids algorithm
+> https://en.wikipedia.org/wiki/Boids
+
+![](/images/boids.jpeg)
+
+Boids is an ai program, developed by Craig Reynolds in 1986, which simulates the flocking behavior of birds.
+
+
+The rules applied in the simplest Boids world are as follows
+
+- separation: 무리가 붐비지 않도록 반대 방향으로 이동(steer to avoid crowding local flockmates)
+    - ![](https://upload.wikimedia.org/wikipedia/commons/e/e1/Rule_separation.gif)
+- alignment: 무리의 평균 방향으로 이동 (steer towards the average heading of local flockmates)
+    - ![](https://upload.wikimedia.org/wikipedia/commons/e/e1/Rule_alignment.gif)
+- cohesion: 무리의 평균 위치를 향해 이동 (steer to move towards the average position, which is center of mass of local flockmates)
+    - ![](https://upload.wikimedia.org/wikipedia/commons/2/2b/Rule_cohesion.gif)
