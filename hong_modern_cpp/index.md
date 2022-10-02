@@ -9,7 +9,7 @@
 <details>
 <summary><strong><u>1. Terminology</u></strong></summary>
 
-## 1. Terminology
+## 0. Terminology
 
 <h4>1.0.1. Basic C++</h4>
 
@@ -61,7 +61,193 @@
 
 ---
 
-## 2. Function Parameter
+## 1. Basic C++
+
+#### namespace
+
+- using namespace
+- namespace끼리 nested하게 사용가능하다.
+
+#### Macro (preprocessor)
+
+Build 타임전, 즉 컴파일 타임에 처리된다. (preprocessor)
+
+- `#ifdef`, `#ifndef`
+
+다음과 같은 경우는 multi platform 즉 여러 os 타입에 따라서 build를 다르게 해주고 싶을 떄, 사용한다. 혹은 gpu 버전에 따라서 버저닝 하고 싶을 때 사용한다.
+
+## 2. Basic types
+
+#### Void type
+void 자체는 메모리가 할당되지 않기 때문에 선언이 불가하다.
+```cpp
+void my_void; // (x)
+```
+
+하지만 void의 포인터 타입은 메모리 address가 있기 때문에 선언이 가능하다.
+
+```cpp
+void *my_void; // (o)
+
+int i = 123;
+float f = 123.456f;
+
+my_void = (void*)&i;
+my_void = (void*)&f;
+```
+
+또한 모든 포인터 address의 사이즈는 같기 때문에 int, float, void 타입 상관없이 동일한 변수에 assign이 가능하다.
+
+- `(void*)` void pointer type
+- `&i`, `&f`: int와 float 변수의 address 값
+
+#### Char type
+
+- casting style
+
+```cpp
+// c-style casting
+cout << (char)65 << endl;
+cout << (int)'A' << endl;
+
+// c++ style casting
+cout << char(65) << endl;
+cout << int('A') << endl;
+```
+
+- static cast
+
+```cpp
+cout << static_cast<char>(65) << endl;
+cout << static_cast<int>('A') << endl;
+```
+
+static_cast의 경우, 일반적으로 primitive type들에 대해서 **compile 타임에 형변환에 대한 타입 오류를 잡아주고 싶을 때 사용합니다.** 
+
+- string buffer
+
+string operator는 buffer에 임시로 저장되기 떄문에, cin으로 받아들인 값의 경우 cout을 하지 않더라도 buffer에 임시로 보관되어집니다.
+
+```cpp
+char c1;
+cin >> c1;
+cout << static_cast<int>(c1) << endl;
+
+cin >> c1;
+cout << static_cast<int>(c1) << endl;
+```
+
+```bash
+$ abc
+97
+98
+```
+
+- `\n` vs `endl` vs `std::flush`
+	- `\n`: new line하라.
+	- `endl`: buffer에 있는 모든 것들을 출력한 뒤, new line하라.
+	- `std::flush`: 줄바꿈 없이 buffer에 있는 것들을 모두 쏟아내라.
+
+#### Literal constants
+> 리터럴 상수
+
+```cpp
+unsigned int n = 5u;
+long n2 = 5L;
+double d = 6.0e-10;
+```
+
+- decimal, ocatal, hexa
+
+```cpp
+int x = 012; // 8진수
+cout << x << endl; // 10
+
+int y = 0xF; // 16진수
+cout << y<< endl; // 15
+```
+
+c++14 이후 부터 `binary literal`이 가능해졌다. 또한 literal 사이에 quota(`'`)를 넣어주게 되면 `'`를 무시해주기 떄문에, 편하게 구분이 가능하게 되었다.
+
+```cpp
+int x = 0b1010;
+cout << x << endl; // 10
+
+int x = 0b1010'1111'1010; // with quota
+cout << x << endl; // 10
+```
+
+#### Symbolic Constants
+> C++ 11 constexpr
+
+
+```cpp
+// Both is allowed
+const double gravity { 9.8 };
+double const gravity2 { 9.8 };  
+
+cout << gravity << endl;
+```
+
+`const`는 보통은 앞에 붙인다. pointer ref를 배우게 되면 
+const의 순서에 따라서 의미상 차이를 가지게 된다.
+
+- runtime constants (<-> compile time constants)
+
+```cpp
+
+const int compile_time_const(123); // compile time
+
+int num;
+cin >> num;
+
+const int runtime_const(num); // runtime
+```
+
+**c++ 11 부터는 runtime const와 compile-time const를 구분해주기 위해서 constexpr이 도입되었다.** 
+
+- `constexpr`: 컴파일 타임에 initialize되는 상수를 뜻함
+
+```cpp
+constexpr int compile_time_const(123); // compile time
+
+int num;
+cin >> num;
+
+const int runtime_const(num); // runtime
+```
+
+또한 constatns들은 일반적으로 하나의 파일에 몰아서 사용한다.
+
+- `MY_CONSTANTS.h`
+```cpp
+#pragma once
+
+namespace constants
+{
+	constexpr double pi(3.141592);
+	constexpr double avogadro(6.22123e23);
+	constexpr double gravity(9.8);
+}
+```
+
+```cpp
+#include <iostream>
+#include "MY_CONSTANTS.h"
+
+using namespace std;
+
+int main()
+{
+	cout << int(constants::pi) << endl;
+	return 0;
+}
+
+```
+
+
+
+## Function Parameter
 - function parameter
 ```cpp
 #include <iostream>
