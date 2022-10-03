@@ -5,13 +5,13 @@
         <description>modern cpp - Category - The Serious</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
             <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 28 Sep 2022 20:35:54 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/modern-cpp/" rel="self" type="application/rss+xml" /><item>
-    <title>Deep dive into cpp</title>
+    <title>Design principle of `C&#43;&#43;` and `Carbon`</title>
     <link>https://minkj1992.github.io/cpp/</link>
     <pubDate>Wed, 28 Sep 2022 20:35:54 &#43;0900</pubDate>
     <author>leoo.j</author>
     <guid>https://minkj1992.github.io/cpp/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/" referrerpolicy="no-referrer">
+                <img src="/images/carbon.webp" referrerpolicy="no-referrer">
             </div><p>Deep dive into c++ with official site</p>]]></description>
 </item>
 </channel>

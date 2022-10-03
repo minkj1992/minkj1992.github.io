@@ -1,4 +1,4 @@
-# Deep dive into cpp
+# Design principle of `C++` and `Carbon`
 
 
 
