@@ -125,7 +125,7 @@ cout << static_cast<char>(65) << endl;
 cout << static_cast<int>('A') << endl;
 ```
 
-static_cast의 경우, 일반적으로 primitive type들에 대해서 **compile 타임에 형변환에 대한 타입 오류를 잡아주고 싶을 때 사용합니다.** 
+static_cast의 경우, 명시적으로 type을 변경해주고 싶을 때, **compile 타임에 형변환에 대한 타입 오류를 잡아주고 싶을 때 사용합니다.** 
 
 - string buffer
 
@@ -394,7 +394,7 @@ void doSomething()
 }
 ```
 
-## `Using`
+#### `Using`
 - scope를 최대한 작게 가져가는게 좋다.
 - 가능하면 .cpp에서 사용하는 것이 좋다.
 - 전역 사용만큼은 무조건 피해라.
@@ -425,7 +425,7 @@ int main()
 }
 ```
 
-## `Auto`
+#### `Auto`
 > Type inference
 
 - 함수의 return type에 대해서도 auto를 사용할 수 있다.
@@ -449,7 +449,144 @@ auto add(int x, int y) -> int
 }
 ```
 
-## std::string
+#### Scoped Enumerations (Enum Class)
+> C++ 11
+
+Enum을 사용할 때, 주의해야할 점은 아래와 같이 index로 비교하게되면 엉뚱한 결과를 만들 수 있게 된다.
+
+```cpp
+#include <iostream>
+
+int main() 
+{
+    using namespace std;
+    
+    enum Color
+    {
+        RED,
+        BLUE,
+    };
+    
+    enum Fruit
+    {
+        BANANA,
+        APPLE,
+    };
+    
+    Color c = RED;
+    Fruit f = BANANA;
+    
+    if (c == f)
+    {
+        cout << "True" << endl;
+    }
+    return 0;
+}
+```
+
+이를 방지하기 위해서 `c++11` 부터는 `enum class`가 도입되었다.
+
+```cpp
+#include <iostream>
+
+int main() 
+{
+    using namespace std;
+    
+    enum class Color
+    {
+        RED,
+        BLUE,
+    };
+    
+    enum class Fruit
+    {
+        BANANA,
+        APPLE,
+    };
+    
+    Color c = Color::RED;
+    Fruit f = Fruit::BANANA;
+    
+    /*
+    * 다른 타입끼리 비교하기 때문에
+    * 여기에서 에러가 발생한다. 
+    if (c == f)
+    {
+        cout << "True" << endl;
+    }
+    */
+    
+    return 0;
+}
+```
+
+#### Type aliases
+> Type에 편의상 별명을 붙여주는 것
+
+```cpp
+int main()
+{
+	typedef double distance_t;
+
+	double			my_distance;
+	distance_t	home2work;
+	distance_t	home2school;
+
+	return 0;
+}
+```
+
+- pair example
+
+```cpp
+// before
+#include <iostream>
+#include <vector>
+
+int main()
+{
+	using namespace std;
+
+	vector<pair<string, int>> pairlist;
+	return 0;
+}
+
+// after
+#include <iostream>
+#include <vector>
+
+int main()
+{
+	using namespace std;
+	
+	typedef vector<pair<string, int>> pairlist_t;
+	// 위의 typedef 대신에 using을 사용할 수도 있다.
+	using pairlist_t = vector<pair<string, int>>;
+
+	pairlist_t pairlist1;
+	pairlist_t pairlist2;
+	return 0;
+}
+
+
+#include <iostream>
+#include <vector>
+
+int main()
+{
+	using namespace std;
+	
+	
+
+	pairlist_t pairlist1;
+	pairlist_t pairlist2;
+	return 0;
+}
+```
+
+#### `Struct`
+
 
 
 
