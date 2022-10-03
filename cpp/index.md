@@ -1,8 +1,8 @@
-# Design principle of `C++` and `Carbon`
+# Design principle of C++ and Carbon
 
 
 
-Deep dive into c++ with official site
+Let's deep dive into `c++` and `Carbon`
 <!--more-->
 <br />
 
