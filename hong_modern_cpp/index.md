@@ -31,6 +31,7 @@
   - `copy initialization` int a = 3;
   - `direct initialization` int a(3);
   - `uniform initialization`  int a{ 3 };
+  - c.f) Most vexing parse: syntax가 일관성이 없어서, 	uniform initialization이 도입됨. (C++ 11)
 - `Fixed-width Integers`
 - scientific notation
 - `inf`: infinite
@@ -57,6 +58,8 @@
 - nullptr(null pointer)
 - `void pointer` == `generic pointer`
 - reference variable
+
+- `::` : scope resolution operator
 </details>  
 
 ---
@@ -244,6 +247,209 @@ int main()
 }
 
 ```
+
+## 4. Variable
+#### variable scope 
+
+```cpp
+using namespace std;
+
+int main() {
+    const int apple = 5;
+    
+    {
+        cout << apple << endl;	 	// 5
+        int apple = 1;
+        cout << apple << endl;    // 1
+    }
+    
+    cout << apple << endl; 				// 5
+    return 0;
+}
+```
+
+const를 사용하더라도 중괄호 안에서 변수는 새롭게 할당되기 때문에 할당이 가능하다.
+
+1. Global variable
+	- `cout << ::value << endl;`
+2. Static  variable
+3. Internal Linkage: `static int g_x;`
+4. External Linkage
+	- `int g_x;`
+	- `extern int g_x;`
+	- `extern const int g_x;`
+
+#### `Static variable in a Function`
+
+- os로 부터 메모리를 빌려와서, program lifetime 동안 재사용된다.
+- **선언된 scope 블록 안에 제한된다.** 즉 scope를 벗어난 공간에서, 해당 variable을 참조할 수 없다.( Global과의 차이)
+
+> *It gets allocated for the lifetime of the program. Even if the function is called multiple times, space for the static variable is allocated only once and the value of variable in the previous call gets carried through the next function call.*
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+void doSomething()
+{
+    static int a = 1; // It is called only once.
+    ++a;
+    cout << a << endl;
+}
+
+int main()
+{
+    doSomething(); // 2
+    doSomething(); // 3
+    doSomething(); // 4
+    doSomething(); // 5
+    return 0;
+}
+```
+
+**디버깅할 때, 함수가 몇번 호출되는지 확인하고 싶을 때 유용하게 사용가능하다.**
+
+> 전역변수 vs Static variable
+>> static은 접근 scope안에서만 할당이 가능한데 반하여, 전역변수는 실수로 다른 scope에서 할당을 하게 되면 원치 않은 결과를 만들어낼 수 있다.
+
+#### Linkage
+
+local variable은 해당 소스코드(모듈)에서만 사용되므로, linkage 시켜주지 않는다.
+<br/>
+
+#### `Extern`
+> global 
+
+```cpp
+// forward declaration
+extern void doSomething();
+extern int a;
+
+int main()
+{
+	...
+}
+```
+
+참고로 extern은 생략 가능하다.
+
+{{< admonition warning "상수 메모리 낭비">}}
+*header 파일에 const를 선언 및 할당까지 한 뒤, 외부 .cpp 파일들에서 이를 include 시키게 되면, 신기하게 모듈별로 const의 주소가 다르게 나온다. **즉, 메모리 낭비가 생긴다. 이를 방지하기 위해서는 header에는 signature를 넣어주고, extern const의 할당은 .cpp파일에서 하게되면 된다.***
+{{< /admonition >}}
+
+- `MyConstants.h`
+```cpp
+#pragma once
+
+namespace constants
+{
+	extern const double pi;
+	extern const double avogadro;
+	extern const double gravity;
+}
+```
+
+- MyConstants.cpp
+```cpp
+#include <iostream>
+
+namespace constants
+{
+	extern const double pi(3.141592);
+	extern const double avogadro(6.22123e23);
+	extern const double gravity(9.8);
+}
+```
+
+- helloworld.cpp
+```cpp
+#include <iostream>
+#include "CONSTS.h"
+
+using namespace std;
+
+void doSomething();
+
+int main()
+{
+	cout << int(constants::pi) << " " << &constants::pi << endl; // 3 0x104037d70
+	doSomething(); // 3 0x104037d70
+
+	return 0;
+}
+```
+
+- helloworld2.cpp
+
+```cpp
+#include <iostream>
+#include "CONSTS.h"
+
+using namespace std;
+
+void doSomething()
+{
+	cout << int(constants::pi) << " " << &constants::pi << endl;
+}
+```
+
+## `Using`
+- scope를 최대한 작게 가져가는게 좋다.
+- 가능하면 .cpp에서 사용하는 것이 좋다.
+- 전역 사용만큼은 무조건 피해라.
+
+```cpp
+namespace a
+{
+	int dup_int(10);
+}
+
+namespace b
+{
+	int dup_int(20);
+}
+
+int main()
+{
+	using namespace std;
+
+	{
+		using namespace a;
+		cout << dup_int << endl; // 10
+	}
+	{
+		using namespace b;
+		cout << dup_int << endl; // 20
+	}
+}
+```
+
+## `Auto`
+> Type inference
+
+- 함수의 return type에 대해서도 auto를 사용할 수 있다.
+
+```cpp
+auto add(int x, int y)
+{
+	return x + y;
+}
+```
+
+- `trailing return type`: 친절하게 설명을 위해서 사용
+
+```cpp
+auto add(int x, int y) -> int;
+auto add(double x, double y) -> double;
+
+auto add(int x, int y) -> int
+{
+	return x + y;
+}
+```
+
+## std::string
 
 
 
@@ -447,8 +653,8 @@ int main()
 }
 ```
 
-## 4. Pointer
-### 4.1. Pointer and Const
+## Pointer
+### Pointer and Const
 ```cpp
 {
 	using namespace std;
