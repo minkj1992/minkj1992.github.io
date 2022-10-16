@@ -4,9 +4,19 @@
         <link>https://minkj1992.github.io/</link>
         <description>About Seroius</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 01 Oct 2022 18:56:15 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 16 Oct 2022 17:29:51 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>A Gift to My Children</title>
+    <link>https://minkj1992.github.io/a-gift-to-my-children-in-2009/</link>
+    <pubDate>Sun, 16 Oct 2022 17:29:51 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/a-gift-to-my-children-in-2009/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/jim.jpg" referrerpolicy="no-referrer">
+            </div><p><em>나에게 권위에 대한 자발적 순종을 알려준, 적당히 욕심 많은 아버지가 딸들에게 보내는 헌신적인 사랑</em></p>]]></description>
+</item>
+<item>
     <title>홍정모의 따라하며 배우는 C&#43;&#43;</title>
     <link>https://minkj1992.github.io/hong_modern_cpp/</link>
     <pubDate>Sat, 01 Oct 2022 18:56:15 &#43;0900</pubDate>
@@ -99,18 +109,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/gcp.png" referrerpolicy="no-referrer">
             </div><p>사이드 프로젝트를 하면서 GCP로 배포할 때, 서버 비용이 걱정되었다면!</p>]]></description>
-</item>
-<item>
-    <title>2022년 상반기를 돌아보며</title>
-    <link>https://minkj1992.github.io/2022_first_half/</link>
-    <pubDate>Mon, 04 Jul 2022 20:08:53 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/2022_first_half/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/2022_2q.jpeg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>Life as travel 🛫</p>
-</blockquote>]]></description>
 </item>
 </channel>
 </rss>
