@@ -4,9 +4,19 @@
         <link>https://minkj1992.github.io/</link>
         <description>About Seroius</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 22 Oct 2022 18:02:29 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 16 Nov 2022 03:01:18 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Spiritual Investments</title>
+    <link>https://minkj1992.github.io/spiritual_investments/</link>
+    <pubDate>Wed, 16 Nov 2022 03:01:18 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/spiritual_investments/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/sir_john.jpeg" referrerpolicy="no-referrer">
+            </div><p><ins><em>What is money? and How to subdue it?</em></ins></p>]]></description>
+</item>
+<item>
     <title>세번째 직장을 그만두고서</title>
     <link>https://minkj1992.github.io/what-i-know/</link>
     <pubDate>Sat, 22 Oct 2022 18:02:29 &#43;0900</pubDate>
@@ -97,18 +107,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/golang_channel.jpeg" referrerpolicy="no-referrer">
             </div><p>Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang.</p>]]></description>
-</item>
-<item>
-    <title>[Book] The Power of the Heart by Baptist De Pape</title>
-    <link>https://minkj1992.github.io/the-power-of-the-heart/</link>
-    <pubDate>Mon, 22 Aug 2022 22:09:37 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/the-power-of-the-heart/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/heart.jpg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p><em><strong>Whatever thy hand finds <code>to do</code>, do it with all <code>thy heart</code></strong></em> by Jesus</p>
-</blockquote>]]></description>
 </item>
 </channel>
 </rss>
