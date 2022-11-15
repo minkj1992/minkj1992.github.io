@@ -7,9 +7,16 @@
 ---
 
 ## tl;dr
-> *Principles (17)*
 
-### Eng
+{{< admonition note "Intro" >}}
+
+_Ethics and spiritual principles should be the basis of everything we do in life. All that we say. All that we think. Every activity should be based on that including the selection of investments. <br/>_
+
+<ins>by Sir John Templeton<ins>
+
+{{< /admonition  >}}
+
+### 17 Principles 
 1. Invest for maximum total real return.
 2. Invest--don't trade or speculate.
 3. Remain flexible and open-minded about types of investments.
@@ -28,7 +35,7 @@
 16. Do not be overly fearful or negative.
 17. Those who do good do well.
 
-### Kor
+### 17가지 원칙
 1. 최종 수익률로 평가하라.
 2. 투기적 매매가 아닌 투자를 하라.
 3. 유연한 자세로 투자 대상을 고르라.
@@ -54,6 +61,34 @@
 ![](/images/spiritual_investments.jpg)
 
 </center>
+
+## 1. 주제 질문과 주제
+> 책의 주요 질문은 무엇이고 그에 대한 답은?
+
+
+
+## 2. 받은 영감
+> 받은 영감, 연상된 점, 깨달은 점
+
+
+
+
+## 3. 저자의 주장에 대한 나의 생각
+> <주장>
+
+- `+`:
+
+- `-`:
+
+
+## 4. 질문 및 토의 사항
+> 
+
+## 5. 작은 실천 계획
+> 
+
+## 6. 자유 감상문
+> 
 
 ---
 
