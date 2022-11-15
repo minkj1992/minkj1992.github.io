@@ -104,8 +104,20 @@ _God blessed them and said to them, “Be fruitful and increase in number; fill 
 <p style="text-align: center;">나에게 돈이란 사랑과 정의, 자유와 책임이며.</p>
 <p style="text-align: center;">돈을 다스린다는 것은.</p>
 <p style="text-align: center;">욕심과 양심 사이를 저울질하면서.</p>
+
+{{< admonition note "Prov.21.2" >}}
+_A person may think their own ways are right, but the LORD weighs the heart._
+{{< /admonition  >}}
+
 <p style="text-align: center;">돈을 스승으로 삼아.</p>
 <p style="text-align: center;">사랑과 정의, 자유와 책임을 위해 사용하는 것입니다.</p>
+
+{{< admonition note "Matt.22.37" >}}
+_"Love the Lord your God with all your heart and with all your soul and with all your mind" ... 
+<br/> 
+And the second is like it: **"Love your neighbor as yourself"**_
+{{< /admonition  >}}
+
 <p style="text-align: center;">먼저는 나에게며.</p>
 <p style="text-align: center;">둘째는 가족이며.</p>
 <p style="text-align: center;">셋째는 스승과 친구이며.</p>
@@ -123,6 +135,11 @@ _Whoever heeds life giving correction, will be at home among the wise._
 {{< /admonition  >}}
 
 <p style="text-align: center;">내 행동의 기도가 양심이라면, 내 그릇이 커질 것이고</p>
+
+{{< admonition note "Prov.19.21" >}}
+_Many are the plans in a person's heart, but it is the LORD's purpose that prevails._
+{{< /admonition  >}}
+
 <p style="text-align: center;">내 행동의 기도가 욕심이라면, 내 그릇이 부끄러워 질 것입니다.</p>
 
 {{< admonition note "Prov.15.33" >}}
