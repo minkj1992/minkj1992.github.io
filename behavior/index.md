@@ -1,4 +1,4 @@
-# (WIP) Consciousness
+# Consciousness
 
 
 나를 포함한 내 주변이 나를 온전히 봐주길 원한다. 나한테 그게 양심이다.
