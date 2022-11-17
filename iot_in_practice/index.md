@@ -1,4 +1,4 @@
-# (WIP) [GCP] Iot core inpractice
+# [GCP] Iot core inpractice
 
 
 Let's generate IoT service with gcp iot core and pub/sub.
