@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>memory - Tag - The Serious</title>
+        <link>https://minkj1992.github.io/tags/memory/</link>
+        <description>memory - Tag - The Serious</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 23 Nov 2022 03:31:04 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/memory/" rel="self" type="application/rss+xml" /><item>
+    <title>What is Memory?</title>
+    <link>https://minkj1992.github.io/what_is_memory/</link>
+    <pubDate>Wed, 23 Nov 2022 03:31:04 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/what_is_memory/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/memory.jpg" referrerpolicy="no-referrer">
+            </div><blockquote>
+<p><em>You can train your brain to remember better, to learn faster and to achieve mastery in anything you want in your life. (Nishant Kasibhatla)</em></p>
+</blockquote>]]></description>
+</item>
+</channel>
+</rss>
