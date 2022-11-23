@@ -33,17 +33,17 @@ FYI, 영상에 나오는 [`Nishant Kasibhatla(니샨트 카십하틀라)`](https
 등등의 경력을 가지고 있다.
 {{< /admonition  >}}
 
-## As Below (3)
+## 1. As Below (3)
 > 3 steps to improve your `memory` and `ability to learn`.
 
-#### 1. Learn: focus, single task
+#### 1-1. Learn: focus, single task
 - You must ensure that the quality of input is really, really high, Which means avoid **multi-tasking**. Multi-tasking kills your learning momentum.
 
 - Quality of input determines the quality of **retention**. It also affects the quality of **recall**.
 
 - **Do one thing at one time, especially when it comes to learning**
 
-#### 2. Reflect: solidifies
+#### 1-2. Reflect: solidifies
 
 - How to learn solidifies.
 	- _After you learn something, pause for a while and ask yourself._
@@ -51,9 +51,7 @@ FYI, 영상에 나오는 [`Nishant Kasibhatla(니샨트 카십하틀라)`](https
 	2. **"How can I use this information in my life?"**
 	3. **"How can I use this information in my work, in my family?"**
 
-
-
-#### 3. Implement: share, express
+#### 1-3. Implement: share, express
 - This is where the magic happens, but unfortunately many people miss out on this. 
 - What they do, is go on learning new things, and get excited and they feel good and **they feel inspired and they go on to learn something new. You just mess up.**
 
@@ -82,10 +80,10 @@ But it's not competence at all, because you haven't implemented.
 - If you're spending **X amount of time on input**. My suggestion is at least spend **2X amount of time on output**. And when you do that, **you are well on your way to be a master at achieving anything you want**.
 
 ---
-## As Above
+## 2. As Above
 > `나만의 원칙`으로 재해석 해보자.
 
-### What is `Like Me`?
+### 2-1. What is `Like Me`?
 
 - 나는 **"나 답게 살고 싶고, 그렇게 죽고 싶다."**. 
 - 현 시점의 나 또한 여전히 **성공한 인생이란, 죽기 전까지 나답게 살아서, 후회없이 사는 것**이라고 생각한다.
@@ -125,101 +123,165 @@ But it's not competence at all, because you haven't implemented.
     4. 여행(베트남, 오키나와, 싱가포르, 삿포로, 라오스, 제주도 :desert_island:)을 통해 더 큰 세상을 `느꼈다`.
 
 #### 30대
-> 만으로 30세가 되었다. "사랑으로 확장을 정의로 증명을 양심으로 균형을 맞추겠다." 다짐한다.
+> 만으로 30세가 되었다. "사랑과 정의를 양심으로 균형 맞추고 싶다".
+
+- **"30대**의 나는 믿음이 아닌, 행동을 통해 알고 싶고, 그 모든 과정이 선했으면 좋겠다.
+
+- > (Albert Einstein) _Innovation is not the product of logical thought, even though the final product is tied to a logical structure._
 
 1. 지식:
 	- 내가 생각하는 균형이란
 		- 선과 악, 양과 음, 사랑과 정의, 자유와 책임, 안과 밖.
 		- 나와 너, 천국과 지옥, 인생과 죽음, 말과 행동, 생각과 감정.
 		- 하찮은 것과 대단한 것, 양심과 욕심.
-	- 내가 생각하는 확장이란.
-		- 선한 것을 사랑하는 마음.
-		- 나와 너가 사랑 안에서 둘이 아니다라는 것.
-		- 나와 세상이 사랑 안에서 둘이 아니다라는 것.
-		- 들이 쉬는 것, 자유로운 것.
+	- 내가 생각하는 사랑이란.
+		- 선한 것을 좋아하는 마음.
+		- 나와 너가 사랑 안에서 둘이 아니라는 것.
+		- 나와 세상이 사랑 안에서 둘이 아니라는 것.
+		- 들이 쉬는 것, 자유로운 것, 확장하는 것, 아는 것.
 	- 내가 생각하는 정의란.
 		- 악한 것을 싫어하는 마음.
 		- 신념을 행동으로 책임지는 것.
 		- 구분하고 있는 나를 아는 것.
 		- 뱉어내는 것, 무거운 것.
 	- 내가 생각하는 양심이란.
-		- 도(중용), 인의예지신
+		- 중심을 맞추는 것 (도)
 		- 내가 나에게 떳떳한 것.
 		- (팔은 안으로 굽으니) 남을 미워한 만큼, 나를 조금 더 미워할 줄 아는 것.
 		- (내가 신이 아니니) 남을 사랑한 만큼, 나를 조금 더 사랑할 줄 아는 것.
 		- (내가 신을 닮고 싶으니) 받은 만큼, 조금 더 줄 줄 아는 것.
 		- (내가 신을 닮고 싶으니) 들이 쉰 만큼, 조금 더 뱉는 것.
 2. 이해:
-	1. 고전/경전 들을 통해 신을 읽고 있고 읽을 예정이다. (홍익학당, 남회근 선생님 주역, 솔로몬 잠언과 전도서, 요한복음과 토마스 복음, 논어, 중용, 도덕경, 헤르메티카, 카발라, 프란츠 바르돈 등)
-	2. 철학을 통해 인간을 읽고 있으며 읽을 예정이다. (쇼펜하우어, 템플턴 성공/행복론, 임마누엘 칸트, 라이프니츠)
-	3. 명상과 단학을 통해 나를 이해하고 있으며, 이해 할 예정이다.
-	4. 돈에 대해 읽고, 정의를 내렸고, 돈의 시나리오를 작성해 투자할 예정이다. (혼마 무네히사, 짐 로저스, 존 템플턴, 워렌 버핏 및 기타 금융 도서)
-	5. 영어를 공부하며, 미국 문화를 이해하고 있으며 적응할 예정이다.
-	6. 직업과 사람에 대해서 이해할 예정이다.
-3. 행동: 
-	1. 퇴사
-	2. mma
-	3. 미국 여행
-	4. 책추남 템플턴 아카데미
-	5. 홍익학당 흥여회 / 신사과정
-	6. 나, 가족, 스승, 친구들을 내 모습에 맞게 사랑하고 미워하고 있다.
+	1. 고전/경전 들을 읽고 있고 더 읽을 예정이다.
+	2. 철학자들의 생각을 읽고 있으며 더 읽을 예정이다.
+	3. 명상과 단학을 해보고 있고, 더 해볼 예정이다.
+	4. 돈에 대해 읽고, 정의 내려보고 있으며, 돈의 시나리오를 작성해 다시 투자해볼 예정이다.
+	5. 영어를 공부하며, 미국 문화를 이해하고 있으며, 기회가 된다면 살아볼 예정이다.
+	6. 직업에 대해서 고민하고 있으며, 더 정의해 볼 예정이다.
+	7. 인간관계에 대해서 고민하고 있으며, 가까운 사람들을 통해 행동해보고 있으며, 다시 사회로 나가 시험해 볼 예정이다.
+3. 행동:
+	8. 퇴사
+	9. mma
+	10. 미국 여행
+	11. 책추남 템플턴 아카데미
+	12. 홍익학당 신사과정 준비
 
 ---
 
-### Back to the point
+### 2-2. Back to the point
 > 학습과 기억에 대한 원칙을 나만의 것으로 재해석 해보자.
 
-{{< admonition note "Sir John Templeton" >}}
+{{< admonition note "Spirit investments" >}}
 _Ethics and spiritual principles should be the basis of everything we do in life. All that we say. All that we think. Every activity should be based on that including the selection of investments._
+
+by Sir John Templeton
 {{< /admonition  >}}
 
-존 템플턴경이 멋지게 말해주셨고, 행동으로 증명하셨듯이.
-모든 행동의 원칙은 자신의 사는 이유, 선/악관념 즉 가장 최고의 원칙에 기반해서 도출해야 한다. 이는 투자에서도 프로그래밍에서도 모든 분야에 대해서도 마찬가지라고 생각한다. 그리고 사실 분리된 것 같아 보이는 모든 분야에서 만류귀종과 같이 공통의 `결`을 볼 수 있으리라 생각한다.
+존 템플턴의 멋진말에 공감한다.
+모든 행동의 원칙은 내가 사는 이유, 선/악의 기준 즉 나의 양심에 기반해서 도출하고 싶다. 
+이는 투자에서도, 프로그래밍에서도, 앞으로 공부할 모든 분야에 대해서도 마찬가지라 생각한다. 
+
+그리고 사실 분리된 것 같아 보이는 모든 분야에서, 나는 공통의 `결`을 볼 수 있으리라 생각한다.
 나 또한 그렇게 생각하기 때문에 앞서 `Like Me`에 대해서 정리를 해보았다.
 
-소크라테스, 뉴턴, 라이프니츠등 과거에는 철학자이자 신학자이자 과학자이자 수학자이고 음악가등 다양한 분야에서 놀라운 발견을 했듯이.
-`벤포드 법칙`이 세상에서 우연이라고 보여지는 데이터에 일정한 법칙들이 보이듯이 나는 모든 학습을 통해서 그 `결`을 보고 싶다.
+{{< admonition note "Einstein and the Poet" >}}
+_The truly religious man has no fear of life and no fear of death—and certainly no blind faith; his faith must be in his conscience. . . .I am therefore against all organized religion._
 
-> _I want to know God’s thoughts; the rest are details. by Albert Einstein_
+by Albert Einstein
+{{< /admonition  >}}
 
-#### 1. `Seek`
-> = Learn
+뉴턴, 라이프니츠 등 과거에는 철학자이자 신학자이자 과학자이자 수학자이고 음악가등 한 인물이 다양한 분야에서 관심을 가지고 공부하고 발견했듯이, `벤포드 법칙`과 같은 법칙이 우연으로 보이는 데이터 세상에서 내적 법칙으로 동작하듯이, 나는 내가 할 수 있는 모든 학습을 통해 그 `결`을 보고 느끼고 싶다.
 
-- :bulb: You, love, free-will, study, expand, light, focus, pray, know, search
+> _(Albert Einstein) I want to know God’s thoughts; the rest are details._
 
-알기원하는 그것에만 집중.
-"간절히 구하면 찾으리라"
-(마태.22.37 네 마음을 다하고 목숨을 다하고 뜻을 다하여 주 너의 하나님을 사랑하라)
+#### 1. `Seek` (learn)
+> 신을 찾듯이, 기도 하듯이, 사랑을 읽고 찾는다.
 
-#### 2. `Establish`
-> = Reflect
+- :bulb:: You, love, free-will, study, expand, light, focus, pray, know, search
 
-- :bulb: Ego, justice, responsibility, connect, spider-web, plan, dark, don't know, 無極, microcosm, Monad, feel, find
+- _(Matt.22.37) **Love the Lord your God with all your heart and with all your soul and with all your mind.**_
 
-이해, 알아낸 것을 기존에 알던 것과 합침. "어떻게 하면 현실에서 적용할 수 있을까?"
-(잠언 16.3. Commit  to the LORD whatever you do, and he will establish your plans. / 너가 하는 모든 일을 주께 맡기라, 그가 너의 계획(생각)을 세우시리라.) 
+- _(Matt.7.7-12) Ask and it will be given to you; seek and you will find; knock and the door will be opened to you. For everyone who asks receives; the one who seeks finds; and to the one who knocks, the door will be opened. “Which of you, if your son asks for bread, will give him a stone? Or if he asks for a fish, will give him a snake?_
 
-#### 3. `Subdue`
-> = Implement
 
-- :bulb: I, being, As above so below, oneness, 道, 中庸, 良心, macrocosm, 太極, sympathy-empathy, golden rule, Ouroboros
 
-구현, 현실에 실제로 적용해봄.
+#### 2. `Establish` (reflect)
+> 기존의 나의 존재와 발견한 사랑을 다시 합친다.
 
-"가장 빠른 학습법은 누군가에게 다시 가르치는 것."
+- :bulb:: Ego, justice, responsibility, connect, spider-web, plan, dark, don't know, 無極, microcosm, Monad, feel, find
 
-(창세기 1.28. 하나님이 그들에게 복을 주시며 그들에게 이르시되 생육하고 번성하여 땅에 충만하라, 땅을 정복하라, 바다의 고기와 공중의 새와 땅에 움직이는 모든 생물을 다스리라 하시니라)
+- _(Prov.16.3) **Commit  to the LORD whatever you do, and he will establish your plans.**_
 
-- My Circle: 1 -> 2 -> 3 -> 2 -> 1. 1과 2는 2번씩 하지만, 3은 1번 밖에 없으니 2배 더 시간을 투자하는게 맞다.
+- "어떻게 하면 현실에서 적용할 수 있을까?"
+- "어떻게 하면 강하면서도 선할 수 있을까?"
+- "어떻게 하면 원수도 사랑 할 수 있을까?"
 
-- 몸의 기억이 제일 오래간다.
-- 말보다 행동이 더 무겁다. 글을 읽는 것보다 이해하는게 더 어렵고 이해한 것 보다 그것을 전달하는게 더 어렵기 때문이며 말한 그대로 사는게 어렵기 때문이다.
+
+#### 3. `Subdue` (implement)
+> 나의 법칙으로 다스려본다. 잘 된다면 말과 행동이 일치하는 인생을 살고 있는 것이다.
+
+- :bulb:: I, being, As above so below, oneness, 道, 中庸, 良心, macrocosm, 太極, sympathy-empathy, golden rule, Ouroboros
+
+- _(Matt 22.39) And the second is like it: ‘Love your neighbor as yourself.'_
+
+- _(Gen 1.28) **God blessed them and said to them, “Be fruitful and increase in number; fill the earthc and subdue it**. Rule over the fish in the sea and the birds in the sky and over every living creature that moves on the ground.”_
+
+<center>
+
+![](/images/rabbi1.jpeg)
+
+![](/images/rabbi2.jpeg)
+
+
+**by Rabbi Daniel Lapin**
+</center>
+
+- 말보다 행동이 더 무겁다. 글을 읽는 것보다 이해하는게 더 어렵고, 이해한 것 보다 그것을 전달하는게 더 어렵고, 말한 것 보다 그렇게 사는게 더 어렵기 때문이다.
 - 말과 행동이 다른 사람이 역한 것은, 자신이 빌려온 지식을 가지고 이해한척, 선생님인척 굴기 때문이다.
 
+이렇게 1 -> 2 -> 3을 하고 나면 다시 반대로 2 -> 1을 하여, 배움을 이어간다.
 
+--- 
+## 3. Conclusion
+> 계자서
 
-1. 계사전
-2. 랍비
+제갈량이 54세의 나이에 8살 아들인 제갈첨(諸葛瞻)에게 보내는 편지를 끝으로 
+배움에 대한 생각을 정리해보려 합니다.
 
+{{< admonition note "계자서 (제갈량)" >}}
+<p style="text-align: center;">夫君子之行(부군자지행) 
+</p><p style="text-align: center;">무릇 군자의 조행(操行-행동을 조심함)이란
+<br/>
+</p><p style="text-align: center;">靜以修身(정이수신) 
+</p><p style="text-align: center;">고요한 마음으로 몸을 닦고
+</p><p style="text-align: center;">儉以養德(검이양덕) 
+</p><p style="text-align: center;">검소함으로써 덕을 기르는 것이다.
+</p><p style="text-align: center;">非澹泊無以明志(비담박무이명지) 
+</p><p style="text-align: center;">마음에 욕심이 없어 담박하지 않으면 뜻을 밝힐 수 없고,
+</p><p style="text-align: center;">非寧靜無以致遠(비녕정무이치원) 
+</p><p style="text-align: center;">마음이 안정되어 있지 않으면 원대한 이상을 이룰 수 없다.
+</p><p style="text-align: center;">夫學須靜也(부학수정야) 
+</p><p style="text-align: center;">무릇 배울 때는 반드시 마음이 안정되어 있어야 하며,
+</p><p style="text-align: center;">才須學也(재수학야) 
+</p><p style="text-align: center;">재능은 반드시 배움을 필요로 한다.
+</p><p style="text-align: center;">非學無以廣才(비학무이광재) 
+</p><p style="text-align: center;">배우지 않으면 재능을 발전시킬 수 없고  (8)
+</p><p style="text-align: center;">非靜無以成學(비정무이성학) 
+</p><p style="text-align: center;">마음이 고요하지 않으면 학문을 성취할 수 없다.
+</p><p style="text-align: center;">慆慢則不能硏精(도만칙불능연정) 
+</p><p style="text-align: center;">마음이 방자하고 오만하면 정밀하고 미묘한 이치를 깊이 연구할 수 </p><p style="text-align: center;">없고
+</p><p style="text-align: center;">險躁則不能理性(험조칙불능이성) 
+</p><p style="text-align: center;">조급하고 경망하면 자신의 본성을 제대로 다스릴 수 없다.
+</p><p style="text-align: center;">年與時馳(년여시치) 
+</p><p style="text-align: center;">이치를 제대로 밝히지 못하고 본성을 제대로 다스리지 못하는 </p><p style="text-align: center;">사이에
+</p><p style="text-align: center;">志與歲去(지여세거) 
+</p><p style="text-align: center;">나이는 시간과 함께 달려가고 의지는 세월과 함께 사라지면서
+</p><p style="text-align: center;">遂成枯落(수성고락) 
+</p><p style="text-align: center;">마침내 가을날 초목처럼 시들어 갈 것이다.
+</p><p style="text-align: center;">悲嘆窮廬(비탄궁려) 
+</p><p style="text-align: center;">그때 가서 곤궁한 오두막집에서 슬퍼하고,
+</p><p style="text-align: center;">將復何及也(장부하급야) 
+</p><p style="text-align: center;">탄식해본들 어찌 할 것인가?    (16)
 
+{{< /admonition  >}}
 
