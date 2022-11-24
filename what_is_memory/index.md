@@ -1,4 +1,4 @@
-# (WIP) What is Memory?
+# What is memory?
 
 
 > _You can train your brain to remember better, to learn faster and to achieve mastery in anything you want in your life. (Nishant Kasibhatla)_
@@ -160,11 +160,11 @@ But it's not competence at all, because you haven't implemented.
 	6. 직업에 대해서 고민하고 있으며, 더 정의해 볼 예정이다.
 	7. 인간관계에 대해서 고민하고 있으며, 가까운 사람들을 통해 행동해보고 있으며, 다시 사회로 나가 시험해 볼 예정이다.
 3. 행동:
-	8. 퇴사
-	9. mma
-	10. 미국 여행
-	11. 책추남 템플턴 아카데미
-	12. 홍익학당 신사과정 준비
+	1. 퇴사
+	2. mma
+	3. 미국 여행
+	4. 책추남 템플턴 아카데미
+	5. 홍익학당 신사과정 준비
 
 ---
 
@@ -182,10 +182,10 @@ by Sir John Templeton
 이는 투자에서도, 프로그래밍에서도, 앞으로 공부할 모든 분야에 대해서도 마찬가지라 생각한다. 
 
 그리고 사실 분리된 것 같아 보이는 모든 분야에서, 나는 공통의 `결`을 볼 수 있으리라 생각한다.
-나 또한 그렇게 생각하기 때문에 앞서 `Like Me`에 대해서 정리를 해보았다.
+`나`라는 개념 또한 그렇게 생각하기 때문에 앞서 `Like Me`에 대해서 정리를 해보았다.
 
 {{< admonition note "Einstein and the Poet" >}}
-_The truly religious man has no fear of life and no fear of death—and certainly no blind faith; his faith must be in his conscience. . . .I am therefore against all organized religion._
+_The truly religious man has no fear of life and no fear of death and certainly no blind faith; his faith must be in his conscience. **I am therefore against all organized religion.**_
 
 by Albert Einstein
 {{< /admonition  >}}
@@ -224,7 +224,7 @@ by Albert Einstein
 
 - _(Matt 22.39) And the second is like it: ‘Love your neighbor as yourself.'_
 
-- _(Gen 1.28) **God blessed them and said to them, “Be fruitful and increase in number; fill the earthc and subdue it**. Rule over the fish in the sea and the birds in the sky and over every living creature that moves on the ground.”_
+- _(Gen 1.28) **God blessed them and said to them, “Be fruitful and increase in number; fill the earth and subdue it**. Rule over the fish in the sea and the birds in the sky and over every living creature that moves on the ground.”_
 
 <center>
 
@@ -243,45 +243,98 @@ by Albert Einstein
 
 --- 
 ## 3. Conclusion
-> 계자서
+> 계자서(戒子書)
 
-제갈량이 54세의 나이에 8살 아들인 제갈첨(諸葛瞻)에게 보내는 편지를 끝으로 
-배움에 대한 생각을 정리해보려 합니다.
+끝으로 제갈량(諸葛亮,181-234)이 54세의 나이에 8살 아들인 제갈첨(諸葛瞻)에게 보내는 편지를 통해 배움에 대한 생각을 마무리해보려 합니다.
 
-{{< admonition note "계자서 (제갈량)" >}}
-<p style="text-align: center;">夫君子之行(부군자지행) 
-</p><p style="text-align: center;">무릇 군자의 조행(操行-행동을 조심함)이란
+<center>
+
+![](/images/계자서.jpeg)
+
+<p>계자서 비석 탁본 글씨</p>
+
+</center>
+
+{{< admonition note "戒子書, 제갈량" >}}
+<p style="text-align: center;">夫君子之行(부군자지행)</p>
+<p style="text-align: center;">무릇 군자의 조행(操行-행동을 조심함)이란</p>
+<p style="text-align: center;">靜以修身(정이수신)</p>
+<p style="text-align: center;">고요한 마음으로 몸을 닦고</p>
+<p style="text-align: center;">儉以養德(검이양덕)</p>
+<p style="text-align: center;">검소함으로써 덕을 기르는 것이다.</p>
 <br/>
-</p><p style="text-align: center;">靜以修身(정이수신) 
-</p><p style="text-align: center;">고요한 마음으로 몸을 닦고
-</p><p style="text-align: center;">儉以養德(검이양덕) 
-</p><p style="text-align: center;">검소함으로써 덕을 기르는 것이다.
-</p><p style="text-align: center;">非澹泊無以明志(비담박무이명지) 
-</p><p style="text-align: center;">마음에 욕심이 없어 담박하지 않으면 뜻을 밝힐 수 없고,
-</p><p style="text-align: center;">非寧靜無以致遠(비녕정무이치원) 
-</p><p style="text-align: center;">마음이 안정되어 있지 않으면 원대한 이상을 이룰 수 없다.
-</p><p style="text-align: center;">夫學須靜也(부학수정야) 
-</p><p style="text-align: center;">무릇 배울 때는 반드시 마음이 안정되어 있어야 하며,
-</p><p style="text-align: center;">才須學也(재수학야) 
-</p><p style="text-align: center;">재능은 반드시 배움을 필요로 한다.
-</p><p style="text-align: center;">非學無以廣才(비학무이광재) 
-</p><p style="text-align: center;">배우지 않으면 재능을 발전시킬 수 없고  (8)
-</p><p style="text-align: center;">非靜無以成學(비정무이성학) 
-</p><p style="text-align: center;">마음이 고요하지 않으면 학문을 성취할 수 없다.
-</p><p style="text-align: center;">慆慢則不能硏精(도만칙불능연정) 
-</p><p style="text-align: center;">마음이 방자하고 오만하면 정밀하고 미묘한 이치를 깊이 연구할 수 </p><p style="text-align: center;">없고
-</p><p style="text-align: center;">險躁則不能理性(험조칙불능이성) 
-</p><p style="text-align: center;">조급하고 경망하면 자신의 본성을 제대로 다스릴 수 없다.
-</p><p style="text-align: center;">年與時馳(년여시치) 
-</p><p style="text-align: center;">이치를 제대로 밝히지 못하고 본성을 제대로 다스리지 못하는 </p><p style="text-align: center;">사이에
-</p><p style="text-align: center;">志與歲去(지여세거) 
-</p><p style="text-align: center;">나이는 시간과 함께 달려가고 의지는 세월과 함께 사라지면서
-</p><p style="text-align: center;">遂成枯落(수성고락) 
-</p><p style="text-align: center;">마침내 가을날 초목처럼 시들어 갈 것이다.
-</p><p style="text-align: center;">悲嘆窮廬(비탄궁려) 
-</p><p style="text-align: center;">그때 가서 곤궁한 오두막집에서 슬퍼하고,
-</p><p style="text-align: center;">將復何及也(장부하급야) 
-</p><p style="text-align: center;">탄식해본들 어찌 할 것인가?    (16)
+<p style="text-align: center;">非澹泊無以明志(비담박무이명지)</p>
+<p style="text-align: center;">마음에 욕심이 없어 담박하지 않으면 뜻을 밝힐 수 없고,</p>
+<p style="text-align: center;">非寧靜無以致遠(비녕정무이치원)</p>
+<p style="text-align: center;">마음이 안정되어 있지 않으면 원대한 이상을 이룰 수 없다.</p>
+<br/>
+<p style="text-align: center;">夫學須靜也(부학수정야)</p>
+<p style="text-align: center;">무릇 배울 때는 반드시 마음이 안정되어 있어야 하며,</p>
+<p style="text-align: center;">才須學也(재수학야)</p>
+<p style="text-align: center;">재능은 반드시 배움을 필요로 한다.</p>
+<br/>
+<p style="text-align: center;">非學無以廣才(비학무이광재)</p>
+<p style="text-align: center;">배우지 않으면 재능을 발전시킬 수 없고</p>
+<p style="text-align: center;">非靜無以成學(비정무이성학)</p>
+<p style="text-align: center;">마음이 고요하지 않으면 학문을 성취할 수 없다.</p>
+<br/>
+<p style="text-align: center;">慆慢則不能硏精(도만칙불능연정)</p>
+<p style="text-align: center;">마음이 방자하고 오만하면 정밀하고 미묘한 이치를 깊이 연구할 수</p>
+<p style="text-align: center;">없고,</p>
+<p style="text-align: center;">險躁則不能理性(험조칙불능이성)</p>
+<p style="text-align: center;">조급하고 경망하면 자신의 본성을 제대로 다스릴 수 없다.</p>
+<br/>
+<p style="text-align: center;">年與時馳(년여시치)</p>
+<p style="text-align: center;">이치를 제대로 밝히지 못하고 본성을 제대로 다스리지 못하는</p>
+<p style="text-align: center;">사이에</p>
+<p style="text-align: center;">志與歲去(지여세거)</p>
+<p style="text-align: center;">나이는 시간과 함께 달려가고 의지는 세월과 함께 사라지면서</p>
+<p style="text-align: center;">遂成枯落(수성고락)</p>
+<p style="text-align: center;">마침내 가을날 초목처럼 시들어 갈 것이다.</p>
+<br/>
+<p style="text-align: center;">悲嘆(守)窮廬(비탄궁려)</p>
+<p style="text-align: center;">그때 가서 곤궁한 오두막집에서 슬퍼하고,</p>
+<p style="text-align: center;">將復何及也(장부하급야)</p>
+<p style="text-align: center;">탄식해본들 어찌 할 것인가?
 
 {{< /admonition  >}}
 
+대만의 남회근 선생님(중국문화 만담)의 풀의 중 참고할 만한 내용입니다.
+
+> “무릇 군자는 고요함으로 몸을 닦고 검소함으로 덕을 기른다. 담박하지 않으면 뜻을 밝게 할 수 없고, 고요하지 않으면 멀리 이를 수 없다" [夫君子之行, 靜以修身, 儉以養德. 非淡泊無以明志, 非寧靜無以致遠]
+
+먼저 심경이 고요할 수 있어야 합니다. 
+
+중국의 신흥 기업가들, 특히 여러분들은 주의해야 합니다! 담박할 수 있겠습니까? 비단 삶이 담박해야 할 뿐 아니라 생각 또한 담박해야 합니다.
+
+> “무릇 배움은 모름지기 고요해야 하며[夫學須靜也]”
+
+진정으로 학문을 말하려면 고요한 환경, 고요한 시간을 가져야 합니다. 
+
+하루 스물네 시간 중 예닐곱 시간은 혼자서 고요히 돌이켜 생각하고 반성하며 독서해야 합니다.
+
+> “재능은 모름지기 배워야 얻는다[才須學也]”
+
+지식의 축적, 재능의 신장은 학문을 통해서 나옵니다.
+
+> “배우지 않으면 재능을 넓힐 수 없고[非學無以廣才]”
+
+광범한 지식을 구하지 않으면 재능이 국한됩니다.
+
+> “고요하지 않으면 학문을 이룰 수 없다[非靜無以成學]”
+
+고요한 심경이 없다면, 고요한 생각이 없다면 여러분의 학문은 깊어질 수 없습니다. 
+
+어떤 판본에서는, “뜻이 없으면 학문을 이룰 수 없다[非志無以成學]”고도 했는데, ‘지(志)’란 입지(立志)로서 뜻을 세우는 것입니다. 강렬한 바람이나 의지가 없다면 학문 역시 깊어질 수 없습니다.
+
+> “오만하면 세밀히 연구할 수 없고, 험하고 조급하면 본성을 다스릴 수 없다[慢則不能硏精, 險躁則不能理性]”
+
+스스로 자신을 용납하고 게으르며 정진하지 않는 것이 ‘도’이고 ‘만’은 자만으로서 스스로 자기 만족에 빠져 뛰어나다고 생각하는 것입니다. 누구든 쉽게 이런 잘못을 범할 수 있습니다.
+
+예를 들어 봅시다. 여러분은 보통의 젊은 사람들이 독서할 때와 마찬가지로 한 번 보고는 모두 이해했다고 생각하지만 사실은 그림자도 잡지 못했습니다.
+
+이것이 바로 도만입니다. 도만하면 정치하게 연구할 수 없습니다. 내면의 생각과 정서가 요동치면 마음이 안정되지 못해 조급하게 성질을 부리는데, 그렇게 되면 본성을 다스릴 수 없습니다. 
+
+자신을 관리할 수 없게 되지요.
+
+<center>- 끝 -</center>
