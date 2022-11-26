@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>hugo - Tag - The Serious</title>
+        <title>hugo - Tag - minkj1992</title>
         <link>https://minkj1992.github.io/tags/hugo/</link>
-        <description>hugo - Tag - The Serious</description>
+        <description>hugo - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
             <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 02 Jan 2022 14:59:43 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/hugo/" rel="self" type="application/rss+xml" /><item>
     <title>Let&#39;s create blog with Hugo</title>

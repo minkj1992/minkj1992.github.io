@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>go - Tag - The Serious</title>
+        <title>go - Tag - minkj1992</title>
         <link>https://minkj1992.github.io/tags/go/</link>
-        <description>go - Tag - The Serious</description>
+        <description>go - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
             <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 12 Feb 2022 10:43:42 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/go/" rel="self" type="application/rss+xml" /><item>
     <title>[일주일 만에 배우는 GO] CH.3 Real World Go</title>
