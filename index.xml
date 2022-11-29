@@ -81,16 +81,6 @@
             </div><p>Let&rsquo;s deep dive into <code>c++</code> and <code>Carbon</code></p>]]></description>
 </item>
 <item>
-    <title>English Sentence Patterns</title>
-    <link>https://minkj1992.github.io/sentence/</link>
-    <pubDate>Tue, 27 Sep 2022 12:27:22 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/sentence/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/english.avif" referrerpolicy="no-referrer">
-            </div><p>영어 문장의 결정적 패턴들</p>]]></description>
-</item>
-<item>
     <title>Honma Munehisa</title>
     <link>https://minkj1992.github.io/honma-munehisa/</link>
     <pubDate>Wed, 14 Sep 2022 21:41:58 &#43;0900</pubDate>
@@ -109,6 +99,16 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/rich.jpeg" referrerpolicy="no-referrer">
             </div><p><em>The warm words of the wise rich old-man <code>Saito Hitori</code></em></p>]]></description>
+</item>
+<item>
+    <title>Mastering Multithreading Programming with golang</title>
+    <link>https://minkj1992.github.io/multithreading_with_go/</link>
+    <pubDate>Sun, 04 Sep 2022 20:25:47 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/multithreading_with_go/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/golang_channel.jpeg" referrerpolicy="no-referrer">
+            </div><p>Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang.</p>]]></description>
 </item>
 </channel>
 </rss>

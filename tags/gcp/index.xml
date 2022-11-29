@@ -26,16 +26,6 @@
  taken in coursera on the topic of <code>Google IoT core</code>.</p>]]></description>
 </item>
 <item>
-    <title>[GCP] Iot core inpractice</title>
-    <link>https://minkj1992.github.io/iot_in_practice/</link>
-    <pubDate>Sat, 23 Apr 2022 12:46:44 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/iot_in_practice/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/ros_think.png" referrerpolicy="no-referrer">
-            </div><p>Let&rsquo;s generate IoT service with gcp iot core and pub/sub.</p>]]></description>
-</item>
-<item>
     <title>[GCP] Iot core</title>
     <link>https://minkj1992.github.io/iot_core/</link>
     <pubDate>Sat, 23 Apr 2022 12:41:55 &#43;0900</pubDate>

@@ -566,4 +566,3 @@ Quitting time!
 Quitting time!
 ```
 
-### Groups and Pools

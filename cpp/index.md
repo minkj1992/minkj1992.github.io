@@ -19,9 +19,8 @@ Let's deep dive into `c++` and `Carbon`
 - https://en.cppreference.com/w/cpp/language/translation_phases
 - https://en.cppreference.com/w/cpp/preprocessor
 
-## 3. Why C++?
 
-## 4. Why not C++?
+## 3. Why not C++?
 
 > References
 
@@ -51,8 +50,3 @@ Let's deep dive into `c++` and `Carbon`
 1. Carbon team failed to meaningfully change C++'s direction and priorities towards improvements rather than backwards compatibility, and demonstrates how the process can fail to make directional decisions.
 2. C++'s process is oriented around standardization rather than design
 
-
-
-## 5. Keywords
-- Solid language foundations
-- 
