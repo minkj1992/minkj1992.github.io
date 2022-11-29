@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 23 Nov 2022 03:31:04 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 30 Nov 2022 04:30:33 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Book of Proverbs</title>
+    <link>https://minkj1992.github.io/proverbs/</link>
+    <pubDate>Wed, 30 Nov 2022 04:30:33 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/proverbs/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/solomon.webp" referrerpolicy="no-referrer">
+            </div><p>After reading the <code>Book of Proverbs</code>, write down some phrases that touched my heart.</p>]]></description>
+</item>
+<item>
     <title>What is memory?</title>
     <link>https://minkj1992.github.io/what_is_memory/</link>
     <pubDate>Wed, 23 Nov 2022 03:31:04 &#43;0900</pubDate>
@@ -97,16 +107,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/rich.jpeg" referrerpolicy="no-referrer">
             </div><p><em>The warm words of the wise rich old-man <code>Saito Hitori</code></em></p>]]></description>
-</item>
-<item>
-    <title>Mastering Multithreading Programming with golang</title>
-    <link>https://minkj1992.github.io/multithreading_with_go/</link>
-    <pubDate>Sun, 04 Sep 2022 20:25:47 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/multithreading_with_go/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/golang_channel.jpeg" referrerpolicy="no-referrer">
-            </div><p>Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang.</p>]]></description>
 </item>
 </channel>
 </rss>
