@@ -4,9 +4,19 @@
         <link>https://minkj1992.github.io/</link>
         <description>I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying.</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 30 Nov 2022 04:30:33 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 04 Dec 2022 14:05:19 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>(WIP) 2023 투자계획</title>
+    <link>https://minkj1992.github.io/2023_investments/</link>
+    <pubDate>Sun, 04 Dec 2022 14:05:19 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/2023_investments/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/principles.jpg" referrerpolicy="no-referrer">
+            </div><p>2023년부터 진행할 1. 투자 시나리오 2. 투자 원칙들을 적어둡니다.</p>]]></description>
+</item>
+<item>
     <title>Book of Proverbs</title>
     <link>https://minkj1992.github.io/proverbs/</link>
     <pubDate>Wed, 30 Nov 2022 04:30:33 &#43;0900</pubDate>
@@ -99,16 +109,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/homma_munehisa.webp" referrerpolicy="no-referrer">
             </div><p>거래의 신 혼마, 주식시장의 캔들차트와 사께다 전법의 창시자를 읽고</p>]]></description>
-</item>
-<item>
-    <title>Hitori Saito</title>
-    <link>https://minkj1992.github.io/hitori-saito/</link>
-    <pubDate>Sat, 10 Sep 2022 13:43:40 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/hitori-saito/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/rich.jpeg" referrerpolicy="no-referrer">
-            </div><p><em>The warm words of the wise rich old-man <code>Saito Hitori</code></em></p>]]></description>
 </item>
 </channel>
 </rss>
