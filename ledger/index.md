@@ -4,9 +4,10 @@
 How to setup my cold wallet (nano s plus).
 <!--more-->
 
-원래 거래소를 믿지 않기도 했고, 2022년 FTX 사태로 특히 더욱 Cold wallet의 중요성이 부각된 것 같아, 미국에 지내는 동안 $79.00에 `Nano S plus`를 구입하여 세팅하였다. 
+거래소를 잘 신뢰하지 못하던 차에, 2022년 FTX 사태가 터져서 겸사겸사 Cold wallet을 구매하였습니다. 
+미국에 지내는 동안 tax포함 약 $85.00에 `Nano S plus`를 구입하여 세팅하는 과정을 정리합니다.
 
-앞으로 거래 시 `DeX`(Decentralized exchange, P2P방식의 분산형 암호화폐 거래소)의 특성을 가진 거래소에서 거래를 할 생각이며, 편의를 위할 때는 Ledger 인프라를 사용할 것 같다.
+또한 앞으로 거래 시 `DeX`(Decentralized exchange, P2P방식의 분산형 암호화폐 거래소)의 특성을 가진 거래소에서 거래를 할 생각이며, 편의를 위할 때는 Ledger 인프라를 사용할 것 같다.
 
 ## TL;DR
 
@@ -16,6 +17,11 @@ How to setup my cold wallet (nano s plus).
 4. (opt) Update firmware.
 5. Install coin apps to nano device.
 6. Add your accounts
+
+{{< admonition warning "Water proof" >}}
+_현재 까지 나온 Ledger사의 Cold wallet들은 방수를 지원하지 않는다. 물론 악세사리로, 방수케이스를 판매하지만 cold wallet 자체는 방수가 되지 않기 때문에 변기에 빠뜨리거나 커피를 쏟는다면 기기가 고장날 수 있다.
+다만 Seed phrase(24개의 words, recovery letters)만 기억하고 있다면, 이를 통해 새로운 nano 하드웨어를 구매하여 지갑을 다시 복구할 수 있다. [seed phrase](https://en.bitcoin.it/wiki/Seed_phrase)_
+{{< /admonition  >}}
 
 ## 1. `Cold Wallet` Background
 > What you should basically know about.
