@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 04 Dec 2022 14:05:19 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 05 Dec 2022 10:19:00 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Ledger</title>
+    <link>https://minkj1992.github.io/ledger/</link>
+    <pubDate>Mon, 05 Dec 2022 10:19:00 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/ledger/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/nano.png" referrerpolicy="no-referrer">
+            </div><p>How to setup my nano product.</p>]]></description>
+</item>
+<item>
     <title>(WIP) 2023 투자계획</title>
     <link>https://minkj1992.github.io/2023_investments/</link>
     <pubDate>Sun, 04 Dec 2022 14:05:19 &#43;0900</pubDate>
@@ -97,16 +107,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/carbon.webp" referrerpolicy="no-referrer">
             </div><p>Let&rsquo;s deep dive into <code>c++</code> and <code>Carbon</code></p>]]></description>
-</item>
-<item>
-    <title>Honma Munehisa</title>
-    <link>https://minkj1992.github.io/honma-munehisa/</link>
-    <pubDate>Wed, 14 Sep 2022 21:41:58 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/honma-munehisa/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/homma_munehisa.webp" referrerpolicy="no-referrer">
-            </div><p>거래의 신 혼마, 주식시장의 캔들차트와 사께다 전법의 창시자를 읽고</p>]]></description>
 </item>
 </channel>
 </rss>
