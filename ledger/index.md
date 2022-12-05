@@ -1,7 +1,7 @@
-# Ledger
+# Cold Wallet with Ledger
 
 
-How to setup my nano product.
+How to setup my cold wallet (nano s plus).
 <!--more-->
 
 원래 거래소를 믿지 않기도 했고, 2022년 FTX 사태로 특히 더욱 Cold wallet의 중요성이 부각된 것 같아, 미국에 지내는 동안 $79.00에 `Nano S plus`를 구입하여 세팅하였다. 
