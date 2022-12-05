@@ -19,8 +19,13 @@ How to setup my cold wallet (nano s plus).
 6. Add your accounts
 
 {{< admonition warning "Water proof" >}}
-_현재 까지 나온 Ledger사의 Cold wallet들은 방수를 지원하지 않는다. 물론 악세사리로, 방수케이스를 판매하지만 cold wallet 자체는 방수가 되지 않기 때문에 변기에 빠뜨리거나 커피를 쏟는다면 기기가 고장날 수 있다.
-다만 Seed phrase(24개의 words, recovery letters)만 기억하고 있다면, 이를 통해 새로운 nano 하드웨어를 구매하여 지갑을 다시 복구할 수 있다. [seed phrase](https://en.bitcoin.it/wiki/Seed_phrase)_
+
+_현재 까지 나온 Ledger사의 Cold wallet들은 방수를 지원하지 않는다. 물론 악세사리로, 방수케이스를 판매하지만 cold wallet 자체는 방수가 되지 않기 때문에 변기에 빠뜨리거나 커피를 쏟는다면 기기가 고장날 수 있다._
+
+_다만 Seed phrase(24개의 words, recovery letters)만 기억하고 있다면, 이를 통해 새로운 nano 하드웨어를 구매하여 지갑을 다시 복구할 수 있다._
+
+- [seed phrase](https://en.bitcoin.it/wiki/Seed_phrase)
+
 {{< /admonition  >}}
 
 ## 1. `Cold Wallet` Background
