@@ -4,27 +4,17 @@
         <link>https://minkj1992.github.io/</link>
         <description>I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying.</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 14 Dec 2022 08:09:59 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 15 Dec 2022 08:09:59 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>(WIP) Warren buffett&#39;s word of wisdom</title>
+    <title>Warren buffett&#39;s word of wisdom</title>
     <link>https://minkj1992.github.io/warren_buffett/</link>
-    <pubDate>Wed, 14 Dec 2022 08:09:59 &#43;0900</pubDate>
+    <pubDate>Thu, 15 Dec 2022 08:09:59 &#43;0900</pubDate>
     <author>leoo.j</author>
     <guid>https://minkj1992.github.io/warren_buffett/</guid>
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/buffett.png" referrerpolicy="no-referrer">
             </div><p>워렌 버핏이 바라보는 돈과 투자 그리고 기업에 대하여.</p>]]></description>
-</item>
-<item>
-    <title>usa</title>
-    <link>https://minkj1992.github.io/2022_usa/</link>
-    <pubDate>Fri, 09 Dec 2022 04:46:49 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/2022_usa/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/" referrerpolicy="no-referrer">
-            </div>22년 11월 2일 - 22년 12월 9일 미국 여행을 정리합니다.]]></description>
 </item>
 <item>
     <title>Cold Wallet with Ledger</title>
@@ -107,6 +97,18 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/jim.jpg" referrerpolicy="no-referrer">
             </div><p><em>나에게 권위에 대한 자발적 순종을 알려준, 적당히 욕심 많은 아버지가 딸들에게 보내는 헌신적인 사랑</em></p>]]></description>
+</item>
+<item>
+    <title>홍정모의 따라하며 배우는 C&#43;&#43;</title>
+    <link>https://minkj1992.github.io/hong_modern_cpp/</link>
+    <pubDate>Sat, 01 Oct 2022 18:56:15 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/hong_modern_cpp/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/cpp.jpeg" referrerpolicy="no-referrer">
+            </div><blockquote>
+<p><code>Modern c++</code>을 학습하고 기억할만한 요소들을 정리합니다.</p>
+</blockquote>]]></description>
 </item>
 </channel>
 </rss>
