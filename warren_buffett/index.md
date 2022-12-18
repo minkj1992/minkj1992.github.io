@@ -242,9 +242,9 @@
 - 151 할 가치가 전혀 없는 일은 잘할 가치 역시 전혀 없다. 본질적인 가치가 낮은 기업은 결국 앞으로 돈을 벌 가망성도 희박하다. 그렇다면 왜 자신에게 전혀 이롭지 않은 기업에 아까운 시간과 열정을 낭비하는가?
 - 153 "기업 실적이 좋고 나쁜 것은 얼마나 노를 잘 젓느냐의 문제라기보다 얼마나 좋은 배를 선택했느냐의 문제다. 물이 샌다는 사실을 알았다면 배를 갈아타는 것이 훨씬 생산적이다."
 
-<center>
+<center >
 
-![](/images/buffeet2.jpeg)
+<img width="601" height="448" src="/images/buffeet2.jpeg"/>
 
 </center>
 
@@ -285,7 +285,7 @@
 
 <center>
 
-![](/images/buffeet3.webp)
+<img width="601" height="448" src="/images/buffeet3.webp"/>
 
 </center>
 
