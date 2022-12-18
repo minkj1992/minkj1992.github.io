@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 15 Dec 2022 08:09:59 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 18 Dec 2022 19:51:09 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>The analects, by Confucius</title>
+    <link>https://minkj1992.github.io/the_analects/</link>
+    <pubDate>Sun, 18 Dec 2022 19:51:09 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/the_analects/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/confucius.webp" referrerpolicy="no-referrer">
+            </div><p>논어가 말하는 양심은 무엇인가?</p>]]></description>
+</item>
+<item>
     <title>Warren buffett&#39;s word of wisdom</title>
     <link>https://minkj1992.github.io/warren_buffett/</link>
     <pubDate>Thu, 15 Dec 2022 08:09:59 &#43;0900</pubDate>
@@ -95,18 +105,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/jim.jpg" referrerpolicy="no-referrer">
             </div><p><em>나에게 권위에 대한 자발적 순종을 알려준, 적당히 욕심 많은 아버지가 딸들에게 보내는 헌신적인 사랑</em></p>]]></description>
-</item>
-<item>
-    <title>홍정모의 따라하며 배우는 C&#43;&#43;</title>
-    <link>https://minkj1992.github.io/hong_modern_cpp/</link>
-    <pubDate>Sat, 01 Oct 2022 18:56:15 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/hong_modern_cpp/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/cpp.jpeg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p><code>Modern c++</code>을 학습하고 기억할만한 요소들을 정리합니다.</p>
-</blockquote>]]></description>
 </item>
 </channel>
 </rss>
