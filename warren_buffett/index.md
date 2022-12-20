@@ -105,6 +105,8 @@
 
 <center>
 
+![](/images/워렌버핏.png)
+
 ![](/images/buffett4.webp)
 
 </center>
