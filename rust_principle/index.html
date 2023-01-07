@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>(WIP) Rust 디자인 원칙 🦀 | minkj1992</title><meta name="Description" content="Rust Q&amp;A를 통해서 알아보는 원리"><meta property="og:title" content="(WIP) Rust 디자인 원칙 🦀" />
+<meta property="og:description" content="Rust Q&amp;A를 통해서 알아보는 원리" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/rust_principle/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-01-07T15:52:24+09:00" />
+<meta property="article:modified_time" content="2023-01-07T15:52:24+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="(WIP) Rust 디자인 원칙 🦀"/>
+<meta name="twitter:description" content="Rust Q&amp;A를 통해서 알아보는 원리"/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/rust_principle/" /><link rel="prev" href="https://minkj1992.github.io/2022_last_half/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "(WIP) Rust 디자인 원칙 🦀",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/rust_principle\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "rust, principles","wordcount":  2526 ,
+        "url": "https:\/\/minkj1992.github.io\/rust_principle\/","datePublished": "2023-01-07T15:52:24+09:00","dateModified": "2023-01-07T15:52:24+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": "Rust Q\u0026A를 통해서 알아보는 원리"
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">(WIP) Rust 디자인 원칙 🦀</h1><h2 class="single-subtitle">Rust Q&amp;A를 통해서 알아보는 원리</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-07">2023-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2526 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/rust.png"
+        data-srcset="/images/rust.png, /images/rust.png 1.5x, /images/rust.png 2x"
+        data-sizes="auto"
+        alt="/images/rust.png"
+        title="Rust Q&amp;A를 통해서 알아보는 원리" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-rust-프로젝트">1. Rust 프로젝트</a></li>
+    <li><a href="#2-성능">2. 성능</a></li>
+    <li><a href="#3-문법-syntax">3. 문법 (Syntax)</a></li>
+    <li><a href="#4-디자인-패턴">4. 디자인 패턴</a></li>
+    <li><a href="#5-other-languages">5. Other Languages</a></li>
+    <li><a href="#6-모듈-및-크레이트">6. 모듈 및 크레이트</a></li>
+    <li><a href="#7-다중-플랫폼">7. 다중 플랫폼</a></li>
+    <li><a href="#8-저수준">8. 저수준</a></li>
+    <li><a href="#9-디버깅--tool">9. 디버깅 / Tool</a></li>
+    <li><a href="#10-오류">10. 오류</a></li>
+    <li><a href="#todo">TODO</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><a href="https://prev.rust-lang.org/ko-KR/faq.html" target="_blank" rel="noopener noreffer">Rust Q&amp;A</a>
+를 통해서 알아보는 Rust 프로그래밍 원리를 살펴보고, 유용했던 문구들을 스크랩 해둡니다.</p>
+<br />
+또한 앞으로 Rust 공부는 다음과 같은 순서로 진행할 예정입니다.
+<ol>
+<li><a href="https://prev.rust-lang.org/en-US/faq.html#syntax" target="_blank" rel="noopener noreffer">Rust Q&amp;A</a>
+</li>
+<li><a href="https://doc.rust-lang.org/book/ch00-00-introduction.html" target="_blank" rel="noopener noreffer">Book: The Rust Programming language</a>
+</li>
+<li><a href="https://lurklurk.org/effective-rust/cover.html" target="_blank" rel="noopener noreffer">Effective Rust(35)</a>
+</li>
+<li><a href="https://doc.rust-lang.org/rust-by-example/" target="_blank" rel="noopener noreffer">Rust by Example</a>
+</li>
+</ol>
+<hr>
+<h2 id="1-rust-프로젝트">1. Rust 프로젝트</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust의 목표는 무엇일까요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><strong><em>To design and implement a safe, concurrent, practical systems language.</em></strong></p>
+<p>Rust는 이 수준의 추상화와 효율을 추구하는 다른 언어들이 만족스럽지 못 하기에 존재합니다. 특히:</p>
+<ol>
+<li>안전성이 너무 덜 주목되어 있습니다.</li>
+<li>동시성 지원이 부족합니다.</li>
+<li>실용적으로 쓰기가 힘듭니다.</li>
+<li>자원에 대한 제어가 제한적입니다.</li>
+</ol>
+<p>Rust는 효율적인 코드와 편안한 수준의 추상화를 제공하며, 동시에 위 4가지를 모두 개선하는 대안으로 만들어졌습니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust의 목표가 아닌 것은 무엇이 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ol>
+<li>우리는 특별히 최신의 기술을 도입하지 않습니다. <strong>오래되고 자리 잡힌 기술이 더 좋습니다.</strong></li>
+<li>우리는 <strong>표현력, 최소주의 또는 우아함을 다른 목표에 우선하지 않습니다</strong>. 이들은 바람직하긴 하지만 부수적인 목표입니다.</li>
+<li>우리는 C++나 기타 다른 언어의 모든 기능 집합을 커버하려 하지 않습니다. <strong>Rust는 자주 쓰이는 기능들을 제공</strong>할 것입니다.</li>
+<li>우리는 100% 정적이거나, 100% 안전하거나, 100% 반영적(reflective)이거나, 기타 어떤 의미에서도 너무 교조적이려 하지 않습니다. <strong>트레이드 오프는 존재합니다.</strong></li>
+<li>우리는 Rust가 “가능한 모든 플랫폼”에서 동작할 걸 요구하지 않습니다. <strong>언젠가 Rust는 널리 쓰이는 하드웨어와 소프트웨어 플랫폼에서 불필요한 타협 없이 동작할 것입니다.</strong></li>
+</ol>
+</div>
+        </div>
+    </div>
+<hr>
+<h2 id="2-성능">2. 성능</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust는 얼마나 빠른가요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>C++와 동일하게 Rust는 비용 없는 추상화를 주요 원칙으로 삼습니다. Rust에는 전역으로 성능을 떨어뜨리는 추상화가 존재하지 않으며, 런타임 시스템에서 부하가 발생하지도 않습니다.</em></p>
+<p><em>Rust가 LLVM에 기반해 있고 LLVM이 보기에 Clang과 비슷하게 보이려 한다는 걸 생각해 보면, LLVM에서 성능 개선이 일어난다면 Rust도 도움을 받게 됩니다. 장기적으로는 Rust 타입 시스템의 더 풍부한 정보로 C/C++ 코드에서는 어렵거나 불가능한 최적화도 가능해질 것입니다.</em></p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust는 쓰레기 수거(garbage collection, GC)를 하나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>아니요. Rust의 중요 혁신 중 하나는 쓰레기 수거 없이 메모리 안전성을 보장한다는 것입니다(즉, 세그폴트가 나지 않습니다).</em></p>
+<p><em>Rust는 GC를 피한 덕에 여러 장점을 제공할 수 있었습니다. 자원들을 예측 가능하게 해제할 수 있고, 메모리 관리 오버헤드가 낮으며, 사실상 런타임 시스템이 없습니다. 이 모든 특징들 때문에 Rust는 아무 맥락에나 깔끔하게 포함(embed)하기 쉬우며, 이미 GC를 가지고 있는 언어에 Rust 코드를 통합하기에도 훨씬 쉽습니다.</em></p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>제 프로그램이 왜 느린 거죠?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>Rust 컴파일러는 요청이 없다면 최적화 없이 컴파일을 하는데, 이는 최적화를 하면 컴파일이 느려지고 개발 과정에서는 보통 바람직하지 않기 때문입니다.</em></p>
+<p><em>cargo로 컴파일을 한다면 &ndash;release 플래그를 쓰세요. rustc를 직접 써서 컴파일을 한다면 -O 플래그를 쓰세요. 어느 쪽이나 최적화를 켜는 역할을 합니다.</em></p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust 컴파일이 느린 것 같습니다. 왜 그런 건가요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>코드를 기계어로 번역하고 최적화를 하기 때문입니다. Rust는 효율적인 기계어로 컴파일되는 고수준 추상화를 제공하고, 이 번역 과정은 특히 최적화를 할 경우 시간이 걸리게 마련입니다.</p>
+<p><strong>Rust 컴파일이 느리다고 느끼는 주된 원인은 C++와 Rust가 컴파일 모델이 다르다는 점, 즉 C++의 컴파일 단위는 한 파일이지만 Rust는 여러 파일로 이루어진 크레이트라는 것 때문입니다.</strong> 따라서 개발 도중에 C++ 파일 하나를 고치면 Rust에 비해 컴파일 시간이 훨씬 줄어들 수 있습니다. 현재 Rust 컴파일러를 리팩토링해서 증분 컴파일(Incremental Compile)을 가능하게 하려는 대형 작업이 진행 중이며, 완료되면 Rust에서도 C++ 모델과 같이 컴파일 시간이 개선될 것입니다.</p>
+<p>컴파일 모델과는 별개로, Rust의 언어 설계에는 컴파일 시간에 영향을 미치는 요소가 여럿 있습니다.</p>
+<p>먼저 Rust는 비교적 <strong>복잡한 타입 시스템을</strong> 가지고 있고, 실행 시간에 Rust를 안전하게 만들기 위한 제약 사항을 강제하는 데 무시할 수 없는 컴파일 시간을 사용해야 합니다.</p>
+<p>두번째로 Rust 컴파일러에는 오래된 기술 부채가 있으며, 특히 생성되는 LLVM IR의 품질이 좋지 못하기 때문에 LLVM이 시간을 들여 이를 “고쳐야” 합니다. <strong>미래에는 MIR 기반 최적화 및 번역 단계가 Rust 컴파일러가 LLVM에 가하는 부하를 줄여 줄지도</strong> 모릅니다.</p>
+<p>세번째로 Rust가 코드 생성에 LLVM을 쓰는 것은 양날의 검이라는 점입니다. <strong>LLVM 덕분에 Rust는 세계구급 런타임 성능을 보여 주지만, LLVM은 컴파일 시간에 촛점을 맞추지 않은 거대한 프레임워크이며 특히 품질이 낮은 입력에 취약</strong>합니다.</p>
+<p>마지막으로 <strong>Rust가 일반화(제너릭) 타입을 C++와 비슷하게 단형화(monomorphise)하는 전략은 빠른 코드를 생성하지만, 다른 번역 전략에 비해 상당히 많은 코드를 생성해야 한다는 문제</strong>가 있습니다. 이 코드 팽창은 트레이트 객체를 써서 동적 디스패치와 장단을 교환할 수 있습니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust의 HashMap은 왜 느린가요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>Rust의 HashMap은 기본적으로 <code>SipHash</code> 해시 알고리즘을 사용합니다. 이 알고리즘은 해시 테이블 충돌 공격을 막으면서 여러 종류의 입력에 대해 적절한 성능을 내도록 설계되었습니다.</em></p>
+<p><em>SipHash가 많은 경우 경쟁력 있는 성능을 보여 주긴 하지만, SipHash는 정수 같이 키가 짧을 경우 다른 해시 알고리즘에 비해 현저히 느립니다. 이 때문에 종종 HashMap의 성능이 낮은 걸 볼 수 있습니다. 이런 경우에는 보통 <code>FNV 해시</code>를 추천하지만, 이 알고리즘이 충돌 공격에서 SipHash와 다른 특성을 보인다는 점은 염두에 두어야 합니다.</em></p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust는 꼬리 재귀(tail-call) 최적화를 하나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>일반적으로는 아닙니다. 제한적으로 꼬리 재귀 최적화를 하긴 하지만 보장되지는 않습니다. 이 기능은 언제나 요청되어 왔기 때문에 Rust에는 이를 위해 예약어(become)가 예약되어 있습니다</em></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust에는 런타임이 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Java 같은 언어들에서 말하는 그런 통상의 런타임은 없습니다만, Rust 표준 라이브러리의 일부분은 힙(heap), 스택 추적(backtrace), 되감기(unwinding) 및 보호(guard)를 제공하는 “런타임”이라고 볼 수 있습니다. 사용자의 main 함수가 실행되기 전에는 소량의 초기화 코드가 실행됩니다. 또한 Rust 표준 라이브러리는 C 표준 라이브러리를 링크하는데 여기에서도 비슷한 런타임 초기화가 일어납니다. Rust 코드는 표준 라이브러리 없이 컴파일될 수 있으며 이 경우 런타임은 대략 C와 비슷해집니다.</em></div>
+        </div>
+    </div>
+<h2 id="3-문법-syntax">3. 문법 (Syntax)</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>왜 중괄호인가요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>또한 중괄호는 프로그래머 입장에서는 더 유연한 문법을 제공하고 컴파일러 입장에서는 더 간단한 파서를 가능하게 합니다.</em></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>if 조건에서 소괄호를 생략할 수 있는데, 그럼 한 줄짜리 블럭에는 왜 중괄호를 넣어야 하나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>C에서는 if 조건문에서 괄호가 필수이고 중괄호가 선택이지만, Rust에서는 반대로 합니다. 이렇게 해서 조건문 몸체와 조건을 명확하게 구분할 수 있고, 중괄호가 선택이라서 벌어지는 위험도 막을 수 있는데, 이는 Apple의 <code>goto fail</code> 버그와 같이 리팩토링 과정에서 흔히 생기고 잡기 어려운 오류들을 유발할 수 있습니다.</em></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Why is there no literal syntax for dictionaries?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em><strong>Rust의 전반적인 설계는 언어의 크기를 제한하되 강력한 라이브러리를 만들 수 있게 하는 쪽을 선호합니다.</strong> Rust는 배열과 문자열 리터럴을 초기화하는 문법을 가지고 있지만 언어에 내장된 컬렉션 타입은 이걸로 전부입니다. 매우 널리 쓰이는 Vec 컬렉션 타입 같이, 라이브러리에서 정의하는 다른 타입들은 vec! 같은 매크로를 사용하여 초기화를 합니다.</em></p>
+<p><em>나중에는 Rust가 매크로를 써서 컬렉션을 초기화하는 설계가 다른 타입에도 일반적으로 사용할 수 있도록 확장될 수 있고, 그렇게 되면 HashMap이나 Vec 같은 것 뿐만이 아니라 BTreeMap 같은 다른 타입들도 간단하게 초기화할 수 있게 될 것입니다.</em></p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>When should I use an implicit return?(암묵적인 반환)<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Rust는 매우 수식 지향적인 언어이며 “암묵적인 반환”은 이 설계의 한 부분입니다. <strong>if, match나 일반 블록들은 Rust에서는 다 수식입니다.</strong> 예를 들어 다음 코드는 i64가 홀수인지 확인하고 결과를 단순히 값으로 내서 결과를 반환합니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">is_odd</span><span class="p">(</span><span class="n">x</span>: <span class="kt">i64</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">is_odd</span><span class="p">(</span><span class="n">x</span>: <span class="kt">i64</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">bool</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>두 예제에서 함수의 마지막 줄은 그 함수의 반환값입니다. 중요한 것은 함수가 세미콜론으로 끝난다면 그 반환값은 ()이고, 이는 반환값이 없다는 뜻이라는 점입니다</strong>. 암묵적으로 반환하려면 세미콜론이 없어야 합니다.</p>
+<p>명시적인 반환은 함수 몸체의 맨 끄트머리보다 이전에 반환을 해야 해서 암묵적인 반환이 불가능할 때만 쓰입니다. 물론 위 함수들도 return</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>왜 함수의 타입 서명(signature)들은 추론되지 않는 거죠?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Rust에서 선언은 타입을 명시적으로 쓰는 편이며 실제 코드는 타입을 추론하는 편입니다. 이 설계에는 몇 가지 이유가 있습니다:</p>
+<ul>
+<li>선언의 서명을 명시적으로 쓰면 모듈 및 크레이트 수준에서 인터페이스 안정성을 강제하는 데 도움이 됩니다.</li>
+<li>서명은 프로그래머가 코드를 더 잘 이해할 수 있게 하므로, IDE가 함수의 인자 타입들을 추측하려고 전체 크레이트에 추론 알고리즘을 돌릴 필요가 사라집니다.</li>
+<li>언제나 명시적이고 바로 옆에 있기 때문이죠.
+기계적으로는 추론 과정에서 한 번에 한 함수만 보면 되므로 추론 알고리즘이 간단해집니다.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>왜 `match`에는 모든 조건들이 들어 있어야 하나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><strong>리팩토링을 돕고 코드를 명료하게 하기 위함입니다.</strong></p>
+<p>먼저, match가 모든 가능성을 커버하고 있다면 enum에 새 변종(variant)을 넣을 때 실행 시간 <strong>(execution time)에 오류가 나는 게 아니라 컴파일(compile time)이 실패하게 됩니다.</strong> Rust에서 이런 종류의 컴파일러 도움은 두려움 없이 리팩토링을 가능하게 합니다.</p>
+<p>두 번째로, 이러한 체크는 기본 선택지를 명시적으로 만듭니다. <strong>일반적으로 모든 가능성을 커버하지 않는 match를 안전하게 만드는 방법은 아무 선택지도 선택되지 않았을 때 스레드를 패닉하게 만드는 것 뿐입니다.</strong> Rust의 옛 버전에서는 match가 모든 가능성을 커버하지 않아도 되게 했는데 수많은 버그의 온상이 되었습니다.</p>
+<p>기술되지 않은 선택지는 <code>_ 와일드 카드</code>로 간단하게 무시할 수 있습니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">match</span><span class="w"> </span><span class="n">val</span><span class="p">.</span><span class="n">do_something</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Cat</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">_</span><span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<hr>
+<h2 id="4-디자인-패턴">4. 디자인 패턴</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust는 객체 지향적(object-oriented)인가요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>It is multi-paradigm. 객체 지향 언어에서 할 수 있는 많은 것들은 Rust에서도 할 수 있지만, 전부 가능한 건 아니고, 여러분에게 익숙한 추상화를 사용하지 않을 수도 있습니다.</em></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>How do I map object-oriented concepts to Rust?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em><code>다중 상속</code>과 같은 객체 지향 개념을 Rust로 옮기는 방법은 여럿 있습니다만, Rust는 객체 지향이 아니기에 객체 지향 언어들과는 상당히 다르게 보일 수 있습니다.</em></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>How do I handle configuration of a struct with optional parameters?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>가장 쉬운 방법은 <code>구조체 인스턴스</code>를 생성하는 어떤 함수에든 (보통 <code>new()</code>에) <code>Option 타입</code>을 쓰는 겁니다. 또 다른 방법은 <code>builder패턴</code>을 써서, 타입을 생성하기 전에 <strong>멤버 변수를 인스턴스화하는 특정 함수들을 호출</strong>해야 하도록 하는 것입니다.</em></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust에서 전역 변수를 쓰려면 어떻게 하죠?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>Rust에서 <code>전역 변수</code>는 컴파일 시간에 계산된 전역 상수라면 <code>const</code> 선언을 쓸 수 있고, 변경 가능한 전역 변수는 <code>static</code>을 쓸 수 있습니다.</em></p>
+<p>다만 <code>static mut</code> 변수를 변경하려면 unsafe가 필요한데, 이는 안전한 Rust에서는 발생하지 않는다고 보장하는 데이터 레이스(data race)가 일어날 수 있기 때문입니다. <strong>const와 static 값의 중요한 차이는 static에서는 참조를 얻을 수 있지만 const는 지정된 메모리 위치를 가지지 않기 때문에 불가능하다는 점입니다.</strong></p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>How can I set `compile-time constants` that are defined procedurally?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>You can define primitives using const declarations as well as define const functions and inherent methods.</em></p>
+<p>(원시 값을 const 선언으로 정의할 수 있고, const 함수나 선천적인 메소드도 정의할 수 있습니다.)</p>
+<p><em>To define procedural constants that can’t be defined via these mechanisms, use the lazy-static crate, which emulates compile-time evaluation by automatically evaluating the constant at first use.</em></p>
+<p>(이 방법으로 선언할 수 없는 <code>procedural 상수</code>를 선언하려면 <code>lazy-static crate</code>를 사용하세요. 이 크레이트는 컴파일 시간 evaluation를 상수가 처음 사용될 때, 자동으로 평가하여 procedural constants를 흉내냅니다.)</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>`main` 이전에 실행되는 초기화 코드를 만들 수 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Rust에는 “main 이전의 life”라는 개념이 없습니다. <code>lazy-static 크레이트</code>가 가장 가까운 것일텐데, 이 크레이트는 “main보다 이전”이라는 시간을 <code>정적 변수</code>를 처음 사용할 때 지연하여 초기화하는 걸로 흉내냅니다.</em></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust에서 상수 수식이 아닌 값을 전역에 넣을 수 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>아니요.</em></p>
+<p><strong>Globals cannot have a non-constant-expression constructor and cannot have a destructor at all.</strong> Static constructors are undesirable because portably ensuring a static initialization order is difficult. <strong><code>Life before main</code> is often considered a misfeature, so Rust does not allow it.</strong></p>
+</div>
+        </div>
+    </div>
+<hr>
+<h2 id="5-other-languages">5. Other Languages</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>How can I implement something like C&#39;s `struct X { static int X; };` in Rust?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>Rust는 static 필드가 없습니다. 대신 주어진 모듈에서만 접근할 수 있는 static 변수를 선언할 수 있습니다.</em></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>왜 Rust는 C 같이 안정화된 ABI가 없는 건가요? 그리고 왜 `extern`을 어노테이트 해야하는 거죠?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>_Rust가 2015년 5월에야 1.0이 되었다는 걸 볼 때 안정된 ABI 같은 큰 투자를 하기에는 아직 너무 이릅니다. 하지만 미래에도 일어나지 않을 거라는 얘기는 아닙니다.</p>
+<p><strong><code>extern</code>를 쓰면 Rust가 잘 정의된 C ABI 같이 특정한 ABI를 써서 다른 언어와 상호작용하도록 할 수 있습니다.</strong></p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust 코드가 C 코드를 호출할 수 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>네. C 코드를 Rust에서 부르는 것은 C++에서 C 코드를 부르는 것만큼 효율적이도록 설계되었습니다.</em></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>C 코드가 Rust 코드를 호출할 수 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>_네. <strong>Rust 코드가 extern 선언으로 노출되어 C의 ABI와 호환되도록 만들어야 합니다.</strong></p>
+<p>이러한 함수는 C 코드에 함수 포인터로 전달되거나, <code>#[no_mangle]</code> 속성으로 <code>symbol mangling</code>을 껐을 경우, C 코드에서 바로 호출될 수 있습니다._</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>C&#43;&#43;의 템플릿 특수화 같은 걸 Rust에서는 어떻게 할 수 있을까요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Rust는 현재 템플릿 특수화(template specialization)와 완전히 같은 기능을 가지고 있지 않지만, <a href="https://github.com/rust-lang/rfcs/pull/1210" target="_blank" rel="noopener noreffer">현재 작업이 진행 중</a>
+이며 아마 곧 추가될 것입니다.</p>
+<p>다만 <a href="https://doc.rust-lang.org/beta/rust-by-example/generics/assoc_items/types.html" target="_blank" rel="noopener noreffer">Associated types</a>
+으로 비슷한 결과를 얻을 수도 있습니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust에는 C&#43;&#43; 같은 생성자가 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><strong>아니요.</strong> 대신 함수가 생성자와 같은 역할을 수행합니다.</p>
+<p>Rust에서 생성자에 대응되는 함수의 일반적인 이름은 new()로, 이는 언어 규칙이 아니라 단순한 규약일 따름입니다. new() 함수는 다른 함수랑 다를 바가 없고, 이런 식으로 씁니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Foo</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">a</span>: <span class="kt">i32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">b</span>: <span class="kt">f64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">c</span>: <span class="kt">bool</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">Foo</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Foo</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Foo</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">a</span>: <span class="mi">0</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">b</span>: <span class="mf">0.0</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">c</span>: <span class="nc">false</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Go와 Rust가 비슷한 점은 무엇이고 다른 점은 무엇인가요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>Rust는 Go보다 저수준입니다. 예를 들어 Rust는 쓰레기 수거기(garbage collector)를 필요하지 않지만 Go는 필요로 합니다. 일반적으로 Rust는 C나 C++와 비견할 만한 제어 수준을 제공합니다.</li>
+<li>Rust의 촛점은 고수준의 편안함을 제공하면서도 안전함과 효율성을 보장하는 것이며, Go의 촛점은 빠르게 컴파일되고 수많은 도구와 함께 멋지게 동작할 수 있는 작고 간단한 언어가 되고자 하는 것입니다.</li>
+<li>Rust는 일반화 코드에 대한 강한 지원을 가지고 있지만 Go는 아닙니다.</li>
+<li>Rust는 함수형 프로그래밍에서 많은 영향을 받았으며, 여기에는 하스켈의 타입 클래스에서 유래한 타입 시스템이 포함됩니다. Go는 더 단순한 타입 시스템을 가지고 있고 기본적인 일반화 프로그래밍을 위해 인터페이스를 사용합니다.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<h2 id="6-모듈-및-크레이트">6. 모듈 및 크레이트</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>`모듈`과 `크레이트` 사이에 어떤 관계가 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>크레이트는 컴파일 단위로, Rust 컴파일러가 다룰 수 있는 가장 작은 규모의 코드입니다.</li>
+<li>모듈은 크레이트 안에 있는 코드 구조의 (중첩될 수도 있는) 단위입니다.</li>
+<li>크레이트에는 암묵적이고 이름이 없는 최상위 모듈이 포함됩니다.</li>
+<li>재귀 정의는 여러 모듈에 걸쳐 있을 수 있지만 여러 크레이트에는 걸칠 수 없습니다.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>왜 모듈 파일을 정의하기 위해 크레이트 최상위에 mod를 넣어야 하나요? 그냥 use로 지정하면 안 되나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Rust에서 모듈은 제자리에 선언하거나 다른 파일에서 선언할 수 있습니다. 각각의 예제는 다음과 같습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// main.rs에서
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">mod</span> <span class="nn">hello</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">f</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;hello!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">hello</span>::<span class="n">f</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// main.rs에서
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">mod</span> <span class="nn">hello</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">hello</span>::<span class="n">f</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// hello.rs에서
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">f</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;hello!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>첫 예제에서 모듈은 모듈이 사용되는 곳과 같은 파일에 정의되어 있습니다. 둘째 예제에서 메인 파일의 모듈 선언은 컴파일러에게 hello.rs나 hello/mod.rs를 찾아 보고 그 파일을 읽으라고 말해 줍니다.</p>
+<p><strong>mod와 use의 차이를 주목하세요. mod는 모듈이 존재한다고 선언하지만, use는 다른 곳에 선언된 모듈을 참조하여 그 내용물을 현재 모듈의 범위 안에 가져 옵니다.</strong></p>
+</div>
+        </div>
+    </div>
+<hr>
+<h2 id="7-다중-플랫폼">7. 다중 플랫폼</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust를 안드로이드 및 iOS 프로그래밍에 쓸 수 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>네 할 수 있습니다! 이미 Rust를 안드로이드와 iOS에서 사용하는 예제가 있습니다.</em></p>
+<ul>
+<li>android: <a href="https://github.com/rust-mobile/ndk" target="_blank" rel="noopener noreffer">https://github.com/rust-mobile/ndk</a>
+</li>
+<li>ios</li>
+</ul>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>개인적인 Rust 프로그램을 웹 브라우저에서 실행할 수 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><em>아마도요. Rust는 <code>asm.js</code>와 <code>WebAssembly</code> 모두를 실험적으로 지원합니다.</em></p>
+<ul>
+<li><a href="https://d2.naver.com/helloworld/8257914" target="_blank" rel="noopener noreffer">WebAssembly의 동향에 대한 유용한 글, Naver D2</a>
+</li>
+</ul>
+</div>
+        </div>
+    </div>
+<hr>
+<h2 id="8-저수준">8. 저수준</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust가 메모리 상에 값이 어떻게 배치될 지가 고정되어 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><strong>기본적으로는 아닙니다.</strong>
+일반적으로 <code>enum</code>과 <code>struct</code>의 배치는 정의되지 않습니다. 따라서 컴파일러가 패딩을 구분값(discriminant)을 넣는데 재사용하거나, 중첩된 enum들의 변종(variant)들을 압축하거나, 패딩을 없애기 위해 필드를 재배치하는 등의 잠재적인 최적화를 할 수 있게 됩니다. 데이터를 들고 있지 않은 (“C와 비슷한”) enum은 정의된 표현을 가지도록 할 수 있습니다. 이러한 enum은 데이터를 들고 있지 않은 이름들만의 단순 목록이므로 쉽게 구분할 수 있습니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">enum</span> <span class="nc">CLike</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">A</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">D</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이러한 enum에 <code>#[repr(C)]</code> 속성을 적용하면 대응되는 C 코드가 가질 표현과 같은 표현이 되도록 할 수 있습니다.</p>
+<p>따라서 <code>FFI</code>(foreign function interface) 코드에서 C enum이 쓰일 대부분의 상황에서 Rust enum을 쓸 수 있습니다. <strong>마찬가지로 struct에도 이 속성을 적용하면 C struct가 가질 배치와 같은 배치가 되도록 할 수 있습니다.</strong></p>
+</div>
+        </div>
+    </div>
+<h2 id="9-디버깅--tool">9. 디버깅 / Tool</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust 프로그램은 어떻게 디버깅하나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Rust 프로그램은 C나 C++와 같이 <code>gdb</code>나 <code>lldb</code>로 디버깅할 수 있습니다.</p>
+<p>사실은 모든 Rust 설치과정에는 (플랫폼 지원에 따라) <code>rust-gdb</code>나 <code>rust-lldb</code> 둘 중 하나가 함께 들어 있습니다. 이들은 gdb와 lldb에 Rust 값을 보기 좋게 출력해 주도록 감싼 것입니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>rustc가 표준 라이브러리 코드에서 패닉(panic)이 일어났다고 하는데, 제 코드의 실수를 어떻게 찾을 수 있을까요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>이 오류는 보통 사용자 코드에서 None이나 Err을 <code>unwrap()</code>해서 일어납니다. <code>RUST_BACKTRACE=1</code> 환경 변수를 설정해서 스택 추적(backtrace)을 켜는 게 더 많은 정보를 얻는데 도움이 됩니다.</p>
+<p>디버그 모드로 컴파일하거나(<code>cargo build의 기본값</code>), 함께 들어 있는 <code>rust-gdb나</code> <code>rust-lldb</code> 같은 디버거를 쓰는 것도 도움이 됩니다.</p>
+</div>
+        </div>
+    </div>
+<ul>
+<li><code>rust</code>의 <code>gofmt</code> 같은 포맷팅 툴: <a href="https://github.com/rust-lang/rustfmt" target="_blank" rel="noopener noreffer">rustfmt</a>
+</li>
+</ul>
+<h2 id="10-오류">10. 오류</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Rust에는 왜 예외(exception)가 없나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>예외는 제어 흐름을 이해하기 복잡하게 만들고, 타입 시스템을 넘어서는 유효성/무효성을 표현하며, (Rust의 주요 촛점인) 멀티스레딩된 코드와 잘 상호작용하지 않습니다.</p>
+<p><strong>Rust는 오류 처리에 타입 기반의 접근을 선호하며, 이는 Rust의 제어 흐름, 동시성 및 여타 다른 것들에 더 잘 맞아 들어 갑니다.</strong></p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>여기 저기 보이는 `unwrap()`를 어떻게 할 수 없나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><code>unwrap()</code>은 <code>Option</code>이나 <code>Result</code> 안에 있는 값을 뽑아 내고 아무 값도 없으면 패닉을 일으키는 함수입니다.</p>
+<p><code>unwrap()</code>이 잘못된 사용자 입력 따위의 **&ldquo;예상할 수 있는 오류들을 다루는 기본 방법&rdquo;**이 되어서는 안 됩니다.
+현업 코드에서 이는 값이 비어 있지 않으며 만에 하나 비어 있다면 프로그램이 깨지는 <strong>단언(assertion)처럼 취급되어야 합니다.</strong></p>
+<p>또한 <strong>unwrap()은 아직 오류를 처리하고 싶지 않은 빠른 프로토타입이나, 오류 처리가 주요 논점을 흐릴 수 있는 곳</strong>에서도 유용합니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>모든 곳에 `Result를` 쓰는 것 말고 더 쉽게 오류를 처리할 방법이 없나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>다른 사람의 코드에 있는 <code>Result</code>를 처리하지 않는 방법을 원한다면 항상 unwrap()를 쓸 수 있지만, 아마도 원하는 게 아닐 겁니다.
+<strong>Result는 어떤 계산이 성공적으로 끝나거나 끝나지 않을 수 있다는 표시입니다.</strong></p>
+<p>이러한 실패를 처리하도록 요구하는 건 Rust가 튼튼한 코드를 권장하는 방법 중 하나입니다. Rust는 실패를 더 편리하게 처리할 수 있도록 try! 매크로 같은 도구를 제공합니다.
+정말로 오류를 처리하고 싶지 않다면 unwrap()를 쓰세요. <strong>하지만 이렇게 하면 실패시 코드가 패닉을 일으키고, 보통 이는 프로세스를 종료시킨다는 점을 유의하시길 바랍니다.</strong></p>
+</div>
+        </div>
+    </div>
+<h2 id="todo">TODO</h2>
+<blockquote>
+<p>Current document is WIP.</p>
+</blockquote>
+<ul>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 숫자</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 문자열</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 컬렉션</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 소유권</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 수명</li>
+<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 일반화 (제너릭)</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-01-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/rust_principle/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/rust_principle/" data-title="(WIP) Rust 디자인 원칙 🦀" data-hashtags="rust,principles"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/rust_principle/" data-hashtag="rust"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/rust_principle/" data-title="(WIP) Rust 디자인 원칙 🦀"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/rust_principle/" data-title="(WIP) Rust 디자인 원칙 🦀"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/rust_principle/" data-title="(WIP) Rust 디자인 원칙 🦀" data-image="/images/rust.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">rust</a>,&nbsp;<a href="/tags/principles/">principles</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2022_last_half/" class="prev" rel="prev" title="2022년 하반기를 돌아보며 🇺🇸"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>2022년 하반기를 돌아보며 🇺🇸</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>

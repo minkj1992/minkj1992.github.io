@@ -4,9 +4,30 @@
         <link>https://minkj1992.github.io/</link>
         <description>I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying.</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 18 Dec 2022 19:51:09 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 07 Jan 2023 15:52:24 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>(WIP) Rust 디자인 원칙 🦀</title>
+    <link>https://minkj1992.github.io/rust_principle/</link>
+    <pubDate>Sat, 07 Jan 2023 15:52:24 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/rust_principle/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/rust.png" referrerpolicy="no-referrer">
+            </div><p><a href="https://prev.rust-lang.org/ko-KR/faq.html" target="_blank" rel="noopener noreffer">Rust Q&amp;A</a>
+를 통해서 알아보는 Rust 프로그래밍 원리를 살펴보고, 유용했던 문구들을 스크랩 해둡니다.</p>]]></description>
+</item>
+<item>
+    <title>2022년 하반기를 돌아보며 🇺🇸</title>
+    <link>https://minkj1992.github.io/2022_last_half/</link>
+    <pubDate>Thu, 29 Dec 2022 20:18:21 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/2022_last_half/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/" referrerpolicy="no-referrer">
+            </div><p>You need to write intro in here</p>]]></description>
+</item>
+<item>
     <title>The analects, by Confucius</title>
     <link>https://minkj1992.github.io/the_analects/</link>
     <pubDate>Sun, 18 Dec 2022 19:51:09 &#43;0900</pubDate>
@@ -87,26 +108,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/poetry.jpeg" referrerpolicy="no-referrer">
             </div><p>한달 전 일도 인생도 제대로 안살고 있는 내가 꼴보기 싫어 <code>직장을 그만두었다.</code></p>]]></description>
-</item>
-<item>
-    <title>Consciousness</title>
-    <link>https://minkj1992.github.io/behavior/</link>
-    <pubDate>Thu, 20 Oct 2022 19:33:17 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/behavior/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/the_office.png" referrerpolicy="no-referrer">
-            </div><p>나를 포함한 내 주변이 나를 온전히 봐주길 원한다. 나한테 그게 양심이다.</p>]]></description>
-</item>
-<item>
-    <title>A Gift to My Children</title>
-    <link>https://minkj1992.github.io/a-gift-to-my-children-in-2009/</link>
-    <pubDate>Sun, 16 Oct 2022 17:29:51 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/a-gift-to-my-children-in-2009/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/jim.jpg" referrerpolicy="no-referrer">
-            </div><p><em>나에게 권위에 대한 자발적 순종을 알려준, 적당히 욕심 많은 아버지가 딸들에게 보내는 헌신적인 사랑</em></p>]]></description>
 </item>
 </channel>
 </rss>
