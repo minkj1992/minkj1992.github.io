@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/rust_principle/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-07T15:52:24+09:00" />
-<meta property="article:modified_time" content="2023-01-07T15:52:24+09:00" />
+<meta property="article:modified_time" content="2023-01-07T18:25:01+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "rust, principles","wordcount":  2526 ,
-        "url": "https:\/\/minkj1992.github.io\/rust_principle\/","datePublished": "2023-01-07T15:52:24+09:00","dateModified": "2023-01-07T15:52:24+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "rust, principles","wordcount":  2525 ,
+        "url": "https:\/\/minkj1992.github.io\/rust_principle\/","datePublished": "2023-01-07T15:52:24+09:00","dateModified": "2023-01-07T18:25:01+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,7 +173,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">(WIP) Rust 디자인 원칙 🦀</h1><h2 class="single-subtitle">Rust Q&amp;A를 통해서 알아보는 원리</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-07">2023-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2526 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-07">2023-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2525 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -289,11 +289,21 @@
         <div class="details-content">
             <div class="admonition-content"><p>코드를 기계어로 번역하고 최적화를 하기 때문입니다. Rust는 효율적인 기계어로 컴파일되는 고수준 추상화를 제공하고, 이 번역 과정은 특히 최적화를 할 경우 시간이 걸리게 마련입니다.</p>
 <p><strong>Rust 컴파일이 느리다고 느끼는 주된 원인은 C++와 Rust가 컴파일 모델이 다르다는 점, 즉 C++의 컴파일 단위는 한 파일이지만 Rust는 여러 파일로 이루어진 크레이트라는 것 때문입니다.</strong> 따라서 개발 도중에 C++ 파일 하나를 고치면 Rust에 비해 컴파일 시간이 훨씬 줄어들 수 있습니다. 현재 Rust 컴파일러를 리팩토링해서 증분 컴파일(Incremental Compile)을 가능하게 하려는 대형 작업이 진행 중이며, 완료되면 Rust에서도 C++ 모델과 같이 컴파일 시간이 개선될 것입니다.</p>
-<p>컴파일 모델과는 별개로, Rust의 언어 설계에는 컴파일 시간에 영향을 미치는 요소가 여럿 있습니다.</p>
-<p>먼저 Rust는 비교적 <strong>복잡한 타입 시스템을</strong> 가지고 있고, 실행 시간에 Rust를 안전하게 만들기 위한 제약 사항을 강제하는 데 무시할 수 없는 컴파일 시간을 사용해야 합니다.</p>
-<p>두번째로 Rust 컴파일러에는 오래된 기술 부채가 있으며, 특히 생성되는 LLVM IR의 품질이 좋지 못하기 때문에 LLVM이 시간을 들여 이를 “고쳐야” 합니다. <strong>미래에는 MIR 기반 최적화 및 번역 단계가 Rust 컴파일러가 LLVM에 가하는 부하를 줄여 줄지도</strong> 모릅니다.</p>
-<p>세번째로 Rust가 코드 생성에 LLVM을 쓰는 것은 양날의 검이라는 점입니다. <strong>LLVM 덕분에 Rust는 세계구급 런타임 성능을 보여 주지만, LLVM은 컴파일 시간에 촛점을 맞추지 않은 거대한 프레임워크이며 특히 품질이 낮은 입력에 취약</strong>합니다.</p>
+<p>(4) 컴파일 모델과는 별개로, Rust의 언어 설계에는 컴파일 시간에 영향을 미치는 요소가 여럿 있습니다.</p>
+<ol>
+<li>
+<p>Rust는 비교적 <strong>복잡한 타입 시스템을</strong> 가지고 있고, 실행 시간에 Rust를 안전하게 만들기 위한 제약 사항을 강제하는 데 무시할 수 없는 컴파일 시간을 사용해야 합니다.</p>
+</li>
+<li>
+<p>Rust 컴파일러에는 오래된 기술 부채가 있으며, 특히 생성되는 LLVM IR의 품질이 좋지 못하기 때문에 LLVM이 시간을 들여 이를 “고쳐야” 합니다. <strong>미래에는 MIR 기반 최적화 및 번역 단계가 Rust 컴파일러가 LLVM에 가하는 부하를 줄여 줄지도</strong> 모릅니다.</p>
+</li>
+<li>
+<p>Rust가 코드 생성에 LLVM을 쓰는 것은 양날의 검이라는 점입니다. <strong>LLVM 덕분에 Rust는 세계구급 런타임 성능을 보여 주지만, LLVM은 컴파일 시간에 촛점을 맞추지 않은 거대한 프레임워크이며 특히 품질이 낮은 입력에 취약</strong>합니다.</p>
+</li>
+<li>
 <p>마지막으로 <strong>Rust가 일반화(제너릭) 타입을 C++와 비슷하게 단형화(monomorphise)하는 전략은 빠른 코드를 생성하지만, 다른 번역 전략에 비해 상당히 많은 코드를 생성해야 한다는 문제</strong>가 있습니다. 이 코드 팽창은 트레이트 객체를 써서 동적 디스패치와 장단을 교환할 수 있습니다.</p>
+</li>
+</ol>
 </div>
         </div>
     </div>
@@ -781,7 +791,7 @@
         </div>
         <div class="details-content">
             <div class="admonition-content"><p><code>unwrap()</code>은 <code>Option</code>이나 <code>Result</code> 안에 있는 값을 뽑아 내고 아무 값도 없으면 패닉을 일으키는 함수입니다.</p>
-<p><code>unwrap()</code>이 잘못된 사용자 입력 따위의 **&ldquo;예상할 수 있는 오류들을 다루는 기본 방법&rdquo;**이 되어서는 안 됩니다.
+<p><code>unwrap()</code>이 잘못된 사용자 입력 따위의 <strong>&ldquo;예상할 수 있는 오류들을 다루는 기본 방법&rdquo;</strong> 이 되어서는 안 됩니다.
 현업 코드에서 이는 값이 비어 있지 않으며 만에 하나 비어 있다면 프로그램이 깨지는 <strong>단언(assertion)처럼 취급되어야 합니다.</strong></p>
 <p>또한 <strong>unwrap()은 아직 오류를 처리하고 싶지 않은 빠른 프로토타입이나, 오류 처리가 주요 논점을 흐릴 수 있는 곳</strong>에서도 유용합니다.</p>
 </div>
@@ -814,7 +824,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-01-07</span>
+                <span>Updated on 2023-01-07&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/b4a5fc3d3f090c47783e2cb81db702e54045f5d1" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) b4a5fc3d3f090c47783e2cb81db702e54045f5d1: rebuilding site Sat Jan  7 18:25:01 KST 2023">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>b4a5fc3</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
