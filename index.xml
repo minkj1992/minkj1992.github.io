@@ -18,16 +18,6 @@
 를 통해서 알아보는 Rust 프로그래밍 원리를 살펴보고, 유용했던 문구들을 스크랩 해둡니다.</p>]]></description>
 </item>
 <item>
-    <title>2022년 하반기를 돌아보며 🇺🇸</title>
-    <link>https://minkj1992.github.io/2022_last_half/</link>
-    <pubDate>Thu, 29 Dec 2022 20:18:21 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/2022_last_half/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/" referrerpolicy="no-referrer">
-            </div><p>You need to write intro in here</p>]]></description>
-</item>
-<item>
     <title>The analects, by Confucius</title>
     <link>https://minkj1992.github.io/the_analects/</link>
     <pubDate>Sun, 18 Dec 2022 19:51:09 &#43;0900</pubDate>
@@ -108,6 +98,16 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/poetry.jpeg" referrerpolicy="no-referrer">
             </div><p>한달 전 일도 인생도 제대로 안살고 있는 내가 꼴보기 싫어 <code>직장을 그만두었다.</code></p>]]></description>
+</item>
+<item>
+    <title>Consciousness</title>
+    <link>https://minkj1992.github.io/behavior/</link>
+    <pubDate>Thu, 20 Oct 2022 19:33:17 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/behavior/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/the_office.png" referrerpolicy="no-referrer">
+            </div><p>나를 포함한 내 주변이 나를 온전히 봐주길 원한다. 나한테 그게 양심이다.</p>]]></description>
 </item>
 </channel>
 </rss>
