@@ -5,7 +5,7 @@
         <description>rust - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
             <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 07 Jan 2023 15:52:24 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
-    <title>(WIP) Rust 디자인 원칙 🦀</title>
+    <title>Rust 디자인 원칙 🦀</title>
     <link>https://minkj1992.github.io/rust_principle/</link>
     <pubDate>Sat, 07 Jan 2023 15:52:24 &#43;0900</pubDate>
     <author>leoo.j</author>

@@ -1,4 +1,4 @@
-# (WIP) Rust 디자인 원칙 🦀
+# Rust 디자인 원칙 🦀
 
 
 [Rust Q&A](https://prev.rust-lang.org/ko-KR/faq.html)를 통해서 알아보는 Rust 프로그래밍 원리를 살펴보고, 유용했던 문구들을 스크랩 해둡니다.
@@ -263,8 +263,8 @@ impl Foo {
 
 - Rust는 Go보다 저수준입니다. 예를 들어 Rust는 쓰레기 수거기(garbage collector)를 필요하지 않지만 Go는 필요로 합니다. 일반적으로 Rust는 C나 C++와 비견할 만한 제어 수준을 제공합니다.
 - Rust의 촛점은 고수준의 편안함을 제공하면서도 안전함과 효율성을 보장하는 것이며, Go의 촛점은 빠르게 컴파일되고 수많은 도구와 함께 멋지게 동작할 수 있는 작고 간단한 언어가 되고자 하는 것입니다.
-- Rust는 일반화 코드에 대한 강한 지원을 가지고 있지만 Go는 아닙니다.
-- Rust는 함수형 프로그래밍에서 많은 영향을 받았으며, 여기에는 하스켈의 타입 클래스에서 유래한 타입 시스템이 포함됩니다. Go는 더 단순한 타입 시스템을 가지고 있고 기본적인 일반화 프로그래밍을 위해 인터페이스를 사용합니다.
+- Rust has strong support for generics, which Go does not.
+- Rust는 함수형 프로그래밍에서 많은 영향을 받았으며, 여기에는 하스켈의 타입 클래스에서 유래한 타입 시스템이 포함됩니다. Go has a simpler type system, using `interfaces` for basic generic programming.
 {{< /admonition  >}}
 
 
@@ -404,18 +404,222 @@ Rust 프로그램은 C나 C++와 같이 `gdb`나 `lldb`로 디버깅할 수 있�
 {{< /admonition  >}}
 
 
+## 10. 숫자
+
+{{< admonition question "부동 소숫점 계산을 할 때 f32와 f64 중 어느 쪽을 선호해야 하나요?" >}}
+_잘 모르겠으면 정밀도를 우선시해서 f64를 선택하세요._
+{{< /admonition  >}}
+
+{{< admonition question "실수들을 비교하거나 HashMap 및 BTreeMap의 키로 쓸 수 없는 이유는 뭔가요?" >}}
+
+(us 문서 기준 개인 해석입니다.)
+
+Floats(실수)타입은 `total ordering`과 `totla equality`가 없습니다. 그렇기 때문에 `Eq` trait를 구현할 수 없습니다.
+
+`total ordering`과 `total equality`가 Float형에 존재하지 않는 이유는 `floating-point`값인 `NaN`이 다른 floating point 값들 그리고 그 자신과도 **비교불가**하기 때문입니다.
+
+(그래서) `float`타입이 `Eq`(total equality 구현체)와 `Ord`(total order 구현체)를 구현하지 못하기 때문에, 이 두 trait를 사용하는 타입들에서 사용될 수 없습니다. 해당 타입에는 `BTreeMap`, `HashMap` 또한 포함됩니다.
+
+두 Map 타입에서는 `key`값에 total ordering 또는 total equality가 필요합니다.
+
+(3rd 인) 이 [ordered-float](https://crates.io/crates/ordered-float) 크레이트에서는 `f32`, `f64` 타입들을 랩핑하여 Ord와 Eq 구현체들을 제공합니다. 그러므로 특정한 상황에서 유용하게 사용할 수 있습니다.
+{{< /admonition  >}}
+
+{{< admonition question "How can I convert between numeric types?" >}}
+두 가지 방법이 있는데, 하나는 `as 예약어`로 원시 타입 사이에서 간단한 변환을 하는 것이고, 다른 하나는 `Into`와 `From` 트레이트를 써서 타입 변환을 하는 것입니다(직접 트레이트를 구현해서 변환을 추가할 수도 있습니다). 
+
+`Into`와 `From` 트레이트는 변환에서 손실이 일어나지 않을 때만 구현되어 있습니다. 이를테면 `f64::from(0f32)`는 컴파일이 되지만 `f32::from(0f64)`는 아닙니다. 한편 `as`는 원시 타입들 사이에서는 모두 변환이 가능하며 필요하다면 값을 잘라냅니다(truncating).
+{{< /admonition  >}}
+
+## 11. 문자열
+
+{{< admonition question "`&str`과 `String`에는 어떤 차이가 있나요?">}}
+`String`은 힙에 할당된 UTF-8 바이트를 소유하는 버퍼입니다. 변경 가능한 `String`은 수정할 수 있고 필요에 따라 그 용량(capacity)을 늘릴 수 있습니다. `&str`은 다른 데 (보통 힙에) 할당되어 있는 `String`으로부터 참조된 슬라이스나, 문자열 리터럴의 경우 정적 메모리를 가리키는, 용량이 고정된 "view"입니다.
+`&str`은 Rust 언어가 구현하는 원시 타입이지만 `String`은 표준 라이브러리에 구현되어 있습니다.
+{{< /admonition  >}}
+
+{{< admonition question "String의 각 문자를 O(1), 즉 상수 시간에 접근하려면 어떻게 해야 하나요?" >}}
+**불가능합니다.**
+
+Rust string들은 `UTF-8`로 인코딩되어 있습니다. `UTF-8`에서 `A single visual character`(보여지는 하나의 문자)는 반드시 `single byte`가 아닐 수도 있습니다(ASCII-encoded string일 경우).
+
+각 바이트는 `“code unit”` (in UTF-16, code units are 2 bytes; in UTF-32 they are 4 bytes)라고 불립니다. `“Code points”`는 하나 또는 2이상의 `code unit`들로 구성되어 있으며, 
+문자를 가장 가까이 근사한다고 할 수 있는 `“자소(grapheme) 클러스터”`는 여러 개의 `코드 포인트`로 구성되어 있습니다.
+
+따라서 UTF-8 문자열에서 바이트를 인덱싱할 수 있다 하더라도 상수 시간에 i번째 코드포인트나 자소 클러스터를 얻어낼 수는 없습니다. **하지만 원하는 `코드포인트`나 `grapheme 클러스터`가 어느 바이트에서 시작하는지 안다면 그건 상수 시간에 접근할 수 있습니다. `str::find()`나 `정규식 검색 결과`는 `바이트 인덱스`를 반환하므로 이 방법으로 접근하는 게 가능합니다.**
+{{< /admonition  >}}
+
+{{< admonition question "Why are strings `UTF-8` by default?" >}}
+`str` 타입이 `UTF-8`인 것은 현실에서, 특히 엔디안이 정해져 있지 않은 네트워크 전송에서 이 인코딩이 널리 쓰이기 때문이고, I/O를 할 때 어느 방향에서도 코드포인트를 다시 변환할 필요가 없는 것이 최선이라고 생각하기 때문입니다.
+
+**물론 이는 문자열 안의 특정 유니코드 코드포인트의 위치를 찾는데 O(n) 연산이 필요하다는 뜻이긴 합니다.** 이미 시작하는 바이트 인덱스를 알고 있을 경우에는 예상대로 O(1) 시간이 걸리겠지만요. 어떻게 보면 바람직하지 않을 수도 있지만, 어떻게 보면 이 문제 자체가 트레이드오프로 가득 차 있기에 다음 중요한 점들을 지적할 필요가 있겠습니다:
+
+**`str`에서 `ASCII 영역`의 코드포인트를 훑는 건 바이트 단위로 안전하게 할 수 있습니다.** 예를 들어 `.as_bytes()`를 쓸 경우 `u8`타입(8-bit unsigned int type)을 얻는 건 `O(1)` 연산이며 이 값은 `ASCII` 범위의 char로 변환하거나 비교할 수 있습니다. 그러니 이를테면 `'\n'`로 줄 바꿈을 찾는다면 바이트 단위로 검색해도 됩니다. UTF-8은 원래부터 이렇게 설계되었거든요.
+
+**대부분의 “문자 기반” 텍스트 연산들은 “ASCII 범위의 코드포인트 한정” 같이 매우 제약된 언어 가정이 있어야만 동작합니다.** ASCII 범위를 벗어나면 언어학적인 단위들(glyphs[글리프], 낱말, 문단)의 경계를 찾기 위해 (상수 시간이 아닌) 복잡한 알고리즘을 써야 하기 마련입니다. 저희는 언어학적으로 올바르며 "honest"하다고 **유니코드에서 인증한 알고리즘을 권장**합니다.
+
+`char` 타입은 `UTF-32`입니다. 한 번에 한 코드포인트를 들여다 보는 알고리즘이 정말로 필요하다고 생각한다면 `type wstr = [char]`을 정의하여 `str`로부터 한번에 읽어들인 뒤 `wstr`에서 연산을 하면 됩니다. **다르게 말하면, 언어가 “기본적으로 UTF-32로 디코딩하지 않는다”고 해서 UTF-32로 디코딩하거나 다시 인코딩하는 것 자체가 불가능한 건 아니라는 말입니다.**
+
+왜 UTF-8이 UTF-16이나 UTF-32보다 보통 더 선호되는지 자세한 설명을 원한다면 [UTF-8 Everywhere manifesto](http://utf8everywhere.org/)를 읽어 보시길 바랍니다.
+{{< /admonition  >}}
+
+{{< admonition question "어떤 문자열 타입을 써야 하죠?" >}}
+Rust는 네 쌍의 문자열 타입이 있고 각각 다른 역할을 합니다. 각 쌍마다 “소유된” 문자열 타입과 “슬라이스” 문자열 타입이 따로 있고, 다음과 같이 구성되어 있습니다
+
+<center>
+
+![](/images/rust_string_types.png)
+
+</center>
+
+Rust의 서로 다른 문자열 타입은 각자 다른 목적을 가집니다. 
+
+- String과 str은 UTF-8로 인코딩된 일반 목적의 문자열입니다. - OsString과 OsStr은 현재 플랫폼에 맞춰 인코딩되어 있고 운영체제와 상호작용할 때 쓰입니다. 
+- CString과 CStr은 C 문자열의 Rust 버전으로 FFI 코드에 사용됩니다.
+- PathBuf와 Path는 OsString과 OsStr에 편의를 위해 경로 조작을 위한 메소드들을 추가한 것입니다.
+{{< /admonition  >}}
+
+{{< admonition question "&str와 String을 동시에 받는 함수를 어떻게 짤 수 있나요?" >}}
+
+- 함수가 소유된 문자열을 필요로 하지만 아무 문자열 타입이나 받고 싶다면, `Into<String>` 제약을 쓰세요.
+- 함수가 문자열 슬라이스를 필요로 하지만 아무 문자열 타입이나 받고 싶다면, `AsRef<str>` 제약을 쓰세요.
+- 함수가 문자열 타입에 대해 신경쓰지 않고 두 가능성을 일관되게 처리하고 싶다면, 입력 타입으로 `Cow<str>`을 쓰세요.
+
+{{< /admonition  >}}
+
+#### `Into<String>`
+
+이 예제에서 함수는 소유된 문자열과 문자열 슬라이스를 둘 다 받으며, 어느 쪽인지에 따라 함수 몸체 안에서 아무 일도 하지 않거나 입력을 소유된 문자열로 변환합니다. 참고로 변환은 명시적으로 해야 하며 안 그러면 변환되지 않을 것입니다.
+
+```rs
+fn accepts_both<S: Into<String>>(s: S) {
+    let s = s.into();   // s를 `String`으로 변환합니다.
+    // ... 함수의 나머지 내용
+}
+```
+
+#### `AsRef<str>`
+
+이 예제에서 함수는 소유된 문자열과 문자열 슬라이스를 둘 다 받으며, 어느 쪽인지에 따라 아무 일도 하지 않거나 입력을 문자열 슬라이스로 변환합니다. 이는 입력을 참조로 받아서 다음과 같이 자동으로 일어나게 할 수 있습니다:
+
+```rs
+fn accepts_both<S: AsRef<str>>(s: &S) {
+    // ... 함수의 몸체
+}
+```
 
 
-## TODO
-> Current document is WIP.
+#### `Cow<str>`
 
-- [ ] 숫자
-- [ ] 문자열
-- [ ] 컬렉션
-- [ ] 소유권
-- [ ] 수명
-- [ ] 일반화 (제너릭)
+이 예제에서 함수는 Cow<str>을 받는데, 이는 일반화된 타입이 아니라 컨테이너로서 필요에 따라 소유된 문자열이나 문자열 슬라이스를 담을 수 있습니다.
+
+```rs
+fn accepts_cow(s: Cow<str>) {
+    // ... 함수의 몸체
+}
+```
+
+## 12. 컬렉션
+
+{{< admonition question "How can I iterate over a collection without moving/consuming it?" >}}
+
+가장 쉬운 방법은 컬렉션의 `IntoIterator` 구현체를 사용하는 겁니다. 
+`IntoIterator`는 `&Vec`과 `&mut Vec`에 구현되어 있으며, 아래는 `&Vec`를 활용해 이를 설명합니다.
+
+```rs
+let v = vec![1,2,3,4,5];
+for item in &v {
+    print!("{} ", item);
+}
+println!("\nLength: {}", v.len());
+```
+Rust의 for 반복문은 반복하고자 하는 대상에 대해 (`IntoIterator` 트레이트에 정의된) `into_iter()`를 호출합니다. `IntoIterator` 트레이트를 구현하는 모든 value들은 for 반복문에서 사용될 수 있습니다. 
+
+**`into_iter()`는 컬렉션을 옮기거나 소모하는 것이 아니라, 그 내용물을 빌리도록 합니다. 다른 표준 컬렉션에 대해서도 똑같은 관계가 성립합니다.**
+
+만약 옮기거나 소모하는 반복자가 필요하다면 for 반복문에서 반복할 때 **`&`나 `&mut` 없이 쓰세요.**
+
+빌리는 반복자를 직접 접근하고 싶다면 보통 **iter() 메소드**를 써서 얻을 수 있습니다.
+
+{{< /admonition  >}}
+
+{{< admonition question "Why do I need to type the array size in the array declaration?" >}}
+
+**꼭 그럴 필요 없습니다.** 
+
+배열을 직접 선언한다면 원소의 갯수로부터 크기가 추론됩니다. 하지만 고정된 크기의 배열을 받는 함수를 선언한다면 컴파일러가 배열이 얼마나 클 지를 알아야 합니다.
+
+하나 짚고 넘어가야 하는 게 있는데, **Rust는 현재 서로 다른 크기의 배열에 대해 `generics`를 지원하지 않습니다. 만약 갯수가 바뀔 수 있는 값들의 연속된 컨테이너를 받고자 한다면 (소유권이 필요하냐 마냐에 따라) `Vec`이나 `slice`를 사용하세요.**
+{{< /admonition  >}}
+
+## 13. 소유권
+> 추가로 다시 봐야할 듯 싶어 [link](https://prev.rust-lang.org/en-US/faq.html#ownership)를 적어둡니다.
+
+{{< admonition question "What is the difference between `passing by value`, `consuming`, `moving`, and `transferring ownership`?" >}}
+
+**다 같은 뜻입니다.**
+
+네 가지 경우에서 모두, 값이 새 소유자에게 옮겨가고, 원 소유자가 소유를 잃어버려 더 이상 쓸 수 없게 됩니다. 단 만약 타입이 Copy 트레이트를 구현한다면 원 소유자의 값은 무효화되지 않아 계속 쓸 수 있습니다.
+
+{{< /admonition  >}}
+
+{{< admonition question "왜 어떤 타입은 함수에 넘긴 뒤에도 재사용할 수 있지만 다른 타입은 그렇지 않나요?" >}}
+
+타입이 `Copy 트레이트`를 구현하면 함수에 전달될 때 복사됩니다. **Rust의 모든 numeric type들은 Copy를 구현하지만**, struct type들은 기본적으로 Copy를 구현하지 않기 때문에 대신 `이동`이 일어납니다. 
 
 
+**This means that the struct can no longer be used elsewhere, unless it is moved back out of the function via the return.**
 
+(즉 구조체는 함수에서 다시 반환되거나 하지 않는 한 더 이상 다른 데서 사용할 수 없게 됩니다.)
+
+
+{{< /admonition  >}}
+
+## 14. Lifetimes(수명)
+
+{{< admonition question "Why lifetimes?" >}}
+`lifetime`은 메모리 안전성에 대한 Rust의 해답입니다. 
+
+Rust는 수명을 사용해 쓰레기 수거(garbage collection)의 성능 비용 없이 메모리 안전성을 보장합니다. 
+{{< /admonition  >}}
+
+{{< admonition question "Why is the lifetime syntax the way it is?" >}}
+`'a` 문법은 `ML(meta language) 계열`의 프로그래밍 언어에서 따 왔는데, 여기서 `'a` 문법은 `generic type parameter`를 나타내는 데 사용됩니다. Rust의 경우 수명 문법은 모호하지 않고, 눈에 띄어야 했으며 타입 선언에서 트레이트와 참조와 함께 쓰기 좋아야 했습니다. 다른 문법도 의논되었으나 이보다 확실히 더 좋은 문법이 제시되진 않았습니다.
+{{< /admonition  >}}
+
+{{< admonition question "Why do some references have lifetimes, like `&'a T`, and some do not, like `&T`?" >}}
+
+사실 모든 참조 타입에는 수명이 있지만, 대부분의 경우 직접 쓸 필요가 없습니다. 규칙은 다음과 같습니다:
+
+1. `function body`에서는 수명을 명시적으로 쓸 필요가 전혀 없습니다.(항상 올바른 값이 추론될 것입니다).
+2. `function signature` (예를 들어 인자 타입이나 반환 타입) 에서는 수명을 명시적으로 써야 할 수도 있습니다. 여기에서는 `수명 탈락(elision)`라는 간단한 기본값이 적용되는데 이는 다음 세 규칙으로 구성되어 있습니다
+    1. function argument들에서 탈락된(elided) 각각 수명들은 서로 다른 인자가 됩니다.
+    2. 입력된 수명이 하나 뿐이면, 그게 탈락되었든 아니든 그 함수의 `return value들`의 all elided lifetimes(탈락된 수명들)에 할당됩니다.
+    3. 입력 수명이 여럿 있지만 그 중 하나가 `&self`거나 `&mut self`라면, `self`의 lifetime이  all elided output lifetimes(모든 탈락된 출력 수명들)에 할당됩니다.
+3. 마지막으로 struct와 enum 정의에서는 모든 수명이 명시적으로 선언되어야 합니다.
+
+
+만약 이 규칙이 컴파일 에러(compilation errors)를 일으킨다면, Rust 컴파일러는 일어난 에러를 가리키는 메시지를 제공하며 그 에러가 일어난 inference process(추론 단계)에 따라 필요한 solution을 제시할 것입니다.
+
+{{< /admonition  >}}
+
+
+{{< admonition question "How can Rust guarantee no `null pointers` and no `dangling pointers`(유령 포인터)?" >}}
+`&Foo`와 `&mut Foo` 타입의 값을 만드는 유일한 방법은 `이미 존재하는 Foo 타입의 값을 reference가 point하는 값으로 specify하는 것 뿐입니다. 
+
+reference는 region of code(즉, the lifetime of the reference) 안에서 원래 값을 “빌리며”, reference가 값을 "빌리는" 동안에는 original value를 옮기거나 소멸시킬 수 없습니다.
+
+{{< /admonition  >}}
+
+{{< admonition question "How do I express the absence of a value without null?" >}}
+
+You can do that with the `Option type`, which can either be `Some(T)` or `None`. `Some(T)` indicates that a value of type T is contained within, while `None` indicates the absence of a value.
+{{< /admonition  >}}
+
+## 15. 제너릭
+
+`Generic`에 대해서는 복잡한 내용들이 많아 링크로 대체합니다.
+
+- [Generic: en](https://prev.rust-lang.org/en-US/faq.html#generics)
+- [GenericL kr](https://prev.rust-lang.org/ko-KR/faq.html#generics)
 

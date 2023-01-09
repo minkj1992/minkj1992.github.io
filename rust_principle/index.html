@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>(WIP) Rust 디자인 원칙 🦀 | minkj1992</title><meta name="Description" content="Rust Q&amp;A를 통해서 알아보는 원리"><meta property="og:title" content="(WIP) Rust 디자인 원칙 🦀" />
+    <title>Rust 디자인 원칙 🦀 | minkj1992</title><meta name="Description" content="Rust Q&amp;A를 통해서 알아보는 원리"><meta property="og:title" content="Rust 디자인 원칙 🦀" />
 <meta property="og:description" content="Rust Q&amp;A를 통해서 알아보는 원리" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/rust_principle/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
@@ -15,7 +15,7 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
 
-<meta name="twitter:title" content="(WIP) Rust 디자인 원칙 🦀"/>
+<meta name="twitter:title" content="Rust 디자인 원칙 🦀"/>
 <meta name="twitter:description" content="Rust Q&amp;A를 통해서 알아보는 원리"/>
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -24,7 +24,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "(WIP) Rust 디자인 원칙 🦀",
+        "headline": "Rust 디자인 원칙 🦀",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -34,7 +34,7 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "rust, principles","wordcount":  2525 ,
+                        }],"genre": "posts","keywords": "rust, principles","wordcount":  4007 ,
         "url": "https:\/\/minkj1992.github.io\/rust_principle\/","datePublished": "2023-01-07T15:52:24+09:00","dateModified": "2023-01-07T18:30:10+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
@@ -170,11 +170,11 @@
             <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">(WIP) Rust 디자인 원칙 🦀</h1><h2 class="single-subtitle">Rust Q&amp;A를 통해서 알아보는 원리</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust 디자인 원칙 🦀</h1><h2 class="single-subtitle">Rust Q&amp;A를 통해서 알아보는 원리</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-07">2023-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2525 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;12 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-07">2023-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4007 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;19 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -199,7 +199,22 @@
     <li><a href="#8-저수준">8. 저수준</a></li>
     <li><a href="#9-디버깅--tool">9. 디버깅 / Tool</a></li>
     <li><a href="#10-오류">10. 오류</a></li>
-    <li><a href="#todo">TODO</a></li>
+    <li><a href="#10-숫자">10. 숫자</a></li>
+    <li><a href="#11-문자열">11. 문자열</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#intostring"><code>Into&lt;String&gt;</code></a></li>
+            <li><a href="#asrefstr"><code>AsRef&lt;str&gt;</code></a></li>
+            <li><a href="#cowstr"><code>Cow&lt;str&gt;</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#12-컬렉션">12. 컬렉션</a></li>
+    <li><a href="#13-소유권">13. 소유권</a></li>
+    <li><a href="#14-lifetimes수명">14. Lifetimes(수명)</a></li>
+    <li><a href="#15-제너릭">15. 제너릭</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p><a href="https://prev.rust-lang.org/ko-KR/faq.html" target="_blank" rel="noopener noreffer">Rust Q&amp;A</a>
@@ -602,8 +617,8 @@
             <div class="admonition-content"><ul>
 <li>Rust는 Go보다 저수준입니다. 예를 들어 Rust는 쓰레기 수거기(garbage collector)를 필요하지 않지만 Go는 필요로 합니다. 일반적으로 Rust는 C나 C++와 비견할 만한 제어 수준을 제공합니다.</li>
 <li>Rust의 촛점은 고수준의 편안함을 제공하면서도 안전함과 효율성을 보장하는 것이며, Go의 촛점은 빠르게 컴파일되고 수많은 도구와 함께 멋지게 동작할 수 있는 작고 간단한 언어가 되고자 하는 것입니다.</li>
-<li>Rust는 일반화 코드에 대한 강한 지원을 가지고 있지만 Go는 아닙니다.</li>
-<li>Rust는 함수형 프로그래밍에서 많은 영향을 받았으며, 여기에는 하스켈의 타입 클래스에서 유래한 타입 시스템이 포함됩니다. Go는 더 단순한 타입 시스템을 가지고 있고 기본적인 일반화 프로그래밍을 위해 인터페이스를 사용합니다.</li>
+<li>Rust has strong support for generics, which Go does not.</li>
+<li>Rust는 함수형 프로그래밍에서 많은 영향을 받았으며, 여기에는 하스켈의 타입 클래스에서 유래한 타입 시스템이 포함됩니다. Go has a simpler type system, using <code>interfaces</code> for basic generic programming.</li>
 </ul>
 </div>
         </div>
@@ -809,17 +824,293 @@
 </div>
         </div>
     </div>
-<h2 id="todo">TODO</h2>
-<blockquote>
-<p>Current document is WIP.</p>
-</blockquote>
+<h2 id="10-숫자">10. 숫자</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>부동 소숫점 계산을 할 때 f32와 f64 중 어느 쪽을 선호해야 하나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><em>잘 모르겠으면 정밀도를 우선시해서 f64를 선택하세요.</em></div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>실수들을 비교하거나 HashMap 및 BTreeMap의 키로 쓸 수 없는 이유는 뭔가요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>(us 문서 기준 개인 해석입니다.)</p>
+<p>Floats(실수)타입은 <code>total ordering</code>과 <code>totla equality</code>가 없습니다. 그렇기 때문에 <code>Eq</code> trait를 구현할 수 없습니다.</p>
+<p><code>total ordering</code>과 <code>total equality</code>가 Float형에 존재하지 않는 이유는 <code>floating-point</code>값인 <code>NaN</code>이 다른 floating point 값들 그리고 그 자신과도 <strong>비교불가</strong>하기 때문입니다.</p>
+<p>(그래서) <code>float</code>타입이 <code>Eq</code>(total equality 구현체)와 <code>Ord</code>(total order 구현체)를 구현하지 못하기 때문에, 이 두 trait를 사용하는 타입들에서 사용될 수 없습니다. 해당 타입에는 <code>BTreeMap</code>, <code>HashMap</code> 또한 포함됩니다.</p>
+<p>두 Map 타입에서는 <code>key</code>값에 total ordering 또는 total equality가 필요합니다.</p>
+<p>(3rd 인) 이 <a href="https://crates.io/crates/ordered-float" target="_blank" rel="noopener noreffer">ordered-float</a>
+ 크레이트에서는 <code>f32</code>, <code>f64</code> 타입들을 랩핑하여 Ord와 Eq 구현체들을 제공합니다. 그러므로 특정한 상황에서 유용하게 사용할 수 있습니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>How can I convert between numeric types?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>두 가지 방법이 있는데, 하나는 <code>as 예약어</code>로 원시 타입 사이에서 간단한 변환을 하는 것이고, 다른 하나는 <code>Into</code>와 <code>From</code> 트레이트를 써서 타입 변환을 하는 것입니다(직접 트레이트를 구현해서 변환을 추가할 수도 있습니다).</p>
+<p><code>Into</code>와 <code>From</code> 트레이트는 변환에서 손실이 일어나지 않을 때만 구현되어 있습니다. 이를테면 <code>f64::from(0f32)</code>는 컴파일이 되지만 <code>f32::from(0f64)</code>는 아닙니다. 한편 <code>as</code>는 원시 타입들 사이에서는 모두 변환이 가능하며 필요하다면 값을 잘라냅니다(truncating).</p>
+</div>
+        </div>
+    </div>
+<h2 id="11-문자열">11. 문자열</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>`&amp;str`과 `String`에는 어떤 차이가 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>String</code>은 힙에 할당된 UTF-8 바이트를 소유하는 버퍼입니다. 변경 가능한 <code>String</code>은 수정할 수 있고 필요에 따라 그 용량(capacity)을 늘릴 수 있습니다. <code>&amp;str</code>은 다른 데 (보통 힙에) 할당되어 있는 <code>String</code>으로부터 참조된 슬라이스나, 문자열 리터럴의 경우 정적 메모리를 가리키는, 용량이 고정된 &ldquo;view&quot;입니다.
+<code>&amp;str</code>은 Rust 언어가 구현하는 원시 타입이지만 <code>String</code>은 표준 라이브러리에 구현되어 있습니다.</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>String의 각 문자를 O(1), 즉 상수 시간에 접근하려면 어떻게 해야 하나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><strong>불가능합니다.</strong></p>
+<p>Rust string들은 <code>UTF-8</code>로 인코딩되어 있습니다. <code>UTF-8</code>에서 <code>A single visual character</code>(보여지는 하나의 문자)는 반드시 <code>single byte</code>가 아닐 수도 있습니다(ASCII-encoded string일 경우).</p>
+<p>각 바이트는 <code>“code unit”</code> (in UTF-16, code units are 2 bytes; in UTF-32 they are 4 bytes)라고 불립니다. <code>“Code points”</code>는 하나 또는 2이상의 <code>code unit</code>들로 구성되어 있으며,
+문자를 가장 가까이 근사한다고 할 수 있는 <code>“자소(grapheme) 클러스터”</code>는 여러 개의 <code>코드 포인트</code>로 구성되어 있습니다.</p>
+<p>따라서 UTF-8 문자열에서 바이트를 인덱싱할 수 있다 하더라도 상수 시간에 i번째 코드포인트나 자소 클러스터를 얻어낼 수는 없습니다. <strong>하지만 원하는 <code>코드포인트</code>나 <code>grapheme 클러스터</code>가 어느 바이트에서 시작하는지 안다면 그건 상수 시간에 접근할 수 있습니다. <code>str::find()</code>나 <code>정규식 검색 결과</code>는 <code>바이트 인덱스</code>를 반환하므로 이 방법으로 접근하는 게 가능합니다.</strong></p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Why are strings `UTF-8` by default?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><code>str</code> 타입이 <code>UTF-8</code>인 것은 현실에서, 특히 엔디안이 정해져 있지 않은 네트워크 전송에서 이 인코딩이 널리 쓰이기 때문이고, I/O를 할 때 어느 방향에서도 코드포인트를 다시 변환할 필요가 없는 것이 최선이라고 생각하기 때문입니다.</p>
+<p><strong>물론 이는 문자열 안의 특정 유니코드 코드포인트의 위치를 찾는데 O(n) 연산이 필요하다는 뜻이긴 합니다.</strong> 이미 시작하는 바이트 인덱스를 알고 있을 경우에는 예상대로 O(1) 시간이 걸리겠지만요. 어떻게 보면 바람직하지 않을 수도 있지만, 어떻게 보면 이 문제 자체가 트레이드오프로 가득 차 있기에 다음 중요한 점들을 지적할 필요가 있겠습니다:</p>
+<p><strong><code>str</code>에서 <code>ASCII 영역</code>의 코드포인트를 훑는 건 바이트 단위로 안전하게 할 수 있습니다.</strong> 예를 들어 <code>.as_bytes()</code>를 쓸 경우 <code>u8</code>타입(8-bit unsigned int type)을 얻는 건 <code>O(1)</code> 연산이며 이 값은 <code>ASCII</code> 범위의 char로 변환하거나 비교할 수 있습니다. 그러니 이를테면 <code>'\n'</code>로 줄 바꿈을 찾는다면 바이트 단위로 검색해도 됩니다. UTF-8은 원래부터 이렇게 설계되었거든요.</p>
+<p><strong>대부분의 “문자 기반” 텍스트 연산들은 “ASCII 범위의 코드포인트 한정” 같이 매우 제약된 언어 가정이 있어야만 동작합니다.</strong> ASCII 범위를 벗어나면 언어학적인 단위들(glyphs[글리프], 낱말, 문단)의 경계를 찾기 위해 (상수 시간이 아닌) 복잡한 알고리즘을 써야 하기 마련입니다. 저희는 언어학적으로 올바르며 &ldquo;honest&quot;하다고 <strong>유니코드에서 인증한 알고리즘을 권장</strong>합니다.</p>
+<p><code>char</code> 타입은 <code>UTF-32</code>입니다. 한 번에 한 코드포인트를 들여다 보는 알고리즘이 정말로 필요하다고 생각한다면 <code>type wstr = [char]</code>을 정의하여 <code>str</code>로부터 한번에 읽어들인 뒤 <code>wstr</code>에서 연산을 하면 됩니다. <strong>다르게 말하면, 언어가 “기본적으로 UTF-32로 디코딩하지 않는다”고 해서 UTF-32로 디코딩하거나 다시 인코딩하는 것 자체가 불가능한 건 아니라는 말입니다.</strong></p>
+<p>왜 UTF-8이 UTF-16이나 UTF-32보다 보통 더 선호되는지 자세한 설명을 원한다면 <a href="http://utf8everywhere.org/" target="_blank" rel="noopener noreffer">UTF-8 Everywhere manifesto</a>
+를 읽어 보시길 바랍니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>어떤 문자열 타입을 써야 하죠?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Rust는 네 쌍의 문자열 타입이 있고 각각 다른 역할을 합니다. 각 쌍마다 “소유된” 문자열 타입과 “슬라이스” 문자열 타입이 따로 있고, 다음과 같이 구성되어 있습니다</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/rust_string_types.png"
+        data-srcset="/images/rust_string_types.png, /images/rust_string_types.png 1.5x, /images/rust_string_types.png 2x"
+        data-sizes="auto"
+        alt="/images/rust_string_types.png"
+        title="/images/rust_string_types.png" /></p>
+</center>
+<p>Rust의 서로 다른 문자열 타입은 각자 다른 목적을 가집니다.</p>
 <ul>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 숫자</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 문자열</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 컬렉션</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 소유권</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 수명</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> 일반화 (제너릭)</li>
+<li>String과 str은 UTF-8로 인코딩된 일반 목적의 문자열입니다. - OsString과 OsStr은 현재 플랫폼에 맞춰 인코딩되어 있고 운영체제와 상호작용할 때 쓰입니다.</li>
+<li>CString과 CStr은 C 문자열의 Rust 버전으로 FFI 코드에 사용됩니다.</li>
+<li>PathBuf와 Path는 OsString과 OsStr에 편의를 위해 경로 조작을 위한 메소드들을 추가한 것입니다.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>&amp;str와 String을 동시에 받는 함수를 어떻게 짤 수 있나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><ul>
+<li>함수가 소유된 문자열을 필요로 하지만 아무 문자열 타입이나 받고 싶다면, <code>Into&lt;String&gt;</code> 제약을 쓰세요.</li>
+<li>함수가 문자열 슬라이스를 필요로 하지만 아무 문자열 타입이나 받고 싶다면, <code>AsRef&lt;str&gt;</code> 제약을 쓰세요.</li>
+<li>함수가 문자열 타입에 대해 신경쓰지 않고 두 가능성을 일관되게 처리하고 싶다면, 입력 타입으로 <code>Cow&lt;str&gt;</code>을 쓰세요.</li>
+</ul>
+</div>
+        </div>
+    </div>
+<h4 id="intostring"><code>Into&lt;String&gt;</code></h4>
+<p>이 예제에서 함수는 소유된 문자열과 문자열 슬라이스를 둘 다 받으며, 어느 쪽인지에 따라 함수 몸체 안에서 아무 일도 하지 않거나 입력을 소유된 문자열로 변환합니다. 참고로 변환은 명시적으로 해야 하며 안 그러면 변환되지 않을 것입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">accepts_both</span><span class="o">&lt;</span><span class="n">S</span>: <span class="nb">Into</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">s</span>: <span class="nc">S</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">into</span><span class="p">();</span><span class="w">   </span><span class="c1">// s를 `String`으로 변환합니다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="c1">// ... 함수의 나머지 내용
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="asrefstr"><code>AsRef&lt;str&gt;</code></h4>
+<p>이 예제에서 함수는 소유된 문자열과 문자열 슬라이스를 둘 다 받으며, 어느 쪽인지에 따라 아무 일도 하지 않거나 입력을 문자열 슬라이스로 변환합니다. 이는 입력을 참조로 받아서 다음과 같이 자동으로 일어나게 할 수 있습니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">accepts_both</span><span class="o">&lt;</span><span class="n">S</span>: <span class="nb">AsRef</span><span class="o">&lt;</span><span class="kt">str</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="nc">S</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ... 함수의 몸체
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="cowstr"><code>Cow&lt;str&gt;</code></h4>
+<p>이 예제에서 함수는 Cow<str>을 받는데, 이는 일반화된 타입이 아니라 컨테이너로서 필요에 따라 소유된 문자열이나 문자열 슬라이스를 담을 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">accepts_cow</span><span class="p">(</span><span class="n">s</span>: <span class="nc">Cow</span><span class="o">&lt;</span><span class="kt">str</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// ... 함수의 몸체
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="12-컬렉션">12. 컬렉션</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>How can I iterate over a collection without moving/consuming it?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>가장 쉬운 방법은 컬렉션의 <code>IntoIterator</code> 구현체를 사용하는 겁니다.
+<code>IntoIterator</code>는 <code>&amp;Vec</code>과 <code>&amp;mut Vec</code>에 구현되어 있으며, 아래는 <code>&amp;Vec</code>를 활용해 이를 설명합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">print!</span><span class="p">(</span><span class="s">&#34;{} &#34;</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;\nLength: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">len</span><span class="p">());</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Rust의 for 반복문은 반복하고자 하는 대상에 대해 (<code>IntoIterator</code> 트레이트에 정의된) <code>into_iter()</code>를 호출합니다. <code>IntoIterator</code> 트레이트를 구현하는 모든 value들은 for 반복문에서 사용될 수 있습니다.</p>
+<p><strong><code>into_iter()</code>는 컬렉션을 옮기거나 소모하는 것이 아니라, 그 내용물을 빌리도록 합니다. 다른 표준 컬렉션에 대해서도 똑같은 관계가 성립합니다.</strong></p>
+<p>만약 옮기거나 소모하는 반복자가 필요하다면 for 반복문에서 반복할 때 <strong><code>&amp;</code>나 <code>&amp;mut</code> 없이 쓰세요.</strong></p>
+<p>빌리는 반복자를 직접 접근하고 싶다면 보통 <strong>iter() 메소드</strong>를 써서 얻을 수 있습니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Why do I need to type the array size in the array declaration?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><strong>꼭 그럴 필요 없습니다.</strong></p>
+<p>배열을 직접 선언한다면 원소의 갯수로부터 크기가 추론됩니다. 하지만 고정된 크기의 배열을 받는 함수를 선언한다면 컴파일러가 배열이 얼마나 클 지를 알아야 합니다.</p>
+<p>하나 짚고 넘어가야 하는 게 있는데, <strong>Rust는 현재 서로 다른 크기의 배열에 대해 <code>generics</code>를 지원하지 않습니다. 만약 갯수가 바뀔 수 있는 값들의 연속된 컨테이너를 받고자 한다면 (소유권이 필요하냐 마냐에 따라) <code>Vec</code>이나 <code>slice</code>를 사용하세요.</strong></p>
+</div>
+        </div>
+    </div>
+<h2 id="13-소유권">13. 소유권</h2>
+<blockquote>
+<p>추가로 다시 봐야할 듯 싶어 <a href="https://prev.rust-lang.org/en-US/faq.html#ownership" target="_blank" rel="noopener noreffer">link</a>
+를 적어둡니다.</p>
+</blockquote>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>What is the difference between `passing by value`, `consuming`, `moving`, and `transferring ownership`?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><strong>다 같은 뜻입니다.</strong></p>
+<p>네 가지 경우에서 모두, 값이 새 소유자에게 옮겨가고, 원 소유자가 소유를 잃어버려 더 이상 쓸 수 없게 됩니다. 단 만약 타입이 Copy 트레이트를 구현한다면 원 소유자의 값은 무효화되지 않아 계속 쓸 수 있습니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>왜 어떤 타입은 함수에 넘긴 뒤에도 재사용할 수 있지만 다른 타입은 그렇지 않나요?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>타입이 <code>Copy 트레이트</code>를 구현하면 함수에 전달될 때 복사됩니다. <strong>Rust의 모든 numeric type들은 Copy를 구현하지만</strong>, struct type들은 기본적으로 Copy를 구현하지 않기 때문에 대신 <code>이동</code>이 일어납니다.</p>
+<p><strong>This means that the struct can no longer be used elsewhere, unless it is moved back out of the function via the return.</strong></p>
+<p>(즉 구조체는 함수에서 다시 반환되거나 하지 않는 한 더 이상 다른 데서 사용할 수 없게 됩니다.)</p>
+</div>
+        </div>
+    </div>
+<h2 id="14-lifetimes수명">14. Lifetimes(수명)</h2>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Why lifetimes?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><code>lifetime</code>은 메모리 안전성에 대한 Rust의 해답입니다.</p>
+<p>Rust는 수명을 사용해 쓰레기 수거(garbage collection)의 성능 비용 없이 메모리 안전성을 보장합니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Why is the lifetime syntax the way it is?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><code>'a</code> 문법은 <code>ML(meta language) 계열</code>의 프로그래밍 언어에서 따 왔는데, 여기서 <code>'a</code> 문법은 <code>generic type parameter</code>를 나타내는 데 사용됩니다. Rust의 경우 수명 문법은 모호하지 않고, 눈에 띄어야 했으며 타입 선언에서 트레이트와 참조와 함께 쓰기 좋아야 했습니다. 다른 문법도 의논되었으나 이보다 확실히 더 좋은 문법이 제시되진 않았습니다.</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>Why do some references have lifetimes, like `&amp;&#39;a T`, and some do not, like `&amp;T`?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>사실 모든 참조 타입에는 수명이 있지만, 대부분의 경우 직접 쓸 필요가 없습니다. 규칙은 다음과 같습니다:</p>
+<ol>
+<li><code>function body</code>에서는 수명을 명시적으로 쓸 필요가 전혀 없습니다.(항상 올바른 값이 추론될 것입니다).</li>
+<li><code>function signature</code> (예를 들어 인자 타입이나 반환 타입) 에서는 수명을 명시적으로 써야 할 수도 있습니다. 여기에서는 <code>수명 탈락(elision)</code>라는 간단한 기본값이 적용되는데 이는 다음 세 규칙으로 구성되어 있습니다
+<ol>
+<li>function argument들에서 탈락된(elided) 각각 수명들은 서로 다른 인자가 됩니다.</li>
+<li>입력된 수명이 하나 뿐이면, 그게 탈락되었든 아니든 그 함수의 <code>return value들</code>의 all elided lifetimes(탈락된 수명들)에 할당됩니다.</li>
+<li>입력 수명이 여럿 있지만 그 중 하나가 <code>&amp;self</code>거나 <code>&amp;mut self</code>라면, <code>self</code>의 lifetime이  all elided output lifetimes(모든 탈락된 출력 수명들)에 할당됩니다.</li>
+</ol>
+</li>
+<li>마지막으로 struct와 enum 정의에서는 모든 수명이 명시적으로 선언되어야 합니다.</li>
+</ol>
+<p>만약 이 규칙이 컴파일 에러(compilation errors)를 일으킨다면, Rust 컴파일러는 일어난 에러를 가리키는 메시지를 제공하며 그 에러가 일어난 inference process(추론 단계)에 따라 필요한 solution을 제시할 것입니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>How can Rust guarantee no `null pointers` and no `dangling pointers`(유령 포인터)?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><code>&amp;Foo</code>와 <code>&amp;mut Foo</code> 타입의 값을 만드는 유일한 방법은 `이미 존재하는 Foo 타입의 값을 reference가 point하는 값으로 specify하는 것 뿐입니다.</p>
+<p>reference는 region of code(즉, the lifetime of the reference) 안에서 원래 값을 “빌리며”, reference가 값을 &ldquo;빌리는&rdquo; 동안에는 original value를 옮기거나 소멸시킬 수 없습니다.</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition question open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-question-circle fa-fw" aria-hidden="true"></i>How do I express the absence of a value without null?<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">You can do that with the <code>Option type</code>, which can either be <code>Some(T)</code> or <code>None</code>. <code>Some(T)</code> indicates that a value of type T is contained within, while <code>None</code> indicates the absence of a value.</div>
+        </div>
+    </div>
+<h2 id="15-제너릭">15. 제너릭</h2>
+<p><code>Generic</code>에 대해서는 복잡한 내용들이 많아 링크로 대체합니다.</p>
+<ul>
+<li><a href="https://prev.rust-lang.org/en-US/faq.html#generics" target="_blank" rel="noopener noreffer">Generic: en</a>
+</li>
+<li><a href="https://prev.rust-lang.org/ko-KR/faq.html#generics" target="_blank" rel="noopener noreffer">GenericL kr</a>
+</li>
 </ul></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -832,7 +1123,7 @@
                             <a class="link-to-markdown" href="/rust_principle/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/rust_principle/" data-title="(WIP) Rust 디자인 원칙 🦀" data-hashtags="rust,principles"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/rust_principle/" data-hashtag="rust"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/rust_principle/" data-title="(WIP) Rust 디자인 원칙 🦀"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/rust_principle/" data-title="(WIP) Rust 디자인 원칙 🦀"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/rust_principle/" data-title="(WIP) Rust 디자인 원칙 🦀" data-image="/images/rust.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/rust_principle/" data-title="Rust 디자인 원칙 🦀" data-hashtags="rust,principles"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/rust_principle/" data-hashtag="rust"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/rust_principle/" data-title="Rust 디자인 원칙 🦀"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/rust_principle/" data-title="Rust 디자인 원칙 🦀"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/rust_principle/" data-title="Rust 디자인 원칙 🦀" data-image="/images/rust.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
