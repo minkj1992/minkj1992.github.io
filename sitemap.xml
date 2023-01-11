@@ -2,18 +2,21 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://minkj1992.github.io/categories/</loc><lastmod>2023-01-09T22:26:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/dev/</loc><lastmod>2023-01-09T22:26:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/</loc><lastmod>2023-01-09T22:26:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2023-01-09T22:26:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/principles/</loc><lastmod>2023-01-09T22:26:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/rust/</loc><lastmod>2023-01-09T22:26:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/rust_principle/</loc><lastmod>2023-01-09T22:26:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2023-01-09T22:26:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/book/</loc><lastmod>2022-12-20T12:26:11&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/book/</loc><lastmod>2022-12-20T12:26:11&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url><url>
-            <loc>https://minkj1992.github.io/the_analects/</loc><lastmod>2022-12-20T12:26:11&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/wisdom/</loc><lastmod>2022-12-20T12:26:11&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/</loc><lastmod>2023-01-11T21:24:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2023-01-11T21:24:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/dev/</loc><lastmod>2023-01-11T21:24:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/language/</loc><lastmod>2023-01-11T21:24:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/</loc><lastmod>2023-01-11T21:24:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2023-01-11T21:24:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/rust/</loc><lastmod>2023-01-11T21:24:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2023-01-11T21:24:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/the_rust_programming_lang/</loc><lastmod>2023-01-11T21:24:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/principles/</loc><lastmod>2023-01-10T11:46:07&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/rust_principle/</loc><lastmod>2023-01-10T11:46:07&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/book/</loc><lastmod>2022-12-20T12:26:11&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/book/</loc><lastmod>2022-12-20T12:26:11&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
+            <loc>https://minkj1992.github.io/the_analects/</loc><lastmod>2022-12-20T12:26:11&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/wisdom/</loc><lastmod>2022-12-20T12:26:11&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
             <loc>https://minkj1992.github.io/tags/money/</loc><lastmod>2022-12-20T11:14:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
             <loc>https://minkj1992.github.io/warren_buffett/</loc><lastmod>2022-12-20T11:14:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
             <loc>https://minkj1992.github.io/ledger/</loc><lastmod>2022-12-05T12:22:50&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
@@ -29,9 +32,9 @@
             <loc>https://minkj1992.github.io/categories/money/</loc><lastmod>2022-11-18T00:55:36&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/spiritual_investments/</loc><lastmod>2022-11-18T00:55:36&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/categories/life/</loc><lastmod>2023-01-07T18:25:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/philosophy/</loc><lastmod>2022-12-20T14:26:41&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/poetry/</loc><lastmod>2022-12-20T14:26:41&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url><url>
-            <loc>https://minkj1992.github.io/what-i-know/</loc><lastmod>2022-12-20T14:26:41&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/philosophy/</loc><lastmod>2022-12-20T14:26:41&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/poetry/</loc><lastmod>2022-12-20T14:26:41&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
+            <loc>https://minkj1992.github.io/what-i-know/</loc><lastmod>2022-12-20T14:26:41&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
             <loc>https://minkj1992.github.io/behavior/</loc><lastmod>2022-11-18T01:05:10&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/tags/life/</loc><lastmod>2022-11-18T01:05:10&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/a-gift-to-my-children-in-2009/</loc><lastmod>2022-11-16T03:55:06&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
@@ -40,7 +43,6 @@
             <loc>https://minkj1992.github.io/hong_modern_cpp/</loc><lastmod>2022-10-03T20:19:52&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/categories/cpp/</loc><lastmod>2022-11-30T04:21:07&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/cpp/</loc><lastmod>2022-11-30T04:21:07&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2023-01-07T18:25:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/categories/modern-cpp/</loc><lastmod>2022-11-30T04:21:07&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/tags/principle/</loc><lastmod>2022-11-30T04:21:07&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/honma-munehisa/</loc><lastmod>2022-09-15T22:03:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>

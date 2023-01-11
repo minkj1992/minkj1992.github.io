@@ -4,7 +4,18 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 28 Sep 2022 20:35:54 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 11 Jan 2023 21:24:37 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>The rust programming language</title>
+    <link>https://minkj1992.github.io/the_rust_programming_lang/</link>
+    <pubDate>Wed, 11 Jan 2023 21:24:37 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/the_rust_programming_lang/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/rust-programming-language.webp" referrerpolicy="no-referrer">
+            </div><p><code>Rust</code>에서 공식적으로 지원하는 <a href="https://doc.rust-lang.org" target="_blank" rel="noopener noreffer">&ldquo;The rust programming language&rdquo;</a>
+을 통해서 <code>Rust</code> 핵심 문법적 특징과 예시코드 그리고 이면에 숨은 디자인 원칙들을 정리 해보겠습니다.</p>]]></description>
+</item>
+<item>
     <title>Design principle of C&#43;&#43; and Carbon</title>
     <link>https://minkj1992.github.io/cpp/</link>
     <pubDate>Wed, 28 Sep 2022 20:35:54 &#43;0900</pubDate>
@@ -98,17 +109,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/protocol_buffer.png" referrerpolicy="no-referrer">
             </div><p>Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data.</p>]]></description>
-</item>
-<item>
-    <title>Arduino step by step</title>
-    <link>https://minkj1992.github.io/arduino_step_by_step/</link>
-    <pubDate>Fri, 27 May 2022 22:29:53 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/arduino_step_by_step/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/arduino/arduino.png" referrerpolicy="no-referrer">
-            </div><p>Learn arduino with <a href="https://www.udemy.com/course/arduino-sbs-17gs" target="_blank" rel="noopener noreffer">Arduino Step by Step: Getting Started by Dr. Peter Dalmaris</a>
- lecture.</p>]]></description>
 </item>
 </channel>
 </rss>

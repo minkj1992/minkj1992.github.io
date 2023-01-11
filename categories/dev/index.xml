@@ -4,7 +4,18 @@
         <link>https://minkj1992.github.io/categories/dev/</link>
         <description>dev - Category - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 07 Jan 2023 15:52:24 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 11 Jan 2023 21:24:37 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>The rust programming language</title>
+    <link>https://minkj1992.github.io/the_rust_programming_lang/</link>
+    <pubDate>Wed, 11 Jan 2023 21:24:37 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/the_rust_programming_lang/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/rust-programming-language.webp" referrerpolicy="no-referrer">
+            </div><p><code>Rust</code>에서 공식적으로 지원하는 <a href="https://doc.rust-lang.org" target="_blank" rel="noopener noreffer">&ldquo;The rust programming language&rdquo;</a>
+을 통해서 <code>Rust</code> 핵심 문법적 특징과 예시코드 그리고 이면에 숨은 디자인 원칙들을 정리 해보겠습니다.</p>]]></description>
+</item>
+<item>
     <title>Rust 디자인 원칙 🦀</title>
     <link>https://minkj1992.github.io/rust_principle/</link>
     <pubDate>Sat, 07 Jan 2023 15:52:24 &#43;0900</pubDate>
