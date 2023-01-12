@@ -259,3 +259,117 @@ thread '<main>' panicked at 'index out of bounds: the len is 5 but the index is
  10', src/main.rs:6
 note: Run with `RUST_BACKTRACE=1` for a backtrace.
 ```
+
+### 3-3. Functions
+
+- Rust code uses `snake case` as the conventional style for function and variable names
+- Rust는 당신의 함수의 위치를 신경쓰지 않습니다, 어디든 정의만 되어 있으면 됩니다.
+
+#### Statements and Expressions
+
+- `Statements`(구문) are instructions that perform some action and **do not return a value**.
+- `Expressions`(표현식) **evaluate to a resultant value**.
+
+```rs
+// statement
+{
+  let y = 6;
+  let x = (let y = 6); // compile error, return value가 없기 때문
+}
+// 
+```
+
+- `{ }` 또한 표현식입니다.
+
+```rs
+fn main() {
+  let x = 5;
+
+  let y = {
+    let x = 3;
+    x + 1 // expression, evaluated return value
+  }; // let y = 4;
+}
+```
+
+- `Expression`은 경우 종결을 나타내는 세미콜론(;)을 사용하지 않습니다.
+
+만약 세미콜론을 표현식 마지막에 추가하면, 이는 구문으로 변경되고 반환 값이 아니게 됩니다. 이후부터 함수의 반환 값과 표현식을 살펴보실 때 이 점을 유의하세요.
+
+#### Functions with Return Values
+
+- `return` 키워드와 값을 써서 함수로부터 일찍 반환할 수 있지만, 대부분의 함수들은 암묵적으로 마지막 표현식을 반환합니다. 
+
+```rs
+fn five() -> i32 {
+    5
+}
+```
+
+위의 코드의 경우 `return 5`가 동작하게 됩니다.
+이와 반대로
+
+```rs
+fn five() -> i32 {
+    5;
+}
+```
+
+와 같이 세미콜론을 붙이게 된다면 `()`(비어있는 튜플)을 반환하게 되어, `mismatched typed` 에러가 발생합니다.
+
+### 3-4. Comments
+
+```rs
+fn main() {
+    // I’m feeling lucky today.
+    let lucky_number = 7;
+}
+```
+
+### 3-5. Control Flow
+
+- if의 조건문은 반드시 명시적으로 `bool` 타입이어야 합니다.
+
+```rs
+fn main() {
+    let number = 3;
+
+    // mismatched types
+    if number {
+        println!("number was three");
+    }
+}
+```
+
+#### Using `if` in a let Statement
+
+```rs
+{
+  let number = if condition {
+      5
+  } else {
+      6
+  };
+}
+```
+
+- 변수가 가질 수 있는 타입이 오직 하나여야 합니다. 그러므로 아래와 같은 코드는 에러입니다.
+
+
+```rs
+{
+    let number = if condition {
+        5
+    } else {
+        "six"
+    };  
+}
+```
+
+Rust는 컴파일 타임에 number 변수의 타입이 뭔지 확실히 정의해야 합니다. 그래야 `number`가 사용되는 모든 곳에서 유효한지 검증할 수 있으니까요. 
+
+Rust는 number의 타입을 런타임에 정의되도록 할 수 없습니다. **컴파일러가 모든 변수의 다양한 타입을 추적해서 알아내야 한다면 컴파일러는 보다 복잡해지고 보증할 수 있는 것은 적어지게 됩니다.**
+
+#### 반복문과 반복 (3)
+> `loop`, `while`, `for`
+
