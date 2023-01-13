@@ -373,3 +373,80 @@ Rust는 number의 타입을 런타임에 정의되도록 할 수 없습니다. *
 #### 반복문과 반복 (3)
 > `loop`, `while`, `for`
 
+- `loop`
+
+```rs
+{
+  loop {
+    do_something();
+  }
+}
+
+
+```
+
+어라? 이 방식은 `while true { }`와 큰 차이점이 없어 보입니다.
+그래서 리서치해보니 loop은 expression으로 값을 return할 수 있습니다. 반면에 while과 for는 statement로 값을 return할 수 없습니다.
+
+```rs
+{
+  let mut cnt = 0;
+  let result = loop {
+    cnt += 1;
+    if cnt == 10 {
+      break cnt * 2;
+    }
+  };
+  
+  assert_eq!(result, 20);
+}
+```
+
+FYI 위 코드에서 **loop의 마지막 부분에 `};`이 사용되었다는 것을 알 수 있습니다.**
+
+- `while`
+
+```rs
+{
+  let mut i = 0;
+
+  while i < 5 {
+    do_something();
+    i = i + 1
+  }
+}
+```
+
+그러나 이런 방식은 에러가 발생하기 쉽습니다.
+
+- 개발자가 정확한 index를 사용하지 못하면 프로그램은 패닉을 발생합니다. 
+- 또한 느립니다.
+  - 이유는 컴파일러가 실행 간에 반복문을 통해 반복될 때마다 요소에 대한 조건 검사를 수행하는 런타임 코드를 추가하기 때문입니다.
+
+이에 대한 대안으로 `for`을 사용합니다.
+
+- `for`
+
+```rs
+{
+  let arr = [1,2,3,4,5];
+
+  for e in arr.iter() {
+    do_somethin(e);
+  }
+}
+```
+
+이를 통해 `index`에 대한 실수를 줄일 수 있습니다.
+
+만약 배열의 길이 만큼이 아닌 **특정한 횟수**만큼 반복하고 싶다면 `Range`를 사용합니다.
+
+```rs
+{
+  for n in (1..4).rev() {
+    do_something();
+  }
+}
+```
+
+
