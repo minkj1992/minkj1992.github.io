@@ -1023,6 +1023,204 @@ fn no_dangle() -> String {
 
 
 다음으로, 우리는 다른 종류의 참조자인 `슬라이스(slice)`를 알아보겠습니다.
-## 4.3. The `Slice`
+## 4.3. `Slices`
+> 슬라이스는 여러분이 컬렉션(collection) 전체가 아닌 컬렉션의 연속된 일련의 요소들을 참조할 수 있게 합니다.
+
+- 소유권을 갖지 않는 또다른 데이터 타입은 슬라이스입니다.
+
+1. slice의 필요성
+2. string slice란?
+3. 그 밖의 슬라이스들
+
+### slice가 없다면?
+
+여기 작은 프로그래밍 문제가 있습니다.
+
+스트링을 입력 받아 그 스트링에서 찾은 첫번째 단어를 반환하는 함수를 작성해보세요. 
+
+만일 함수가 공백문자를 찾지 못한다면, 이는 전체 스트링이 한 단어라는 의미이고, 이때는 전체 스트링이 반환되어야 합니다.
+
+```rs
+fn first_word(s: &String) -> ?
+```
+
+이 함수 first_word는 &String을 파라미터로 갖습니다. 우리는 소유권을 원하지 않으므로, 이렇게 해도 좋습니다. 하지만 뭘 반환해야할까요? 우리는 스트링의 일부에 대해 표현할 방법이 없습니다.
 
 
+하지만 단어의 끝부분의 인덱스를 반환할 수는 있겠습니다.
+
+```rs
+// String 파라미터의 바이트 인덱스 값을 반환하는 first_word 함수
+fn first_word(s: &String) -> usize {
+  // 공백인지 확인할 필요가 있기 때문에, String은 as_bytes 메소드를 이용하여 바이트 배열로 변환.
+  let bytes = s.as_bytes();
+
+  for (i, &item) in bytes.iter().enumerate() {
+    // 공백 문자를 찾았다면, 이 위치를 반환합니다.
+      if item == b' ' {
+          return i;
+      }
+  }
+
+  s.len()
+}
+```
+
+이제 우리에게 스트링의 첫번째 단어의 끝부분의 인덱스를 찾아낼 방법이 생겼습니다. usize를 그대로 반환하고 있지만, 이는 `&String`의 내용물 내에서만 의미가 있습니다. 
+
+바꿔 말하면, 이것이 String로부터 분리되어 있는 숫자이기 때문에, 아래 코드 처럼 이것이 나중에도 여전히 유효한지를 보장할 길이 없습니다.
+
+```rs
+fn main() {
+    let mut s = String::from("hello world");
+
+    let word = first_word(&s); // word는 5를 갖게 될 것입니다.
+
+    s.clear(); // 이 코드는 String을 비워서 ""로 만들게 됩니다.
+
+    // word는 여기서 여전히 5를 갖고 있지만, 5라는 값을 의미있게 쓸 수 있는 스트링은 이제 없습니다.
+    // word는 이제 완전 유효하지 않습니다!
+}
+```
+
+이처럼 `word`의 인덱스가 `s` 데이터와 `싱크`가 안맞을 것은, 지겹고 쉽게 발생할 수 있는 오류입니다. 이러한 인덱스들을 관리하는 것은 우리가 `second_word` 함수를 작성했을 때 더더욱 다루기 어려워집니다. 이 함수의 시그니처는 아래와 같은 모양이 되어야 할 것입니다.
+
+```rs
+fn second_word(s: &String) -> (usize, usize) {
+
+}
+```
+
+이로써, 모든 개발자들은 매번 동기화를 유지할 필요가 있는, 원본 데이터와 분리된 세 개의 변수들을 가지게 되었습니다. 이를 해결하기 위해서 도입한 문법이 바로
+
+`String slice`입니다.
+
+### 스트링 슬라이스 
+> string slice는 String의 일부분에 대한 reference(참조자)입니다.
+
+```rs
+let s = String::from("hello world");
+
+let hello = &s[0..5]; // 0, 1, 2, 3, 4
+// let hello = &s[..5];와 동일
+
+let world = &s[6..11]; // 6, 7, 8, 9, 10
+// let len = s.len();
+// let slice = &s[3..len]; 와 동일
+// let slice = &s[3..]; 와 동일
+```
+
+
+<center>
+
+![](/images/str_slice.svg)
+
+</center>
+
+전체 스트링의 슬라이스를 만들기 위해 양쪽 값을 모두 생략할 수 있습니다. 따라서 아래 두 줄의 표현은 동일합니다.
+
+```rs
+let s = String::from("hello");
+
+let n = s.len();
+
+let slice = &s[0..n];
+let slice = &s[..];
+```
+
+이 모든 정보를 잘 기억하시고, first_word가 슬라이스를 반환하도록 다시 작성해봅시다. “스트링 슬라이스”를 나타내는 type은 `&str`로 씁니다.
+
+```rs
+fn first_word(s: &String) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
+```
+
+만약 아까 와 같이, clear()한 경우 발생하는 문제는 그럼 어떻게 해결될 까요?
+
+```rs
+fn main() {
+    let mut s = String::from("hello world");
+
+    let word = first_word(&s);
+
+    s.clear(); // Error!
+
+    println!("the first word is: {}", word);
+}
+```
+
+```js
+17:6 error: cannot borrow `s` as mutable because it is also borrowed as
+            immutable [E0502]
+    s.clear(); // Error!
+    ^
+15:29 note: previous borrow of `s` occurs here; the immutable borrow prevents
+            subsequent moves or mutable borrows of `s` until the borrow ends
+    let word = first_word(&s);
+                           ^
+18:2 note: previous borrow ends here
+fn main() {
+
+}
+```
+
+`Borrowing`(빌림) 규칙에서 만일 무언가에 대한 불변 참조자를 만들었을 경우, 가변 참조자를 만들 수 없다는 점을 상기해보세요. 
+
+`clear()`가 String을 잘라낼 필요가 있기 때문에, 이 함수는 가변 참조자를 갖기 위한 시도를 할 것이고, 이는 실패하게 됩니다.
+
+- **스트링 리터럴은 슬라이스입니다**
+
+스트링 리터럴이 바이너리 안에 저장된다고 하는 얘기를 상기해봅시다. 이제 슬라이스에 대해 알았으니, 우리는 스트링 리터럴을 적합하게 이해할 수 있습니다.
+
+```rs
+let s = "Hello, world!"; // s는 &str 타입
+```
+
+여기서 s의 타입은 &str입니다.
+
+이것은 바이너리의 특정 지점을 가리키고 있는 슬라이스입니다. 이는 왜 스트링 리터럴이 불변인가도 설명해줍니다; &str은 불변 참조자이기 때문입니다.
+
+
+
+- **파라미터로서의 스트링 슬라이스**
+
+리터럴과 String의 슬라이스를 얻을 수 있다는 것을 알게 되었다면, `first_word`는 
+
+```rs
+fn first_word(s: &str) -> &str {
+```
+
+로 시그니처를 변경시킬 수 있습니다.
+
+```rs
+fn main() {
+    let my_string = String::from("hello world");
+
+    // first_word가 `String`의 슬라이스로 동작합니다.
+    let word = first_word(&my_string[..]);
+
+    let my_string_literal = "hello world";
+
+    // first_word가 스트링 리터럴의 슬라이스로 동작합니다.
+    let word = first_word(&my_string_literal[..]);
+
+    // 스트링 리터럴은 또한 스트링 슬라이스이기 때문에,
+    // 아래 코드도 슬라이스 문법 없이 동작합니다!
+    let word = first_word(my_string_literal);
+}
+```
+
+이런 Rust의 확장성은 python 처럼 slice를 편하게 만들어주네요.
+
+### 그 밖의 슬라이스들
+
+`slice`는 스트링 이외에도 array, vector에 모두 동작합니다. 
