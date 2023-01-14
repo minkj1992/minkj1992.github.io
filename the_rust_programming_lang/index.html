@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/the_rust_programming_lang/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-11T21:24:37+09:00" />
-<meta property="article:modified_time" content="2023-01-13T17:20:51+09:00" />
+<meta property="article:modified_time" content="2023-01-13T22:51:10+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  2767 ,
-        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang\/","datePublished": "2023-01-11T21:24:37+09:00","dateModified": "2023-01-13T17:20:51+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  3561 ,
+        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang\/","datePublished": "2023-01-11T21:24:37+09:00","dateModified": "2023-01-13T22:51:10+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The rust programming language</h1><h2 class="single-subtitle">The official Rust book</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-11">2023-01-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2767 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-11">2023-01-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3561 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -232,7 +232,15 @@
         <li><a href="#return-values-and-scope">Return Values and Scope</a></li>
       </ul>
     </li>
-    <li><a href="#42-references-and-borrowing">4.2. <code>References</code> and <code>Borrowing</code></a></li>
+    <li><a href="#42-references-and-borrowing">4.2. <code>References</code> and <code>Borrowing</code></a>
+      <ul>
+        <li><a href="#references">References</a></li>
+        <li><a href="#borrowing">Borrowing</a></li>
+        <li><a href="#mutable-references-가변-참조자">Mutable references (가변 참조자)</a></li>
+        <li><a href="#dangling-references">Dangling References</a></li>
+        <li><a href="#the-rules-of-references">The Rules of References</a></li>
+      </ul>
+    </li>
     <li><a href="#43-the-slice">4.3. The <code>Slice</code></a></li>
   </ul>
 </nav></div>
@@ -782,6 +790,20 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>와 같이 세미콜론을 붙이게 된다면 <code>()</code>(비어있는 튜플)을 반환하게 되어, <code>mismatched typed</code> 에러가 발생합니다.</p>
+<p>반면</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">five</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="mi">5</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>와 같이 return 타입을 tuple로 변경하게 될 경우 컴파일 에러가 사라지는 것을 확인할 수 있습니다.</p>
 <h2 id="3-4-comments">3-4. Comments</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1489,12 +1511,10 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
-</span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calculate_length</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The length of &#39;{}&#39; is {}.&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">s2</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">);</span><span class="w">
@@ -1512,12 +1532,330 @@
 <p>for using a value without transferring ownership, called <code>references</code>.</p>
 </blockquote>
 <h2 id="42-references-and-borrowing">4.2. <code>References</code> and <code>Borrowing</code></h2>
+<ul>
+<li>References (참조자, 불변 참조자, immutable)</li>
+<li>Borrowing</li>
+<li>Mutable references (가변 참조자)</li>
+<li>Dangling References</li>
+<li>The Rules of References</li>
+</ul>
+<h3 id="references">References</h3>
+<p>바로 위의 코드에서, s1의 소유권을 넘기는 대신 Rust는 함수 signature를 reference 타입으로 변경시켜서 처리할 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calculate_length</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The length of &#39;{}&#39; is {}.&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">calculate_length</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">usize</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="c1">// 여기서 s는 스코프 밖으로 벗어났습니다. 하지만 가리키고 있는 값에 대한 소유권이 없기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="c1">// 때문에, 아무런 일도 발생하지 않습니다.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>s2 선언부가 사라지고, calculate_length() 튜플 return이 사라졌습니다.</li>
+<li>calculate_length에 <code>&amp;s1</code>을 사용합니다.</li>
+</ol>
+<p><strong><code>&amp;</code>를 <code>references</code>(참조)라고 부르며, 어떤 값의 소유권을 넘기지 않고 참조하도록 할 수 있습니다.</strong></p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/rust_ref.svg"
+        data-srcset="/images/rust_ref.svg, /images/rust_ref.svg 1.5x, /images/rust_ref.svg 2x"
+        data-sizes="auto"
+        alt="/images/rust_ref.svg"
+        title="/images/rust_ref.svg" /></p>
+</center>
+<p>위 도표와 같이, <code>calculate_length</code>의 param인 참조자 <code>s</code>라는 포인터 타입 local변수가 생성되고, 이 포인터가 s1을 참조하는 형식입니다.</p>
+<p><code>Reference</code>를 활용하게 되면, <strong>참조자는 소유권을 갖고 있지는 않기 때문에, 이 참조자가 가리키는 값은 참조자가 스코프 밖으로 벗어났을 때도 메모리가 반납되지 않을 것입니다.</strong></p>
+<p><strong><code>&amp;s</code>(참조자)를 파라미터로 가지게 되어, 함수는 소유권을 가지지 않게 될 수 있습니다. 그러므로 당연히 소유권을 되돌려주기 위해 값을 다시 반환할 필요도 없게 됩니다.</strong></p>
+<h3 id="borrowing">Borrowing</h3>
+<p>함수의 파라미터로 <code>참조자</code>(<code>&amp;s</code>)를 만드는 것을 <code>Borrowing</code>(빌림)라고 부릅니다.</p>
+<p>어떤 무언가를 빌렸다는 것은, 함부로 빌린 물건을 대해서는 안됩니다. 우리가 빌린 무언가를 고치려고 시도한다면 무슨 일이 생길까요?</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">modify</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">modify</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">s</span><span class="p">.</span><span class="n">push_str</span><span class="p">(</span><span class="s">&#34;, minwook&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">error</span><span class="p">[</span><span class="nx">E0596</span><span class="p">]</span><span class="o">:</span> <span class="nx">cannot</span> <span class="nx">borrow</span> <span class="sb">`*s`</span> <span class="nx">as</span> <span class="nx">mutable</span><span class="p">,</span> <span class="nx">as</span> <span class="nx">it</span> <span class="nx">is</span> <span class="nx">behind</span> <span class="nx">a</span> <span class="sb">`&amp;`</span> <span class="nx">reference</span>
+</span></span><span class="line"><span class="cl"> <span class="o">--&gt;</span> <span class="nx">src</span><span class="o">/</span><span class="nx">main</span><span class="p">.</span><span class="nx">rs</span><span class="o">:</span><span class="mi">7</span><span class="o">:</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span>
+</span></span><span class="line"><span class="cl"><span class="mi">6</span> <span class="o">|</span> <span class="nx">fn</span> <span class="nx">modify</span><span class="p">(</span><span class="nx">s</span><span class="o">:</span> <span class="o">&amp;</span><span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span>              <span class="o">-------</span> <span class="nx">help</span><span class="o">:</span> <span class="nx">consider</span> <span class="nx">changing</span> <span class="k">this</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">a</span> <span class="nx">mutable</span> <span class="nx">reference</span><span class="o">:</span> <span class="sb">`&amp;mut String`</span>
+</span></span><span class="line"><span class="cl"><span class="mi">7</span> <span class="o">|</span>   <span class="nx">s</span><span class="p">.</span><span class="nx">push_str</span><span class="p">(</span><span class="s2">&#34;, minwook&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="o">|</span>   <span class="o">^^^^^^^^^^^^^^^^^^^^^^^</span> <span class="sb">`s`</span> <span class="nx">is</span> <span class="nx">a</span> <span class="sb">`&amp;`</span> <span class="nx">reference</span><span class="p">,</span> <span class="nx">so</span> <span class="nx">the</span> <span class="nx">data</span> <span class="nx">it</span> <span class="nx">refers</span> <span class="nx">to</span> <span class="nx">cannot</span> <span class="nx">be</span> <span class="nx">borrowed</span> <span class="nx">as</span> <span class="nx">mutable</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>변수가 기본적으로 불변인 것처럼, 참조자도 마찬가지입니다.</strong></p>
+<h3 id="mutable-references-가변-참조자">Mutable references (가변 참조자)</h3>
+<blockquote>
+<p>변할 수 있는 참조자 (<code>&amp;mut</code>)</p>
+</blockquote>
+<p>빌린 물건을 의도적으로 수정하고 싶다면, <code>&amp;mut</code>를 붙여주면 됩니다. 또한 원래 물건(변수) 또한 mut 처리해주어야 합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">modify</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">s1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">modify</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">s</span><span class="p">.</span><span class="n">push_str</span><span class="p">(</span><span class="s">&#34;, minwook&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>하지만 가변 참조자는 딱 한가지 큰 제한이 있습니다.</p>
+<p><strong>특정한 스코프 내에 특정한 데이터 조각에 대한 가변 참조자를 딱 하나만 만들 수 있다는 겁니다.</strong></p>
+<p>아래 코드는 실패할 겁니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// error[E0499]: cannot borrow `s` as mutable more than once at a time.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이런 불편한 제한사항 덕분에, 여러분이 가질 수 있는 이점은 바로 <strong>러스트가 컴파일 타임에 데이터 레이스(data race)를 방지할 수 있도록 해준다는 것입니다.</strong></p>
+<p>아래는 Data race가 발생될 수 있는 race condition 조건입니다.</p>
+<ol>
+<li>두 개 이상의 포인터가 동시에 같은 데이터에 접근한다.</li>
+<li>그 중 적어도 하나의 포인터가 데이터를 쓴다.</li>
+<li>데이터에 접근하는데 동기화(sync)를 하는 어떠한 수단 없다.</li>
+</ol>
+<p>Rust는 하나의 원본값(변수)에 대해 같은 scope 안에서 2개 이상의 &amp;mut를 만들 수 없도록, 문법적 강제를 합니다. 이로써 1번의 조건을 사전에 차단하였습니다.</p>
+<p>Rust의 scope를 사용하면, &ldquo;동시&quot;에 만드는 것을 우회하여, 여러개의 가변 참조자를 만들 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">)</span>:
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="c1">// 여기서 r1은 스코프 밖으로 벗어났으므로, 우리는 아무 문제 없이 새로운 참조자를 만들 수 있습니다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>mutable reference(가변 참조자)와 immutable reference(불변 참조자, 디폴트)를 혼용에 대한 규칙도 존재합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s</span><span class="p">;</span><span class="w"> </span><span class="c1">// ok
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>immutable reference는 중복해도 modify 할 수없으니(Read Only) 문제 없습니다.</p>
+<p>반면에 혼용하게 될 경우에는 에러가 생깁니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>위와 같이 불변 참조자를 가지고 있을 동안 가변 참조자를 만들 수 없습니다.
+불변 참조자의 사용자는 사용중인 동안에 값이 값자기 바뀌리라 예상하지 않기 때문입니다.</p>
+<p>이는 순서를 반대로 해도 같습니다. (&amp;mut 선언 후 &amp; 재선언)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// error[E0502]: cannot borrow `s` as immutable because it is also borrowed as mutable
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="dangling-references">Dangling References</h3>
+<p>포인터가 있는 언어에서는 자칫 잘못하면 댕글링 포인터(dangling pointer, 허상 포인터)를 만들기 쉬운데, 댕글링 포인터란 어떤 메모리를 가리키는 포인터를 보존하는 동안, 포인터가 가리키고 있는 메모리를 해제함으로써 다른 개체에게 사용하도록 줘버렸을 지도, 또는 제거되었을지도 모를 메모리를 참조하고 있는 포인터를 말합니다.</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/dangling_ptr.jpeg"
+        data-srcset="/images/dangling_ptr.jpeg, /images/dangling_ptr.jpeg 1.5x, /images/dangling_ptr.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/dangling_ptr.jpeg"
+        title="/images/dangling_ptr.jpeg" /></p>
+</center>
+<p>이와는 반대로, 러스트에서는 컴파일러가 모든 참조자들이 댕글링 참조자가 되지 않도록 보장해 줍니다.</p>
+<p><strong>만일 우리가 어떤 데이터의 참조자를 만들었다면, 컴파일러는 그 참조자가 스코프 밖으로 벗어나기 전에는 데이터가 스코프 밖으로 벗어나지 않을 것임을 확인해 줍니다.</strong> 댕글링 참조자를 만들어보며 보도록 하겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">dangle_ref</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dangle</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">dangle</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">&amp;</span><span class="n">s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w"> </span><span class="c1">// s는 }를 벗어나는 시점에 free되므로, &amp;s는 dangling reference입니다.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">error</span><span class="p">[</span><span class="nx">E0106</span><span class="p">]</span><span class="o">:</span> <span class="nx">missing</span> <span class="nx">lifetime</span> <span class="nx">specifier</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">help</span><span class="o">:</span> <span class="k">this</span> <span class="kd">function</span><span class="err">&#39;</span><span class="nx">s</span> <span class="k">return</span> <span class="nx">type</span> <span class="nx">contains</span> <span class="nx">a</span> <span class="nx">borrowed</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">there</span> <span class="nx">is</span> <span class="nx">no</span> <span class="nx">value</span> <span class="k">for</span> <span class="nx">it</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">borrowed</span> <span class="nx">from</span><span class="p">.</span> 
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nx">해석</span><span class="o">:</span> <span class="nx">이</span> <span class="nx">함수의</span> <span class="nx">반환</span> <span class="nx">타입은</span> <span class="nx">빌린</span> <span class="nx">값을</span> <span class="nx">포함하고</span> <span class="nx">있는데</span><span class="p">,</span> <span class="nx">빌려온</span> <span class="nx">실제</span> <span class="nx">값은</span> <span class="nx">없습니다</span><span class="p">.)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>여기서의 해법은 String을 직접 반환하는 것입니다. 소유권이 밖으로 이동되었고, 아무것도 할당 해제되지 않습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">no_dangle</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="the-rules-of-references">The Rules of References</h3>
+<blockquote>
+<p>지금 까지 Reference(참조자)에 대해 논의한 것들을 정리해봅니다.</p>
+</blockquote>
+<ol>
+<li>어떠한 경우이든, Rust는 아래 두가지 중에서, <strong>오직 하나만 가질 수 있습니다.</strong></li>
+</ol>
+<ul>
+<li><code>one mutable reference</code>(하나의 가변 참조자, <code>&amp;mut</code>)</li>
+<li><code>any number of immutable references</code>(임의 개수의 불변 참조자들, <code>&amp;</code>)</li>
+</ul>
+<ol start="2">
+<li>참조자는 항상 유효해야만 한다.</li>
+</ol>
+<p>다음으로, 우리는 다른 종류의 참조자인 <code>슬라이스(slice)</code>를 알아보겠습니다.</p>
 <h2 id="43-the-slice">4.3. The <code>Slice</code></h2></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-01-13&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/90046164c07da46a04f84fb8bbe8fcc1cb727598" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 90046164c07da46a04f84fb8bbe8fcc1cb727598: rebuilding site Fri Jan 13 17:20:51 KST 2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9004616</a></span>
+                <span>Updated on 2023-01-13&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/b87dd30a6f624768dd8f5ff7feb2a6df0b88d2d7" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) b87dd30a6f624768dd8f5ff7feb2a6df0b88d2d7: rebuilding site Fri Jan 13 22:51:10 KST 2023">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>b87dd30</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

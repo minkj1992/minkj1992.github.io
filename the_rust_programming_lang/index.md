@@ -317,6 +317,14 @@ fn five() -> i32 {
 
 와 같이 세미콜론을 붙이게 된다면 `()`(비어있는 튜플)을 반환하게 되어, `mismatched typed` 에러가 발생합니다.
 
+반면
+
+```rs
+fn five() -> () {
+    5;
+}
+```
+와 같이 return 타입을 tuple로 변경하게 될 경우 컴파일 에러가 사라지는 것을 확인할 수 있습니다.
 ## 3-4. Comments
 
 ```rs
@@ -783,7 +791,6 @@ fn takes_and_gives_back(a_string: String) -> String { // a_string이 스코프
 ```rs
 fn main() {
     let s1 = String::from("hello");
-
     let (s2, len) = calculate_length(s1);
 
     println!("The length of '{}' is {}.", s2, len);
@@ -801,4 +808,221 @@ fn calculate_length(s: String) -> (String, usize) {
 
 
 ## 4.2. `References` and `Borrowing`
+
+
+- References (참조자, 불변 참조자, immutable)
+- Borrowing
+- Mutable references (가변 참조자)
+- Dangling References
+- The Rules of References
+
+### References
+
+바로 위의 코드에서, s1의 소유권을 넘기는 대신 Rust는 함수 signature를 reference 타입으로 변경시켜서 처리할 수 있습니다.
+
+```rs
+fn main() {
+  let s1 = String::from("hello");
+  let len = calculate_length(&s1);
+  
+  println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+} // 여기서 s는 스코프 밖으로 벗어났습니다. 하지만 가리키고 있는 값에 대한 소유권이 없기
+  // 때문에, 아무런 일도 발생하지 않습니다.
+```
+
+1. s2 선언부가 사라지고, calculate_length() 튜플 return이 사라졌습니다.
+2. calculate_length에 `&s1`을 사용합니다.
+
+**`&`를 `references`(참조)라고 부르며, 어떤 값의 소유권을 넘기지 않고 참조하도록 할 수 있습니다.**
+
+<center>
+
+![](/images/rust_ref.svg)
+
+</center>
+
+위 도표와 같이, `calculate_length`의 param인 참조자 `s`라는 포인터 타입 local변수가 생성되고, 이 포인터가 s1을 참조하는 형식입니다.
+
+`Reference`를 활용하게 되면, **참조자는 소유권을 갖고 있지는 않기 때문에, 이 참조자가 가리키는 값은 참조자가 스코프 밖으로 벗어났을 때도 메모리가 반납되지 않을 것입니다.**
+
+**`&s`(참조자)를 파라미터로 가지게 되어, 함수는 소유권을 가지지 않게 될 수 있습니다. 그러므로 당연히 소유권을 되돌려주기 위해 값을 다시 반환할 필요도 없게 됩니다.**
+
+### Borrowing
+
+함수의 파라미터로 `참조자`(`&s`)를 만드는 것을 `Borrowing`(빌림)라고 부릅니다.
+
+어떤 무언가를 빌렸다는 것은, 함부로 빌린 물건을 대해서는 안됩니다. 우리가 빌린 무언가를 고치려고 시도한다면 무슨 일이 생길까요? 
+
+```rs
+fn main() {
+  let s1 = String::from("hello");
+  modify(&s1);
+}
+
+fn modify(s: &String) {
+  s.push_str(", minwook");
+}
+```
+
+```js
+error[E0596]: cannot borrow `*s` as mutable, as it is behind a `&` reference
+ --> src/main.rs:7:3
+  |
+6 | fn modify(s: &String) {
+  |              ------- help: consider changing this to be a mutable reference: `&mut String`
+7 |   s.push_str(", minwook");
+  |   ^^^^^^^^^^^^^^^^^^^^^^^ `s` is a `&` reference, so the data it refers to cannot be borrowed as mutable
+```
+
+**변수가 기본적으로 불변인 것처럼, 참조자도 마찬가지입니다.**
+
+### Mutable references (가변 참조자)
+> 변할 수 있는 참조자 (`&mut`)
+
+빌린 물건을 의도적으로 수정하고 싶다면, `&mut`를 붙여주면 됩니다. 또한 원래 물건(변수) 또한 mut 처리해주어야 합니다.
+
+```rs
+fn main() {
+  let mut s1 = String::from("hello");
+  modify(&mut s1);
+}
+
+fn modify(s: &mut String) {
+  s.push_str(", minwook");
+}
+```
+
+하지만 가변 참조자는 딱 한가지 큰 제한이 있습니다.
+
+**특정한 스코프 내에 특정한 데이터 조각에 대한 가변 참조자를 딱 하나만 만들 수 있다는 겁니다.**
+
+아래 코드는 실패할 겁니다.
+
+```rs
+{
+  let mut s = String::from("hello");
+  let r1 = &mut s;
+  let r2 = &mut s;
+}
+
+// error[E0499]: cannot borrow `s` as mutable more than once at a time.
+```
+
+이런 불편한 제한사항 덕분에, 여러분이 가질 수 있는 이점은 바로 **러스트가 컴파일 타임에 데이터 레이스(data race)를 방지할 수 있도록 해준다는 것입니다.**
+
+아래는 Data race가 발생될 수 있는 race condition 조건입니다.
+
+1. 두 개 이상의 포인터가 동시에 같은 데이터에 접근한다.
+2. 그 중 적어도 하나의 포인터가 데이터를 쓴다.
+3. 데이터에 접근하는데 동기화(sync)를 하는 어떠한 수단 없다.
+
+Rust는 하나의 원본값(변수)에 대해 같은 scope 안에서 2개 이상의 &mut를 만들 수 없도록, 문법적 강제를 합니다. 이로써 1번의 조건을 사전에 차단하였습니다.
+
+Rust의 scope를 사용하면, "동시"에 만드는 것을 우회하여, 여러개의 가변 참조자를 만들 수 있습니다.
+
+```rs
+let mut s = String::from("hello"):
+{
+  let r1 = &mut s;
+} // 여기서 r1은 스코프 밖으로 벗어났으므로, 우리는 아무 문제 없이 새로운 참조자를 만들 수 있습니다.
+
+let r2 = &mut s;
+```
+
+mutable reference(가변 참조자)와 immutable reference(불변 참조자, 디폴트)를 혼용에 대한 규칙도 존재합니다.
+
+```rs
+let mut s = String::from("hello");
+
+let r1 = &s;
+let r2 = &s; // ok
+```
+
+immutable reference는 중복해도 modify 할 수없으니(Read Only) 문제 없습니다.
+
+반면에 혼용하게 될 경우에는 에러가 생깁니다.
+
+```rs
+let mut s = String::from("hello");
+
+let r1 = &s;
+let r2 = &mut s;
+// error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable.
+```
+
+위와 같이 불변 참조자를 가지고 있을 동안 가변 참조자를 만들 수 없습니다. 
+불변 참조자의 사용자는 사용중인 동안에 값이 값자기 바뀌리라 예상하지 않기 때문입니다.
+
+이는 순서를 반대로 해도 같습니다. (&mut 선언 후 & 재선언)
+
+```rs
+let mut s = String::from("hello");
+
+let r2 = &mut s;
+let r1 = &s;
+// error[E0502]: cannot borrow `s` as immutable because it is also borrowed as mutable
+```
+
+### Dangling References
+
+포인터가 있는 언어에서는 자칫 잘못하면 댕글링 포인터(dangling pointer, 허상 포인터)를 만들기 쉬운데, 댕글링 포인터란 어떤 메모리를 가리키는 포인터를 보존하는 동안, 포인터가 가리키고 있는 메모리를 해제함으로써 다른 개체에게 사용하도록 줘버렸을 지도, 또는 제거되었을지도 모를 메모리를 참조하고 있는 포인터를 말합니다.
+
+<center>
+
+![](/images/dangling_ptr.jpeg)
+
+</center>
+
+이와는 반대로, 러스트에서는 컴파일러가 모든 참조자들이 댕글링 참조자가 되지 않도록 보장해 줍니다. 
+
+**만일 우리가 어떤 데이터의 참조자를 만들었다면, 컴파일러는 그 참조자가 스코프 밖으로 벗어나기 전에는 데이터가 스코프 밖으로 벗어나지 않을 것임을 확인해 줍니다.** 댕글링 참조자를 만들어보며 보도록 하겠습니다.
+
+```rs
+fn main() {
+  let dangle_ref = dangle();
+}
+
+fn dangle() -> &String {
+  let s = String::from("hello");
+
+  &s
+} // s는 }를 벗어나는 시점에 free되므로, &s는 dangling reference입니다.
+```
+
+```js
+error[E0106]: missing lifetime specifier
+
+...
+
+help: this function's return type contains a borrowed value, but there is no value for it to be borrowed from. 
+(해석: 이 함수의 반환 타입은 빌린 값을 포함하고 있는데, 빌려온 실제 값은 없습니다.)
+
+```
+
+여기서의 해법은 String을 직접 반환하는 것입니다. 소유권이 밖으로 이동되었고, 아무것도 할당 해제되지 않습니다.
+
+```rs
+fn no_dangle() -> String {
+    let s = String::from("hello");
+
+    s
+}
+```
+
+### The Rules of References
+> 지금 까지 Reference(참조자)에 대해 논의한 것들을 정리해봅니다.
+
+1. 어떠한 경우이든, Rust는 아래 두가지 중에서, **오직 하나만 가질 수 있습니다.**
+  - `one mutable reference`(하나의 가변 참조자, `&mut`)
+  - `any number of immutable references`(임의 개수의 불변 참조자들, `&`)
+2. 참조자는 항상 유효해야만 한다.
+
+
+다음으로, 우리는 다른 종류의 참조자인 `슬라이스(slice)`를 알아보겠습니다.
 ## 4.3. The `Slice`
+
+
