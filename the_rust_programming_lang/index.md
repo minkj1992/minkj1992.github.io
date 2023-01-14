@@ -1223,4 +1223,4 @@ fn main() {
 
 ### 그 밖의 슬라이스들
 
-`slice`는 스트링 이외에도 array, vector에 모두 동작합니다. 
+`slice`는 스트링 이외에도 array, vector에 모두 동작합니다.
