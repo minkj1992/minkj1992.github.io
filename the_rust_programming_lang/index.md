@@ -656,7 +656,7 @@ which does not implement the `Copy` trait
 2. shallow: 원치 않게 오리지널 `heap` 데이터 변경.
 3. deep: `heap`의 데이터 복사에 의한 퍼포먼스 저하.
 
-동시에 allocate한 메모리에 대해서 **운영체제에게 메모리를 반납(free)**을 할 수 있게 되었습니다.
+동시에 allocate한 메모리에 대해서 **운영체제에게 메모리를 반납(free)** 을 할 수 있게 되었습니다.
 
 #### 2. 변수와 데이터가 상호작용하는 방법: `Clone`
 > Rust의 Deep copy 방법
@@ -831,7 +831,7 @@ fn main() {
 fn calculate_length(s: &String) -> usize {
     s.len()
 } // 여기서 s는 스코프 밖으로 벗어났습니다. 하지만 가리키고 있는 값에 대한 소유권이 없기
-  // 때문에, 아무런 일도 발생하지 않습니다.
+  // 때문에, 아무런 에러도 발생하지 않습니다. 참조자 s가 drop됩니다.
 ```
 
 1. s2 선언부가 사라지고, calculate_length() 튜플 return이 사라졌습니다.
@@ -1373,3 +1373,198 @@ fn main() {
 // error[E0106]: missing lifetime specifier
 ```
 
+## 5.2. An Example Program Using Structs
+> 리팩토링을 하면서 배워보는 struct
+
+- before
+
+```rs
+fn main() {
+    let length1 = 50;
+    let width1 = 30;
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area(length1, width1)
+    );
+}
+
+fn area(length: u32, width: u32) -> u32 {
+    length * width
+}
+```
+
+- 1차 리팩토링: `튜플`: argument를 하나로 줄일 수 있다.
+
+```rs
+fn main() {
+    let rect1 = (50, 30);
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        area(rect1)
+    );
+}
+
+fn area(dimensions: (u32, u32)) -> u32 {
+    dimensions.0 * dimensions.1 // 명확하지 못함.
+}
+```
+
+
+- 2차 리팩토링: `구조체`: 필드들을 명시적으로 사용가능
+
+```rs
+struct Rectangle {
+  length: u32,
+  width: u32,
+}
+
+fn main() {
+  let r1 = Rectangle {
+    length: 50,
+    width: 30,
+  };
+  println!(
+    "The area of the rectangle is {} square pixels.",
+    area(&r1)
+  );
+}
+
+fn area(rectangle: &Rectangle) -> u32 {
+  rectangel.length * rectangle.width // explicit하게 필드들 사용가능
+}
+```
+
+추가로 확인할 점은, `fn area(rectangle: &Rectangle) -> u32`에서 rectangle이 ownership move가 아닌 reference를 통한 borrow로 이뤄졌다는 것입니다.
+이를 통해 main()에서 `r1`에 대한 소유권을 유지할 수 있습니다.
+
+### `derived trait`
+> 파생 트레잇(derived trait)으로 유용한 기능 추가하기
+
+구조체를 pretty print하기 위해서는 아래 2가지를 사용하면 됩니다.
+
+1. `#[derive(Debug)]`
+2. `println!("{:#?}", r1);`
+
+```rs
+#[derive(Debug)]
+struct Rectangle {
+    length: u32,
+    width: u32,
+}
+
+fn main() {
+    let rect1 = Rectangle { length: 50, width: 30 };
+
+    // 1. print struct
+    println!("rect1 is {:?}", rect1); 
+    // rect1 is Rectangle { length: 50, width: 30 }
+    
+    // 2. pretty print struct
+    println!("rect1 is {:#?}", rect1); 
+    // rect1 is Rectangle {
+    //  length: 50,
+    //  width: 30
+    // }
+}
+}
+```
+
+
+## 5.3. `Method`
+
+- `Python`과 마찬가지로, 메서드의 첫번쨰 파라미터는 언제나 `self`가 전달되며, 필요에 따라 다음과 같이 활용됩니다.
+  1. `self`: 소유권 가져오기
+  2. `&self`: 소유권 없이 readonly
+  3. `&mut self`: 소유권 없이 read/write
+- `self`의 타입은 작성될 필요가 없습니다. `impl` 뒤에 나오는 `struct`가 알려주기 때문입니다.
+
+{{< admonition note "`self`" >}}
+method의 parameter를 `self`로 받는, 이러한 테크닉은 보통 해당 메소드가 self을 다른 무언가로 변형시키고 이 변형 이후에 호출하는 측에서 원본 인스턴스를 사용하는 것을 막고 싶을 때 종종 쓰입니다.
+{{< /admonition  >}}
+
+```rs
+#[derive(Debug)]
+struct Rectangle {
+    length: u32,
+    width: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.length * self.width
+    }
+}
+```
+
+{{< admonition note "Rust의 역참조" >}}
+`C++` 같은 언어에서는, 메소드 호출을 위해서 서로 다른 두 개의 연산자가 사용됩니다.
+
+1. 만일 어떤 객체의 메소드를 직접 호출하는 중이라면 `.`를 이용하고
+2. 어떤 객체의 포인터에서의 메소드를 호출하는 중이고 이 포인터를 역참조할 필요가 있다면 `->`를 씁니다. 
+
+달리 표현하면, 만일 `object`가 포인터라면, `object->something()`은 `(*object).something()`과 비슷합니다.
+
+**러스트는 `-> 연산자`와 동치인 연산자를 가지고 있지 않습니다;** 
+
+대신, 러스트는 자동 참조 및 역참조 (`automatic referencing and dereferencing`) 이라는 기능을 가지고 있습니다. 메소드 호출은 이 동작을 포함하는 몇 군데 중 하나입니다.
+
+동작 방식을 설명해보겠습니다: 
+`object.something()`이라고 메소드를 호출했을 때, 러스트는 자동적으로 `&`나 `&mut`, 혹은 `*`을 붙여서 **object가 해당 `메소드의 시그니처`와 맞도록 합니다.** 달리 말하면, 다음은 동일한 표현입니다.
+
+```rs
+p1.distance(&p2);
+(&p1).distance(&p2);
+```
+
+첫번째 표현이 훨씬 깔끔해 보입니다. 이러한 자동 참조 동작은 메소드가 명확한 수신자-즉 `self`의 타입을 가지고 있기 때문에 동작합니다. 
+
+수신자와 메소드의 이름이 주어질 때, 러스트는 해당 메소드가 읽는지 (&self) 혹은 변형시키는지 (&mut self), 아니면 소비하는지 (self)를 결정론적으로 알아낼 수 있습니다.
+{{< /admonition  >}}
+
+### 더 많은 파라미터를 가진 메소드
+
+```rs
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.length * self.width
+    }
+
+    fn can_hold(&self, other: &Rectangle) -> bool {
+        self.length > other.length && self.width > other.width
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle { length: 50, width: 30 };
+    let rect2 = Rectangle { length: 40, width: 10 };
+
+    println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2)); 
+    // Can rect1 hold rect2? true
+}
+```
+### 연관 함수 (associated functions)
+
+`impl 블록`의 또다른 유용한 기능은 `self` 파라미터를 갖지 않는 함수도 `impl` 내에 정의하는 것이 허용된다는 점입니다. 
+
+**이를 연관 함수 (associated functions) 라고 부르는데, 그 이유는 이 함수가 해당 구조체와 연관되어 있기 때문입니다.**
+
+
+- 이들은 메소드가 아니라 여전히 함수인데, **이는 함께 동작할 구조체의 인스턴스를 가지고 있지 않기 때문입니다.**
+- i.g. `String::from()`
+- **연관 함수는 생성자로서 자주 사용됩니다.**
+
+```rs
+impl Rectangle {
+  fn square(size: u32) -> Rectangle {
+    Rectangle { length: size, width: size}
+  }
+}
+
+fn main() {
+  let sq = Rectangle::square(3);
+}
+```
+
+연관 함수는 이용 가능한 인스턴스 없이 우리의 구조체에 특정 기능을 이름공간 내에 넣을 수 있도록 해줍니다.
