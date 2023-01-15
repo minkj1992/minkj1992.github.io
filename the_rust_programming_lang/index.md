@@ -1224,3 +1224,152 @@ fn main() {
 ### 그 밖의 슬라이스들
 
 `slice`는 스트링 이외에도 array, vector에 모두 동작합니다.
+
+# 5. `Structs`
+> Using Structs to Structure Related Data.
+
+OOP의 핵심, 데이터 속성과 메소드, 그리고 `associated functions`를 묶어주는 `struct`를 러스트 또한 제공합니다.
+
+- 5.1. Defining and Instantiating Structs
+- 5.2. An Example Program Using Structs
+- 5.3. Method Syntax
+
+## 5.1. Defining and Instantiating Structs
+
+- 튜플과 유사하게, 구조체의 구성요소들은 각자 다른 타입을 지닐 수 있습니다.
+- 구조체를 정의할 때는 struct 키워드를 먼저 입력하고 명명할 구조체명을 입력하면 됩니다.
+
+```rs
+struct User {
+  name: String,
+  email: String,
+  sign_in_count: u64,
+  is_active: bool,
+}
+```
+
+- 구조체를 통해 인스턴스를 생성할때, 필드들의 순서가 정의한 필드의 순서와 같을 필요는 없습니다.
+- User 구조체 정의에서, `&str` 문자 슬라이스 타입 대신 `String`타입을 사용했습니다.
+- 이는 의도적인 선택으로, **구조체 전체가 유효한 동안 구조체가 그 데이터를 소유하게 하고자 함입니다.**
+
+```rs
+#[derive(Debug)]
+struct User {
+  name: String,
+  email: String,
+  sign_in_count: u64,
+  is_active: bool,
+}
+
+fn main() {
+
+    let mut user = User {
+      email: String::from("leoo_is_cool@leoo.com"),
+      name: String::from("leoo.j"),
+      is_active: true,
+      sign_in_count: 1,
+    };
+    user.is_active = false;    
+    println!("{:#?}", user);
+}
+```
+
+
+- 변수명이 필드명과 같을 때 간단하게 필드 초기화하기
+
+```rs
+fn build_user(email: String, name: String) -> User {
+  User {
+    email, // email: email과 동일
+    name, // name: name과 동일
+    is_actieve: true,
+    sign_in_count: 1,
+  }
+}
+```
+
+### `struct update syntax`
+> 구조체 갱신법을 이용하여 기존 구조체 인스턴스로 새 구조체 인스턴스 생성하기
+
+`..` 연산자를 활용하면 쉽게 인스턴스를 생성할 수 있습니다.
+
+- before
+
+```rs
+let user2 = User {
+    email: String::from("another@example.com"),
+    name: String::from("anotherusername567"),
+    is_active: user1.is_active,
+    sign_in_count: user1.sign_in_count,
+};
+```
+
+- after
+
+```rs
+let user2 = User {
+    email: String::from("another@example.com"),
+    name: String::from("anotherusername567"),
+    ..user1
+};
+```
+
+### `tuple structs`
+> 이름이 없고 필드마다 타입은 다르게 정의 가능한 튜플 구조체.
+
+러스트의 `tuple struct`는 파이썬의 `Namedtuple`과 비슷해 보입니다.
+
+```python
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(11, y=22)
+```
+
+
+```rs
+extern crate assert_type_eq;
+
+struct Color(i32, i32, i32);
+struct Point(i32, i32, i32);
+
+fn main() {
+  let black = Color(0,0,0);
+  let origin = Point(0,0,0);
+}
+```
+
+`black`과 `origin`은 다른 튜플 구조체이기 때문에, 다른타입 입니다.
+
+### `unit-like structs`
+> 필드가 없는 유사 유닛 구조체
+
+러스트에서 `필드가 없는 튜플`인 `()`을 `unit` 또는 `unit type`라고 부릅니다.
+
+- 러스트에서 어떤 필드도 없는 `구조체` 역시 정의 가능합니다. 이를 유닛처럼 동작하는 구조체, `unit-like structs`라고 부릅니다.
+
+유사 유닛 구조체는 특정한 타입의 트레잇(`trait`)을 구현해야하지만 타입 자체에 데이터를 저장하지 않는 경우에 유용합니다.
+
+
+### 구조체 안의 데이터 소유권 (`Ownership`)
+
+- 구조체가 소유권이 없는 데이터의 참조를 저장할수는 있지만, `라이프타임(lifetimes)`의 사용을 전제로 합니다. 
+- 라이프타임은 구조체가 존재하는동안 참조하는 데이터를 계속 존재할 수 있도록 합니다. 라이프타임을 사용하지 않고 참조를 저장하고자 하면 에러가 발생합니다.
+
+```rs
+struct User {
+    username: &str, // 참조(reference) 데이터
+    email: &str, // // 참조(reference) 데이터
+    sign_in_count: u64,
+    active: bool,
+}
+fn main() {
+    let user1 = User {
+        email: "someone@example.com",
+        username: "someusername123",
+        active: true,
+        sign_in_count: 1,
+    };
+}
+
+// error[E0106]: missing lifetime specifier
+```
+
