@@ -1545,6 +1545,7 @@ fn main() {
 }
 ```
 ### 연관 함수 (associated functions)
+> 다른 말로 static method
 
 `impl 블록`의 또다른 유용한 기능은 `self` 파라미터를 갖지 않는 함수도 `impl` 내에 정의하는 것이 허용된다는 점입니다. 
 
@@ -1568,3 +1569,140 @@ fn main() {
 ```
 
 연관 함수는 이용 가능한 인스턴스 없이 우리의 구조체에 특정 기능을 이름공간 내에 넣을 수 있도록 해줍니다.
+
+
+# 6 Enums and Pattern Matching
+> `enum`, `match`, `Option`, `if let`
+
+- 6.1 `Enum` 정의하기
+- 6.2 `match` 흐름제어 연산자
+- 6.3 `if let`을 사용한 간결한 흐름 제어
+
+## 6.1 `Enum` 정의하기
+
+1. Enum values
+2. `Option 열거형`이 `Null 값` 보다 좋은 점들.
+
+
+- variants of the enum
+
+```rs
+enum IpAddrKind {
+  V4,
+  V6,
+}
+```
+
+### Enum Values
+
+```rs
+struct Ipv4Addr {
+  address : (u8, u8, u8, u8),
+  ...
+}
+
+struct Ipv6Addr {
+  address : String,
+  ...
+}
+
+enum IpAddr {
+  V4(Ipv4Addr),
+  V6(Ipv6Addr),
+}
+```
+
+- Enum은 각 variants가 다른 유형의 타입들으로 저장할수도 있습니다.
+
+
+```rs
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+```
+- `Quit` 은 연관된 데이터가 전혀 없습니다. (unit-like struct)
+- `Move` 은 `익명 구조체`를 포함합니다. 
+- `Write` 은 하나의 `String` 을 포함합니다. (`tuple structs`)
+- `ChangeColor` 는 세 개의 i32 을 포함합니다. (`tuple structs`)
+
+```rs
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+impl Message {
+    fn call(&self) {
+        println!("called");
+    }
+}
+
+struct QuitMessage; // 유닛 구조체
+struct MoveMessage {
+    x: i32,
+    y: i32,
+}
+struct WriteMessage(String); // 튜플 구조체
+struct ChangeColorMessage(i32, i32, i32); // 튜플 구조체
+
+fn main() {
+    let m = Message::Write(String::from("hello"));
+    m.call();
+}
+```
+
+### `Option 열거형`이 `Null 값` 보다 좋은 점들.
+
+- 러스트는 다른 언어들에서 흔하게 볼 수 있는 null 특성이 없습니다.
+
+
+{{< admonition note "Null, 10억달러의 실수 by Tony Hoare" >}}
+_나는 그것을 나의 10억 달러의 실수라고 생각한다. 그 당시 객체지향 언어에서 처음 참조를 위한 포괄적인 타입 시스템을 디자인하고 있었다. 내 목표는 컴파일러에 의해 자동으로 수행되는 체크를 통해 모든 참조의 사용은 절대적으로 안전하다는 것을 확인하는 것이었다. 그러나 null 참조를 넣고 싶은 유혹을 참을 수 없었다. 간단한 이유는 구현이 쉽다는 것이었다. 이것은 수없이 많은 오류와 취약점들, 시스템 종료를 유발했고, 지난 40년간 10억 달러의 고통과 손실을 초래했을 수도 있다._
+{{< /admonition  >}}
+
+
+```rs
+// Rust std라이브러리에 정의되어 있는 Null 대체제
+enum Option<T> {
+    Some(T),
+    None,
+}
+
+fn main {
+  let some_number = Some(5);
+  let some_string = Some("a string");
+
+  let absent_number: Option<i32> = None;
+}
+```
+
+그럼 rust의 Option<T>::None이 null 보다 나은 이유는 뭘까요?
+
+간단하게 말하면, `Option<T>` 와 `T` (`T` 는 어떤 타입이던 될 수 있음)는 다른 타입이며, 컴파일러는 `Option<T>` 값을 명확하게 유효한 값처럼 사용하지 못하도록 합니다.
+
+```rs
+let x: i8 = 5;
+let y: Option<i8> = Some(5);
+
+let sum = x + y; // i8 + Option<i8>은 컴파일 에러.
+```
+
+이런 컴파일 에러 덕분에 null값이 더해지는 것을 방지할 수 있습니다.
+
+다르게 얘기하자면, T 에 대한 연산을 수행하기 전에 `Option<T>` 를 T 로 변환해야 합니다. 일반적으로, 이런 방식은 null 과 관련된 가장 흔한 이슈 중 하나를 발견하는데 도움을 줍니다(실제로 `null` 일 때, `if (x != null):` 처럼 if 처리하는 경우입니다.)
+
+
+- null 일 수 있는 값을 사용하기 위해서, 명시적으로 값의 타입을 Option<T> 로 만들어 줘야 합니다.
+- 그다음엔 값을 사용할 때 명시적으로 null 인 경우를 처리해야 합니다. 
+
+이를 통해 타입이 `Option<T>` 가 아닌 모든 곳은 값이 `null` 아니라고 안전하게 가정할 수 있습니다. 
+
+
+
+## 6.2 `match` 흐름제어 연산자
+## 6.3 `if let`을 사용한 간결한 흐름 제어
