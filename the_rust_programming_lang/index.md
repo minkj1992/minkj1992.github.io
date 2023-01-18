@@ -1705,4 +1705,149 @@ let sum = x + y; // i8 + Option<i8>은 컴파일 에러.
 
 
 ## 6.2 `match` 흐름제어 연산자
+
+- `match`의 힘은 패턴의 표현성으로부터 오며 **컴파일러는 모든 가능한 경우가 다루어지는지를 검사**합니다.
+
+```rs
+enum Coin {
+  Penny,
+  Nickel,
+  Dime,
+  Quarter,
+}
+
+fn to_cents(coin: Coin) -> u32 {
+  match coin {
+    Coin::Penny => 1,
+    Coin::Nickel => 5,
+    Coin::Dime => 10,
+    Coin::Quarter => 25,
+  }
+}
+```
+
+- `match`에서 갈래들은 `arm`이라고 합니다.
+- match 표현식이 실행될 때, 결과 값을 각 갈래의 패턴에 대해서 순차적으로 비교합니다.
+- match의 arm에서 코드부분이 짧다면, 중괄호는 보통 사용하지 않습니다.
+
+```rs
+fn to_cents(coin: Coin) -> u32 {
+  match coin {
+    Coin::Penny => {
+      println!("Lucky penny!");
+      1
+    },
+    Coin::Nickel => 5,
+    Coin::Dime => 10,
+    Coin::Quarter => 25,
+  }
+}
+```
+
+### 바인딩
+- `arm`의 또 다른 유용한 기능은 패턴과 매치된 값을 바인딩할 수 있다는 것입니다.
+
+```rs
+#[derive(Debug)] // So we can inspect the state in a minute
+enum UsState {
+    Alabama,
+    Alaska,
+    // ... etc
+}
+
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter(UsState),
+}
+
+fn to_cents(coin: Coin) -> u32 {
+  match coin {
+    Coin::Penny => {
+      println!("Lucky penny!");
+      1
+    },
+    Coin::Nickel => 5,
+    Coin::Dime => 10,
+    Coin::Quarter(state) => {
+      println!("State quarter from {:?}!", state);
+      25
+    },
+  }
+}
+
+fn main() {
+  to_cents(Coin::Quarter(UsState::Alaska));
+  // State quarter from Alaska
+}
+```
+
+### `Option<T>`를 이용하는 매칭
+
+```rs
+fn plus_one(x: Option<i32>) -> Option<i32> {
+  match x {
+    None => None,
+    Some(i) => Some(i+1),
+  }
+}
+
+let five = Some(5);
+let six = plus_one(five);
+let none = plus_one(None);
+```
+
+### `_` placeholder
+
+```rs
+let some_u8_value = 0u8;
+match some_u8_value {
+    1 => println!("one"),
+    3 => println!("three"),
+    5 => println!("five"),
+    7 => println!("seven"),
+    _ => (),
+}
+```
+
+- `_ 패턴`은 어떠한 값과도 매칭 될 것입니다. 
+- _는 명시하지 않은 모든 가능한 경우에 대해 매칭 될 것입니다. 
+- ()는 단지 단위 값이므로, _ 케이스에서는 어떤 일도 일어나지 않을 것입니다.
+
+**match 표현식은 단 한 가지 경우에 대해서만 고려하는 경우 장황할 수 있습니다.**
+이러한 상황을 위하여, 러스트는 if let을 제공합니다.
+
 ## 6.3 `if let`을 사용한 간결한 흐름 제어
+
+- `if`와 `let`을 조합하여 **하나의 패턴만 매칭 시키고 나머지 경우는 무시하는 값**을 다루는 경우 사용.
+- `if let`은 `match`문법의 syntax sugar입니다.
+
+- before
+```rs
+let some_u8_value = Some(0u8);
+match some_u8_value {
+  Some(3) => println!("three"),
+  _ => (),
+}
+```
+
+- after: `if let`
+
+```rs
+if let Some(3) = some_u8_value {
+  println!("three");
+}
+```
+
+- `else`사용
+
+```rs
+let mut cnt = 0;
+if let Coin::Quarter(state) = coin {
+  println("State quarter from {:?}!", state);
+} else {
+  cnt += 1;
+}
+```
+
