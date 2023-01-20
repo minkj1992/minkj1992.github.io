@@ -1851,3 +1851,248 @@ if let Coin::Quarter(state) = coin {
 }
 ```
 
+# 7. Module
+
+- `mod`와 파일 시스템
+- `pub`로 visibility 제어하기
+- `use`로 이름 가져오기
+
+
+
+## 7-1. `mod`와 파일 시스템
+
+- **src/lib.rs**
+
+```rs
+mod client; // 모듈을 선언만 한 경우
+// 정의(impl)는 다른 파일에서 찾으라고 컴파일러에게 말합니다.
+
+mod network;
+```
+
+- 러스트는 기본적으로 `src/lib.rs`만 찾아볼줄 압니다.
+- 최초 진입점.
+
+- **src/client.rs**
+
+```rs
+fn connect() {
+
+}
+```
+
+- **src/network.rs**
+
+```rs
+fn connect() {
+}
+
+mod server {
+    fn connect() {
+    }
+}
+```
+
+만약 network의 하위 모듈인 `server`를 분리하고 싶다면 
+
+```bash
+$ mkdir src/network
+$ mv src/network.rs src/network/mod.rs
+$ mv src/server.rs src/network
+
+// 모듈 레이아웃
+communicator
+ ├── client
+ └── network
+     └── server
+
+// 파일 레이아웃
+├── src
+│   ├── client.rs
+│   ├── lib.rs
+│   └── network
+│       ├── mod.rs
+│       └── server.rs
+```
+
+이렇게 복잡한 과정이 필요한 이유는 다음과 같은 상황일 경우가 생길 수 있기 때문입니다.
+
+- src/lib.rs
+
+```
+// 모듈 계층구조
+communicator
+ ├── client
+ └── network
+     └── client
+```
+
+- 3개의 모듈 
+  1. `client`
+  2. `network`
+  3. `network::client`
+
+이제 구현 부분을 
+
+- `src/client.rs`
+- `src/network.rs`
+
+만 하게 될 경우 `client`와 서브모듈인 `network::client`를 구분하기 힘듭니다.
+따라서, `network` 모듈의 `network::client 서브모듈`을 위한 파일을 추출하기 위해서는 `src/network.rs` 파일 대신 `network` 모듈을 위한 디렉토리를 만들 필요가 있습니다. network 모듈 내의 코드는 그후 `src/network/mod.rs` 파일로 가고, 서브모듈 `network::client`은 `src/network/client.rs` 파일을 갖게할 수 있습니다. 이제 최상위 층의 `src/client.rs`는 모호하지 않게 **client 모듈이 소유한 코드가 됩니다.**
+
+
+### 모듈 파일 시스템의 규칙
+
+1. 만일 foo라는 이름의 모듈이 서브모듈을 가지고 있지 않다면, foo.rs라는 이름의 파일 내에 foo에 대한 선언을 집어넣어야 합니다.
+2. 만일 foo가 서브모듈을 가지고 있다면, foo/mod.rs라는 이름의 파일에 foo에 대한 `선언`을 집어넣어야 합니다.
+
+```
+├── foo
+│   ├── bar.rs (contains the declarations in `foo::bar`)
+│   └── mod.rs (contains the declarations in `foo`, including `mod bar`)
+```
+
+## 7-2. `pub`로 visibility 제어하기
+
+- 러스트의 모든 코드의 기본 상태는 비공개(private)입니다. 이는 `module`에도 적용됩니다.
+
+```rs
+pub mod client; //public mod 선언
+
+mod network; // private mod 선언
+```
+
+- 당연한 말이지만 라이브러리를 만들때, api로 사용되는 코드들은 `pub`로 열어주어야 타 사용자들이 
+- re-use(재샤용)할 수 있습니다.
+
+### private의 visibility 규칙
+1. 만일 어떤 아이템이 공개(`pub`)라면, 이는 **부모 모듈의 어디에서건 접근 가능**합니다.
+2. 만일 어떤 아이템이 비공개라면, 
+  1. 같은 파일 내에 있는 부모 모듈
+  2. 이 부모의 자식 모듈에서만 접근 가능합니다.
+
+
+```rs
+// src/lib.rs
+mod outermost {
+    pub fn middle_function() {}
+
+    fn middle_secret_function() {}
+
+    mod inside {
+        pub fn inner_function() {}
+
+        fn secret_function() {}
+    }
+}
+
+fn try_me() {
+    outermost::middle_function(); // (o)
+    outermost::middle_secret_function(); // (x), 컴파일 에러
+    outermost::inside::inner_function(); // (x), outermost에 의해서만 접근할 수 있습니다.
+    outermost::inside::secret_function(); // (x)
+}
+```
+
+비록 `outermost` 모듈이 private이지만, `try_me`와 같은 루트 모듈안에 존재하기 때문에, `try_me`가 `outermost`를 접근할 수 있습니다.
+
+
+## 7-3. `use`로 외부 네임스페이스 가져오기
+
+```rs
+pub mod a {
+    pub mod series {
+        pub mod of {
+            pub fn nested_modules() {}
+        }
+    }
+}
+
+fn main() {
+    a::series::of::nested_modules();
+}
+```
+
+완전하게 경로를 지정한 모듈을 참조하는 건, 이름이 너무 길어질 수 있습니다. 이를 간결하게 해주기 위해 러스트는 `use`라는 키워드를 도입하였습니다.
+
+### `use`를 이용해 간결하게 가져오기
+
+```rs
+pub mod a {
+    pub mod series {
+        pub mod of {
+            pub fn nested_modules() {}
+        }
+    }
+}
+
+use a::series::of;
+
+fn main() {
+    of::nested_modules();
+}
+```
+
+열거형 또한 모듈과 비슷한 일종의 `namespace`를 형성하고 있기 때문에, 열거형의 variant 또한 use를 이용하여 가져올 수 있습니다.
+
+```rs
+enum TrafficLight {
+  Red,
+  Yellow,
+  Green,
+}
+
+use TrafficLight::{Red, Yellow};
+
+fn main() {
+  let red = Red;
+  let green = TrafficLight::Green;
+}
+```
+
+### `*`를 이용해 glob(전체) 가져오기
+
+네임스페이스 안에 모든 아이템을 가져오기 위해서는 `*` 문법을 이용할 수도 있습니다.
+명시적으로 사용되는 것이 아닌 만큼 naming conflict가 생길 수 있으니, 조심해야 합니다.
+
+```rs
+use std::fmt;
+use TrafficLight::*;
+
+enum TrafficLight {
+    Red,
+    Yellow,
+    Green,
+}
+
+impl fmt::Debug for TrafficLight {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+
+impl fmt::Display for TrafficLight {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+
+
+
+fn main() {
+    let red = Red;
+    let yellow = Yellow;
+    
+    
+    println!("{:?}, {:?}", red, yellow);
+
+    // warning: variant `Green` is never constructed
+}
+```
+
+또한 위의 경우를 보면, `glob import`를 시행하였지만, Green never constructed 경고가 발생할 수 있다. 즉 모든 아이템을 import하였지만 `let green = Green;`을 하지 않았기 때문에 발생한 친절한 경고인 것이다.
+
+
+
+### `super`를 이용해 부모 모듈 접근하기
+
