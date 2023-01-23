@@ -2093,6 +2093,145 @@ fn main() {
 또한 위의 경우를 보면, `glob import`를 시행하였지만, Green never constructed 경고가 발생할 수 있다. 즉 모든 아이템을 import하였지만 `let green = Green;`을 하지 않았기 때문에 발생한 친절한 경고인 것이다.
 
 
+# 8. Collection
 
-### `super`를 이용해 부모 모듈 접근하기
+1. `vector`
+2. `string`
+3. `hashmap`
 
+![std collection in detail](https://doc.rust-lang.org/std/collections/index.html)
+
+## 8.1 Vector
+- 벡터는 같은 타입의 값만을 저장할 수 있습니다.
+- 벡터는 동적입니다,
+
+```rs
+// 선언만 제공
+let v: Vec<i32> = Vec::new();
+
+// 값과 함께 선언
+let v = vec![1, 2, 3];
+```
+
+벡터는 제네릭(generic)을 이용하여 구현되었습니다. 즉 선언시점에 벡터는 Type을 알려주어야 합니다.
+
+
+`struct`와 마찬가지로 벡터도 스코프 밖으로 벗어났을 때 해제됩니다.
+```rs
+{
+  let v = vec![1,2,3,4];
+} // 벡터 v free된다.
+```
+
+벡터가 드롭될 때 벡터의 내용물 또한 전부 드롭되는데, 이는 벡터가 가지고 있는 정수들이 모두 제거된다는 의미입니다.
+
+{{< admonition question "만약 struct를 담는 벡터의 경우에는?" >}}
+이를 테스트해보기 위해
+1. 상위 scope에 struct를 선언해두고
+2. inner scope에서 vector를 선언한 뒤
+3. inner scope에서 vector가 해제될 때, 상위 scope에 선언된 strct는 어떻게 될지? 
+
+```rs
+
+#[derive(Debug)]
+struct User {
+  is_active: bool,
+}
+
+fn main() {
+    let is_gc_user = User{is_active: false};
+    println!("{:?}", is_gc_user); // User { is_active: false }
+    {
+        let mut v = vec![User{is_active: true},User{is_active: true}];
+        v.push(is_gc_user); // moved is_gc_user
+        for u in v.iter() {
+            print!("{:?}", u.is_active); // true true false
+        }
+        
+        println!("{:?}", v.len()); // 3
+    }
+    println!("{:?}", is_gc_user); // error[E0382]: borrow of moved value: `is_gc_user`
+}
+```
+
+마지막 `println!("{:?}", is_gc_user);`에서 컴파일 에러가 나타납니다. 
+즉 상위 scope에 있는 구조체는 inner scope로 move되어, `}`가 실행될 때 해제됩니다.
+
+{{< /admonition  >}}
+
+### 벡터의 요소들 읽기
+
+벡터 속 element를 읽을 수 있는 방법은 총 2가지 입니다.
+
+1. `&`와 `[숫자]`
+2. `.get()`
+
+```rs
+let v = vec![1, 2, 3, 4, 5];
+
+let third: &i32 = &v[2];
+let third: Option<&i32> = v.get(2);
+```
+
+### 유효하지 않은 참조자
+
+```rs
+let mut v = vec![1, 2, 3, 4, 5];
+
+let first = &v[0];
+
+v.push(6);
+// error[E0502]: cannot borrow `v` as mutable because it is also borrowed as
+// immutable
+```
+
+이 에러에 대한 내막은 벡터가 동작하는 방법 때문입니다: 새로운 요소를 벡터의 끝에 추가하는 것은 새로 메모리를 할당하여 예전 요소를 새 공간에 복사하는 일을 필요로 할 수 있는데, 이는 벡터가 모든 요소들을 붙여서 저장할 공간이 충분치 않는 환경에서 일어날 수 있습니다. 이러한 경우, 첫번째 요소에 대한 참조자는 할당이 해제된 메모리를 가리키게 될 것입니다. 빌림 규칙은 프로그램이 이러한 상황에 빠지지 않도록 해줍니다.
+
+### 벡터 내의 값들 변경
+
+```rs
+let mut v = vec![100, 32, 57];
+for i in &mut v {
+    *i += 50;
+}
+```
+
+가변 참조자가 참고하고 있는 값을 바꾸기 위해서, i에 += 연산자를 이용하기 전에 역참조 연산자 (*)를 사용하여 값을 얻어야 합니다.
+
+{{< admonition note "Rust's Order of expression" >}}
+위 코드의 경우에는 **left-to-right**입니다.
+> The operands of these expressions are evaluated prior to applying the effects of the expression. **Expressions taking multiple operands are evaluated left to right as written in the source code.**
+
+{{< /admonition  >}}
+
+### 열거형을 사용하여 여러 타입을 저장하기
+```rs
+enum SpreadsheetCell {
+    Int(i32),
+    Float(f64),
+    Text(String),
+}
+
+let row = vec![
+    SpreadsheetCell::Int(3),
+    SpreadsheetCell::Text(String::from("blue")),
+    SpreadsheetCell::Float(10.12),
+];
+```
+
+러스트가 컴파일 타임에 벡터 내에 저장될 타입이 어떤 것인지 알아야할 필요가 있는 이유는 각 요소를 저장하기 위해 얼만큼의 힙 메모리가 필요한지 알기 위함입니다. 부차적인 이점은 이 백터에 허용되는 타입에 대해 명시적일 수 있다는 점입니다.
+
+만약 런타임에 벡터에 저장하게 될 타입의 모든 경우를 알지 못하는 경우, 열거형은 사용할 수 없기 때문에 이를 위하여 `trait object`라는 것이 있습니다.
+
+## 8.2 String
+> Rust에서 String이 이해하기 어려운 이유 3가지
+
+Rust에서 String을 이해하기 위해서는 다음 3가지를 이해해야합니다.
+
+1. 가능한 에러를 꼭 노출하도록 하는 러스트의 성향
+2. 많은 프로그래머의 예상보다 더 복잡한 데이터 구조인 스트링
+3. UTF-8
+
+
+
+## 8.3 HashMap
