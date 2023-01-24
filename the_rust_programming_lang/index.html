@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/the_rust_programming_lang/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-11T21:24:37+09:00" />
-<meta property="article:modified_time" content="2023-01-20T19:33:20+09:00" />
+<meta property="article:modified_time" content="2023-01-23T19:38:17+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  6938 ,
-        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang\/","datePublished": "2023-01-11T21:24:37+09:00","dateModified": "2023-01-20T19:33:20+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  7318 ,
+        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang\/","datePublished": "2023-01-11T21:24:37+09:00","dateModified": "2023-01-23T19:38:17+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The rust programming language</h1><h2 class="single-subtitle">The official Rust book</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-11">2023-01-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6938 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;33 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-11">2023-01-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7318 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;35 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -317,7 +317,13 @@
         <li><a href="#열거형을-사용하여-여러-타입을-저장하기">열거형을 사용하여 여러 타입을 저장하기</a></li>
       </ul>
     </li>
-    <li><a href="#82-string">8.2 String</a></li>
+    <li><a href="#82-string">8.2 String</a>
+      <ul>
+        <li><a href="#연산자"><code>+</code>연산자</a></li>
+        <li><a href="#string-indexing">String Indexing</a></li>
+        <li><a href="#string의-내부적-표현">String의 내부적 표현</a></li>
+      </ul>
+    </li>
     <li><a href="#83-hashmap">8.3 HashMap</a></li>
   </ul>
 </nav></div>
@@ -3917,21 +3923,209 @@
 </div><p>러스트가 컴파일 타임에 벡터 내에 저장될 타입이 어떤 것인지 알아야할 필요가 있는 이유는 각 요소를 저장하기 위해 얼만큼의 힙 메모리가 필요한지 알기 위함입니다. 부차적인 이점은 이 백터에 허용되는 타입에 대해 명시적일 수 있다는 점입니다.</p>
 <p>만약 런타임에 벡터에 저장하게 될 타입의 모든 경우를 알지 못하는 경우, 열거형은 사용할 수 없기 때문에 이를 위하여 <code>trait object</code>라는 것이 있습니다.</p>
 <h2 id="82-string">8.2 String</h2>
-<blockquote>
-<p>Rust에서 String이 이해하기 어려운 이유 3가지</p>
-</blockquote>
-<p>Rust에서 String을 이해하기 위해서는 다음 3가지를 이해해야합니다.</p>
+<p>Rust의 스트링은 총 3가지를 지칭합니다.</p>
 <ol>
-<li>가능한 에러를 꼭 노출하도록 하는 러스트의 성향</li>
-<li>많은 프로그래머의 예상보다 더 복잡한 데이터 구조인 스트링</li>
-<li>UTF-8</li>
+<li><code>String</code> (<code>Struct std::string::String</code> struct 타입)</li>
+<li><code>&amp;str</code> (스트링 슬라이스, 스트링 리터럴)</li>
+<li>primitive type <code>str</code></li>
 </ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;hello world&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello world&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;안녕하세요&#34;</span><span class="p">);</span><span class="w"> </span><span class="c1">// utf-8 based
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="연산자"><code>+</code>연산자</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;Hello, &#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;world!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 우리는 1. String + &amp;str만 더할 수 있고
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="c1">// 다음 조건들은 더하지 못합니다. (컴파일 에러)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="c1">// (x) String + String
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="c1">// (x) &amp;str + &amp;str -&gt; 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&amp;</span><span class="n">s2</span><span class="p">;</span><span class="w"> </span><span class="c1">// s1은 여기서 이동되어 더이상 쓸 수 없음을 유의하세요
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{s1}&#34;</span><span class="p">);</span><span class="w"> </span><span class="c1">// error[E0382]: borrow of moved value: `s1`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>let s3 = s1 + &amp;s2;</code>은 String + &amp;String 타입인데, 반하여 실제 <code>+</code>의 구현체를 보면</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">s</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>라는 것 (2번째 인자가 <code>&amp;str</code> 타입)을 알 수 있습니다. <code>&amp;String</code>이 <code>&amp;str</code>로 타입 처리가 되는 이유는 러스트의 <code>deref coercion</code>(역참조 강제) 기능 덕분입니다.</p>
+<p>만약 어떤 파라미터도 소유권을 넘기지 않는 방식으로 concat을 하고 싶다면 <code>format!()</code>을 사용하면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;tic&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;tac&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;toe&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;{}-{}-{}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">s2</span><span class="p">,</span><span class="w"> </span><span class="n">s3</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="string-indexing">String Indexing</h3>
+<p><strong>rust는 스트링 인덱싱을 허용하지 않습니다.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// error: the trait bound `std::string::String: std::ops::Index&lt;_&gt;` is not satisfied [--explain E0277]
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이를 이해하기 위해서는 rust가 스트링을 내부적으로 메모리에 저장하는 방식을 알아야합니다.</p>
+<h3 id="string의-내부적-표현">String의 내부적 표현</h3>
+<blockquote>
+<p>Rust가 String indexing을 에러처리하는 이유</p>
+</blockquote>
+<ul>
+<li><code>String</code>은 <code>Vec&lt;u8&gt;</code>을 감싼 것입니다(wrapper).</li>
+<li><code>String</code>의 UTF-8로 인코딩된 글자 수와, 실제 각 char이 차지하는 바이트(1~4byte/ 문자 당)의 차이가 있습니다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;ynte&#34;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1byte per char
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;уйте&#34;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 2byte per char
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;ㄱㄴㄷㄹ&#34;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 3byte per char
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;ㅏㅑㅗㅛ&#34;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 3byte per char
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">s5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;🌱🌱🌱🌱&#34;</span><span class="p">;</span><span class="w"> </span><span class="c1">// 4byte per char
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 4, 8, 12, 12, 16
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{}, {}, {}, {}, {}&#34;</span><span class="p">,</span><span class="n">s1</span><span class="p">.</span><span class="n">len</span><span class="p">(),</span><span class="w"> </span><span class="n">s2</span><span class="p">.</span><span class="n">len</span><span class="p">(),</span><span class="w"> </span><span class="n">s3</span><span class="p">.</span><span class="n">len</span><span class="p">(),</span><span class="w"> </span><span class="n">s4</span><span class="p">.</span><span class="n">len</span><span class="p">(),</span><span class="w"> </span><span class="n">s5</span><span class="p">.</span><span class="n">len</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이런 모호함을 방지하기 위해, String의 index 접근을 컴파일 에러로 처리합니다.</p>
+<p>추가로 러스트가 String indexing을 에러 처리하는 또 하나의 이유는 인덱스 연산은 <code>O(1)</code> 즉 Constant Complexity를 제공하기 위해서입니다. 하지만 스트링 내에 얼마나 많은 <code>유효 문자</code>(valid characters, 예를 들면 힌두어에서 &lsquo;े&rsquo;는 발음 구별 부호로 그 자체로는 이해할 수 없는 char입니다)가 있는지 시작 지점부터 인덱스로 지정된 곳까지 훑어야 하기 때문입니다.</p>
+<ul>
+<li>그래도 panic을 감수하고 서라도, 정말 스트링 슬라이스를 써야 한다면 <code>string slice</code>를 명시적으로 사용하면 됩니다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">literal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;йте&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">literal</span><span class="p">[</span><span class="mi">0</span><span class="o">..</span><span class="mi">2</span><span class="p">];</span><span class="w"> </span><span class="c1">//й
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>indexing 잘못한다면 프로그램을 죽일 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-console" data-lang="console"><span class="line"><span class="cl"><span class="go">thread &#39;main&#39; panicked at &#39;byte index 1 is not a char boundary; it is inside &#39;й&#39; (bytes 0..2) of `йте`&#39;, src/main.rs:4:15
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>또한 만일 String에 대해, 개별 char에 접근하길 원한다면 indexing대신 loop를 사용할 수 있습니다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s">&#34;ㅏㅑ가나다뷁&#34;</span><span class="p">.</span><span class="n">chars</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// ㅏ
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ㅑ
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 가
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 나
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 다
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 뷁
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Rust에서는 이렇게 복잡하게 스트링을 관리함으로써 <code> handle errors involving non-ASCII characters later in your development life cycle.</code>해줍니다.</p>
 <h2 id="83-hashmap">8.3 HashMap</h2></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-01-20&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/56f2fbfb0e08808582715b63159713b95b5dca9e" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 56f2fbfb0e08808582715b63159713b95b5dca9e: rebuilding site Fri Jan 20 19:33:20 KST 2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>56f2fbf</a></span>
+                <span>Updated on 2023-01-23&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/1e07e7d31c09d477aa4b0dfad1b1838c6702cb8b" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 1e07e7d31c09d477aa4b0dfad1b1838c6702cb8b: rebuilding site Mon Jan 23 19:38:17 KST 2023">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>1e07e7d</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
