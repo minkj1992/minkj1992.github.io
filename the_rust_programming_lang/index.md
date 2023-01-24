@@ -2099,7 +2099,7 @@ fn main() {
 2. `string`
 3. `hashmap`
 
-![std collection in detail](https://doc.rust-lang.org/std/collections/index.html)
+[std collection in detail](https://doc.rust-lang.org/std/collections/index.html)
 
 ## 8.1 Vector
 - 벡터는 같은 타입의 값만을 저장할 수 있습니다.
