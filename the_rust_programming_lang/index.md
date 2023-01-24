@@ -2345,3 +2345,43 @@ fn main() {
 Rust에서는 이렇게 복잡하게 스트링을 관리함으로써 ` handle errors involving non-ASCII characters later in your development life cycle.`해줍니다.
 
 ## 8.3 HashMap
+
+```rs
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+
+scores.insert("Blue", 10);
+scores.insert("Yellow", 50);
+```
+
+
+- `zip`과 `collect()`을 통한 init
+
+```rs
+use std::collections::HashMap;
+
+fn main() {
+    let teams  = vec!["Blue", "Yellow"];
+    let initial_scores = vec![10, 50];
+    
+    let scores = teams.iter().zip(initial_scores.iter());
+    // ("Blue", 10)
+    // ("Yellow", 50)
+    // for e in scores {
+    //     println!("{:?}", e);
+    // }
+    
+    let scores_table: HashMap<_,_> = scores.collect();
+    println!("{:#?}",scores_table);
+    // {
+    //     "Blue": 10,
+    //     "Yellow": 50,
+    // }   
+}
+```
+.zip을 하게 되면 (키, 값) 튜플이 만들어지게 되고, 이를 collect()하게 되면 hashMap을 반환합니다.
+
+이때 hash table에 대해서 타입을 명시해주어야 합니다. **`HashMap<_, _>`을 사용하게 되면, 러스트는 벡터에 담긴 데이터의 타입에 기초하여 해쉬에 담길 타입을 추론할 수 있습니다.**
+
+
