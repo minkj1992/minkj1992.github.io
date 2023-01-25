@@ -2196,7 +2196,7 @@ for i in &mut v {
 }
 ```
 
-가변 참조자가 참고하고 있는 값을 바꾸기 위해서, i에 += 연산자를 이용하기 전에 역참조 연산자 (*)를 사용하여 값을 얻어야 합니다.
+mut ref(가변 참조자, `&mut`)가 참고하고 있는 값을 바꾸기 위해서, i에 += 연산자를 이용하기 전에 역참조 연산자 (*)를 사용하여 값을 얻어야 합니다.
 
 {{< admonition note "Rust's Order of expression" >}}
 위 코드의 경우에는 **left-to-right**입니다.
@@ -2383,5 +2383,57 @@ fn main() {
 .zip을 하게 되면 (키, 값) 튜플이 만들어지게 되고, 이를 collect()하게 되면 hashMap을 반환합니다.
 
 이때 hash table에 대해서 타입을 명시해주어야 합니다. **`HashMap<_, _>`을 사용하게 되면, 러스트는 벡터에 담긴 데이터의 타입에 기초하여 해쉬에 담길 타입을 추론할 수 있습니다.**
+
+- `.collect()`: 튜플 -> hashMap
+- `.zip()`: iter, iter -> tuple 
+
+### 해쉬맵의 소유권처리
+
+- `i32`와 같이 `Copy 트레잇`을 구현한 타입: 그 값들은 해쉬맵 안으로 복사
+- `String`같이 소유된 값: 소유권 `move`
+
+
+- `&str`타입은 copy
+```rs
+use std::collections::HashMap;
+
+fn main() {
+    let k = "Favorite color"; // &str type
+    let v = "Blue";
+    
+    let mut map = HashMap::new();
+    map.insert(k, v);
+    
+    println!("{k}, {v}"); //문제 없음
+}
+```
+
+- borrow되어 k,v는 사용할 수 없게 됩니다.
+```rs
+{
+    let k = String::from("Favorite color");
+    let v = String::from("Blue");
+    ..
+    map.insert(k, v);
+    println!("{k}, {v}"); // error[E0382]: borrow of moved value: `k`
+}
+
+```
+
+### HashMap Update
+
+- key에 할당된 값이 없을 경우에만 업데이트 원할 경우
+
+```rs
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+scores.insert(String::from("Blue"), 10);
+
+scores.entry(String::from("Yellow")).or_insert(50);
+scores.entry(String::from("Blue")).or_insert(50);
+
+println!("{:?}", scores);
+```
 
 
