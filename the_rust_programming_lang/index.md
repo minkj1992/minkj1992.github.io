@@ -2321,7 +2321,7 @@ let c = &literal[0..2]; //й
 
 indexing 잘못한다면 프로그램을 죽일 수 있습니다.
 
-```console
+```js
 thread 'main' panicked at 'byte index 1 is not a char boundary; it is inside 'й' (bytes 0..2) of `йте`', src/main.rs:4:15
 ```
 
@@ -2437,3 +2437,200 @@ println!("{:?}", scores);
 ```
 
 
+# 9. Error Handling
+
+<center>
+
+![](/images/rs_like_err_in_py.webp)
+
+<p>&#60;Rust like error handling in python&#62;</p>
+
+</center>
+
+
+Rust에서 에러는 2가지 종류가 존재합니다.
+
+1. recoverable error
+2. unrecoverable error
+
+2번은 버그를 알기 위해 필요하며, 1번의 경우에는 합리적으로 필요한 에러 즉 개발자가 코드로 대응할 에러를 뜻합니다.
+
+러스트에서는 go처럼 exception 메커니즘을 사용하지 않습니다.
+
+- recoverable error는 `Result<T,E>`를 사용
+- unrecoverable error는 `panic!` 매크로를 사용합니다.
+
+## 9-1. `Panic!`
+
+- `panic!`은 기본적으로 `unwinding`을 사용합니다.
+
+즉 패닉을 마주하면, 프로그램은 해당 함수로 부터 스택을 거꾸로 훑어가면서 데이터를 제거하는데 이 과정에서 비교적 많은 연산을 사용합니다.
+
+만약 훑어가기와 데이터 제거 없이 프로그램을 그냥 종료하고 싶다면 panic 정책을 `abort`로 하면 됩니다.
+
+이 경우, panic을 마주하면 프로그램을 바로 종료합니다.
+
+```toml
+# Cargo.toml
+[profile.release]
+panic = 'abort'
+
+```
+
+
+## 9-2. `Result<T,E>`
+
+- `Result<T,E>`를 match를 활용해서 처리하는 방법
+
+```rs
+use std::fs::File;
+use std::io::ErrorKind;
+
+fn main() {
+    let f = File::open("hello.txt");
+
+    let f = match f {
+        Ok(file) => file,
+        // match guard를 사용
+        Err(ref error) if error.kind() == ErrorKind::NotFound => match File::create("hello.txt") {
+            Ok(fc) => fc,
+            Err(e) => {
+                panic!("Tried to create file but there was a problem: {:?}", e)
+            }
+        },
+        Err(error) => {
+            panic!("There was a problem opening the file: {:?}", error)
+        }
+    };
+}
+
+```
+
+### `unwarp`와 `expect`
+match의 syntax sugar들인 `unwarp`와 `expect`를 사용하여 Result를 핸들링할 수도 있습니다.
+
+- `unwrap()`: Result의 값이 `Err` variant라면 자동으로 panic!처리
+- `expect()`: `unwrap()`과 동일하지만, panic 에러 메시지 추가할 수 있습니다.
+
+
+```rs
+// unwrap()
+use std::fs::File;
+
+fn main() {
+    let f = File::open("hello.txt").unwrap();
+}
+```
+
+```rs
+// expect()
+use std::fs:File;
+
+fn main() {
+  let f = File::open("hello.txt").expect("Failed to open hello.txt");
+}
+```
+
+### 에러 전파하기
+
+- match를 이용한 에러전파
+```rs
+use std::fs::File;
+use std::io;
+use std::io::Read;
+
+fn read_file(name: &str) -> Result<String, io::Error> {
+    let f = File::open(name);
+
+    let mut f = match f {
+        Ok(file) => file,
+        Err(e) => return Err(e),
+    };
+
+    let mut s = String::new();
+
+    match f.read_to_string(&mut s) {
+        Ok(_) => Ok(s),
+        Err(e) => Err(e),
+    }
+}
+
+fn main() {
+    let r = read_file("hello.txt");
+    match r {
+        Ok(_) => todo!(),
+        Err(e) => println!("{}", e.to_string()),
+    }
+}
+```
+
+러스트에서는 위의 패턴을 지원하기 위한 syntax sugar(숏컷)로 `?`가 있습니다.
+
+```rs
+use std::io;
+use std::io::Read;
+use std::fs::File;
+
+fn read_file(name: &str) -> Result<String, io::Error> {
+    let mut f = File::open(name)?;
+    let mut s = String::new();
+    f.read_to_string(&mut s)?;
+    Ok(s)
+}
+```
+
+ match 표현식과 물음표 연산자가 수행하는 한 가지 차이점은 물음표 연산자를 사용할 때 에러 값들이 표준 라이브러리 내에 있는 From 트레잇에 정의된 from 함수를 hit(call)한다는 것입니다. 
+
+ 또한 `?`는 에러가 발생하면 그 즉시 해당 함수 scope를 벗어나 err를 return합니다.
+
+ 아래 테스트를 보면
+
+ ```rs
+ fn read_file(name: &str) -> Result<String, io::Error> {
+    println!("Start read_file");
+    let mut f = File::open(name)?;
+    println!("If error this will not be called");
+    let mut s = String::new();
+    f.read_to_string(&mut s)?;
+    Ok(s)
+}
+
+fn main() {
+    let r = read_file("hello.txt");
+    match r {
+        Ok(_) => todo!(),
+        Err(e) => println!("{}", e.to_string()),
+    }
+}
+```
+
+다음과 같이 에러가 발생하면 "If error this will not be called" 부분을 실행하지 않습니다. 이는 match 코드에서도 `Err(e) => return Err(e)` 가 구현된 부분으로 동일합니다.
+
+```js
+Start read_file
+No such file or directory (os error 2)
+```
+
+- `?` changing
+
+체이닝을 통해서 에러를 더욱 pretty하게 처리할 수 있습니다.
+
+```rs
+use std::io;
+use std::io::Read;
+use std::fs::File;
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let mut s = String::new();
+
+    File::open("hello.txt")?.read_to_string(&mut s)?;
+
+    Ok(s)
+}
+```
+
+- **?는 Result를 반환하는 함수에서만 사용될 수 있습니다.**
+
+즉 위의 특성때문에 `()`를 반환하는 `main() {}` 함수에서는 ?를 사용할 수 없습니다.
+
+## 9-3. 예외처리 가이드라인
