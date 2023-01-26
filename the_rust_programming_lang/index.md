@@ -2634,3 +2634,40 @@ fn read_username_from_file() -> Result<String, io::Error> {
 즉 위의 특성때문에 `()`를 반환하는 `main() {}` 함수에서는 ?를 사용할 수 없습니다.
 
 ## 9-3. 예외처리 가이드라인
+
+panic(`unwrap`, `expect`)을 일으켜도 좋다고 생각되는 상황들은 다음과 같습니다.
+
+1. 테스트, 프로토타입 코드
+2. 컴파일러보다 여러분이 더 많은 정보를 가지고 있을 때
+
+```rs
+use std::net::IpAddr;
+
+// 이 경우에는 127.0.0.1이 에러 나지 않을 것을 개발자는 안다.
+let home = "127.0.0.1".parse::<IpAddr>().unwrap();
+```
+
+### 유효성을 검사하는 커스텀 타입 생성하는 방법
+
+```rs
+pub struct Guess {
+  value: u32,
+}
+
+impl Guess {
+  pub fn new(value: u32) -> Guess {
+    if value < 1 || value > 100 {
+      panic!("Guess value must be between 1 and 100, but got {}.", value);
+    }
+    
+    Guess {
+      value
+    }
+  }
+
+  // struct의 value필드는 private이기 때문에, Getter
+  pub fn value(&self) -> u32 {
+    self.value
+  }
+}
+```
