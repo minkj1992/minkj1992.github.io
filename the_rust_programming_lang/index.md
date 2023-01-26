@@ -193,7 +193,18 @@ fn main() {
 즉 한국어/중국어/일본어 표의 문자, 이모티콘, 넓이가 0인 공백문자를 `char`타입 변수로 받을 수 있습니다.
 
 ### Compound types
-> Compound types can **group multiple values** into one type. Rust는 2가지의 primative 컴파운드 타입(`tuples` and `arrays`)을 가지고 있습니다.
+> Compound types can **group multiple values** into one type. Rust는 `Sequence types`에서 총 3가지의 primative 타입(`tuples` and `arrays`, `slice`)을 가지고 있습니다.
+
+1. `Tuple`: `()`, `(&str, i32)`...
+  1. i.g. `()`
+2. `Array`: `[Type; Expression]`
+  1. i.g. `[i32; 3]` : i32가 3개있는 배열
+3. `Slice`: `[T]`
+  1. `&[T]`: shared slice reference
+  2. `&mut [T]`: mutable slice reference
+  3. `Box<[T]>`: boxed slice
+
+
 
 - `The Tuple Type`
 
@@ -2671,3 +2682,217 @@ impl Guess {
   }
 }
 ```
+
+# 10. 제너릭, 트레잇, 라이프타임
+
+- 10.1 제너릭
+- 10.2 트레잇: 공유 동작을 정의하기
+- 10.3 라이프타임을 이용한 참조자 유효화
+
+`제너릭`은 다양한 타입들에 대해서 공통점들을 추상화 시켜서 코드를 줄이는 방법이고,
+
+`트레잇`은 `동작`을 제네릭 한 방식으로 정의하는 방법을 말합니다. **트레잇을 통해서 특정 제너릭 타입에 대하여 특정 동작을 하는 타입으로 강제할 수 있습니다.**
+
+`라이프타임`은 제너릭의 일종으로 컴파일러에게 참조자들이 서로에게 어떤 연관이 있는지에 대한 정보를 줄 수 있도록 합니다. 라이프타임을 통해 "수많은 상황에서 값을 빌릴 수 있도록 허용해 주고도 여전히 참조자들이 유효할지를 컴파일러가 검증하도록 해줄 수 있습니다."
+
+## 10.1 제너릭
+
+
+<center>
+
+![](/images/metamong.webp)
+
+</center>
+
+`T`로 제너릭을 표현하는 것은 관례상 사용하는 것입니다. 즉 문법적 강제가 없습니다.
+
+- generic before
+
+```rs
+fn largest_i32(list: &[i32]) -> i32 {
+    let mut largest = list[0];
+
+    for &item in list.iter() {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn largest_char(list: &[char]) -> char {
+    let mut largest = list[0];
+
+    for &item in list.iter() {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn main() {
+    let numbers = vec![34, 50, 25, 100, 65];
+
+    let result = largest_i32(&numbers);
+    println!("The largest number is {}", result);
+
+    let chars = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest_char(&chars);
+    println!("The largest char is {}", result);
+}
+```
+
+- after first try.
+
+```rs
+// error[E0369]: binary operation `>` cannot be applied to type `T`
+fn largest<T>(list: &[T]) -> T {
+    let mut largest = list[0];
+
+    for &item in list.iter() {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn main() {
+    let numbers = vec![34, 50, 25, 100, 65];
+
+    let result = largest(&numbers);
+    println!("The largest number is {}", result);
+
+    let chars = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest(&chars);
+    println!("The largest char is {}", result);
+}
+```
+
+위 코드를 컴파일하면 `std::cmp::PartialOrd`라는 트레잇을 언급합니다. 이를 해결할 수 있는 방법은 `10.2`에서 다루겠습니다.
+
+
+### 구조체에서 제너릭
+
+```rs
+struct Point<T> {
+  x: T,
+  y: T,
+}
+```
+
+### Enum에서 제너릭
+
+```rs
+enum Result<T, E> {
+  Ok(T),
+  Err(E),
+}
+```
+
+### 메소드에서 제너릭
+
+```rs
+#[derive(Debug)]
+struct Point<T, U> {
+    x: T,
+    y: U,
+}
+
+impl<T, U> Point<T, U> {
+    fn mix_diff<V, W>(self, other: Point<V, W>) -> Point<T, W> {
+        Point {
+            x: self.x,
+            y: other.y,
+        }
+    }
+
+    fn mix(self, other: Point<T, U>) -> Point<T, U> {
+        Point {
+            x: self.x,
+            y: other.y,
+        }
+    }
+}
+
+fn main() {
+    let p1 = Point { x: 1, y: 99.9 };
+    let p2 = Point { x: "Hello", y: 'c' };
+
+    let diff_type = Point { x: 5, y: 10.4 }.mix_diff(p2);
+    println!("{:#?}", diff_type);
+    let same_type = Point { x: 5, y: 10.4 }.mix(p1);
+    println!("{:#?}", same_type);
+
+    println!(
+        "{:#?}",
+        Point { x: 5, y: 10.4 }.mix_diff(Point { x: 1, y: 99.9 })
+    );
+}
+```
+
+```js
+Point {
+    x: 5,
+    y: 'c',
+}
+Point {
+    x: 5,
+    y: 99.9,
+}
+Point {
+    x: 5,
+    y: 99.9,
+}
+```
+
+### 제너릭 타입 성능(런타임 비용)
+
+러스트는 제네릭 파라미터 대신 구체적인 타입을 명시했을 때와 비교해 전혀 느려지지 않습니다.
+
+> Finally, while Rust’s preferred strategy of monomorphising generics (ala C++) produces fast code, it demands that significantly more code be generated than other translation strategies. Rust programmers can use trait objects to trade away this code bloat by using dynamic dispatch instead. (in Rust faq part)
+
+러스트는 컴파일 타임에 제네릭을 사용하는 코드에 대해 단형성화(`monomorphization`) 를 수행함으로써 이러한 성능을 이루어 냈습니다. 단형성화란 제네릭 코드를 실제로 채워질 구체적인 타입으로 된 특정 코드로 바꾸는 과정을 말합니다.
+
+러스트 컴파일러는 제네릭 코드가 호출되는 모든 곳을 살펴보고 제네릭 코드가 호출될 때 사용된 구체적인 타입에 대한 코드를 생성합니다.
+
+즉 만약, 아래와 같은 코드가 존재한다면
+
+- before compile
+```rs
+fn main() {
+  let integer = Some(5);
+  let float = Some(5.0);
+}
+```
+
+- after compile
+```rs
+enum Opiton_i32 {
+  Some(i32),
+  None,
+}
+enum Opiton_f64 {
+  Some(f64),
+  None,
+}
+
+fn main() {
+  let integer = Opiton_i32::Some(5);
+  let float = Opiton_f64::Some(5.0);
+}
+```
+
+위와 같은 코드를 컴파일 타임에 만들어냅니다. 그러므로 타 언어에 비해 바이너리 파일은 커지겠지만, 런타임 퍼포먼스는 아무런 손해없이 제너릭을 사용할 수 있습니다. 이런 컴파일 기능을 단형성화(`monomorphization`)라고 부릅니다.
+
+## 10.2 트레잇: 공유 동작을 정의하기
+
+
+## 10.3 라이프타임을 이용한 참조자 유효화
+
