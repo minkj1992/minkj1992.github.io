@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/the_rust_programming_lang/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-11T21:24:37+09:00" />
-<meta property="article:modified_time" content="2023-01-26T16:00:24+09:00" />
+<meta property="article:modified_time" content="2023-01-26T17:34:26+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -20,7 +20,7 @@
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/the_rust_programming_lang/" /><link rel="prev" href="https://minkj1992.github.io/rust_principle/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/the_rust_programming_lang/" /><link rel="prev" href="https://minkj1992.github.io/rust_principle/" /><link rel="next" href="https://minkj1992.github.io/setup_icp_env/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  8550 ,
-        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang\/","datePublished": "2023-01-11T21:24:37+09:00","dateModified": "2023-01-26T16:00:24+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  8584 ,
+        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang\/","datePublished": "2023-01-11T21:24:37+09:00","dateModified": "2023-01-26T17:34:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,7 +173,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The rust programming language</h1><h2 class="single-subtitle">The official Rust book</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-11">2023-01-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8550 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-11">2023-01-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8584 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;41 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -5061,12 +5061,16 @@
 </div>
 </div><p>위와 같은 코드를 컴파일 타임에 만들어냅니다. 그러므로 타 언어에 비해 바이너리 파일은 커지겠지만, 런타임 퍼포먼스는 아무런 손해없이 제너릭을 사용할 수 있습니다. 이런 컴파일 기능을 단형성화(<code>monomorphization</code>)라고 부릅니다.</p>
 <h2 id="102-트레잇-공유-동작을-정의하기">10.2 트레잇: 공유 동작을 정의하기</h2>
+<blockquote>
+<p>트레잇은 다른 언어들에서 &lsquo;인터페이스(interface)&lsquo;라고 부르는 기능과 유사하지만, 몇 가지 다른 점이 있습니다.</p>
+</blockquote>
+<p>트레잇은 타입들이 공통적으로 갖는 동작에 대하여 추상화하도록 해줍니다. 트레잇(trait)은 러스트 컴파일러에게 특정한 타입이 다른 타입들과 함께 공유할 수도 있는 기능에 대해 말해줍니다.</p>
 <h2 id="103-라이프타임을-이용한-참조자-유효화">10.3 라이프타임을 이용한 참조자 유효화</h2></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-01-26&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/ea265da72aa3854c89d4210963fbbc865259408b" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) ea265da72aa3854c89d4210963fbbc865259408b: rebuilding site Thu Jan 26 16:00:24 KST 2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ea265da</a></span>
+                <span>Updated on 2023-01-26&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/3ec90514ce4c19ae6cdcd1f8ff54c69b151cc4bb" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 3ec90514ce4c19ae6cdcd1f8ff54c69b151cc4bb: rebuilding site Thu Jan 26 17:34:26 KST 2023">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3ec9051</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
@@ -5085,7 +5089,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/rust_principle/" class="prev" rel="prev" title="Rust 디자인 원칙 🦀"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust 디자인 원칙 🦀</a></div>
+    <div class="post-nav"><a href="/rust_principle/" class="prev" rel="prev" title="Rust 디자인 원칙 🦀"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Rust 디자인 원칙 🦀</a>
+            <a href="/setup_icp_env/" class="next" rel="next" title="Internet Computer development environment">Internet Computer development environment<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
