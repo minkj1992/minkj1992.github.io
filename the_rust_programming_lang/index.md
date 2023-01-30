@@ -121,7 +121,7 @@ fn main() {
 | Hex              | `0xff`        |
 | Octal            | `0o77`        |
 | Binary           | `0b1111_0000` |
-| Byte (`u8` only) | `b'A'`        |
+| Byte (`u8` only) | `b`'a`'`      |
 
 **확실하게 정해진 경우가 아니면 Rust의 기본 값인 i32가 일반적으로는 좋은 선택입니다.**
 
@@ -2484,7 +2484,7 @@ Rust에서 에러는 2가지 종류가 존재합니다.
 ```toml
 # Cargo.toml
 [profile.release]
-panic = 'abort'
+panic = `'a`bort'
 
 ```
 
@@ -2739,7 +2739,7 @@ fn main() {
     let result = largest_i32(&numbers);
     println!("The largest number is {}", result);
 
-    let chars = vec!['y', 'm', 'a', 'q'];
+    let chars = vec!['y', 'm', `'a`', 'q'];
 
     let result = largest_char(&chars);
     println!("The largest char is {}", result);
@@ -2768,7 +2768,7 @@ fn main() {
     let result = largest(&numbers);
     println!("The largest number is {}", result);
 
-    let chars = vec!['y', 'm', 'a', 'q'];
+    let chars = vec!['y', 'm', `'a`', 'q'];
 
     let result = largest(&chars);
     println!("The largest char is {}", result);
@@ -2892,9 +2892,475 @@ fn main() {
 위와 같은 코드를 컴파일 타임에 만들어냅니다. 그러므로 타 언어에 비해 바이너리 파일은 커지겠지만, 런타임 퍼포먼스는 아무런 손해없이 제너릭을 사용할 수 있습니다. 이런 컴파일 기능을 단형성화(`monomorphization`)라고 부릅니다.
 
 ## 10.2 트레잇: 공유 동작을 정의하기
-> 트레잇은 다른 언어들에서 '인터페이스(interface)'라고 부르는 기능과 유사하지만, 몇 가지 다른 점이 있습니다.
+> 트레잇은 다른 언어들에서 '인터페이스(`interface`)'라고 부르는 기능과 유사하지만, 몇 가지 다른 점이 있습니다.
 
 트레잇은 타입들이 공통적으로 갖는 동작에 대하여 추상화하도록 해줍니다. 트레잇(trait)은 러스트 컴파일러에게 특정한 타입이 다른 타입들과 함께 공유할 수도 있는 기능에 대해 말해줍니다. 
 
+- trait 정의 (`lib.rs` with `aggregator crate`)
+```rs
+pub trait Summary {
+    fn summary(&self) -> String;
+}
+```
+
+- trait impl (`lib.rs` with `aggregator crate`)
+```rs
+pub struct News {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+// impl 강제 with trait
+impl Summary for NewsArticle {
+    fn summary(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
+
+impl Summary for Tweet {
+    fn summary(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+```
+
+- other file
+```rs
+// You do not need to write extern crate anymore for external dependencies in Rust 2018.
+// 여기에서는 아래와 같은 코드가 필요없어진다.
+// extern crate aggregator;
+// use aggregator::Summarizable;
+
+use aggregator::{Summary, Tweet};
+
+fn main() {
+    let tweet = Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    };
+
+    println!("1 new tweet: {}", tweet.summarize());
+}
+
+```
+
+- `Orphan rule`(고아 규칙)
+
+트레잇 구현과 함께 기억할 한 가지 제한사항이 있습니다: 트레잇 혹은 타입이 우리의 크레이트 내의 것일 경우에만 해당 타입에서의 트레잇을 정의할 수 있습니다. 바꿔 말하면, 외부의 타입에 대한 외부 트레잇을 구현하는 것은 허용되지 않습니다. 
+
+간단하게 말하면, 부모 타입이 존재하지 않기 때문에 고아 규칙이라고 부릅니다. 이 규칙이 없다면, 두 크레이트는 동일한 타입에 대해 동일한 트레잇을 구현할 수 있게 되고, 이 두 구현체가 충돌을 일으킬 것입니다: 러스트는 어떤 구현을 이용할 것인지 알지 못할 것입니다. 러스트가 고아 규칙을 강제하기 때문에, 다른 사람의 코드는 여러분의 코드를 망가뜨리지 못하고 반대의 경우도 마찬가지입니다.
+
+### `Trait Bound`
+
+이제 method가 아닌 trait을 받아들이는 fn을 만들어봅니다.
+
+```rs
+pub fn notify<T: Summary>(item T) {
+    println!("Breaking news! {}", item.summary());
+}
+```
+
+`+`를 이용하면 하나의 제네릭 타입에 대해 여러 개의 트레잇 바운드를 특정할 수 있습니다.
+
+```rs
+fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
+```
+
+
+
+### `Where`
+
+위의 `some_function`을 `where`이라는 syntax를 사용하면 더욱 가시성을 확보해서 코딩할 수 있습니다.
+
+
+we can use a where clause, like this:
+
+
+- after `where`
+```rs
+fn some_function<T, U>(t: &T, u: &U) -> i32
+    where T: Display + Clone,
+          U: Clone + Debug
+{
+}
+```
+
+where 뒤쪽으로 trait bound를 이동시켜서, 함수를 더 잘 읽을 수 있도록 해주었습니다.
+
+
+이제 아래와 같은 `largest` 함수를 trait bound를 사용해 고쳐보겠습니다.
+
+- before
+
+```rs
+fn largest<T>(list: &[T]) -> T {
+    let mut largest = list[0];
+
+    for &item in list.iter() {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+```
+
+- 1st try
+
+```rs
+fn largest<T: PartialOrd>(list: &[T]) -> T {
+}
+
+// error[E0508]: cannot move out of type `[T]`, a non-copy array
+```
+
+- after(완성본)
+
+```rs
+fn largest<T: PartialOrd + Copy>(list: &[T])  -> T {
+  let mut largest = list[0];
+  for &item in list{
+    if item > largest {
+      largest = item
+    }
+  }
+  largest
+}
+
+// where 사용한 경우
+fn largest<T>(list: &[T]) -> T
+where
+    T: PartialOrd + Copy,
+{
+    let mut largest = list[0];
+    for &item in list {
+        if item > largest {
+            largest = item
+        }
+    }
+    largest
+}
+
+
+// main()
+
+fn main() {
+    let numbers = vec![34, 50, 25, 100, 65];
+
+    let result = largest(&numbers);
+    println!("The largest number is {}", result);
+
+    let chars = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest(&chars);
+    println!("The largest char is {}", result);
+}
+```
+
+### Using Trait Bounds to Conditionally Implement Methods
+
+조건에 따라 Trait Bound를 다르게하여 method를 정의할 수도 있습니다.
+
+```rs
+use std::fmt::Display;
+
+struct Pair<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self { x, y }
+    }
+}
+
+impl<T: Display + PartialOrd> Pair<T> {
+    fn cmp_display(&self) {
+        if self.x >= self.y {
+            println!("The largest member is x = {}", self.x);
+        } else {
+            println!("The largest member is y = {}", self.y);
+        }
+    }
+}
+
+```
+
 ## 10.3 라이프타임을 이용한 참조자 유효화
+
+러스트에서 모든 reference는 lifetime을 가지며, 이는 reference가 유효할 수 있는 scope를 뜻합니다.
+
+`Lifetime`의 주 목적은 `dangling reference`(댕글링 참조자)를 방지하는 것입니다. 아래는 댕글링 참조자를 임의로 만들어본 코드입니다.
+
+```rs
+{
+  let r;
+  {
+    let x = 5;
+    r = &x;
+  } // 로컬 변수 x는 이 scope에서 free되며 r은 x를 가리키고 있습니다. (dangling reference)
+  println!("{r}"); // error: `x` does not live long enough
+}
+```
+에러가 발생하는 것을 알 수 있는데요, 그럼 러스트 컴파일러는 위와 같은 상황을 어떻게 알아차릴까요?
+
+### Borrow Checker
+
+`borrow checker`(검사기)는 컴파일러의 한 부분으로, 모든 `borrow`가 유효한지를 검사하며, 이때 scope를 기준으로 유효성을 판단합니다.
+
+```rs
+{
+    let r;         // -------+-- `'a`
+                   //        |
+    {              //        |
+        let x = 5; // -+-----+-- 'b
+        r = &x;    //  |     |
+    }              // -+     |
+                   //        |
+    println!("r: {}", r); // |
+                   //        |
+                   // -------+
+}
+```
+
+r의 lifetime인 `'a`는 `'b`에 비하여 더 큰 lifetime을 가지고 있는데, 더 작은 lifetime인 `'b`를 r에 assign하려 하기 때문에 컴파일에러를 일으킵니다.
+
+다시 말해, reference와 reference가 가리키는 대상 총 2가지가 있는데
+
+- `reference` > `reference가 가리키는 대상`인 경우 에러를 일으킵니다. 이를 흔히 댕글링 포인터라고 부릅니다. (reference, 포인터는 살아있는데 가리키고 있는 본질이 free된 경우)
+
+
+### 함수에서 제너릭의 라이프타임
+
+```rs
+fn longest(x: &str, y: &str) -> &str {
+  if x.len() > y.len() {
+    x
+  } else {
+    y
+  }
+}
+
+fn main() {
+  let string1 = String::from("abcd");
+  let string2 = "xyz";
+  
+  let result = longest(string1.as_str(), string2);
+  println!("The longest string is {}", result);
+}
+```
+
+```js
+error[E0106]: missing lifetime specifier
+   |
+1  | fn longest(x: &str, y: &str) -> &str {
+   |                                 ^ expected lifetime parameter
+   |
+   = help: this function's return type contains a borrowed value, but the
+   signature does not say whether it is borrowed from `x` or `y`
+```
+
+이 도움말은 반환 타입에 대하여 제네릭 라이프타임 파라미터가 필요하다는 것을 말해주고 있는데, 왜냐하면 반환되는 참조자가 x를 참조하는지 혹은 y를 참조하는지를 러스트가 말할 수 없기 때문입니다. 사실, 우리 또한 모르는데, 이 함수의 본체 내의 if 블록은 x의 참조자를 반환하고 else 블록은 y의 참조자를 반환하기 때문입니다.
+
+우리가 이 함수를 정의하고 있는 시점에서, 우리는 이 함수에 넘겨지게 될 구체적인 값을 모르므로, if 케이스가 실행될지 혹은 else 케이스가 실행될지는 알 수 없습니다. 또한 함수에 넘겨지게 될 참조자의 구체적인 라이프타임을 알지 못하므로, 우리가 반환하는 참조자가 항상 유효한지를 결정하기 위해서 Listing 10-17과 10-18에서 했던 것과 같이 스코프를 살펴볼 수도 없습니다. 빌림 검사기 또한 이를 결정할 수 없는데, 그 이유는 x와 y의 라이프타임이 반환 값의 라이프타임과 어떻게 연관되어 있는지 알지 못하기 때문입니다. 우리는 참조자들 간의 관계를 정의하는 `제네릭 라이프타임 파라미터`를 추가하여 빌림 검사기가 분석을 수행할 수 있도록 할 것입니다.
+
+### explicit lifetime
+
+사실 라이프타임은 implicit하게 동작하고 있기 때문에, 평소에는 코드에 작성할 필요없지만,
+위의 코드와 같이 컴파일 타임에 lifetime이 어떻게 될지 알 수 없는 경우에는 explicit하게 lifetimedmf 명시 해야합니다.
+
+라이프타임 명시는 연관된 참조자가 얼마나 오랫동안 살게 되는지를 바꾸지는 않습니다. 함수의 시그니처가 제네릭 타입 파라미터를 특정할 때 이 함수가 어떠한 타입이든 허용할 수 있는 것과 같이, 함수의 시그니처가 제네릭 라이프타임 파라미터를 특정할 때라면 이 함수는 어떠한 라이프타임을 가진 참조자라도 허용할 수 있습니다. 라이프타임 명시가 하는 것은 여러 개의 참조자에 대한 라이프타임들을 서로 연관 짓도록 하는 것입니다.
+
+라이프타임 명시는 약간 독특한 문법을 갖고 있습니다: 라이프타임 파라미터의 이름은 어퍼스트로피 '로 시작해야 합니다. 라이프타임 파라미터의 이름은 보통 모두 소문자이며, 제네릭 타입과 비슷하게 그들의 이름은 보통 매우 짧습니다. `'a`는 대부분의 사람들이 기본적으로 사용하는 이름입니다. 라이프타임 파라미터 명시는 참조자의 & 뒤에 오며, 공백 문자가 라이프타임 명시와 참조자의 타입을 구분해줍니다.
+
+```rs
+&i32        // a reference
+&`'a` i32     // a reference with an explicit lifetime
+&`'a` mut i32 // a mutable reference with an explicit lifetime
+```
+
+만일 라이프타임 `'a`를 가지고 있는 i32에 대한 참조자인 first를 파라미터로, 그리고 또한 라이프타임 `'a`를 가지고 있는 i32에 대한 또 다른 참조자인 second를 또 다른 파라미터로 가진 함수가 있다면, 이 두 개의 같은 이름을 가진 라이프타임 명시는 참조자 first와 second가 돌다 동일한 제네릭 라이프타임만큼 살아야 한다는 것을 가리킵니다.
+
+### function signature lifetime
+
+```rs
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+	if x.len() > y.len() {
+		x
+	} else {
+		y
+	}
+}
+
+```
+
+- `'a`를 통해 컴파일러는 x와 y값 중에서 가장 짧은 lifetime을 기준으로 검사를 실시하게 됩니다. 
+
+### implicit lifetime
+현재 러스트 컴파일러는 `&str(스트링 슬라이스)`같은 경우에는 라이프타임을 자동으로 추론해주는 결정론적 패턴 분석이 있습니다.(룰)
+
+이를 `lifetime elision rules`(라이프타임 생략 규칙)이라 부르며, 규칙은 다음과 같습니다. 들어가기 앞서 용어를 정리하면
+
+- input lifetime: 함수/메소드 파라미터에 대한 라이프타임
+- output lifetime: 반환값에 대한 라이프타임
+
+#### **명시적인 라이프타임이 없을때, 참조자가 어떤 라이프타임을 가지는가?**
+> lifetime elision rules
+
+명시적이지 않은 라이프타임의 경우 판단 규칙은 다음 순서로 컴파일러에서 진행됩니다.
+
+1. 참조자인 각각의 파라미터는 고유한 라이프타임 파라미터를 갖습니다. 바꿔 말하면, 하나의 파라미터를 갖는 함수는 하나의 라이프타임 파라미터를 갖고: fn foo<'a>(x: &'a i32), 두 개의 파라미터를 갖는 함수는 두 개의 라이프타임 파라미터를 따로 갖고: fn foo<'a, 'b>(x: &'a i32, y: &'b i32), 이와 같은 식입니다.
+
+2. 만일 정확히 딱 하나의 라이프타임 파라미터만 있다면, 그 라이프타임이 모든 출력 라이프타임 파라미터들에 대입됩니다: fn foo<'a>(x: &'a i32) -> &'a i32.
+
+3. 만일 여러 개의 입력 라이프타임 파라미터가 있는데, 메소드라서 그중 하나가 &self 혹은 &mut self라고 한다면, self의 라이프타임이 모든 출력 라이프타임 파라미터에 대입됩니다. 이는 메소드의 작성을 더욱 멋지게 만들어줍니다.
+
+
+즉 정리하면 
+
+1. 파라미터 갯수에 따라 라이프타임을 만든다. (파라미터 : 라이프타임 = 1:1)
+2. 파라미터가 1개인경우, return의 lifetime 또한 같은 lifetime을 가지도록 한다.
+3. `&self`, `&mut self`인 경우(즉 메서드 인경우)이면서 return type이 reference인 경우, return lifetime이 self와 같도록 만든다.
+
+다음은 예시입니다. 
+
+- 파라미터가 1개인 경우
+
+```rs
+// 원본
+fn first_word(s: &str) -> &str {}
+
+// 1번 규칙
+fn first_word<'a>(s: &'a str) -> &str {}
+
+// 2번 규칙 (최종)
+fn first_word<'a>(s: &'a str) -> &'a str {}
+```
+
+- 파라미터가 2개인 경우
+
+```rs
+// 원본
+fn longest(x: &str, y: &str) -> &str {}
+
+// 1번 규칙 (최종)
+fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &str {}
+
+error[E0106]: missing lifetime specifier
+   |
+1  | fn longest(x: &str, y: &str) -> &str {
+   |                                 ^ expected lifetime parameter
+```
+
+위와 같이, 파라미터가 2개이상인 경우이면서 메서드가 아닌 경우이기 때문에 return 타입에 대한 lifetime을 명시해주어야 합니다. 왜냐하면 elision rule에 벗어난 경우이기 때문입니다.
+
+- 메서드인 경우
+
+```rs
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
+
+// <'a>이 2번 쓰인걸 주목
+// 또한 method의 return이 참조자가 아닌 primitive type 값인걸 주목 (elision rule은 reference에 대해서만 기능합니다.)
+impl<'a> ImportantExcerpt<'a> {
+    fn level(&self) -> i32 {
+        3
+    }
+}
+```
+
+구조체 필드를 위한 라이프타임 이름은 언제나 impl 키워드 뒤에 선언되어야 하며, 그러고 나서 구조체의 이름 뒤에 사용되어야 하는데, 이 라이프타임들은 구조체 타입의 일부이기 때문입니다.
+
+- rule3이 적용된 메서드 예시
+
+```rs
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
+
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
+```
+
+위의 코드 경우 `announce_and_return_part`의 return value인 self.part는 ImportantExcerpt의 self와 같은 라이프타임을 가지게 됩니다.
+
+### Static lifetime
+> 프로그램의 전체 라이프타임을 가리키는 특별 라이프타임
+
+```rs
+let s: &'static str = "I have a static lifetime.";
+```
+
+- "static with static lietime(`'static`")
+```rs
+static NAME: &'static str = "Steve";
+```
+
+
+{{< admonition note "static vs const" >}}
+Read [RFC 246](https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md) to get more details.
+
+- `constants` declare constant values. These represent a value, not a memory address. This is the most common thing one would reach for and would replace static as we know it today in almost all cases.
+
+- `statics` declare global variables. These represent a memory address. They would be rarely used: the primary use cases are global locks, global atomic counters, and interfacing with legacy C libraries.
+
+---
+
+- `const`
+  - immutable, 사용하는 곳에 컴파일 시점에 binary 변경된 값으로 변환됨.
+  - Have no fixed address in memory
+  - They’re inlined to each place which uses them, this means they are put directly into the binary on the places which use them.
+  - Usually faster runtime but bigger executable file because it doesn't have to look up an address like static.
+- `static`
+  - `mutable`(`unsafe` box를 필요)
+  - Have a fixed address in memory (`global scope`)
+  - Their value is loaded from this fixed address each place which uses them.
+  - Usually slower runtime because we need to perform the extra instruction of loading the data from the fixed address. However this could result in a smaller executable file (only when it is used frequently) because it doesn't have to have multiple copies of the value baked into the executable.
+
+{{< /admonition  >}}
+
+### Let's recap with example
+> See a code with generic type parameter, trait bound, lifetime.
+
+```rs
+use std::fmt::Display;
+
+fn longest_with_an_announcement<'a, T>(
+    x: &'a str,
+    y: &'a str,
+    ann: T,
+) -> &'a str
+where
+    T: Display,
+{
+    println!("Announcement! {}", ann);
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
+
+
 

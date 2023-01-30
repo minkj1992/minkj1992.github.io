@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/the_rust_programming_lang/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-11T21:24:37+09:00" />
-<meta property="article:modified_time" content="2023-01-26T17:34:26+09:00" />
+<meta property="article:modified_time" content="2023-01-28T09:51:28+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  8584 ,
-        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang\/","datePublished": "2023-01-11T21:24:37+09:00","dateModified": "2023-01-26T17:34:26+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  10348 ,
+        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang\/","datePublished": "2023-01-11T21:24:37+09:00","dateModified": "2023-01-28T09:51:28+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">The rust programming language</h1><h2 class="single-subtitle">The official Rust book</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-11">2023-01-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8584 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;41 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-11">2023-01-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;10348 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;49 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -356,8 +356,28 @@
         <li><a href="#제너릭-타입-성능런타임-비용">제너릭 타입 성능(런타임 비용)</a></li>
       </ul>
     </li>
-    <li><a href="#102-트레잇-공유-동작을-정의하기">10.2 트레잇: 공유 동작을 정의하기</a></li>
-    <li><a href="#103-라이프타임을-이용한-참조자-유효화">10.3 라이프타임을 이용한 참조자 유효화</a></li>
+    <li><a href="#102-트레잇-공유-동작을-정의하기">10.2 트레잇: 공유 동작을 정의하기</a>
+      <ul>
+        <li><a href="#trait-bound"><code>Trait Bound</code></a></li>
+        <li><a href="#where"><code>Where</code></a></li>
+        <li><a href="#using-trait-bounds-to-conditionally-implement-methods">Using Trait Bounds to Conditionally Implement Methods</a></li>
+      </ul>
+    </li>
+    <li><a href="#103-라이프타임을-이용한-참조자-유효화">10.3 라이프타임을 이용한 참조자 유효화</a>
+      <ul>
+        <li><a href="#borrow-checker">Borrow Checker</a></li>
+        <li><a href="#함수에서-제너릭의-라이프타임">함수에서 제너릭의 라이프타임</a></li>
+        <li><a href="#explicit-lifetime">explicit lifetime</a></li>
+        <li><a href="#function-signature-lifetime">function signature lifetime</a></li>
+        <li><a href="#implicit-lifetime">implicit lifetime</a>
+          <ul>
+            <li><a href="#명시적인-라이프타임이-없을때-참조자가-어떤-라이프타임을-가지는가"><strong>명시적인 라이프타임이 없을때, 참조자가 어떤 라이프타임을 가지는가?</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#static-lifetime">Static lifetime</a></li>
+        <li><a href="#lets-recap-with-example">Let&rsquo;s recap with example</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p><code>Rust</code>에서 공식적으로 지원하는 <a href="https://doc.rust-lang.org" target="_blank" rel="noopener noreffer">&ldquo;The rust programming language&rdquo;</a>
@@ -580,7 +600,7 @@
 </tr>
 <tr>
 <td>Byte (<code>u8</code> only)</td>
-<td><code>b'A'</code></td>
+<td><code>b</code>&lsquo;a<code>'</code></td>
 </tr>
 </tbody>
 </table>
@@ -4361,7 +4381,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="c"># Cargo.toml</span>
 </span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">profile</span><span class="p">.</span><span class="nx">release</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl"><span class="nx">panic</span> <span class="p">=</span> <span class="s1">&#39;abort&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">panic</span> <span class="p">=</span> <span class="err">`</span><span class="s1">&#39;a`bort&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="9-2-resultte">9-2. <code>Result&lt;T,E&gt;</code></h2>
@@ -4795,7 +4815,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">largest_i32</span><span class="p">(</span><span class="o">&amp;</span><span class="n">numbers</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The largest number is {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="sc">&#39;y&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="sc">&#39;y&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">`</span><span class="o">&#39;</span><span class="na">a</span><span class="err">`</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="p">];</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">largest_char</span><span class="p">(</span><span class="o">&amp;</span><span class="n">chars</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The largest char is {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
@@ -4852,7 +4872,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">largest</span><span class="p">(</span><span class="o">&amp;</span><span class="n">numbers</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The largest number is {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="sc">&#39;y&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="sc">&#39;y&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="p">,</span><span class="w"> </span><span class="err">`</span><span class="o">&#39;</span><span class="na">a</span><span class="err">`</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="p">];</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">largest</span><span class="p">(</span><span class="o">&amp;</span><span class="n">chars</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The largest char is {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
@@ -5062,15 +5082,790 @@
 </div><p>위와 같은 코드를 컴파일 타임에 만들어냅니다. 그러므로 타 언어에 비해 바이너리 파일은 커지겠지만, 런타임 퍼포먼스는 아무런 손해없이 제너릭을 사용할 수 있습니다. 이런 컴파일 기능을 단형성화(<code>monomorphization</code>)라고 부릅니다.</p>
 <h2 id="102-트레잇-공유-동작을-정의하기">10.2 트레잇: 공유 동작을 정의하기</h2>
 <blockquote>
-<p>트레잇은 다른 언어들에서 &lsquo;인터페이스(interface)&lsquo;라고 부르는 기능과 유사하지만, 몇 가지 다른 점이 있습니다.</p>
+<p>트레잇은 다른 언어들에서 &lsquo;인터페이스(<code>interface</code>)&lsquo;라고 부르는 기능과 유사하지만, 몇 가지 다른 점이 있습니다.</p>
 </blockquote>
 <p>트레잇은 타입들이 공통적으로 갖는 동작에 대하여 추상화하도록 해줍니다. 트레잇(trait)은 러스트 컴파일러에게 특정한 타입이 다른 타입들과 함께 공유할 수도 있는 기능에 대해 말해줍니다.</p>
-<h2 id="103-라이프타임을-이용한-참조자-유효화">10.3 라이프타임을 이용한 참조자 유효화</h2></div><div class="post-footer" id="post-footer">
+<ul>
+<li>trait 정의 (<code>lib.rs</code> with <code>aggregator crate</code>)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Summary</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">summary</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>trait impl (<code>lib.rs</code> with <code>aggregator crate</code>)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">News</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">headline</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">location</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">author</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">content</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">struct</span> <span class="nc">Tweet</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">username</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">content</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">reply</span>: <span class="kt">bool</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">retweet</span>: <span class="kt">bool</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// impl 강제 with trait
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">impl</span><span class="w"> </span><span class="n">Summary</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">NewsArticle</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">summary</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;{}, by {} ({})&#34;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">headline</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">author</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">location</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">Summary</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Tweet</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">summary</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">format!</span><span class="p">(</span><span class="s">&#34;{}: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">username</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">content</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>other file</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// You do not need to write extern crate anymore for external dependencies in Rust 2018.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 여기에서는 아래와 같은 코드가 필요없어진다.
+</span></span></span><span class="line"><span class="cl"><span class="c1">// extern crate aggregator;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// use aggregator::Summarizable;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">aggregator</span>::<span class="p">{</span><span class="n">Summary</span><span class="p">,</span><span class="w"> </span><span class="n">Tweet</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">tweet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Tweet</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">username</span>: <span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;horse_ebooks&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">content</span>: <span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="s">&#34;of course, as you probably already know, people&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">reply</span>: <span class="nc">false</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">retweet</span>: <span class="nc">false</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;1 new tweet: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">tweet</span><span class="p">.</span><span class="n">summarize</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>Orphan rule</code>(고아 규칙)</li>
+</ul>
+<p>트레잇 구현과 함께 기억할 한 가지 제한사항이 있습니다: 트레잇 혹은 타입이 우리의 크레이트 내의 것일 경우에만 해당 타입에서의 트레잇을 정의할 수 있습니다. 바꿔 말하면, 외부의 타입에 대한 외부 트레잇을 구현하는 것은 허용되지 않습니다.</p>
+<p>간단하게 말하면, 부모 타입이 존재하지 않기 때문에 고아 규칙이라고 부릅니다. 이 규칙이 없다면, 두 크레이트는 동일한 타입에 대해 동일한 트레잇을 구현할 수 있게 되고, 이 두 구현체가 충돌을 일으킬 것입니다: 러스트는 어떤 구현을 이용할 것인지 알지 못할 것입니다. 러스트가 고아 규칙을 강제하기 때문에, 다른 사람의 코드는 여러분의 코드를 망가뜨리지 못하고 반대의 경우도 마찬가지입니다.</p>
+<h3 id="trait-bound"><code>Trait Bound</code></h3>
+<p>이제 method가 아닌 trait을 받아들이는 fn을 만들어봅니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">notify</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Summary</span><span class="o">&gt;</span><span class="p">(</span><span class="n">item</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Breaking news! {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">.</span><span class="n">summary</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>+</code>를 이용하면 하나의 제네릭 타입에 대해 여러 개의 트레잇 바운드를 특정할 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">some_function</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Display</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Clone</span><span class="p">,</span><span class="w"> </span><span class="n">U</span>: <span class="nb">Clone</span> <span class="o">+</span><span class="w"> </span><span class="n">Debug</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span>: <span class="kp">&amp;</span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">u</span>: <span class="kp">&amp;</span><span class="nc">U</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="p">{</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="where"><code>Where</code></h3>
+<p>위의 <code>some_function</code>을 <code>where</code>이라는 syntax를 사용하면 더욱 가시성을 확보해서 코딩할 수 있습니다.</p>
+<p>we can use a where clause, like this:</p>
+<ul>
+<li>after <code>where</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">some_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span>: <span class="kp">&amp;</span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">u</span>: <span class="kp">&amp;</span><span class="nc">U</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span>
+</span></span><span class="line"><span class="cl">    <span class="nc">where</span><span class="w"> </span><span class="n">T</span>: <span class="nc">Display</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Clone</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="n">U</span>: <span class="nb">Clone</span> <span class="o">+</span><span class="w"> </span><span class="n">Debug</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>where 뒤쪽으로 trait bound를 이동시켜서, 함수를 더 잘 읽을 수 있도록 해주었습니다.</p>
+<p>이제 아래와 같은 <code>largest</code> 함수를 trait bound를 사용해 고쳐보겠습니다.</p>
+<ul>
+<li>before</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">largest</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">list</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="nc">T</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">largest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="o">&amp;</span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">list</span><span class="p">.</span><span class="n">iter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">largest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">largest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">item</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">largest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>1st try</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">largest</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nb">PartialOrd</span><span class="o">&gt;</span><span class="p">(</span><span class="n">list</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="nc">T</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// error[E0508]: cannot move out of type `[T]`, a non-copy array
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>after(완성본)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">largest</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nb">PartialOrd</span> <span class="o">+</span><span class="w"> </span><span class="nb">Copy</span><span class="o">&gt;</span><span class="p">(</span><span class="n">list</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w">  </span>-&gt; <span class="nc">T</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">largest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="o">&amp;</span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">list</span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">largest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">largest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">item</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">largest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// where 사용한 경우
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fn</span> <span class="nf">largest</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">list</span>: <span class="kp">&amp;</span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w"> </span>-&gt; <span class="nc">T</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">T</span>: <span class="nb">PartialOrd</span> <span class="o">+</span><span class="w"> </span><span class="nb">Copy</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">largest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="o">&amp;</span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">largest</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">largest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">item</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">largest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// main()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">65</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">largest</span><span class="p">(</span><span class="o">&amp;</span><span class="n">numbers</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The largest number is {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="sc">&#39;y&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;m&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;q&#39;</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">largest</span><span class="p">(</span><span class="o">&amp;</span><span class="n">chars</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The largest char is {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="using-trait-bounds-to-conditionally-implement-methods">Using Trait Bounds to Conditionally Implement Methods</h3>
+<p>조건에 따라 Trait Bound를 다르게하여 method를 정의할 수도 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">fmt</span>::<span class="n">Display</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">struct</span> <span class="nc">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">x</span>: <span class="nc">T</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">y</span>: <span class="nc">T</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">new</span><span class="p">(</span><span class="n">x</span>: <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="nc">T</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Self</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="bp">Self</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Display</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">PartialOrd</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">cmp_display</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The largest member is x = {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The largest member is y = {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="103-라이프타임을-이용한-참조자-유효화">10.3 라이프타임을 이용한 참조자 유효화</h2>
+<p>러스트에서 모든 reference는 lifetime을 가지며, 이는 reference가 유효할 수 있는 scope를 뜻합니다.</p>
+<p><code>Lifetime</code>의 주 목적은 <code>dangling reference</code>(댕글링 참조자)를 방지하는 것입니다. 아래는 댕글링 참조자를 임의로 만들어본 코드입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="c1">// 로컬 변수 x는 이 scope에서 free되며 r은 x를 가리키고 있습니다. (dangling reference)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{r}&#34;</span><span class="p">);</span><span class="w"> </span><span class="c1">// error: `x` does not live long enough
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>에러가 발생하는 것을 알 수 있는데요, 그럼 러스트 컴파일러는 위와 같은 상황을 어떻게 알아차릴까요?</p>
+<h3 id="borrow-checker">Borrow Checker</h3>
+<p><code>borrow checker</code>(검사기)는 컴파일러의 한 부분으로, 모든 <code>borrow</code>가 유효한지를 검사하며, 이때 scope를 기준으로 유효성을 판단합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="p">;</span><span class="w">         </span><span class="c1">// -------+-- `&#39;a`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">                   </span><span class="c1">//        |
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="p">{</span><span class="w">              </span><span class="c1">//        |
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="c1">// -+-----+-- &#39;b
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span><span class="w">    </span><span class="c1">//  |     |
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="p">}</span><span class="w">              </span><span class="c1">// -+     |
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">                   </span><span class="c1">//        |
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;r: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">);</span><span class="w"> </span><span class="c1">// |
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">                   </span><span class="c1">//        |
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">                   </span><span class="c1">// -------+
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>r의 lifetime인 <code>'a</code>는 <code>'b</code>에 비하여 더 큰 lifetime을 가지고 있는데, 더 작은 lifetime인 <code>'b</code>를 r에 assign하려 하기 때문에 컴파일에러를 일으킵니다.</p>
+<p>다시 말해, reference와 reference가 가리키는 대상 총 2가지가 있는데</p>
+<ul>
+<li><code>reference</code> &gt; <code>reference가 가리키는 대상</code>인 경우 에러를 일으킵니다. 이를 흔히 댕글링 포인터라고 부릅니다. (reference, 포인터는 살아있는데 가리키고 있는 본질이 free된 경우)</li>
+</ul>
+<h3 id="함수에서-제너릭의-라이프타임">함수에서 제너릭의 라이프타임</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">longest</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="kt">str</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">x</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">y</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">string1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;abcd&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">string2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&#34;xyz&#34;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">longest</span><span class="p">(</span><span class="n">string1</span><span class="p">.</span><span class="n">as_str</span><span class="p">(),</span><span class="w"> </span><span class="n">string2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The longest string is {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">error</span><span class="p">[</span><span class="nx">E0106</span><span class="p">]</span><span class="o">:</span> <span class="nx">missing</span> <span class="nx">lifetime</span> <span class="nx">specifier</span>
+</span></span><span class="line"><span class="cl">   <span class="o">|</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="o">|</span> <span class="nx">fn</span> <span class="nx">longest</span><span class="p">(</span><span class="nx">x</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">str</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">&amp;</span><span class="nx">str</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="o">|</span>                                 <span class="o">^</span> <span class="nx">expected</span> <span class="nx">lifetime</span> <span class="nx">parameter</span>
+</span></span><span class="line"><span class="cl">   <span class="o">|</span>
+</span></span><span class="line"><span class="cl">   <span class="o">=</span> <span class="nx">help</span><span class="o">:</span> <span class="k">this</span> <span class="kd">function</span><span class="err">&#39;</span><span class="nx">s</span> <span class="k">return</span> <span class="nx">type</span> <span class="nx">contains</span> <span class="nx">a</span> <span class="nx">borrowed</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">the</span>
+</span></span><span class="line"><span class="cl">   <span class="nx">signature</span> <span class="nx">does</span> <span class="nx">not</span> <span class="nx">say</span> <span class="nx">whether</span> <span class="nx">it</span> <span class="nx">is</span> <span class="nx">borrowed</span> <span class="nx">from</span> <span class="sb">`x`</span> <span class="nx">or</span> <span class="sb">`y`</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이 도움말은 반환 타입에 대하여 제네릭 라이프타임 파라미터가 필요하다는 것을 말해주고 있는데, 왜냐하면 반환되는 참조자가 x를 참조하는지 혹은 y를 참조하는지를 러스트가 말할 수 없기 때문입니다. 사실, 우리 또한 모르는데, 이 함수의 본체 내의 if 블록은 x의 참조자를 반환하고 else 블록은 y의 참조자를 반환하기 때문입니다.</p>
+<p>우리가 이 함수를 정의하고 있는 시점에서, 우리는 이 함수에 넘겨지게 될 구체적인 값을 모르므로, if 케이스가 실행될지 혹은 else 케이스가 실행될지는 알 수 없습니다. 또한 함수에 넘겨지게 될 참조자의 구체적인 라이프타임을 알지 못하므로, 우리가 반환하는 참조자가 항상 유효한지를 결정하기 위해서 Listing 10-17과 10-18에서 했던 것과 같이 스코프를 살펴볼 수도 없습니다. 빌림 검사기 또한 이를 결정할 수 없는데, 그 이유는 x와 y의 라이프타임이 반환 값의 라이프타임과 어떻게 연관되어 있는지 알지 못하기 때문입니다. 우리는 참조자들 간의 관계를 정의하는 <code>제네릭 라이프타임 파라미터</code>를 추가하여 빌림 검사기가 분석을 수행할 수 있도록 할 것입니다.</p>
+<h3 id="explicit-lifetime">explicit lifetime</h3>
+<p>사실 라이프타임은 implicit하게 동작하고 있기 때문에, 평소에는 코드에 작성할 필요없지만,
+위의 코드와 같이 컴파일 타임에 lifetime이 어떻게 될지 알 수 없는 경우에는 explicit하게 lifetimedmf 명시 해야합니다.</p>
+<p>라이프타임 명시는 연관된 참조자가 얼마나 오랫동안 살게 되는지를 바꾸지는 않습니다. 함수의 시그니처가 제네릭 타입 파라미터를 특정할 때 이 함수가 어떠한 타입이든 허용할 수 있는 것과 같이, 함수의 시그니처가 제네릭 라이프타임 파라미터를 특정할 때라면 이 함수는 어떠한 라이프타임을 가진 참조자라도 허용할 수 있습니다. 라이프타임 명시가 하는 것은 여러 개의 참조자에 대한 라이프타임들을 서로 연관 짓도록 하는 것입니다.</p>
+<p>라이프타임 명시는 약간 독특한 문법을 갖고 있습니다: 라이프타임 파라미터의 이름은 어퍼스트로피 &lsquo;로 시작해야 합니다. 라이프타임 파라미터의 이름은 보통 모두 소문자이며, 제네릭 타입과 비슷하게 그들의 이름은 보통 매우 짧습니다. <code>'a</code>는 대부분의 사람들이 기본적으로 사용하는 이름입니다. 라이프타임 파라미터 명시는 참조자의 &amp; 뒤에 오며, 공백 문자가 라이프타임 명시와 참조자의 타입을 구분해줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="o">&amp;</span><span class="kt">i32</span><span class="w">        </span><span class="c1">// a reference
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">&amp;</span><span class="err">`</span><span class="o">&#39;</span><span class="na">a</span><span class="err">`</span><span class="w"> </span><span class="kt">i32</span><span class="w">     </span><span class="c1">// a reference with an explicit lifetime
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">&amp;</span><span class="err">`</span><span class="o">&#39;</span><span class="na">a</span><span class="err">`</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="c1">// a mutable reference with an explicit lifetime
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>만일 라이프타임 <code>'a</code>를 가지고 있는 i32에 대한 참조자인 first를 파라미터로, 그리고 또한 라이프타임 <code>'a</code>를 가지고 있는 i32에 대한 또 다른 참조자인 second를 또 다른 파라미터로 가진 함수가 있다면, 이 두 개의 같은 이름을 가진 라이프타임 명시는 참조자 first와 second가 돌다 동일한 제네릭 라이프타임만큼 살아야 한다는 것을 가리킵니다.</p>
+<h3 id="function-signature-lifetime">function signature lifetime</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">longest</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">x</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">y</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>'a</code>를 통해 컴파일러는 x와 y값 중에서 가장 짧은 lifetime을 기준으로 검사를 실시하게 됩니다.</li>
+</ul>
+<h3 id="implicit-lifetime">implicit lifetime</h3>
+<p>현재 러스트 컴파일러는 <code>&amp;str(스트링 슬라이스)</code>같은 경우에는 라이프타임을 자동으로 추론해주는 결정론적 패턴 분석이 있습니다.(룰)</p>
+<p>이를 <code>lifetime elision rules</code>(라이프타임 생략 규칙)이라 부르며, 규칙은 다음과 같습니다. 들어가기 앞서 용어를 정리하면</p>
+<ul>
+<li>input lifetime: 함수/메소드 파라미터에 대한 라이프타임</li>
+<li>output lifetime: 반환값에 대한 라이프타임</li>
+</ul>
+<h4 id="명시적인-라이프타임이-없을때-참조자가-어떤-라이프타임을-가지는가"><strong>명시적인 라이프타임이 없을때, 참조자가 어떤 라이프타임을 가지는가?</strong></h4>
+<blockquote>
+<p>lifetime elision rules</p>
+</blockquote>
+<p>명시적이지 않은 라이프타임의 경우 판단 규칙은 다음 순서로 컴파일러에서 진행됩니다.</p>
+<ol>
+<li>
+<p>참조자인 각각의 파라미터는 고유한 라이프타임 파라미터를 갖습니다. 바꿔 말하면, 하나의 파라미터를 갖는 함수는 하나의 라이프타임 파라미터를 갖고: fn foo&lt;&lsquo;a&gt;(x: &amp;&lsquo;a i32), 두 개의 파라미터를 갖는 함수는 두 개의 라이프타임 파라미터를 따로 갖고: fn foo&lt;&lsquo;a, &lsquo;b&gt;(x: &amp;&lsquo;a i32, y: &amp;&lsquo;b i32), 이와 같은 식입니다.</p>
+</li>
+<li>
+<p>만일 정확히 딱 하나의 라이프타임 파라미터만 있다면, 그 라이프타임이 모든 출력 라이프타임 파라미터들에 대입됩니다: fn foo&lt;&lsquo;a&gt;(x: &amp;&lsquo;a i32) -&gt; &amp;&lsquo;a i32.</p>
+</li>
+<li>
+<p>만일 여러 개의 입력 라이프타임 파라미터가 있는데, 메소드라서 그중 하나가 &amp;self 혹은 &amp;mut self라고 한다면, self의 라이프타임이 모든 출력 라이프타임 파라미터에 대입됩니다. 이는 메소드의 작성을 더욱 멋지게 만들어줍니다.</p>
+</li>
+</ol>
+<p>즉 정리하면</p>
+<ol>
+<li>파라미터 갯수에 따라 라이프타임을 만든다. (파라미터 : 라이프타임 = 1:1)</li>
+<li>파라미터가 1개인경우, return의 lifetime 또한 같은 lifetime을 가지도록 한다.</li>
+<li><code>&amp;self</code>, <code>&amp;mut self</code>인 경우(즉 메서드 인경우)이면서 return type이 reference인 경우, return lifetime이 self와 같도록 만든다.</li>
+</ol>
+<p>다음은 예시입니다.</p>
+<ul>
+<li>파라미터가 1개인 경우</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// 원본
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fn</span> <span class="nf">first_word</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="kt">str</span> <span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 1번 규칙
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fn</span> <span class="nf">first_word</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="kt">str</span> <span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 2번 규칙 (최종)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fn</span> <span class="nf">first_word</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span> <span class="p">{}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>파라미터가 2개인 경우</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// 원본
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fn</span> <span class="nf">longest</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="kt">str</span> <span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 1번 규칙 (최종)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fn</span> <span class="nf">longest</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="p">,</span><span class="w"> </span><span class="o">&#39;</span><span class="na">b</span><span class="o">&gt;</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">b</span> <span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="kt">str</span> <span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">error</span><span class="p">[</span><span class="n">E0106</span><span class="p">]</span>: <span class="nc">missing</span><span class="w"> </span><span class="n">lifetime</span><span class="w"> </span><span class="n">specifier</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">1</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">fn</span> <span class="nf">longest</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="kt">str</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">                                 </span><span class="o">^</span><span class="w"> </span><span class="n">expected</span><span class="w"> </span><span class="n">lifetime</span><span class="w"> </span><span class="n">parameter</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>위와 같이, 파라미터가 2개이상인 경우이면서 메서드가 아닌 경우이기 때문에 return 타입에 대한 lifetime을 명시해주어야 합니다. 왜냐하면 elision rule에 벗어난 경우이기 때문입니다.</p>
+<ul>
+<li>메서드인 경우</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">ImportantExcerpt</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">part</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// &lt;&#39;a&gt;이 2번 쓰인걸 주목
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 또한 method의 return이 참조자가 아닌 primitive type 값인걸 주목 (elision rule은 reference에 대해서만 기능합니다.)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">impl</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ImportantExcerpt</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">level</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="mi">3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>구조체 필드를 위한 라이프타임 이름은 언제나 impl 키워드 뒤에 선언되어야 하며, 그러고 나서 구조체의 이름 뒤에 사용되어야 하는데, 이 라이프타임들은 구조체 타입의 일부이기 때문입니다.</p>
+<ul>
+<li>rule3이 적용된 메서드 예시</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">ImportantExcerpt</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">part</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">ImportantExcerpt</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">announce_and_return_part</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">announcement</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="kt">str</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Attention please: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">announcement</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">part</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>위의 코드 경우 <code>announce_and_return_part</code>의 return value인 self.part는 ImportantExcerpt의 self와 같은 라이프타임을 가지게 됩니다.</p>
+<h3 id="static-lifetime">Static lifetime</h3>
+<blockquote>
+<p>프로그램의 전체 라이프타임을 가리키는 특별 라이프타임</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">s</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="nb">static</span> <span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">&#34;I have a static lifetime.&#34;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>&ldquo;static with static lietime(<code>'static</code>&rdquo;)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">static</span><span class="w"> </span><span class="n">NAME</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="nb">static</span> <span class="kt">str</span> <span class="o">=</span><span class="w"> </span><span class="s">&#34;Steve&#34;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>static vs const<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Read <a href="https://github.com/rust-lang/rfcs/blob/master/text/0246-const-vs-static.md" target="_blank" rel="noopener noreffer">RFC 246</a>
+ to get more details.</p>
+<ul>
+<li>
+<p><code>constants</code> declare constant values. These represent a value, not a memory address. This is the most common thing one would reach for and would replace static as we know it today in almost all cases.</p>
+</li>
+<li>
+<p><code>statics</code> declare global variables. These represent a memory address. They would be rarely used: the primary use cases are global locks, global atomic counters, and interfacing with legacy C libraries.</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><code>const</code>
+<ul>
+<li>immutable, 사용하는 곳에 컴파일 시점에 binary 변경된 값으로 변환됨.</li>
+<li>Have no fixed address in memory</li>
+<li>They’re inlined to each place which uses them, this means they are put directly into the binary on the places which use them.</li>
+<li>Usually faster runtime but bigger executable file because it doesn&rsquo;t have to look up an address like static.</li>
+</ul>
+</li>
+<li><code>static</code>
+<ul>
+<li><code>mutable</code>(<code>unsafe</code> box를 필요)</li>
+<li>Have a fixed address in memory (<code>global scope</code>)</li>
+<li>Their value is loaded from this fixed address each place which uses them.</li>
+<li>Usually slower runtime because we need to perform the extra instruction of loading the data from the fixed address. However this could result in a smaller executable file (only when it is used frequently) because it doesn&rsquo;t have to have multiple copies of the value baked into the executable.</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+    </div>
+<h3 id="lets-recap-with-example">Let&rsquo;s recap with example</h3>
+<blockquote>
+<p>See a code with generic type parameter, trait bound, lifetime.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">fmt</span>::<span class="n">Display</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">longest_with_an_announcement</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">x</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">ann</span>: <span class="nc">T</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span>
+</span></span><span class="line"><span class="cl"><span class="nc">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">T</span>: <span class="nc">Display</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Announcement! {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">ann</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">x</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">y</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-01-26&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/3ec90514ce4c19ae6cdcd1f8ff54c69b151cc4bb" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 3ec90514ce4c19ae6cdcd1f8ff54c69b151cc4bb: rebuilding site Thu Jan 26 17:34:26 KST 2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3ec9051</a></span>
+                <span>Updated on 2023-01-28&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/22d1995f1d1b4bb184aeffcf7cc434c387624db5" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 22d1995f1d1b4bb184aeffcf7cc434c387624db5: rebuilding site Sat Jan 28 09:51:28 KST 2023">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>22d1995</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
