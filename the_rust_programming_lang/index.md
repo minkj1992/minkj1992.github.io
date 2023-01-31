@@ -1,4 +1,4 @@
-# The rust programming language
+# [Part1] The rust programming language
 
 
 `Rust`에서 공식적으로 지원하는 ["The rust programming language"](https://doc.rust-lang.org)을 통해서 `Rust` 핵심 문법적 특징과 예시코드 그리고 이면에 숨은 디자인 원칙들을 정리 해보겠습니다.

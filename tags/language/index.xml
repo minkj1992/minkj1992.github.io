@@ -4,8 +4,19 @@
         <link>https://minkj1992.github.io/tags/language/</link>
         <description>language - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 11 Jan 2023 21:24:37 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/language/" rel="self" type="application/rss+xml" /><item>
-    <title>The rust programming language</title>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 30 Jan 2023 18:53:11 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/language/" rel="self" type="application/rss+xml" /><item>
+    <title>[Part2] The rust programming language</title>
+    <link>https://minkj1992.github.io/the_rust_programming_lang_part2/</link>
+    <pubDate>Mon, 30 Jan 2023 18:53:11 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/the_rust_programming_lang_part2/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/rust_prog.jpeg" referrerpolicy="no-referrer">
+            </div><p><a href="https://minkj1992.github.io/the_rust_programming_lang/" target="_blank" rel="noopener noreffer">Part1. Rust 프로그래밍</a>
+에 이어서 Rust의 고급 문법들을 익혀보겠습니다.</p>]]></description>
+</item>
+<item>
+    <title>[Part1] The rust programming language</title>
     <link>https://minkj1992.github.io/the_rust_programming_lang/</link>
     <pubDate>Wed, 11 Jan 2023 21:24:37 &#43;0900</pubDate>
     <author>leoo.j</author>
