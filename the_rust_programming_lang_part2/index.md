@@ -112,15 +112,17 @@ Usage: cargo test [OPTIONS] [TESTNAME] [-- [args]...]
 `cargo test`는 위의 2가지 argument를 구분하기 위해 `--`를 사용합니다.
 
 
-- `--nocapture`를 사용하면 stdout까지 print되는 것을 막을 수 있습니다.
+### `--nocapture`
+> `--nocapture`를 사용하면 stdout까지 print되는 것을 막을 수 있습니다.
 
 ```js
 $ cargo test -- --nocapture
 ```
 
-- name filtering
+### filtering
+> cargo는 test 뒤에 나오는 네이밍을 regex로 필터링합니다.
 
-cargo는 test 뒤에 나오는 네이밍을 regex로 필터링합니다.
+만약 아래와 같은 코드가 있고, `$ cargo test add`를 실행하게 된다면
 
 ```rs
 pub fn add_two(a: i32) -> i32 {
@@ -148,8 +150,6 @@ mod tests {
 }
 ```
 
-만약 위와 같은 코드가 있고, `$ cargo test add`를 실행하게 된다면
-
 ```js
 $ cargo test add
     Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
@@ -164,9 +164,8 @@ test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out
 
 다음과 같은 결과가 일어납니다.
 
-- `ignore`
-
-만약 특정 테스트들을 무시하고 싶으면 `#[ignore]`를 사용하면됩니다.
+### `ignore`
+> 만약 특정 테스트들을 무시하고 싶으면 `#[ignore]`를 사용하면됩니다.
 
 ```rs
 #[test]
@@ -181,10 +180,75 @@ fn expensive_test() {
 }
 ```
 
-만일 역으로 ignore된 테스트들만 실행시키고 싶다면, --ignored를 추가하면 됩니다.
+역으로 ignore된 테스트들만 실행시키고 싶다면, --ignored를 추가하면 됩니다.
 
 ```
 $ cargo test -- --ignored
 ```
 
 ## 11-3. 테스트 조직화
+
+1. Unit test
+2. Integration test
+
+### `unit test`
+
+관례는 각 파일마다 테스트 함수를 담고 있는 tests라는 이름의 모듈을 만들고, 이 모듈에 `cfg(test)`라고 어노테이션 하는 것입니다.
+
+`cfg(test)`
+
+- 이 어노테이션은 러스트에게 우리가 **cargo build를 실행시킬 때가 아니라 cargo test를 실행시킬 때에만 컴파일하고 실행**시키라고 말해줍니다.
+- 통합 테스트는 다른 디렉토리에 위치하기 때문에, 이 어노테이션이 필요없습니다.
+
+또한 rust의 `private`은 test에서는 접근가능 합니다.
+
+```rs
+pub fn add_two(a: i32) -> i32 {
+    internal_adder(a, 2)
+}
+
+fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn internal() {
+        assert_eq!(4, internal_adder(2, 2));
+    }
+}
+```
+
+마지막으로 rust의 모듈 특성을 이용하면, test 파일을 소스 코드와 분리해서 관리할 수도 있습니다.
+
+[Should unit tests really be put in the same file as the source?](https://users.rust-lang.org/t/should-unit-tests-really-be-put-in-the-same-file-as-the-source/62153)
+
+```
+src/
+  ...
+  ops.rs
+  ops/
+    test.rs
+```
+
+
+
+### `Integration test`
+
+러스트의 통합테스트는 `tests/` 디렉토리로 완전히 `src/`와 분리되서 관리됩니다.
+
+```js
+src/ 
+  lib.rs
+  ops.rs
+  ops/
+    test.rs
+
+tests/
+```
+
+
+
