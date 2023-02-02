@@ -102,12 +102,6 @@ Decryption complete.
 
 ## 2. Hello world locally
 
-<center>
-
-![](images/icp5.png)
-
-</center>
-
 
 <center>
 
@@ -140,4 +134,71 @@ Dashboard: http://localhost:56958/_/dashboard
 // base root is hello
 > yarn install // or npm install
 > dfx deploy
+
+...
+
+Deployed canisters.
+URLs:
+  Frontend canister via browser
+    hello_frontend: http://127.0.0.1:4943/?canisterId=rkp4c-7iaaa-aaaaa-aaaca-cai
+  Backend canister via Candid interface:
+    hello_backend: http://127.0.0.1:4943/?canisterId=rno2w-sqaaa-aaaaa-aaacq-cai&id=r7inp-6aaaa-aaaaa-aaabq-cai
 ```
+
+{{< admonition fix "if you faced frontend build hangs" >}}
+[How to fix dfx deploy infinite hang](https://forum.dfinity.org/t/dfx-deploy-locally-with-a-new-dfx-identity/16470/24?u=leoo.j)
+
+1. Open package.json file.
+2. edit scripts like below.
+
+- as-is
+```json
+  "scripts": {
+    ...
+    "generate": "dfx generate hello_backend"
+  },
+```
+
+- to-be
+```json
+  "scripts": {
+    ...
+    "generate": "dfx --identity anonymous generate hello_backend"
+  },
+```
+{{< /admonition  >}}
+
+
+Finally Open your browser and navigate to the url output by the `dfx deploy`. 
+In my case, it is `http://127.0.0.1:4943/?canisterId=rkp4c-7iaaa-aaaaa-aaaca-cai`.
+
+
+<center>
+
+![](images/icp5.png)
+
+</center>
+
+## 3. (OPT) Check my public wallet dashboard
+
+You can check your wallet dashboard by below command.
+
+```js
+> dfx identity --network ic get-wallet
+Please enter the passphrase for your identity: [hidden]
+Decryption complete.
+zze7b-pqaaa-aaaam-abciq-cai
+```
+
+With given wallet ID, you can browse your public dashboard site. 
+Type **https://<wallet-id>.ic0.app/** on your web browser.
+
+
+<center>
+
+![](images/icp7.png)
+
+[My public ICP Dashboard](https://zze7b-pqaaa-aaaam-abciq-cai.ic0.app/)
+
+<p>- fin -</p>
+</center>

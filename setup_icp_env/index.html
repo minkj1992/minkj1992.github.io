@@ -34,7 +34,7 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, web3.0, blockchain, internet computer","wordcount":  404 ,
+                        }],"genre": "posts","keywords": "dev, web3.0, blockchain, internet computer","wordcount":  559 ,
         "url": "https:\/\/minkj1992.github.io\/setup_icp_env\/","datePublished": "2023-01-27T17:19:45+09:00","dateModified": "2023-01-28T09:51:28+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Internet Computer development environment</h1><h2 class="single-subtitle">How to set up Internet Computer development environment.</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/icp/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>icp</a>&nbsp;<a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-27">2023-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;404 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-27">2023-01-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;559 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -198,6 +198,7 @@
       </ul>
     </li>
     <li><a href="#2-hello-world-locally">2. Hello world locally</a></li>
+    <li><a href="#3-opt-check-my-public-wallet-dashboard">3. (OPT) Check my public wallet dashboard</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>How to set up Internet Computer development environment.</p>
@@ -372,16 +373,6 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="images/icp5.png"
-        data-srcset="/images/icp5.png, images/icp5.png 1.5x, /images/icp5.png 2x"
-        data-sizes="auto"
-        alt="/images/icp5.png"
-        title="/images/icp5.png" /></p>
-</center>
-<center>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
         data-src="images/icp6.png"
         data-srcset="/images/icp6.png, images/icp6.png 1.5x, /images/icp6.png 2x"
         data-sizes="auto"
@@ -427,17 +418,125 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// base root is hello
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">&gt;</span> <span class="nx">yarn</span> <span class="nx">install</span> <span class="c1">// or npm install
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">&gt;</span> <span class="nx">dfx</span> <span class="nx">deploy</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Deployed</span> <span class="nx">canisters</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nx">URLs</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">Frontend</span> <span class="nx">canister</span> <span class="nx">via</span> <span class="nx">browser</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">hello_frontend</span><span class="o">:</span> <span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:4943/?canisterId=rkp4c-7iaaa-aaaaa-aaaca-cai
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">Backend</span> <span class="nx">canister</span> <span class="nx">via</span> <span class="nx">Candid</span> <span class="kr">interface</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">hello_backend</span><span class="o">:</span> <span class="nx">http</span><span class="o">:</span><span class="c1">//127.0.0.1:4943/?canisterId=rno2w-sqaaa-aaaaa-aaacq-cai&amp;id=r7inp-6aaaa-aaaaa-aaabq-cai
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition fix open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw" aria-hidden="true"></i>if you faced frontend build hangs<i class="details-icon fas fa-angle-right fa-fw" aria-hidden="true"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p><a href="https://forum.dfinity.org/t/dfx-deploy-locally-with-a-new-dfx-identity/16470/24?u=leoo.j" target="_blank" rel="noopener noreffer">How to fix dfx deploy infinite hang</a>
+</p>
+<ol>
+<li>Open package.json file.</li>
+<li>edit scripts like below.</li>
+</ol>
+<ul>
+<li>as-is</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">&#34;scripts&#34;</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">...</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;generate&#34;</span><span class="p">:</span> <span class="s2">&#34;dfx generate hello_backend&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span><span class="err">,</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><ul>
+<li>to-be</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl">  <span class="s2">&#34;scripts&#34;</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="err">...</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;generate&#34;</span><span class="p">:</span> <span class="s2">&#34;dfx --identity anonymous generate hello_backend&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span><span class="err">,</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+        </div>
+    </div>
+<p>Finally Open your browser and navigate to the url output by the <code>dfx deploy</code>.
+In my case, it is <code>http://127.0.0.1:4943/?canisterId=rkp4c-7iaaa-aaaaa-aaaca-cai</code>.</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/icp5.png"
+        data-srcset="/images/icp5.png, images/icp5.png 1.5x, /images/icp5.png 2x"
+        data-sizes="auto"
+        alt="/images/icp5.png"
+        title="/images/icp5.png" /></p>
+</center>
+<h2 id="3-opt-check-my-public-wallet-dashboard">3. (OPT) Check my public wallet dashboard</h2>
+<p>You can check your wallet dashboard by below command.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">dfx</span> <span class="nx">identity</span> <span class="o">--</span><span class="nx">network</span> <span class="nx">ic</span> <span class="nx">get</span><span class="o">-</span><span class="nx">wallet</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Please</span> <span class="nx">enter</span> <span class="nx">the</span> <span class="nx">passphrase</span> <span class="k">for</span> <span class="nx">your</span> <span class="nx">identity</span><span class="o">:</span> <span class="p">[</span><span class="nx">hidden</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Decryption</span> <span class="nx">complete</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nx">zze7b</span><span class="o">-</span><span class="nx">pqaaa</span><span class="o">-</span><span class="nx">aaaam</span><span class="o">-</span><span class="nx">abciq</span><span class="o">-</span><span class="nx">cai</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>With given wallet ID, you can browse your public dashboard site.
+Type <strong>https://<wallet-id>.ic0.app/</strong> on your web browser.</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="images/icp7.png"
+        data-srcset="/images/icp7.png, images/icp7.png 1.5x, /images/icp7.png 2x"
+        data-sizes="auto"
+        alt="/images/icp7.png"
+        title="/images/icp7.png" /></p>
+<p><a href="https://zze7b-pqaaa-aaaam-abciq-cai.ic0.app/" target="_blank" rel="noopener noreffer">My public ICP Dashboard</a>
+</p>
+<p>- fin -</p>
+</center></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
