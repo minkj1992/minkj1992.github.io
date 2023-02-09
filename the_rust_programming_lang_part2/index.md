@@ -355,4 +355,191 @@ fn main() {
     );
 }
 ```
+#### `Memoization` (`lazy evaluation`)
+> with `Fn trait`
 
+각 클로저 인스턴스는 자신의 유일한 익명 타입을 갖습니다: 즉, 두 클로저가 동일한 타입 서명을 갖더라도 그들의 타입은 여전히 다른 것으로 간주 됩니다.
+
+
+- 구조체 필드에 클로저를 구현한 경우. (`Fn trait`)
+- impl 
+```rs
+pub struct Cacher<T>
+where
+    T: Fn(u32) -> u32,
+{
+    calculation: T,
+    value: Option<u32>,
+}
+
+impl<T> Cacher<T>
+where
+    T: Fn(u32) -> u32,
+{
+    pub fn new(calculation: T) -> Cacher<T> {
+        Cacher {
+            calculation,
+            value: None,
+        }
+    }
+    pub fn value(&mut self, arg: u32) -> u32 {
+        match self.value {
+            Some(v) => v,
+            None => {
+                let v = (self.calculation)(arg);
+                self.value = Some(v);
+                v
+            }
+        }
+    }
+}
+
+```
+
+## `Iterator`
+
+- 모든 iterator는 lazy하게 evaluation합니다. (python의 `range`와 같다.)
+
+
+```rs
+let v1 = vec![1, 2, 3];
+
+let v1_iter = v1.iter();
+
+for val in v1_iter {
+    println!("Got: {}", val);
+}
+```
+
+iterator는 내부적으로 next()를 사용하여 item들을 참조합니다. 또한 next는 `&mut self`로 참조하는데, 이를 통해 next가 호출 될 때마다, item들이 소비됩니다.
+
+
+- 모든 반복자는 표준 라이브러리에 정의된 Iterator 라는 이름의 트레잇을 구현 합니 다. 트레잇의 정의는 아래와 같습니다.
+
+```rs
+trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+
+    // methods with default implementations elided
+}
+
+...
+
+#[test]
+fn iterator_demonstration() {
+    let v1 = vec![1, 2, 3];
+
+    let mut v1_iter = v1.iter();
+
+    assert_eq!(v1_iter.next(), Some(&1));
+    assert_eq!(v1_iter.next(), Some(&2));
+    assert_eq!(v1_iter.next(), Some(&3));
+    assert_eq!(v1_iter.next(), None);
+}
+```
+
+- next 호출로 얻어온 값들은 벡터 안에 있는 값들에 대한 불변 참조라는 점 역시 유의 하세요. 
+- `iter()` 불변 참조에 대한 반복자를 만듭니다. 
+- 만약 v1 의 소유권을 갖고 소유된 값들을 반환하도록 하고 싶다면, `iter` 대신 `into_iter` 를 호출해야 합니다. 비슷하게, 가변 참조에 대한 반복자를 원한다면, iter 대신 `iter_mut` 을 호출할 수 있습니다.
+
+
+### 반복자를 소비하는 메서드들
+
+- sum 또한 item을 소비합니다.
+
+```rs
+#[test]
+fn iterator_sum() {
+    let v1 = vec![1, 2, 3];
+
+    let v1_iter = v1.iter();
+
+    let total: i32 = v1_iter.sum();
+
+    assert_eq!(total, 6);
+}
+```
+sum 은 호출한 반복자의 소유권을 갖기 때문에, sum 을 호출한 후 v1_iter 은 사용할 수 없습니다.
+
+### 다른 반복자를 생성하는 메서드들
+
+- `map()`
+
+```rs
+let v1: Vec<i32> = vec![1, 2, 3];
+
+v1.iter().map(|x| x + 1); // 새로운 iterator를 생성
+```
+
+iterator는 lazy하기 때문에, consume 되기전까지는 evaluate되지 않습니다.
+그렇기 때문에 위에 코드는 아래와 같은 경고를 만들게 되는데요.
+
+```
+warning: unused `std::iter::Map` which must be used: iterator adaptors are lazy
+and do nothing unless consumed
+ --> src/main.rs:4:5
+  |
+4 |     v1.iter().map(|x| x + 1);
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |
+  = note: #[warn(unused_must_use)] on by default
+```
+
+이를 해결하기 위해서는 iterator를 소비해주면 됩니다. 
+
+
+- `collect()`
+
+```rs
+let v1: Vec<i32> = vec![1, 2, 3];
+
+let v2: Vec<_> = v1.iter().map(|x| x + 1).collect();
+
+assert_eq!(v2, vec![2, 3, 4]);
+```
+
+- `filter`
+
+```rs
+#[derive(PartialEq, Debug)]
+struct Shoe {
+    size: u32,
+    style: String,
+}
+
+fn shoes_in_my_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
+    shoes.into_iter()
+        .filter(|s| s.size == shoe_size)
+        .collect()
+}
+
+#[test]
+fn filters_by_size() {
+    let shoes = vec![
+        Shoe { size: 10, style: String::from("sneaker") },
+        Shoe { size: 13, style: String::from("sandal") },
+        Shoe { size: 10, style: String::from("boot") },
+    ];
+
+    let in_my_size = shoes_in_my_size(shoes, 10);
+
+    assert_eq!(
+        in_my_size,
+        vec![
+            Shoe { size: 10, style: String::from("sneaker") },
+            Shoe { size: 10, style: String::from("boot") },
+        ]
+    );
+}
+```
+
+### 성능 비교하기: 루프 vs. 반복자
+
+[performance compare](https://rinthel.github.io/rust-lang-book-ko/ch13-04-performance.html)
+
+오히려 iterator가 loop보다 빠르게 측정된다. 빠르다는 것이 중요한 것은 아니고
+비록 iterator가 고수준의 abstract임에도, 컴파일이 진행되면 low level 코드와 같은 수준까지 내려갑니다. 이를 `zero cost abstraction`라고 러스트에서는 부릅니다.
+
+즉 iterator와 closure 코드는 고수준이지만, 컴파일러의 zero cost abstraction 덕분에 런타임 성능 걱정없이 사용할 수 있습니다.
