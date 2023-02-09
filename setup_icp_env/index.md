@@ -190,7 +190,7 @@ Decryption complete.
 zze7b-pqaaa-aaaam-abciq-cai
 ```
 
-With given wallet ID, you can browse your public dashboard site. 
+With given wallet ID, you can browse your public dashboard site.
 Type **https://<wallet-id>.ic0.app/** on your web browser.
 
 

@@ -251,4 +251,12 @@ tests/
 ```
 
 
+## 12. I/O 커맨드 라인 프로그램
+
+[CLI repo](https://github.com/minkj1992/rust_playground/tree/main/cli)
+
+## 13. Funtional Programming
+
+- Closure
+- Iterator
 
