@@ -261,7 +261,7 @@ index를 사용해 요소에 접근하려고 하면 Rust는 지정한 색인이 
 
 또한 index 에러는 컴파일 시에는 아무런 에러도 발생시키지 않습니다만, 프로그램의 결과는 실행 중에 에러가 발생했고 성공적으로 종료되지 못했다고 나옵니다.
 
-```js
+```bash
 $ cargo run
    Compiling arrays v0.1.0 (file:///projects/arrays)
     Finished dev [unoptimized + debuginfo] target(s) in 0.31 secs
@@ -742,7 +742,7 @@ fn makes_copy(some_integer: i32) { // some_integer이 스코프 안으로 들어
 } // 여기서 some_integer가 스코프 밖으로 벗어났습니다. 별다른 일은 발생하지 않습니다.
 ```
 
-```js
+```bash
 hello
 5
 ```
@@ -879,7 +879,7 @@ fn modify(s: &String) {
 }
 ```
 
-```js
+```bash
 error[E0596]: cannot borrow `*s` as mutable, as it is behind a `&` reference
  --> src/main.rs:7:3
   |
@@ -1004,7 +1004,7 @@ fn dangle() -> &String {
 } // s는 }를 벗어나는 시점에 free되므로, &s는 dangling reference입니다.
 ```
 
-```js
+```bash
 error[E0106]: missing lifetime specifier
 
 ...
@@ -1169,7 +1169,7 @@ fn main() {
 }
 ```
 
-```js
+```bash
 17:6 error: cannot borrow `s` as mutable because it is also borrowed as
             immutable [E0502]
     s.clear(); // Error!
@@ -2332,7 +2332,7 @@ let c = &literal[0..2]; //й
 
 indexing 잘못한다면 프로그램을 죽일 수 있습니다.
 
-```js
+```bash
 thread 'main' panicked at 'byte index 1 is not a char boundary; it is inside 'й' (bytes 0..2) of `йте`', src/main.rs:4:15
 ```
 
@@ -2617,7 +2617,7 @@ fn main() {
 
 다음과 같이 에러가 발생하면 "If error this will not be called" 부분을 실행하지 않습니다. 이는 match 코드에서도 `Err(e) => return Err(e)` 가 구현된 부분으로 동일합니다.
 
-```js
+```bash
 Start read_file
 No such file or directory (os error 2)
 ```
@@ -2837,7 +2837,7 @@ fn main() {
 }
 ```
 
-```js
+```bash
 Point {
     x: 5,
     y: 'c',
@@ -3165,7 +3165,7 @@ fn main() {
 }
 ```
 
-```js
+```bash
 error[E0106]: missing lifetime specifier
    |
 1  | fn longest(x: &str, y: &str) -> &str {

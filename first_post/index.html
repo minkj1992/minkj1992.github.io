@@ -34,7 +34,7 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "Markdown, HTML","wordcount":  2785 ,
+                        }],"genre": "posts","keywords": "Markdown, HTML","wordcount":  2788 ,
         "url": "https:\/\/minkj1992.github.io\/first_post\/","datePublished": "2022-01-01T23:00:00+09:00","dateModified": "2022-01-14T19:19:37+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
@@ -173,7 +173,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Initial Post</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/markdown/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Markdown</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2785 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2788 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;14 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -902,7 +902,7 @@ line 3 of code
 </div><h3 id="94-syntax-highlighting">9.4. Syntax Highlighting</h3>
 <p><strong><ruby>GFM<rt>GitHub Flavored Markdown</rt></ruby></strong> also supports syntax highlighting.</p>
 <p>To activate it, simply add the file extension of the language you want to use directly after the first code &ldquo;fence&rdquo;,
-<code>```js</code>, and syntax highlighting will automatically be applied in the rendered HTML.</p>
+<code>```bash</code>, and syntax highlighting will automatically be applied in the rendered HTML.</p>
 <p>For example, to apply syntax highlighting to JavaScript code:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -928,25 +928,25 @@ line 3 of code
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="s">```js
-</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">assemble</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">assets</span><span class="o">:</span> <span class="s1">&#39;docs/assets&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">data</span><span class="o">:</span> <span class="s1">&#39;src/data/*.{json,yml}&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">helpers</span><span class="o">:</span> <span class="s1">&#39;src/custom-helpers.js&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">partials</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;src/partials/**/*.{hbs,md}&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pages</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">layout</span><span class="o">:</span> <span class="s1">&#39;default.hbs&#39;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">},</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;./&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;src/templates/pages/index.hbs&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="s">```bash
+</span></span></span><span class="line"><span class="cl"><span class="s"></span>grunt.initConfig<span class="o">({</span>
+</span></span><span class="line"><span class="cl">  assemble: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    options: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      assets: <span class="s1">&#39;docs/assets&#39;</span>,
+</span></span><span class="line"><span class="cl">      data: <span class="s1">&#39;src/data/*.{json,yml}&#39;</span>,
+</span></span><span class="line"><span class="cl">      helpers: <span class="s1">&#39;src/custom-helpers.js&#39;</span>,
+</span></span><span class="line"><span class="cl">      partials: <span class="o">[</span><span class="s1">&#39;src/partials/**/*.{hbs,md}&#39;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">    pages: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      options: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        layout: <span class="s1">&#39;default.hbs&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">      files: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;./&#39;</span>: <span class="o">[</span><span class="s1">&#39;src/templates/pages/index.hbs&#39;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">      <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="s">```</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -973,24 +973,24 @@ line 3 of code
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">assemble</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">assets</span><span class="o">:</span> <span class="s1">&#39;docs/assets&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">data</span><span class="o">:</span> <span class="s1">&#39;src/data/*.{json,yml}&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">helpers</span><span class="o">:</span> <span class="s1">&#39;src/custom-helpers.js&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">partials</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;src/partials/**/*.{hbs,md}&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">pages</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="nx">layout</span><span class="o">:</span> <span class="s1">&#39;default.hbs&#39;</span>
-</span></span><span class="line"><span class="cl">      <span class="p">},</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">files</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="s1">&#39;./&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;src/templates/pages/index.hbs&#39;</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">      <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">grunt.initConfig<span class="o">({</span>
+</span></span><span class="line"><span class="cl">  assemble: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    options: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      assets: <span class="s1">&#39;docs/assets&#39;</span>,
+</span></span><span class="line"><span class="cl">      data: <span class="s1">&#39;src/data/*.{json,yml}&#39;</span>,
+</span></span><span class="line"><span class="cl">      helpers: <span class="s1">&#39;src/custom-helpers.js&#39;</span>,
+</span></span><span class="line"><span class="cl">      partials: <span class="o">[</span><span class="s1">&#39;src/partials/**/*.{hbs,md}&#39;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">    pages: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      options: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        layout: <span class="s1">&#39;default.hbs&#39;</span>
+</span></span><span class="line"><span class="cl">      <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">      files: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;./&#39;</span>: <span class="o">[</span><span class="s1">&#39;src/templates/pages/index.hbs&#39;</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">      <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition note open">
@@ -1013,11 +1013,11 @@ line 3 of code
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">| Option | Description |
-</span></span><span class="line"><span class="cl">| ------ | ----------- |
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">| Option | Description                                                               |
+</span></span><span class="line"><span class="cl">| ------ | ------------------------------------------------------------------------- |
 </span></span><span class="line"><span class="cl">| data   | path to data files to supply the data that will be passed into templates. |
-</span></span><span class="line"><span class="cl">| engine | engine to be used for processing templates. Handlebars is the default. |
-</span></span><span class="line"><span class="cl">| ext    | extension to be used for dest files. |
+</span></span><span class="line"><span class="cl">| engine | engine to be used for processing templates. Handlebars is the default.    |
+</span></span><span class="line"><span class="cl">| ext    | extension to be used for dest files.                                      |
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>The rendered output looks like this:</p>
@@ -1110,11 +1110,11 @@ line 3 of code
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">| Option | Description |
-</span></span><span class="line"><span class="cl">|:------:| -----------:|
-</span></span><span class="line"><span class="cl">| data   | path to data files to supply the data that will be passed into templates. |
-</span></span><span class="line"><span class="cl">| engine | engine to be used for processing templates. Handlebars is the default. |
-</span></span><span class="line"><span class="cl">| ext    | extension to be used for dest files. |
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">| Option |                                                               Description |
+</span></span><span class="line"><span class="cl">| :----: | ------------------------------------------------------------------------: |
+</span></span><span class="line"><span class="cl">|  data  | path to data files to supply the data that will be passed into templates. |
+</span></span><span class="line"><span class="cl">| engine |    engine to be used for processing templates. Handlebars is the default. |
+</span></span><span class="line"><span class="cl">|  ext   |                                      extension to be used for dest files. |
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>The rendered output looks like this:</p>

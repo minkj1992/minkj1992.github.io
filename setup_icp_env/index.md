@@ -38,7 +38,7 @@ How to set up Internet Computer development environment.
 
 `dfx`: **D**i**f**inity e**x**ecution command-line interface
 
-```js
+```bash
 $ sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
 $ dfs --version
 dfx 0.12.1
@@ -48,7 +48,7 @@ dfx 0.12.1
 
 ### 1-3. Claim cycles
 
-```js
+```bash
 > dfx identity list
 Creating the "default" identity.
 WARNING: The "default" identity is not stored securely. Do not use it to control a lot of cycles/ICP.
@@ -63,7 +63,7 @@ Caused by: Failed to load identity manager.
 
 1. Generate [Identity](https://support.dfinity.org/hc/en-us/articles/7453712440084-What-are-identities-) and set it default
 
-```js
+```bash
 > sudo rm -rf leoo
 > dfx identity list
 anonymous
@@ -83,7 +83,7 @@ Using identity: "leoo.j".
 
 2. Claim Cycles
 
-```js
+```bash
 > sudo dfx wallet --network ic redeem-faucet-coupon <COUPON_NUMBER>
 Please enter the passphrase for your identity: [hidden]
 Decryption complete.
@@ -114,13 +114,13 @@ I faced some permission error while doing `Hello_World` canister. So I posted be
 
 - [Issue that I faced](https://forum.dfinity.org/t/permissions-dfx-cli-on-osx/18220?u=leoo.j)
 
-```js
+```bash
 > dfx new hello
 > cd hello
 ```
 
 - Terminal A
-```js
+```bash
 // base root is hello
 > dfx start
 Running dfx start for version 0.12.1
@@ -130,7 +130,7 @@ Dashboard: http://localhost:56958/_/dashboard
 
 - Terminal B
 
-```js
+```bash
 // base root is hello
 > yarn install // or npm install
 > dfx deploy
@@ -183,7 +183,7 @@ In my case, it is `http://127.0.0.1:4943/?canisterId=rkp4c-7iaaa-aaaaa-aaaca-cai
 
 You can check your wallet dashboard by below command.
 
-```js
+```bash
 > dfx identity --network ic get-wallet
 Please enter the passphrase for your identity: [hidden]
 Decryption complete.

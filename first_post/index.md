@@ -492,12 +492,12 @@ The HTML looks like this:
 [GFM]^(GitHub Flavored Markdown) also supports syntax highlighting.
 
 To activate it, simply add the file extension of the language you want to use directly after the first code "fence",
-<code>```js</code>, and syntax highlighting will automatically be applied in the rendered HTML.
+<code>```bash</code>, and syntax highlighting will automatically be applied in the rendered HTML.
 
 For example, to apply syntax highlighting to JavaScript code:
 
 {{< highlight markdown >}}
-```js
+```bash
 grunt.initConfig({
   assemble: {
     options: {
@@ -521,7 +521,7 @@ grunt.initConfig({
 
 The rendered output looks like this:
 
-```js
+```bash
 grunt.initConfig({
   assemble: {
     options: {
@@ -551,20 +551,20 @@ grunt.initConfig({
 Tables are created by adding pipes as dividers between each cell, and by adding a line of dashes (also separated by bars) beneath the header. Note that the pipes do not need to be vertically aligned.
 
 ```markdown
-| Option | Description |
-| ------ | ----------- |
+| Option | Description                                                               |
+| ------ | ------------------------------------------------------------------------- |
 | data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| engine | engine to be used for processing templates. Handlebars is the default.    |
+| ext    | extension to be used for dest files.                                      |
 ```
 
 The rendered output looks like this:
 
-| Option | Description |
-| ------ | ----------- |
+| Option | Description                                                               |
+| ------ | ------------------------------------------------------------------------- |
 | data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| engine | engine to be used for processing templates. Handlebars is the default.    |
+| ext    | extension to be used for dest files.                                      |
 
 The HTML looks like this:
 
@@ -599,20 +599,20 @@ Adding a colon on the right side of the dashes below any heading will right alig
 Adding colons on both sides of the dashes below any heading will center align text for that column.
 
 ```markdown
-| Option | Description |
-|:------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| Option |                                                               Description |
+| :----: | ------------------------------------------------------------------------: |
+|  data  | path to data files to supply the data that will be passed into templates. |
+| engine |    engine to be used for processing templates. Handlebars is the default. |
+|  ext   |                                      extension to be used for dest files. |
 ```
 
 The rendered output looks like this:
 
-| Option | Description |
-|:------:| -----------:|
-| data   | path to data files to supply the data that will be passed into templates. |
-| engine | engine to be used for processing templates. Handlebars is the default. |
-| ext    | extension to be used for dest files. |
+| Option |                                                               Description |
+| :----: | ------------------------------------------------------------------------: |
+|  data  | path to data files to supply the data that will be passed into templates. |
+| engine |    engine to be used for processing templates. Handlebars is the default. |
+|  ext   |                                      extension to be used for dest files. |
 {{< /admonition >}}
 
 ## 11. Links {#links}

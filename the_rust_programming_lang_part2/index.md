@@ -90,13 +90,13 @@ mod tests {
 - `cargo test`는 기본적으로 스레드를 이용해 병렬적으로 수행됩니다.
 만일 병렬 테스트를 실행하고 싶지 않을 경우, 스레드 갯수를 그저 1개로 줄이면 됩니다.
 
-```js
+```bash
 $ cargo test -- --test-threads=1
 ```
 
 cargo test에는 총 2가지 종류의 argument가 존재합니다.
 
-```js
+```bash
 > cargo test --help
 Execute all unit and integration tests and build examples of a local package
 
@@ -115,7 +115,7 @@ Usage: cargo test [OPTIONS] [TESTNAME] [-- [args]...]
 ### `--nocapture`
 > `--nocapture`를 사용하면 stdout까지 print되는 것을 막을 수 있습니다.
 
-```js
+```bash
 $ cargo test -- --nocapture
 ```
 
@@ -150,7 +150,7 @@ mod tests {
 }
 ```
 
-```js
+```bash
 $ cargo test add
     Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
      Running target/debug/deps/adder-06a75b4a1f2515e9
@@ -240,7 +240,7 @@ src/
 
 러스트의 통합테스트는 `tests/` 디렉토리로 완전히 `src/`와 분리되서 관리됩니다.
 
-```js
+```bash
 src/ 
   lib.rs
   ops.rs
@@ -257,6 +257,102 @@ tests/
 
 ## 13. Funtional Programming
 
-- Closure
-- Iterator
+- `Closure`
+- `Iterator`
+
+
+### 13.1 `Closure`
+- simple define closure
+
+```rs
+fn  add_one_v1   (x: u32) -> u32 { x + 1 }
+let add_one_v2 = |x: u32| -> u32 { x + 1 };
+let add_one_v3 = |x|             { x + 1 };
+let add_one_v4 = |x|               x + 1  ;
+
+{
+    let expensive_closure = |num| {
+    println!("calculating slowly...");
+    thread::sleep(Duration::from_secs(2));
+    num
+    };
+}
+```
+
+클로저는 만약 좁은 범위에서 사용되기 때문에, 문맥상 타입이 명확하다면 오히려 불필요하게 타입을 쓰지 않아도 좋은 접근인 것 같다.
+
+- 한번 호출 이후 타입은 고정됩니다.
+
+```rs
+let example_closure = |x| x;
+
+let s = example_closure(String::from("hello"));
+let n = example_closure(5);
+```
+
+```bash
+error[E0308]: mismatched types
+ --> src/main.rs
+  |
+  | let n = example_closure(5);
+  |                         ^ expected struct `std::string::String`, found
+  integral variable
+  |
+  = note: expected type `std::string::String`
+             found type `{integer}`
+```
+
+
+- full example
+```rs
+#[derive(Debug, PartialEq, Copy, Clone)]
+enum ShirtColor {
+    Red,
+    Blue,
+}
+
+struct Inventory {
+    shirts: Vec<ShirtColor>,
+}
+
+impl Inventory {
+    fn giveaway(&self, preference: Option<ShirtColor>) -> ShirtColor {
+        // |no parameter| => self.most_stocked call closure
+        preference.unwrap_or_else(|| self.most_stocked())
+    }
+    
+    fn most_stocked(&self) -> ShirtColor {
+        let (mut n_red, mut n_blue) = (0,0);
+        
+        for c in &self.shirts {
+            match c {
+                ShirtColor::Red => n_red +=1,
+                ShirtColor::Blue => n_blue +=1,
+            }
+        }
+        
+        if n_red > n_blue {ShirtColor::Red} else {ShirtColor::Blue}
+    }
+}
+
+fn main() {
+    let store = Inventory {
+        shirts: vec![ShirtColor::Blue, ShirtColor::Red, ShirtColor::Blue],
+    };
+
+    let user_pref1 = Some(ShirtColor::Red);
+    let giveaway1 = store.giveaway(user_pref1);
+    println!(
+        "The user with preference {:?} gets {:?}",
+        user_pref1, giveaway1
+    );
+
+    let user_pref2 = Some(ShirtColor::Red);
+    let giveaway2 = store.giveaway(user_pref2);
+    println!(
+        "The user with preference {:?} gets {:?}",
+        user_pref2, giveaway2
+    );
+}
+```
 

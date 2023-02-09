@@ -89,7 +89,7 @@ SimpleStorageUpgrade version 2 deployed to: 0x9fE46736679d2D9a65F0992F2272dE9f3c
 
 #### hardhat.config.js
 
-```js
+```bash
 require("dotenv").config(); // yarn add dotenv
 
 // ... 중략 ...

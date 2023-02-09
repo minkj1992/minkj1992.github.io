@@ -350,24 +350,24 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">require</span><span class="p">(</span><span class="s2">&#34;dotenv&#34;</span><span class="p">).</span><span class="nx">config</span><span class="p">();</span> <span class="c1">// yarn add dotenv
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="c1">// ... 중략 ...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">networks</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">rinkeby</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">url</span><span class="o">:</span> <span class="sb">`https://eth-rinkeby.alchemyapi.io/v2/</span><span class="si">${</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ALCHEMY_API_KEY</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">// 0x20CE8B2190949f48F5D32d5BbbfE7E3760811F61
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nx">accounts</span><span class="o">:</span> <span class="p">[</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">TEST_ACCOUNT_PRIVATE_KEY</span><span class="p">],</span>
-</span></span><span class="line"><span class="cl">    <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">solidity</span><span class="o">:</span> <span class="s2">&#34;0.8.4&#34;</span><span class="p">,</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">require<span class="o">(</span><span class="s2">&#34;dotenv&#34;</span><span class="o">)</span>.config<span class="o">()</span><span class="p">;</span> // yarn add dotenv
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="nx">etherscan</span><span class="o">:</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">apiKey</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ETHERSCAN_API_KEY</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="p">},</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">// ... 중략 ...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">module.exports <span class="o">=</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  networks: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    rinkeby: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      url: <span class="sb">`</span>https://eth-rinkeby.alchemyapi.io/v2/<span class="si">${</span><span class="nv">process</span><span class="p">.env.ALCHEMY_API_KEY</span><span class="si">}</span><span class="sb">`</span>,
+</span></span><span class="line"><span class="cl">      // 0x20CE8B2190949f48F5D32d5BbbfE7E3760811F61
+</span></span><span class="line"><span class="cl">      accounts: <span class="o">[</span>process.env.TEST_ACCOUNT_PRIVATE_KEY<span class="o">]</span>,
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">  solidity: <span class="s2">&#34;0.8.4&#34;</span>,
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  etherscan: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    apiKey: process.env.ETHERSCAN_API_KEY,
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>,
+</span></span><span class="line"><span class="cl"><span class="o">}</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>

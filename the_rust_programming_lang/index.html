@@ -839,13 +839,13 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">$</span> <span class="nx">cargo</span> <span class="nx">run</span>
-</span></span><span class="line"><span class="cl">   <span class="nx">Compiling</span> <span class="nx">arrays</span> <span class="nx">v0</span><span class="p">.</span><span class="mf">1.0</span> <span class="p">(</span><span class="nx">file</span><span class="o">:</span><span class="c1">///projects/arrays)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Finished</span> <span class="nx">dev</span> <span class="p">[</span><span class="nx">unoptimized</span> <span class="o">+</span> <span class="nx">debuginfo</span><span class="p">]</span> <span class="nx">target</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="k">in</span> <span class="mf">0.31</span> <span class="nx">secs</span>
-</span></span><span class="line"><span class="cl">     <span class="nx">Running</span> <span class="sb">`target/debug/arrays`</span>
-</span></span><span class="line"><span class="cl"><span class="nx">thread</span> <span class="s1">&#39;&lt;main&gt;&#39;</span> <span class="nx">panicked</span> <span class="nx">at</span> <span class="s1">&#39;index out of bounds: the len is 5 but the index is
-</span></span></span><span class="line"><span class="cl"><span class="s1"> 10&#39;</span><span class="p">,</span> <span class="nx">src</span><span class="o">/</span><span class="nx">main</span><span class="p">.</span><span class="nx">rs</span><span class="o">:</span><span class="mi">6</span>
-</span></span><span class="line"><span class="cl"><span class="nx">note</span><span class="o">:</span> <span class="nx">Run</span> <span class="kd">with</span> <span class="sb">`RUST_BACKTRACE=1`</span> <span class="k">for</span> <span class="nx">a</span> <span class="nx">backtrace</span><span class="p">.</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cargo run
+</span></span><span class="line"><span class="cl">   Compiling arrays v0.1.0 <span class="o">(</span>file:///projects/arrays<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    Finished dev <span class="o">[</span>unoptimized + debuginfo<span class="o">]</span> target<span class="o">(</span>s<span class="o">)</span> in 0.31 secs
+</span></span><span class="line"><span class="cl">     Running <span class="sb">`</span>target/debug/arrays<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">thread <span class="s1">&#39;&lt;main&gt;&#39;</span> panicked at <span class="s1">&#39;index out of bounds: the len is 5 but the index is
+</span></span></span><span class="line"><span class="cl"><span class="s1"> 10&#39;</span>, src/main.rs:6
+</span></span><span class="line"><span class="cl">note: Run with <span class="sb">`</span><span class="nv">RUST_BACKTRACE</span><span class="o">=</span>1<span class="sb">`</span> <span class="k">for</span> a backtrace.
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="3-3-functions">3-3. Functions</h2>
@@ -1551,8 +1551,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">hello</span>
-</span></span><span class="line"><span class="cl"><span class="mi">5</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">hello
+</span></span><span class="line"><span class="cl"><span class="m">5</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>만일 우리가 <code>s</code>를 <code>takes_ownership</code> 함수를 호출한 이후에 사용하려 한다면, 러스트는 컴파일 타임 오류를 낼 것입니다.</p>
@@ -1769,13 +1769,13 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">error</span><span class="p">[</span><span class="nx">E0596</span><span class="p">]</span><span class="o">:</span> <span class="nx">cannot</span> <span class="nx">borrow</span> <span class="sb">`*s`</span> <span class="nx">as</span> <span class="nx">mutable</span><span class="p">,</span> <span class="nx">as</span> <span class="nx">it</span> <span class="nx">is</span> <span class="nx">behind</span> <span class="nx">a</span> <span class="sb">`&amp;`</span> <span class="nx">reference</span>
-</span></span><span class="line"><span class="cl"> <span class="o">--&gt;</span> <span class="nx">src</span><span class="o">/</span><span class="nx">main</span><span class="p">.</span><span class="nx">rs</span><span class="o">:</span><span class="mi">7</span><span class="o">:</span><span class="mi">3</span>
-</span></span><span class="line"><span class="cl">  <span class="o">|</span>
-</span></span><span class="line"><span class="cl"><span class="mi">6</span> <span class="o">|</span> <span class="nx">fn</span> <span class="nx">modify</span><span class="p">(</span><span class="nx">s</span><span class="o">:</span> <span class="o">&amp;</span><span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="o">|</span>              <span class="o">-------</span> <span class="nx">help</span><span class="o">:</span> <span class="nx">consider</span> <span class="nx">changing</span> <span class="k">this</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">a</span> <span class="nx">mutable</span> <span class="nx">reference</span><span class="o">:</span> <span class="sb">`&amp;mut String`</span>
-</span></span><span class="line"><span class="cl"><span class="mi">7</span> <span class="o">|</span>   <span class="nx">s</span><span class="p">.</span><span class="nx">push_str</span><span class="p">(</span><span class="s2">&#34;, minwook&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="o">|</span>   <span class="o">^^^^^^^^^^^^^^^^^^^^^^^</span> <span class="sb">`s`</span> <span class="nx">is</span> <span class="nx">a</span> <span class="sb">`&amp;`</span> <span class="nx">reference</span><span class="p">,</span> <span class="nx">so</span> <span class="nx">the</span> <span class="nx">data</span> <span class="nx">it</span> <span class="nx">refers</span> <span class="nx">to</span> <span class="nx">cannot</span> <span class="nx">be</span> <span class="nx">borrowed</span> <span class="nx">as</span> <span class="nx">mutable</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">error<span class="o">[</span>E0596<span class="o">]</span>: cannot borrow <span class="sb">`</span>*s<span class="sb">`</span> as mutable, as it is behind a <span class="sb">`</span><span class="p">&amp;</span><span class="sb">`</span> reference
+</span></span><span class="line"><span class="cl"> --&gt; src/main.rs:7:3
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="m">6</span> <span class="p">|</span> fn modify<span class="o">(</span>s: <span class="p">&amp;</span>String<span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>              ------- help: consider changing this to be a mutable reference: <span class="sb">`</span><span class="p">&amp;</span>mut String<span class="sb">`</span>
+</span></span><span class="line"><span class="cl"><span class="m">7</span> <span class="p">|</span>   s.push_str<span class="o">(</span><span class="s2">&#34;, minwook&#34;</span><span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">|</span>   ^^^^^^^^^^^^^^^^^^^^^^^ <span class="sb">`</span>s<span class="sb">`</span> is a <span class="sb">`</span><span class="p">&amp;</span><span class="sb">`</span> reference, so the data it refers to cannot be borrowed as mutable
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>변수가 기본적으로 불변인 것처럼, 참조자도 마찬가지입니다.</strong></p>
@@ -1956,12 +1956,12 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">error</span><span class="p">[</span><span class="nx">E0106</span><span class="p">]</span><span class="o">:</span> <span class="nx">missing</span> <span class="nx">lifetime</span> <span class="nx">specifier</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">error<span class="o">[</span>E0106<span class="o">]</span>: missing lifetime specifier
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="cl">...
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nx">help</span><span class="o">:</span> <span class="k">this</span> <span class="kd">function</span><span class="err">&#39;</span><span class="nx">s</span> <span class="k">return</span> <span class="nx">type</span> <span class="nx">contains</span> <span class="nx">a</span> <span class="nx">borrowed</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">there</span> <span class="nx">is</span> <span class="nx">no</span> <span class="nx">value</span> <span class="k">for</span> <span class="nx">it</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">borrowed</span> <span class="nx">from</span><span class="p">.</span> 
-</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="nx">해석</span><span class="o">:</span> <span class="nx">이</span> <span class="nx">함수의</span> <span class="nx">반환</span> <span class="nx">타입은</span> <span class="nx">빌린</span> <span class="nx">값을</span> <span class="nx">포함하고</span> <span class="nx">있는데</span><span class="p">,</span> <span class="nx">빌려온</span> <span class="nx">실제</span> <span class="nx">값은</span> <span class="nx">없습니다</span><span class="p">.)</span>
+</span></span><span class="line"><span class="cl">help: this <span class="k">function</span><span class="err">&#39;</span>s <span class="k">return</span> <span class="nb">type</span> contains a borrowed value, but there is no value <span class="k">for</span> it to be borrowed from. 
+</span></span><span class="line"><span class="cl"><span class="o">(</span>해석: 이 함수의 반환 타입은 빌린 값을 포함하고 있는데, 빌려온 실제 값은 없습니다.<span class="o">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>여기서의 해법은 String을 직접 반환하는 것입니다. 소유권이 밖으로 이동되었고, 아무것도 할당 해제되지 않습니다.</p>
@@ -2226,18 +2226,18 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="mi">17</span><span class="o">:</span><span class="mi">6</span> <span class="nx">error</span><span class="o">:</span> <span class="nx">cannot</span> <span class="nx">borrow</span> <span class="sb">`s`</span> <span class="nx">as</span> <span class="nx">mutable</span> <span class="nx">because</span> <span class="nx">it</span> <span class="nx">is</span> <span class="nx">also</span> <span class="nx">borrowed</span> <span class="nx">as</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">immutable</span> <span class="p">[</span><span class="nx">E0502</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">s</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span> <span class="c1">// Error!
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">^</span>
-</span></span><span class="line"><span class="cl"><span class="mi">15</span><span class="o">:</span><span class="mi">29</span> <span class="nx">note</span><span class="o">:</span> <span class="nx">previous</span> <span class="nx">borrow</span> <span class="k">of</span> <span class="sb">`s`</span> <span class="nx">occurs</span> <span class="nx">here</span><span class="p">;</span> <span class="nx">the</span> <span class="nx">immutable</span> <span class="nx">borrow</span> <span class="nx">prevents</span>
-</span></span><span class="line"><span class="cl">            <span class="nx">subsequent</span> <span class="nx">moves</span> <span class="nx">or</span> <span class="nx">mutable</span> <span class="nx">borrows</span> <span class="k">of</span> <span class="sb">`s`</span> <span class="nx">until</span> <span class="nx">the</span> <span class="nx">borrow</span> <span class="nx">ends</span>
-</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">word</span> <span class="o">=</span> <span class="nx">first_word</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                           <span class="o">^</span>
-</span></span><span class="line"><span class="cl"><span class="mi">18</span><span class="o">:</span><span class="mi">2</span> <span class="nx">note</span><span class="o">:</span> <span class="nx">previous</span> <span class="nx">borrow</span> <span class="nx">ends</span> <span class="nx">here</span>
-</span></span><span class="line"><span class="cl"><span class="nx">fn</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">17:6 error: cannot borrow <span class="sb">`</span>s<span class="sb">`</span> as mutable because it is also borrowed as
+</span></span><span class="line"><span class="cl">            immutable <span class="o">[</span>E0502<span class="o">]</span>
+</span></span><span class="line"><span class="cl">    s.clear<span class="o">()</span><span class="p">;</span> // Error!
+</span></span><span class="line"><span class="cl">    ^
+</span></span><span class="line"><span class="cl">15:29 note: previous borrow of <span class="sb">`</span>s<span class="sb">`</span> occurs here<span class="p">;</span> the immutable borrow prevents
+</span></span><span class="line"><span class="cl">            subsequent moves or mutable borrows of <span class="sb">`</span>s<span class="sb">`</span> <span class="k">until</span> the borrow ends
+</span></span><span class="line"><span class="cl">    <span class="nb">let</span> <span class="nv">word</span> <span class="o">=</span> first_word<span class="o">(</span><span class="p">&amp;</span>s<span class="o">)</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                           ^
+</span></span><span class="line"><span class="cl">18:2 note: previous borrow ends here
+</span></span><span class="line"><span class="cl">fn main<span class="o">()</span> <span class="o">{</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>Borrowing</code>(빌림) 규칙에서 만일 무언가에 대한 불변 참조자를 만들었을 경우, 가변 참조자를 만들 수 없다는 점을 상기해보세요.</p>
@@ -4140,7 +4140,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">thread</span> <span class="s1">&#39;main&#39;</span> <span class="nx">panicked</span> <span class="nx">at</span> <span class="s1">&#39;byte index 1 is not a char boundary; it is inside &#39;</span><span class="nx">й</span><span class="s1">&#39; (bytes 0..2) of `йте`&#39;</span><span class="p">,</span> <span class="nx">src</span><span class="o">/</span><span class="nx">main</span><span class="p">.</span><span class="nx">rs</span><span class="o">:</span><span class="mi">4</span><span class="o">:</span><span class="mi">15</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">thread <span class="s1">&#39;main&#39;</span> panicked at <span class="s1">&#39;byte index 1 is not a char boundary; it is inside &#39;</span>й<span class="s1">&#39; (bytes 0..2) of `йте`&#39;</span>, src/main.rs:4:15
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -4615,8 +4615,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">Start</span> <span class="nx">read_file</span>
-</span></span><span class="line"><span class="cl"><span class="nx">No</span> <span class="nx">such</span> <span class="nx">file</span> <span class="nx">or</span> <span class="nx">directory</span> <span class="p">(</span><span class="nx">os</span> <span class="nx">error</span> <span class="mi">2</span><span class="p">)</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Start read_file
+</span></span><span class="line"><span class="cl">No such file or directory <span class="o">(</span>os error 2<span class="o">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -5005,18 +5005,18 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">Point</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">x</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">y</span><span class="o">:</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nx">Point</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">x</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">y</span><span class="o">:</span> <span class="mf">99.9</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="nx">Point</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">x</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">y</span><span class="o">:</span> <span class="mf">99.9</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Point <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    x: 5,
+</span></span><span class="line"><span class="cl">    y: <span class="s1">&#39;c&#39;</span>,
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">Point <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    x: 5,
+</span></span><span class="line"><span class="cl">    y: 99.9,
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">Point <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    x: 5,
+</span></span><span class="line"><span class="cl">    y: 99.9,
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="제너릭-타입-성능런타임-비용">제너릭 타입 성능(런타임 비용)</h3>
@@ -5556,13 +5556,13 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">error</span><span class="p">[</span><span class="nx">E0106</span><span class="p">]</span><span class="o">:</span> <span class="nx">missing</span> <span class="nx">lifetime</span> <span class="nx">specifier</span>
-</span></span><span class="line"><span class="cl">   <span class="o">|</span>
-</span></span><span class="line"><span class="cl"><span class="mi">1</span>  <span class="o">|</span> <span class="nx">fn</span> <span class="nx">longest</span><span class="p">(</span><span class="nx">x</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">str</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">&amp;</span><span class="nx">str</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">   <span class="o">|</span>                                 <span class="o">^</span> <span class="nx">expected</span> <span class="nx">lifetime</span> <span class="nx">parameter</span>
-</span></span><span class="line"><span class="cl">   <span class="o">|</span>
-</span></span><span class="line"><span class="cl">   <span class="o">=</span> <span class="nx">help</span><span class="o">:</span> <span class="k">this</span> <span class="kd">function</span><span class="err">&#39;</span><span class="nx">s</span> <span class="k">return</span> <span class="nx">type</span> <span class="nx">contains</span> <span class="nx">a</span> <span class="nx">borrowed</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">but</span> <span class="nx">the</span>
-</span></span><span class="line"><span class="cl">   <span class="nx">signature</span> <span class="nx">does</span> <span class="nx">not</span> <span class="nx">say</span> <span class="nx">whether</span> <span class="nx">it</span> <span class="nx">is</span> <span class="nx">borrowed</span> <span class="nx">from</span> <span class="sb">`x`</span> <span class="nx">or</span> <span class="sb">`y`</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">error<span class="o">[</span>E0106<span class="o">]</span>: missing lifetime specifier
+</span></span><span class="line"><span class="cl">   <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="m">1</span>  <span class="p">|</span> fn longest<span class="o">(</span>x: <span class="p">&amp;</span>str, y: <span class="p">&amp;</span>str<span class="o">)</span> -&gt; <span class="p">&amp;</span>str <span class="o">{</span>
+</span></span><span class="line"><span class="cl">   <span class="p">|</span>                                 ^ expected lifetime parameter
+</span></span><span class="line"><span class="cl">   <span class="p">|</span>
+</span></span><span class="line"><span class="cl">   <span class="o">=</span> help: this <span class="k">function</span><span class="err">&#39;</span>s <span class="k">return</span> <span class="nb">type</span> contains a borrowed value, but the
+</span></span><span class="line"><span class="cl">   signature does not say whether it is borrowed from <span class="sb">`</span>x<span class="sb">`</span> or <span class="sb">`</span>y<span class="sb">`</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>이 도움말은 반환 타입에 대하여 제네릭 라이프타임 파라미터가 필요하다는 것을 말해주고 있는데, 왜냐하면 반환되는 참조자가 x를 참조하는지 혹은 y를 참조하는지를 러스트가 말할 수 없기 때문입니다. 사실, 우리 또한 모르는데, 이 함수의 본체 내의 if 블록은 x의 참조자를 반환하고 else 블록은 y의 참조자를 반환하기 때문입니다.</p>
