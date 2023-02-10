@@ -543,3 +543,211 @@ fn filters_by_size() {
 비록 iterator가 고수준의 abstract임에도, 컴파일이 진행되면 low level 코드와 같은 수준까지 내려갑니다. 이를 `zero cost abstraction`라고 러스트에서는 부릅니다.
 
 즉 iterator와 closure 코드는 고수준이지만, 컴파일러의 zero cost abstraction 덕분에 런타임 성능 걱정없이 사용할 수 있습니다.
+
+# 15. 스마트 포인터
+
+- 러스트에서 스마트 포인터는 보통 구조체를 이용해서 구현된 기능이 추가된 포인터입니다.
+- `String`, `Vec<T>` 또한 스마트 포인터의 일종입니다. 이유는 이들이 얼마간의 메모리를 소유하고, 개발자들이 다루도록 허용하기 때문입니다. 또한 메타데이터와, 추가 능력(확장) 기능을 가지고 있습니다.
+
+{{< admonition note "Smart pointer" >}}
+_In computer science, a smart pointer is an abstract data type that simulates a pointer while providing added features, such as automatic memory management or bounds checking. Such features are intended to reduce bugs caused by the misuse of pointers, while retaining efficiency._
+
+_Smart pointers typically keep track of the memory they point to, and may also be used to manage other resources, such as network connections and file handles. Smart pointers were first popularized in the programming language C++ during the first half of the 1990s as rebuttal to criticisms of C++'s lack of automatic garbage collection._
+{{< /admonition  >}}
+
+
+스마트 포인터가 일반적인 구조체와 구분되는 특성은 바로 `Deref`, `Drop` 트레잇을 구현한다는 것입니다.
+
+- `Deref`: 스마트 포인터 구조체의 인스턴스가 참조자처럼 동작하도록 하여 참조자나 스마트 포인터 둘 중 하나와 함께 작동하는 코드를 작성하게 해줍니다.
+- `Drop`: 스마트 포인터의 인스턴스가 스코프 밖으로 벗어났을 때, 실행되는 코드
+
+표준 라이브러리에는 가장 대표적으로 아래의 스마트 포인터들이 있습니다.
+
+- `Box<T>`: 값을 `힙`에 할당
+- `Rc<T>`: Reference Counting 타입, 복수개의 소유권 가능하도록 함.
+- 빌림 규칙을 컴파일 타임 대신 런타임에 강제하는 타입인, `RefCell<T>`를 통해 접근 가능한 `Ref<T>`와 `RefMut<T>`
+
+
+## `Box<T>`
+> 데이터를 스택이 아닌 힙에 저장하도록 합니다.
+>
+> 스택 대신 힙에 저장한다는 점 외에는, 성능적인 오버헤드는 없습니다. (stack vs heap 자료구조에 상에서 성능 오버헤드를 뜻하는 듯)
+
+아래 3가지 경우에 자주 사용합니다.
+
+1. 컴파일 타임에 크기를 알 수 없는 타입을 갖고 있고, 정확한 사이즈를 알 필요가 있는 맥락 안에서 해당 타입의 값을 이용하고 싶을 때
+2. 커다란 데이터를 가지고 있고 소유권을 옮기고 싶지만 그렇게 했을 때 데이터가 복사되지 않을 것이라고 보장하기를 원할 때
+3. 어떤 값을 소유하고 이 값의 구체화된 타입을 알고 있기보다는 특정 트레잇을 구현한 타입이라는 점만 신경 쓰고 싶을 때 (`trait object` 17장)
+
+이번 장에서는 1번 상황을 설명합니다. 2번의 경우는 그저 stack에 여러개 올리기 부담스러울 정도로 큰 데이터 또는 copy가 일어날지 불명확할 떄 heap에 저장시킨다는 뜻입니다. 
+
+```rs
+{
+    let bx = Box::new(5);
+}
+```
+
+## Recursive type
+
+컴파일 타임에서, 러스트는 어떤 타입이 얼마나 많은 공간을 차지하는지를 알 필요가 있습니다. 컴파일 타임에는 크기를 알 수 없는 한 가지 타입이 바로 재귀적 타입 (recursive type)입니다.
+
+하지만 이때 재귀적 타입 정의 안에 Box를 사용하면 가능합니다.
+
+- without `Box`, 컴파일 에러
+
+```rs
+enum List {
+    Cons(i32, List),
+    Nil,
+}
+
+use List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1, Cons(2, Cons(3, Nil)));
+}
+```
+
+- with `Box`, 성공.
+
+```rs
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
+}
+
+use List::{Cons, Nil};
+
+fn main() {
+    let list = Cons(1,
+        Box::new(Cons(2,
+            Box::new(Cons(3,
+                Box::new(Nil))))));
+}
+```
+
+<center>
+
+![](/images/rust_box.svg)
+
+</center>
+
+
+## `Deref trait`
+
+`Deref` 트레잇을 구현한다는 것은, `dereference` operator(역참조 연산자) 즉 `*`의 동작을 커스터마이징 하는 것을 허용합니다.
+
+우선 다음은 일반적인 역참조 연산자 입니다.
+
+```rs
+fn main() {
+    let mut x = 5;
+    let y = &x;
+    assert_eq!(5, x);
+    assert_eq!(5, *y); // 역참조, deref
+}
+```
+
+### `Box<T>`를 참조자처럼 사용하기
+
+Box는 `Deref trait`를 구현하고 있기 때문에, 다음과 같이 동작할 수 있습니다.
+
+```rs
+fn main() {
+    let x = 5;
+    let y = Box::new(x);
+    assert_eq!(5, x);
+    assert_eq!(5, *y); // 역참조
+}
+```
+
+### 커스텀 Box 타입
+> deref를 지원하는 커스텀 box 타입
+
+```rs
+use std::ops::Deref;
+
+struct MyBox<T>(T);
+
+impl<T> MyBox<T> {
+    fn new(x: T) -> MyBox<T> {
+        MyBox(x)
+    }
+}
+
+impl<T> Deref for MyBox<T> {
+    type Target = T;
+
+    fn deref(&self) -> &T {
+        dbg!("deref is called");
+        &self.0 // 도대체 self.0이 뭘가르키는 거지....
+    }
+}
+
+
+fn main() {
+    let x = 5;
+    let y = MyBox::new(x);
+    
+    dbg!(*y); 
+    // "deref is called"
+    // *y = 5
+}
+```
+러스트는 `*y`를 뒤에서 다음과 같이 호출합니다.
+
+```rs
+*(y.deref());
+```
+
+### deref coercion (역참조 강제, 암묵적 역참조)
+
+
+> 역참조 강제란(암묵적 역참조) 우리가 특정 타입의 값에 대한 참조자를 함수 혹은 메소드의 인자로 넘기는 중 정의된 파라미터 타입에는 맞지 않을 때 자동적으로 발생합니다.
+
+Deref 트레잇을 구현한 타입은 컴파일러가 `암묵적 역참조`를 자동으로 처리해줍니다.
+
+- 암묵적 역참조
+```rs
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+fn main() {
+    let m = MyBox::new(String::from("Rust"));
+    hello(&m);
+}
+```
+
+- 만약 암묵적 역참조가 없다면
+
+```rs
+fn main() {
+    let m = MyBox::new(String::from("Rust"));
+    hello(&(*m)[..]);
+}
+```
+
+Deref 트레잇이 관련된 타입에 대해 정의될 때, 러스트는 해당 타입을 분석하여 파라미터의 타입에 맞는 참조자를 얻기 위해 필요한 수만큼의 Deref::deref를 사용할 것입니다. Deref::deref가 삽입될 필요가 있는 횟수는 컴파일 타임에 분석되므로, 역참조 강제의 이점을 얻는 데에 관해서 어떠한 런타임 페널티도 없습니다!
+
+### `Mutable reference`의 암묵적 역참조(deref coercion)
+
+불변 참조자에 대한 `*`를 오버 라이딩하기 위해 `Deref 트레잇`을 이용하는 방법과 비슷하게, 러스트는 가변 참조자에 대한 `*`를 오버 라이딩하기 위한 `DerefMut 트레잇`을 제공합니다.
+
+러스트 컴파일러는 다음 3가지 경우에 해당 하는 타입을 만나면 역참조 강제를 수행합니다.
+
+1. `T: Deref<Target=U`>일때 `&T`에서 `&U`로
+2. `T: DerefMut<Target=U>`일때 `&mut T`에서 `&mut U`로
+3. `T: Deref<Target=U>`일때 `&mut T`에서 `&U`로
+
+
+1번은 앞서 보았던 역참조 강제이며, 2번은 mut reference에서도 역참조 강제가 일어난다는 것을 뜻합니다.
+
+마지막 세 번째 경우는 좀 더 교묘합니다: 
+
+러스트는 가변 참조자를 불변 참조자로 강제할 수도 있습니다. 하지만 그 역은 불가능합니다: 불변 참조자는 가변 참조자로 결코 강제되지 않을 것입니다. 빌림 규칙 때문에, 만일 여러분이 가변 참조자를 가지고 있다면, 그 가변 참조자는 해당 데이터에 대한 유일한 참조자임에 틀림없습니다 (만일 그렇지 않다면, 그 프로그램은 컴파일되지 않을 것입니다). 가변 참조자를 불변 참조자로 변경하는 것은 결코 빌림 규칙을 깨트리지 않을 것입니다. 불변 참조자를 가변 참조자로 변경하는 것은 해당 데이터에 대한 단 하나의 불변 참조자가 있어야 한다는 요구를 하게 되고, 이는 빌림 규칙이 보장해줄 수 없습니다. 따라서, 러스트는 불변 참조자를 가변 참조자로 변경하는 것이 가능하다는 가정을 할 수 없습니다.
+
+## `Drop trait`
+## `Rc<T>`와 `레퍼런스 카운팅` 스마트 포인터
+## `RefCell<T`와 `내부 가변성` 패턴
+## reference cycle (순환참조)
