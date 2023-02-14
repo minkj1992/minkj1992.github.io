@@ -895,6 +895,139 @@ count after creating c = 3
 count after c goes out of scope = 2
 ```
 
+## `RefCell<T>`와 `내부 가변성` 패턴
 
-## `RefCell<T`와 `내부 가변성` 패턴
+`interior mutability`(내부 가변성)이란 어떤 데이터와 관련된 immutable reference가 있더라도, 여러분이 데이터를 변형할 수 있게 해주는 러스트의 디자인 패턴입니다. 보통 borrow rule에 의해서 이는 허용되지 않지만, `unsafe`코드를 사용하여 이를 우회할 수 있습니다.
+
+만약 우리가 런타임에 borrow rule을 따릇 것이라는 것을 보장할 수 있다면, 컴파일러가 이를 보장하지 못하더라도 내부 가변성 패턴을 이용하는 타입을 사용할 수 있습니다.
+
+- `unsafe 코드`는 안전한 API로 감싸져 있고, 외부에서는 여전히 불변하게 동작합니다.
+
+`RefCell<T>`는 대표적으로 내부 가변성(`interior mutability`)를 따르는 타입입니다.
+
+
+`Box<T>`, `Rc<T>`, 혹은 `RefCell<T>`을 선택하는 이유의 요점은 다음과 같습니다:
+
+- `Rc<T>`는 동일한 데이터에 대해 복수개의 소유자를 가능하게 합니다; `Box<T>`와 `RefCell<T>`은 단일 소유자만 갖습니다.
+- `Box<T>`는 컴파일 타임에 검사된 불변 혹은 가변 빌림을 허용합니다; `Rc<T>`는 오직 컴파일 타임에 검사된 불변 빌림만 허용합니다; `RefCell<T>`는 런타임에 검사된 불변 혹은 가변 빌림을 허용합니다.
+- `RefCell<T>`이 런타임에 검사된 가변 빌림을 허용하기 때문에, `RefCell<T>`이 불변일 때라도 `RefCell<T>` 내부의 값을 변경할 수 있습니다.
+
+
+- `RefCell<T>` 예시
+
+```rs
+pub trait Messenger {
+    fn send(&self, msg: &str);
+}
+
+pub struct LimitTracker<'a, T: 'a + Messenger> {
+    messenger: &'a T,
+    value: usize,
+    max: usize,
+}
+
+impl<'a, T> LimitTracker<'a, T>
+    where T: Messenger {
+    pub fn new(messenger: &T, max: usize) -> LimitTracker<T> {
+        LimitTracker {
+            messenger,
+            value: 0,
+            max,
+        }
+    }
+
+    pub fn set_value(&mut self, value: usize) {
+        self.value = value;
+
+        let percentage_of_max = self.value as f64 / self.max as f64;
+
+        if percentage_of_max >= 0.75 && percentage_of_max < 0.9 {
+            self.messenger.send("Warning: You've used up over 75% of your quota!");
+        } else if percentage_of_max >= 0.9 && percentage_of_max < 1.0 {
+            self.messenger.send("Urgent warning: You've used up over 90% of your quota!");
+        } else if percentage_of_max >= 1.0 {
+            self.messenger.send("Error: You are over your quota!");
+        }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::cell::RefCell;
+
+    struct MockMessenger {
+        sent_messages: RefCell<Vec<String>>, // 여기에서 사용되었다.
+    }
+
+    impl MockMessenger {
+        fn new() -> MockMessenger {
+            MockMessenger { sent_messages: RefCell::new(vec![]) }
+        }
+    }
+
+    impl Messenger for MockMessenger {
+        fn send(&self, message: &str) {
+            self.sent_messages.borrow_mut().push(String::from(message));
+        }
+    }
+
+    #[test]
+    fn it_sends_an_over_75_percent_warning_message() {
+        // --snip--
+
+        assert_eq!(mock_messenger.sent_messages.borrow().len(), 1);
+    }
+}
+```
+
+### Rc<T>와 RefCell<T>를 조합하여 가변 데이터의 복수 소유자 만들기
+
+**RefCell<T>를 사용하는 일반적인 방법은 Rc<T>와 함께 조합하는 것입니다.** 
+
+- Rc<T>이 어떤 데이터에 대해 복수의 소유자를 허용하지만, 그 데이터에 대한 불변 접근만 제공하는 것을 상기하세요. 
+- 만일 우리가 RefCell<T>을 들고 있는 Rc<T>를 갖는다면, 우리가 변경 가능하면서 복수의 소유자를 갖는 값을 가질 수 있습니다.
+
+우리가 어떤 리스트의 소유권을 공유하는 여러 개의 리스트를 가질 수 있도록 하기 위해 Rc<T>를 사용했던 cons 리스트 예제를 상기해보면, `Rc<T>`가 오직 불변의 값만을 가질 수 있기 때문에, 우리가 이들을 일단 만들면 리스트 안의 값들을 변경하는 것은 불가능했습니다. 
+
+이 리스트 안의 값을 변경하는 능력을 얻기 위해서 `RefCell<T>`을 추가해 봅시다.
+
+```rs
+#[derive(Debug)]
+enum List {
+    Cons(Rc<RefCell<i32>>, Rc<List>),
+    Nil,
+}
+
+use List::{Cons, Nil};
+use std::rc::Rc;
+use std::cell::RefCell;
+
+fn main() {
+    let value = Rc::new(RefCell::new(5));
+
+    let a = Rc::new(Cons(Rc::clone(&value), Rc::new(Nil)));
+
+    let b = Cons(Rc::new(RefCell::new(6)), Rc::clone(&a));
+    let c = Cons(Rc::new(RefCell::new(10)), Rc::clone(&a));
+
+    *value.borrow_mut() += 10;
+
+    println!("a after = {:?}", a);
+    println!("b after = {:?}", b);
+    println!("c after = {:?}", c);
+}
+```
+Cons 정의 내에 RefCell<T>를 사용함으로써 우리가 모든 리스트 내에 저장된 값을 변경할 수 있음을 보여줍니다.
+
+```
+a after = Cons(RefCell { value: 15 }, Nil)
+b after = Cons(RefCell { value: 6 }, Cons(RefCell { value: 15 }, Nil))
+c after = Cons(RefCell { value: 10 }, Cons(RefCell { value: 15 }, Nil))
+```
+
+이 기술은 매우 깔끔합니다! RefCell<T>을 이용함으로써, 우리는 표면상으로는 불변인 List를 갖고 있습니다. 하지만 우리는 내부 가변성 접근을 제공하여 우리가 원할때 데이터를 변경시킬 수 있는 RefCell<T> 내의 메소드를 사용할 수 있습니다. 빌림 규칙의 런타임 검사는 데이터 레이스로부터 우리를 지켜주고, 우리 데이터 구조의 이러한 유연성을 위해서 약간의 속도를 트레이드 오프 하는 것이 때때로 가치있습니다.
+
+표준 라이브러리는 내부 가변성을 제공하는 다른 타입을 가지고 있는데, 이를 테면 Cell<T>는 내부 값의 참조자를 주는 대신 값이 복사되어 Cell<T> 밖으로 나오는 점만 제외하면 비슷합니다. 또한 Mutex<T>가 있는데, 이는 스레드들을 건너가며 사용해도 안전한 내부 가변성을 제공합니다.
+
 ## reference cycle (순환참조)
