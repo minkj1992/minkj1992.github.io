@@ -748,6 +748,153 @@ Deref 트레잇이 관련된 타입에 대해 정의될 때, 러스트는 해당
 러스트는 가변 참조자를 불변 참조자로 강제할 수도 있습니다. 하지만 그 역은 불가능합니다: 불변 참조자는 가변 참조자로 결코 강제되지 않을 것입니다. 빌림 규칙 때문에, 만일 여러분이 가변 참조자를 가지고 있다면, 그 가변 참조자는 해당 데이터에 대한 유일한 참조자임에 틀림없습니다 (만일 그렇지 않다면, 그 프로그램은 컴파일되지 않을 것입니다). 가변 참조자를 불변 참조자로 변경하는 것은 결코 빌림 규칙을 깨트리지 않을 것입니다. 불변 참조자를 가변 참조자로 변경하는 것은 해당 데이터에 대한 단 하나의 불변 참조자가 있어야 한다는 요구를 하게 되고, 이는 빌림 규칙이 보장해줄 수 없습니다. 따라서, 러스트는 불변 참조자를 가변 참조자로 변경하는 것이 가능하다는 가정을 할 수 없습니다.
 
 ## `Drop trait`
+
+```rs
+struct CustomSmartPointer {
+    heap_data: String,
+}
+
+impl Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Drop CustomSmartPointer `{}`", self.heap_data);
+    }
+}
+
+fn main() {
+    let a = CustomSmartPointer {
+        heap_data: String::from("leoo"),
+    };
+    let b = CustomSmartPointer {
+        heap_data: String::from("wants to learn more loves."),
+    };
+
+    println!("CustomSmartPointers are created.");
+}
+
+// CustomSmartPointers are created.
+// Drop CustomSmartPointer `wants to learn more loves.`
+// Drop CustomSmartPointer `leoo`
+```
+
+- Drop 트레잇은 `prelude`에 포함되어 있으므로, 이를 가져오지 않아도 됩니다.
+- `drop 함수`의 본체는 여러분이 만든 타입의 인스턴스가 스코프 밖으로 벗어났을 때 실행시키고자 하는 어떠한 로직이라도 위치시킬 수 있는 곳입니다.
+- drop은 stack에 스택에 따라 처리되기 때문에, 최근에 선언된 스마트포인터일 수록 더 먼저 처리됩니다.
+
+
+일반적이지는 않지만 아주 가끔, 여러분은 **값을 일찍 정리하기를 원할 지도 모릅니다**. 한 가지 예는 락을 관리하는 스마트 포인터를 이용할 때입니다.
+
+단 러스트는 default로 `.drop()` 메서드(소멸자, `destructor`)가 호출되는 것을 허용하지 않습니다. 만약 명시적으로 drop을 일찍 시켜주고 싶다면 `std::mem::drop` 함수를 이용할 수 있습니다.
+
+std::mem::drop 함수는 Drop 트레잇 내에 있는 drop 메소드와 다릅니다. 우리가 일찍 버리도록 강제하길 원하는 값을 인자로 넘김으로써 이를 호출할 수 있습니다. 이 함수는 프렐루드에 포함되어 있습니다. 
+
+```rs
+fn main() {
+    let c = CustomSmartPointer { data: String::from("some data") };
+    println!("CustomSmartPointer created.");
+
+    // method가 아닌, 함수로 처리
+    drop(c);
+    println!("CustomSmartPointer dropped before the end of main.");
+}
+
+// CustomSmartPointer created.
+// Dropping CustomSmartPointer with data `some data`!
+// CustomSmartPointer dropped before the end of main.
+```
+
 ## `Rc<T>`와 `레퍼런스 카운팅` 스마트 포인터
+
+대부분의 경우에서, 소유권은 명확합니다: 여러분은 어떤 변수가 주어진 값을 소유하는지 정확히 압니다. 그러나, 하나의 값이 여러 개의 소유자를 가질 수도 있는 경우가 있습니다. 
+
+예를 들면, 그래프 데이터 구조에서, 여러 에지가 동일한 노드를 가리킬 수도 있고, 그 노드는 개념적으로 해당 노드를 가리키는 모든 에지들에 의해 소유됩니다. 노드는 어떠한 에지도 이를 가리키지 않을 때까지는 메모리 정리가 되어서는 안됩니다.
+
+- 복수 소유권을 가능하게 하기 위해서, 러스트는 `Rc<T>`라 불리우는 타입을 가지고 있습니다. 
+- 이 이름은 참조 카운팅 (`reference counting`) 의 약자입니다.
+- 이는 어떤 값이 계속 사용되는지 혹은 그렇지 않은지를 알기 위해 해당 값에 대한 참조자의 갯수를 계속 추적하는 것입니다.
+
+- before: `RC<T>`없이 소유권을 나눠가질 때: 컴파일 에러
+
+```rs
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
+}
+
+use List::{Cons, Nil};
+
+fn main() {
+    let a = Cons(5,
+        Box::new(Cons(10,
+            Box::new(Nil))));
+    let b = Cons(3, Box::new(a));
+    let c = Cons(4, Box::new(a));
+}
+```
+```
+error[E0382]: use of moved value: `a`
+  --> src/main.rs:13:30
+   |
+12 |     let b = Cons(3, Box::new(a));
+   |                              - value moved here
+13 |     let c = Cons(4, Box::new(a));
+   |                              ^ value used here after move
+   |
+   = note: move occurs because `a` has type `List`, which does not implement
+   the `Copy` trait
+```
+
+Cons variant는 이것이 가지고 있는 데이터를 소유하므로, 우리가 b리스트를 만들때, a는 b 안으로 이동되고 b는 a를 소유합니다. 그 뒤, c를 생성할 때 a를 다시 이용하는 시도를 할 경우, 이는 a가 이동되었으므로 허용되지 않습니다.
+
+우리는 Cons가 대신 참조자를 갖도록 정의를 변경할 수도 있지만, 그러면 라이프타임 파라미터를 명시해야 할 것입니다. 라이프타임 파라미터를 명시함으로써, 리스트 내의 모든 요소들이 최소한 전체 리스트만큼 오래 살아있도록 명시될 것입니다. 빌림 검사기는 예를 들면 `let a = Cons(10, &Nil);`을 컴파일되도록 하지 않게 할텐데, 이는 일시적인 Nil 값은 a가 그에 대한 참조자를 가질 수도 있는 시점 이전에 버려질 것이기 때문입니다.
+
+- after: `RC<T>`를 사용.
+
+```rs
+enum List {
+    Cons(i32, Rc<List>),
+    Nil,
+}
+
+use List::{Cons, Nil};
+use std::rc::Rc;
+
+fn main() {
+    let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
+    let b = Cons(3, Rc::clone(&a));
+    let c = Cons(4, Rc::clone(&a));
+}
+```
+
+- Rc<T>는 프렐루드에 포함되어 있지 않으므로 우리는 이를 가져오기 위해 `use std::rc::Rc`가 필요합니다.
+
+`Rc::clone(&a)` 보다는 `a.clone()`을 호출할 수도 있지만, 위의 경우 러스트의 관례는 `Rc::clone`를 이용하는 것입니다.
+
+`Rc::clone`의 구현체는 대부분의 타입들의 `clone` 구현체들이 하는 것처럼 모든 데이터의 깊은 복사 (deep copy) 를 만들지 않습니다. **`Rc::clone`의 호출은 오직 참조 카운트만 증가 시키는데, 이는 큰 시간이 들지 않습니다.** 
+
+이를 통해서 코드 내에서 성능 문제가 있어 문제가 될 부분들을 찾고 있다면, 깊은 복사 클론만 고려할 필요가 있고 Rc::clone 호출은 무시할 수 있습니다.
+
+- 레퍼런스 카운트 출력하기
+```rs
+fn main() {
+    let a = Rc::new(Cons(5, Rc::new(Cons(10, Rc::new(Nil)))));
+    println!("count after creating a = {}", Rc::strong_count(&a));
+    let b = Cons(3, Rc::clone(&a));
+    println!("count after creating b = {}", Rc::strong_count(&a));
+    {
+        let c = Cons(4, Rc::clone(&a));
+        println!("count after creating c = {}", Rc::strong_count(&a));
+    }
+    println!("count after c goes out of scope = {}", Rc::strong_count(&a));
+}
+```
+
+```
+count after creating a = 1
+count after creating b = 2
+count after creating c = 3
+count after c goes out of scope = 2
+```
+
+
 ## `RefCell<T`와 `내부 가변성` 패턴
 ## reference cycle (순환참조)
