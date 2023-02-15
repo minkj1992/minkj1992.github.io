@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/the_rust_programming_lang_part2/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-30T18:53:11+09:00" />
-<meta property="article:modified_time" content="2023-02-14T20:20:44+09:00" />
+<meta property="article:modified_time" content="2023-02-14T21:04:22+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  3149 ,
-        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang_part2\/","datePublished": "2023-01-30T18:53:11+09:00","dateModified": "2023-02-14T20:20:44+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  3920 ,
+        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang_part2\/","datePublished": "2023-01-30T18:53:11+09:00","dateModified": "2023-02-14T21:04:22+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">[Part2] The rust programming language</h1><h2 class="single-subtitle">The official Rust book</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-30">2023-01-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3149 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-30">2023-01-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3920 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;19 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -203,18 +203,13 @@
         <li><a href="#integration-test"><code>Integration test</code></a></li>
       </ul>
     </li>
-    <li><a href="#12-io-커맨드-라인-프로그램">12. I/O 커맨드 라인 프로그램</a></li>
-    <li><a href="#13-funtional-programming">13. Funtional Programming</a>
+  </ul>
+
+  <ul>
+    <li><a href="#131-closure">13.1 <code>Closure</code></a>
       <ul>
-        <li><a href="#131-closure">13.1 <code>Closure</code></a>
-          <ul>
-            <li><a href="#memoization-lazy-evaluation"><code>Memoization</code> (<code>lazy evaluation</code>)</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#iterator"><code>Iterator</code></a>
-      <ul>
+        <li><a href="#memoization-lazy-evaluation"><code>Memoization</code> (<code>lazy evaluation</code>)</a></li>
+        <li><a href="#iterator"><code>Iterator</code></a></li>
         <li><a href="#반복자를-소비하는-메서드들">반복자를 소비하는 메서드들</a></li>
         <li><a href="#다른-반복자를-생성하는-메서드들">다른 반복자를 생성하는 메서드들</a></li>
         <li><a href="#성능-비교하기-루프-vs-반복자">성능 비교하기: 루프 vs. 반복자</a></li>
@@ -223,9 +218,12 @@
   </ul>
 
   <ul>
-    <li><a href="#boxt"><code>Box&lt;T&gt;</code></a></li>
-    <li><a href="#recursive-type">Recursive type</a></li>
-    <li><a href="#deref-trait"><code>Deref trait</code></a>
+    <li><a href="#151-boxt">15.1 <code>Box&lt;T&gt;</code></a>
+      <ul>
+        <li><a href="#recursive-type">Recursive type</a></li>
+      </ul>
+    </li>
+    <li><a href="#152-deref-trait">15.2 <code>Deref trait</code></a>
       <ul>
         <li><a href="#boxt를-참조자처럼-사용하기"><code>Box&lt;T&gt;</code>를 참조자처럼 사용하기</a></li>
         <li><a href="#커스텀-box-타입">커스텀 Box 타입</a></li>
@@ -233,14 +231,18 @@
         <li><a href="#mutable-reference의-암묵적-역참조deref-coercion"><code>Mutable reference</code>의 암묵적 역참조(deref coercion)</a></li>
       </ul>
     </li>
-    <li><a href="#drop-trait"><code>Drop trait</code></a></li>
-    <li><a href="#rct와-레퍼런스-카운팅-스마트-포인터"><code>Rc&lt;T&gt;</code>와 <code>레퍼런스 카운팅</code> 스마트 포인터</a></li>
-    <li><a href="#refcellt와-내부-가변성-패턴"><code>RefCell&lt;T&gt;</code>와 <code>내부 가변성</code> 패턴</a>
+    <li><a href="#153-drop-trait">15.3 <code>Drop trait</code></a></li>
+    <li><a href="#154-rct와-레퍼런스-카운팅-스마트-포인터">15.4 <code>Rc&lt;T&gt;</code>와 <code>레퍼런스 카운팅</code> 스마트 포인터</a></li>
+    <li><a href="#155-refcellt와-내부-가변성-패턴">15.5 <code>RefCell&lt;T&gt;</code>와 <code>내부 가변성</code> 패턴</a>
       <ul>
         <li><a href="#rct와-refcellt를-조합하여-가변-데이터의-복수-소유자-만들기">Rc<T>와 RefCell<T>를 조합하여 가변 데이터의 복수 소유자 만들기</a></li>
       </ul>
     </li>
-    <li><a href="#reference-cycle-순환참조">reference cycle (순환참조)</a></li>
+    <li><a href="#155-reference-cycle-순환참조">15.5 reference cycle (순환참조)</a>
+      <ul>
+        <li><a href="#순환-참조-방지하기">순환 참조 방지하기</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p><a href="https://minkj1992.github.io/the_rust_programming_lang/" target="_blank" rel="noopener noreffer">Part1. Rust 프로그래밍</a>
@@ -648,15 +650,15 @@
 </span></span><span class="line"><span class="cl">tests/
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="12-io-커맨드-라인-프로그램">12. I/O 커맨드 라인 프로그램</h2>
+</div><h1 id="12-io-커맨드-라인-프로그램">12. I/O 커맨드 라인 프로그램</h1>
 <p><a href="https://github.com/minkj1992/rust_playground/tree/main/cli" target="_blank" rel="noopener noreffer">CLI repo</a>
 </p>
-<h2 id="13-funtional-programming">13. Funtional Programming</h2>
+<h1 id="13-funtional-programming">13. Funtional Programming</h1>
 <ul>
 <li><code>Closure</code></li>
 <li><code>Iterator</code></li>
 </ul>
-<h3 id="131-closure">13.1 <code>Closure</code></h3>
+<h2 id="131-closure">13.1 <code>Closure</code></h2>
 <ul>
 <li>simple define closure</li>
 </ul>
@@ -839,7 +841,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="memoization-lazy-evaluation"><code>Memoization</code> (<code>lazy evaluation</code>)</h4>
+</div><h3 id="memoization-lazy-evaluation"><code>Memoization</code> (<code>lazy evaluation</code>)</h3>
 <blockquote>
 <p>with <code>Fn trait</code></p>
 </blockquote>
@@ -912,7 +914,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="iterator"><code>Iterator</code></h2>
+</div><h3 id="iterator"><code>Iterator</code></h3>
 <ul>
 <li>모든 iterator는 lazy하게 evaluation합니다. (python의 <code>range</code>와 같다.)</li>
 </ul>
@@ -1185,7 +1187,7 @@
 <li><code>Rc&lt;T&gt;</code>: Reference Counting 타입, 복수개의 소유권 가능하도록 함.</li>
 <li>빌림 규칙을 컴파일 타임 대신 런타임에 강제하는 타입인, <code>RefCell&lt;T&gt;</code>를 통해 접근 가능한 <code>Ref&lt;T&gt;</code>와 <code>RefMut&lt;T&gt;</code></li>
 </ul>
-<h2 id="boxt"><code>Box&lt;T&gt;</code></h2>
+<h2 id="151-boxt">15.1 <code>Box&lt;T&gt;</code></h2>
 <blockquote>
 <p>데이터를 스택이 아닌 힙에 저장하도록 합니다.</p>
 <p>스택 대신 힙에 저장한다는 점 외에는, 성능적인 오버헤드는 없습니다. (stack vs heap 자료구조에 상에서 성능 오버헤드를 뜻하는 듯)</p>
@@ -1209,7 +1211,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="recursive-type">Recursive type</h2>
+</div><h3 id="recursive-type">Recursive type</h3>
 <p>컴파일 타임에서, 러스트는 어떤 타입이 얼마나 많은 공간을 차지하는지를 알 필요가 있습니다. 컴파일 타임에는 크기를 알 수 없는 한 가지 타입이 바로 재귀적 타입 (recursive type)입니다.</p>
 <p>하지만 이때 재귀적 타입 정의 안에 Box를 사용하면 가능합니다.</p>
 <ul>
@@ -1286,7 +1288,7 @@
         alt="/images/rust_box.svg"
         title="/images/rust_box.svg" /></p>
 </center>
-<h2 id="deref-trait"><code>Deref trait</code></h2>
+<h2 id="152-deref-trait">15.2 <code>Deref trait</code></h2>
 <p><code>Deref</code> 트레잇을 구현한다는 것은, <code>dereference</code> operator(역참조 연산자) 즉 <code>*</code>의 동작을 커스터마이징 하는 것을 허용합니다.</p>
 <p>우선 다음은 일반적인 역참조 연산자 입니다.</p>
 <div class="highlight"><div class="chroma">
@@ -1461,7 +1463,7 @@
 <p>1번은 앞서 보았던 역참조 강제이며, 2번은 mut reference에서도 역참조 강제가 일어난다는 것을 뜻합니다.</p>
 <p>마지막 세 번째 경우는 좀 더 교묘합니다:</p>
 <p>러스트는 가변 참조자를 불변 참조자로 강제할 수도 있습니다. 하지만 그 역은 불가능합니다: 불변 참조자는 가변 참조자로 결코 강제되지 않을 것입니다. 빌림 규칙 때문에, 만일 여러분이 가변 참조자를 가지고 있다면, 그 가변 참조자는 해당 데이터에 대한 유일한 참조자임에 틀림없습니다 (만일 그렇지 않다면, 그 프로그램은 컴파일되지 않을 것입니다). 가변 참조자를 불변 참조자로 변경하는 것은 결코 빌림 규칙을 깨트리지 않을 것입니다. 불변 참조자를 가변 참조자로 변경하는 것은 해당 데이터에 대한 단 하나의 불변 참조자가 있어야 한다는 요구를 하게 되고, 이는 빌림 규칙이 보장해줄 수 없습니다. 따라서, 러스트는 불변 참조자를 가변 참조자로 변경하는 것이 가능하다는 가정을 할 수 없습니다.</p>
-<h2 id="drop-trait"><code>Drop trait</code></h2>
+<h2 id="153-drop-trait">15.3 <code>Drop trait</code></h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1554,7 +1556,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1">// CustomSmartPointer dropped before the end of main.
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="rct와-레퍼런스-카운팅-스마트-포인터"><code>Rc&lt;T&gt;</code>와 <code>레퍼런스 카운팅</code> 스마트 포인터</h2>
+</div><h2 id="154-rct와-레퍼런스-카운팅-스마트-포인터">15.4 <code>Rc&lt;T&gt;</code>와 <code>레퍼런스 카운팅</code> 스마트 포인터</h2>
 <p>대부분의 경우에서, 소유권은 명확합니다: 여러분은 어떤 변수가 주어진 값을 소유하는지 정확히 압니다. 그러나, 하나의 값이 여러 개의 소유자를 가질 수도 있는 경우가 있습니다.</p>
 <p>예를 들면, 그래프 데이터 구조에서, 여러 에지가 동일한 노드를 가리킬 수도 있고, 그 노드는 개념적으로 해당 노드를 가리키는 모든 에지들에 의해 소유됩니다. 노드는 어떠한 에지도 이를 가리키지 않을 때까지는 메모리 정리가 되어서는 안됩니다.</p>
 <ul>
@@ -1719,7 +1721,7 @@
 </span></span><span class="line"><span class="cl">count after c goes out of scope = 2
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="refcellt와-내부-가변성-패턴"><code>RefCell&lt;T&gt;</code>와 <code>내부 가변성</code> 패턴</h2>
+</div><h2 id="155-refcellt와-내부-가변성-패턴">15.5 <code>RefCell&lt;T&gt;</code>와 <code>내부 가변성</code> 패턴</h2>
 <p><code>interior mutability</code>(내부 가변성)이란 어떤 데이터와 관련된 immutable reference가 있더라도, 여러분이 데이터를 변형할 수 있게 해주는 러스트의 디자인 패턴입니다. 보통 borrow rule에 의해서 이는 허용되지 않지만, <code>unsafe</code>코드를 사용하여 이를 우회할 수 있습니다.</p>
 <p>만약 우리가 런타임에 borrow rule을 따릇 것이라는 것을 보장할 수 있다면, 컴파일러가 이를 보장하지 못하더라도 내부 가변성 패턴을 이용하는 타입을 사용할 수 있습니다.</p>
 <ul>
@@ -1950,12 +1952,394 @@
 </div>
 </div><p>이 기술은 매우 깔끔합니다! RefCell<T>을 이용함으로써, 우리는 표면상으로는 불변인 List를 갖고 있습니다. 하지만 우리는 내부 가변성 접근을 제공하여 우리가 원할때 데이터를 변경시킬 수 있는 RefCell<T> 내의 메소드를 사용할 수 있습니다. 빌림 규칙의 런타임 검사는 데이터 레이스로부터 우리를 지켜주고, 우리 데이터 구조의 이러한 유연성을 위해서 약간의 속도를 트레이드 오프 하는 것이 때때로 가치있습니다.</p>
 <p>표준 라이브러리는 내부 가변성을 제공하는 다른 타입을 가지고 있는데, 이를 테면 Cell<T>는 내부 값의 참조자를 주는 대신 값이 복사되어 Cell<T> 밖으로 나오는 점만 제외하면 비슷합니다. 또한 Mutex<T>가 있는데, 이는 스레드들을 건너가며 사용해도 안전한 내부 가변성을 제공합니다.</p>
-<h2 id="reference-cycle-순환참조">reference cycle (순환참조)</h2></div><div class="post-footer" id="post-footer">
+<h2 id="155-reference-cycle-순환참조">15.5 reference cycle (순환참조)</h2>
+<p>러스트의 memory safety(memory leak 안정보장)은 뜻하지 않게 해제 되지 않는 메모리 생성을 힘들게 하지만, <code>Rc&lt;T&gt;</code>, <code>RefCell&lt;T&gt;</code> 처럼 메모리 릭을 허용하는 것이 있다는 것을 알 수 있습니다.</p>
+<p>즉 아이템들 끼리 서로를 순환 참조하는 참조자를 만드는 것이 가능합니다. 이로 인해 메모리릭이 발생되는데, 서로 참조하는 cycle에서 reference count는 결코 0이 되지 않을 것이고, 그렇게 되면 해당 값들은 버려지지 않게 됩니다.</p>
+<ul>
+<li>순환 참조가 발생하는 코드</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cell</span>::<span class="n">RefCell</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">rc</span>::<span class="n">Rc</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">List</span>::<span class="p">{</span><span class="n">Cons</span><span class="p">,</span><span class="w"> </span><span class="n">Nil</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[derive(Debug)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">enum</span> <span class="nc">List</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">Rc</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&gt;&gt;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Nil</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">tail</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;&amp;</span><span class="n">RefCell</span><span class="o">&lt;</span><span class="n">Rc</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&gt;&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="o">*</span><span class="bp">self</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Cons</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="k">ref</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">item</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">Nil</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">None</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">custom_print</span><span class="p">(</span><span class="n">name</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">l</span>: <span class="kp">&amp;</span><span class="nc">Rc</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;### About {name} ###&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;rc count = {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">strong_count</span><span class="p">(</span><span class="o">&amp;</span><span class="n">l</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;next block = {:?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">l</span><span class="p">.</span><span class="n">tail</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Cons</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="n">Rc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Nil</span><span class="p">))));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">custom_print</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Cons</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="n">Rc</span>::<span class="n">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">))));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">custom_print</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">custom_print</span><span class="p">(</span><span class="s">&#34;b&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// reference cycle point (memory leak);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="c1">// a -&gt; b;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">link</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">tail</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">*</span><span class="n">link</span><span class="p">.</span><span class="n">borrow_mut</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// thread &#39;main&#39; has overflowed its stack
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="c1">// fatal runtime error: stack overflow
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="n">custom_print</span><span class="p">(</span><span class="s">&#34;a&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">custom_print</span><span class="p">(</span><span class="s">&#34;b&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>[5, Nil]를 가진 리스트 a를 만든 뒤, [10, a]를 가진 리스트 b를 생성하였습니다.
+이후 <code>borrow_mut()</code>를 사용해 a의 tail인 Nil이 b로 변경되도록 하였습니다.</p>
+<ul>
+<li><code>a</code>: [5, b]</li>
+<li><code>b</code>: [10, a]</li>
+</ul>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/rust_reference_cycle.svg"
+        data-srcset="/images/rust_reference_cycle.svg, /images/rust_reference_cycle.svg 1.5x, /images/rust_reference_cycle.svg 2x"
+        data-sizes="auto"
+        alt="/images/rust_reference_cycle.svg"
+        title="/images/rust_reference_cycle.svg" /></p>
+</center>
+<p>순환참조에 의한 메모리릭 문제는 러스트 컴파일러에 기대어서는 안되며 테스트, 코드리뷰 등으로 파악해야 하는 논리적인 에러입니다.</p>
+<p>순환참조를 피하는 다른 해결책으로는 각 인스턴스들의 <code>그래프</code>에 따라서 소유권이 필요한 노드와 그렇지 않은 노드를 파악해서 끊어주면 됩니다.</p>
+<h3 id="순환-참조-방지하기">순환 참조 방지하기</h3>
+<blockquote>
+<p><code>Rc&lt;T&gt;</code>를 <code>Weak&lt;T&gt;</code>로 변경하기</p>
+</blockquote>
+<ul>
+<li><code>Rc::downgrade()</code>: 참조자(reference)를 weak reference(<code>Weak&lt;T&gt;</code>로 변경시킵니다.</li>
+</ul>
+<p><code>Weak&lt;T&gt;</code> 타입의 스마트 포인터는 <code>clone()</code>이 호출될 시, Rc<T>인스턴스의 strong_count를 +=1 시키는 것이 아니라, <code>weak_count</code>라는 필드를 1 증가시킵니다.</p>
+<p>weak_count와 strong_count의 차이점 즉, Weak<T>과 Rc<T>의 차이점은</p>
+<ul>
+<li><code>Rc&lt;T&gt;</code>가 제거되기(<code>free</code>) 위해서는 <code>strong_count == 0</code>이어야 하지만</li>
+<li><code>Weak&lt;T&gt;</code>는 제거되기 위해서 <code>weak_count</code>가 0일 필요가 없습니다.</li>
+</ul>
+<p><code>강한 참조</code>는 여러분이 <code>Rc&lt;T&gt;</code> 인스턴스의 소유권을 공유할 수 있는 방법입니다. <strong>약한 참조는 소유권 관계를 표현하지 않습니다.</strong> (<code>Weak&lt;T&gt;</code>)</p>
+<p>그렇기 때문에 <code>Weak&lt;T&gt;</code>가 참조하고 있는 값은 이미 버려져 있을지도 모릅니다. <code>Weak&lt;T&gt;</code>가 가리키고 있는 값을 가지고 어떤 일을 하기 위해서는, 반드시 그 전에 참조하고 있는 값의 존재여부를 확인해야 합니다.</p>
+<p>이를 위해서 <code>Weak&lt;T&gt;</code>의 <code>.upgrade()</code> 메소드를 호출합니다.
+이 메소드는 <code>Option&lt;Rc&lt;T&gt;&gt;</code>를 반환할 것이고, <code>Some</code>이 return된다면 값이 있다는 것이며, None의 경우네는 값이 free된 경우입니다.</p>
+<p>아래는 Weak<T>를 활용해 <code>트리 데이터: 자식 노드를 가진 Node</code>를 만들어 보겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cell</span>::<span class="n">RefCell</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">rc</span>::<span class="n">Rc</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[derive(Debug)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">struct</span> <span class="nc">Node</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">value</span>: <span class="kt">i32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">children</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Rc</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;&gt;&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">leaf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">value</span>: <span class="mi">3</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">children</span>: <span class="nc">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="fm">vec!</span><span class="p">[]),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">value</span>: <span class="mi">5</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">children</span>: <span class="nc">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="fm">vec!</span><span class="p">[</span><span class="n">Rc</span>::<span class="n">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">leaf</span><span class="p">)]),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>dbg!(branch);</code> 결과값</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[src/main.rs:21] branch = Node {
+</span></span><span class="line"><span class="cl">    value: 5,
+</span></span><span class="line"><span class="cl">    children: RefCell {
+</span></span><span class="line"><span class="cl">        value: [
+</span></span><span class="line"><span class="cl">            Node {
+</span></span><span class="line"><span class="cl">                value: 3,
+</span></span><span class="line"><span class="cl">                children: RefCell {
+</span></span><span class="line"><span class="cl">                    value: [],
+</span></span><span class="line"><span class="cl">                },
+</span></span><span class="line"><span class="cl">            },
+</span></span><span class="line"><span class="cl">        ],
+</span></span><span class="line"><span class="cl">    },
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이를 통해 branch는 leaf에 접근가능하게 되었으며, leaf는 2개의 strong reference count를 가지게 되었습니다. 다음으로 leaf가 branch에 접근가능하도록 코드를 수정 해보겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cell</span>::<span class="n">RefCell</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">rc</span>::<span class="p">{</span><span class="n">Rc</span><span class="p">,</span><span class="w"> </span><span class="n">Weak</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[derive(Debug)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">struct</span> <span class="nc">Node</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">value</span>: <span class="kt">i32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">parent</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="n">Weak</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">children</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">Rc</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;&gt;&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">generate_empty_node</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">RefCell</span><span class="o">&lt;</span><span class="n">Weak</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="n">Weak</span>::<span class="n">new</span><span class="p">())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">leaf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">value</span>: <span class="mi">3</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">parent</span>: <span class="nc">generate_empty_node</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">children</span>: <span class="nc">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="fm">vec!</span><span class="p">[]),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// leaf parent = None
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;leaf parent = {:?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">leaf</span><span class="p">.</span><span class="n">parent</span><span class="p">.</span><span class="n">borrow</span><span class="p">().</span><span class="n">upgrade</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">value</span>: <span class="mi">5</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">parent</span>: <span class="nc">generate_empty_node</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">children</span>: <span class="nc">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="fm">vec!</span><span class="p">[</span><span class="n">Rc</span>::<span class="n">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">leaf</span><span class="p">)]),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// link to parent
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="o">*</span><span class="n">leaf</span><span class="p">.</span><span class="n">parent</span><span class="p">.</span><span class="n">borrow_mut</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">downgrade</span><span class="p">(</span><span class="o">&amp;</span><span class="n">branch</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// leaf parent = Some(Node { value: 5, parent: RefCell { value: (Weak) }, &lt;- branch 자신
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="c1">// children: RefCell { value: [Node { value: 3, parent: RefCell { value: (Weak) }, &lt;- leaf
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="c1">// children: RefCell { value: [] } }] } }) &lt;- leaf의 children
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;leaf parent = {:?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">leaf</span><span class="p">.</span><span class="n">parent</span><span class="p">.</span><span class="n">borrow</span><span class="p">().</span><span class="n">upgrade</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>leaf 노드가 branch를 parent로 가리키도록 하였습니다. 다음으로 아래 custom print함수를 사용해, weak count와 strong count 갯수를 확인해보겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">print_node</span><span class="p">(</span><span class="n">node</span>: <span class="kp">&amp;</span><span class="nc">Rc</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="s">&#34;value = {} ,strong = {}, weak = {}&#34;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">node</span><span class="p">.</span><span class="n">value</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Rc</span>::<span class="n">strong_count</span><span class="p">(</span><span class="n">node</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Rc</span>::<span class="n">weak_count</span><span class="p">(</span><span class="n">node</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">leaf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">value</span>: <span class="mi">3</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">parent</span>: <span class="nc">generate_empty_node</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">children</span>: <span class="nc">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="fm">vec!</span><span class="p">[]),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">print_node</span><span class="p">(</span><span class="o">&amp;</span><span class="n">leaf</span><span class="p">);</span><span class="w"> </span><span class="c1">// value = 3 ,strong = 1, weak = 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">value</span>: <span class="mi">5</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">parent</span>: <span class="nc">generate_empty_node</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">children</span>: <span class="nc">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="fm">vec!</span><span class="p">[</span><span class="n">Rc</span>::<span class="n">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">leaf</span><span class="p">)]),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="c1">// link to parent
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="o">*</span><span class="n">leaf</span><span class="p">.</span><span class="n">parent</span><span class="p">.</span><span class="n">borrow_mut</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">downgrade</span><span class="p">(</span><span class="o">&amp;</span><span class="n">branch</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">print_node</span><span class="p">(</span><span class="o">&amp;</span><span class="n">branch</span><span class="p">);</span><span class="w"> </span><span class="c1">// value = 5 ,strong = 1, weak = 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="n">print_node</span><span class="p">(</span><span class="o">&amp;</span><span class="n">leaf</span><span class="p">);</span><span class="w"> </span><span class="c1">// value = 3 ,strong = 2, weak = 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// leaf parent = None
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;leaf parent = {:?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">leaf</span><span class="p">.</span><span class="n">parent</span><span class="p">.</span><span class="n">borrow</span><span class="p">().</span><span class="n">upgrade</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">print_node</span><span class="p">(</span><span class="o">&amp;</span><span class="n">leaf</span><span class="p">);</span><span class="w"> </span><span class="c1">// value = 3 ,strong = 1, weak = 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>leaf 노드는 내부 scope에 정의된 <code>branch</code>를 parent로 하였고, 이에대한 참조를 weak reference로 해두었기 때문에 <code>branch</code>는 scope를 벗어날 때 free됩니다. (strong count가 0).</p>
+<p>이때 branch는 <code>weak count = 1</code>인 leaf의 weak reference를 가지고 있지만 이는 free에는 어떤 영향도 주지 않습니다. 이를 통해 어떠한 메모리 릭도 발생되지 않습니다.</p>
+<p><code>leaf parent = None</code>을 보시면, 스코프 끝 이후에 leaf의 부모에 접근을 시도하였기 때문에 <code>None</code>이 반환됩니다.</p>
+<p>참조 카운트들과 버리는 값들을 관리하는 모든 로직은 Rc<T>와 Weak<T>, 그리고 이들의 Drop 트레잇에 대한 구현부에 만들어져 있습니다. 자식으로부터 부모로의 관계가 Node의 정의 내에서 Weak<T> 참조자로 되어야 함을 특정함으로서, 여러분은 순환 참조와 메모리 릭을 만들지 않고도 자식 노드를 가리키는 부모 노드 혹은 그 반대의 것을 가지게 될 수 있습니다.</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-02-14&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/61f3fb68c9fd51ddc55074cab078ed3161c0b269" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 61f3fb68c9fd51ddc55074cab078ed3161c0b269: rebuilding site Tue Feb 14 20:20:43 KST 2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>61f3fb6</a></span>
+                <span>Updated on 2023-02-14&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/30183c4bf982d6e748720082a37494c6d5da983f" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 30183c4bf982d6e748720082a37494c6d5da983f: rebuilding site Tue Feb 14 21:04:22 KST 2023">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>30183c4</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

@@ -251,17 +251,17 @@ tests/
 ```
 
 
-## 12. I/O 커맨드 라인 프로그램
+# 12. I/O 커맨드 라인 프로그램
 
 [CLI repo](https://github.com/minkj1992/rust_playground/tree/main/cli)
 
-## 13. Funtional Programming
+# 13. Funtional Programming
 
 - `Closure`
 - `Iterator`
 
 
-### 13.1 `Closure`
+## 13.1 `Closure`
 - simple define closure
 
 ```rs
@@ -355,7 +355,7 @@ fn main() {
     );
 }
 ```
-#### `Memoization` (`lazy evaluation`)
+### `Memoization` (`lazy evaluation`)
 > with `Fn trait`
 
 각 클로저 인스턴스는 자신의 유일한 익명 타입을 갖습니다: 즉, 두 클로저가 동일한 타입 서명을 갖더라도 그들의 타입은 여전히 다른 것으로 간주 됩니다.
@@ -396,7 +396,7 @@ where
 
 ```
 
-## `Iterator`
+### `Iterator`
 
 - 모든 iterator는 lazy하게 evaluation합니다. (python의 `range`와 같다.)
 
@@ -568,7 +568,7 @@ _Smart pointers typically keep track of the memory they point to, and may also b
 - 빌림 규칙을 컴파일 타임 대신 런타임에 강제하는 타입인, `RefCell<T>`를 통해 접근 가능한 `Ref<T>`와 `RefMut<T>`
 
 
-## `Box<T>`
+## 15.1 `Box<T>`
 > 데이터를 스택이 아닌 힙에 저장하도록 합니다.
 >
 > 스택 대신 힙에 저장한다는 점 외에는, 성능적인 오버헤드는 없습니다. (stack vs heap 자료구조에 상에서 성능 오버헤드를 뜻하는 듯)
@@ -587,7 +587,7 @@ _Smart pointers typically keep track of the memory they point to, and may also b
 }
 ```
 
-## Recursive type
+### Recursive type
 
 컴파일 타임에서, 러스트는 어떤 타입이 얼마나 많은 공간을 차지하는지를 알 필요가 있습니다. 컴파일 타임에는 크기를 알 수 없는 한 가지 타입이 바로 재귀적 타입 (recursive type)입니다.
 
@@ -633,7 +633,7 @@ fn main() {
 </center>
 
 
-## `Deref trait`
+## 15.2 `Deref trait`
 
 `Deref` 트레잇을 구현한다는 것은, `dereference` operator(역참조 연산자) 즉 `*`의 동작을 커스터마이징 하는 것을 허용합니다.
 
@@ -747,7 +747,7 @@ Deref 트레잇이 관련된 타입에 대해 정의될 때, 러스트는 해당
 
 러스트는 가변 참조자를 불변 참조자로 강제할 수도 있습니다. 하지만 그 역은 불가능합니다: 불변 참조자는 가변 참조자로 결코 강제되지 않을 것입니다. 빌림 규칙 때문에, 만일 여러분이 가변 참조자를 가지고 있다면, 그 가변 참조자는 해당 데이터에 대한 유일한 참조자임에 틀림없습니다 (만일 그렇지 않다면, 그 프로그램은 컴파일되지 않을 것입니다). 가변 참조자를 불변 참조자로 변경하는 것은 결코 빌림 규칙을 깨트리지 않을 것입니다. 불변 참조자를 가변 참조자로 변경하는 것은 해당 데이터에 대한 단 하나의 불변 참조자가 있어야 한다는 요구를 하게 되고, 이는 빌림 규칙이 보장해줄 수 없습니다. 따라서, 러스트는 불변 참조자를 가변 참조자로 변경하는 것이 가능하다는 가정을 할 수 없습니다.
 
-## `Drop trait`
+## 15.3 `Drop trait`
 
 ```rs
 struct CustomSmartPointer {
@@ -802,7 +802,7 @@ fn main() {
 // CustomSmartPointer dropped before the end of main.
 ```
 
-## `Rc<T>`와 `레퍼런스 카운팅` 스마트 포인터
+## 15.4 `Rc<T>`와 `레퍼런스 카운팅` 스마트 포인터
 
 대부분의 경우에서, 소유권은 명확합니다: 여러분은 어떤 변수가 주어진 값을 소유하는지 정확히 압니다. 그러나, 하나의 값이 여러 개의 소유자를 가질 수도 있는 경우가 있습니다. 
 
@@ -895,7 +895,7 @@ count after creating c = 3
 count after c goes out of scope = 2
 ```
 
-## `RefCell<T>`와 `내부 가변성` 패턴
+## 15.5 `RefCell<T>`와 `내부 가변성` 패턴
 
 `interior mutability`(내부 가변성)이란 어떤 데이터와 관련된 immutable reference가 있더라도, 여러분이 데이터를 변형할 수 있게 해주는 러스트의 디자인 패턴입니다. 보통 borrow rule에 의해서 이는 허용되지 않지만, `unsafe`코드를 사용하여 이를 우회할 수 있습니다.
 
@@ -1030,4 +1030,228 @@ c after = Cons(RefCell { value: 10 }, Cons(RefCell { value: 15 }, Nil))
 
 표준 라이브러리는 내부 가변성을 제공하는 다른 타입을 가지고 있는데, 이를 테면 Cell<T>는 내부 값의 참조자를 주는 대신 값이 복사되어 Cell<T> 밖으로 나오는 점만 제외하면 비슷합니다. 또한 Mutex<T>가 있는데, 이는 스레드들을 건너가며 사용해도 안전한 내부 가변성을 제공합니다.
 
-## reference cycle (순환참조)
+## 15.5 reference cycle (순환참조)
+
+러스트의 memory safety(memory leak 안정보장)은 뜻하지 않게 해제 되지 않는 메모리 생성을 힘들게 하지만, `Rc<T>`, `RefCell<T>` 처럼 메모리 릭을 허용하는 것이 있다는 것을 알 수 있습니다. 
+
+즉 아이템들 끼리 서로를 순환 참조하는 참조자를 만드는 것이 가능합니다. 이로 인해 메모리릭이 발생되는데, 서로 참조하는 cycle에서 reference count는 결코 0이 되지 않을 것이고, 그렇게 되면 해당 값들은 버려지지 않게 됩니다.
+
+- 순환 참조가 발생하는 코드
+
+```rs
+use std::cell::RefCell;
+use std::rc::Rc;
+use List::{Cons, Nil};
+
+#[derive(Debug)]
+enum List {
+    Cons(i32, RefCell<Rc<List>>),
+    Nil,
+}
+
+impl List {
+    fn tail(&self) -> Option<&RefCell<Rc<List>>> {
+        match *self {
+            Cons(_, ref item) => Some(item),
+            Nil => None,
+        }
+    }
+}
+
+fn custom_print(name: &str, l: &Rc<List>) {
+    println!("### About {name} ###");
+    println!("rc count = {}", Rc::strong_count(&l));
+    println!("next block = {:?}", l.tail());
+}
+
+fn main() {
+    let a = Rc::new(Cons(5, RefCell::new(Rc::new(Nil))));
+    custom_print("a", &a);
+
+    let b = Rc::new(Cons(10, RefCell::new(Rc::clone(&a))));
+    custom_print("a", &a);
+    custom_print("b", &b);
+
+    // reference cycle point (memory leak);
+    // a -> b;
+    if let Some(link) = a.tail() {
+        *link.borrow_mut() = Rc::clone(&b);
+    }
+    // thread 'main' has overflowed its stack
+    // fatal runtime error: stack overflow
+    custom_print("a", &a);
+    custom_print("b", &b);
+}
+```
+
+[5, Nil]를 가진 리스트 a를 만든 뒤, [10, a]를 가진 리스트 b를 생성하였습니다.
+이후 `borrow_mut()`를 사용해 a의 tail인 Nil이 b로 변경되도록 하였습니다.
+
+- `a`: [5, b]
+- `b`: [10, a]
+
+<center>
+
+![](/images/rust_reference_cycle.svg)
+
+</center>
+
+순환참조에 의한 메모리릭 문제는 러스트 컴파일러에 기대어서는 안되며 테스트, 코드리뷰 등으로 파악해야 하는 논리적인 에러입니다.
+
+순환참조를 피하는 다른 해결책으로는 각 인스턴스들의 `그래프`에 따라서 소유권이 필요한 노드와 그렇지 않은 노드를 파악해서 끊어주면 됩니다.
+
+### 순환 참조 방지하기
+> `Rc<T>`를 `Weak<T>`로 변경하기
+
+- `Rc::downgrade()`: 참조자(reference)를 weak reference(`Weak<T>`로 변경시킵니다.
+
+`Weak<T>` 타입의 스마트 포인터는 `clone()`이 호출될 시, Rc<T>인스턴스의 strong_count를 +=1 시키는 것이 아니라, `weak_count`라는 필드를 1 증가시킵니다.
+
+weak_count와 strong_count의 차이점 즉, Weak<T>과 Rc<T>의 차이점은
+
+- `Rc<T>`가 제거되기(`free`) 위해서는 `strong_count == 0`이어야 하지만
+- `Weak<T>`는 제거되기 위해서 `weak_count`가 0일 필요가 없습니다.
+
+`강한 참조`는 여러분이 `Rc<T>` 인스턴스의 소유권을 공유할 수 있는 방법입니다. **약한 참조는 소유권 관계를 표현하지 않습니다.** (`Weak<T>`)
+
+
+그렇기 때문에 `Weak<T>`가 참조하고 있는 값은 이미 버려져 있을지도 모릅니다. `Weak<T>`가 가리키고 있는 값을 가지고 어떤 일을 하기 위해서는, 반드시 그 전에 참조하고 있는 값의 존재여부를 확인해야 합니다.
+
+이를 위해서 `Weak<T>`의 `.upgrade()` 메소드를 호출합니다.
+이 메소드는 `Option<Rc<T>>`를 반환할 것이고, `Some`이 return된다면 값이 있다는 것이며, None의 경우네는 값이 free된 경우입니다.
+
+아래는 Weak<T>를 활용해 `트리 데이터: 자식 노드를 가진 Node`를 만들어 보겠습니다.
+
+```rs
+use std::cell::RefCell;
+use std::rc::Rc;
+
+#[derive(Debug)]
+struct Node {
+    value: i32,
+    children: RefCell<Vec<Rc<Node>>>,
+}
+
+fn main() {
+    let leaf = Rc::new(Node {
+        value: 3,
+        children: RefCell::new(vec![]),
+    });
+
+    let branch = Rc::new(Node {
+        value: 5,
+        children: RefCell::new(vec![Rc::clone(&leaf)]),
+    });
+}
+```
+- `dbg!(branch);` 결과값
+```
+
+[src/main.rs:21] branch = Node {
+    value: 5,
+    children: RefCell {
+        value: [
+            Node {
+                value: 3,
+                children: RefCell {
+                    value: [],
+                },
+            },
+        ],
+    },
+}
+```
+
+이를 통해 branch는 leaf에 접근가능하게 되었으며, leaf는 2개의 strong reference count를 가지게 되었습니다. 다음으로 leaf가 branch에 접근가능하도록 코드를 수정 해보겠습니다.
+
+
+```rs
+use std::cell::RefCell;
+use std::rc::{Rc, Weak};
+
+#[derive(Debug)]
+struct Node {
+    value: i32,
+    parent: RefCell<Weak<Node>>,
+    children: RefCell<Vec<Rc<Node>>>,
+}
+
+fn generate_empty_node() -> RefCell<Weak<Node>> {
+    RefCell::new(Weak::new())
+}
+
+fn main() {
+    let leaf = Rc::new(Node {
+        value: 3,
+        parent: generate_empty_node(),
+        children: RefCell::new(vec![]),
+    });
+
+    // leaf parent = None
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+
+    let branch = Rc::new(Node {
+        value: 5,
+        parent: generate_empty_node(),
+        children: RefCell::new(vec![Rc::clone(&leaf)]),
+    });
+
+    // link to parent
+    *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+    
+    // leaf parent = Some(Node { value: 5, parent: RefCell { value: (Weak) }, <- branch 자신
+    // children: RefCell { value: [Node { value: 3, parent: RefCell { value: (Weak) }, <- leaf
+    // children: RefCell { value: [] } }] } }) <- leaf의 children
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+}
+```
+
+leaf 노드가 branch를 parent로 가리키도록 하였습니다. 다음으로 아래 custom print함수를 사용해, weak count와 strong count 갯수를 확인해보겠습니다.
+
+
+```rs
+fn print_node(node: &Rc<Node>) {
+    println!(
+        "value = {} ,strong = {}, weak = {}",
+        node.value,
+        Rc::strong_count(node),
+        Rc::weak_count(node),
+    );
+}
+```
+
+```rs
+fn main() {
+    let leaf = Rc::new(Node {
+        value: 3,
+        parent: generate_empty_node(),
+        children: RefCell::new(vec![]),
+    });
+    print_node(&leaf); // value = 3 ,strong = 1, weak = 0
+
+    {
+        let branch = Rc::new(Node {
+            value: 5,
+            parent: generate_empty_node(),
+            children: RefCell::new(vec![Rc::clone(&leaf)]),
+        });
+
+        // link to parent
+        *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+        print_node(&branch); // value = 5 ,strong = 1, weak = 1
+        print_node(&leaf); // value = 3 ,strong = 2, weak = 0
+    }
+    
+    // leaf parent = None
+    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+    print_node(&leaf); // value = 3 ,strong = 1, weak = 0
+}
+```
+
+leaf 노드는 내부 scope에 정의된 `branch`를 parent로 하였고, 이에대한 참조를 weak reference로 해두었기 때문에 `branch`는 scope를 벗어날 때 free됩니다. (strong count가 0). 
+
+이때 branch는 `weak count = 1`인 leaf의 weak reference를 가지고 있지만 이는 free에는 어떤 영향도 주지 않습니다. 이를 통해 어떠한 메모리 릭도 발생되지 않습니다.
+
+`leaf parent = None`을 보시면, 스코프 끝 이후에 leaf의 부모에 접근을 시도하였기 때문에 `None`이 반환됩니다.
+
+참조 카운트들과 버리는 값들을 관리하는 모든 로직은 Rc<T>와 Weak<T>, 그리고 이들의 Drop 트레잇에 대한 구현부에 만들어져 있습니다. 자식으로부터 부모로의 관계가 Node의 정의 내에서 Weak<T> 참조자로 되어야 함을 특정함으로서, 여러분은 순환 참조와 메모리 릭을 만들지 않고도 자식 노드를 가리키는 부모 노드 혹은 그 반대의 것을 가지게 될 수 있습니다.
