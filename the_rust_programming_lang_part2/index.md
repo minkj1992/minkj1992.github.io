@@ -1337,7 +1337,7 @@ hi number 9 from the spawned thread!
 ```
 
 ## `move` 클로저
-> 스레드 간 데이터 이동
+> 스레드 간 데이터 소유권 이동
 
 move 클로저는 thread::spawn와 함께 자주 사용되는데 그 이유는 이것이 여러분으로 하여금 어떤 스레드의 데이터를 다른 스레드 내에서 사용하도록 해주기 때문입니다.
 
@@ -1389,4 +1389,157 @@ fn main() {
 }
 ```
 
+## Message Passing
+스레드에 대한 Go의 슬로건 중 하나는 다음과 같습니다.
 
+> "Do not communicate by sharing memory; instead, share memory by communicating."
+
+이 처럼 안전한 동시성을 보장하는 인기있는 방법은 message passing 입니다. 러스트 또한 go처럼 channel을 활용합니다.
+
+프로그래밍에서 채널은 둘로 나뉘어져 있습니다.
+
+1. transmitter (송신자)
+    - abbr. `tx`
+2. receiver (수신자)
+    - abbr. `rx`
+
+`transmitter` 측은 여러분이 강에 고무 오리를 띄우는 상류 위치이고, `receiver` 측은 하류에 고무 오리가 도달하는 곳입니다. 
+
+여러분 코드 중 한 곳에서 여러분이 보내고자 하는 데이터와 함께 송신자의 메소드를 호출하면, 다른 곳에서는 도달한 메세지에 대한 수신 종료를 검사합니다. 송신자 혹은 송신자가 드롭되면 채널이 닫혔다 (closed) 라고 말합니다.
+
+```rs
+use std::sync::mpsc;
+
+fn main() {
+
+}
+```
+
+채널을 사용하기 위해서는 std 라이브러리인 `mpsc`를 활용합니다. `mpsc`는 `multiple producer, single consumer`의 약자입니다.
+
+다시 말해 표준 라이브러리 mpsc가 채널을 구현한 방법은 **한 채널이 값을 생성하는 복수개의 송신 단말을 가질 수 있지만 값을 소비하는 단 하나의 수신 단말을 가질 수 있음을 의미합니다.**
+
+`mpsc::channel()`는 튜플을 반환합니다.
+
+```rs
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel(); // 튜플 반환
+
+    thread::spawn(move || {
+        let v = String::from("Hi");
+        tx.send(v).unwrap(); // Result<T, E>
+    });
+
+    let received = rx.recv().unwrap();
+    println!("Got: {}", received);
+}
+```
+
+`rx`는 2가지 유용한 메소드를 활용해 메시지를 받을 수 있습니다.
+
+1. `.recv()`
+2. `.try_recv()`
+
+`recv()`는 **block**한 상태로 메시지가 보내질 때까지 기다립니다. 그리고 그 전달된 값은 Result<T,E>형태로 전달됩니다.
+
+
+`try_recv()`는 블록하지 않는 대신, 해당 시점에 `Result<T,E>`형태로 값을 전달해줍니다. 만약 메시지가 전달되었다면 `Ok`, 없다면 `Err`입니다. 만약 메시지를 기다리면서 다른 작업을 해야한다면 유용하게 사용할 수 있습니다.
+
+## 채널간 메시지 전달과 소유권 처리
+
+다음으로 tx에서 rx로 값을 내려보낸 뒤에, 그 값을 사용한다면 소유권 체크가 어떻게 되는지 확인해보겠습니다.
+
+```rs
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        let v = String::from("Hi");
+        tx.send(v).unwrap();
+        println!("Here!!!! is Problem {val}");
+    });
+
+    let received = rx.recv().unwrap();
+    println!("Got: {}", received);
+}
+```
+
+```
+error[E0382]: use of moved value: `val`
+  --> src/main.rs:10:31
+   |
+9  |         tx.send(val).unwrap();
+   |                 --- value moved here
+10 |         println!("val is {}", val);
+   |                               ^^^ value used here after move
+   |
+   = note: move occurs because `val` has type `std::string::String`, which does
+not implement the `Copy` trait
+```
+
+당연히 소유권체크에서 컴파일러가 똑똑하게 잡아줍니다.
+
+## multiple producer
+
+마지막으로 `mpsc`의 multiple producer를 사용하는 코들르 작성하겠습니다.
+
+```rs
+use std::sync::mpsc;
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+    let tx1 = tx.clone();
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("tx1: hi"),
+            String::from("tx1: from"),
+            String::from("tx1: the"),
+            String::from("tx1: thread"),
+        ];
+        for v in vals {
+            tx1.send(v).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("tx: more"),
+            String::from("tx: messages"),
+            String::from("tx: for"),
+            String::from("tx: you"),
+        ];
+
+        for v in vals {
+            tx.send(v).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    // receiver
+    for r in rx {
+        println!("Got: {}", r);
+    }
+}
+```
+
+```
+Got: tx: more
+Got: tx1: hi
+Got: tx: messages
+Got: tx1: from
+Got: tx: for
+Got: tx1: the
+Got: tx: you
+Got: tx1: thread
+```
+
+결과값 순서는 다르게 나올 수 있습니다.
