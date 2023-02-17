@@ -262,6 +262,11 @@ tests/
 
 
 ## 13.1 `Closure`
+
+Closures are functions that can capture the enclosing environment. 
+
+- `|val| val + x`
+
 - simple define closure
 
 ```rs
@@ -1255,3 +1260,133 @@ leaf 노드는 내부 scope에 정의된 `branch`를 parent로 하였고, 이에
 `leaf parent = None`을 보시면, 스코프 끝 이후에 leaf의 부모에 접근을 시도하였기 때문에 `None`이 반환됩니다.
 
 참조 카운트들과 버리는 값들을 관리하는 모든 로직은 Rc<T>와 Weak<T>, 그리고 이들의 Drop 트레잇에 대한 구현부에 만들어져 있습니다. 자식으로부터 부모로의 관계가 Node의 정의 내에서 Weak<T> 참조자로 되어야 함을 특정함으로서, 여러분은 순환 참조와 메모리 릭을 만들지 않고도 자식 노드를 가리키는 부모 노드 혹은 그 반대의 것을 가지게 될 수 있습니다.
+
+# 16. 동시성
+
+- 들어가기 앞서 이번장에서는 `동시성`과 `병렬성`을 구분하지 않고 모두 `동시성`이라고 칭합니다.
+- 또한 `런타임`의 범위를 프로그래밍 언어의 모든 바이너리 내에 포함되는 코들르 의미합니다.
+
+대표적으로 스레드는 코드 snippet에 대해 실행 순서를 보장하지 않기 때문에, 발생하는 문제점들은 다음과 같습니다. (3)
+
+1. race condition
+2. deadlock
+3. 특정한 상황에서만 발생되어 재현하기와 안정적으로 수정하기가 힘든 버그들
+
+1:1 스레드라는 것은 프로그래밍 언어에서 운영체제 API가 제공하는 스레드와 1:1로 상응하는 스레드를 의미합니다.
+
+반면 `green thread`의 경우에는 운영체제 스레드와 M:N관계를 가집니다.
+그린 스레드 M:N 구조는 자체 스레드들을 관리하기 위해 더 `큰 언어 런타임`이 필요하게 됩니다. 이런 트레이드 오프 때문에 러스트의 `std 라이브러리`는 오직 1:1 스레드 구현만 제공합니다. 이런 트레이드 오프(오버헤드)를 감수하더라도 `context switching`에 더 저렴한 cost를 원한다면 M:N 스레드를 구현한 `crate`들도 존재합니다.
+
+## `thread::spawn()`
+> 새로운 스레드 생성하기
+
+```rs
+{
+    thread::spawn(|| {
+        for i in 1..10 {
+            println!("hi number {} from the spawned thread!", i);
+            thread::sleep(Duration::from_millis(1));
+        }
+    });
+}
+```
+
+## `.join().unwrap()`
+> join 핸들을 사용하여 모든 스레드 끝날때까지 기다리기
+
+개의 경우 메인 스레드가 종료되는 이유로 생성된 스레드가 조기에 멈출 뿐만 아니라, 생성된 스레드가 모든 코드를 실행할 것임을 보장해 줄수도 없습니다. 그 이유는 스레드들이 실행되는 순서에 대한 보장이 없기 때문입니다.
+
+이를 해결하기 위해서는 .join()을 사용하면 됩니다. thread::spawn()은 `JoinHandle`을 리턴하며, 이를 변수에 담아 .join() 메서드를 호출시키면 스레드가 끝날때까지 기다릴 수 있습니다.
+
+```rs
+use std::thread;
+use std::time::Duration;
+
+fn main() {
+    let handle = thread::spawn(|| {
+        for i in 1..10 {
+            println!("hi number {} from the spawned thread!", i);
+            thread::sleep(Duration::from_millis(1));            
+        }
+    });
+
+    for i in 1..5 {
+        println!("hi number {} from the main thread!", i);
+        thread::sleep(Duration::from_millis(1));
+    }
+
+    // join spwaned thread.
+    handle.join().unwrap();
+}
+```
+
+```
+hi number 1 from the main thread!
+hi number 2 from the main thread!
+hi number 1 from the spawned thread!
+hi number 3 from the main thread!
+hi number 2 from the spawned thread!
+hi number 4 from the main thread!
+hi number 3 from the spawned thread!
+hi number 4 from the spawned thread!
+hi number 5 from the spawned thread!
+hi number 6 from the spawned thread!
+hi number 7 from the spawned thread!
+hi number 8 from the spawned thread!
+hi number 9 from the spawned thread!
+```
+
+## `move` 클로저
+> 스레드 간 데이터 이동
+
+move 클로저는 thread::spawn와 함께 자주 사용되는데 그 이유는 이것이 여러분으로 하여금 어떤 스레드의 데이터를 다른 스레드 내에서 사용하도록 해주기 때문입니다.
+
+**클로저의 파라미터 목록 앞에 move 키워드를 이용하여 클로저가 그 환경에서 사용하는 값의 소유권을 강제로 갖게 할 수 있습니다.** 이 기술은 값의 소유권을 한 스레드에서 다른 스레드로 이전하기 위해 새로운 스레드를 생성할 때 특히 유용합니다.
+
+move가 필요한 코드를 먼저 보여드리겠습니다.
+
+```rs
+use std::thread;
+
+fn main() {
+    let v = vec![1,2,3];
+
+    let handle = thread::spawn(|| {
+        println!("Here's a vector: {:?}", v); // 만약 v에 대해서 레퍼런스를 주었다면, v가 언제까지 살아있을지 확신을 할 수 없습니다.
+    });
+
+    drop(v); // v를 main thread에서 제거
+    handle.join().unwrap();
+}
+```
+
+이러한 이유로, 러스트 컴파일러는 다음과 같은 에러 메시지를 제공합니다.
+
+```
+help: to force the closure to take ownership of `v` (and any other referenced
+variables), use the `move` keyword
+  |
+6 |     let handle = thread::spawn(move || {
+  |                                ^^^^^^^
+```
+
+즉 클로저 안에서 v에 대한 소유권을 main으로부터 받아오라고 말해줍니다.
+
+```rs
+use std::thread;
+
+fn main() {
+    let v = vec![1,2,3];
+
+    let handle = thread::spawn(move || {
+        println!("Here's a vector: {:?}", v);
+    });
+
+    // drop(v);
+    // error[E0382]: use of moved value: `v`
+
+    handle.join().unwrap();
+}
+```
+
+
