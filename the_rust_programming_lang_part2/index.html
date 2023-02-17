@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/the_rust_programming_lang_part2/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-30T18:53:11+09:00" />
-<meta property="article:modified_time" content="2023-02-17T16:34:33+09:00" />
+<meta property="article:modified_time" content="2023-02-17T18:04:10+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  5509 ,
-        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang_part2\/","datePublished": "2023-01-30T18:53:11+09:00","dateModified": "2023-02-17T16:34:33+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  5694 ,
+        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang_part2\/","datePublished": "2023-01-30T18:53:11+09:00","dateModified": "2023-02-17T18:04:10+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">[Part2] The rust programming language</h1><h2 class="single-subtitle">The official Rust book</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-30">2023-01-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5509 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;26 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-30">2023-01-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5694 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;27 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -260,6 +260,12 @@
         <li><a href="#rct-multiple-ownership-with-multiple-threads">Rc<T>: Multiple Ownership with Multiple Threads</a></li>
         <li><a href="#atomic-reference-counting-with-arct">Atomic Reference Counting with <code>Arc&lt;T&gt;</code></a></li>
         <li><a href="#refcelltrct-vs-mutextarct"><code>RefCell&lt;T&gt;</code>/<code>Rc&lt;T&gt;</code> vs <code>Mutex&lt;T&gt;</code>/<code>Arc&lt;T&gt;</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#sync와-send-trait을-활용한-확장-가능한-동시성"><code>Sync</code>와 <code>Send</code> trait을 활용한 확장 가능한 동시성</a>
+      <ul>
+        <li><a href="#send-trait">Send trait</a></li>
+        <li><a href="#sync-trait">Sync trait</a></li>
       </ul>
     </li>
   </ul>
@@ -3187,12 +3193,31 @@
 <li>RefCell<T>와 Mutext<T>가 비슷하게 내부 가변성을 제공한다는 것입니다.</li>
 <li><code>Mutex&lt;T&gt;</code>는 Deadlock <code>RefCell&lt;T&gt;</code>는 memory leak(순환 참조 등)</li>
 </ol>
-<p><code>RefCell&lt;T&gt;</code>/<code>Rc&lt;T&gt;</code> and <code>Mutex&lt;T&gt;</code>/<code>Arc&lt;T&gt;</code></p></div><div class="post-footer" id="post-footer">
+<p><code>RefCell&lt;T&gt;</code>/<code>Rc&lt;T&gt;</code> and <code>Mutex&lt;T&gt;</code>/<code>Arc&lt;T&gt;</code></p>
+<h2 id="sync와-send-trait을-활용한-확장-가능한-동시성"><code>Sync</code>와 <code>Send</code> trait을 활용한 확장 가능한 동시성</h2>
+<p>러스트는 매우 적은 숫자의 동시성 기능을 std라이브러리에서 제공하는 대신, 확장성을 위하여 sync와 send trait을 열어줍니다.</p>
+<p>즉 동시성을 확장하기 위해서는 std::marker 트레잇인 <code>Sync</code>, <code>Send</code>를 구현하면 됩니다.</p>
+<h3 id="send-trait">Send trait</h3>
+<blockquote>
+<p>스레드 사이에서 소유권 이전을 허용하기</p>
+</blockquote>
+<p>Send가 구현된 타입들은 소유권이 스레드들 사이에서 이전될 수 있음을 나타내며, 대부분의 rust타입들은 Send가 구현되어있습니다. 단 Rc<T>와 raw pointer는 불가능합니다.</p>
+<p>Rc<T>의 경우에는 clone 된 이후, 다른 스레드로 복제본이 소유권 전송이 된다면 두 스레드 모두 동시에 레퍼런스카운트를 write하려고 시도할 수 있기 때문입니다. 그렇기 때문에 Rc<T>는 단일 스레드에서만 사용되도록 구현되어있습니다. raw pointer는 19장에서 알아보겠습니다.</p>
+<h3 id="sync-trait">Sync trait</h3>
+<blockquote>
+<p>여러 스레드로부터의 접근을 허용하기</p>
+</blockquote>
+<p>Sync 마커 트레잇은 Sync가 구현된 타입이 여러 스레드로부터 안전하게 참조 가능함을 나타냅니다. 바꿔 말하면, 만일 &amp;T (T의 참조자) 가 Send이면, 즉 참조자가 다른 스레드로 안전하게 보내질 수 있다면, T는 Sync합니다. Send와 유사하게, 기초 타입들은 Sync하고, 또한 Sync한 타입들로 전체가 구성된 타입 또한 Sync합니다.</p>
+<ul>
+<li>스마트 포인터 Rc<T>는 Send가 아닌 이유와 동일한 이유로 또한 Sync하지도 않습니다.</li>
+<li>RefCell<T> 타입과 연관된 Cell<T> 타입의 가족들도 Sync하지 않습니다.</li>
+</ul>
+<p>RefCell<T>가 런타임에 수행하는 빌림 검사 구현은 스레드-안전하지 않습니다. 스마트 포인터 Mutex<T>는 Sync하고 “여러 스레드 사이로 Mutex<T> 공유하기” 절에서 본 것처럼 여러 스레드에서 접근을 공유하는데 사용될 수 있습니다.</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-02-17&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/6c2eb0c85a009f6cd733c0fe2087674d74769423" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 6c2eb0c85a009f6cd733c0fe2087674d74769423: rebuilding site Fri Feb 17 16:34:33 KST 2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>6c2eb0c</a></span>
+                <span>Updated on 2023-02-17&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/51a12391de6646a6290f2d480e7937bf93beab8e" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 51a12391de6646a6290f2d480e7937bf93beab8e: rebuilding site Fri Feb 17 18:04:10 KST 2023">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>51a1239</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
