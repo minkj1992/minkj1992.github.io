@@ -1543,3 +1543,234 @@ Got: tx1: thread
 ```
 
 결과값 순서는 다르게 나올 수 있습니다.
+
+## shared memory
+
+어떻게 보면 프로그래밍 언어에서 `채널`들은 **단일 소유권**과 비슷한데, 이는 채널로 값을 transmit하면, 그 값은 더 이상 이전에 소유권을 가진 영역에서 사용할 수 없기 때문입니다.
+
+반면에 `shared memory`는 **복수 소유권**과 유사합니다. 여러개의 스레드들이 동시에 동일한 메모리 위치를 접근할 수 있기 때문입니다.
+
+여러 스레드들이 동시에 접근할 수 있기 때문에 접근에 대해서 제어할 수 있는 장치가 필요합니다. 대표적으로 
+
+- `std::sync::Mutex`
+- `std::sync::Arc`
+    - std::sync::atomic 기반으로 작성됨
+
+뮤텍스와 **A**tomically **R**eference **C**ounted가 존재합니다.
+
+### Mutex
+> mutual exclusion, 상호 배제
+
+상호 배제, 뮤텍스란 내부적으로 주어진 시간에 오직 하나의 스레드만 데이터 접근을 허용합니다. 이를 위해 `lock`을 사용하며, 스레드들은 데이터에 접근하기 위해 lock을 요청합니다.
+
+뮤텍스 작동을 단순화 시키면 2가지를 기억하면 됩니다.
+
+1. 데이터를 사용하기 전에 반드시 락을 얻는 시도를 해야한다.
+2. 뮤텍스가 보호하는 데이터의 사용이 끝났다면, 다른 스레드들이 락을 얻을 수 있도록 `unlock`을 해야한다.
+
+러스트의 경우에는 타입과 `ownership`개념 덕분에 복잡한 mutex 시스템을 단순화 시킬 수 있습니다. 즉 러스트에서는 잘못 락을 얻거나, unlock 하는 경우를 컴파일러에서 잡아줄 수 있습니다.
+
+### Mutex<T> api
+
+다음은 mutex.lock()가 성공 될 때, 리턴되는 `MutexGuard<T>`에 대한 주석 내용 중 일부 입니다.
+
+> The data protected by the mutex can be accessed through this guard via its [`Deref`] and [`DerefMut`] implementations.
+
+Deref를 통해서 MutexGuard는 데이터를 접근해야하며, RAII 즉 Drop 트레잇을 가지고 있기 때문에, scope 밖으로 벗어날 경우 자동으로 drop 처리됩니다. 이를 통해 개발자가 실수록 언락하는 것을 잊어버릴 경우를 처리해줍니다.
+
+```rs
+use std::sync::Mutex;
+
+fn main() {
+    let m = Mutex::new(5); // i32 데이터를 보호하는 mutex
+    {
+        let mut num = m.lock().unwrap();
+        println!("{}", num); // 5
+        *num = 6;
+        println!("{}", num); // 6
+    }
+}
+```
+
+### 여러 스레드들 사이에서 Mutex<T> 공유하기
+
+이를 확인해보기 위해, 10개의 스레드를 실행시키면서, mutex로 보호받는 counter:i32 값을 +1 진행 시켜보겠습니다.
+
+
+```rs
+use std::sync::Mutex;
+use std::thread;
+
+fn main() {
+    let counter = Mutex::new(0);
+    let mut handlers = vec![];
+
+    for _ in 0..10 {
+        let handler = thread::spawn(move || { // 문제 발생 포인트
+            let mut n = counter.lock().unwrap();
+            *n += 1;
+        });
+        handlers.push(handler);
+    }
+
+    for handler in handlers {
+        handler.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+```
+
+```
+error[E0382]: use of moved value: `counter`
+  --> src/main.rs:9:37
+   |
+5  |     let counter = Mutex::new(0);
+   |         ------- move occurs because `counter` has type `Mutex<i32>`, which does not implement the `Copy` trait
+...
+9  |         let handler = thread::spawn(move || {
+   |                                     ^^^^^^^ value moved into closure here, in previous iteration of loop
+10 |             let mut n = counter.lock().unwrap();
+   |                         ------- use occurs due to use in closure
+```
+
+10번째 줄에서, move된 counter.lock()을 클로저 안에서 호출했기 때문이라고 컴파일러는 말하고 있습니다. 좀 더 내부적으로는 현재 `counter`의 소유권이 공유되도록 설정 되어있지 않기 때문에, 여러 스레드들에서 공유를 할 수가 없습니다. 
+
+이는 다음과 같이 하나의 main thread가 counter의 소유권을 클로저(스레드)에 넘겨주고 마지막에 join 이후에 println!()을 하더라도 동일하게 발생할 문제입니다.
+
+```rs
+use std::sync::Mutex;
+use std::thread;
+
+fn main() {
+    let counter = Mutex::new(0);
+    let mut handlers = vec![];
+    let handler = thread::spawn(move || {
+        let mut n = counter.lock().unwrap();
+        *n += 1;
+    });
+    handlers.push(handler);
+    
+    for handler in handlers {
+        handler.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap()); // error[E0382]: borrow of moved value: `counter`
+}
+```
+
+이를 해결하기 위해서는 이전에 확인했던 레퍼런스 카운터 기반 스마트포인터 `Rc<T>`를 활용하면 됩니다.
+
+### Rc<T>: Multiple Ownership with Multiple Threads
+
+```rs
+use std::rc::Rc;
+use std::sync::Mutex;
+use std::thread;
+
+fn main() {
+    let counter = Rc::new(Mutex::new(0)); // 이 부분 변경됨
+    let mut handles = vec![];
+
+   for _ in 0..10 {
+        let counter = Rc::clone(&counter); // 이 부분 변경됨.
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+```
+
+```
+error[E0277]: `Rc<Mutex<i32>>` cannot be sent between threads safely
+  --> src/main.rs:11:36
+   |
+11 |           let handle = thread::spawn(move || {
+   |                        ------------- ^------
+   |                        |             |
+   |  ______________________|_____________within this `[closure@src/main.rs:11:36: 11:43]`
+   | |                      |
+   | |                      required by a bound introduced by this call
+12 | |             let mut num = counter.lock().unwrap();
+13 | |
+14 | |             *num += 1;
+15 | |         });
+   | |_________^ `Rc<Mutex<i32>>` cannot be sent between threads safely
+   |
+   = help: within `[closure@src/main.rs:11:36: 11:43]`, the trait `Send` is not implemented for `Rc<Mutex<i32>>`
+note: required because it's used within this closure
+  --> src/main.rs:11:36
+   |
+11 |         let handle = thread::spawn(move || {
+   |                                    ^^^^^^^
+note: required by a bound in `spawn`
+```
+
+
+`Rc<Mutex<i32>>` cannot be sent between threads safely. 이전에 살펴보았듯 Rc<T>는 스레드 safe하지 않습니다. 즉 Rc<T>의 레퍼런스 카운트는 ::clone() 호출 할 때 만약 여러 thread들에 분산되어있으면, 레퍼런스 카운트에 대해서 thread race condition이 발생할 수 있습니다. 이 때문에 잘못된 레퍼런스 카운트를 야기할 수 있고, 이는 zombie를 살아있게 만들어 memory leak이 발생하게 만듭니다. 
+
+이를 해결하기 위해서 러스트는 `Atomic`을 지원합니다.
+
+### Atomic Reference Counting with `Arc<T>`
+
+기본적으로 thread safe기능은 성능저하를 trade off로 가져옵니다. 그렇기 때문에 러스트에서는 thread safe가 디폴트가 아니며, 동시성이 필요한 부분에서 atmoic을 활용해 primitive type 변수들이 thread safe하도록 보장하도록 만들어주어야 합니다.
+
+`Arc<T>`는 `Rc<T>`와 같은 API를 가지고 있기 때문에 앞서 예시에서 `Rc::`를 `Arc::`로 변경만 해주면 됩니다.
+
+```rs
+use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0)); // 이 부분 변경됨
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&counter); // 이 부분 변경됨.
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
+}
+```
+
+```
+Result: 10
+```
+
+### `RefCell<T>`/`Rc<T>` vs `Mutex<T>`/`Arc<T>`
+> 두 그룹간의 유사성
+
+사실 위의 예시 코드들을 보면 counter가 mut하지 않음에도, 변경이되는 RefCell<T>와 같은 내부 가변성을 제공하는 것을 알 수 있습니다.
+
+`Mutex<T>`는 `RefCell<T>`와 마찬가지로 논리적 에러를 막아주지 못합니다. 즉 RefCell<T>가 순환참조자 같은 memory leak을 야기할 수 있듯이, Mutex는  `Deadlock`위험이 있습니다.
+
+예를 들면 2개의 리소스에 대한 Mutex의 락을 두 개의 스레드가 각각 하나씩 나누어 가지고, 서로의 lock을 획득해야 다음 코드가 진행될 수 있다면 데드락이 발생할 수 있습니다.
+
+정리하면 다음과 같은 2가지 유사성이 있습니다.
+
+1. RefCell<T>와 Mutext<T>가 비슷하게 내부 가변성을 제공한다는 것입니다.
+2. `Mutex<T>`는 Deadlock `RefCell<T>`는 memory leak(순환 참조 등)
+
+
+
+`RefCell<T>`/`Rc<T>` and `Mutex<T>`/`Arc<T>`
+

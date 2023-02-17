@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/the_rust_programming_lang_part2/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-30T18:53:11+09:00" />
-<meta property="article:modified_time" content="2023-02-17T15:47:29+09:00" />
+<meta property="article:modified_time" content="2023-02-17T16:34:33+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  4794 ,
-        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang_part2\/","datePublished": "2023-01-30T18:53:11+09:00","dateModified": "2023-02-17T15:47:29+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, rust, language","wordcount":  5509 ,
+        "url": "https:\/\/minkj1992.github.io\/the_rust_programming_lang_part2\/","datePublished": "2023-01-30T18:53:11+09:00","dateModified": "2023-02-17T16:34:33+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">[Part2] The rust programming language</h1><h2 class="single-subtitle">The official Rust book</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-30">2023-01-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4794 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;23 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-30">2023-01-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5509 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;26 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -252,6 +252,16 @@
     <li><a href="#message-passing">Message Passing</a></li>
     <li><a href="#채널간-메시지-전달과-소유권-처리">채널간 메시지 전달과 소유권 처리</a></li>
     <li><a href="#multiple-producer">multiple producer</a></li>
+    <li><a href="#shared-memory">shared memory</a>
+      <ul>
+        <li><a href="#mutex">Mutex</a></li>
+        <li><a href="#mutext-api">Mutex<T> api</a></li>
+        <li><a href="#여러-스레드들-사이에서-mutext-공유하기">여러 스레드들 사이에서 Mutex<T> 공유하기</a></li>
+        <li><a href="#rct-multiple-ownership-with-multiple-threads">Rc<T>: Multiple Ownership with Multiple Threads</a></li>
+        <li><a href="#atomic-reference-counting-with-arct">Atomic Reference Counting with <code>Arc&lt;T&gt;</code></a></li>
+        <li><a href="#refcelltrct-vs-mutextarct"><code>RefCell&lt;T&gt;</code>/<code>Rc&lt;T&gt;</code> vs <code>Mutex&lt;T&gt;</code>/<code>Arc&lt;T&gt;</code></a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p><a href="https://minkj1992.github.io/the_rust_programming_lang/" target="_blank" rel="noopener noreffer">Part1. Rust 프로그래밍</a>
@@ -2815,12 +2825,374 @@
 </span></span><span class="line"><span class="cl">Got: tx1: thread
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>결과값 순서는 다르게 나올 수 있습니다.</p></div><div class="post-footer" id="post-footer">
+</div><p>결과값 순서는 다르게 나올 수 있습니다.</p>
+<h2 id="shared-memory">shared memory</h2>
+<p>어떻게 보면 프로그래밍 언어에서 <code>채널</code>들은 <strong>단일 소유권</strong>과 비슷한데, 이는 채널로 값을 transmit하면, 그 값은 더 이상 이전에 소유권을 가진 영역에서 사용할 수 없기 때문입니다.</p>
+<p>반면에 <code>shared memory</code>는 <strong>복수 소유권</strong>과 유사합니다. 여러개의 스레드들이 동시에 동일한 메모리 위치를 접근할 수 있기 때문입니다.</p>
+<p>여러 스레드들이 동시에 접근할 수 있기 때문에 접근에 대해서 제어할 수 있는 장치가 필요합니다. 대표적으로</p>
+<ul>
+<li><code>std::sync::Mutex</code></li>
+<li><code>std::sync::Arc</code>
+<ul>
+<li>std::sync::atomic 기반으로 작성됨</li>
+</ul>
+</li>
+</ul>
+<p>뮤텍스와 <strong>A</strong>tomically <strong>R</strong>eference <strong>C</strong>ounted가 존재합니다.</p>
+<h3 id="mutex">Mutex</h3>
+<blockquote>
+<p>mutual exclusion, 상호 배제</p>
+</blockquote>
+<p>상호 배제, 뮤텍스란 내부적으로 주어진 시간에 오직 하나의 스레드만 데이터 접근을 허용합니다. 이를 위해 <code>lock</code>을 사용하며, 스레드들은 데이터에 접근하기 위해 lock을 요청합니다.</p>
+<p>뮤텍스 작동을 단순화 시키면 2가지를 기억하면 됩니다.</p>
+<ol>
+<li>데이터를 사용하기 전에 반드시 락을 얻는 시도를 해야한다.</li>
+<li>뮤텍스가 보호하는 데이터의 사용이 끝났다면, 다른 스레드들이 락을 얻을 수 있도록 <code>unlock</code>을 해야한다.</li>
+</ol>
+<p>러스트의 경우에는 타입과 <code>ownership</code>개념 덕분에 복잡한 mutex 시스템을 단순화 시킬 수 있습니다. 즉 러스트에서는 잘못 락을 얻거나, unlock 하는 경우를 컴파일러에서 잡아줄 수 있습니다.</p>
+<h3 id="mutext-api">Mutex<T> api</h3>
+<p>다음은 mutex.lock()가 성공 될 때, 리턴되는 <code>MutexGuard&lt;T&gt;</code>에 대한 주석 내용 중 일부 입니다.</p>
+<blockquote>
+<p>The data protected by the mutex can be accessed through this guard via its [<code>Deref</code>] and [<code>DerefMut</code>] implementations.</p>
+</blockquote>
+<p>Deref를 통해서 MutexGuard는 데이터를 접근해야하며, RAII 즉 Drop 트레잇을 가지고 있기 때문에, scope 밖으로 벗어날 경우 자동으로 drop 처리됩니다. 이를 통해 개발자가 실수록 언락하는 것을 잊어버릴 경우를 처리해줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">sync</span>::<span class="n">Mutex</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mutex</span>::<span class="n">new</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="c1">// i32 데이터를 보호하는 mutex
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">lock</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">);</span><span class="w"> </span><span class="c1">// 5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="o">*</span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">);</span><span class="w"> </span><span class="c1">// 6
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="여러-스레드들-사이에서-mutext-공유하기">여러 스레드들 사이에서 Mutex<T> 공유하기</h3>
+<p>이를 확인해보기 위해, 10개의 스레드를 실행시키면서, mutex로 보호받는 counter:i32 값을 +1 진행 시켜보겠습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">sync</span>::<span class="n">Mutex</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">thread</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mutex</span>::<span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">handlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">10</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thread</span>::<span class="n">spawn</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// 문제 발생 포인트
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counter</span><span class="p">.</span><span class="n">lock</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">*</span><span class="n">n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">handlers</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">handler</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">handlers</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">handler</span><span class="p">.</span><span class="n">join</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Result: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">counter</span><span class="p">.</span><span class="n">lock</span><span class="p">().</span><span class="n">unwrap</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="n">error</span><span class="p">[</span><span class="n">E0382</span><span class="p">]:</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">moved</span><span class="w"> </span><span class="n">value</span><span class="p">:</span><span class="w"> </span><span class="o">`</span><span class="n">counter</span><span class="o">`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="p">.</span><span class="n">rs</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="mi">37</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">5</span><span class="w">  </span><span class="o">|</span><span class="w">     </span><span class="n">let</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mutex</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">         </span><span class="o">-----</span><span class="c1">-- move occurs because `counter` has type `Mutex&lt;i32&gt;`, which does not implement the `Copy` trait
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">9</span><span class="w">  </span><span class="o">|</span><span class="w">         </span><span class="n">let</span><span class="w"> </span><span class="n">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thread</span><span class="p">::</span><span class="nf">spawn</span><span class="p">(</span><span class="n">move</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">                                     </span><span class="o">^^^^^^^</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">moved</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">closure</span><span class="w"> </span><span class="n">here</span><span class="p">,</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">previous</span><span class="w"> </span><span class="n">iteration</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="k">loop</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">10</span><span class="w"> </span><span class="o">|</span><span class="w">             </span><span class="n">let</span><span class="w"> </span><span class="n">mut</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counter</span><span class="p">.</span><span class="k">lock</span><span class="p">().</span><span class="nf">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">                         </span><span class="o">-----</span><span class="c1">-- use occurs due to use in closure
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>10번째 줄에서, move된 counter.lock()을 클로저 안에서 호출했기 때문이라고 컴파일러는 말하고 있습니다. 좀 더 내부적으로는 현재 <code>counter</code>의 소유권이 공유되도록 설정 되어있지 않기 때문에, 여러 스레드들에서 공유를 할 수가 없습니다.</p>
+<p>이는 다음과 같이 하나의 main thread가 counter의 소유권을 클로저(스레드)에 넘겨주고 마지막에 join 이후에 println!()을 하더라도 동일하게 발생할 문제입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">sync</span>::<span class="n">Mutex</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">thread</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mutex</span>::<span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">handlers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thread</span>::<span class="n">spawn</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counter</span><span class="p">.</span><span class="n">lock</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="o">*</span><span class="n">n</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">handlers</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">handler</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">handlers</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">handler</span><span class="p">.</span><span class="n">join</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Result: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">counter</span><span class="p">.</span><span class="n">lock</span><span class="p">().</span><span class="n">unwrap</span><span class="p">());</span><span class="w"> </span><span class="c1">// error[E0382]: borrow of moved value: `counter`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이를 해결하기 위해서는 이전에 확인했던 레퍼런스 카운터 기반 스마트포인터 <code>Rc&lt;T&gt;</code>를 활용하면 됩니다.</p>
+<h3 id="rct-multiple-ownership-with-multiple-threads">Rc<T>: Multiple Ownership with Multiple Threads</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">rc</span>::<span class="n">Rc</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">sync</span>::<span class="n">Mutex</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">thread</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Mutex</span>::<span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span><span class="w"> </span><span class="c1">// 이 부분 변경됨
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">handles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">10</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Rc</span>::<span class="n">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">counter</span><span class="p">);</span><span class="w"> </span><span class="c1">// 이 부분 변경됨.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thread</span>::<span class="n">spawn</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counter</span><span class="p">.</span><span class="n">lock</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">*</span><span class="n">num</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">handles</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">handles</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">handle</span><span class="p">.</span><span class="n">join</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Result: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">counter</span><span class="p">.</span><span class="n">lock</span><span class="p">().</span><span class="n">unwrap</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="n">error</span><span class="p">[</span><span class="n">E0277</span><span class="p">]:</span><span class="w"> </span><span class="o">`</span><span class="n">Rc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">i32</span><span class="o">&gt;&gt;`</span><span class="w"> </span><span class="n">cannot</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">sent</span><span class="w"> </span><span class="k">between</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="n">safely</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="o">--&gt;</span><span class="w"> </span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="p">.</span><span class="n">rs</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">36</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">11</span><span class="w"> </span><span class="o">|</span><span class="w">           </span><span class="n">let</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thread</span><span class="p">::</span><span class="nf">spawn</span><span class="p">(</span><span class="n">move</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="err">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">                        </span><span class="o">-----------</span><span class="c1">-- ^------
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">   </span><span class="o">|</span><span class="w">                        </span><span class="o">|</span><span class="w">             </span><span class="o">|</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">  </span><span class="n">______________________</span><span class="o">|</span><span class="n">_____________within</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="o">`</span><span class="p">[</span><span class="n">closure</span><span class="o">@</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="p">.</span><span class="n">rs</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">43</span><span class="p">]</span><span class="o">`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="o">|</span><span class="w">                      </span><span class="o">|</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="o">|</span><span class="w">                      </span><span class="n">required</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">bound</span><span class="w"> </span><span class="n">introduced</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">call</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">12</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">|</span><span class="w">             </span><span class="n">let</span><span class="w"> </span><span class="n">mut</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counter</span><span class="p">.</span><span class="k">lock</span><span class="p">().</span><span class="nf">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">13</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">|</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">14</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">|</span><span class="w">             </span><span class="o">*</span><span class="n">num</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="mi">15</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">|</span><span class="w">         </span><span class="err">}</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="o">|</span><span class="n">_________</span><span class="o">^</span><span class="w"> </span><span class="o">`</span><span class="n">Rc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">i32</span><span class="o">&gt;&gt;`</span><span class="w"> </span><span class="n">cannot</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">sent</span><span class="w"> </span><span class="k">between</span><span class="w"> </span><span class="n">threads</span><span class="w"> </span><span class="n">safely</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">|</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">help</span><span class="p">:</span><span class="w"> </span><span class="n">within</span><span class="w"> </span><span class="o">`</span><span class="p">[</span><span class="n">closure</span><span class="o">@</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="p">.</span><span class="n">rs</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">36</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">:</span><span class="mi">43</span><span class="p">]</span><span class="o">`</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">trait</span><span class="w"> </span><span class="o">`</span><span class="n">Send</span><span class="o">`</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">implemented</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="o">`</span><span class="n">Rc</span><span class="o">&lt;</span><span class="n">Mutex</span><span class="o">&lt;</span><span class="n">i32</span><span class="o">&gt;&gt;`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">note</span><span class="p">:</span><span class="w"> </span><span class="n">required</span><span class="w"> </span><span class="n">because</span><span class="w"> </span><span class="n">it</span><span class="s1">&#39;s used within this closure
+</span></span></span><span class="line"><span class="cl"><span class="s1">  --&gt; src/main.rs:11:36
+</span></span></span><span class="line"><span class="cl"><span class="s1">   |
+</span></span></span><span class="line"><span class="cl"><span class="s1">11 |         let handle = thread::spawn(move || {
+</span></span></span><span class="line"><span class="cl"><span class="s1">   |                                    ^^^^^^^
+</span></span></span><span class="line"><span class="cl"><span class="s1">note: required by a bound in `spawn`
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>Rc&lt;Mutex&lt;i32&gt;&gt;</code> cannot be sent between threads safely. 이전에 살펴보았듯 Rc<T>는 스레드 safe하지 않습니다. 즉 Rc<T>의 레퍼런스 카운트는 ::clone() 호출 할 때 만약 여러 thread들에 분산되어있으면, 레퍼런스 카운트에 대해서 thread race condition이 발생할 수 있습니다. 이 때문에 잘못된 레퍼런스 카운트를 야기할 수 있고, 이는 zombie를 살아있게 만들어 memory leak이 발생하게 만듭니다.</p>
+<p>이를 해결하기 위해서 러스트는 <code>Atomic</code>을 지원합니다.</p>
+<h3 id="atomic-reference-counting-with-arct">Atomic Reference Counting with <code>Arc&lt;T&gt;</code></h3>
+<p>기본적으로 thread safe기능은 성능저하를 trade off로 가져옵니다. 그렇기 때문에 러스트에서는 thread safe가 디폴트가 아니며, 동시성이 필요한 부분에서 atmoic을 활용해 primitive type 변수들이 thread safe하도록 보장하도록 만들어주어야 합니다.</p>
+<p><code>Arc&lt;T&gt;</code>는 <code>Rc&lt;T&gt;</code>와 같은 API를 가지고 있기 때문에 앞서 예시에서 <code>Rc::</code>를 <code>Arc::</code>로 변경만 해주면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">sync</span>::<span class="p">{</span><span class="n">Arc</span><span class="p">,</span><span class="w"> </span><span class="n">Mutex</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">thread</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arc</span>::<span class="n">new</span><span class="p">(</span><span class="n">Mutex</span>::<span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span><span class="w"> </span><span class="c1">// 이 부분 변경됨
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">handles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">10</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arc</span>::<span class="n">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">counter</span><span class="p">);</span><span class="w"> </span><span class="c1">// 이 부분 변경됨.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">thread</span>::<span class="n">spawn</span><span class="p">(</span><span class="k">move</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counter</span><span class="p">.</span><span class="n">lock</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="o">*</span><span class="n">num</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">handles</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">handles</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">handle</span><span class="p">.</span><span class="n">join</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Result: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">counter</span><span class="p">.</span><span class="n">lock</span><span class="p">().</span><span class="n">unwrap</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Result: 10
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="refcelltrct-vs-mutextarct"><code>RefCell&lt;T&gt;</code>/<code>Rc&lt;T&gt;</code> vs <code>Mutex&lt;T&gt;</code>/<code>Arc&lt;T&gt;</code></h3>
+<blockquote>
+<p>두 그룹간의 유사성</p>
+</blockquote>
+<p>사실 위의 예시 코드들을 보면 counter가 mut하지 않음에도, 변경이되는 RefCell<T>와 같은 내부 가변성을 제공하는 것을 알 수 있습니다.</p>
+<p><code>Mutex&lt;T&gt;</code>는 <code>RefCell&lt;T&gt;</code>와 마찬가지로 논리적 에러를 막아주지 못합니다. 즉 RefCell<T>가 순환참조자 같은 memory leak을 야기할 수 있듯이, Mutex는  <code>Deadlock</code>위험이 있습니다.</p>
+<p>예를 들면 2개의 리소스에 대한 Mutex의 락을 두 개의 스레드가 각각 하나씩 나누어 가지고, 서로의 lock을 획득해야 다음 코드가 진행될 수 있다면 데드락이 발생할 수 있습니다.</p>
+<p>정리하면 다음과 같은 2가지 유사성이 있습니다.</p>
+<ol>
+<li>RefCell<T>와 Mutext<T>가 비슷하게 내부 가변성을 제공한다는 것입니다.</li>
+<li><code>Mutex&lt;T&gt;</code>는 Deadlock <code>RefCell&lt;T&gt;</code>는 memory leak(순환 참조 등)</li>
+</ol>
+<p><code>RefCell&lt;T&gt;</code>/<code>Rc&lt;T&gt;</code> and <code>Mutex&lt;T&gt;</code>/<code>Arc&lt;T&gt;</code></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-02-17&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/c939d4b0c4850e4942aa3c388138c3b920241544" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) c939d4b0c4850e4942aa3c388138c3b920241544: rebuilding site Fri Feb 17 15:47:29 KST 2023">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c939d4b</a></span>
+                <span>Updated on 2023-02-17&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/6c2eb0c85a009f6cd733c0fe2087674d74769423" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 6c2eb0c85a009f6cd733c0fe2087674d74769423: rebuilding site Fri Feb 17 16:34:33 KST 2023">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>6c2eb0c</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
