@@ -143,7 +143,7 @@ Headquarters: Jeju, Korea
 ## 2. Side Projects :train:
 
 <center>
-    <div id="lottie4" style="width:50%;height:50%"></div>
+    <div id="lottie4" style="width:70%;height:50%"></div>
 </center>
 
 ##### 2-1. Youtube music playlist
