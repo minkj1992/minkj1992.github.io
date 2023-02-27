@@ -1,22 +1,11 @@
-# About Minwook
+# About Minwook Je
 
 
-{{< style "img { height: 1.25rem; }" >}}
 
-![dd](https://img.shields.io/static/v1?label=love&message=love&color=pink)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/dillonzq/LoveIt?style=flat-square)](https://github.com/dillonzq/LoveIt/releases)
-[![Hugo](https://img.shields.io/badge/Hugo-%5E0.62.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
-[![GitHub stars](https://img.shields.io/github/stars/dillonzq/LoveIt?style=social)](https://github.com/dillonzq/LoveIt)
-[![GitHub forks](https://img.shields.io/github/forks/dillonzq/LoveIt?style=social)](https://github.com/dillonzq/LoveIt/fork)
-{{< /style >}}
 
-Hi I'm `minwook`. I want to be a conscientious person weighing my love and justice. 🐋
 <!--more-->
 
-
-
-## TL;DR
-
+---
 
 <div align="center">
     <img src="/images/profile3.png" width=128> <br/>
@@ -28,16 +17,39 @@ Hi I'm `minwook`. I want to be a conscientious person weighing my love and justi
     <a href="https://minkj1992.github.io"><img src="/images/kakao.png" width=16 align="center"> KakaoTalk</a>
 </div>
 
+Hi I'm `minwook`. I want to be a conscientious person weighing my love and justice. 🐋
 
+---
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.7/lottie.min.js"></script>
-
+## Experience
 <div id="lottie1"></div>
-<div id="lottie2"></div>
+
+## Education
+
+- Ajou University 
+
+## Skills
+
+[![minwook's github stats](https://github-readme-stats.vercel.app/api?username=minkj1992&theme=blue-green)](https://github.com/anuraghazra/github-readme-stats)
+
+[![Naereen's top languages](https://github-readme-stats.vercel.app/api/top-langs/?username=minkj1992&theme=blue-green&card_width=1000px&exclude_repo=minkj1992.github.io,love)](https://github.com/anuraghazra/github-readme-stats)
+
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=minkj1992&hide_progress=true&exclude_repo=minkj1992.github.io,love)](https://github.com/minkj1992/github-readme-stats)
+
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=anuraghazra&hide=contribs,prs)
+
+
+
+
+<div align="right">
+    <div id="lottie2" style="width:80%;height:50%"></div>
+</div>
+
 <div id="lottie3"></div>
 
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.7/lottie.min.js"></script>
 <script>
   const lottie1 = bodymovin.loadAnimation({
     container: document.getElementById('lottie1'),
@@ -63,7 +75,6 @@ Hi I'm `minwook`. I want to be a conscientious person weighing my love and justi
     path: 'https://raw.githubusercontent.com/minkj1992/love/main/assets/136431-3d-astronaut.json',
   });
 </script>
-
 
 
 
