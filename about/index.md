@@ -106,7 +106,7 @@
 
 <img src="/images/semes.jpeg" width="100%"/>
 
-[Homepage](https://teamnexters.com/) | [Github]((https://github.com/Nexters)
+[Homepage](https://teamnexters.com/) | [Github](https://github.com/Nexters)
 
 </center>
 
