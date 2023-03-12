@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Feb 2023 18:45:12 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 09 Mar 2023 13:42:35 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>ICP DAO</title>
+    <link>https://minkj1992.github.io/icp_dao/</link>
+    <pubDate>Thu, 09 Mar 2023 13:42:35 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/icp_dao/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/" referrerpolicy="no-referrer">
+            </div><p>How can I create an transparent donation system based on blockchain DAO concepts, in a practical way.</p>]]></description>
+</item>
+<item>
     <title>[Whitepaper] STEPN 그리고 tokenomics</title>
     <link>https://minkj1992.github.io/stepn/</link>
     <pubDate>Wed, 01 Feb 2023 18:45:12 &#43;0900</pubDate>
@@ -97,16 +107,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/principles.jpg" referrerpolicy="no-referrer">
             </div><p>2023년부터 진행할 <code>투자 시나리오</code>와 <code>투자 원칙</code>들을 정리 합니다.</p>]]></description>
-</item>
-<item>
-    <title>Book of Proverbs</title>
-    <link>https://minkj1992.github.io/proverbs/</link>
-    <pubDate>Wed, 30 Nov 2022 04:30:33 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/proverbs/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/solomon.webp" referrerpolicy="no-referrer">
-            </div><p>After reading the <code>Book of Proverbs</code>, write down some phrases that touched my heart.</p>]]></description>
 </item>
 </channel>
 </rss>

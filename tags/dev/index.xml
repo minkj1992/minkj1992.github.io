@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 01 Feb 2023 18:45:12 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 09 Mar 2023 13:42:35 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>ICP DAO</title>
+    <link>https://minkj1992.github.io/icp_dao/</link>
+    <pubDate>Thu, 09 Mar 2023 13:42:35 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/icp_dao/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/" referrerpolicy="no-referrer">
+            </div><p>How can I create an transparent donation system based on blockchain DAO concepts, in a practical way.</p>]]></description>
+</item>
+<item>
     <title>[Whitepaper] STEPN 그리고 tokenomics</title>
     <link>https://minkj1992.github.io/stepn/</link>
     <pubDate>Wed, 01 Feb 2023 18:45:12 &#43;0900</pubDate>
@@ -98,16 +108,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/gcp/google_taiwan.png" referrerpolicy="no-referrer">
             </div><p>In this article, I&rsquo;ll describe the cheapest way to deploy server with GCP in a side project</p>]]></description>
-</item>
-<item>
-    <title>Google Cloud Computing 가격 정책 비교</title>
-    <link>https://minkj1992.github.io/gcp_pricing/</link>
-    <pubDate>Thu, 07 Jul 2022 11:12:26 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/gcp_pricing/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/gcp.png" referrerpolicy="no-referrer">
-            </div><p>사이드 프로젝트를 하면서 GCP로 배포할 때, 서버 비용이 걱정되었다면!</p>]]></description>
 </item>
 </channel>
 </rss>
