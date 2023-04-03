@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>COW 🐄 in Rust 🦀 | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="COW 🐄 in Rust 🦀" />
+<meta property="og:description" content="dfinity/ic 코드를 보다 이해되지 않는 코드들이 있어, Cow를 왜 사용하는지 정리하려 합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/cow/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-03T15:35:29+09:00" />
+<meta property="article:modified_time" content="2023-04-03T17:14:22+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="COW 🐄 in Rust 🦀"/>
+<meta name="twitter:description" content="dfinity/ic 코드를 보다 이해되지 않는 코드들이 있어, Cow를 왜 사용하는지 정리하려 합니다."/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/cow/" /><link rel="prev" href="https://minkj1992.github.io/icp_dao/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "COW 🐄 in Rust 🦀",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/cow\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  240 ,
+        "url": "https:\/\/minkj1992.github.io\/cow\/","datePublished": "2023-04-03T15:35:29+09:00","dateModified": "2023-04-03T17:14:22+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">COW 🐄 in Rust 🦀</h1><h2 class="single-subtitle">clone-on-write</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-04-03">2023-04-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;240 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/cow.png"
+        data-srcset="/images/cow.png, /images/cow.png 1.5x, /images/cow.png 2x"
+        data-sizes="auto"
+        alt="/images/cow.png"
+        title="/images/cow.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#cow를-사용하는-이유">Cow를 사용하는 이유</a>
+      <ul>
+        <li><a href="#1-a-function-rarely-modifying-the-data">1. A function rarely modifying the data</a>
+          <ul>
+            <li><a href="#before">before</a></li>
+            <li><a href="#after">after</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-a-struct-optionally-owning-the-data">2. A struct optionally owning the data</a></li>
+        <li><a href="#3-a-clone-on-write-struct">3. A clone on write struct</a></li>
+        <li><a href="#4-keep-your-own-type-inside-it">4. Keep your own type inside it</a></li>
+        <li><a href="#5-borrow-the-type-as-dyn-trait">5. Borrow the type as dyn Trait</a></li>
+        <li><a href="#6-implement-safe-wrapper-over-ffi-type">6. Implement safe wrapper over FFI type</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>dfinity/ic 코드를 보다 이해되지 않는 코드들이 있어, Cow를 왜 사용하는지 정리하려 합니다.</p>
+<h2 id="tldr">TL;DR</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">enum</span> <span class="nc">Cow</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="p">,</span><span class="w"> </span><span class="n">B</span><span class="o">&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">B</span>: <span class="o">&#39;</span><span class="na">a</span> <span class="o">+</span><span class="w"> </span><span class="nb">ToOwned</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">?</span><span class="nb">Sized</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Borrowed</span><span class="p">(</span><span class="o">&amp;&#39;</span><span class="na">a</span><span class="w"> </span><span class="n">B</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Owned</span><span class="p">(</span><span class="o">&lt;</span><span class="n">B</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nb">ToOwned</span><span class="o">&gt;</span>::<span class="n">Owned</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>Cow의 약어 뜻은 clone-on-write로 read가 아닌 write시 clone시킬 수 있는 기능을 가지고 있습니다.</p>
+</li>
+<li>
+<p>Cow는 Borrowed, Owned를 구분하는 enum 타입입니다.</p>
+</li>
+<li>
+<p>제너릭 <code>B</code>는 &lsquo;a와, ToOwned, ?Sized로 바운드 되어있습니다.</p>
+</li>
+<li>
+<p><code>ToOwned</code> trait</p>
+<ul>
+<li>borrowed 데이터의 <code>Clone</code>에 대한 일반화</li>
+<li>clone시켜서, Owned 타입을 만들어 낼 수 있다.</li>
+</ul>
+</li>
+<li>
+<p><code>?Sized</code> trait</p>
+<ul>
+<li>컴파일 타임에 constant size를 알 수 있는 타입</li>
+<li>모든 타입 파라미터는 implicit bound로 <code>Sized</code>를 보유하고 있다.</li>
+<li><code>?</code>를 사용하면 이 bound를 remove시켜줄 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p>즉 Cow는 <code>Borrowed</code> 또는 <code>Owned</code> 둘 모두를 사용하고 싶을 때 사용한다. 예를 들면 &amp;str, String타입 모두 사용하길 원하는 경우.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="cp">#[derive(CandidType, Deserialize, Clone)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">struct</span> <span class="nc">LogoResult</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">logo_type</span>: <span class="nc">Cow</span><span class="o">&lt;&#39;</span><span class="nb">static</span><span class="p">,</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">data</span>: <span class="nc">Cow</span><span class="o">&lt;&#39;</span><span class="nb">static</span><span class="p">,</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span><span class="w"> </span><span class="n">DEFAULT_LOGO</span>: <span class="nc">LogoResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LogoResult</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">data</span>: <span class="nc">Cow</span>::<span class="n">Borrowed</span><span class="p">(</span><span class="n">include_base64</span><span class="o">!</span><span class="p">(</span><span class="s">&#34;logo.png&#34;</span><span class="p">)),</span><span class="w"> </span><span class="c1">//&amp;str
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="n">logo_type</span>: <span class="nc">Cow</span>::<span class="n">Borrowed</span><span class="p">(</span><span class="s">&#34;image/png&#34;</span><span class="p">),</span><span class="w"> </span><span class="c1">//&amp;str
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="cow를-사용하는-이유">Cow를 사용하는 이유</h2>
+<blockquote>
+<p><a href="https://dev.to/kgrech/6-things-you-can-do-with-the-cow-in-rust-4l55" target="_blank" rel="noopener noreffer">6 thing you can do with the 🐄 in 🦀</a>
+</p>
+</blockquote>
+<h3 id="1-a-function-rarely-modifying-the-data">1. A function rarely modifying the data</h3>
+<p>불필요하게 clone을 하게되는 경우를 막기 위해서 cow를 사용할 수 있습니다.
+FYI <code>to_string()</code>은 복사본을 전달한다.</p>
+<h4 id="before">before</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">remove_whitespaces</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">s</span><span class="p">.</span><span class="n">to_string</span><span class="p">().</span><span class="n">replace</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">remove_whitespaces</span><span class="p">(</span><span class="s">&#34;Hello world!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="after">after</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">borrow</span>::<span class="n">Cow</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">remove_whitespaces</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Cow</span><span class="o">&lt;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Cow</span>::<span class="n">Owned</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">to_string</span><span class="p">().</span><span class="n">replace</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;&#34;</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Cow</span>::<span class="n">Borrowed</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">remove_whitespaces</span><span class="p">(</span><span class="s">&#34;Hello world!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-a-struct-optionally-owning-the-data">2. A struct optionally owning the data</h3>
+<h3 id="3-a-clone-on-write-struct">3. A clone on write struct</h3>
+<h3 id="4-keep-your-own-type-inside-it">4. Keep your own type inside it</h3>
+<h3 id="5-borrow-the-type-as-dyn-trait">5. Borrow the type as dyn Trait</h3>
+<h3 id="6-implement-safe-wrapper-over-ffi-type">6. Implement safe wrapper over FFI type</h3></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-04-03&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/7e40bde2c15a812e23a7582aba40d52d3d52e892" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 7e40bde2c15a812e23a7582aba40d52d3d52e892: rebuilding site Mon Apr  3 17:14:22 KST 2023">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>7e40bde</a></span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/cow/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/cow/" data-title="COW 🐄 in Rust 🦀" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/cow/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/cow/" data-title="COW 🐄 in Rust 🦀"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/cow/" data-title="COW 🐄 in Rust 🦀"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/cow/" data-title="COW 🐄 in Rust 🦀" data-image="/images/cow.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/icp_dao/" class="prev" rel="prev" title="ICP DAO"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>ICP DAO</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>

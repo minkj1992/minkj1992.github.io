@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 09 Mar 2023 13:42:35 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 03 Apr 2023 15:35:29 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>COW 🐄 in Rust 🦀</title>
+    <link>https://minkj1992.github.io/cow/</link>
+    <pubDate>Mon, 03 Apr 2023 15:35:29 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/cow/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/cow.png" referrerpolicy="no-referrer">
+            </div><p>dfinity/ic 코드를 보다 이해되지 않는 코드들이 있어, Cow를 왜 사용하는지 정리하려 합니다.</p>]]></description>
+</item>
+<item>
     <title>ICP DAO</title>
     <link>https://minkj1992.github.io/icp_dao/</link>
     <pubDate>Thu, 09 Mar 2023 13:42:35 &#43;0900</pubDate>
@@ -98,16 +108,6 @@
             </div><blockquote>
 <p><em><strong>Whatever thy hand finds <code>to do</code>, do it with all <code>thy heart</code></strong></em> by Jesus</p>
 </blockquote>]]></description>
-</item>
-<item>
-    <title>The cheapest way to build GCP</title>
-    <link>https://minkj1992.github.io/gcp_build/</link>
-    <pubDate>Sat, 09 Jul 2022 11:03:29 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/gcp_build/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/gcp/google_taiwan.png" referrerpolicy="no-referrer">
-            </div><p>In this article, I&rsquo;ll describe the cheapest way to deploy server with GCP in a side project</p>]]></description>
 </item>
 </channel>
 </rss>

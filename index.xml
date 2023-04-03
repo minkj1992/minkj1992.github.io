@@ -4,9 +4,19 @@
         <link>https://minkj1992.github.io/</link>
         <description>I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying.</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 09 Mar 2023 13:42:35 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 03 Apr 2023 15:35:29 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>COW 🐄 in Rust 🦀</title>
+    <link>https://minkj1992.github.io/cow/</link>
+    <pubDate>Mon, 03 Apr 2023 15:35:29 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/cow/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/cow.png" referrerpolicy="no-referrer">
+            </div><p>dfinity/ic 코드를 보다 이해되지 않는 코드들이 있어, Cow를 왜 사용하는지 정리하려 합니다.</p>]]></description>
+</item>
+<item>
     <title>ICP DAO</title>
     <link>https://minkj1992.github.io/icp_dao/</link>
     <pubDate>Thu, 09 Mar 2023 13:42:35 &#43;0900</pubDate>
@@ -99,16 +109,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/nano.png" referrerpolicy="no-referrer">
             </div><p>How to setup my cold wallet (nano s plus).</p>]]></description>
-</item>
-<item>
-    <title>(WIP) 2023 투자계획</title>
-    <link>https://minkj1992.github.io/2023_investments/</link>
-    <pubDate>Sun, 04 Dec 2022 14:05:19 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/2023_investments/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/principles.jpg" referrerpolicy="no-referrer">
-            </div><p>2023년부터 진행할 <code>투자 시나리오</code>와 <code>투자 원칙</code>들을 정리 합니다.</p>]]></description>
 </item>
 </channel>
 </rss>
