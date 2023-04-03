@@ -24,13 +24,3 @@ Having fully on-chain DAOs is important because it enables all decisions to be e
 2. **Speedy User Adoption**: As co-owners, users become the biggest advocates of the product.
 3. Funding: **projects are funded through a community-driven** decentralization sale.
 
-#### What is SNS-1?
-
-
-#### 
-
-DAO 기반으로 제대로 만들고 싶은데, 처음부터 끝까지 만들기에는 여력이 안된다.
-
-Metamask / Klip  -> 
-
-원화 / 암호화폐 > 
