@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Cell and RefCell | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Cell and RefCell" />
+<meta property="og:description" content="You need to write intro in here" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/cell/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-03T20:08:09+09:00" />
+<meta property="article:modified_time" content="2023-04-03T20:08:09+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Cell and RefCell"/>
+<meta name="twitter:description" content="You need to write intro in here"/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/cell/" /><link rel="prev" href="https://minkj1992.github.io/cow/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cell and RefCell",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/cell\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  390 ,
+        "url": "https:\/\/minkj1992.github.io\/cell\/","datePublished": "2023-04-03T20:08:09+09:00","dateModified": "2023-04-03T20:08:09+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Cell and RefCell</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/rust/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>rust</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-04-03">2023-04-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;390 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/cell.png"
+        data-srcset="/images/cell.png, /images/cell.png 1.5x, /images/cell.png 2x"
+        data-sizes="auto"
+        alt="/images/cell.png"
+        title="/images/cell.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#1-cell">1. Cell</a></li>
+    <li><a href="#2-refcell">2. <code>RefCell</code></a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>You need to write intro in here</p>
+<h2 id="tldr">TL;DR</h2>
+<p>참고로 Cell과 RefCell는 thread-safe하지 않다. 즉 single-threaded way에서만 safe를 보장한다.</p>
+<ul>
+<li>
+<p><code>Cell</code>: immutable한 타입을 명시적으로 런타임에 mutable하게 사용할 수 있고 value를 return한다.</p>
+</li>
+<li>
+<p><code>RefCell</code>: Cell의 Reference버전</p>
+</li>
+<li>
+<p>차이점</p>
+<ul>
+<li>Cell provides you values, RefCell with references</li>
+<li>Cell never panics, RefCell can panic</li>
+<li>panic이 없는 Cell을 선호하게 짜는게 유리하며, 몇몇 operation에서는 Cell을 사용할 수 없으니 그때 RefCell을 사용한다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-cell">1. Cell</h2>
+<blockquote>
+<p>Interior mutability</p>
+</blockquote>
+<ul>
+<li><a href="https://fongyoong.github.io/easy_rust/Chapter_41.html?highlight=cell#cell" target="_blank" rel="noopener noreffer">Cell</a>
+</li>
+</ul>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/cell.png"
+        data-srcset="/images/cell.png, /images/cell.png 1.5x, /images/cell.png 2x"
+        data-sizes="auto"
+        alt="/images/cell.png"
+        title="/images/cell.png" /></p>
+</center>
+<p><code>mut</code> 키워드 없이, mutable하게 변수를 변경할 수 있는 방법이 뭐가 있을까?
+러스트에서는 몇가지 방법을 제공하는데 그 중 가장 simple한 방법은 <code>Cell</code>이다.</p>
+<blockquote>
+<p>언제 사용할까? 예를 들어 immutable struct에서 특정 필드만 mutable하게 관리하고 싶을 때.</p>
+</blockquote>
+<ul>
+<li>before</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">PhoneModel</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">company_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">model_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">screen_size</span>: <span class="kt">f32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">memory</span>: <span class="kt">usize</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">date_issued</span>: <span class="kt">u32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">on_sale</span>: <span class="kt">bool</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">super_phone_3000</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PhoneModel</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">company_name</span>: <span class="s">&#34;YY Electronics&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">model_name</span>: <span class="s">&#34;Super Phone 3000&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">screen_size</span>: <span class="mf">7.5</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">memory</span>: <span class="mi">4_000_000</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">date_issued</span>: <span class="mi">2020</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">on_sale</span>: <span class="nc">true</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>after</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cell</span>::<span class="n">Cell</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">struct</span> <span class="nc">PhoneModel</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">company_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">model_name</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">screen_size</span>: <span class="kt">f32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">memory</span>: <span class="kt">usize</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">date_issued</span>: <span class="kt">u32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">on_sale</span>: <span class="nc">Cell</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">super_phone_3000</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PhoneModel</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">company_name</span>: <span class="s">&#34;YY Electronics&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">model_name</span>: <span class="s">&#34;Super Phone 3000&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">screen_size</span>: <span class="mf">7.5</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">memory</span>: <span class="mi">4_000_000</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">date_issued</span>: <span class="mi">2020</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">on_sale</span>: <span class="nc">Cell</span>::<span class="n">new</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 10 years later, super_phone_3000 is not on sale anymore
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="n">super_phone_3000</span><span class="p">.</span><span class="n">on_sale</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong><code>Cell</code>은 value를 return하기</strong> 때문에 <code>Copy types</code>에 가장 적홥하다.</li>
+</ul>
+<h2 id="2-refcell">2. <code>RefCell</code></h2>
+<blockquote>
+<p><a href="https://fongyoong.github.io/easy_rust/Chapter_42.html" target="_blank" rel="noopener noreffer">RefCell</a>
+</p>
+</blockquote>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/refcell.png"
+        data-srcset="/images/refcell.png, /images/refcell.png 1.5x, /images/refcell.png 2x"
+        data-sizes="auto"
+        alt="/images/refcell.png"
+        title="/images/refcell.png" /></p>
+</center>
+<p><code>Cell</code>과 마찬가지로 <code>mut</code>없이 value를 change할 수 있지만, <code>RefCell</code>는 <code>Copy</code> 대신 reference를 사용한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cell</span>::<span class="n">RefCell</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[derive(Debug)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">struct</span> <span class="nc">User</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">id</span>: <span class="kt">u32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">year_registered</span>: <span class="kt">u32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">username</span>: <span class="nb">String</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">active</span>: <span class="nc">RefCell</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Many other fields
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">user_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">id</span>: <span class="mi">1</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">year_registered</span>: <span class="mi">2020</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">username</span>: <span class="s">&#34;User 1&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">active</span>: <span class="nc">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{:?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">user_1</span><span class="p">.</span><span class="n">active</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>RefCell은 총 2가지 메서드를 통해 RO(read only), RW(Read/Write) 를 처리한다. 이는 <code>&amp;</code>와 <code>&amp;mut</code> 각각과 대응된다.</p>
+<ul>
+<li><code>.borrow()</code></li>
+<li><code>.borrow_mut()</code></li>
+</ul>
+<p>당연히 <code>borrow_mut()</code>는 최대 1개만 사용되어야 한다. 또한 readonly인 <code>borrow()</code>는 여러개 사용되어도 상관없다.</p>
+<p><strong>마지막으로 <code>borrow()</code>와 <code>borrow_mut()</code>는 동시에 사용할 수 없다.</strong></p>
+<ul>
+<li><code>replace()</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="n">user_1</span><span class="p">.</span><span class="n">active</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>replace_with()</code>: 조건을 통한 replace</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// 🚧
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2020</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">user_1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">active</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">.</span><span class="n">replace_with</span><span class="p">(</span><span class="o">|</span><span class="n">_</span><span class="o">|</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">date</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2000</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">true</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">});</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;{:?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">user_1</span><span class="p">.</span><span class="n">active</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>또한 Cell과 마찬가지로 Runtime에 동작하기 때문에 panic이 일어날 수 있다. 예를들면 borrow_mut()를 2번사용하게 되면 컴파일 타임에러가 아닌 런타임에 에러가 난다.</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="o">..</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">user_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">User</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">id</span>: <span class="mi">1</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">year_registered</span>: <span class="mi">2020</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">username</span>: <span class="s">&#34;User 1&#34;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">active</span>: <span class="nc">RefCell</span>::<span class="n">new</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">borrow_one</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_1</span><span class="p">.</span><span class="n">active</span><span class="p">.</span><span class="n">borrow_mut</span><span class="p">();</span><span class="w"> </span><span class="c1">// first mutable borrow - okay
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">borrow_two</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_1</span><span class="p">.</span><span class="n">active</span><span class="p">.</span><span class="n">borrow_mut</span><span class="p">();</span><span class="w"> </span><span class="c1">// second mutable borrow - not okay
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// thread &#39;main&#39; panicked at &#39;already borrowed: BorrowMutError&#39;, C:\Users\mithr\.rustup\toolchains\stable-x86_64-pc-windows-msvc\lib/rustlib/src/rust\src\libcore\cell.rs:877:9
+</span></span></span><span class="line"><span class="cl"><span class="c1">// note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+</span></span></span><span class="line"><span class="cl"><span class="c1">// error: process didn&#39;t exit successfully: `target\debug\rust_book.exe` (exit code: 101)
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-04-03</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/cell/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/cell/" data-title="Cell and RefCell" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/cell/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/cell/" data-title="Cell and RefCell"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/cell/" data-title="Cell and RefCell"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/cell/" data-title="Cell and RefCell" data-image="/images/cell.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/cow/" class="prev" rel="prev" title="COW 🐄 in Rust 🦀"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>COW 🐄 in Rust 🦀</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>
