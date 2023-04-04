@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/categories/rust/</link>
         <description>rust - Category - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 03 Apr 2023 20:08:09 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 04 Apr 2023 10:30:16 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+    <title>std::thread_local!</title>
+    <link>https://minkj1992.github.io/threadlocal/</link>
+    <pubDate>Tue, 04 Apr 2023 10:30:16 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/threadlocal/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/thread_local.png" referrerpolicy="no-referrer">
+            </div><p>A brief summary about <code>std::thread_local!</code></p>]]></description>
+</item>
+<item>
     <title>Cell and RefCell</title>
     <link>https://minkj1992.github.io/cell/</link>
     <pubDate>Mon, 03 Apr 2023 20:08:09 &#43;0900</pubDate>

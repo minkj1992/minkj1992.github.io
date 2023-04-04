@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>dfinity - Category - minkj1992</title>
+        <link>https://minkj1992.github.io/categories/dfinity/</link>
+        <description>dfinity - Category - minkj1992</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 04 Apr 2023 10:30:16 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dfinity/" rel="self" type="application/rss+xml" /><item>
+    <title>std::thread_local!</title>
+    <link>https://minkj1992.github.io/threadlocal/</link>
+    <pubDate>Tue, 04 Apr 2023 10:30:16 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/threadlocal/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/thread_local.png" referrerpolicy="no-referrer">
+            </div><p>A brief summary about <code>std::thread_local!</code></p>]]></description>
+</item>
+</channel>
+</rss>

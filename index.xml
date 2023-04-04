@@ -4,9 +4,19 @@
         <link>https://minkj1992.github.io/</link>
         <description>I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying.</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 03 Apr 2023 20:08:09 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 04 Apr 2023 10:30:16 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>std::thread_local!</title>
+    <link>https://minkj1992.github.io/threadlocal/</link>
+    <pubDate>Tue, 04 Apr 2023 10:30:16 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/threadlocal/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/thread_local.png" referrerpolicy="no-referrer">
+            </div><p>A brief summary about <code>std::thread_local!</code></p>]]></description>
+</item>
+<item>
     <title>Cell and RefCell</title>
     <link>https://minkj1992.github.io/cell/</link>
     <pubDate>Mon, 03 Apr 2023 20:08:09 &#43;0900</pubDate>
@@ -99,16 +109,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/confucius.webp" referrerpolicy="no-referrer">
             </div><p>논어가 말하는 양심은 무엇인가?</p>]]></description>
-</item>
-<item>
-    <title>Warren buffett&#39;s word of wisdom</title>
-    <link>https://minkj1992.github.io/warren_buffett/</link>
-    <pubDate>Thu, 15 Dec 2022 08:09:59 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/warren_buffett/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/buffett.png" referrerpolicy="no-referrer">
-            </div><p>워렌 버핏이 바라보는 돈과 투자 그리고 기업에 대하여.</p>]]></description>
 </item>
 </channel>
 </rss>
