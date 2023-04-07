@@ -17,7 +17,7 @@
 
 ## 1. Accounts
 
-### 1.1 용어
+#### 1.1 용어
 - `IC principal`: `account` = 1: n
 - `account` : `owner` = 1:1 (no joint accounts)
 
@@ -35,7 +35,7 @@ account_identifier(principal, subaccount_identifier) = CRC32(h) || h
 h = sha224(“\x0Aaccount-id” || principal || subaccount_identifier)
 ```
 
-### Type
+## 2. Types
 
 ```rs
 type Tokens = record {
@@ -112,11 +112,11 @@ _It is represented as a transaction from the source account to the ICP supply ac
 {{< /admonition  >}}
 
 
-## 2. Ledger block
+## 3. Ledger block
 
 **확장성을 위해 ledger canister는 entire ledger transactions들을 저장하지 않습니다.** 대신 ledger canister는 가장 최근 블록으로 구성된 suffix of the ledger를 저장하고 있습니다. 그리고 나머지 블록들은 모두 `archive canisters`에 저장됩니다.
 
-## 3. Conclusion
+## 4. Conclusion
 
 Ledger canister는 ICP token관련된 block들을 저장하며, 아래 3가지 기능을 interface로 제공합니다.
 
