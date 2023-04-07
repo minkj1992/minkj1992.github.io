@@ -4,7 +4,18 @@
         <link>https://minkj1992.github.io/categories/icp/</link>
         <description>icp - Category - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 27 Jan 2023 17:19:45 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/icp/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 07 Apr 2023 22:07:10 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/icp/" rel="self" type="application/rss+xml" /><item>
+    <title>The Ledger canister</title>
+    <link>https://minkj1992.github.io/ledger_canister/</link>
+    <pubDate>Fri, 07 Apr 2023 22:07:10 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/ledger_canister/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ledger_canister.png" referrerpolicy="no-referrer">
+            </div><p><a href="https://internetcomputer.org/docs/current/references/ledger" target="_blank" rel="noopener noreffer">The Ledger canister from internet computer docs</a>
+</p>]]></description>
+</item>
+<item>
     <title>Internet Computer development environment</title>
     <link>https://minkj1992.github.io/setup_icp_env/</link>
     <pubDate>Fri, 27 Jan 2023 17:19:45 &#43;0900</pubDate>

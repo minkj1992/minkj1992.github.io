@@ -4,7 +4,18 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 04 Apr 2023 10:30:16 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 07 Apr 2023 22:07:10 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>The Ledger canister</title>
+    <link>https://minkj1992.github.io/ledger_canister/</link>
+    <pubDate>Fri, 07 Apr 2023 22:07:10 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/ledger_canister/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ledger_canister.png" referrerpolicy="no-referrer">
+            </div><p><a href="https://internetcomputer.org/docs/current/references/ledger" target="_blank" rel="noopener noreffer">The Ledger canister from internet computer docs</a>
+</p>]]></description>
+</item>
+<item>
     <title>std::thread_local!</title>
     <link>https://minkj1992.github.io/threadlocal/</link>
     <pubDate>Tue, 04 Apr 2023 10:30:16 &#43;0900</pubDate>
@@ -97,16 +108,6 @@
                 <img src="/images/rust.png" referrerpolicy="no-referrer">
             </div><p><a href="https://prev.rust-lang.org/ko-KR/faq.html" target="_blank" rel="noopener noreffer">Rust Q&amp;A</a>
 를 통해서 알아보는 Rust 프로그래밍 원리를 살펴보고, 유용했던 문구들을 스크랩 해둡니다.</p>]]></description>
-</item>
-<item>
-    <title>The analects, by Confucius</title>
-    <link>https://minkj1992.github.io/the_analects/</link>
-    <pubDate>Sun, 18 Dec 2022 19:51:09 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/the_analects/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/confucius.webp" referrerpolicy="no-referrer">
-            </div><p>논어가 말하는 양심은 무엇인가?</p>]]></description>
 </item>
 </channel>
 </rss>

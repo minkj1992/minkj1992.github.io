@@ -4,7 +4,18 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 04 Apr 2023 10:30:16 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 07 Apr 2023 22:07:10 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>The Ledger canister</title>
+    <link>https://minkj1992.github.io/ledger_canister/</link>
+    <pubDate>Fri, 07 Apr 2023 22:07:10 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/ledger_canister/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ledger_canister.png" referrerpolicy="no-referrer">
+            </div><p><a href="https://internetcomputer.org/docs/current/references/ledger" target="_blank" rel="noopener noreffer">The Ledger canister from internet computer docs</a>
+</p>]]></description>
+</item>
+<item>
     <title>std::thread_local!</title>
     <link>https://minkj1992.github.io/threadlocal/</link>
     <pubDate>Tue, 04 Apr 2023 10:30:16 &#43;0900</pubDate>
@@ -96,16 +107,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/carbon.webp" referrerpolicy="no-referrer">
             </div><p>Let&rsquo;s deep dive into <code>c++</code> and <code>Carbon</code></p>]]></description>
-</item>
-<item>
-    <title>Hitori Saito</title>
-    <link>https://minkj1992.github.io/hitori-saito/</link>
-    <pubDate>Sat, 10 Sep 2022 13:43:40 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/hitori-saito/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/rich.jpeg" referrerpolicy="no-referrer">
-            </div><p><em>The warm words of the wise rich old-man <code>Saito Hitori</code></em></p>]]></description>
 </item>
 </channel>
 </rss>

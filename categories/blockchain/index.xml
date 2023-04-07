@@ -4,7 +4,18 @@
         <link>https://minkj1992.github.io/categories/blockchain/</link>
         <description>blockchain - Category - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 29 Jan 2022 16:27:53 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/blockchain/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 07 Apr 2023 22:07:10 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/blockchain/" rel="self" type="application/rss+xml" /><item>
+    <title>The Ledger canister</title>
+    <link>https://minkj1992.github.io/ledger_canister/</link>
+    <pubDate>Fri, 07 Apr 2023 22:07:10 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/ledger_canister/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ledger_canister.png" referrerpolicy="no-referrer">
+            </div><p><a href="https://internetcomputer.org/docs/current/references/ledger" target="_blank" rel="noopener noreffer">The Ledger canister from internet computer docs</a>
+</p>]]></description>
+</item>
+<item>
     <title>[마스터링 이더리움 CH03] Ethereum Client</title>
     <link>https://minkj1992.github.io/ch03_eth_client/</link>
     <pubDate>Sat, 29 Jan 2022 16:27:53 &#43;0900</pubDate>
