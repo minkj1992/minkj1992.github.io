@@ -11,7 +11,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/mdn-css/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-07-18T21:18:38+09:00" />
-<meta property="article:modified_time" content="2023-07-18T21:18:38+09:00" />
+<meta property="article:modified_time" content="2023-07-18T22:18:03+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -36,8 +36,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  335 ,
-        "url": "https:\/\/minkj1992.github.io\/mdn-css\/","datePublished": "2023-07-18T21:18:38+09:00","dateModified": "2023-07-18T21:18:38+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  849 ,
+        "url": "https:\/\/minkj1992.github.io\/mdn-css\/","datePublished": "2023-07-18T21:18:38+09:00","dateModified": "2023-07-18T22:18:03+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -175,16 +175,16 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CSS (MDN)</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-18">2023-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;335 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-18">2023-07-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;849 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/"
-        data-srcset="/images/, /images/ 1.5x, /images/ 2x"
+        data-src="/images/css.svg"
+        data-srcset="/images/css.svg, /images/css.svg 1.5x, /images/css.svg 2x"
         data-sizes="auto"
-        alt="/images/"
-        title="/images/" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/css.svg"
+        title="/images/css.svg" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
@@ -203,7 +203,17 @@
         <li><a href="#css-작동-방식">CSS 작동 방식</a></li>
       </ul>
     </li>
-    <li><a href="#2-css-구성-블록">2. CSS 구성 블록</a></li>
+    <li><a href="#2-css-구성-블록">2. CSS 구성 블록</a>
+      <ul>
+        <li><a href="#css-선택자">CSS 선택자</a></li>
+        <li><a href="#--vs-">&rsquo; &rsquo; vs &lsquo;&gt;&rsquo;</a></li>
+        <li><a href="#2이상-클래스-적용">2이상 클래스 적용</a></li>
+        <li><a href="#attribute-selector">Attribute Selector</a></li>
+        <li><a href="#pseudo-class-">Pseudo Class (<code>:</code>)</a></li>
+        <li><a href="#pseudo-element-">Pseudo Element (<code>::</code>)</a></li>
+        <li><a href="#cascade-layer">Cascade Layer</a></li>
+      </ul>
+    </li>
     <li><a href="#refs">REFS</a></li>
   </ul>
 </nav></div>
@@ -405,6 +415,269 @@
 <p><a href="https://developer.mozilla.org/ko/docs/Learn/CSS/Building_blocks" target="_blank" rel="noopener noreffer">https://developer.mozilla.org/ko/docs/Learn/CSS/Building_blocks</a>
 </p>
 </blockquote>
+<h3 id="css-선택자">CSS 선택자</h3>
+<ul>
+<li>
+<p>유형</p>
+<ol>
+<li>type</li>
+<li>class</li>
+<li>id</li>
+</ol>
+</li>
+<li>
+<p>속성 선택자</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">a</span><span class="o">[</span><span class="nt">title</span><span class="o">]</span> <span class="p">{</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Pseudo-classes 및 pseudo-elements</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="c">/* &lt;article&gt; 요소의 모든 자식 요소 중에서 첫 번째 자식 요소에 스타일을 적용  */</span>
+</span></span><span class="line"><span class="cl"><span class="nt">article</span> <span class="p">:</span><span class="nd">first-child</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">/* article :first-child와 같음. */</span>
+</span></span><span class="line"><span class="cl"><span class="nt">article</span> <span class="o">*</span><span class="p">:</span><span class="nd">first-child</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">/*  &lt;article&gt; 요소가 부모 요소의 첫 번째 자식으로 있을 때에만 스타일이 적용됩니다. 즉, &lt;article&gt; 요소가 문서 내에서 최상위 요소가 되거나, 다른 요소들 사이에서 첫 번째로 등장하는 경우에만 스타일이 적용 */</span>
+</span></span><span class="line"><span class="cl"><span class="nt">article</span><span class="p">:</span><span class="nd">first-child</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">p</span><span class="p">::</span><span class="nd">first-line</span> <span class="p">{</span> <span class="p">}</span> <span class="o">//</span> <span class="nt">pseudo-elements</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="--vs-">&rsquo; &rsquo; vs &lsquo;&gt;&rsquo;</h3>
+<p>하위 결합자 (Descendant combinator)와 자식 결합자 (Child combinator)는 CSS에서 요소를 선택하는 데 사용되는 두 가지 다른 방식입니다.</p>
+<ul>
+<li>
+<p>하위 결합자 (<code> </code>):
+이 결합자는 한 요소의 모든 하위 요소를 선택하는 데 사용됩니다. 예를 들어, article p는 article 요소 안에 있는 모든 p 요소를 선택합니다. 이는 중첩된 p 요소가 있더라도 해당 p가 어디에 위치하든 간에 모든 p 요소를 선택합니다.</p>
+</li>
+<li>
+<p>자식 결합자 (<code>&gt;</code>):
+이 결합자는 바로 아래에 있는 자식 요소만을 선택합니다. article &gt; p라는 선택자는 article 요소의 직접적인 자식인 p 요소만을 선택합니다. 만약 p 요소가 더 깊게 중첩되어 있으면, 그 요소는 선택되지 않습니다.</p>
+</li>
+</ul>
+<p>즉, 이 둘의 주요한 차이는 article p가 article 내의 모든 수준에서 p 요소를 선택하는 반면, article &gt; p는 오직 article의 직접적인 자식인 p 요소만을 선택한다는 것입니다.</p>
+<h3 id="2이상-클래스-적용">2이상 클래스 적용</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-svelte" data-lang="svelte"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">notebox</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">border</span><span class="p">:</span> <span class="mi">4</span><span class="kt">px</span> <span class="kc">solid</span> <span class="mh">#666</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">padding</span><span class="p">:</span> <span class="mf">.5</span><span class="kt">em</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">notebox</span><span class="p">.</span><span class="nc">warning</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">border-color</span><span class="p">:</span> <span class="kc">orange</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">.</span><span class="nc">notebox</span><span class="p">.</span><span class="nc">danger</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">border-color</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;notebox&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    This is an informational note.
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;notebox warning&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    This note shows a warning.
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;notebox danger&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    This note shows danger!
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;danger&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    This won&#39;t get styled — it also needs to have the notebox class
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>    
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="attribute-selector">Attribute Selector</h3>
+<blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Attribute_selectors#presence_and_value_selectors" target="_blank" rel="noopener noreffer">https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Attribute_selectors#presence_and_value_selectors</a>
+</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>선택자</th>
+<th>예</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[attr]</td>
+<td>a[title]</td>
+<td>attr 속성(<strong>이름</strong>은 대괄호 안의 값임)이 있는 요소와 일치합니다 .</td>
+</tr>
+<tr>
+<td>[attr=value]</td>
+<td>a[href=&ldquo;https://example.com&rdquo;]</td>
+<td>값이 <strong>정확히 value</strong> (따옴표 안의 문자열) 인 attr 속성이 있는 요소와 일치합니다 .</td>
+</tr>
+<tr>
+<td>[attr~=value]</td>
+<td>p[class~=&ldquo;special&rdquo;]</td>
+<td>값이 정확히 value 인 attr 속성이 있는 요소와 일치하거나 (공백으로 구분된) 값 목록에 있는 값을 <strong>포함</strong>합니다 .</td>
+</tr>
+<tr>
+<td>[attr|=value]</td>
+<td>div[lang|=&ldquo;zh&rdquo;]</td>
+<td>값이 정확히 value 이거나 <strong>바로 뒤에 하이픈</strong>이 오는 value 로 시작하는 attr 속성 이 있는 요소와 일치합니다 .</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="c">/* li에 class가 있는 요소만 */</span>
+</span></span><span class="line"><span class="cl"><span class="nt">li</span><span class="o">[</span><span class="nt">class</span><span class="o">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">200</span><span class="kt">%</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">/* li의 class 이름이 정확히 a */</span>
+</span></span><span class="line"><span class="cl"><span class="c">/* 적용되지 않음:  &lt;li class=&#34;a b&#34;&gt;Item 2&lt;/li&gt; */</span>
+</span></span><span class="line"><span class="cl"><span class="nt">li</span><span class="o">[</span><span class="nt">class</span><span class="o">=</span><span class="s2">&#34;a&#34;</span><span class="o">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background-color</span><span class="p">:</span> <span class="kc">yellow</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">/* a를 포함 */</span>
+</span></span><span class="line"><span class="cl"><span class="c">/* 적용됨 &lt;li class=&#34;a b&#34;&gt;Item 2&lt;/li&gt; */</span>
+</span></span><span class="line"><span class="cl"><span class="c">/* 적용되지 않음 &lt;li class=&#34;ab&#34;&gt;Item 4&lt;/li&gt; */</span>
+</span></span><span class="line"><span class="cl"><span class="nt">li</span><span class="o">[</span><span class="nt">class</span><span class="o">~=</span><span class="s2">&#34;a&#34;</span><span class="o">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>대소문자 구분하지 않음 (<code>i</code>)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nt">li</span><span class="o">[</span><span class="nt">class</span><span class="o">^=</span><span class="s2">&#34;a&#34;</span> <span class="nt">i</span><span class="o">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="kc">red</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pseudo-class-">Pseudo Class (<code>:</code>)</h3>
+<blockquote>
+<p>Pseudo Class는 특정 상태에 있는 요소를 선택하는 선택기입니다</p>
+</blockquote>
+<ul>
+<li><code>:hover</code></li>
+<li><code>:first-child</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">article</span> <span class="nt">p</span><span class="p">:</span><span class="nd">first-child</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-size</span><span class="p">:</span> <span class="mi">120</span><span class="kt">%</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-weight</span><span class="p">:</span> <span class="kc">bold</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>   
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="pseudo-element-">Pseudo Element (<code>::</code>)</h3>
+<blockquote>
+<p>기존 요소에 클래스를 적용하는 것이 아니라 완전히 새로운 HTML 요소를 마크업에 추가한 것처럼 작동합니다.</p>
+</blockquote>
+<h3 id="cascade-layer">Cascade Layer</h3>
+<blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers" target="_blank" rel="noopener noreffer">https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers</a>
+</p>
+</blockquote>
 <h2 id="refs">REFS</h2>
 <ul>
 <li><a href="https://developer.mozilla.org/ko/docs/Learn/CSS/Building_blocks/Debugging_CSS" target="_blank" rel="noopener noreffer">css 디버깅</a>
@@ -413,14 +686,15 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-07-18</span>
+                <span>Updated on 2023-07-18&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/5831a09d6e602962817451a86f6ddf96c68c6572" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 5831a09d6e602962817451a86f6ddf96c68c6572: mdn css">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>5831a09</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/mdn-css/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/mdn-css/" data-title="CSS (MDN)" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/mdn-css/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/mdn-css/" data-title="CSS (MDN)"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/mdn-css/" data-title="CSS (MDN)"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/mdn-css/" data-title="CSS (MDN)" data-image="/images/"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/mdn-css/" data-title="CSS (MDN)" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/mdn-css/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/mdn-css/" data-title="CSS (MDN)"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/mdn-css/" data-title="CSS (MDN)"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/mdn-css/" data-title="CSS (MDN)" data-image="/images/css.svg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
