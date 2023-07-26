@@ -2,14 +2,13 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2023-07-26T19:49:24&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/hydrate/</loc><lastmod>2023-07-26T19:49:24&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/</loc><lastmod>2023-07-26T19:49:24&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2023-07-26T19:49:24&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2023-07-26T19:49:24&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/</loc><lastmod>2023-07-26T19:29:12&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/dev/</loc><lastmod>2023-07-26T19:29:12&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/elderjs/</loc><lastmod>2023-07-26T19:29:12&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/</loc><lastmod>2023-07-26T21:08:15&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2023-07-26T21:08:15&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/dev/</loc><lastmod>2023-07-26T21:08:15&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/elderjs/</loc><lastmod>2023-07-26T21:08:15&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/</loc><lastmod>2023-07-26T21:08:15&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2023-07-26T21:08:15&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2023-07-26T21:08:15&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/mdn-css/</loc><lastmod>2023-07-19T21:58:50&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/categories/blockchain/</loc><lastmod>2023-04-07T22:58:47&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/categories/dfinity/</loc><lastmod>2023-04-07T22:58:47&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
