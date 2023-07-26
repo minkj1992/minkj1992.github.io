@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Elderjs | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Elderjs" />
+<meta property="og:description" content="Elder.js: an SEO first Svelte Framework &amp; Static Site Generator" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/elderjs/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-26T19:29:12+09:00" />
+<meta property="article:modified_time" content="2023-07-26T19:29:12+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Elderjs"/>
+<meta name="twitter:description" content="Elder.js: an SEO first Svelte Framework &amp; Static Site Generator"/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/elderjs/" /><link rel="prev" href="https://minkj1992.github.io/mdn-css/" /><link rel="next" href="https://minkj1992.github.io/hydrate/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Elderjs",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/elderjs\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  1160 ,
+        "url": "https:\/\/minkj1992.github.io\/elderjs\/","datePublished": "2023-07-26T19:29:12+09:00","dateModified": "2023-07-26T19:29:12+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Elderjs</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-26">2023-07-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1160 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/elderjs.png"
+        data-srcset="/images/elderjs.png, /images/elderjs.png 1.5x, /images/elderjs.png 2x"
+        data-sizes="auto"
+        alt="/images/elderjs.png"
+        title="/images/elderjs.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#cli">cli</a></li>
+    <li><a href="#elderjs의-markdown-plugin"><code>Elder.js의 Markdown-plugin</code></a>
+      <ul>
+        <li><a href="#markdown-plugins-ecosystem"><code>Markdown plugin's</code> Ecosystem</a></li>
+      </ul>
+    </li>
+    <li><a href="#routejs"><code>Route.js</code></a></li>
+    <li><a href="#pagests">Pages.ts</a></li>
+    <li><a href="#hooksts">Hooks.ts</a></li>
+    <li><a href="#elderjs-x-svelte"><code>Elder.js</code> x <code>Svelte</code></a>
+      <ul>
+        <li><a href="#partial-hydration">Partial Hydration</a></li>
+      </ul>
+    </li>
+    <li><a href="#shorcodes"><code>Shorcodes</code></a></li>
+    <li><a href="#elderjs-data-flow">Elder.js Data flow</a></li>
+    <li><a href="#elderjs-vs-sveltekit">Elder.js vs Sveltekit</a></li>
+    <li><a href="#더-읽어볼거리">더 읽어볼거리</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><code>Elder.js</code>: an SEO first Svelte Framework &amp; Static Site Generator</p>
+<h1 id="elderjs">Elder.js</h1>
+<blockquote>
+<p><a href="https://elderguide.com/tech/elderjs" target="_blank" rel="noopener noreffer">https://elderguide.com/tech/elderjs</a>
+</p>
+</blockquote>
+<h2 id="cli">cli</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pnpm start
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">npm run build
+</span></span><span class="line"><span class="cl"><span class="c1"># preview</span>
+</span></span><span class="line"><span class="cl">npx sirv-cli public
+</span></span><span class="line"><span class="cl"><span class="c1"># To Run in SSR Mode for Production:</span>
+</span></span><span class="line"><span class="cl">npm run serve
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="elderjs의-markdown-plugin"><code>Elder.js의 Markdown-plugin</code></h2>
+<ul>
+<li><a href="https://github.com/Elderjs/plugins/tree/master/packages/markdown#getting-all-markdown-for-a-route" target="_blank" rel="noopener noreffer">Getting all Markdown For a Route</a>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">data.markdown
+</span></span><span class="line"><span class="cl">data.markdown.blog
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>By default, if there is a <strong>date field in your frontmatter</strong> it will sort all of the markdown for that route by it.</li>
+<li>If there is a <strong>slug field in your frontmatter</strong> it will use that for the slug, if not it falls back to the <strong>filename</strong>.</li>
+<li>If <code>draft: true</code> is in a file&rsquo;s <strong>frontmatter</strong> or a <strong>slug is prefixed with draft-</strong> these markdown files will be hidden when <code>process.env.NODE_ENV === 'production'</code>. They will also be prefixed with DRAFT: [Post Title Here] to make this functionality more obvious.</li>
+</ul>
+<p>markdown 플러그인이 data hook때, 어떤 데이터들을 추가하는지 나타내는 코드</p>
+<ul>
+<li><a href="https://github.com/Elderjs/plugins/blob/f7e8fd8f2503881342220baf9df6b2d535427f24/packages/markdown/src/index.ts#L222" target="_blank" rel="noopener noreffer">markdown plugin data hook</a>
+</li>
+<li><a href="https://elderguide.com/tech/elderjs/#data" target="_blank" rel="noopener noreffer">elder js <code>data</code> hook</a>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// https://github.com/Elderjs/plugins/blob/f7e8fd8f2503881342220baf9df6b2d535427f24/packages/markdown/src/index.ts#L222
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">hook</span><span class="o">:</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;addFrontmatterAndHtmlToDataForRequest&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">description</span><span class="o">:</span> <span class="s1">&#39;Adds parsed frontmatter and html to the data object for the specific request.&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">priority</span><span class="o">:</span> <span class="mi">50</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">run</span><span class="o">:</span> <span class="kr">async</span> <span class="p">({</span> <span class="nx">request</span><span class="p">,</span> <span class="nx">data</span> <span class="p">})</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">markdown</span> <span class="o">&amp;&amp;</span> <span class="nx">data</span><span class="p">.</span><span class="nx">markdown</span><span class="p">[</span><span class="nx">request</span><span class="p">.</span><span class="nx">route</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="kr">const</span> <span class="nx">markdown</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">markdown</span><span class="p">[</span><span class="nx">request</span><span class="p">.</span><span class="nx">route</span><span class="p">].</span><span class="nx">find</span><span class="p">((</span><span class="nx">m</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">slug</span> <span class="o">===</span> <span class="nx">request</span><span class="p">.</span><span class="nx">slug</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nx">markdown</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">await</span> <span class="nx">markdown</span><span class="p">.</span><span class="nx">compileHtml</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="kr">const</span> <span class="p">{</span> <span class="nx">html</span><span class="p">,</span> <span class="nx">frontmatter</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span> <span class="nx">addToData</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">markdown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="nx">data</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="p">...</span><span class="nx">data</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="p">...</span><span class="nx">addToData</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">html</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">frontmatter</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">};</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="markdown-plugins-ecosystem"><code>Markdown plugin's</code> Ecosystem</h3>
+<ul>
+<li>
+<p><a href="https://github.com/Elderjs/plugins/tree/master/packages/markdown" target="_blank" rel="noopener noreffer">Markdown plugin</a>
+</p>
+</li>
+<li>
+<p>markdown</p>
+<ul>
+<li>remarkjs (Markdown Abstract Syntax Tree format -&gt; unified)
+<ul>
+<li><code>remark-frontmatter</code>: 마크다운 frontmatter 처리</li>
+<li><code>remark-gfm</code>: github flavored markdown 형식 변환</li>
+<li><a href="https://github.com/remarkjs/remark-slug/tree/8e6394c" target="_blank" rel="noopener noreffer"><code>remark-slug</code></a>
+: (Deprecated) html tag id 채워주기</li>
+<li><a href="https://github.com/remarkjs/remark-html" target="_blank" rel="noopener noreffer"><code>remark-html</code></a>
+
+<ul>
+<li>serializing HTML</li>
+<li>unified와 remark 그리고 rehype를 이어준다.</li>
+<li><a href="https://github.com/remarkjs/remark-html#when-should-i-use-this" target="_blank" rel="noopener noreffer">복수의 (unified, rehype) markdown -&gt; html 컴파일러가 필요한 이유</a>
+</li>
+</ul>
+</li>
+<li><code>remark</code> unified, remark-parse, and remark-stringify, useful when input and output are markdown</li>
+</ul>
+</li>
+<li>unified
+<ul>
+<li>transform markdown -&gt; HTML</li>
+</ul>
+</li>
+<li><code>rehype</code>: Markdown -&gt; HTML (uses <code>hast</code>)</li>
+</ul>
+</li>
+</ul>
+<p>즉 unified와 rehype는 같은 기능(md -&gt; html)을 하는 녀석들이지만, 서로 보충해주는 역활을 한다. 이유는 markdown의 문법이 여러 경우의 수가 있어서 html 전환을 할때 경우의 수가 많기 때문이다.
+보통 <code>.use(remarkRehype).use(rehypeStringify)</code>를 사용한다.</p>
+<h2 id="routejs"><code>Route.js</code></h2>
+<ul>
+<li><code>all</code> -&gt; pass requests -&gt; <code>permalink</code> transforms links</li>
+<li><strong>Skinny request objects. Fat data functions</strong>
+<ul>
+<li>Fetching, preparing, and processing data should be done in your <code>data function</code>.</li>
+<li>it is recommended that you only include the bare minimum required to query your database, api, file system, or data store on the <code>request object</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">all</span><span class="o">:</span> <span class="kr">async</span> <span class="p">({</span> <span class="nx">settings</span><span class="p">,</span> <span class="nx">query</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">helpers</span> <span class="p">})</span><span class="o">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nb">Object</span><span class="o">&gt;</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// settings: this describes the Elder.js settings at initialization.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// query: an empty object that is usually populated on the &#39;bootstrap&#39; hook with a database connection or api connection. This is sharable throughout all hooks, functions, and shortcodes.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// data: any data set on the &#39;bootstrap&#39; hook.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nb">Object</span><span class="o">&gt;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">permalink</span><span class="o">:</span> <span class="p">({</span> <span class="nx">request</span><span class="p">,</span> <span class="nx">settings</span><span class="p">,</span> <span class="nx">helpers</span> <span class="p">})</span><span class="o">:</span> <span class="nb">String</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// NOTE: permalink must be sync. Async is not supported.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// request: this is the object received from the all() function. Generally, we recommend passing a &#39;slug&#39; parameter but you can use any naming you want.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// settings: this describes the Elder.js bootstrap settings.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// helpers: Elder.js helpers and user helpers from the ./src/helpers/index.js` file.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// NOTE: You should avoid using helpers here as helpers.permalinks default helper (see below) doesn&#39;t support it.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="nb">String</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">data</span><span class="o">:</span> <span class="kr">async</span> <span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">data</span><span class="p">,</span> <span class="c1">// any data set by plugins or hooks on the &#39;bootstrap&#39; hook
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">helpers</span><span class="p">,</span> <span class="c1">// Elder.js helpers and user helpers from the ./src/helpers/index.js` file.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">allRequests</span><span class="p">,</span> <span class="c1">// all of the `request` objects returned by a route&#39;s all() function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">settings</span><span class="p">,</span> <span class="c1">// settings of Elder.js
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">request</span><span class="p">,</span> <span class="c1">// the requested page&#39;s `request` object.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">errors</span><span class="p">,</span> <span class="c1">// any errors
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">perf</span><span class="p">,</span> <span class="c1">// the performance helper.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">query</span><span class="p">,</span> <span class="c1">// search for &#39;query&#39; in these docs for more details on it&#39;s use.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">})</span><span class="o">:</span> <span class="nb">Object</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// data is any data set from plugins or hooks.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="nb">Object</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="pagests">Pages.ts</h2>
+<p><a href="https://github.com/Elderjs/elderjs/blob/6dae253bc12b438d71b12bb78365991284f536fa/src/utils/Page.ts#L152" target="_blank" rel="noopener noreffer">Elder js에서 page에서 사용할 수 있는 props</a>
+</p>
+<h2 id="hooksts">Hooks.ts</h2>
+<p><a href="https://elderguide.com/tech/elderjs/#hooks" target="_blank" rel="noopener noreffer">About hooks</a>
+</p>
+<h2 id="elderjs-x-svelte"><code>Elder.js</code> x <code>Svelte</code></h2>
+<ul>
+<li><code>Svelte Components</code>
+<ul>
+<li>./src/components/ folder</li>
+<li><code>Svelte Templates</code> and <code>Svelte Layouts</code> 에서 호출</li>
+</ul>
+</li>
+<li><code>Svelte Templates</code>
+<ul>
+<li>for each route (eg: ./src/routes/blog/Blog.svelte)</li>
+<li><strong>only rendered on the server</strong> because they receive <strong>props of data, helpers, request, and settings.</strong></li>
+</ul>
+</li>
+<li><code>Svelte Layouts</code>
+<ul>
+<li>./src/layouts/ folder</li>
+<li><strong>only rendered on the server</strong> because they receive <strong>props of data, helpers, request, settings, and templateHtml.</strong></li>
+</ul>
+</li>
+</ul>
+<p>대부분의 <strong>Svelte 파일은 ./src/components/ 폴더에 있으며</strong> 아래에 정의된 대로 Svelte 템플릿 또는 Svelte 레이아웃 내에서 파일을 hydrate(ssr or csr) 해서 사용할 수 있다.</p>
+<details>
+<summary>Sveltekit에서 hydrate이 뭐야?</summary>
+<p>A: SvelteKit에서 &ldquo;hydrate&quot;는 서버에서 렌더링된 HTML을 클라이언트에서 동적으로 활성화하는 과정을 의미합니다. 이 과정은 서버 사이드 렌더링(SSR)과 클라이언트 사이드 렌더링(CSR) 사이의 간극을 메우는 중요한 단계입니다.</p>
+<p>서버에서 페이지가 렌더링되면, 그 결과는 정적 HTML로 클라이언트에 전송됩니다. 이 HTML은 브라우저에서 빠르게 렌더링되어 사용자에게 페이지를 즉시 보여줄 수 있습니다. 그러나 이 HTML은 초기에는 정적이므로, 사용자의 상호작용에 반응하기 위해서는 JavaScript가 필요합니다.</p>
+<p>이때 &ldquo;hydration&rdquo; 단계가 시작됩니다. SvelteKit는 이 단계에서 서버에서 렌더링된 HTML을 가져와서 Svelte 컴포넌트로 &ldquo;hydrate&quot;하거나 활성화합니다. 이렇게 하면 페이지가 동적으로 반응하고 사용자의 상호작용에 응답할 수 있게 됩니다.</p>
+<p>이 과정은 사용자에게 빠른 초기 로딩 시간을 제공하면서도, 페이지가 완전히 인터랙티브하게 동작할 수 있도록 하는 데 중요합니다. 이것이 SvelteKit와 같은 프레임워크에서 SSR과 CSR을 결합하는 이유입니다.</p>
+</details>
+<h3 id="partial-hydration">Partial Hydration</h3>
+<p>어떤 것이 hydrate되어야 하고 어떤 것이 hydrate되지 않아야 하는지 확실하지 않은 경우, 일반적인 규칙은 <strong>if a component needs to be interactive on the client, you need to hydrate it.</strong></p>
+<h2 id="shorcodes"><code>Shorcodes</code></h2>
+<p>현재 굳이 필요없어 패스</p>
+<p><a href="https://elderguide.com/tech/elderjs/#overview" target="_blank" rel="noopener noreffer">link</a>
+</p>
+<h2 id="elderjs-data-flow">Elder.js Data flow</h2>
+<blockquote>
+<p><a href="https://elderguide.com/tech/elderjs/#data-flow" target="_blank" rel="noopener noreffer">link</a>
+</p>
+</blockquote>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/server_hooks.png"
+        data-srcset="/images/server_hooks.png, /images/server_hooks.png 1.5x, /images/server_hooks.png 2x"
+        data-sizes="auto"
+        alt="/images/server_hooks.png"
+        title="Server hooks" /></p>
+</center>
+<ol>
+<li>route.js module export 실행</li>
+<li>Elder의 <code>bootstrap hook</code> 실행
+<ol>
+<li><code>all</code> function in routes are called</li>
+</ol>
+</li>
+<li><code>allRequests hook</code>  run
+<ol>
+<li>allows users to modify the allRequests array.</li>
+</ol>
+</li>
+<li>Full <code>request</code> Objects are Built
+<ol>
+<li>이는 추후 data func의 파라미터로 들어간다.</li>
+<li>또한 Svelte templates, Svelte layouts 파일로 전달된다.</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>i.g</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">request</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">slug</span><span class="o">:</span> <span class="sb">`why-kittens-rock`</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ... any other keys from the `request` object returned from the `all` function.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// below is then added by Elder.js
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">permalink</span><span class="o">:</span> <span class="s2">&#34;/blog/why-kittens-rock&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">route</span><span class="o">:</span> <span class="s2">&#34;blog&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;build&#34;</span><span class="p">,</span> <span class="c1">// server or build.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>남은 <code>Hooks</code>들이 실행된다. (Until the <code>Route's data</code> function)
+<ol>
+<li>즉 위의 그림에서<code>middleware</code>, <code>request</code> 실행됨</li>
+</ol>
+</li>
+<li>The &lsquo;data&rsquo; hook is Executed</li>
+<li>The <code>data Object</code> is passed to the <code>Svelte template</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-svelte" data-lang="svelte"><span class="line"><span class="cl">// i.g Blog.svelte
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">export</span> <span class="kd">let</span> <span class="nx">data</span><span class="p">;</span> <span class="c1">// here is the &#39;data&#39; object we&#39;ve been following.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">export</span> <span class="kd">let</span> <span class="nx">settings</span><span class="p">;</span> <span class="c1">// Elder.js settings
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">export</span> <span class="kd">let</span> <span class="nx">helpers</span><span class="p">;</span> <span class="c1">// Elder.js helpers and user helpers.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kr">export</span> <span class="kd">let</span> <span class="nx">request</span><span class="p">;</span> <span class="c1">// &#39;request&#39; object from above. ....
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="8">
+<li>The HTML returned by Blog.svelte is passed into Layout.svelte
+<ul>
+<li>svelte layout도 svelte template과 같은 props를 받는다. 추가로 <code>templateHtml</code> props도 받는다.</li>
+</ul>
+</li>
+<li>Page Generation Completes
+<ol>
+<li>All further hooks are run until the &lsquo;request&rsquo; has been completed.</li>
+<li>This includes user hooks, system hooks, and plugin hooks.</li>
+</ol>
+</li>
+</ol>
+<h2 id="elderjs-vs-sveltekit">Elder.js vs Sveltekit</h2>
+<p>Elder와 SvelteKit을 비교하는 방법은 매우 일반적인 질문입니다. 주요 차이점은 Elder.js가 SEO를 염두에 두고 설계되었으며 대규모 정적 사이트를 보다 쉽게 ​​구축할 수 있는 도구를 제공한다는 것.</p>
+<h2 id="더-읽어볼거리">더 읽어볼거리</h2>
+<ul>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics?hl=ko" target="_blank" rel="noopener noreffer">자바스크립트 검색엔진 최적화의 기본사항 이해하기</a>
+</li>
+<li><a href="https://web.dev/rendering-on-the-web/" target="_blank" rel="noopener noreffer">Google hydration guide</a>
+</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-07-26</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/elderjs/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/elderjs/" data-title="Elderjs" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/elderjs/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/elderjs/" data-title="Elderjs"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/elderjs/" data-title="Elderjs"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/elderjs/" data-title="Elderjs" data-image="/images/elderjs.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/mdn-css/" class="prev" rel="prev" title="CSS (MDN)"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CSS (MDN)</a>
+            <a href="/hydrate/" class="next" rel="next" title="Hydrate">Hydrate<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>
