@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/llm/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-09-27T13:36:55+09:00" />
-<meta property="article:modified_time" content="2023-09-27T13:36:55+09:00" />
+<meta property="article:modified_time" content="2023-09-27T15:07:54+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  2073 ,
-        "url": "https:\/\/minkj1992.github.io\/llm\/","datePublished": "2023-09-27T13:36:55+09:00","dateModified": "2023-09-27T13:36:55+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  3282 ,
+        "url": "https:\/\/minkj1992.github.io\/llm\/","datePublished": "2023-09-27T13:36:55+09:00","dateModified": "2023-09-27T15:07:54+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Databricks: Large Language Models: Application through Production</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/llm/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>llm</a>&nbsp;<a href="/categories/databricks/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>databricks</a>&nbsp;<a href="/categories/lmops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>lmops</a>&nbsp;<a href="/categories/mlops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mlops</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-27">2023-09-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2073 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-27">2023-09-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3282 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -206,6 +206,14 @@
     <li><a href="#26-prompts">2.6 Prompts</a></li>
     <li><a href="#27-prompt-engineering">2.7 Prompt Engineering</a></li>
     <li><a href="#28-recap">2.8 Recap</a></li>
+    <li><a href="#29-notebook-democratizing">2.9. Notebook democratizing</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-overview">3.1 Overview</a></li>
+    <li><a href="#32-how-does-vector-search-work">3.2. How does Vector Search work</a></li>
+    <li><a href="#-l1-l2">(+) L1, L2</a></li>
+    <li><a href="#33-filtering">3.3. Filtering</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>Based on <a href="https://www.youtube.com/watch?v=MLLLDaR6P08&amp;list=PLTPXxbhUt-YWSR8wtILixhZLF9qB_1yZm" target="_blank" rel="noopener noreffer">Databrick&rsquo;s LLM application</a>
@@ -303,7 +311,7 @@
 <li>Language models create a probability distribution over vocabulary tokens; large language models use the Transformer architecture with millions to billions of parameters.</li>
 <li>Tokens are the smallest units in language models, converting text to indices and then to n-dimensional word embeddings to capture context and meaning.</li>
 </ul>
-<h1 id="2-module-1---applications-with-llms">2. Module 1 - Applications with LLMs</h1>
+<h1 id="2-applications-with-llms">2. Applications with LLMs</h1>
 <h2 id="21-introduction-to-llm-applications">2.1 Introduction to LLM Applications</h2>
 <ul>
 <li><strong>Introduction to LLM Applications</strong>: The module begins with a humorous note on the urgency among CEOs to adopt LLMs.</li>
@@ -461,16 +469,208 @@
 <li>There are many tips for model selection, but it&rsquo;s essential to tailor choices to specific applications.</li>
 <li>Prompt engineering is vital for generating valuable responses, combining both art and engineering techniques.</li>
 </ul>
-<h1 id="3-module-2---embeddings-vector-databases-and-search">3. Module 2 - Embeddings, Vector Databases and Search</h1>
-<h1 id="4-module-3---multi-stage-reasoning">4. Module 3 - Multi-stage Reasoning</h1>
-<h1 id="5-module-4---fine-tuning-and-evaluating-llms">5. Module 4 - Fine-tuning and Evaluating LLMs</h1>
-<h1 id="6-module-5---society-and-llms-bias-and-safety">6. Module 5 - Society and LLMs: Bias and Safety</h1>
-<h1 id="7-module-6---llmops">7. Module 6 - LLMOps</h1>
+<h2 id="29-notebook-democratizing">2.9. Notebook democratizing</h2>
+<blockquote>
+<p>Especially focused on search and sampling.</p>
+</blockquote>
+<p><strong>Search &amp; Sampling</strong>:
+Large Language Models (LLMs)에서 토큰을 생성할 때는 주로 두 가지 주요 방법, 즉 &ldquo;검색(Search)&ldquo;과 &ldquo;샘플링(Sampling)&ldquo;이 사용됩니다. 이 두 방법은 모델이 다음 토큰을 어떻게 선택할지를 결정하는 방식에 따라 구분됩니다.</p>
+<p><strong>연관관계</strong>:</p>
+<ul>
+<li>&ldquo;Search&quot;와 &ldquo;Sampling&quot;은 서로 다른 목적과 상황에 따라 선택될 수 있습니다. 예를 들어, 일관된 및 고품질의 출력이 필요한 경우 &ldquo;Search&quot;를 사용할 수 있으며, 다양한 및 창의적인 출력이 필요한 경우 &ldquo;Sampling&quot;을 사용할 수 있습니다.</li>
+<li>실제 응용 프로그램에서는 &ldquo;Search&quot;와 &ldquo;Sampling&rdquo; 전략을 결합하여 사용하는 경우도 많습니다. 예를 들어, &ldquo;Beam Search&rdquo; 동안 일부 확률적 &ldquo;Sampling&quot;을 적용하여 다양한 결과를 얻을 수 있습니다.</li>
+</ul>
+<p>결론적으로, &ldquo;Search&quot;와 &ldquo;Sampling&quot;은 시퀀스 생성 모델의 출력을 결정하는 데 사용되는 전략으로, 서로 다른 접근 방식을 제공하며, 특정 응용 프로그램의 요구 사항에 따라 선택 및 조합될 수 있습니다.</p>
+<blockquote>
+<p>Note. <a href="https://discuss.huggingface.co/t/can-beam-search-be-used-with-sampling/17741" target="_blank" rel="noopener noreffer">Can beam search be used with sampling?</a>
+</p>
+</blockquote>
+<ol>
+<li>
+<p><strong>Search</strong>:</p>
+<ul>
+<li>&ldquo;Search&quot;는 가능한 모든 토큰 시퀀스 중에서 최적의 시퀀스를 찾는 것을 목표로 합니다.</li>
+<li>예를 들어, &ldquo;Greedy Search&quot;는 각 단계에서 확률이 가장 높은 토큰을 선택하는 방법입니다.</li>
+<li>&ldquo;Beam Search&quot;는 여러 가능한 경로를 동시에 탐색하여 전체적으로 최적의 시퀀스를 찾습니다.</li>
+<li>&ldquo;Search&quot;는 일반적으로 더 일관된 및 결정론적인 결과를 생성합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sampling</strong>:</p>
+<ul>
+<li>&ldquo;Sampling&quot;은 확률 분포에 따라 토큰을 무작위로 선택하는 방법입니다.</li>
+<li>이 방법은 다양한 결과를 생성할 수 있으며, 모델의 확률 분포를 직접 활용합니다.</li>
+<li>&ldquo;Top-k Sampling&rdquo; 또는 &ldquo;Top-p Sampling&quot;과 같은 변형은 완전한 무작위 선택의 위험을 줄이기 위해 토큰 선택의 범위를 제한합니다.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol>
+<li>
+<p><strong>Greedy Search (탐욕 검색)</strong>:</p>
+<ul>
+<li>이 방법은 각 단계에서 가장 확률이 높은 토큰을 선택합니다.</li>
+<li>결과적으로 가장 확률이 높은 단일 시퀀스를 생성하지만, 때로는 지역적으로 최적화된 선택으로 인해 전체적으로는 최적이 아닌 결과를 얻을 수 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Beam Search</strong>:</p>
+<ul>
+<li>여러 경로를 동시에 탐색하면서 가장 확률이 높은 시퀀스를 찾습니다.</li>
+<li>&ldquo;빔 크기(Beam Size)&ldquo;라는 매개변수를 사용하여 한 번에 탐색할 경로의 수를 지정합니다.</li>
+<li>빔 크기가 크면 더 많은 경로를 탐색하지만, 계산 비용이 증가합니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sampling</strong>:</p>
+<ul>
+<li>다음 토큰을 확률적으로 선택하여 다양한 시퀀스를 생성합니다.</li>
+<li>이 방법은 다양한 결과를 생성할 수 있지만, 때로는 의미 없는 결과를 생성할 수도 있습니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Top-k Sampling</strong>:</p>
+<ul>
+<li>다음 토큰을 선택할 때 가장 확률이 높은 상위 k개의 토큰만을 고려합니다.</li>
+<li>이 방법은 샘플링의 임의성을 유지하면서 완전히 무작위 선택의 위험을 줄입니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>Top-p (nucleus) Sampling</strong>:</p>
+<ul>
+<li>확률이 높은 토큰들의 누적 확률이 p를 초과할 때까지 토큰을 선택합니다.</li>
+<li>이 방법은 동적으로 선택 범위를 조정하여 토큰의 다양성과 임의성 사이의 균형을 찾습니다.</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-embeddings-vector-databases-and-search">3. Embeddings, Vector Databases and Search</h1>
+<h2 id="31-overview">3.1 Overview</h2>
+<p>Title: <strong>LLM Module 2 - Embeddings, Vector Databases, and Search | 2.2 Module Overview</strong></p>
+<ol>
+<li>
+<p><strong>Purpose of LLMs</strong>: Large Language Models (LLMs) act as reasoning engines, processing information to return meaningful outputs. The module focuses on using embeddings, vector databases, and search to enhance question-answering systems.</p>
+</li>
+<li>
+<p><strong>Knowledge Incorporation</strong>: There are two primary methods for LLMs to learn knowledge:</p>
+<ul>
+<li>Training a model from scratch or fine-tuning an existing one.</li>
+<li>Passing knowledge as model inputs, often referred to as context or prompt engineering.</li>
+</ul>
+</li>
+<li>
+<p><strong>Context Limitations</strong>: While passing context helps in precision, there&rsquo;s a limitation to the length of context that can be passed. For instance, OpenAI&rsquo;s GPT-3.5 model has a limit of 4,000 tokens. Workarounds include summarizing documents or splitting them into chunks.</p>
+</li>
+<li>
+<p><strong>Rise of Vector Databases</strong>: 2023 is dubbed the year of vector databases, which are essential for converting various unstructured data types (text, images, audio) into embedding vectors. These vectors can be used for a range of tasks, from object detection to music transcription.</p>
+</li>
+<li>
+<p><strong>QA System Workflow</strong>:</p>
+<ul>
+<li>Convert a knowledge base of documents into embedding vectors.</li>
+<li>Store these vectors in a vector index, either through a vector library or database.</li>
+<li>Convert user queries into embedding vectors.</li>
+<li>Search the vector index to find relevant document vectors.</li>
+<li>Use the retrieved documents as context for the language model to generate a response.</li>
+</ul>
+</li>
+</ol>
+<p>This module provides a comprehensive understanding of how embeddings and vector databases can be utilized to improve search and retrieval performance in question-answering systems.</p>
+<h2 id="32-how-does-vector-search-work">3.2. How does Vector Search work</h2>
+<ul>
+<li><strong>Vector Search Overview</strong>:
+<ul>
+<li>Two main strategies: exact search (brute force, little room for error) and approximate search (less accurate but faster).</li>
+<li>Common indexing algorithms produce a data structure called a vector index, which aids in efficient vector search. Methods range from tree-based, clustering, to hashing.</li>
+<li>Similarity between vectors is determined using distance or similarity metrics, such as L1 Manhattan distance, L2 Euclidean distance, or cosine similarity. When used on normalized embeddings, L2 distance and cosine similarity produce equivalent ranking distances.</li>
+<li>Dense embedding vectors can be memory-intensive. Product quantization (PQ) compresses vectors by segmenting them into subvectors, which are then quantized and mapped to the nearest centroid, reducing memory usage.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Note, <a href="https://www.youtube.com/watch?v=PNVJvZEkuXo" target="_blank" rel="noopener noreffer">Product Quantization</a>
+</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Specific Vector Indexing Algorithms</strong>:</p>
+<ul>
+<li><strong>FAISS (Facebook AI Similarity Search)</strong>: A clustering algorithm that computes L2 Euclidean distance between vectors. It optimizes the search process using Voronoi cells, computing distances between a query vector and centroids first, then finding similar vectors within the same Voronoi cells.</li>
+<li><strong>HNSW (Hierarchical Navigable Small Worlds)</strong>: Uses Euclidean distance but is a proximity graph-based approach. It employs a linked list/skip list structure, skipping nodes or vertices as layers increase. If there are too many nodes, hierarchy is introduced to traverse through the graph efficiently.</li>
+</ul>
+</li>
+<li>
+<p><strong>Significance of Vector Search</strong>:</p>
+<ul>
+<li>Vector search allows for more flexible and expansive use cases compared to exact matching rules. Traditional SQL filter statements are restrictive, but vector databases offer more dynamic search capabilities.</li>
+</ul>
+</li>
+</ul>
+<h2 id="-l1-l2">(+) L1, L2</h2>
+<ol>
+<li>
+<p><strong>L1 Manhattan 거리 (L1 Norm 또는 Taxicab Norm)</strong>:</p>
+<ul>
+<li>두 점 P(x_1, y_1) 및  Q(x_2, y_2) 사이의 Manhattan 거리는 그들 사이의 수평 및 수직 경로에 따라 계산됩니다.</li>
+<li>계산식:
+$$
+|x_1 - x_2| + |y_1 - y_2|
+$$</li>
+<li>이 거리는 그 이름에서 알 수 있듯이 도시의 격자 패턴 블록을 따라 두 점 사이의 거리를 측정하는 것과 유사합니다.</li>
+<li><strong>장점</strong>: 이 거리는 각 차원에서의 차이를 개별적으로 고려합니다. 이로 인해 이상치에 덜 민감하게 됩니다.</li>
+<li><strong>사용 사례</strong>: 특히 고차원 데이터에서 이상치의 영향을 최소화하려는 경우나, 각 차원의 차이가 중요한 경우에 사용됩니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>L2 유클리드 거리 (L2 Norm)</strong>:</p>
+<ul>
+<li>두 점 사이의 &ldquo;직선&rdquo; 거리입니다. 2차원 평면에서 두 점 사이의 직선 거리를 계산하는 것과 동일하며, 고차원에서도 확장됩니다.</li>
+<li>계산식 (2차원의 경우):
+$$
+\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+$$</li>
+<li>유클리드 거리는 가장 직관적인 두 점 사이의 거리 측정 방법입니다.</li>
+<li><strong>장점</strong>: 직관적이며, 두 점 사이의 실제 &ldquo;직선&rdquo; 거리를 제공합니다. 이로 인해 많은 알고리즘과 기술에서 기본 거리 측정 방법으로 사용됩니다.</li>
+<li><strong>사용 사례</strong>: k-평균 클러스터링, SVM, k-최근접 이웃 알고리즘과 같은 기계 학습 알고리즘에서 널리 사용됩니다.</li>
+</ul>
+</li>
+<li>
+<p><strong>코사인 유사도</strong>:</p>
+<ul>
+<li>두 벡터 간의 코사인 각도를 사용하여 유사도를 측정합니다. 이 값은 -1에서 1 사이입니다.</li>
+<li>값이 1에 가까울수록 두 벡터는 매우 유사하며, -1에 가까울수록 매우 다릅니다. 0은 두 벡터가 직교하다는 것을 의미합니다.</li>
+<li>계산식:
+$$
+\frac{A \cdot B}{|A| |B|}
+$$
+여기서 A.B 는 두 벡터의 내적이고, ||A|| 및 ||B||는 각 벡터의 크기입니다.</li>
+<li>코사인 유사도는 텍스트 분석 및 문서 유사도 측정과 같은 많은 응용 분야에서 널리 사용됩니다.</li>
+<li><strong>장점</strong>: 벡터의 크기가 아닌 방향에 중점을 둡니다. 따라서 두 벡터가 얼마나 유사한 방향을 가지고 있는지 측정할 때 유용합니다. 특히 텍스트 데이터와 같이 크기보다 방향이 더 중요한 경우에 유용합니다.</li>
+<li><strong>사용 사례</strong>: 텍스트 문서의 유사도 측정, 추천 시스템, 텍스트 분류 등에서 널리 사용됩니다.</li>
+</ul>
+</li>
+</ol>
+<p><strong>L2 거리와 코사인 유사도의 동등성</strong>:</p>
+<ul>
+<li>정규화된 임베딩에서 L2 거리와 코사인 유사도는 기능적으로 동등한 순위 거리를 생성합니다. 이는 두 측정 방법 모두 벡터 간의 방향성을 측정하기 때문입니다. 정규화된 벡터에서는 유클리드 거리가 작을수록 코사인 유사도가 높아집니다. 따라서 많은 응용 분야에서 두 측정 방법 중 하나를 선택하여 사용할 수 있습니다.</li>
+</ul>
+<h2 id="33-filtering">3.3. Filtering</h2>
+<ul>
+<li>Filtering in vector databases is challenging and varies among different databases.</li>
+<li>There are three main categories of filtering strategies: post-query, in-query, and pre-query.</li>
+<li>Post-query filtering involves applying filters after identifying the top-K nearest neighbors, but it can lead to unpredictable results.</li>
+<li>In-query filtering combines ANN and filtering simultaneously, demanding more system memory as filters increase.</li>
+<li>Pre-query filtering limits similarity search within a specific scope but is less performant than the other methods due to its brute-force approach.</li>
+</ul>
+<h1 id="4-multi-stage-reasoning">4. Multi-stage Reasoning</h1>
+<h1 id="5-fine-tuning-and-evaluating-llms">5. Fine-tuning and Evaluating LLMs</h1>
+<h1 id="6-society-and-llms-bias-and-safety">6. Society and LLMs: Bias and Safety</h1>
+<h1 id="7-llmops">7. LLMOps</h1>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-09-27</span>
+                <span>Updated on 2023-09-27&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/3ed81684c52578c132f922c9b38eedaf3bc46107" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 3ed81684c52578c132f922c9b38eedaf3bc46107: docs: Databricks: Large Language Models: Application through Production">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3ed8168</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

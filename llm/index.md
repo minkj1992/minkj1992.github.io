@@ -72,7 +72,7 @@ Based on [Databrick's LLM application](https://www.youtube.com/watch?v=MLLLDaR6P
 - Language models create a probability distribution over vocabulary tokens; large language models use the Transformer architecture with millions to billions of parameters.
 - Tokens are the smallest units in language models, converting text to indices and then to n-dimensional word embeddings to capture context and meaning.
 
-# 2. Module 1 - Applications with LLMs
+# 2. Applications with LLMs
 
 ## 2.1 Introduction to LLM Applications
 - **Introduction to LLM Applications**: The module begins with a humorous note on the urgency among CEOs to adopt LLMs.
@@ -177,13 +177,149 @@ Based on [Databrick's LLM application](https://www.youtube.com/watch?v=MLLLDaR6P
 - There are many tips for model selection, but it's essential to tailor choices to specific applications.
 - Prompt engineering is vital for generating valuable responses, combining both art and engineering techniques.
 
+## 2.9. Notebook democratizing
+> Especially focused on search and sampling.
 
 
-# 3. Module 2 - Embeddings, Vector Databases and Search
-# 4. Module 3 - Multi-stage Reasoning
-# 5. Module 4 - Fine-tuning and Evaluating LLMs
-# 6. Module 5 - Society and LLMs: Bias and Safety
-# 7. Module 6 - LLMOps
+
+**Search & Sampling**:
+Large Language Models (LLMs)에서 토큰을 생성할 때는 주로 두 가지 주요 방법, 즉 "검색(Search)"과 "샘플링(Sampling)"이 사용됩니다. 이 두 방법은 모델이 다음 토큰을 어떻게 선택할지를 결정하는 방식에 따라 구분됩니다.
+
+**연관관계**:
+- "Search"와 "Sampling"은 서로 다른 목적과 상황에 따라 선택될 수 있습니다. 예를 들어, 일관된 및 고품질의 출력이 필요한 경우 "Search"를 사용할 수 있으며, 다양한 및 창의적인 출력이 필요한 경우 "Sampling"을 사용할 수 있습니다.
+- 실제 응용 프로그램에서는 "Search"와 "Sampling" 전략을 결합하여 사용하는 경우도 많습니다. 예를 들어, "Beam Search" 동안 일부 확률적 "Sampling"을 적용하여 다양한 결과를 얻을 수 있습니다.
+
+결론적으로, "Search"와 "Sampling"은 시퀀스 생성 모델의 출력을 결정하는 데 사용되는 전략으로, 서로 다른 접근 방식을 제공하며, 특정 응용 프로그램의 요구 사항에 따라 선택 및 조합될 수 있습니다.
+
+> Note. [Can beam search be used with sampling?](https://discuss.huggingface.co/t/can-beam-search-be-used-with-sampling/17741)
+
+
+
+1. **Search**:
+   - "Search"는 가능한 모든 토큰 시퀀스 중에서 최적의 시퀀스를 찾는 것을 목표로 합니다.
+   - 예를 들어, "Greedy Search"는 각 단계에서 확률이 가장 높은 토큰을 선택하는 방법입니다.
+   - "Beam Search"는 여러 가능한 경로를 동시에 탐색하여 전체적으로 최적의 시퀀스를 찾습니다.
+   - "Search"는 일반적으로 더 일관된 및 결정론적인 결과를 생성합니다.
+
+2. **Sampling**:
+   - "Sampling"은 확률 분포에 따라 토큰을 무작위로 선택하는 방법입니다.
+   - 이 방법은 다양한 결과를 생성할 수 있으며, 모델의 확률 분포를 직접 활용합니다.
+   - "Top-k Sampling" 또는 "Top-p Sampling"과 같은 변형은 완전한 무작위 선택의 위험을 줄이기 위해 토큰 선택의 범위를 제한합니다.
+
+--- 
+1. **Greedy Search (탐욕 검색)**:
+   - 이 방법은 각 단계에서 가장 확률이 높은 토큰을 선택합니다.
+   - 결과적으로 가장 확률이 높은 단일 시퀀스를 생성하지만, 때로는 지역적으로 최적화된 선택으로 인해 전체적으로는 최적이 아닌 결과를 얻을 수 있습니다.
+
+2. **Beam Search**:
+   - 여러 경로를 동시에 탐색하면서 가장 확률이 높은 시퀀스를 찾습니다.
+   - "빔 크기(Beam Size)"라는 매개변수를 사용하여 한 번에 탐색할 경로의 수를 지정합니다.
+   - 빔 크기가 크면 더 많은 경로를 탐색하지만, 계산 비용이 증가합니다.
+
+3. **Sampling**:
+   - 다음 토큰을 확률적으로 선택하여 다양한 시퀀스를 생성합니다.
+   - 이 방법은 다양한 결과를 생성할 수 있지만, 때로는 의미 없는 결과를 생성할 수도 있습니다.
+
+4. **Top-k Sampling**:
+   - 다음 토큰을 선택할 때 가장 확률이 높은 상위 k개의 토큰만을 고려합니다.
+   - 이 방법은 샘플링의 임의성을 유지하면서 완전히 무작위 선택의 위험을 줄입니다.
+
+5. **Top-p (nucleus) Sampling**:
+   - 확률이 높은 토큰들의 누적 확률이 p를 초과할 때까지 토큰을 선택합니다.
+   - 이 방법은 동적으로 선택 범위를 조정하여 토큰의 다양성과 임의성 사이의 균형을 찾습니다.
+
+
+
+# 3. Embeddings, Vector Databases and Search
+
+## 3.1 Overview
+
+Title: **LLM Module 2 - Embeddings, Vector Databases, and Search | 2.2 Module Overview**
+
+1. **Purpose of LLMs**: Large Language Models (LLMs) act as reasoning engines, processing information to return meaningful outputs. The module focuses on using embeddings, vector databases, and search to enhance question-answering systems.
+  
+2. **Knowledge Incorporation**: There are two primary methods for LLMs to learn knowledge: 
+   - Training a model from scratch or fine-tuning an existing one.
+   - Passing knowledge as model inputs, often referred to as context or prompt engineering.
+
+3. **Context Limitations**: While passing context helps in precision, there's a limitation to the length of context that can be passed. For instance, OpenAI's GPT-3.5 model has a limit of 4,000 tokens. Workarounds include summarizing documents or splitting them into chunks.
+
+4. **Rise of Vector Databases**: 2023 is dubbed the year of vector databases, which are essential for converting various unstructured data types (text, images, audio) into embedding vectors. These vectors can be used for a range of tasks, from object detection to music transcription.
+
+5. **QA System Workflow**:
+   - Convert a knowledge base of documents into embedding vectors.
+   - Store these vectors in a vector index, either through a vector library or database.
+   - Convert user queries into embedding vectors.
+   - Search the vector index to find relevant document vectors.
+   - Use the retrieved documents as context for the language model to generate a response.
+
+This module provides a comprehensive understanding of how embeddings and vector databases can be utilized to improve search and retrieval performance in question-answering systems.
+
+## 3.2. How does Vector Search work
+
+- **Vector Search Overview**:
+  - Two main strategies: exact search (brute force, little room for error) and approximate search (less accurate but faster).
+  - Common indexing algorithms produce a data structure called a vector index, which aids in efficient vector search. Methods range from tree-based, clustering, to hashing.
+  - Similarity between vectors is determined using distance or similarity metrics, such as L1 Manhattan distance, L2 Euclidean distance, or cosine similarity. When used on normalized embeddings, L2 distance and cosine similarity produce equivalent ranking distances.
+  - Dense embedding vectors can be memory-intensive. Product quantization (PQ) compresses vectors by segmenting them into subvectors, which are then quantized and mapped to the nearest centroid, reducing memory usage.
+
+> Note, [Product Quantization](https://www.youtube.com/watch?v=PNVJvZEkuXo)
+  
+- **Specific Vector Indexing Algorithms**:
+  - **FAISS (Facebook AI Similarity Search)**: A clustering algorithm that computes L2 Euclidean distance between vectors. It optimizes the search process using Voronoi cells, computing distances between a query vector and centroids first, then finding similar vectors within the same Voronoi cells.
+  - **HNSW (Hierarchical Navigable Small Worlds)**: Uses Euclidean distance but is a proximity graph-based approach. It employs a linked list/skip list structure, skipping nodes or vertices as layers increase. If there are too many nodes, hierarchy is introduced to traverse through the graph efficiently.
+
+- **Significance of Vector Search**:
+  - Vector search allows for more flexible and expansive use cases compared to exact matching rules. Traditional SQL filter statements are restrictive, but vector databases offer more dynamic search capabilities.
+
+## (+) L1, L2
+1. **L1 Manhattan 거리 (L1 Norm 또는 Taxicab Norm)**:
+   - 두 점 P(x_1, y_1) 및  Q(x_2, y_2) 사이의 Manhattan 거리는 그들 사이의 수평 및 수직 경로에 따라 계산됩니다.
+   - 계산식: 
+   $$
+   |x_1 - x_2| + |y_1 - y_2|
+   $$
+   - 이 거리는 그 이름에서 알 수 있듯이 도시의 격자 패턴 블록을 따라 두 점 사이의 거리를 측정하는 것과 유사합니다.
+   - **장점**: 이 거리는 각 차원에서의 차이를 개별적으로 고려합니다. 이로 인해 이상치에 덜 민감하게 됩니다.
+   - **사용 사례**: 특히 고차원 데이터에서 이상치의 영향을 최소화하려는 경우나, 각 차원의 차이가 중요한 경우에 사용됩니다.
+
+2. **L2 유클리드 거리 (L2 Norm)**:
+   - 두 점 사이의 "직선" 거리입니다. 2차원 평면에서 두 점 사이의 직선 거리를 계산하는 것과 동일하며, 고차원에서도 확장됩니다.
+   - 계산식 (2차원의 경우): 
+   $$
+   \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+   $$
+   - 유클리드 거리는 가장 직관적인 두 점 사이의 거리 측정 방법입니다.
+   - **장점**: 직관적이며, 두 점 사이의 실제 "직선" 거리를 제공합니다. 이로 인해 많은 알고리즘과 기술에서 기본 거리 측정 방법으로 사용됩니다.
+   - **사용 사례**: k-평균 클러스터링, SVM, k-최근접 이웃 알고리즘과 같은 기계 학습 알고리즘에서 널리 사용됩니다.
+   
+3. **코사인 유사도**:
+   - 두 벡터 간의 코사인 각도를 사용하여 유사도를 측정합니다. 이 값은 -1에서 1 사이입니다.
+   - 값이 1에 가까울수록 두 벡터는 매우 유사하며, -1에 가까울수록 매우 다릅니다. 0은 두 벡터가 직교하다는 것을 의미합니다.
+   - 계산식: 
+   $$
+   \frac{A \cdot B}{\|A\| \|B\|}
+   $$
+   여기서 A.B 는 두 벡터의 내적이고, ||A|| 및 ||B||는 각 벡터의 크기입니다.
+   - 코사인 유사도는 텍스트 분석 및 문서 유사도 측정과 같은 많은 응용 분야에서 널리 사용됩니다.
+   - **장점**: 벡터의 크기가 아닌 방향에 중점을 둡니다. 따라서 두 벡터가 얼마나 유사한 방향을 가지고 있는지 측정할 때 유용합니다. 특히 텍스트 데이터와 같이 크기보다 방향이 더 중요한 경우에 유용합니다.
+   - **사용 사례**: 텍스트 문서의 유사도 측정, 추천 시스템, 텍스트 분류 등에서 널리 사용됩니다.
+
+**L2 거리와 코사인 유사도의 동등성**:
+- 정규화된 임베딩에서 L2 거리와 코사인 유사도는 기능적으로 동등한 순위 거리를 생성합니다. 이는 두 측정 방법 모두 벡터 간의 방향성을 측정하기 때문입니다. 정규화된 벡터에서는 유클리드 거리가 작을수록 코사인 유사도가 높아집니다. 따라서 많은 응용 분야에서 두 측정 방법 중 하나를 선택하여 사용할 수 있습니다.
+
+## 3.3. Filtering
+
+- Filtering in vector databases is challenging and varies among different databases.
+- There are three main categories of filtering strategies: post-query, in-query, and pre-query.
+- Post-query filtering involves applying filters after identifying the top-K nearest neighbors, but it can lead to unpredictable results.
+- In-query filtering combines ANN and filtering simultaneously, demanding more system memory as filters increase.
+- Pre-query filtering limits similarity search within a specific scope but is less performant than the other methods due to its brute-force approach.
+
+# 4. Multi-stage Reasoning
+# 5. Fine-tuning and Evaluating LLMs
+# 6. Society and LLMs: Bias and Safety
+# 7. LLMOps
 
 
 
