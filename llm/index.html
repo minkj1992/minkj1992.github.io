@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Databricks: Large Language Models: Application through Production | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Databricks: Large Language Models: Application through Production" />
+<meta property="og:description" content="How to build Large Language Model based application for production ready." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/llm/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-27T13:36:55+09:00" />
+<meta property="article:modified_time" content="2023-09-27T13:36:55+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Databricks: Large Language Models: Application through Production"/>
+<meta name="twitter:description" content="How to build Large Language Model based application for production ready."/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/llm/" /><link rel="prev" href="https://minkj1992.github.io/elderjs/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Databricks: Large Language Models: Application through Production",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/llm\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  2073 ,
+        "url": "https:\/\/minkj1992.github.io\/llm\/","datePublished": "2023-09-27T13:36:55+09:00","dateModified": "2023-09-27T13:36:55+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Databricks: Large Language Models: Application through Production</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/llm/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>llm</a>&nbsp;<a href="/categories/databricks/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>databricks</a>&nbsp;<a href="/categories/lmops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>lmops</a>&nbsp;<a href="/categories/mlops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mlops</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-09-27">2023-09-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2073 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/databricks.jpeg"
+        data-srcset="/images/databricks.jpeg, /images/databricks.jpeg 1.5x, /images/databricks.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/databricks.jpeg"
+        title="/images/databricks.jpeg" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#12-why-llms">1.2 Why LLMs</a></li>
+    <li><a href="#13-primer">1.3 Primer</a></li>
+    <li><a href="#14-language-model">1.4 Language Model</a></li>
+    <li><a href="#15-tokenization">1.5 Tokenization</a></li>
+    <li><a href="#16-word-embeddings">1.6 Word Embeddings</a></li>
+    <li><a href="#17-recap">1.7 Recap</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-introduction-to-llm-applications">2.1 Introduction to LLM Applications</a></li>
+    <li><a href="#22-module-overview">2.2 Module Overview</a></li>
+    <li><a href="#23-hugging-face">2.3 Hugging Face</a></li>
+    <li><a href="#24-model-selection">2.4 Model Selection</a></li>
+    <li><a href="#25-nlp-tasks">2.5 NLP tasks</a></li>
+    <li><a href="#26-prompts">2.6 Prompts</a></li>
+    <li><a href="#27-prompt-engineering">2.7 Prompt Engineering</a></li>
+    <li><a href="#28-recap">2.8 Recap</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Based on <a href="https://www.youtube.com/watch?v=MLLLDaR6P08&amp;list=PLTPXxbhUt-YWSR8wtILixhZLF9qB_1yZm" target="_blank" rel="noopener noreffer">Databrick&rsquo;s LLM application</a>
+</p>
+<ul>
+<li><a href="https://github.com/databricks-academy/large-language-models" target="_blank" rel="noopener noreffer"><code>github</code></a>
+</li>
+<li><a href="https://www.edx.org/learn/computer-science/databricks-large-language-models-application-through-production" target="_blank" rel="noopener noreffer"><code>edx</code></a>
+</li>
+</ul>
+<h1 id="1-llm-module-0">1. LLM Module 0</h1>
+<h2 id="12-why-llms">1.2 Why LLMs</h2>
+<ul>
+<li><strong>Introduction to LLMs (Large Language Models)</strong>:
+<ol>
+<li>LLMs are revolutionizing industries involving human-computer interaction and language data. They&rsquo;re more than just hype and are impacting businesses, like Chegg, which saw a drop in site shares due to users using ChatGPT.</li>
+<li>LLMs are enhancing existing tools, such as GitHub co-pilot, which now can fix code errors, generate tests, and more, thanks to advanced language models.</li>
+<li>The core of an LLM is a statistical model that predicts words in text. It&rsquo;s trained on vast amounts of data, with some models being trained on data equivalent to tens of millions of books.</li>
+<li>LLMs can automate tasks that involve imprecise language or knowledge about the world, helping in software development, democratizing AI, generating content, and reducing development costs.</li>
+<li>When considering LLM applications, it&rsquo;s essential to evaluate the model&rsquo;s quality, serving cost, latency, and customizability. The course aims to bridge the gap between black-box solutions and academic principles, providing practical knowledge for real-world applications.</li>
+</ol>
+</li>
+</ul>
+<h2 id="13-primer">1.3 Primer</h2>
+<ul>
+<li>
+<p><strong>Introduction to NLP</strong>: Natural Language Processing (NLP) is the study of understanding and modeling natural language for computational applications. It&rsquo;s used daily in tasks like autocomplete, spelling checks, and more.</p>
+</li>
+<li>
+<p><strong>Applications of NLP</strong>: NLP can be applied to various tasks such as sentiment analysis, language translation, chatbots, similarity searching, document summarization, and text classification.</p>
+</li>
+<li>
+<p><strong>Key Definitions in NLP</strong>:</p>
+<ul>
+<li><strong>Tokens</strong>: The building blocks of NLP, which can be words, characters, or sub-words.</li>
+<li><strong>Sequence</strong>: A collection of tokens in a specific order.</li>
+<li><strong>Vocabulary</strong>: The entire set of tokens available for a model.</li>
+</ul>
+</li>
+<li>
+<p><strong>Classifying NLP Tasks</strong>: Tasks can be categorized based on their input and output, e.g., translation is a sequence-to-sequence task, while sentiment analysis might be a sequence-to-non-sequence prediction.</p>
+</li>
+<li>
+<p><strong>Scope of the Course</strong>: While NLP encompasses more than just text (e.g., speech recognition, image captioning), this course focuses on text-based problems due to their inherent complexity and challenges.</p>
+</li>
+</ul>
+<h2 id="14-language-model">1.4 Language Model</h2>
+<ul>
+<li><strong>Language Models (LMs)</strong>: Computational models that predict text based on a given sequence, determining the most likely word by calculating a probability distribution over a vocabulary.
+<ul>
+<li><strong>Two Types of LMs</strong>:
+<ul>
+<li><strong>Generative</strong>: Predicts the next word in a sequence.</li>
+<li><strong>Classification-based</strong>: Predicts a masked (or blanked out) word in a sequence.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Large Language Models (LLMs)</strong>: LMs that have significantly more parameters, ranging from billions compared to earlier models with 10 to 50 million parameters.</li>
+<li><strong>Transformers</strong>: A type of architecture introduced around 2017 that has since dominated the natural language processing field due to its computational efficiency.</li>
+<li><strong>Pre-Transformer Era</strong>: Earlier language models, some with deep neural network architectures, had fewer parameters and were not considered &ldquo;large&rdquo; but still required significant computational resources.</li>
+<li><strong>Post-2017 Shift</strong>: The introduction of Transformers led to a surge in the development and popularity of LLMs.</li>
+</ul>
+<h2 id="15-tokenization">1.5 Tokenization</h2>
+<ul>
+<li>
+<p><strong>Tokenization in NLP</strong>: Tokenization is the process of converting text into a format suitable for computation. Depending on the design choice, tokens can be words, characters, or pieces of words.</p>
+</li>
+<li>
+<p><strong>Word-based Tokenization</strong>: This method involves creating a vocabulary from training data, assigning each word a unique number. However, it has limitations like out-of-vocabulary errors, inability to handle misspellings, and a large vocabulary size due to different word forms (e.g., fast, faster, fastest).</p>
+</li>
+<li>
+<p><strong>Character-based Tokenization</strong>: By breaking text into individual characters, this method offers a small vocabulary size and can handle new words or misspellings. However, it loses the context of words and results in long sequence lengths.</p>
+</li>
+<li>
+<p><strong>Subword Tokenization</strong>: A middle ground between word and character tokenization, subword tokenization breaks words into smaller meaningful parts (e.g., &ldquo;sub&rdquo; and &ldquo;ject&rdquo; from &ldquo;subject&rdquo;). Techniques like byte pairing coding, sentence piece, and wordpiece are used to achieve this. It offers a good balance between vocabulary size and flexibility.</p>
+</li>
+<li>
+<p><strong>Next Steps</strong>: After tokenization, the challenge is to incorporate meaning and context into these tokens, which will be discussed in the context of word embeddings in the subsequent video.</p>
+</li>
+</ul>
+<h2 id="16-word-embeddings">1.6 Word Embeddings</h2>
+<ul>
+<li>Word embeddings aim to capture the context and intrinsic meaning of words within a vocabulary.</li>
+<li>By tokenizing sentences, we can numerically represent words and compare sentences or documents for similarities and differences.</li>
+<li>Traditional methods, like counting word frequency, result in sparse vectors, which aren&rsquo;t efficient for large vocabularies.</li>
+<li>Word embedding methods, like Word2Vec, represent words as vectors based on surrounding words in training data, capturing contextual relationships.</li>
+<li>These embedding vectors can be visualized in 2D, showing clusters of words with similar meanings, although the exact meanings of vector dimensions aren&rsquo;t always clear.</li>
+</ul>
+<h2 id="17-recap">1.7 Recap</h2>
+<ul>
+<li>Natural language processing (NLP) focuses on studying natural language, especially text.</li>
+<li>NLP encompasses more than just text; it includes speech, video-to-text, image-to-text, and other concepts where natural language plays a role.</li>
+<li>NLP is valuable for tasks like translation, summarizing text, and classification problems with natural language inputs and outputs.</li>
+<li>Language models create a probability distribution over vocabulary tokens; large language models use the Transformer architecture with millions to billions of parameters.</li>
+<li>Tokens are the smallest units in language models, converting text to indices and then to n-dimensional word embeddings to capture context and meaning.</li>
+</ul>
+<h1 id="2-module-1---applications-with-llms">2. Module 1 - Applications with LLMs</h1>
+<h2 id="21-introduction-to-llm-applications">2.1 Introduction to LLM Applications</h2>
+<ul>
+<li><strong>Introduction to LLM Applications</strong>: The module begins with a humorous note on the urgency among CEOs to adopt LLMs.</li>
+<li><strong>Ease of Use</strong>: LLMs can be quickly integrated into various applications with minimal initial effort, allowing for continuous improvement.</li>
+<li><strong>Common Applications</strong>: The module will explore standard natural language processing tasks where pre-trained, often open-source, LLMs excel and can be fine-tuned for specific applications.</li>
+<li><strong>Tools and Techniques</strong>: Hugging Face will be introduced as a framework for LLMs, along with prompt engineering as a method to adapt general LLMs for diverse tasks. Common tasks like summarization, review classification, and Q&amp;A will be discussed.</li>
+<li><strong>Understanding Trade-offs</strong>: The module will emphasize the balance between the effort in implementing LLMs and the resulting quality and performance, guiding learners on the potential and limitations of LLMs in various applications.</li>
+</ul>
+<h2 id="22-module-overview">2.2 Module Overview</h2>
+<ul>
+<li><strong>LLM Module 1 Overview</strong>:
+<ul>
+<li>The module focuses on understanding and applying pre-trained LLMs (Language Learning Models).</li>
+<li>By the end, learners will know how to interact with LLMs using Hugging Face&rsquo;s APIs, datasets, pipelines, tokenizers, and models.</li>
+<li>The module emphasizes finding the right model for specific applications, especially given the vast number of models available on Hugging Face Hub as of April 2023.</li>
+<li>A key topic is prompt engineering, with a real-world example of generating summaries for news articles to be showcased.</li>
+<li>The module also touches upon the broader NLP ecosystem, mentioning both classical and deep learning-based tools, including proprietary ones and newcomers like LangChain.</li>
+</ul>
+</li>
+</ul>
+<h2 id="23-hugging-face">2.3 Hugging Face</h2>
+<ul>
+<li>
+<p><strong>Hugging Face Overview</strong>:</p>
+<ul>
+<li>Hugging Face is a company and community known for open-source machine learning projects, especially in NLP.</li>
+<li>It hosts models, datasets, and spaces for demos and code, available under various licenses.</li>
+<li>Libraries provided include &ldquo;datasets&rdquo; for data downloading, &ldquo;Transformers&rdquo; for NLP pipelines, and &ldquo;evaluate&rdquo; for performance assessment.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transformers and Pipelines</strong>:</p>
+<ul>
+<li>Transformers library simplifies NLP tasks, such as summarization, by providing easy-to-use pipelines.</li>
+<li>The process involves prompt construction, tokenization (encoding text as numbers), and model inference.</li>
+<li>The library offers &ldquo;Auto&rdquo; classes that automatically configure based on the provided model or tokenizer name.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tokenization Details</strong>:</p>
+<ul>
+<li>Tokenizers output encoded data as &ldquo;input IDs&rdquo; and an &ldquo;attention mask&rdquo; which is metadata about the text.</li>
+<li>Adjustments can be made for input text length, padding, truncation, and tensor return type.</li>
+</ul>
+</li>
+<li>
+<p><strong>Model Inference</strong>:</p>
+<ul>
+<li>
+<p>Sequence-to-sequence language models transform variable-length text sequences, like articles, into summaries.</p>
+</li>
+<li>
+<p>Parameters like &ldquo;num beams&rdquo; for beam search and output length constraints can be specified. (<code>beam search</code>)</p>
+<blockquote>
+<p>Why <code>beam</code>?</p>
+<blockquote>
+<p>beam search라는 이름은 &ldquo;beam of hypotheses&quot;의 약자에서 유래했습니다. beam은 광선이나 빔을 의미하며, 동시에 여러 가지 가능한 후보를 고려하는 방법을 의미합니다.</p>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Datasets Library</strong>:</p>
+<ul>
+<li>Offers one-line APIs for loading and sharing datasets, including NLP, audio, and vision.</li>
+<li>Datasets are hosted on the Hugging Face Hub, allowing users to filter by various criteria and find related models.</li>
+</ul>
+</li>
+</ul>
+<h2 id="24-model-selection">2.4 Model Selection</h2>
+<ul>
+<li>
+<p><strong>Model Selection for Tasks</strong>: When selecting a model for tasks like summarization, one must decide between extractive (selecting pieces from the original text) and abstractive (generating new text) methods.</p>
+</li>
+<li>
+<p><strong>Filtering Models on Hugging Face</strong>: With thousands of models available, users can filter by task, license, language, and model size. It&rsquo;s also essential to consider the model&rsquo;s popularity, update frequency, and documentation.</p>
+</li>
+<li>
+<p><strong>Model Variants and Fine-tuning</strong>: Famous models often come in different sizes (base, small, large). Starting with the smallest model can be cost-effective. Fine-tuned models, adjusted for specific tasks, may perform better for related tasks.</p>
+</li>
+<li>
+<p><strong>Importance of Examples and Datasets</strong>: Not all models are well-documented, so looking for usage examples can be beneficial. It&rsquo;s crucial to know if a model is a generalist or fine-tuned for specific tasks and which datasets were used for its training.</p>
+</li>
+<li>
+<p><strong>Recognizing Famous Models</strong>: Many well-known models belong to model families, varying in size and specificity. While size can indicate power, other factors like architecture, training datasets, and fine-tuning can significantly impact performance.</p>
+</li>
+</ul>
+<h2 id="25-nlp-tasks">2.5 NLP tasks</h2>
+<ul>
+<li>
+<p><strong>NLP Tasks Overview</strong>: The module introduces various NLP tasks, some of which overlap, and are frequently mentioned in literature and platforms like Hugging Face Hub.</p>
+</li>
+<li>
+<p><strong>Text Generation &amp; Summarization</strong>: Text generation can encompass many tasks, including summarization. Some summarization models are labeled as text generation due to their multifunctional nature.</p>
+</li>
+<li>
+<p><strong>Sentiment Analysis</strong>: This task determines the sentiment of a given text, such as identifying whether a tweet about a stock is positive, negative, or neutral. LLMs can also provide a confidence score for their sentiment predictions.</p>
+</li>
+<li>
+<p><strong>Translation &amp; Zero-Shot Classification</strong>: LLMs can be fine-tuned for specific language translations, like English to Spanish. Zero-shot classification allows for categorizing content without retraining the model every time categories change, leveraging the LLM&rsquo;s inherent language understanding.</p>
+</li>
+<li>
+<p><strong>Few-Shot Learning</strong>: This is more of a technique than a task. Instead of fine-tuning a model for a specific task, a few examples are provided to guide the model. This is useful when there isn&rsquo;t a specific model available for a task and limited labeled training data.</p>
+</li>
+</ul>
+<h2 id="26-prompts">2.6 Prompts</h2>
+<ul>
+<li>
+<p><strong>Prompts in LLMs</strong>: Prompts serve as the primary method for interacting with large language models (LLMs) and are especially prevalent in instruction-following LLMs.</p>
+</li>
+<li>
+<p><strong>Foundation Models vs. Instruction Following Models</strong>: While Foundation models are trained for general text generation tasks like predicting the next token in a sequence, instruction-following models are tuned to adhere to specific instructions or prompts, such as generating ideas or writing stories.</p>
+</li>
+<li>
+<p><strong>Nature of Prompts</strong>: Prompts can be natural language sentences, questions, code, emojis, or even outputs from other LLM queries. Their purpose is to elicit specific responses from the LLMs, guiding their behavior.</p>
+</li>
+<li>
+<p><strong>Complex Dynamic Interactions</strong>: LLMs can handle nested or chained prompts, allowing for intricate interactions. An example mentioned is &ldquo;few-shot learning,&rdquo; where the prompt provides an instruction, examples to guide the LLM, and then the actual query.</p>
+</li>
+<li>
+<p><strong>Power of Prompt Engineering</strong>: Effective prompt engineering can lead to structured outputs suitable for downstream data pipelines. The complexity of prompts can range from simple instructions to detailed formats with multiple components, showcasing the versatility and potential of LLMs.</p>
+</li>
+</ul>
+<h2 id="27-prompt-engineering">2.7 Prompt Engineering</h2>
+<ul>
+<li>
+<p><strong>Prompt Engineering Specifics</strong>:</p>
+<ul>
+<li>Prompt engineering is model-specific; what works for one model might not work for another.</li>
+<li>Effective prompts are clear and specific, often including an instruction, context, input/question, and desired output format.</li>
+<li>Techniques to improve model responses include instructing the model not to make things up, not to assume sensitive information, and using chain of thought reasoning.</li>
+</ul>
+</li>
+<li>
+<p><strong>Prompt Formatting and Security</strong>:</p>
+<ul>
+<li>Proper formatting, using delimiters, can help distinguish between instructions, context, and user input.</li>
+<li>There are vulnerabilities like prompt injection (overriding real instructions), prompt leaking (extracting sensitive info), and jailbreaking (bypassing moderation). Developers need to be aware and constantly update to counteract these vulnerabilities.</li>
+</ul>
+</li>
+<li>
+<p><strong>Countermeasures and Resources</strong>:</p>
+<ul>
+<li>Techniques to reduce prompt hacking include post-processing, filtering, repeating instructions, enclosing user input with random strings, and selecting different models.</li>
+<li>Various guides and tools are available to assist in writing effective prompts, some specific to OpenAI and others more general.</li>
+</ul>
+</li>
+</ul>
+<h2 id="28-recap">2.8 Recap</h2>
+<ul>
+<li>LLMs have a wide variety of applications and use cases.</li>
+<li>Hugging Face offers numerous NLP components, a hub for models, datasets, and examples.</li>
+<li>When selecting a model, consider the task, constraints, and model size.</li>
+<li>There are many tips for model selection, but it&rsquo;s essential to tailor choices to specific applications.</li>
+<li>Prompt engineering is vital for generating valuable responses, combining both art and engineering techniques.</li>
+</ul>
+<h1 id="3-module-2---embeddings-vector-databases-and-search">3. Module 2 - Embeddings, Vector Databases and Search</h1>
+<h1 id="4-module-3---multi-stage-reasoning">4. Module 3 - Multi-stage Reasoning</h1>
+<h1 id="5-module-4---fine-tuning-and-evaluating-llms">5. Module 4 - Fine-tuning and Evaluating LLMs</h1>
+<h1 id="6-module-5---society-and-llms-bias-and-safety">6. Module 5 - Society and LLMs: Bias and Safety</h1>
+<h1 id="7-module-6---llmops">7. Module 6 - LLMOps</h1>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-09-27</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/llm/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/llm/" data-title="Databricks: Large Language Models: Application through Production" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/llm/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/llm/" data-title="Databricks: Large Language Models: Application through Production"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/llm/" data-title="Databricks: Large Language Models: Application through Production"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/llm/" data-title="Databricks: Large Language Models: Application through Production" data-image="/images/databricks.jpeg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/elderjs/" class="prev" rel="prev" title="Elderjs"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Elderjs</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>
