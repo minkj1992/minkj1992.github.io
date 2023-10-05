@@ -318,6 +318,16 @@ This module provides a comprehensive understanding of how embeddings and vector 
 
 # 4. Multi-stage Reasoning
 # 5. Fine-tuning and Evaluating LLMs
+
+## 5.2. Fine-tuning and Evaluating LLMs 
+
+- **Module 4 Overview: Fine-tuning and Evaluating Large Language Models (LLMs)**
+  - The module explores the customization of LLMs for specific applications, emphasizing the process of fine-tuning.
+  - Participants will learn how to use tools like DeepSpeed and Hugging Face for fine-tuning specific use cases and evaluating the performance of LLMs.
+  - LLMs are frequently released in various sizes, with different sequence lengths, and may come with pre-fine-tuned versions for specific tasks.
+  - Developers must balance accuracy, speed, and task-specific performance when choosing and using LLMs.
+  - The module will guide participants in building an application that summarizes news articles and converts them into riddles.
+
 # 6. Society and LLMs: Bias and Safety
 # 7. LLMOps
 

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Fundamentals of Database Engineering | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Fundamentals of Database Engineering" />
+<meta property="og:description" content="Learn ACID, Indexing, Partitioning, Sharding, Concurrency control, Replication, DB Engines, Best Practices and More!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/db/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-04T20:25:04+09:00" />
+<meta property="article:modified_time" content="2023-10-04T20:25:04+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Fundamentals of Database Engineering"/>
+<meta name="twitter:description" content="Learn ACID, Indexing, Partitioning, Sharding, Concurrency control, Replication, DB Engines, Best Practices and More!"/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/db/" /><link rel="prev" href="https://minkj1992.github.io/mlops/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Fundamentals of Database Engineering",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/db\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "database, cs","wordcount":  955 ,
+        "url": "https:\/\/minkj1992.github.io\/db\/","datePublished": "2023-10-04T20:25:04+09:00","dateModified": "2023-10-04T20:25:04+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Fundamentals of Database Engineering</h1><h2 class="single-subtitle">https://www.udemy.com/course/database-engines-crash-course/</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/cs/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>cs</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-04">2023-10-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;955 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db.png"
+        data-srcset="/images/db.png, /images/db.png 1.5x, /images/db.png 2x"
+        data-sizes="auto"
+        alt="/images/db.png"
+        title="/images/db.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#21-what-is-transaction">2.1 What is Transaction?</a>
+      <ul>
+        <li><a href="#transaction-lifespan">Transaction Lifespan</a></li>
+      </ul>
+    </li>
+    <li><a href="#22-atomicity">2.2. Atomicity</a></li>
+    <li><a href="#23-isolation">2.3. Isolation</a>
+      <ul>
+        <li><a href="#231-read-phenomena">2.3.1. Read Phenomena</a>
+          <ul>
+            <li><a href="#2311-dirty-reads">2.3.1.1. Dirty Reads</a></li>
+            <li><a href="#2312-non-repeatable-reads">2.3.1.2. Non-repeatable reads</a></li>
+            <li><a href="#2313-phantom-reads">2.3.1.3. Phantom reads</a></li>
+            <li><a href="#2314-lost-updates">2.3.1.4. Lost updates</a></li>
+          </ul>
+        </li>
+        <li><a href="#232-isolation-level">2.3.2. Isolation Level</a></li>
+        <li><a href="#233-implementation-of-isolation">2.3.3. Implementation of Isolation</a></li>
+      </ul>
+    </li>
+    <li><a href="#24-consistency">2.4. Consistency</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#241-consistency-in-data">2.4.1. Consistency in Data</a></li>
+            <li><a href="#242-consistency-in-read">2.4.2. Consistency in Read</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#25-durability">2.5. Durability</a>
+      <ul>
+        <li><a href="#wal">WAL</a></li>
+        <li><a href="#os-cache">OS Cache</a></li>
+      </ul>
+    </li>
+    <li><a href="#26-practical-exercise-acid">2.6. Practical Exercise ACID</a>
+      <ul>
+        <li><a href="#261-atomicity">2.6.1 Atomicity</a></li>
+        <li><a href="#262-isolation">2.6.2 Isolation</a></li>
+        <li><a href="#263-durability">2.6.3. Durability</a></li>
+        <li><a href="#264-phantom-read">2.6.4 phantom read</a></li>
+        <li><a href="#265-serializable-vs-non-repeatable">2.6.5. Serializable vs Non-Repeatable</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Learn ACID, Indexing, Partitioning, Sharding, Concurrency control, Replication, DB Engines, Best Practices and More!</p>
+<h1 id="2-acid">2. ACID</h1>
+<h2 id="21-what-is-transaction">2.1 What is Transaction?</h2>
+<ul>
+<li>A Collection of a queries</li>
+<li>One unit of work</li>
+</ul>
+<h3 id="transaction-lifespan">Transaction Lifespan</h3>
+<ul>
+<li>BEGIN</li>
+<li>COMMIT</li>
+<li>(opt) Rollback</li>
+</ul>
+<h2 id="22-atomicity">2.2. Atomicity</h2>
+<ul>
+<li>트랜잭션안의 모든 쿼리들을 succeed 되어야한다.</li>
+<li>트랜잭션안의 한 쿼리가 실패하면, 이전의 모든 성공적인 쿼리들은 rollback 되어야 한다.</li>
+<li>트랜잭션이 commit 되기 전에, db가 crash (went down)되면, 모든 트랜잭션 안의 successful queries는 rollback 되어야 한다.</li>
+<li>꺼진 db가 다시 켜지게 되면, should clean this up 해야 한다.</li>
+</ul>
+<h2 id="23-isolation">2.3. Isolation</h2>
+<blockquote>
+<p>실행되고 있는 트랜잭션이, 다른 실행되고 있는 트랜잭션이 변경 시킨 change를 볼 수있을까?</p>
+</blockquote>
+<ol>
+<li>Read Phenomena (읽기 이상 현상)</li>
+<li>Isolation Levels (격리 수준)</li>
+<li>Impl of isolation</li>
+</ol>
+<h3 id="231-read-phenomena">2.3.1. Read Phenomena</h3>
+<blockquote>
+<p>dnpl</p>
+</blockquote>
+<ul>
+<li>Dirty reads</li>
+<li>Non-repeatable reads</li>
+<li>Phantom reads</li>
+<li>Lost updates</li>
+</ul>
+<h4 id="2311-dirty-reads">2.3.1.1. Dirty Reads</h4>
+<blockquote>
+<p>middle update
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db1.png"
+        data-srcset="/images/db1.png, /images/db1.png 1.5x, /images/db1.png 2x"
+        data-sizes="auto"
+        alt="/images/db1.png"
+        title="/images/db1.png" /></p>
+</blockquote>
+<p>동시에 진행되고 있는 다른 트랜잭션(아직 커밋하지 않은 상태)에서 변경한 데이터를 현재 진행 중인 트랜잭션에서 읽어 들이는 것을 뜻합니다.</p>
+<h4 id="2312-non-repeatable-reads">2.3.1.2. Non-repeatable reads</h4>
+<blockquote>
+<p>middle update commit</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db2.png"
+        data-srcset="/images/db2.png, /images/db2.png 1.5x, /images/db2.png 2x"
+        data-sizes="auto"
+        alt="/images/db2.png"
+        title="/images/db2.png" /></p>
+<p>하나의 트랜잭션 중 읽어 들였던 특정 row의 값을 같은 트랜잭션 내에서 다시 읽어 들이는데 중간에 변경사항이 생겨 (실제로 COMMIT이 된 변경사항) 결괏값이 다르게 나오는 현상</p>
+<h4 id="2313-phantom-reads">2.3.1.3. Phantom reads</h4>
+<blockquote>
+<p>insert</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db3.png"
+        data-srcset="/images/db3.png, /images/db3.png 1.5x, /images/db3.png 2x"
+        data-sizes="auto"
+        alt="/images/db3.png"
+        title="/images/db3.png" /></p>
+<p>Phantom read란, 트랜잭션 시작 시점 데이터를 읽었을 때 존재하지 않았던 데이터가 다시 같은 조건으로 데이터를 읽어 들였을 때 존재해 (유령처럼) INCONSISTENT 한 결괏값을 반환하는 현상</p>
+<h4 id="2314-lost-updates">2.3.1.4. Lost updates</h4>
+<blockquote>
+<p>duplicate update</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db4.png"
+        data-srcset="/images/db4.png, /images/db4.png 1.5x, /images/db4.png 2x"
+        data-sizes="auto"
+        alt="/images/db4.png"
+        title="/images/db4.png" /></p>
+<p>Lost Update란, 한 트랜잭션에서 데이터를 변경한 뒤 아직 커밋을 하지 않은 상태에서 읽어 들일 때, 다른 트랜잭션으로 인해 내가 작성한 변경사항이 덮어씌워지는 현상을 뜻합니다.</p>
+<h3 id="232-isolation-level">2.3.2. Isolation Level</h3>
+<ol>
+<li>Read uncommitted, No isolation</li>
+<li>Read committed, tx only sees commited changed by other tx</li>
+<li>Repeatable Read, make sure query read unchanged while tx running
+<ol>
+<li>트랜잭션안에 있는 여러 쿼리들이 같은 row를 참조할 때, 항상 같은 값을 주도록 한다.</li>
+<li>lock 또는 snapshot으로 구현시킬 수 있다.</li>
+<li>PostgreSQL은 (4) Snapshot으로 구현하여 phantom read 방지</li>
+<li>InnoDB는 MVCC (multi version concurrency control), 즉 undo 백업을 관리함.</li>
+</ol>
+</li>
+<li>Snapshot, snapshot으로 version 관리
+<ol>
+<li>phantom read 없음</li>
+</ol>
+</li>
+<li>Serializable, no concurrency</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db5.png"
+        data-srcset="/images/db5.png, /images/db5.png 1.5x, /images/db5.png 2x"
+        data-sizes="auto"
+        alt="/images/db5.png"
+        title="/images/db5.png" /></p>
+<h3 id="233-implementation-of-isolation">2.3.3. Implementation of Isolation</h3>
+<ul>
+<li>Pessimistic, lock (row, table, page level)</li>
+<li>Optimistic, no lock (track and 충돌 발생시 뒤의 요청은 에러)
+<ul>
+<li>version, hashcode, timestamp등의 col 추가해서 충돌을 예방</li>
+</ul>
+</li>
+<li>Serializable은 주로 Optimistic concurrency control로 구현된다. Pessimistic하게 구현하기 위해서는 SELECT FOR UPDATE</li>
+</ul>
+<h2 id="24-consistency">2.4. Consistency</h2>
+<h4 id="241-consistency-in-data">2.4.1. Consistency in Data</h4>
+<blockquote>
+<p>개발자 테이블 설계 관련 문제</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db6.png"
+        data-srcset="/images/db6.png, /images/db6.png 1.5x, /images/db6.png 2x"
+        data-sizes="auto"
+        alt="/images/db6.png"
+        title="/images/db6.png" /></p>
+<h4 id="242-consistency-in-read">2.4.2. Consistency in Read</h4>
+<blockquote>
+<p>tx 커밋된 변화를, 새로운 tx가 곧바로 참조할 수 있을까?</p>
+</blockquote>
+<p>Sharding된 db1,db2에서 db1에 update x to a를 했고, db2에서 select x를 할 경우에
+Inconsistency가 발생한다.</p>
+<p>scale horizontally한 또는 caching을 도입한,
+RDB 그리고 NoSQL 모두 이에 대해서 suffer하고 있다.</p>
+<ul>
+<li>이를 해결하기 위해서 Eventual consistency 전략이 도입되었다.</li>
+<li>or 무시 가능한 경우(예를들어 좋아요 수), inconsistent를 허용하는 방법.</li>
+</ul>
+<h2 id="25-durability">2.5. Durability</h2>
+<p>Commit된 tx의 변화는 durable, non-volatile storage에 persisted 되어야한다.</p>
+<p>Durability techniques</p>
+<ol>
+<li>WAL - Write ahead log segments</li>
+<li>Async snapshot, memory -&gt; background snapshot</li>
+<li>AOF</li>
+</ol>
+<h3 id="wal">WAL</h3>
+<p>연산에 사용되는 모든 데이터를 Disk에 저장하는 건 비싸다.
+WAL (Compressed version of the change)은 변화 segments를 compress해서 version 관리를 한다.</p>
+<h3 id="os-cache">OS Cache</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db7.png"
+        data-srcset="/images/db7.png, /images/db7.png 1.5x, /images/db7.png 2x"
+        data-sizes="auto"
+        alt="/images/db7.png"
+        title="/images/db7.png" /></p>
+<p>Os에서 write request는 대부분 os cache로 들어간다. 예를들어 file 저장을 요구했고, os가 succeed 되었다고 하지만, 알고보니 os cache memory에 기록되었고, os crush 상황에서 이 데이터는 유실될 수 있다는 뜻입니다. (os는 cache에 모아두었다가 batch로 처리해서 i/o 사용을 줄이는 전략을 취하기 때문에)</p>
+<p>이를 해결하는 방법은 <code>fsync</code> command를 사용해서, write되는 데이터가 항상 go to disk 하도록 할 수 있습니다. 하지만 trade-off는 expensive하고 commit을 느려지게 할 수 있다는 점입니다.</p>
+<h2 id="26-practical-exercise-acid">2.6. Practical Exercise ACID</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run --name pgacid -d -e <span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>postgres postgres:13
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it pgacid psql -U postgres
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-postgres" data-lang="postgres"><span class="line"><span class="cl"><span class="k">create</span> <span class="k">table</span> <span class="n">products</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pid</span> <span class="nb">serial</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="k">name</span> <span class="nb">text</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">price</span> <span class="k">float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inventory</span> <span class="nb">integer</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">create</span> <span class="k">table</span> <span class="n">sales</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">saleid</span> <span class="nb">serial</span> <span class="k">primary</span> <span class="k">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pid</span> <span class="nb">integer</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">price</span> <span class="k">float</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">quantity</span> <span class="nb">integer</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">insert</span> <span class="k">into</span> <span class="n">products</span><span class="p">(</span><span class="k">name</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">inventory</span><span class="p">)</span> <span class="k">values</span><span class="p">(</span><span class="s1">&#39;phone&#39;</span><span class="p">,</span> <span class="mf">999.99</span><span class="p">,</span> <span class="mf">100</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="261-atomicity">2.6.1 Atomicity</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">postgres=# begin transaction;
+</span></span><span class="line"><span class="cl">BEGIN
+</span></span><span class="line"><span class="cl">postgres=*# select * from products;
+</span></span><span class="line"><span class="cl"> pid | name  | price  | inventory
+</span></span><span class="line"><span class="cl">-----+-------+--------+-----------
+</span></span><span class="line"><span class="cl">   1 | phone | 999.99 |       100
+</span></span><span class="line"><span class="cl">(1 row)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">postgres=*# update products set inventory = inventory - 10;
+</span></span><span class="line"><span class="cl">UPDATE 1
+</span></span><span class="line"><span class="cl">postgres=*# select * from products;
+</span></span><span class="line"><span class="cl"> pid | name  | price  | inventory
+</span></span><span class="line"><span class="cl">-----+-------+--------+-----------
+</span></span><span class="line"><span class="cl">   1 | phone | 999.99 |        90
+</span></span><span class="line"><span class="cl">(1 row)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">postgres=*# exit;
+</span></span><span class="line"><span class="cl">&gt; docker exec -it pgacid psql -U postgres
+</span></span><span class="line"><span class="cl">psql (13.12 (Debian 13.12-1.pgdg120+1))
+</span></span><span class="line"><span class="cl">Type &#34;help&#34; for help.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">postgres=# select * from products;
+</span></span><span class="line"><span class="cl"> pid | name  | price  | inventory
+</span></span><span class="line"><span class="cl">-----+-------+--------+-----------
+</span></span><span class="line"><span class="cl">   1 | phone | 999.99 |       100
+</span></span><span class="line"><span class="cl">(1 row)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="262-isolation">2.6.2 Isolation</h3>
+<blockquote>
+<p>mvcc</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-postgres" data-lang="postgres"><span class="line"><span class="cl"><span class="n">postgres</span><span class="o">=*#</span> <span class="k">begin</span> <span class="k">transaction</span> <span class="k">isolation</span> <span class="k">level</span> <span class="k">repeatable</span> <span class="k">read</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="263-durability">2.6.3. Durability</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db8.png"
+        data-srcset="/images/db8.png, /images/db8.png 1.5x, /images/db8.png 2x"
+        data-sizes="auto"
+        alt="/images/db8.png"
+        title="/images/db8.png" /></p>
+<p>TV를 insert하고 tx commit 시점에 docker stop 하더라도, durability
+로 TV 정보가 남아있다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db9.png"
+        data-srcset="/images/db9.png, /images/db9.png 1.5x, /images/db9.png 2x"
+        data-sizes="auto"
+        alt="/images/db9.png"
+        title="/images/db9.png" /></p>
+<h3 id="264-phantom-read">2.6.4 phantom read</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-postgres" data-lang="postgres"><span class="line"><span class="cl"><span class="n">postgres</span><span class="o">=*#</span> <span class="k">begin</span> <span class="k">transaction</span> <span class="k">isolation</span> <span class="k">level</span> <span class="k">serializable</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다른 tx에서 commit 하더라도 phantom read가 일어나지 않는다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-postgres" data-lang="postgres"><span class="line"><span class="cl"><span class="n">postgres</span><span class="o">=*#</span> <span class="k">begin</span> <span class="k">transaction</span> <span class="k">isolation</span> <span class="k">level</span> <span class="k">repeatable</span> <span class="k">read</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>하지만 PostgreSQL serializable보다 더 낮은 레벨인 repeatable read level에서도 tx안에서의 query에 대한 snapshot을 관리하기 때문에, phantom read를 방지 가능하다.</p>
+<h3 id="265-serializable-vs-non-repeatable">2.6.5. Serializable vs Non-Repeatable</h3>
+<ul>
+<li>reapeatable read level인 경우</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db10.png"
+        data-srcset="/images/db10.png, /images/db10.png 1.5x, /images/db10.png 2x"
+        data-sizes="auto"
+        alt="/images/db10.png"
+        title="/images/db10.png" /></p>
+<p>1 a
+2 a
+3 b
+4 b</p>
+<p>테이블에서</p>
+<p>a-&gt;b (where not b), b-&gt;a (where not a)하는 2개의 tx(reapeatable read level)에서 동시에 commit을 할 경우,</p>
+<p>1 b
+2 b
+3 a
+4 a</p>
+<p>가 발생한다.</p>
+<p>만약 이를 원하지 않는 경우에는, Serializable level을 사용하면 된다.</p>
+<ul>
+<li>Serializable level인 경우</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/db11.png"
+        data-srcset="/images/db11.png, /images/db11.png 1.5x, /images/db11.png 2x"
+        data-sizes="auto"
+        alt="/images/db11.png"
+        title="/images/db11.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1. start tx1, tx2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(tx1) select * from test;
+</span></span><span class="line"><span class="cl">1 a
+</span></span><span class="line"><span class="cl">2 a
+</span></span><span class="line"><span class="cl">3 b
+</span></span><span class="line"><span class="cl">4 b
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(tx1) update  test set t = &#39;a&#39; where t = &#39;b&#39;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">1 b
+</span></span><span class="line"><span class="cl">2 b
+</span></span><span class="line"><span class="cl">3 b
+</span></span><span class="line"><span class="cl">4 b
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(tx1) commit
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(tx2) update  test set t = &#39;a&#39; where t = &#39;b&#39;;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ERROR: could not serialize access due to read/write dependencies among transactions
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">(tx2) rollback 하고 다시 commit하면 성공
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>backend 개발자는 에러 처리에 대해서 어떻게 동작할지를 서비스에 적용해 둬야한다.</p>
+<h1 id="3-understanding-database-internals">3. Understanding Database Internals</h1></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/db/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/db/" data-title="Fundamentals of Database Engineering" data-hashtags="database,cs"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/db/" data-hashtag="database"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/db/" data-title="Fundamentals of Database Engineering"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/db/" data-title="Fundamentals of Database Engineering"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/db/" data-title="Fundamentals of Database Engineering" data-image="/images/db.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/database/">database</a>,&nbsp;<a href="/tags/cs/">cs</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/mlops/" class="prev" rel="prev" title="All about mlops"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>All about mlops</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>
