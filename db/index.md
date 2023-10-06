@@ -279,3 +279,112 @@ backend 개발자는 에러 처리에 대해서 어떻게 동작할지를 서비
 
 # 3. Understanding Database Internals
 
+## 3.1. How tables and Indexes are stored on disk
+> 인덱스와 테이블이 disk에 저장되는 방식 그리고 query 어떻게 되는지
+
+Storage Concepts
+
+- Table
+- Row_id
+- Page
+- IO
+- Heap data structure
+- Index data structure b-tree
+- Example of a query
+
+### Row id
+
+- 내부 시스템에서 관리되는 row 아이디
+- innodb는 pk와 같지만, postgres는 row_id(tuple_id)가 따로 관리된다.
+
+### Page
+> "고정된 크기의 block으로, disk에서 데이터와 인덱스를 저장하고 관리하는 기본 단위.
+
+- innoDB(16KB)
+- postgres(8KB)
+
+- db는 single row를 읽는 것이 아닌, 한번의 IO에서 page or more을 읽는다. 
+- 1001 rows가 존재하고, 각 page가 3rows를 가진다면, 333 ~ pages를 가지게 된다.
+- 한편 Postgresql에서는 Heap안에 여러 page들로 데이터를 disk에 저장한다.
+
+
+### IO
+> input/output request to the disk
+
+- IO는 expensive operation이기 때문에, 개발자들은 io를 최대한 최소화 하려고 노력
+- 한번의 IO는 1page 이상을 fetch한다.
+- 몇몇의 IO는 os에 따라서, disk가 아닌 os system cache에 접근한다. (i.e. postgresql)
+
+### Heap
+
+페이지들을 담고 있는 heap data structure.
+Heap 안에서 효율적으로 데이터를 search하기 위해 index 필요.
+
+
+### Index
+
+- Heap과 분리된 data structure로 heap에 대한 pointer들을 가지고 있다.
+- Index는 Heap의 어떤 page에서 정보를 가져와야할지 알려준다.
+- 인덱스도 page로 관리되고, index entries들을 가져오기 위해 IO가 소요된다.
+- Index가 작으면 작을 수로 memory에 fit되고 search가 빨라진다.
+
+여기서 마지막 문장이 모호하게 들려, 좀 더 자세히 풀어보겠습니다.
+index의 크기가 작으면 작을 수록 memory에 fit하다는 뜻은, Index가 작을 수록 RAM의 Virtual Memory에서의 page 하나 또는 적은수의 페이지에 포함되게 되며, 이를 통해 페이징 작업이 줄어들게 됩니다.
+
+또한 페이지 fault시에도 적은 데이터로 인해 디스크 I/O작업을 최소화 시켜 페이지 폴트 처리 시간을 줄일 수 있습니다.
+
+**사실 index도 page로 저장되기 때문에 disk에 저장되지만, buffer pool(innodb), shared Buffer Cache(postgre)같이 RAM 메모리 내의 buffer pool에 데이터를 cache**할 수 있기 때문에 적용되는 내용이라 생각된다.
+
+## 3.2. Row vs Column oriented Databases
+
+![](/images/db12.png)
+
+### Row Databases
+- Optimal for read / writes
+- OLTP
+- Compression isn't efficient
+- Aggregation isn't efficient
+    - aggr에 필요하지 않은 필드들도 mem에 올라와서 더 많은 page들을 뒤져서 aggr함
+- Efficient queries w/multi-columns
+    - 칼럼형은 row데이터를 얻기 위해서는, column 갯수 만큼 io 해서 찾아야 하기 때문에.
+### Columnar Databases
+- Writes are slower
+- OLAP (online analytical Processing)
+    - Google Bigquery, parquet
+- Compress greatly
+    - 칼럼형의 값들은 같은 타입의 값들이기 때문에 row형은 여러 타입들의 데이터가 저장되어있음.
+    - 또한 col 값마다 중복된 값이 더 많을 수 있으므로 압축효율이 높음
+- Amazing for aggregation (i.e. SUM() ...)
+- Inefficient queries w/multi-columns
+
+## 3.3. Primary key vs Secondary Key
+> pk는 clustering과 관련 되어 있습니다. 
+> [Mysql 인덱스 - 클러스티드 인덱스와 논클러스티드 인덱스 개념편 ](https://sihyung92.oopy.io/database/mysql-index) 참조
+
+
+기본적으로 table은 ordering하지 않고 있지만 oracle의 IOT(Index organized Table), Postgres의 Clustered Index 따위가 있고, InnoDB는 Primary Key 클러스터링 인덱싱이 default입니다.
+
+<center>
+
+![](/images/db_index.png)
+
+![](/images/db_index2.png)
+
+</center>
+
+InnoDB 기준 Primary key는 자동으로 clustered index가 되기 때문에 PK = clustered index로 생각하겠습니다. B Tree 구조에서 table이 저장될 때, PK(Clustered index)로 정렬되어 저장되어 tree형식으로 page들이 저장됩니다. 
+
+![](/images/clustered_index.png)
+
+Secondary Index(non clustered index)는 Index Page를 따로 생성하여 관리되며, `CREATE INDEX`로 생성된 index에 대한 B-tree를 생성하여 관리합니다.
+
+![](/images/non_clustered_index.png)
+
+즉 non clustered index는 index table이 따로 관리되며, B-Tree로 관리되기 때문에, Read 효율을 얻는 대신, CUD를 trade off로 가집니다.
+
+## 3.4. Databases Pages - Deep dive
+- 데이터 베이스 페이지란?
+- 어떻게 Disk에 write 되는가?
+- 어떻게 Disk에 store 되는가?
+- Postgres의 page layout은 어떻게 되는가?
+

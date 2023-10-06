@@ -100,5 +100,91 @@
 
 
 
+# 3. Kubeflow
+
+## Kubeflow Concepts
+1. Component
+    - Component contents
+    - Component wrapper, kubeflow로 component가 전달
+2. Artifacts, Componenet를 통해 생산
+3. Pipeline
+4. Run
+
+
+### 1.1. Component contents
+
+컴포넌트 콘첸츠를 구성하는 것은 총 3가지로
+1. Environment
+2. Python code w\ Config
+3. Generates Artifacts
+
+
+```py
+import dill
+import pandas as pd
+
+from sklearn.svm import SVC
+
+train_data = pd.read_csv(train_data_path)
+train_target= pd.read_csv(train_target_path)
+
+clf= SVC(
+    kernel=kernel
+)
+clf.fit(train_data)
+
+with open(model_path, mode="wb") as file_writer:
+     dill.dump(clf, file_writer)
+```
+
+
+![](/images/kubeflow_components.png)
+
+
+### 1.2. Component Wrapper
+
+컴포넌트 래퍼는 컴포넌트 콘텐츠에 필요한 config를 전달하고 실행시키는 작업을 합니다.
+
+
+![](/images/component_wrapper.png)
+
+
+### 2. Artifacts
+
+- Model
+    - 파이썬 코드
+    - 학습된 weights
+    - network 구조
+    - 실행시키기 위한 환경
+- Data
+    - 전처리된 feature
+    - 모델의 예측값
+- Metric
+    - Dynamic metric, train loss와 같이 epoch마다 계속 변화하는 값
+    - Stataic Metric, 학습이 끝난 뒤 최종적으로 모델을 평가하는 정확도 등
+
+### 3. Pipeline
+
+파이프라인은 컴포넌트의 집합과 이를 실행시키는 순서도로 구성되어있습니다. 순서도는 DAG 이뤄져 있으며 조건문을 포함시킬 수 있습니다.
+
+또한 컴포넌트를 실행시키기 위해서는 Config가 필요한데, Pipeline을 구성하는 컴포넌트의 Config들을 모아 둔 것이 파이프라인 Config 입니다.
+
+
+![](/images/kubeflow_pipeline.png)
+
+### 4. Run
+
+Kubeflow에서는 실행된 파이프라인을 Run이라고 부릅니다.
+**파이프라인이 실행되면, 각 컴포넌트들이 아티팩트들을 생성하고, Kubeflow pipeline에서는 Run하나당 고유한 ID를 생성한 뒤, Run에서 생성되는 모든 아티팩트들을 저장합니다.**
+
+![](/images/kubeflow_run.png)
+
+
+### 5. Experiment
+
+Experiment란 Kubeflow 에서 실행되는 Run을 논리적으로 관리하는 단위입니다.
+
+### 6. InputPath, OutputPath
+
 
 
