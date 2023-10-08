@@ -4,7 +4,19 @@
         <link>https://minkj1992.github.io/tags/interview/</link>
         <description>interview - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 12 Jan 2022 20:21:33 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/interview/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 06 Oct 2023 22:00:50 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/interview/" rel="self" type="application/rss+xml" /><item>
+    <title>All Basic Computer Science</title>
+    <link>https://minkj1992.github.io/interview/</link>
+    <pubDate>Fri, 06 Oct 2023 22:00:50 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/interview/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/interview.jpeg" referrerpolicy="no-referrer">
+            </div><blockquote>
+<p>Let&rsquo;s prepare basic computer science interview questions.</p>
+</blockquote>]]></description>
+</item>
+<item>
     <title>Sorting algorithms</title>
     <link>https://minkj1992.github.io/sorting/</link>
     <pubDate>Wed, 12 Jan 2022 20:21:33 &#43;0900</pubDate>
@@ -14,18 +26,6 @@
                 <img src="/images/sorting.jpeg" referrerpolicy="no-referrer">
             </div><blockquote>
 <p>Let&rsquo;s summary list of Sorting Algorithms</p>
-</blockquote>]]></description>
-</item>
-<item>
-    <title>All Basic Computer Science</title>
-    <link>https://minkj1992.github.io/interview/</link>
-    <pubDate>Thu, 06 Jan 2022 22:00:50 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/interview/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/interview.jpeg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>Let&rsquo;s prepare basic computer science interview questions.</p>
 </blockquote>]]></description>
 </item>
 </channel>
