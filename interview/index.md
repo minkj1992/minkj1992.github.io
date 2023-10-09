@@ -87,7 +87,30 @@ localhost.initiator > localhost.receiver: Flags [.], ack 1, win 6379
 $ sysctl net.inet.tcp | grep sack:
 net.inet.tcp.sack: 1
 ```
+### DNS lookup
 
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbuJeCx%2FbtrRtVNCPHr%2FwP0QDJYq9fI9cwos0HkSRK%2Fimg.png)
+
+1. 브라우저에서 naver.com을 입력하면
+2. /hosts 파일에서 dns: ip에 대한 매핑 확인
+3. (없을 경우) local pc dns cache 확인
+4. (없을 경우) /resolv.conf에서 local dns server ip 확인
+
+> Local DNS Server란?
+>> ISP provider(skt, kt, 등) 또는 Public DNS(google, cloudflare)등이 역할 가능하며, 주요 역할은 DNS name을 IP 주소로 변환하는 것
+
+![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbIx8eY%2FbtrRtU2gjnv%2F20sXtl8sBhwb70IXcJqgQ0%2Fimg.png)
+
+5. local dns server의 cache에서 확인
+6. (없을 경우) local dns server - (recursive query) -> ROOT DNS SERVER
+  1. TLD DNS server IP 획득
+  2. TLD (.com, .kr 등)
+7. local dns server -> TLD DNS SERVER
+  1. Second domain dns의 authoritative server ip 획득
+8. local dns server --> authoritative server
+9. Authoritative dns -> subdomain(3rd level domain) 체크
+  1. 예를들면 ftp.naver.com, blog.naver.com에서 ftp.* 또는 blog.* 와 매핑된 Ip 주소
+10. ip 획득, cache 저장
 
 
 
@@ -95,42 +118,48 @@ net.inet.tcp.sack: 1
 
 > 키워드: `dhcp`, `dns`, `nat`, `isp`, `3-way / 4-way handshake`, `ssl (ssl handshake)`
 
-1. 가장 먼저 브라우저가 url에 적힌 값을 파싱해서 `HTTP Request Message`를 만들고, OS에 전송 요청을 합니다.
 
-2. **OS는 `DNS Lookup`을 수행합니다.**
-   룩업 과정은 etc/hosts > DNS Cache > Cache가 없을 경우 dns server로 ip를 얻어옵니다.
+(pre-step) 노트북 기준 wifi 연결시, IP주소를 얻기 위해 DHCP 요청하며 이를 통해 라우터(또는 wifi 공유기)를 통해 사설 IP주소, 서브넷 마스크, 게이트웨이 주소등을 전달받아둔 상태입니다. 
 
-3. **DNS server로 ip request**
-   이때 DNS server IP는 1차적으로 `isp`(internet service provider, ex kt, skt...)가 제공하는 정보들이 `dhcp`에 의해 컴퓨터에 세팅됩니다.
+1. 먼저 브라우저가 url에 적힌 값을 파싱해서 `HTTP Request Message`를 만들고, OS에 전송 요청을 합니다.
 
-`dhcp`는 wifi를 쓸 경우, 공유기에 연결되어있는 `gateway ip`와 `router`의 `NAT`을 통해 `사설 ip`(private ip)를 할당 받으며, 외부 통신을 할 경우 router의 `Public ip`을 사용합니다.
+2. **DNS lookup**, /hosts -> cache 를 확인해서 IP 주소가 없을 경우 DNS lookup을 실시합니다.
+3. **NAT**, 노트북에 할당된 사설 IP주소를 라우터/wifi공유기가 실행하여 public IP주소로 변환합니다.
+4. 라우터의 라우팅 테이블을 통해 패킷 다음 목적지 선택
+5. ISP의 라우터로 전달 후 다음 목적지 선택
+6. google.com의 데이터 센터로 전달
+7. 3way handshake
+8. 패킷 전달
+9. (keep-alive 이후) 4way handshake
 
-ISP에 의해 세팅되어 있는 dns server로 아래 형식의 요청을 보내어, 도메인에 매핑된 ip를 받아옵니다.
 
-```
-- from: router ip(nat ip)
-- to: 받아온 ip
-- 게이트웨이 ip : wifi이면 공유기 연결 게이트웨이 ip / 스마트폰이면 자체 ip
-```
+### DNS round robin 방식
+> DNS round robin이란 부하 분산 기술로, Authoritative Nameserver는 여러 IP 주소를 순차적으로 반환하여 RR방식으로 부하 분산하는 것입니다.
 
-4. **루트 도메인서버에서부터 서브도메인 서버순으로 dns query**
-   이제 DNS Server로 DNS Query를 요청하게 되면 DNS 서버는 `Root name server`에 해당 도메인을 질의하고, `.com` `name server`의 ip를 받아오게 됩니다.
+FYI, DNS RR은 (DNS lookup에도 영향)을 주는 IP 주소에 대한 load balancing이다. 
 
-그 후 `.com 네임 서버`에 도메인 Query하게되면 `google.com`의 ip주소를 받고 최종적으로 `www.google.com`의 ip를 받아오게 됩니다.
+#### DNS RR 문제점
 
-5. pc는 최종 서버 ip로 HTTP Request를 보낸다.
+
+1. cache에 의해 균등하게 분산되지 못함
+2. health check이 존재하지 않음
+
 
 
 ### handshakes
 #### 3-way handshake
 
   > syn > syn-ack > ack
-
+  
 #### 4-way handshake
 
   > fin > ack(close wait) > fin(last_ack) > ack
 
 #### TLS handshake
+
+![](https://cf-assets.www.cloudflare.com/slt3lc6tev37/5aYOr5erfyNBq20X5djTco/3c859532c91f25d961b2884bf521c1eb/tls-ssl-handshake.png)
+
+
 
 - [tls/ssl](https://www.cloudflare.com/ko-kr/learning/ssl/what-happens-in-a-tls-handshake/)
 - [좀 더 자세한 과정 설명](https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/)
@@ -139,16 +168,15 @@ ISP에 의해 세팅되어 있는 dns server로 아래 형식의 요청을 보�
 
 ```py
 # RSA 키 교환 알고리즘
-1. client hello (protocol version, 암호 알고리즘, 압축 방식, 클라 난수)
-2. server hello (세션 ID, ca 인증서, 서버난수)
-3. verify ca and get public key
-4. 클라는 난수(pre master secret) 생성 후 public key로 암호화 후 서버 전달
-5. 클라 세션키 생성 및 서버는 난수를 private key로 복호화 하여 대칭키(세션 키) 생성
-6. 클라는 세션키(대칭키)로 암호화한 fin message를 서버로 전달
-7. 서버 또한 세션키로 암호화한 fin message를 전달
-8. 이후 세션키를 통해 통신 계속 진행
+1. client -> server: client hello (protocol version, 암호 알고리즘, 압축 방식, 클라 난수)
+2. server -> client: server hello (세션 ID, ca 인증서, 서버난수)
+3. client -> client: verify ca and get public key
+4. client -> server: 클라는 난수(pre master secret) 생성 후 public key로 암호화 후 서버 전달
+5. both: 클라 세션키 생성 및 서버는 난수를 private key로 복호화 하여 대칭키(세션 키) 생성
+6. client -> server: 클라는 세션키(대칭키)로 암호화한 fin message를 서버로 전달
+7. server -> client: 서버 또한 세션키로 암호화한 fin message를 전달
+8. 이후 세션키(master key, 대칭키)를 통해 통신 계속 진행
 ```
-
 
 ### Web Socket Handshake
 
