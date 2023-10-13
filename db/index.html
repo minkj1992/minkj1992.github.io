@@ -599,17 +599,37 @@ WAL (Compressed version of the change)은 변화 segments를 compress해서 vers
         data-sizes="auto"
         alt="/images/db10.png"
         title="/images/db10.png" /></p>
-<p>1 a
-2 a
-3 b
-4 b</p>
-<p>테이블에서</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>테이블에서</p>
 <p>a-&gt;b (where not b), b-&gt;a (where not a)하는 2개의 tx(reapeatable read level)에서 동시에 commit을 할 경우,</p>
-<p>1 b
-2 b
-3 a
-4 a</p>
-<p>가 발생한다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="n">b</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span>
+</span></span><span class="line"><span class="cl"><span class="n">a</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>가 발생한다.</p>
 <p>만약 이를 원하지 않는 경우에는, Serializable level을 사용하면 된다.</p>
 <ul>
 <li>Serializable level인 경우</li>
@@ -787,9 +807,11 @@ index의 크기가 작으면 작을 수록 memory에 fit하다는 뜻은, Index�
 </ul>
 <h2 id="33-primary-key-vs-secondary-key">3.3. Primary key vs Secondary Key</h2>
 <blockquote>
-<p>pk는 clustering과 관련 되어 있습니다.
-<a href="https://sihyung92.oopy.io/database/mysql-index" target="_blank" rel="noopener noreffer">Mysql 인덱스 - 클러스티드 인덱스와 논클러스티드 인덱스 개념편 </a>
- 참조</p>
+<ul>
+<li>pk는 clustering과 관련 되어 있습니다.</li>
+<li><a href="https://sihyung92.oopy.io/database/mysql-index" target="_blank" rel="noopener noreffer">Mysql 인덱스 - 클러스티드 인덱스와 논클러스티드 인덱스 개념편 </a>
+ 참조</li>
+</ul>
 </blockquote>
 <p>기본적으로 table은 ordering하지 않고 있지만 oracle의 IOT(Index organized Table), Postgres의 Clustered Index 따위가 있고, InnoDB는 Primary Key 클러스터링 인덱싱이 default입니다.</p>
 <center>

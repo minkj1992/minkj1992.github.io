@@ -225,20 +225,23 @@ postgres=*# begin transaction isolation level repeatable read;
 
 ![](/images/db10.png)
 
-1 a
-2 a
-3 b
-4 b
+```py
+a
+a
+b
+b
+```
 
 테이블에서
 
 a->b (where not b), b->a (where not a)하는 2개의 tx(reapeatable read level)에서 동시에 commit을 할 경우, 
 
-1 b
-2 b
-3 a
-4 a
-
+```py
+b
+b
+a
+a
+```
 가 발생한다.
 
 만약 이를 원하지 않는 경우에는, Serializable level을 사용하면 된다.
@@ -358,8 +361,8 @@ index의 크기가 작으면 작을 수록 memory에 fit하다는 뜻은, Index�
 - Inefficient queries w/multi-columns
 
 ## 3.3. Primary key vs Secondary Key
-> pk는 clustering과 관련 되어 있습니다. 
-> [Mysql 인덱스 - 클러스티드 인덱스와 논클러스티드 인덱스 개념편 ](https://sihyung92.oopy.io/database/mysql-index) 참조
+> - pk는 clustering과 관련 되어 있습니다. 
+> - [Mysql 인덱스 - 클러스티드 인덱스와 논클러스티드 인덱스 개념편 ](https://sihyung92.oopy.io/database/mysql-index) 참조
 
 
 기본적으로 table은 ordering하지 않고 있지만 oracle의 IOT(Index organized Table), Postgres의 Clustered Index 따위가 있고, InnoDB는 Primary Key 클러스터링 인덱싱이 default입니다.

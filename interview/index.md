@@ -6,22 +6,22 @@
 <!--more-->
 
 
-## Network
+# Network
 
-### HTTP의 GET과 POST 비교
+## 1. HTTP의 GET과 POST 비교
 > get과 post는 http 프로토콜의 가장 기본적인 메소드들 중 2개입니다.
 
-#### GET
+### GET
 - 조회 기능
 - http request message(1. request line, 2. header, 3. body)중 request line에 url (쿼리 포함)로 전송
 - 웹 브라우저나 중간의 프록시 서버 (의도치 않게) cache 가능성 존재
 - 길이 제한, 안정성
 
-#### POST
+### POST
 - 서버로 데이터를 전송하여 리소스 생성 기능
 - http reqeust message의 body에 데이터를 담아 전송하여, GET과 비교해 더 많은 양의 데이터 전송 가능
 
-### TCP vs UDP
+## 2. TCP vs UDP
 
 |                |        TCP         |              UDP               |
 | :------------: | :----------------: | :----------------------------: |
@@ -47,7 +47,7 @@ UDP
 - 최소한의 오버헤드
 - DNS, 온라인 게임, VoIP(voice call), 미디어 스트리밍 그리고 http3 (QUIC)
 
-#### TCP 흐름제어 (sliding window)
+## 3. TCP 흐름제어 (sliding window)
 > [패킷의 흐름과 오류를 제어하는 TCP](https://evan-moon.github.io/2019/11/22/tcp-flow-control-error-control/)
 
 클라와 서버는 각각 데이터를 담을 수 있는 버퍼를 가지고 있고, `window`라는 일종의 마스킹 도구를 가지고 있다. 서버측의 윈도우 크기는 3way handshake를 통해, 마지막 클라이언트 측에서 보내준 버퍼 크기를 사용하여 서버측 윈도우 크기를 정하게 된다.
@@ -87,7 +87,7 @@ localhost.initiator > localhost.receiver: Flags [.], ack 1, win 6379
 $ sysctl net.inet.tcp | grep sack:
 net.inet.tcp.sack: 1
 ```
-### DNS lookup
+## 4. DNS lookup
 
 ![](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbuJeCx%2FbtrRtVNCPHr%2FwP0QDJYq9fI9cwos0HkSRK%2Fimg.png)
 
@@ -114,7 +114,7 @@ net.inet.tcp.sack: 1
 
 
 
-### 웹 통신의 큰 흐름: https://www.google.com/ 을 접속할 때 일어나는 일
+## 5. 웹 통신의 큰 흐름: https://www.google.com/ 을 접속할 때 일어나는 일
 
 > 키워드: `dhcp`, `dns`, `nat`, `isp`, `3-way / 4-way handshake`, `ssl (ssl handshake)`
 
@@ -133,12 +133,12 @@ net.inet.tcp.sack: 1
 9. (keep-alive 이후) 4way handshake
 
 
-### DNS round robin 방식
+## 6. DNS round robin 방식
 > DNS round robin이란 부하 분산 기술로, Authoritative Nameserver는 여러 IP 주소를 순차적으로 반환하여 RR방식으로 부하 분산하는 것입니다.
 
 FYI, DNS RR은 (DNS lookup에도 영향)을 주는 IP 주소에 대한 load balancing이다. 
 
-#### DNS RR 문제점
+### DNS RR 문제점
 
 
 1. cache에 의해 균등하게 분산되지 못함
@@ -146,23 +146,19 @@ FYI, DNS RR은 (DNS lookup에도 영향)을 주는 IP 주소에 대한 load bala
 
 
 
-### handshakes
-#### 3-way handshake
+## 7. handshakes
+### 3-way handshake
 
   > syn > syn-ack > ack
   
-#### 4-way handshake
+### 4-way handshake
 
   > fin > ack(close wait) > fin(last_ack) > ack
 
-#### TLS handshake
+### TLS handshake(RSA)
 
 ![](https://cf-assets.www.cloudflare.com/slt3lc6tev37/5aYOr5erfyNBq20X5djTco/3c859532c91f25d961b2884bf521c1eb/tls-ssl-handshake.png)
 
-
-
-- [tls/ssl](https://www.cloudflare.com/ko-kr/learning/ssl/what-happens-in-a-tls-handshake/)
-- [좀 더 자세한 과정 설명](https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/)
 
 ![](/images/rsa_ssl.jpeg)
 
@@ -178,6 +174,9 @@ FYI, DNS RR은 (DNS lookup에도 영향)을 주는 IP 주소에 대한 load bala
 8. 이후 세션키(master key, 대칭키)를 통해 통신 계속 진행
 ```
 
+- [tls/ssl](https://www.cloudflare.com/ko-kr/learning/ssl/what-happens-in-a-tls-handshake/)
+- [좀 더 자세한 과정 설명](https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/)
+
 ### Web Socket Handshake
 
 [web socket mdn](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers)
@@ -186,19 +185,13 @@ FYI, DNS RR은 (DNS lookup에도 영향)을 주는 IP 주소에 대한 load bala
 
 클라와 서버가 서로 TCP/IP 4계층 레이어에서 통신한다. 즉 conneciton을 들고 있다.
 
-- http 요청 이후, upgrade요청 한다.
+- http 요청 이후, client가 서버로 upgrade요청하고 101응답
 - ping을 지속적으로 쏴서, health-check
 
-### 로드 밸런싱(Load Balancing)
 
-로드 밸런싱이란 여러 서버에게 균등하게 트래픽을 분산 시켜주는 것이다.
+## 8. Nginx가 c10k problem을 해결한 방식
+> c10k problem( connection 10k problem )은 한 시스템이 동시에 수천개의 네트워크 연결을 효율적으로 처리해야하는 용어로 nginx는 이 문제를 해결하기 위해 event driven arch를 도입하였습니다.
 
-nginx의 경우 기본적으로 라운드 로빈 방식으로 동작합니다.
-
-- scale-out
-- scale-up
-
-### Nginx가 10k problem을 해결한 방식
 
 기존 방식은 request당 하나의 process 또는 thread를 사용해서 요청들을 처리했습니다. 이에 반해 nginx는 worker pool을 두고 request가 들어올 때 마다, async하게 worker(default cpu 당 1)에게 task를 위임합니다.
 
@@ -206,9 +199,12 @@ nginx의 경우 기본적으로 라운드 로빈 방식으로 동작합니다.
 
 즉 지정된 갯수의 미리생성된 process(thread) 워커를 사용함으로써, 기존의 request가 늘어날 때마다, os 리소스가 급격히 늘어나는 것을 방지하여, 이에 대한 side effect(스케쥴링, context-switching등에 대한 오버헤드를 막아줍니다.) 또한 워커에 필요한 리소스들을 미리 생성해두기 때문에 Process 생성에 들어가는 오버헤드를 줄여줍니다.
 
-## Database
 
-### DB 트랜잭션이란?
+- [Further reading](https://cyuu.tistory.com/172)
+
+# Database
+
+## DB 트랜잭션이란?
 
 > 트랜잭션은 데이터베이스의 데이터를 조작하는 논리적인 작업의 단위(unit of work)입니다.
 
@@ -224,7 +220,7 @@ nginx의 경우 기본적으로 라운드 로빈 방식으로 동작합니다.
   - Durability
     - transaction이 Commit했을 경우 해당 결과가 영구적으로 적용됨을 보장하는 성질이다
 
-### 트랜잭션과 lock에 대해서 isolation과 연결 지어 설명해주세요
+## 트랜잭션과 lock에 대해서 isolation과 연결 지어 설명해주세요
 
 DB엔진은 ACID 원칙을 희생하여 동시성을 얻을 수 있는 방법을 제공합니다.
 
@@ -248,22 +244,68 @@ lock은 모두 transaction이 commit 되거나 rollback 될 때 함께 unlock
   - https://idea-sketch.tistory.com/43?category=547413
   - https://idea-sketch.tistory.com/45
 
-### DB index에 대해 설명해주세요
+## optimistic lock vs pessimistic lock
+
+- Pessimistic lock은 비관적 상황을 고려해 먼저 lock을 걸고 자원을 사용하는 것입니다.
+- Optimistic Lock은 update가 실행될 때만 lock을 시도합니다, 충돌이 일어나면 collision을 통해서 처리하는 방식입니다.
+  - 충돌 검사를 위해 버전 번호나 타임스탬프 사용합니다.
+
+InnoDB는 SELECT ... FOR UPDATE를 통해, PostgreSQL은 Serializable level에서 optimistic lock을 사용합니다.
+
+
+## DB index에 대해 설명해주세요
 
 > https://idea-sketch.tistory.com/43?category=547413
 
-### todo
 
-- dirty read, Non-Repeatable Read, Phantom Read
-- optimistic lock, pessimistic lock
-- slow query
-- Index
 
-## Software Engineering
+데이터를 빠르게 검색하고 액세스 할 수 있도록 도와주는 자료구조입니다. 대부분의 RDB에서는 B+ Tree를 사용해 Balanced Tree를 유지하며 이를 통해 O(logn)의 검색 성능을 보장합니다.
 
-## Design Pattern
+크게 클러스터링 인덱스와 비클러스터링 인덱스(Secondary Index)로 나눌 수 있습니다.
+innodb의 경우 PK가 기본적으로 제공되어 클러스터링 Index에 사용됩니다. pk값을 기준으로 데이터를 빠르게 검색할 수 있습니다.
 
-## Language
+Secondary Index는 개발자가 설정한 index로 별도의 공간에 생성되는 인덱스입니다. postgresql의 경우에는 pk를 포함한 모든 인덱스들이 secondary index로 취급되며, heap과는 별도의 파일에 저장됩니다.
 
-## Computer Architecture
+Secondary Index를 통한 검색은 먼저 index를 검색하여 O(logN)의 성능으로 조건에 맞는 여러 클러스터링 인덱스의 주소들을 가져옵니다. 그 다음 이 주소들을 사용해 클러스터링 인덱스를 검색하고, 각 주소에 해당하는 실제 데이터를 포함하는 leaf node들을 찾아 데이터를 검색합니다.
+
+## DB Join
+
+### Join 유형
+데이터 베이스는 크게 4가지로 Inner, Outer, Cross Join, Self Join이 있습니다.
+Outer Join은 left Outer join, right outer, Full Outer join으로 나뉩니다.
+
+
+- Inner Join은 두 테이블에서 조인 조건에 일치하는 레코드만 반환합니다.
+- Left Join은 왼쪽 테이블의 모든 레코드와 오른쪽 테이블에서 조인 조건에 일치하는 레코드를 반환하며, 오른쪽 테이블에 일치하는 레코드가 없으면 NULL값을 반환합니다.
+- Right Join, 이하 생략
+- Full Outer Join은 합집합으로 A와 B테이블의 모든 데이터를 보여줍니다.
+- Cross Join은 Product Join으로 모든 경우의 수를 표현해줍니다. A테이블 row당 B테이블 전체 join
+- Self Join은 자기 자신과 조인
+
+### Join 연산 시 성능 최적화 전략
+
+- 조인할 테이블 크기를 최소화하기 위해 필요한 컬럼만 선택합니다.
+- 조인 조건에 사용되는 컬럼에 인덱스를 생성합니다.
+  - 조인 조건에 인덱스가 있을 경우, 옵티마이저는 가장 효율적인 방법을 사용합니다. 예를들어 full scan을 피하고, 조인 조건에 있는 인덱스를 활용해 테이블 스캔을 최소화할 수 있습니다.
+- WHERE 절을 사용할 수 있으면 조인 전에 레코드를 필터링합니다.
+- 가능한 경우, 더 작은 테이블을 먼저 조인합니다.
+  - Nested Loop Join의 경우 한 테이블의 각 행에 대해 다른 테이블의 모든 행을 검색하므로 작은 테이블을 외부 테이블로 사용하면 반복 횟수를 줄일 수 있습니다.
+
+### Join 전략: Nested Loop Join, Hash Join, Merge Join
+> NHM
+
+- Nested Loop Join(NL Join), 적은량, 조회의 범위가 적을 때, 2 for-loop
+  - outer loop를 돌면서 inner 테이블에 적합한 레코드를 찾는다. DB는 Page단위로 I/O를 수행하는데, 하나의 레코들르 읽으려고 page를 통째로 읽는 비효율이 존재한다.
+  - 또한 join 조건에 index가 들어있다면 랜덤 access로 Disk에 비효율적인 랜덤 I/O가 발생한다.
+- Hash Join, equal, 하나의 테이블을 hash table로 바꿔 메모리에 올리고 equal 연산으로 찾습니다.
+- Merge Join, 대용량, 조회의 범위가 많을 때,
+  - 두 테이블의 Join key를 기반으로 sort 이후(또는 기존에 정렬된 상태), 동시에 스캔하여 조인 조건에 맞는 레코드를 찾아 비교하며 머지합니다.
+  - 물론 row 추출 시, 각 테이블 검색 조건에 해당하는 대상 집합들을 찾을 때 index를 사용한 random access가 발생할 수 있다. 많야 random access가 많다면 merge join의 이점이 사라질 수 있다.
+
+
+Nested Join의 경우, 인덱스에 의한 랜덤 액세스를 기반으로 하기 때문에 대량의 데이터 처리 시 적합하지 않습니다. DB에서 Sequential access가 아닌 Index를 통한 랜덤 access가 비싼이유는 I/O에 의해서 HDD 디스크 헤더를 계속 옮겨야 하는 오버헤드가 발생하기 때문입니다.
+
+### 카디널리티와 조인
+
+두 테이블의 카디널리티(집합의 크기, unique한 원소의 갯수)가 다르면, 작은 테이블을 먼저 읽고 큰 테이블과 조인하는 것이 일반적으로 효율적입니다.
 
