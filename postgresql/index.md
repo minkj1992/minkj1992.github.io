@@ -272,7 +272,7 @@ CREATE TABLE followers (
 ```
 
 
-## Understanding the internals of PostgreSQL
+## The internals of PostgreSQL
 
 Postgresql에서 데이터들은 어떻게 저장될까요? 한번 알아보도록 하겠습니다.
 
@@ -362,8 +362,100 @@ PostgreSQL 공식 홈페이지의 [Page Layout](https://www.postgresql.org/docs/
 |:---:|:---:|
 | ![](/images/postgresql/internal14.png) | ![](/images/postgresql/internal15.png) |
 
+## Index
 
-### Block Data Layout
+### Full Scan
+pk 또는 uniq 키 또는 secondary index를 적용시키지 않은 경우 postgresql은 full scan을 합니다.
 
-### Heap File Layout
+![](/images/postgresql/full_scan1.png)
 
+Disk에 있는 heap 파일을 찾아서, 메모리에 해당 heap에 존재하는 모든 tuple들을 memory에 올린뒤, 하나하나 찾습니다.
+
+![](/images/postgresql/full_scan2.png)
+
+
+### Index Scan
+
+성능을 높이기 위해서는 index를 사용하면 됩니다. `B+ Tree` 형태로 관리되는 index는 index의 크기에 따라 level이 다르긴 하지만, root <-> leaf node 사이즈의 index를 기준으로 tree를 그려보면 아래와 같습니다.
+
+![](/images/postgresql/index1.png)
+
+Root 또는 branch node를 통해서, 검색 조건을 O(logn) 성능으로 타고 내려가서, leaf node에서 검색 결과에 맞는 CTID(=ROWID) 즉 (page number, row id)를 찾습니다. 이를 기반으로 index가 처리된 table의 heap파일에서 page 위치에 있는 row_id를 찾습니다.
+
+다만 index 또한 trade-off가 존재합니다.
+
+![](/images/postgresql/index2.png)
+
+예를 들어 880kb 사이즈의 user table에 대해서 username에 대한 index를 생성하면 184kb의 index 파일을 추가로 저장해야합니다. RDB는 클라우드상에서 기본적으로 비싼 값을 내고 관리되어야 하니, 대규모 시스템에서는 상당한 규모의 index 관리를 위해 돈을 지불해야합니다.
+
+
+| | |
+|:---:|:---:|
+| ![](/images/postgresql/index3.png) | ![](/images/postgresql/index4.png) |
+
+
+index의 단점을 정리하면 총 3가지입니다.
+
+1. 추가 disk 요구 (큰 disk 사이즈)
+2. B+-Tree를 유지 관리해야 하기 때문에 insert / update / delete에 대한 추가 오버헤드 필요
+3. Postgresql planner에 의해서 index를 실제로는 사용안할 수도 있다. (성능과 돈을 들였는데, index를 사용하지 않기 때문에 최악의 경우라고 할 수 있음)
+
+
+### Default Index
+
+Secondary Index를 생성하지 않더라도, 기본적으로 index를 생성해주는 index가 존재합니다. (FYI, postgresql의 모든 index는 secondary index입니다. innodb와 달리 pk가 클러스터링 index가 아닙니다.)
+
+![](/images/postgresql/index5.png)
+
+기본적으로 PK와 uniq키는 index를 생성해서 관리됩니다. 이들은 pgAdmin의 index 섹션에 보이지 않기 때문에, query로 찾아보면 아래와 같습니다.
+
+![](/images/postgresql/index6.png)
+
+### Index in detail
+
+인덱스를 좀 더 상세히 살펴보자면, index는 table과 마찬가지로 Heap으로 disk에 저장되며, heap안에는 여러 pages들로 구분됩니다. 
+
+| | |
+|:---:|:---:|
+| ![](/images/postgresql/index7.png) | ![](/images/postgresql/index8.png) |
+
+Heap안에 page들을 memory에 올려 O(logn) scan을 실시합니다.
+
+이제 그럼 pgAdmin으로 실제 index가 어떻게 생겼는지 확인해보록 하겠습니다. 먼저 index를 상세히 보기위해서 extension을 하나 설치해줍니다.
+
+```sql
+CREATE EXTENSION pageinspect;
+```
+
+그 뒤, users 테이블에 존재하는 username에 대한 index 형태를 확인해줍니다. `users_username_idx` 인덱스에 대해서 3번째 page를 확인해보면 아래와 같습니다.
+
+![](/images/postgresql/index10.png)
+
+이때 가장 첫번째 row를 확인하면 이 page가 root(or branch) page인지, leaf page인지 알 수 있습니다. 만약 첫번째 row의 data가 비워져있다면, 이는 root 또는 branch page이며, data가 존재한다면 이는 leaf page입니다. 
+
+참고로 B+Tree에서 leaf node끼리는 연결되어있는데, 이를 표현한 것이 leaf page의 첫번째 row입니다. 해당 row의 data는 다음 leaf node의 index col 데이터를 의미하며, ctid를 찾아서 가게되면 다음 leaf page로 이동할 수 있습니다.
+
+![](/images/postgresql/28-1.svg)
+
+위의 다이어그램을 봐서 알듯이, page 3는 root page입니다. 이제 page 1번을 확인해보자면
+
+![](/images/postgresql/index11.png)
+
+첫번쨰 row의 data가 채워져있는 것을 확인할 수 있습니다. 2번째 row부터는 leaf page에 들어있는 element들입니다. 여기에서는 크게 (ctid, 특정 username) 정도가 들어있다 생각하면 됩니다.
+
+![](/images/postgresql/index12.png)
+
+(33,43)을 타고 들어가보면 실제 Users 테이블의 ctid와 동일하다는 것을 알 수 있습니다.
+
+마지막으로 relkind = 'i' (index타입) 찾아보면 22713 이라는 heap 파일에 index가 저장된 것을 확인가능하며, 
+
+![](/images/postgresql/index13.png)
+
+이 heap파일은 이전 table 파일과 마찬가지로 page단위로 섹션이 구분된 것을 알 수 있습니다.
+
+![](/images/postgresql/index14.png)
+
+**User 테이블은 그 숫자가 적어, index의 B+tree가 높이 2로 존재했지만, 더 큰 likes 테이블의 경우 아래와 같이 더 깊이 있는 tree로 구성됩니다.**
+
+
+![](/images/postgresql/28-2.svg)

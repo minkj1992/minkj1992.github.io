@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/postgresql/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-10-15T15:14:23+09:00" />
-<meta property="article:modified_time" content="2023-10-15T15:14:23+09:00" />
+<meta property="article:modified_time" content="2023-10-15T18:54:46+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, database","wordcount":  1067 ,
-        "url": "https:\/\/minkj1992.github.io\/postgresql\/","datePublished": "2023-10-15T15:14:23+09:00","dateModified": "2023-10-15T15:14:23+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, database","wordcount":  1497 ,
+        "url": "https:\/\/minkj1992.github.io\/postgresql\/","datePublished": "2023-10-15T15:14:23+09:00","dateModified": "2023-10-15T18:54:46+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PostgreSQL</h1><h2 class="single-subtitle">Design efficient database structures</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>database</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-15">2023-10-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1067 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-15">2023-10-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1497 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -206,11 +206,17 @@
     </li>
     <li><a href="#how-to-build-a-follow-system">How to build a &lsquo;Follow&rsquo; System</a></li>
     <li><a href="#final-schema">Final Schema</a></li>
-    <li><a href="#understanding-the-internals-of-postgresql">Understanding the internals of PostgreSQL</a>
+    <li><a href="#the-internals-of-postgresql">The internals of PostgreSQL</a>
       <ul>
         <li><a href="#heaps-blocks-and-tuples">Heaps, Blocks and Tuples</a></li>
-        <li><a href="#block-data-layout">Block Data Layout</a></li>
-        <li><a href="#heap-file-layout">Heap File Layout</a></li>
+      </ul>
+    </li>
+    <li><a href="#index">Index</a>
+      <ul>
+        <li><a href="#full-scan">Full Scan</a></li>
+        <li><a href="#index-scan">Index Scan</a></li>
+        <li><a href="#default-index">Default Index</a></li>
+        <li><a href="#index-in-detail">Index in detail</a></li>
       </ul>
     </li>
   </ul>
@@ -659,7 +665,7 @@ likes 테이블에 post_id 또는 comment_id를 기록하는 like_id와 post/com
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="understanding-the-internals-of-postgresql">Understanding the internals of PostgreSQL</h2>
+</div><h2 id="the-internals-of-postgresql">The internals of PostgreSQL</h2>
 <p>Postgresql에서 데이터들은 어떻게 저장될까요? 한번 알아보도록 하겠습니다.</p>
 <p><img
         class="lazyload"
@@ -846,12 +852,210 @@ likes 테이블에 post_id 또는 comment_id를 기록하는 like_id와 post/com
 </tr>
 </tbody>
 </table>
-<h3 id="block-data-layout">Block Data Layout</h3>
-<h3 id="heap-file-layout">Heap File Layout</h3></div><div class="post-footer" id="post-footer">
+<h2 id="index">Index</h2>
+<h3 id="full-scan">Full Scan</h3>
+<p>pk 또는 uniq 키 또는 secondary index를 적용시키지 않은 경우 postgresql은 full scan을 합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/full_scan1.png"
+        data-srcset="/images/postgresql/full_scan1.png, /images/postgresql/full_scan1.png 1.5x, /images/postgresql/full_scan1.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/full_scan1.png"
+        title="/images/postgresql/full_scan1.png" /></p>
+<p>Disk에 있는 heap 파일을 찾아서, 메모리에 해당 heap에 존재하는 모든 tuple들을 memory에 올린뒤, 하나하나 찾습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/full_scan2.png"
+        data-srcset="/images/postgresql/full_scan2.png, /images/postgresql/full_scan2.png 1.5x, /images/postgresql/full_scan2.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/full_scan2.png"
+        title="/images/postgresql/full_scan2.png" /></p>
+<h3 id="index-scan">Index Scan</h3>
+<p>성능을 높이기 위해서는 index를 사용하면 됩니다. <code>B+ Tree</code> 형태로 관리되는 index는 index의 크기에 따라 level이 다르긴 하지만, root &lt;-&gt; leaf node 사이즈의 index를 기준으로 tree를 그려보면 아래와 같습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index1.png"
+        data-srcset="/images/postgresql/index1.png, /images/postgresql/index1.png 1.5x, /images/postgresql/index1.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index1.png"
+        title="/images/postgresql/index1.png" /></p>
+<p>Root 또는 branch node를 통해서, 검색 조건을 O(logn) 성능으로 타고 내려가서, leaf node에서 검색 결과에 맞는 CTID(=ROWID) 즉 (page number, row id)를 찾습니다. 이를 기반으로 index가 처리된 table의 heap파일에서 page 위치에 있는 row_id를 찾습니다.</p>
+<p>다만 index 또한 trade-off가 존재합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index2.png"
+        data-srcset="/images/postgresql/index2.png, /images/postgresql/index2.png 1.5x, /images/postgresql/index2.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index2.png"
+        title="/images/postgresql/index2.png" /></p>
+<p>예를 들어 880kb 사이즈의 user table에 대해서 username에 대한 index를 생성하면 184kb의 index 파일을 추가로 저장해야합니다. RDB는 클라우드상에서 기본적으로 비싼 값을 내고 관리되어야 하니, 대규모 시스템에서는 상당한 규모의 index 관리를 위해 돈을 지불해야합니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index3.png"
+        data-srcset="/images/postgresql/index3.png, /images/postgresql/index3.png 1.5x, /images/postgresql/index3.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index3.png"
+        title="/images/postgresql/index3.png" /></td>
+<td style="text-align:center"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index4.png"
+        data-srcset="/images/postgresql/index4.png, /images/postgresql/index4.png 1.5x, /images/postgresql/index4.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index4.png"
+        title="/images/postgresql/index4.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>index의 단점을 정리하면 총 3가지입니다.</p>
+<ol>
+<li>추가 disk 요구 (큰 disk 사이즈)</li>
+<li>B+-Tree를 유지 관리해야 하기 때문에 insert / update / delete에 대한 추가 오버헤드 필요</li>
+<li>Postgresql planner에 의해서 index를 실제로는 사용안할 수도 있다. (성능과 돈을 들였는데, index를 사용하지 않기 때문에 최악의 경우라고 할 수 있음)</li>
+</ol>
+<h3 id="default-index">Default Index</h3>
+<p>Secondary Index를 생성하지 않더라도, 기본적으로 index를 생성해주는 index가 존재합니다. (FYI, postgresql의 모든 index는 secondary index입니다. innodb와 달리 pk가 클러스터링 index가 아닙니다.)</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index5.png"
+        data-srcset="/images/postgresql/index5.png, /images/postgresql/index5.png 1.5x, /images/postgresql/index5.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index5.png"
+        title="/images/postgresql/index5.png" /></p>
+<p>기본적으로 PK와 uniq키는 index를 생성해서 관리됩니다. 이들은 pgAdmin의 index 섹션에 보이지 않기 때문에, query로 찾아보면 아래와 같습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index6.png"
+        data-srcset="/images/postgresql/index6.png, /images/postgresql/index6.png 1.5x, /images/postgresql/index6.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index6.png"
+        title="/images/postgresql/index6.png" /></p>
+<h3 id="index-in-detail">Index in detail</h3>
+<p>인덱스를 좀 더 상세히 살펴보자면, index는 table과 마찬가지로 Heap으로 disk에 저장되며, heap안에는 여러 pages들로 구분됩니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index7.png"
+        data-srcset="/images/postgresql/index7.png, /images/postgresql/index7.png 1.5x, /images/postgresql/index7.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index7.png"
+        title="/images/postgresql/index7.png" /></td>
+<td style="text-align:center"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index8.png"
+        data-srcset="/images/postgresql/index8.png, /images/postgresql/index8.png 1.5x, /images/postgresql/index8.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index8.png"
+        title="/images/postgresql/index8.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>Heap안에 page들을 memory에 올려 O(logn) scan을 실시합니다.</p>
+<p>이제 그럼 pgAdmin으로 실제 index가 어떻게 생겼는지 확인해보록 하겠습니다. 먼저 index를 상세히 보기위해서 extension을 하나 설치해줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="n">EXTENSION</span><span class="w"> </span><span class="n">pageinspect</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>그 뒤, users 테이블에 존재하는 username에 대한 index 형태를 확인해줍니다. <code>users_username_idx</code> 인덱스에 대해서 3번째 page를 확인해보면 아래와 같습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index10.png"
+        data-srcset="/images/postgresql/index10.png, /images/postgresql/index10.png 1.5x, /images/postgresql/index10.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index10.png"
+        title="/images/postgresql/index10.png" /></p>
+<p>이때 가장 첫번째 row를 확인하면 이 page가 root(or branch) page인지, leaf page인지 알 수 있습니다. 만약 첫번째 row의 data가 비워져있다면, 이는 root 또는 branch page이며, data가 존재한다면 이는 leaf page입니다.</p>
+<p>참고로 B+Tree에서 leaf node끼리는 연결되어있는데, 이를 표현한 것이 leaf page의 첫번째 row입니다. 해당 row의 data는 다음 leaf node의 index col 데이터를 의미하며, ctid를 찾아서 가게되면 다음 leaf page로 이동할 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/28-1.svg"
+        data-srcset="/images/postgresql/28-1.svg, /images/postgresql/28-1.svg 1.5x, /images/postgresql/28-1.svg 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/28-1.svg"
+        title="/images/postgresql/28-1.svg" /></p>
+<p>위의 다이어그램을 봐서 알듯이, page 3는 root page입니다. 이제 page 1번을 확인해보자면</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index11.png"
+        data-srcset="/images/postgresql/index11.png, /images/postgresql/index11.png 1.5x, /images/postgresql/index11.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index11.png"
+        title="/images/postgresql/index11.png" /></p>
+<p>첫번쨰 row의 data가 채워져있는 것을 확인할 수 있습니다. 2번째 row부터는 leaf page에 들어있는 element들입니다. 여기에서는 크게 (ctid, 특정 username) 정도가 들어있다 생각하면 됩니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index12.png"
+        data-srcset="/images/postgresql/index12.png, /images/postgresql/index12.png 1.5x, /images/postgresql/index12.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index12.png"
+        title="/images/postgresql/index12.png" /></p>
+<p>(33,43)을 타고 들어가보면 실제 Users 테이블의 ctid와 동일하다는 것을 알 수 있습니다.</p>
+<p>마지막으로 relkind = &lsquo;i&rsquo; (index타입) 찾아보면 22713 이라는 heap 파일에 index가 저장된 것을 확인가능하며,</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index13.png"
+        data-srcset="/images/postgresql/index13.png, /images/postgresql/index13.png 1.5x, /images/postgresql/index13.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index13.png"
+        title="/images/postgresql/index13.png" /></p>
+<p>이 heap파일은 이전 table 파일과 마찬가지로 page단위로 섹션이 구분된 것을 알 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/index14.png"
+        data-srcset="/images/postgresql/index14.png, /images/postgresql/index14.png 1.5x, /images/postgresql/index14.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/index14.png"
+        title="/images/postgresql/index14.png" /></p>
+<p><strong>User 테이블은 그 숫자가 적어, index의 B+tree가 높이 2로 존재했지만, 더 큰 likes 테이블의 경우 아래와 같이 더 깊이 있는 tree로 구성됩니다.</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/28-2.svg"
+        data-srcset="/images/postgresql/28-2.svg, /images/postgresql/28-2.svg 1.5x, /images/postgresql/28-2.svg 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/28-2.svg"
+        title="/images/postgresql/28-2.svg" /></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-10-15</span>
+                <span>Updated on 2023-10-15&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/b11f2d94b58fff5a3f30c84528f44ba751b250bf" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) b11f2d94b58fff5a3f30c84528f44ba751b250bf: docs: postgresql with instagram">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>b11f2d9</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
