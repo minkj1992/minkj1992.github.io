@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>PostgreSQL | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="PostgreSQL" />
+<meta property="og:description" content="Design efficient database structures with PostgreSQL" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/postgresql/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-10-15T15:14:23+09:00" />
+<meta property="article:modified_time" content="2023-10-15T15:14:23+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="PostgreSQL"/>
+<meta name="twitter:description" content="Design efficient database structures with PostgreSQL"/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/postgresql/" /><link rel="prev" href="https://minkj1992.github.io/interview/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PostgreSQL",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/postgresql\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, database","wordcount":  1067 ,
+        "url": "https:\/\/minkj1992.github.io\/postgresql\/","datePublished": "2023-10-15T15:14:23+09:00","dateModified": "2023-10-15T15:14:23+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">PostgreSQL</h1><h2 class="single-subtitle">Design efficient database structures</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/database/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>database</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-15">2023-10-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1067 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/postgresql-logo.webp"
+        data-srcset="/images/postgresql/postgresql-logo.webp, /images/postgresql/postgresql-logo.webp 1.5x, /images/postgresql/postgresql-logo.webp 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/postgresql-logo.webp"
+        title="/images/postgresql/postgresql-logo.webp" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#how-to-build-a-like-system">How to build a &lsquo;Like&rsquo; System</a>
+      <ul>
+        <li><a href="#1st-approach">1st approach</a></li>
+        <li><a href="#2nd-approach">2nd approach</a></li>
+        <li><a href="#3rd-polymorphic-association">3rd, Polymorphic association</a></li>
+        <li><a href="#4th">4th</a></li>
+        <li><a href="#5th">5th</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-build-a-mention-system">How to build a &lsquo;Mention&rsquo; System</a></li>
+    <li><a href="#how-to-build-a-hashtag-system">How to build a &lsquo;HashTag&rsquo; System</a>
+      <ul>
+        <li><a href="#hash-tag-table">hash tag table</a></li>
+      </ul>
+    </li>
+    <li><a href="#how-to-build-a-follow-system">How to build a &lsquo;Follow&rsquo; System</a></li>
+    <li><a href="#final-schema">Final Schema</a></li>
+    <li><a href="#understanding-the-internals-of-postgresql">Understanding the internals of PostgreSQL</a>
+      <ul>
+        <li><a href="#heaps-blocks-and-tuples">Heaps, Blocks and Tuples</a></li>
+        <li><a href="#block-data-layout">Block Data Layout</a></li>
+        <li><a href="#heap-file-layout">Heap File Layout</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Design efficient database structures with <code>PostgreSQL</code></p>
+<h2 id="how-to-build-a-like-system">How to build a &lsquo;Like&rsquo; System</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/like_post.png"
+        data-srcset="/images/postgresql/like_post.png, /images/postgresql/like_post.png 1.5x, /images/postgresql/like_post.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/like_post.png"
+        title="/images/postgresql/like_post.png" /></p>
+<p>Instagram의 &lsquo;Like&rsquo; System을 만들 때, user &lt;-&gt; likes &lt;-&gt; posts 관계를 생각해볼 수 있습니다.</p>
+<p>이 경우 like는 아래의 Rule이 필요합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/like_rule.png"
+        data-srcset="/images/postgresql/like_rule.png, /images/postgresql/like_rule.png 1.5x, /images/postgresql/like_rule.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/like_rule.png"
+        title="/images/postgresql/like_rule.png" /></p>
+<ol>
+<li>각 유저는 특정 post에 한번만 like를 해야합니다.</li>
+<li>자신의 게시물은 like 할 수 없습니다.</li>
+<li>유저는 unlike할 수 있어야 합니다.</li>
+<li>얼마나 많은 유저들이 post를 like했는지 셀 수 있어야 합니다.</li>
+<li>어떤 유저들이 Like했는지 볼 수 있어야 합니다.</li>
+<li>어쩌면 post이외에도 like할 수 있어야 합니다. (i.e 댓글)</li>
+<li>어쩌면 하트/빈하트가 아니라, 이모티콘 처럼 여러 종류의 Reaction을 관리할 수도 있습니다.</li>
+</ol>
+<h3 id="1st-approach">1st approach</h3>
+<p>가장 단순하게 like system을 생각해본다면, posts 테이블안에 likes 필드를 두어 관리하는 방법을 생각해볼 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/like1.png"
+        data-srcset="/images/postgresql/like1.png, /images/postgresql/like1.png 1.5x, /images/postgresql/like1.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/like1.png"
+        title="/images/postgresql/like1.png" /></p>
+<p>이 경우, 다음과 같은 문제점들이 생깁니다.</p>
+<ol>
+<li>어떤 유저가 like했는지 기록하지 않아, 한번만 like 하도록 강제할 수 없습니다.</li>
+<li>특정 유저가 unlike할 때, 자신이 한 like를 unlike하는건지 알 수 없습니다.</li>
+<li>누가 어떤 post를 like하는지 알 방법이 없습니다.</li>
+<li>유저가 탈퇴하면 어떤 포스트의 like 수를 낮춰야 하는지 알 수 없습니다.</li>
+</ol>
+<h3 id="2nd-approach">2nd approach</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/like2.png"
+        data-srcset="/images/postgresql/like2.png, /images/postgresql/like2.png 1.5x, /images/postgresql/like2.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/like2.png"
+        title="/images/postgresql/like2.png" /></p>
+<p>다음 방법은, likes 테이블을 따로 두어, user_id와 post_id를 기록하는 방식입니다.
+이렇게 할 경우, 아래 4가지 경우를 모두 알 수 있습니다.</p>
+<ol>
+<li>특정 post의 # of likes</li>
+<li>특정 post에 누가 like 했는지</li>
+<li>like 순으로 post들 정렬가능</li>
+<li>특정 user가 like한 post들</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/like3.png"
+        data-srcset="/images/postgresql/like3.png, /images/postgresql/like3.png 1.5x, /images/postgresql/like3.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/like3.png"
+        title="/images/postgresql/like3.png" /></p>
+<p>이때 한 유저는 한번만 post에 like를 해야하니, unique(user_id, post_id)로 관리합니다.</p>
+<p>하지만 여기서 만약 post이외에도 댓글에 대해서 like를 해야하는 요구사항이 생기면 어떻게 관리되어야 할까요?</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/like4.png"
+        data-srcset="/images/postgresql/like4.png, /images/postgresql/like4.png 1.5x, /images/postgresql/like4.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/like4.png"
+        title="/images/postgresql/like4.png" /></p>
+<h3 id="3rd-polymorphic-association">3rd, Polymorphic association</h3>
+<p><code>post</code>와 <code>comment</code>의 like를 쉽게 관리할 수 있는 첫번째 방법은 다음과 같습니다.
+likes 테이블에 post_id 또는 comment_id를 기록하는 like_id와 post/comment에 대한 like_type을 추가하는 방식입니다. 이 방법을 <code>Polymorphic association</code>이라고 칭합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/like5.png"
+        data-srcset="/images/postgresql/like5.png, /images/postgresql/like5.png 1.5x, /images/postgresql/like5.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/like5.png"
+        title="/images/postgresql/like5.png" /></p>
+<p>이 경우에 가장 큰 문제점은 &rsquo;like_id&rsquo;가 fk로 관리될 수 없고 일반 int필드로 관리되기 때문에, constraint와 관리에서 큰 문제가 발생할 수 있습니다.</p>
+<h3 id="4th">4th</h3>
+<p><code>Polymorphic Association</code>을 피하는 가장 쉬운 방법은 2개의 fk (post, comment)를 관리하던 <code>like_id</code>를 나누면 됩니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/like6.png"
+        data-srcset="/images/postgresql/like6.png, /images/postgresql/like6.png 1.5x, /images/postgresql/like6.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/like6.png"
+        title="/images/postgresql/like6.png" /></p>
+<p>post_id와 comment_id를 나눈뒤, fk로 관리하면 문제를 해결 할 수 있습니다. 이때 post_id와 comment_id가 동시에 값을 가지거나, 동시에 null인 경우를 처리하기 위해서</p>
+<p><code>COALESCE((post_id)::BOOLEAN::INTEGER,0) + COALESCE((comment_id)::BOOLEAN::INTEGER,0)</code>를 사용해 constraint를 걸어줍니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/like7.png"
+        data-srcset="/images/postgresql/like7.png, /images/postgresql/like7.png 1.5x, /images/postgresql/like7.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/like7.png"
+        title="/images/postgresql/like7.png" /></p>
+<p>하지만 이 방법 또한 like를 post와 comment이외에도 여러곳에서 사용해야한다면 관리가 복잡해진다는 단점이 존재합니다.</p>
+<h3 id="5th">5th</h3>
+<p>이전의 방식의 문제점은 하나의 테이블에서 서로 다른 형태의 like를 관리하려 했기 때문이기 때문에, 이를 해결하기 위해서 like테이블을 각각 나눠서 관리하면 됩니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/like8.png"
+        data-srcset="/images/postgresql/like8.png, /images/postgresql/like8.png 1.5x, /images/postgresql/like8.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/like8.png"
+        title="/images/postgresql/like8.png" /></p>
+<p>이 경우 장점은 like가 여러곳에서 사용되더라도, 여러 테이블로 관리하면 되기 때문에 테이블 복잡도를 낮출 수 있습니다.</p>
+<p>또한 트래픽 차원에서도 만약 post-like에 대한 접근과 comment에 대한 like 접근이 8:2라면, 이전 방식에서는 하나의 테이블에서 부하를 모두 감당했지만, 나눠진 테이블에서는 분리해서 관리하기 때문에
+관리가 더 편합니다.</p>
+<p>또한 Reaction 타입의 like를 Post에 도입한다 하더라도, col한개만 추가하면 되기 때문에 간편합니다.</p>
+<p>다만 정규화를 할 수록 join에 대한 요구가 더 많아질 수 있기 때문에, 이에 대해서는 trade-off가 존재합니다.</p>
+<p>만약 post와 comment 외에 like가 필요없다면 기획적으로 사용할 예정이라면, 이전 방법도 좋은 방법입니다.</p>
+<h2 id="how-to-build-a-mention-system">How to build a &lsquo;Mention&rsquo; System</h2>
+<blockquote>
+<p>`@user_id``</p>
+</blockquote>
+<p>다음은 <code>mention</code>에 대해서 db를 디자인 해봅니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/mention1.png"
+        data-srcset="/images/postgresql/mention1.png, /images/postgresql/mention1.png 1.5x, /images/postgresql/mention1.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/mention1.png"
+        title="/images/postgresql/mention1.png" /></p>
+<p>가장 먼저 post안의 <code>@renan_ozturk</code>나, <code>@stepenwikes</code>와 같이 멘션들을 넣을 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/mention3.png"
+        data-srcset="/images/postgresql/mention3.png, /images/postgresql/mention3.png 1.5x, /images/postgresql/mention3.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/mention3.png"
+        title="/images/postgresql/mention3.png" /></p>
+<p>또한 post를 생성 시, <code>Tag People</code>를 하여, 사용자를 태그할 수 있으며, Image의 특정 x,y 좌표에 mention을 할수도 있습니다. 이외에도 post에 대한 좌표를 저장해야 합니다.</p>
+<p>우선 여기에선 photo에 대한 tag와 post안에 들어있는 caption_tag에 대한 schema를 디자인 해보자면
+다음과 같은 2가지 방식이 존재할 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/mention2.png"
+        data-srcset="/images/postgresql/mention2.png, /images/postgresql/mention2.png 1.5x, /images/postgresql/mention2.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/mention2.png"
+        title="/images/postgresql/mention2.png" /></p>
+<ol>
+<li>첫번째 방식은 photo mention인 경우에는 x,y를 저장하고, 그렇지 않으면 x,y를 Null로 관리하는 방식이고</li>
+<li>두번째 방식은 2개의 테이블로 나눠서 관리하는 방식입니다.</li>
+</ol>
+<h2 id="how-to-build-a-hashtag-system">How to build a &lsquo;HashTag&rsquo; System</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/hash1.png"
+        data-srcset="/images/postgresql/hash1.png, /images/postgresql/hash1.png 1.5x, /images/postgresql/hash1.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/hash1.png"
+        title="/images/postgresql/hash1.png" /></p>
+<p>다음은 인스타그램 hashtag 시스템입니다. 여러 곳에서 hashtag가 사용되고 있으며 이에 대해서 기록하면 스키마는 다음과 같습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/hash2.png"
+        data-srcset="/images/postgresql/hash2.png, /images/postgresql/hash2.png 1.5x, /images/postgresql/hash2.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/hash2.png"
+        title="/images/postgresql/hash2.png" /></p>
+<p>하지만 실제로 hashtag는 post에 대한 검색만을 제공해주고 있기 때문에 rdb에는 post에 대한 hashtag만 저장해두면 될 것 같습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/hash3.png"
+        data-srcset="/images/postgresql/hash3.png, /images/postgresql/hash3.png 1.5x, /images/postgresql/hash3.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/hash3.png"
+        title="/images/postgresql/hash3.png" /></p>
+<p>다른 곳에서 사용되는 hashtag들은 rdb가 아닌 분석을 위해, preprocess 단계를 거쳐 데이터웨어하우스에 저장하는 방식으로 저장될 수는 있어 보입니다.</p>
+<p>결국 추가적으로 관리해야 하는 table은 hashtag &lt;-&gt; post에 대한 테이블입니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/hash4.png"
+        data-srcset="/images/postgresql/hash4.png, /images/postgresql/hash4.png 1.5x, /images/postgresql/hash4.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/hash4.png"
+        title="/images/postgresql/hash4.png" /></p>
+<p>그럼 이 hashtag를 어떻게 효율적으로 저장할 수 있을까요?</p>
+<h3 id="hash-tag-table">hash tag table</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/hash5.png"
+        data-srcset="/images/postgresql/hash5.png, /images/postgresql/hash5.png 1.5x, /images/postgresql/hash5.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/hash5.png"
+        title="/images/postgresql/hash5.png" /></p>
+<p>해시태그는 그 성격상 중복이 많을 수 있기 때문에, 위의 테이블과 같이 저장하게 되면 매우 비효율적으로 테이블이 관리되게 됩니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/hash6.png"
+        data-srcset="/images/postgresql/hash6.png, /images/postgresql/hash6.png 1.5x, /images/postgresql/hash6.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/hash6.png"
+        title="/images/postgresql/hash6.png" /></p>
+<p>또한 hashtags: posts = n:m 관계인 것을 고려하면, 중간에 매핑 테이블로 저장해서 관리하면 됩니다.
+이떄 hashtags 테이블의 title을 unique로 저장하면 중복관리에도 좋습니다.</p>
+<h2 id="how-to-build-a-follow-system">How to build a &lsquo;Follow&rsquo; System</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/follower1.png"
+        data-srcset="/images/postgresql/follower1.png, /images/postgresql/follower1.png 1.5x, /images/postgresql/follower1.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/follower1.png"
+        title="/images/postgresql/follower1.png" /></p>
+<p>인스타그램에서는 총 follwer 숫자, following 숫자 그리고 누구를 follow 또는 following되는지를 저장하고 있습니다.</p>
+<p>이는 아래와 같은 스키마로 저장합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/follower2.png"
+        data-srcset="/images/postgresql/follower2.png, /images/postgresql/follower2.png 1.5x, /images/postgresql/follower2.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/follower2.png"
+        title="/images/postgresql/follower2.png" /></p>
+<h2 id="final-schema">Final Schema</h2>
+<p>최종적으로 schema는 아래의 diagram을 따릅니다.</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/postgresql_diagrams.png"
+        data-srcset="/images/postgresql/postgresql_diagrams.png, /images/postgresql/postgresql_diagrams.png 1.5x, /images/postgresql/postgresql_diagrams.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/postgresql_diagrams.png"
+        title="/images/postgresql/postgresql_diagrams.png" /></p>
+</center>
+<p>아래는 table statement입니다. 이때 null, default는 아래 기준으로 정의했습니다.</p>
+<ol>
+<li>value가 주어지든 아니든 상관없다 -&gt; <code>비워둠</code></li>
+<li>100% 유저 또는 engineer가 값을 주어야 한다 -&gt; <code>NOT NULL</code></li>
+<li>언제나 값이 테이블에 존재하길 원하지만, 생성될 때 optional로 처리되어도 된다 -&gt; <code>NOT NULL + DEFAULT</code></li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">users</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">username</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">bio</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">400</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">avatar</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">phone</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">email</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">40</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">password</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">50</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">status</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">CHECK</span><span class="p">(</span><span class="n">COALESCE</span><span class="p">(</span><span class="n">phone</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="p">)</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">posts</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">url</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">caption</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">240</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">lat</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="n">lat</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">lat</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="o">-</span><span class="mi">90</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">lat</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">90</span><span class="p">)),</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">lng</span><span class="w"> </span><span class="nb">REAL</span><span class="w"> </span><span class="k">CHECK</span><span class="p">(</span><span class="n">lng</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="p">(</span><span class="n">lng</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="o">-</span><span class="mi">180</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">lng</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">180</span><span class="p">)),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">comments</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">contents</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">240</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">post_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">likes</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">post_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">comment_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">comments</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">CHECK</span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">COALESCE</span><span class="p">((</span><span class="n">post_id</span><span class="p">)::</span><span class="nb">BOOLEAN</span><span class="p">::</span><span class="nb">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="o">+</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="n">COALESCE</span><span class="p">((</span><span class="n">comment_id</span><span class="p">)::</span><span class="nb">BOOLEAN</span><span class="p">::</span><span class="nb">INTEGER</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">post_id</span><span class="p">,</span><span class="w"> </span><span class="n">comment_id</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">photo_tags</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">updated_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">post_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">x</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">y</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">post_id</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">caption_tags</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">user_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">post_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span><span class="w"> </span><span class="n">post_id</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">hashtags</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">UNIQUE</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">hashtags_posts</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">hashtag_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">hashtags</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">post_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">posts</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">hashtag_id</span><span class="p">,</span><span class="w"> </span><span class="n">post_id</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">followers</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">created_at</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITH</span><span class="w"> </span><span class="n">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">leader_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">follower_id</span><span class="w"> </span><span class="nb">INTEGER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">users</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">CASCADE</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="k">UNIQUE</span><span class="p">(</span><span class="n">leader_id</span><span class="p">,</span><span class="w"> </span><span class="n">follower_id</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="understanding-the-internals-of-postgresql">Understanding the internals of PostgreSQL</h2>
+<p>Postgresql에서 데이터들은 어떻게 저장될까요? 한번 알아보도록 하겠습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal1.png"
+        data-srcset="/images/postgresql/internal1.png, /images/postgresql/internal1.png 1.5x, /images/postgresql/internal1.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal1.png"
+        title="/images/postgresql/internal1.png" /></p>
+<p>먼저 pgAdmin에서 data_directory를 요청하면, postgresql이 데이터를 저장하고 있는 dir을 알려줍니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal2.png"
+        data-srcset="/images/postgresql/internal2.png, /images/postgresql/internal2.png 1.5x, /images/postgresql/internal2.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal2.png"
+        title="/images/postgresql/internal2.png" /></p>
+<p>해당 디렉토리에 들어가면 여러 폴더들이 존재하는데, 그 중에서 ./base 폴더에 들어가보면</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal4.png"
+        data-srcset="/images/postgresql/internal4.png, /images/postgresql/internal4.png 1.5x, /images/postgresql/internal4.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal4.png"
+        title="/images/postgresql/internal4.png" /></p>
+<p>oid로 구분된 디렉토리에 데이터들이 저장되어있는 것을 확인할 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal5.png"
+        data-srcset="/images/postgresql/internal5.png, /images/postgresql/internal5.png 1.5x, /images/postgresql/internal5.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal5.png"
+        title="/images/postgresql/internal5.png" /></p>
+<p>이를 pgAdmin에서 dataname에 대한 oid를 찾아보면, instagram은 22442로 저장되어있는 것을 확인할 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal6.png"
+        data-srcset="/images/postgresql/internal6.png, /images/postgresql/internal6.png 1.5x, /images/postgresql/internal6.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal6.png"
+        title="/images/postgresql/internal6.png" /></p>
+<p>./base/22442안에 들어가게 되면 여러 파일들로 disk에 데이터가 저장되어있는 것을 확인할 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal7.png"
+        data-srcset="/images/postgresql/internal7.png, /images/postgresql/internal7.png 1.5x, /images/postgresql/internal7.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal7.png"
+        title="/images/postgresql/internal7.png" /></p>
+<p>이때 pg_class로 instagram과 관련된 table의 oid를 얻어내면, 아래와 같이 저장된 것을 확인가능합니다.</p>
+<ul>
+<li>users 테이블은 22445</li>
+<li>posts 테이블은 22459</li>
+<li>comments 테이블은 22476</li>
+</ul>
+<p>그럼 postgreSQL는 어떤 구조로 이렇게 disk에 데이터를 저장하고 있을까요?</p>
+<h3 id="heaps-blocks-and-tuples">Heaps, Blocks and Tuples</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal8.png"
+        data-srcset="/images/postgresql/internal8.png, /images/postgresql/internal8.png 1.5x, /images/postgresql/internal8.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal8.png"
+        title="/images/postgresql/internal8.png" /></p>
+<p>PostgreSQL는 다음 3가지로 데이터를 disk에 저장합니다.</p>
+<ol>
+<li>Heap (File)</li>
+<li>Pages (Block)</li>
+<li>Tuple (Item)</li>
+</ol>
+<p>하나의 Heap 단위 즉 file단위로 테이블의 data(rows)를 저장해둡니다. 이때 저장되는 row(tuple)은 page단위로 group화 되어있으며, i/o의 단위가 됩니다. 즉 하나의 row를 찾더라도 최소한 하나의 page를 i/o 해야 한다는 뜻입니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal9.png"
+        data-srcset="/images/postgresql/internal9.png, /images/postgresql/internal9.png 1.5x, /images/postgresql/internal9.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal9.png"
+        title="/images/postgresql/internal9.png" /></p>
+<p>앞서 user 테이블을 담고있는 22445 파일을 예시로 보자면, 22445라는 heap file로 디렉토리에 저장되어있으며, user row들은 Page 단위로 구분되어있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal10.png"
+        data-srcset="/images/postgresql/internal10.png, /images/postgresql/internal10.png 1.5x, /images/postgresql/internal10.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal10.png"
+        title="/images/postgresql/internal10.png" /></p>
+<p>하나의 page는 8kb로 구성되어있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/page_layout1.png"
+        data-srcset="/images/postgresql/page_layout1.png, /images/postgresql/page_layout1.png 1.5x, /images/postgresql/page_layout1.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/page_layout1.png"
+        title="/images/postgresql/page_layout1.png" /></p>
+<p>PostgreSQL 공식 홈페이지의 <a href="https://www.postgresql.org/docs/current/storage-page-layout.html" target="_blank" rel="noopener noreffer">Page Layout</a>
+를 살펴보면 8kb인 페이지의 레이아웃은 크게 4가지로 구성되어있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/page_layout2.png"
+        data-srcset="/images/postgresql/page_layout2.png, /images/postgresql/page_layout2.png 1.5x, /images/postgresql/page_layout2.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/page_layout2.png"
+        title="/images/postgresql/page_layout2.png" /></p>
+<ol>
+<li>헤더 데이터
+<ol>
+<li>24bytes long</li>
+<li><code>pd_lower</code>	LocationIndex	2 bytes	Offset to start of free space</li>
+<li><code>pd_upper</code>	LocationIndex	2 bytes	Offset to end of free space</li>
+</ol>
+</li>
+<li>아이템 id(페이지내의 tuple의 위치를 가리키는 포인터)들
+<ol>
+<li>4byte per item</li>
+</ol>
+</li>
+<li>Free Space</li>
+<li>Items</li>
+</ol>
+<p>헤더 데이터 안에는 free space의 시작 지점에 대한 포인터와 free space가 끝나는 지점에 대한 포인터값이 존재합니다.</p>
+<p>페이지 레이아웃을 추상적으로 도식화 해보자면 아래와 같습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal11.png"
+        data-srcset="/images/postgresql/internal11.png, /images/postgresql/internal11.png 1.5x, /images/postgresql/internal11.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal11.png"
+        title="/images/postgresql/internal11.png" /></p>
+<p>물론 물리적으로는 2진수(실제로는 16진수)로 저장되어 있기 때문에 page(block)은 실제로는 다음과 같은 형태가 됩니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal12.png"
+        data-srcset="/images/postgresql/internal12.png, /images/postgresql/internal12.png 1.5x, /images/postgresql/internal12.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal12.png"
+        title="/images/postgresql/internal12.png" /></p>
+<p>실제 22445 heap 파일의 첫번째 page를 vs code에서 꺼내보면 다음과 같이 보입니다. (with extension <code>hex editor</code> by ms)</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal13.png"
+        data-srcset="/images/postgresql/internal13.png, /images/postgresql/internal13.png 1.5x, /images/postgresql/internal13.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal13.png"
+        title="/images/postgresql/internal13.png" /></p>
+<p>이 값을 postgresql의 구조에 따라 decode해보자면 아래와 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal14.png"
+        data-srcset="/images/postgresql/internal14.png, /images/postgresql/internal14.png 1.5x, /images/postgresql/internal14.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal14.png"
+        title="/images/postgresql/internal14.png" /></td>
+<td style="text-align:center"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/postgresql/internal15.png"
+        data-srcset="/images/postgresql/internal15.png, /images/postgresql/internal15.png 1.5x, /images/postgresql/internal15.png 2x"
+        data-sizes="auto"
+        alt="/images/postgresql/internal15.png"
+        title="/images/postgresql/internal15.png" /></td>
+</tr>
+</tbody>
+</table>
+<h3 id="block-data-layout">Block Data Layout</h3>
+<h3 id="heap-file-layout">Heap File Layout</h3></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-10-15</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/postgresql/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/postgresql/" data-title="PostgreSQL" data-hashtags="dev,database"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/postgresql/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/postgresql/" data-title="PostgreSQL"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/postgresql/" data-title="PostgreSQL"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/postgresql/" data-title="PostgreSQL" data-image="/images/postgresql/postgresql-logo.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/database/">database</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/interview/" class="prev" rel="prev" title="All Basic Computer Science"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>All Basic Computer Science</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>

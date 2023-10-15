@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/tags/database/</link>
         <description>database - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 04 Oct 2023 20:25:04 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/database/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 15 Oct 2023 15:14:23 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/database/" rel="self" type="application/rss+xml" /><item>
+    <title>PostgreSQL</title>
+    <link>https://minkj1992.github.io/postgresql/</link>
+    <pubDate>Sun, 15 Oct 2023 15:14:23 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/postgresql/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/postgresql/postgresql-logo.webp" referrerpolicy="no-referrer">
+            </div><p>Design efficient database structures with <code>PostgreSQL</code></p>]]></description>
+</item>
+<item>
     <title>Fundamentals of Database Engineering</title>
     <link>https://minkj1992.github.io/db/</link>
     <pubDate>Wed, 04 Oct 2023 20:25:04 &#43;0900</pubDate>

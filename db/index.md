@@ -391,3 +391,8 @@ Secondary Index(non clustered index)는 Index Page를 따로 생성하여 관리
 - 어떻게 Disk에 store 되는가?
 - Postgres의 page layout은 어떻게 되는가?
 
+# 4. Database Index
+
+## Bitmap Index Scan vs Index Scan vs Table Scan
+
+

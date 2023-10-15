@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/db/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-10-04T20:25:04+09:00" />
-<meta property="article:modified_time" content="2023-10-06T18:47:19+09:00" />
+<meta property="article:modified_time" content="2023-10-13T11:51:53+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "database, cs","wordcount":  1425 ,
-        "url": "https:\/\/minkj1992.github.io\/db\/","datePublished": "2023-10-04T20:25:04+09:00","dateModified": "2023-10-06T18:47:19+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "database, cs","wordcount":  1437 ,
+        "url": "https:\/\/minkj1992.github.io\/db\/","datePublished": "2023-10-04T20:25:04+09:00","dateModified": "2023-10-13T11:51:53+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,7 +173,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Fundamentals of Database Engineering</h1><h2 class="single-subtitle">https://www.udemy.com/course/database-engines-crash-course/</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cs/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>cs</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-04">2023-10-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1425 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-10-04">2023-10-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1437 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -254,6 +254,10 @@
     </li>
     <li><a href="#33-primary-key-vs-secondary-key">3.3. Primary key vs Secondary Key</a></li>
     <li><a href="#34-databases-pages---deep-dive">3.4. Databases Pages - Deep dive</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#bitmap-index-scan-vs-index-scan-vs-table-scan">Bitmap Index Scan vs Index Scan vs Table Scan</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>Learn ACID, Indexing, Partitioning, Sharding, Concurrency control, Replication, DB Engines, Best Practices and More!</p>
@@ -857,12 +861,14 @@ index의 크기가 작으면 작을 수록 memory에 fit하다는 뜻은, Index�
 <li>어떻게 Disk에 write 되는가?</li>
 <li>어떻게 Disk에 store 되는가?</li>
 <li>Postgres의 page layout은 어떻게 되는가?</li>
-</ul></div><div class="post-footer" id="post-footer">
+</ul>
+<h1 id="4-database-index">4. Database Index</h1>
+<h2 id="bitmap-index-scan-vs-index-scan-vs-table-scan">Bitmap Index Scan vs Index Scan vs Table Scan</h2></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-10-06&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/ffb3bfa0e6a28987d36e54053a0052943772ecf0" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) ffb3bfa0e6a28987d36e54053a0052943772ecf0: docs: db[internals]">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ffb3bfa</a></span>
+                <span>Updated on 2023-10-13&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/3005bf04273eee18d6c2918146c8de82e271ca78" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 3005bf04273eee18d6c2918146c8de82e271ca78: docs: interview">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3005bf0</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
