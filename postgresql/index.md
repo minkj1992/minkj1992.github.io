@@ -459,3 +459,160 @@ CREATE EXTENSION pageinspect;
 
 
 ![](/images/postgresql/28-2.svg)
+
+## Planner
+
+- `EXPLAIN`, Query Plan + Show
+- `EXPLAIN ANALYZE`, Query Plan + Run + Show
+
+쿼리 플랜에서 해석할 때, 밑에서 부터 위로 올라오는 순으로 쿼리가 실행되는 순서라고 생각하면 됩니다. 
+또한 `->`이 들어 있는 문장 또는 가장 위에 존재하는 문장은 `plan node`로 해석되며, query plan들은 plan node의 순서로 진행됩니다.
+
+```sql
+SELECT username, contents
+FROM users
+JOIN comments ON comments.user_id = users.id
+WHERE username = 'Alyson14';
+```
+
+![](/images/postgresql/plan3.png)
+
+위의 다이어 그램은 실제 query plan을 표현한 그림으로, 아래에서 위로 올라오면서 paln node들이 진행된다고 생각하면 됩니다. 
+
+![](/images/postgresql/plan1.png)
+
+1. WHERE = 'Alyson14'인 `users_username_idx` 인덱스를 scan하여 users를 가져옵니다.
+2. 9kB 버킷을 메모리에 올려 Hash를 생성합니다.
+3. Comments 테이블을 Full Scan(=Seq Scan)하여 60410(guess)개의 row를 memory에 올리고
+4. Hash join 하여 comments.user_id = users.id인 row들을 뽑아냅니다.
+
+가장 상위의 plan node를 분석하면 아래와 같습니다.
+
+![](/images/postgresql/plan2.png)
+
+1. return할 데이터를 어떤 방식으로 plan했는지
+2. plan과 execute에 대한 소요시간 추측 
+3. 생성될 row 수를 추측
+4. row의 평균 byte를 추측
+
+이처럼 postgresql은 실제로 planning할 때, 시간 및 row 수를 guess할 수 있는데, 이에 필요한 메타데이터들은 pg_stats에서 확인가능합니다.
+
+![](/images/postgresql/plan4.png)
+
+
+
+## View
+
+
+### Common Table Expression (CTE)
+
+Common Table Expression(CTE)란 set of a query로 쿼리 가독성을 위해서 긴 쿼리문을 tmp하게 변수로 관리하는 것을 뜻합니다.
+
+Recursive common table Expression은 CTE에서 recursive하게 참조해서 복잡한 쿼리문을 간단하게 표현하는 방식입니다. 특히 graph관계나 tree 관계에서 유용한데, 예를들어서 user와 follow 테이블이 존재할 때, 연결 관계가 4 depth까지인 모든 user들을 찾고 싶을 때와 같은 상황에서 유용하게 관리될 수 있습니다.
+
+예를 들어 **tag가 많이된 username, 태그된 수를 태그순으로 정렬**해서 보여주려 할 때, 사진에 들어있는 tag와 post를 작성시 caption에서 태그한 사용자들을 모아서 user와 join한 뒤 count하는 방식으로 아래와 같은 query를 만들 수 있습니다. 
+
+```sql
+SELECT username, COUNT(*)
+FROM users
+JOIN (
+	SELECT user_id FROM photo_tags
+	UNION ALL
+	SELECT user_id FROM caption_tags
+) AS tags ON tags.user_id = users.id
+GROUP BY username
+ORDER BY COUNT(*) DESC;
+```
+
+이를 CTE를 활용하면, 좀 더 가시성 있게 쿼리를 만들 수 있습니다.
+
+```sql
+WITH tags AS (
+	SELECT user_id FROM photo_tags
+	UNION ALL
+	SELECT user_id FROM caption_tags
+)
+
+SELECT username, COUNT(*)
+FROM users
+JOIN tags ON tags.user_id = users.id
+GROUP BY username
+ORDER BY COUNT(*) DESC;
+```
+
+
+### View
+
+**하지만 CTE는 오직 선언된 다음의 SQL 쿼리에 국한되어 사용됩니다.** 즉 이후의 다른 쿼리에서 해당 tags CTE를 사용하고 싶어도 사용할 수 없습니다. 이를 위해서 view를 사용합니다.
+
+![](/images/postgresql/view1.png)
+
+
+메모리에 임시로 존재하는 CTE와 달리, `VIEW`는 쿼리 텍스트를 disk에 저장해서 관리합니다. 
+
+![](/images/postgresql/view2.png)
+
+즉 위의 경우 tag가 많이 된 user에 대한 쿼리를 매번 작성하기 보다, view를 사용해서 간편하게 쿼리를 실행할 수 있습니다. (view의 결과값은 disk에 저장되는게 아니라, 쿼리문 그 자체가 저장됨)
+
+![](/images/postgresql/view3.png)
+
+tag에 대한 view를 생성하려면 아래와 같습니다.
+
+```sql
+CREATE VIEW tags AS (
+	SELECT id, created_at, user_id, post_id, 'photo_tag' AS type FROM photo_tags
+	UNION ALL
+	SELECT id, created_at, user_id, post_id, 'caption_tag' AS type FROM caption_tags
+);
+```
+
+![](/images/postgresql/view4.png)
+
+### Materialized Views
+
+하지만 `view`의 경우, 매번 refer될 떄마다 execute해야 한다는 단점이 있습니다. 이를 해결하기 위해서 `Materialized Views`라는 개념이 도입됩니다.
+
+![](/images/postgresql/view5.png)
+
+View와 달리 `Materialized View`는 만들어지는 시점에 snapshot으로 쿼리된 데이터를 disk에 저장합니다. 다만 만들어지는 시점의 snapshot을 만들기 때문에, table이 변화될 때마다 refresh를 해주어야 합니다.
+
+![](/images/postgresql/view6.png)
+
+만약 매주, post와 comment에 대한 like 수를 테이블로 표현하고 싶은 경우, 쿼리문의 경우 아래와 같이 표현할 수 있습니다.
+
+```sql
+SELECT
+	date_trunc('week', COALESCE(posts.created_at, comments.created_at)) AS week,
+	COUNT(posts.id) AS num_post_likes,
+	COUNT(comments.id) AS num_comment_likes
+FROM likes
+LEFT JOIN posts ON posts.id = likes.post_id
+LEFT JOIN comments ON comments.id = likes.comment_id
+GROUP BY week
+ORDER BY week
+```
+
+![](/images/postgresql/view7.png)
+
+이때 이를 Materialized View로 생성하면 아래와 같습니다.
+
+```sql
+CREATE MATERIALIZED VIEW weekly_likes AS (
+	[[쿼리문]]
+) WITH DATA;
+```
+
+```sql
+CREATE MATERIALIZED VIEW weekly_likes AS (
+	SELECT
+		date_trunc('week', COALESCE(posts.created_at, comments.created_at)) AS week,
+		COUNT(posts.id) AS num_post_likes,
+		COUNT(comments.id) AS num_comment_likes
+	FROM likes
+	LEFT JOIN posts ON posts.id = likes.post_id
+	LEFT JOIN comments ON comments.id = likes.comment_id
+	GROUP BY week
+	ORDER BY week	
+) WITH DATA;
+```
+
