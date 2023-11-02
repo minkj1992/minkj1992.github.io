@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 15 Oct 2023 15:14:23 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 02 Nov 2023 18:24:43 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Receiver Race Condition</title>
+    <link>https://minkj1992.github.io/go-receiver-race-condition/</link>
+    <pubDate>Thu, 02 Nov 2023 18:24:43 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/go-receiver-race-condition/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/race_condition.png" referrerpolicy="no-referrer">
+            </div><p>Golang Pointer Receiver를 사용할 때 발생할 수 있는 문제점</p>]]></description>
+</item>
+<item>
     <title>PostgreSQL</title>
     <link>https://minkj1992.github.io/postgresql/</link>
     <pubDate>Sun, 15 Oct 2023 15:14:23 &#43;0900</pubDate>
@@ -33,7 +43,7 @@
     <author>leoo.j</author>
     <guid>https://minkj1992.github.io/mlops/</guid>
     <description><![CDATA[<div class="featured-image">
-                <img src="/images/mlops.jepg" referrerpolicy="no-referrer">
+                <img src="/images/mlops.png" referrerpolicy="no-referrer">
             </div>MLOps for ALL  1. Introduction What is MLOps?  Continuous Tranning pipeline Model CI / CD  Levels of MLOps 0단계: 수동 process  ML -model-&gt; Ops, 즉 model을 통해 ops팀과 ml팀이 소통하는 방식 model  codes 학습된 weight and bias environment    1단계: ML 파이프라인 자동화  Trainning Pipeline Continuous Training  2단계: CI/CD 파이프라인 자동화 Componenet of MLOps  Experimentation, prototype (ml engineer)  jupyter notebook Data, Hyper parameter, eval metrics Visualization   Data Processing  크게 3가지에서 사용됩니다.  ML model develop phase COntinuous Training pipeline API deployment   다양한 데이터 소스와 서비스에 호환되는 데이터 connector feature Encoder / Decoder 데이터 변환과 Feature engineering 학습과 서빙을 위한 scale-out 가능한 Batch / Stream data feature   Model Training  ML framework 실행을 위한 env GPU 분산 학습을 위한 환경 제공 Hyper parameter tunning 그리고 최적화 기능 (Hyper parameter? 모델링시 사용자가 직접 세팅해주는 값들, top_p, top_k, token_length &hellip;)   Model Evaluation  모델 performance 측정 CT 결과의 성능 지속적인 추적 Visualization   Model Serving  low latency, high availability (HA) 다양한 ML 모델 프레임워크 지원 복잡한 형태의 모델간, 스텝별 flow 서빙 (preprocess, postprocess, 모델간 통신) autoscaling logging, 특히 llm을 직접 관리한다면, CT를 위해 agent의 logging들이 필수   Online Experimentation  A/B testing 새로운 모델 생성 시, 해당 모델을 배포하면 어느 정도의 성능을 보일지 검증하는 기능 Multi-armed bandit testing, 한정된 리소스(시간, 트래픽)에서 여러개의 테스트 그룹 중 가장 좋은 그룹 선택   Model Monitoring  model 성능 측정   ML Pipeline  다양한 이벤트들을 통한 실행 기능   Model REgistry  모델 lifecycle관리하는 중앙 저장소 versioning, metadata   Dataset and Feature Repository  Dataset sharing, search, versioning Event streaming 및 온라인 추론 작업에 대한 실시간 처리 및 서빙 기능 사진 / 텍스트 / 테이블 등 다양한 형태의 데이터 지원   ML metadata and Artifact Tracking  ML 산출물 ML artifacts history관리 기능    Why Kubernetes?  Container를 통한 소통 편리성 phase 분리 용이성 등 node 리소스 효율적 관리 GPU 등.  2. Setup Kubernetes  kustomize istio, service mesh CSI Argo Helm k3s  3. Kubeflow Kubeflow Concepts  Component  Component contents Component wrapper, kubeflow로 component가 전달   Artifacts, Componenet를 통해 생산 Pipeline Run  1.1. Component contents 컴포넌트 콘첸츠를 구성하는 것은 총 3가지로
  Environment Python code w\ Config Generates Artifacts  1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  import dill import pandas as pd from sklearn.svm import SVC train_data = pd.read_csv(train_data_path) train_target= pd.read_csv(train_target_path) clf= SVC( kernel=kernel ) clf.fit(train_data) with open(model_path, mode=&#34;wb&#34;) as file_writer: dill.dump(clf, file_writer)   1.2. Component Wrapper 컴포넌트 래퍼는 컴포넌트 콘텐츠에 필요한 config를 전달하고 실행시키는 작업을 합니다.
 2. Artifacts  Model  파이썬 코드 학습된 weights network 구조 실행시키기 위한 환경   Data  전처리된 feature 모델의 예측값   Metric  Dynamic metric, train loss와 같이 epoch마다 계속 변화하는 값 Stataic Metric, 학습이 끝난 뒤 최종적으로 모델을 평가하는 정확도 등    3. Pipeline 파이프라인은 컴포넌트의 집합과 이를 실행시키는 순서도로 구성되어있습니다.]]></description>
@@ -99,16 +109,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/cell.png" referrerpolicy="no-referrer">
             </div><p>You need to write intro in here</p>]]></description>
-</item>
-<item>
-    <title>COW 🐄 in Rust 🦀</title>
-    <link>https://minkj1992.github.io/cow/</link>
-    <pubDate>Mon, 03 Apr 2023 15:35:29 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/cow/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/cow.png" referrerpolicy="no-referrer">
-            </div><p>dfinity/ic 코드를 보다 이해되지 않는 코드들이 있어, Cow를 왜 사용하는지 정리하려 합니다.</p>]]></description>
 </item>
 </channel>
 </rss>

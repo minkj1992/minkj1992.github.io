@@ -616,3 +616,11 @@ CREATE MATERIALIZED VIEW weekly_likes AS (
 ) WITH DATA;
 ```
 
+Materialized Views는 snapshot이기 때문에 참조하는 table에 변경이 있을 경우, REFRESH를 해주어야 최신 데이터를 얻을 수 있습니다. 대체로 이는 2가지 방식으로 구현합니다.
+
+
+1. 주기적 -> Cron job으로 `REFRESH MATERIALIZED VIEW 뷰이름`
+2. Trigger -> 특정 테이블의 값이 변경될 때마다 trigger를 사용해 `REFRESH MATERIALIZED VIEW 뷰이름`를 실행
+
+2번의 경우에는 데이터 변경이 자주 일어날 경우, 성능 부하를 크게 줄 위험이 있기 때문에 실시간 sync를 포기해도 되는 경우 cronjob으로 관리하는게 일반적일 것 같습니다.
+

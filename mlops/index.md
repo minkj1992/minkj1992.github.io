@@ -184,7 +184,3 @@ Kubeflow에서는 실행된 파이프라인을 Run이라고 부릅니다.
 
 Experiment란 Kubeflow 에서 실행되는 Run을 논리적으로 관리하는 단위입니다.
 
-### 6. InputPath, OutputPath
-
-
-
