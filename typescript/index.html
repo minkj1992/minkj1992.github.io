@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Deep dive into Typescript | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Deep dive into Typescript" />
+<meta property="og:description" content="Deep dive into typescript" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/typescript/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-07T17:13:37+09:00" />
+<meta property="article:modified_time" content="2023-11-07T17:13:37+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Deep dive into Typescript"/>
+<meta name="twitter:description" content="Deep dive into typescript"/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/typescript/" /><link rel="prev" href="https://minkj1992.github.io/kubeflow/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Deep dive into Typescript",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/typescript\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  807 ,
+        "url": "https:\/\/minkj1992.github.io\/typescript\/","datePublished": "2023-11-07T17:13:37+09:00","dateModified": "2023-11-07T17:13:37+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Deep dive into Typescript</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;807 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/typescripts/ts0.png"
+        data-srcset="/images/typescripts/ts0.png, /images/typescripts/ts0.png 1.5x, /images/typescripts/ts0.png 2x"
+        data-sizes="auto"
+        alt="/images/typescripts/ts0.png"
+        title="/images/typescripts/ts0.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tsctypescript-compiler"><code>tsc</code>(Typescript Compiler)</a></li>
+    <li><a href="#ts-node"><code>ts-node</code></a></li>
+    <li><a href="#tsc-vs-ts-node">tsc vs ts-node</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#commonjs">CommonJS</a></li>
+    <li><a href="#es6-ecmascript-2015">ES6 (ECMAScript 2015)</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#node-js-architecture">Node JS Architecture</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Deep dive into typescript</p>
+<h1 id="tsc-and-ts-node">tsc and ts-node</h1>
+<h2 id="tsctypescript-compiler"><code>tsc</code>(Typescript Compiler)</h2>
+<p>tsc는 타입스크립트 공식 컴파일러로 Typescript 코드를 Javascript 코드로 변환합니다. 이 과정에서 타입 검사를 수행하고 설정된 대상 버전의 JS 코드를 생성합니다.</p>
+<h2 id="ts-node"><code>ts-node</code></h2>
+<p><code>ts-node</code>는 TypeScript 코드를 직접 실행할 수 있는 Node.js의 런타임입니다. 기본적으로 Node.js는 .js 파일만 실행 할 수 있지만, ts-node를 사용하면 Node.js의 런타임을 확장하여 .ts 파일을 직접 실행할 수 있는 기능을 추가합니다.</p>
+<p>일반적으로 ts-node는 개발환경에서 TS코드를 신속하게 실행하고 테스트하기 위해 사용되기 때문에 production 의존성에서는 제외시키는 것이 좋습니다.</p>
+<h2 id="tsc-vs-ts-node">tsc vs ts-node</h2>
+<p>개발자는 ts-node를 사용해 빠른 피드백을 얻고 프로덕션 빌들르 생성할 때는 tsc를 사용해 최적화된 Javascript 코드를 생성할 수 있습니다.</p>
+<h1 id="eslint-tslint-prettier">eslint, tslint, prettier</h1>
+<p>2019년 <code>tslint</code>는 deprecated되었고, eslint는 코딩 컨벤션을 위배하거나 안티 패턴을 자동 검출하는 Linting(소스코드를 분석하여 프로그램 오류, 버그, 스타일 오류등을 찾아내는 도구다.) tool입니다. 공식문서에서는 타입스크립를 위한 eslint로 tslint대신 <a href="https://typescript-eslint.io/" target="_blank" rel="noopener noreffer"><code>typescript-eslint</code></a>
+를 추천합니다.
+<code>prettier</code>는 코딩 스타일 교정을 위한 포맷터입니다.</p>
+<p>광범위한 scope이다 보니, eslint와 prettier이 충돌되는 경우가 있습니다. (예를 들면 tab옵션)
+충돌되지 않도록 하기 위해서는 일반적으로 Prettier를 먼저 실행하고 eslint를 실행하는 것이 좋습니다.</p>
+<blockquote>
+<p><code>Code</code> -&gt; <code>prettier</code> -&gt; <code>eslint --fix</code> -&gt; <code>Formatted Code</code></p>
+</blockquote>
+<p><code>Prettier</code>로 코드를 Formatting한 뒤(<code>prettier</code>) ESLint로 수정(<code>eslint --fix</code>)한 것과 같은 결과물을 출력한다.</p>
+<ul>
+<li><a href="https://blog.logrocket.com/linting-typescript-eslint-prettier/" target="_blank" rel="noopener noreffer">LogRocket: Linting in Typescript using eslint and prettier</a>
+</li>
+<li><a href="https://pravusid.kr/typescript/2020/07/19/typescript-eslint-prettier.html" target="_blank" rel="noopener noreffer">TypeScript ESLint + Prettier 함께 사용하기 on vscode</a>
+</li>
+</ul>
+<h1 id="commonjs-vs-es6">CommonJS vs ES6</h1>
+<h2 id="commonjs">CommonJS</h2>
+<p>CommonJS는 자바스크립트를 위한 모듈 표준 중 하나입니다. Node.js는 이 CommonJS 모듈 시스템을 사용해 파일과 모듈을 관리하며, 대표적으로 <code>require</code>, <code>module.exports</code> 구문을 사용해 모듈을 가져오고 내보내는 것이 표준의 특징입니다.</p>
+<h2 id="es6-ecmascript-2015">ES6 (ECMAScript 2015)</h2>
+<p>ES6는 <code>import</code>, <code>export</code> 구문을 사용하는 모듈 시스템을 도입한 버전입니다.</p>
+<h1 id="bundler">Bundler</h1>
+<p>번들러는 웹 개발에서 사용되는 여러 자바스크립트 파일과 리소스를 하나 또는 여러개의 최적화된 파일로 결합하는 도구입니다. 이를 통해 웹 애플리케이션의 로딩 시간을 줄이고 성능을 향상시키며, 브라우저 간 호환성 문제를 해결하는데 도움을 줍니다.</p>
+<ol>
+<li>(FE) 성능 최적화: 사용자가 웹사이트에 접속할떄, 모든 js파일을 개별적으로 로드하는 것은 많은 시간이 소요되기 때문에, 번들러는 하나의 파일로 결합하여 네트워크 요청의 수를 줄이고 결과적으로 페이지 로딩시간을 단축시킵니다.</li>
+<li>코드 최적화: 번들러는 타입스크립트를 순수 js로 컴파일하고 사용되지 않는 코드(트리 쉐이킹)를 제거하여 최종 파일 크기를 줄입니다.</li>
+<li>보안 / 유지보수:  번들러는 소스코드를 압축하고 난독화하여 보안을 강화합니다.</li>
+<li>환경 일관성: 다양한 브라우저와 장치에서 애플리케이션을 동일하게 실행하기 위해, 번들러는 필요한 폴리필과 트랜스파일링을 적용하여 호환성을 보장합니다.
+<ul>
+<li>트랜스파일링: 호환성을 위해 최신 js 문법 -&gt; 구 버전 JS문법 변환</li>
+<li>폴리필: 특정 브라우저가 지원하지 않는 기능을 구현하는 코드 조각. 예를 들어 구형 브라우저에서 Promise나 fetch API를 사용할 수 있게함.</li>
+</ul>
+</li>
+<li>env: ENV 주입, phase관리(dev, sandbox, prod)</li>
+</ol>
+<p>대표적으로 아래와 같은 번들러들이 존재합니다.</p>
+<ul>
+<li>
+<p><code>Webpack</code>: 매우 강력하고 유연한 플러그인 시스템을 가지고 있으며, 대규모 프로젝트와 복잡한 구성에 적합합니다. 많은 커뮤니티 지원과 풍부한 플러그인 생태계를 가지고 있습니다.</p>
+</li>
+<li>
+<p><code>Vite</code>: 최신 프론트엔드 도구로, <code>esbuild</code>를 사용하여 매우 빠른 cold start와 HMR을 제공합니다. 간단한 설정과 빠른 빌드 속도로 인기를 얻고 있습니다.</p>
+</li>
+<li>
+<p><code>Rollup</code>: 특히 라이브러리 개발에 적합하며, 효율적인 트리 쉐이킹과 코드 분할 기능을 제공합니다. 또한, 결과물이 깔끔하고 작은 번들을 생성합니다.</p>
+</li>
+<li>
+<p><code>Parcel</code>: 설정이 필요 없는 번들러로, 빠른 설정과 개발 시작이 가능합니다. 작은 프로젝트나 간단한 웹 애플리케이션에 적합합니다.</p>
+</li>
+<li>
+<p><code>esbuild</code>: Go로 작성되어 매우 빠른 빌드 속도를 자랑합니다. 대규모 프로젝트의 빌드 시간을 단축시키는 데 유용합니다.</p>
+</li>
+</ul>
+<h1 id="ts-compile-process">TS Compile process</h1>
+<blockquote>
+<p><a href="https://www.huy.rocks/everyday/04-01-2022-typescript-how-the-compiler-compiles" target="_blank" rel="noopener noreffer">TypeScript / How the compiler compiles</a>
+</p>
+</blockquote>
+<blockquote>
+<p><a href="https://www.nextree.io/typescript-compile-process/" target="_blank" rel="noopener noreffer">https://www.nextree.io/typescript-compile-process/</a>
+</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/typescripts/tsc1.png"
+        data-srcset="/images/typescripts/tsc1.png, /images/typescripts/tsc1.png 1.5x, /images/typescripts/tsc1.png 2x"
+        data-sizes="auto"
+        alt="/images/typescripts/tsc1.png"
+        title="/images/typescripts/tsc1.png" /></p>
+<p>높은 차원에서 타입스크립트 컴파일러는 .ts파일을 *.js, *.d.ts, *.map로 생성합니다. 이제 좀 더 자세히 알아보겠습니다.</p>
+<p>내부적으로 컴파일 프로세스는 아래와 같은 과정들을 포함합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/typescripts/tsc2.png"
+        data-srcset="/images/typescripts/tsc2.png, /images/typescripts/tsc2.png 1.5x, /images/typescripts/tsc2.png 2x"
+        data-sizes="auto"
+        alt="/images/typescripts/tsc2.png"
+        title="/images/typescripts/tsc2.png" /></p>
+<ol>
+<li><code>$ tsc</code> command</li>
+<li>Read <code>tsconfig.json</code></li>
+</ol>
+<p>tsc는 <code>src/compiler/program.ts</code>에 정의되어있는 Program 객체로 컴파일 컨텍스트를 생성한 뒤 tsconfig에 정의된 모든 입력파일과 import를 로드합니다. 이후 각각의 파일을 AST(Abstract Syntax Tree)로 변환시키기 위해 <code>Parser</code>(src/compiler/parser.ts)를 호출합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/typescripts/tsc3.png"
+        data-srcset="/images/typescripts/tsc3.png, /images/typescripts/tsc3.png 1.5x, /images/typescripts/tsc3.png 2x"
+        data-sizes="auto"
+        alt="/images/typescripts/tsc3.png"
+        title="/images/typescripts/tsc3.png" /></p>
+<p>내부적으로 <code>Parser</code>는 <code>Scanner</code>(src/compiler/scanner.ts) 인스턴스를 생성합니다. <code>Scanner</code> 인스턴스는 소스코드를 스캔하여 스트림형태의 토큰(<code>SyntaxKind</code>라고 불림)을 생성합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/typescripts/tsc6.jpeg"
+        data-srcset="/images/typescripts/tsc6.jpeg, /images/typescripts/tsc6.jpeg 1.5x, /images/typescripts/tsc6.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/typescripts/tsc6.jpeg"
+        title="/images/typescripts/tsc6.jpeg" /></p>
+<p>정리하면 Scanner가 타입스크립트로 입력된 코드 문자열은 각각 예약어, 콜론, 부호등의 토큰으로 분리시키고, Parser는 Scanner가 분리해준 토큰을 구문의 구조에 따라 트리 구조로 만들어냅니다.
+그러면서 추가로 코드가 올바른 문법인지 분석하여 구문 오류를 잡아냅니다.</p>
+<ol start="3">
+<li>Scanner: tokenize</li>
+<li>Parser: Build AST</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/typescripts/tsc4.png"
+        data-srcset="/images/typescripts/tsc4.png, /images/typescripts/tsc4.png 1.5x, /images/typescripts/tsc4.png 2x"
+        data-sizes="auto"
+        alt="/images/typescripts/tsc4.png"
+        title="/images/typescripts/tsc4.png" /></p>
+<p>이후 <code>Binder</code>(src/compiler/binder.ts)는 AST 즉 Tree를 traverse하면서, Symbols table인 HashMap을 생성합니다.
+바인더는 AST의 각 노드를 방문하여 식별자(변수, 함수, 클래스, 인터페이스 등)를 수집하며, 이 식별자를 key로 하는 value인 symbol을 생성합니다. (아래 그림의 키값이 잘못됨 실제로는 string타입인 identifier로 저장됨)
+심볼에는 해당 식별자의 <strong>타입</strong>, 스코프, 선언 위치 등의 메타데이터를 포함합니다. Binder의 Symbol테이블을 통해 식별자 네이밍 컬리션을 방지할 수 있으며, HashMap 특성상 상수시간에 식별자에 대한 symbol에 접근하여 효율적으로 컴파일이 진행될 수 있습니다.</p>
+<p>앞서 AST가 tree라고 하였는데, Binder는 symbol table이외에도 AST 트리를 타고 가면서 flow nodes를 생성해 추적합니다.
+flow nodes(flow container)는 flow conditional(조건식)을 기준으로 분기가 나눠집니다. (FYI, flow nodes는 이후 타입 체킹과정에서 Type Guards, Type Inference와 같은곳에서 사용됩니다.)</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/typescripts/tsc7.jpeg"
+        data-srcset="/images/typescripts/tsc7.jpeg, /images/typescripts/tsc7.jpeg 1.5x, /images/typescripts/tsc7.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/typescripts/tsc7.jpeg"
+        title="/images/typescripts/tsc7.jpeg" /></p>
+<p>즉 binder는 AST를 통해서 <code>symbol table</code>과 <code>flow nodes</code>를 생성합니다.</p>
+<ol start="5">
+<li>Binder: Create Symbol table and Flow Nodes</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/typescripts/tsc7.jpeg"
+        data-srcset="/images/typescripts/tsc7.jpeg, /images/typescripts/tsc7.jpeg 1.5x, /images/typescripts/tsc7.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/typescripts/tsc7.jpeg"
+        title="/images/typescripts/tsc7.jpeg" /></p>
+<p>이후 타입스크립트의 핵심이 Type Check단계가 진행됩니다. (<code>Type Checker</code>, src/compiler/types.ts)
+여기에서 타입 추론과 타입체크 등이 발생합니다.</p>
+<ol start="6">
+<li>TypeChecker: type checking</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/typescripts/tsc5.png"
+        data-srcset="/images/typescripts/tsc5.png, /images/typescripts/tsc5.png 1.5x, /images/typescripts/tsc5.png 2x"
+        data-sizes="auto"
+        alt="/images/typescripts/tsc5.png"
+        title="/images/typescripts/tsc5.png" /></p>
+<p>이후 AST와 type Checker를 통해 자바스크립트 코드로 변환하는 emitter가 실행되며 emitter는 크게 2가지가 존재합니다.</p>
+<ol>
+<li>emitter.ts (.js): 자바스크립트 소스코드와 source map을 생성합니다.</li>
+<li>declarationEmitter.ts (.d.ts): 타입 정의 파일을 생성합니다.</li>
+</ol>
+<p>이를 emitter과정이 끝나면 최종적으로 3가지 파일형태가 생성됩니다.</p>
+<ul>
+<li>*.js: transpile된 js</li>
+<li>*.d.ts: 타입스크립트 타입 정보</li>
+<li>*.map: 소스맵 파일, 주로 js파일의 minify 또는 transpile과정에서 생성됩니다. 소스 맵 파일로, 트랜스파일된 코드의 각 부분이 원본 소스 코드의 어느 부분에 해당하는지를 나타내는 정보를 담고 있습니다. 개발자 도구에서 원본 소스 코드처럼 보이게 하여 디버깅을 용이하게 합니다.</li>
+</ul>
+<h1 id="npx-nvm">npx, nvm</h1>
+<h1 id="dts"><code>d.ts</code></h1>
+<h2 id="node-js-architecture">Node JS Architecture</h2>
+<ol>
+<li>namespace</li>
+<li>build process</li>
+<li>nodejs internal process</li>
+<li>v8 핵심만 정리</li>
+<li>nodejs deploy</li>
+</ol></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/typescript/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/typescript/" data-title="Deep dive into Typescript" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/typescript/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/typescript/" data-title="Deep dive into Typescript"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/typescript/" data-title="Deep dive into Typescript"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/typescript/" data-title="Deep dive into Typescript" data-image="/images/typescripts/ts0.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/kubeflow/" class="prev" rel="prev" title="Kubeflow"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Kubeflow</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>
