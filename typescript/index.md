@@ -141,6 +141,15 @@ CJS 모듈은 런타임에 `require()`를 통해 모듈을 로드하기 때문�
 6. 모듈은 1번만 실행되고, import & export로 모듈간 공유됩니다.
 7. 항상 `use strict`로 실행됩니다.
 
+# lexical scoping
+
+렉시컬 scope(lexical scope)이란 **호출되는 시점**에 따라 상위 스코프를 결정하는 `dynamic scoping`과 반대되는 개념으로, **선언되는 시점**에 따라 상위 스코프를 결정하는 정적 스코핑을 의미합니다. 다시말해 함수가 어디서 호출되었는지가 아닌, **어디에 선언되었는지가 중요합니다.**
+
+
+# this scope
+
+- Arrow function
+
 
 # Bundler
 
