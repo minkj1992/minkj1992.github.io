@@ -37,15 +37,110 @@ tsc는 타입스크립트 공식 컴파일러로 Typescript 코드를 Javascript
 - [TypeScript ESLint + Prettier 함께 사용하기 on vscode](https://pravusid.kr/typescript/2020/07/19/typescript-eslint-prettier.html)
 
 
-# CommonJS vs ES6
+# CommonJS vs ES6(ESM)
+> [Kakao: CommonJS에서 ESM으로 전환하기](https://tech.kakao.com/2023/10/19/commonjs-esm-migration/)
+
+Node.js가 js파일을 어떤 모듈 방식으로 구문분석할지 결정하는 방식입니다.
 
 ## CommonJS
 
 CommonJS는 자바스크립트를 위한 모듈 표준 중 하나입니다. Node.js는 이 CommonJS 모듈 시스템을 사용해 파일과 모듈을 관리하며, 대표적으로 `require`, `module.exports` 구문을 사용해 모듈을 가져오고 내보내는 것이 표준의 특징입니다.
 
+- `require()`는 **ESM 파일을 가져올 수 없습니다. (`ERR_REQUIRE_ESM` 에러 발생) 파일 확장자를 작성하지 않아도 됩니다.**
+
+```js
+const module = require('./moduleFile');
+```
+
+- `import()` ESM 모듈을 CJS에서 비동기적으로 불러오기 위한 표현식입니다. 반드시 파일 확장자를 지정해주어야 합니다.
+
+```js
+import('./moduleFile.js').then(module => )
+```
+
+
 ## ES6 (ECMAScript 2015)
 
 ES6는 `import`, `export` 구문을 사용하는 모듈 시스템을 도입한 버전입니다. 
+
+- `import`문: 구문 분석 단계에 모듈을 불러오기 때문에 런타임인 데이터(동적인 값)을 사용할 수 없습니다. **CJS, ESM 모듈 모두 불러올 수 있으며, 반드시 파일 확장자를 지정해주어야 합니다.**
+
+```js
+// export default
+export default {
+    something: 123
+}
+
+export const namedSomething = 123
+
+// export from
+export otherModuel
+```
+
+```js
+import { funcName } from './moduleFile.js'
+
+// 사용 불가
+import {AorB_Module} from condition ? './A_module.js' : './B_module.js';
+
+// 동적으로 모듈을 불러오기 위해서는 import 표현식(Expr)을 사용해야 합니다.
+const module = await import(condition ? './A_module.js' : './B_module.js');
+```
+
+### ESM에서 CJS 모듈 사용하기
+
+- **cjs의 module.exports로 내보내진 모듈은 default attribute에 담겨서 내보내집니다.**
+- 모듈 또한 instance로 취급되며, module객체 안에 default라는 attribute가 존재합니다.
+
+```js
+// 1. module객체안의 default attribute를 cjsModule이라는 이름으로 
+// cjsModule === { a: 1, b: 2 }
+import { default as cjsModule } from 'cjs';
+
+
+// 2. 1과 동일한 sugar syntax
+import cjsSugar from 'cjs';
+
+// 3. module 객체를 cjsNamespace로 할당
+import * as cjsNamespace from 'cjs';
+/*
+[Module: null prototype] {
+  __esModule: undefined,
+  default: { a: 1, b: 2 }
+}
+*/
+```
+
+## ESM 동작 원리
+> [mozila hacks](https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/)
+
+
+## ESM, CJS 트리쉐이킹
+
+CJS 모듈은 런타임에 `require()`를 통해 모듈을 로드하기 때문에 동적 특성상 빌드 시스템이 어떤 코드가 실제로 사용될지를 정적으로 분석하기 어렵게 합니다. 이는 모듈의 일부만 사용되더라도 전체 모듈을 번들에 포함해야 할 수 있음을 뜻합니다. 
+
+이와 반대로 ESM은 모듈의 `import`, `export`를 조건부안에 넣을 수 없기 때문에(물론 await import가 있지만 동적 import는 트리쉐이킹 불가), 빌드타임에 import문을 분석가능하게 합니다. 이를 통해서 의존성 그래프를 번들러가 모듈을 실행하기 전에 알 수 있으며, 이를 통해 사용하지 않는 모듈들을 제거할 수 있습니다.
+
+하지만 최근 번들러들은 esm 만큼 효과적이지는 않더라도 일정수준의 트리쉐이킹을 cjs에서도 수행할 수 있습니다. 
+
+# `<script/ >` defer vs async
+> https://ko.javascript.info/script-async-defer
+
+![](/images/typescripts/src_module1.png)
+
+![](/images/typescripts/src_module2.png)
+
+# `<script type="module">`
+> https://ko.javascript.info/modules-intro
+
+1. 브라우저에서 import, export 지시자를 사용하려면 type=module이 필요합니다.
+2. 모듈은 defer처럼 처리됩니다.
+3. `<script async type="module" />`를 사용하면 async처럼 사용가능합니다.
+4. 보안을 위해, 외부 오리진에서 스크립트를 불러오려면 서버가 `Access-Control-Allow-Origin:` 헤더 제공해야합니다.
+5. 모듈은 자신만의 scope를 가집니다.
+6. 모듈은 1번만 실행되고, import & export로 모듈간 공유됩니다.
+7. 항상 `use strict`로 실행됩니다.
+
 
 # Bundler
 
@@ -137,24 +232,31 @@ flow nodes(flow container)는 flow conditional(조건식)을 기준으로 분기
 - *.d.ts: 타입스크립트 타입 정보
 - *.map: 소스맵 파일, 주로 js파일의 minify 또는 transpile과정에서 생성됩니다. 소스 맵 파일로, 트랜스파일된 코드의 각 부분이 원본 소스 코드의 어느 부분에 해당하는지를 나타내는 정보를 담고 있습니다. 개발자 도구에서 원본 소스 코드처럼 보이게 하여 디버깅을 용이하게 합니다.
 
-
-
-
 # npx, nvm
 
 # `d.ts`
 
+# Vscode Debugging, ESM + TS + NodeJS
+> vscode 에서 ES module debug 하기
+
+- [reference content](https://fettblog.eu/typescript-node-visual-studio-code/)
+- typescript, nodejs, esm, vscode debugger
+
+<details>
+    <summary>View Code</summary>
+    <script src="https://gist.github.com/minkj1992/3425fd048b23551aad66580964a34ed5.js"></script>
+</details>
+
+# Monorepo
+> https://monorepo.tools/#understanding-monorepos
+
+# Google TS guide
+> https://google.github.io/styleguide/tsguide.html
+
+# JS deep dive
+> https://ko.javascript.info
 
 
+# Node JS Architecture
 
-
-
-
-
-## Node JS Architecture
-
-1. namespace
-2. build process
-3. nodejs internal process
-4. v8 핵심만 정리
-5. nodejs deployd
+...

@@ -17,16 +17,6 @@
             </div><p>Deep dive into typescript</p>]]></description>
 </item>
 <item>
-    <title>Kubeflow</title>
-    <link>https://minkj1992.github.io/kubeflow/</link>
-    <pubDate>Sat, 04 Nov 2023 19:29:30 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/kubeflow/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/" referrerpolicy="no-referrer">
-            </div><p>You need to write intro in here</p>]]></description>
-</item>
-<item>
     <title>Go Receiver Race Condition</title>
     <link>https://minkj1992.github.io/go-receiver-race-condition/</link>
     <pubDate>Thu, 02 Nov 2023 18:24:43 &#43;0900</pubDate>
@@ -109,6 +99,17 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/css.svg" referrerpolicy="no-referrer">
             </div><p><a href="https://developer.mozilla.org/ko/docs/Web/CSS" target="_blank" rel="noopener noreffer">CSS: Cascadubg Style Sheets</a>
+</p>]]></description>
+</item>
+<item>
+    <title>The Ledger canister</title>
+    <link>https://minkj1992.github.io/ledger_canister/</link>
+    <pubDate>Fri, 07 Apr 2023 22:07:10 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/ledger_canister/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ledger_canister.png" referrerpolicy="no-referrer">
+            </div><p><a href="https://internetcomputer.org/docs/current/references/ledger" target="_blank" rel="noopener noreffer">The Ledger canister from internet computer docs</a>
 </p>]]></description>
 </item>
 </channel>

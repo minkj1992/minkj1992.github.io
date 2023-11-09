@@ -2,12 +2,11 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://minkj1992.github.io/typescript/</loc><lastmod>2023-11-07T21:48:57&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2023-11-07T21:48:57&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/</loc><lastmod>2023-11-07T21:48:57&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2023-11-07T21:48:57&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2023-11-07T21:48:57&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/kubeflow/</loc><lastmod>2023-11-07T21:48:57&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/typescript/</loc><lastmod>2023-11-07T21:49:24&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2023-11-07T21:49:24&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/</loc><lastmod>2023-11-07T21:49:24&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2023-11-07T21:49:24&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2023-11-07T21:49:24&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/go-receiver-race-condition/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/categories/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/tags/database/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
@@ -22,10 +21,10 @@
             <loc>https://minkj1992.github.io/mlops/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/tags/mlops/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/categories/mlops/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/databricks/</loc><lastmod>2023-10-05T13:55:59&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url><url>
-            <loc>https://minkj1992.github.io/llm/</loc><lastmod>2023-10-05T13:55:59&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/llm/</loc><lastmod>2023-10-05T13:55:59&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/lmops/</loc><lastmod>2023-10-05T13:55:59&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/databricks/</loc><lastmod>2023-10-05T13:55:59&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
+            <loc>https://minkj1992.github.io/llm/</loc><lastmod>2023-10-05T13:55:59&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/llm/</loc><lastmod>2023-10-05T13:55:59&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/lmops/</loc><lastmod>2023-10-05T13:55:59&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/elderjs/</loc><lastmod>2023-07-26T21:08:15&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/mdn-css/</loc><lastmod>2023-07-19T21:58:50&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/categories/blockchain/</loc><lastmod>2023-04-07T22:58:47&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
