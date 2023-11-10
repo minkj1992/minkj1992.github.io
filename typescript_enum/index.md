@@ -2,6 +2,9 @@
 
 
 
+Typescript Better Enum
+<!--more-->
+
 ## TL;DR
 - TS버전 5.*.*미만일 경우에는 Enum을 사용하지 말자, 대신 as const 사용하자.
 - v5 부터는 enum 사용
