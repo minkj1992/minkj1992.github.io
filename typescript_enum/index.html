@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Typescript Better Enum | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Typescript Better Enum" />
+<meta property="og:description" content="TL;DR  TS버전 5.*.*미만일 경우에는 Enum을 사용하지 말자, 대신 as const 사용하자. v5 부터는 enum 사용  1 2 3 4 5 6 7 8 9 10 11  const PostState = { Draft: &#34;DRAFT&#34;, Scheduled: &#34;SCHEDULED&#34;, Published: &#34;PUBLISHED&#34; } as const; type PostStateType = typeof PostState[keyof typeof PostState]; // Usage const x: PostStateType = PostState.Draft const y: PostStateType = &#34;SCHEDULED&#34;   다만 TS version5부터는, All enums Are Union enums enum의 기존 문제점들이 해결되었습니다.
+Enum의 문제점과 v5의 변화 기존의 타입스크립트에서 enum은 기본적으로 숫자 기반 enum이었습니다. 이는 각 enum 멤버가 숫자 값을 가지며, 이 숫자들은 컴파일 타임에 할당됩니다. 그러나 타입스크립트의 타입 체킹 시스템은 enum 타입으로 선언된 변수에 어떠한 숫자도 할당할 수 있게 허용했습니다. 이는 enum이 숫자의 집합으로 간주되었기 때문입니다.
+예를 들어, 다음과 같은 enum이 있다고 가정해보겠습니다:
+1 2 3 4 5  enum PostState { Draft, // 0  Published, // 1  Private, // 2 }   여기서 PostState 타입의 함수에 숫자를 전달하는 것은 허용되었습니다:
+1 2 3 4 5  function handlePost(state: PostState) {} handlePost(0); // Draft를 의미합니다. handlePost(1); // Published를 의미합니다. handlePost(9999); // 타입 체크를 통과합니다.   handlePost(9999)가 허용되는 이유는 타입스크립트가 enum 타입을 숫자의 서브타입으로 간주했기 때문입니다. 즉, PostState 타입은 실제로 숫자 타입에 할당 가능한 모든 값을 포함하고 있었습니다. (모든 숫자값을 허용하는 문제) 이는 타입 안전성을 저해하는 문제로 인식되었고, 코드의 의도를 명확하게 표현하는 데에도 문제가 있었습니다.
+타입스크립트 2.0에서 도입된 enum 리터럴 타입은 이 문제를 부분적으로 해결했습니다. 각 enum 멤버는 리터럴 타입을 가지게 되어, PostState 타입은 실제로 0 | 1 | 2와 같은 유니언 타입이 되었습니다. 그러나 계산된 멤버가 있는 경우에는 여전히 문제가 발생할 수 있었습니다.
+타입스크립트 5.0에서는 모든 enum 멤버가 고유한 타입을 가지게 되어, 이러한 문제를 완전히 해결했습니다. 이제 handlePost(9999)와 같은 호출은 타입 에러를 발생시키게 되어, 타입 안전성이 향상되었습니다.
+타입스크립트 5.0에서의 변화:
+타입스크립트 5.0에서는 모든 enum 멤버가 고유한 타입을 가지게 되어, enum은 멤버 타입들의 유니언이 됩니다. 이로 인해 각각의 enum 멤버를 더 명확하게 다룰 수 있게 되며, 타입 안전성이 향상됩니다.
+1 2 3 4 5 6 7 8 9 10 11 12 13  // 타입스크립트 version 5.*.* enum PostState { Draft, // 이제 &#39;PostState.Draft&#39; 타입을 가짐  Published, // &#39;PostState.Published&#39; 타입  Private, // &#39;PostState.Private&#39; 타입 } // 이 함수는 이제 &#39;PostState&#39;의 특정 멤버만을 받을 수 있습니다. function handlePost(state: PostState.Draft | PostState.Published) {} handlePost(PostState.Draft); // ✅ handlePost(PostState.Private); // ❌ 타입 체크 해줌 handlePost(999); // ❌ 값 체크 해줌   이제 handlePost 함수는 PostState의 모든 멤버를 받는 것이 아니라, 오직 Draft 또는 Published 상태의 포스트만을 처리할 수 있습니다. 이는 타입스크립트가 더 엄격한 타입 체크를 할 수 있게 해주어, 잘못된 값이 함수에 전달되는 것을 방지합니다.
+또한, 계산된 값을 가진 enum 멤버에 대해서도 고유한 타입을 생성하여, 이전에는 타입스크립트가 처리하지 못했던 경우에도 타입 안전성을 제공합니다.
+1 2 3 4 5 6 7 8  enum PostState { Draft = &#34;DRAFT&#34;, Published = &#34;PUBLISHED&#34;, Private = Math.random() // 계산된 값 } // 이전 버전에서는 &#39;Private&#39; 멤버의 타입이 계산될 수 없었지만, // 타입스크립트 5.0에서는 &#39;Private&#39;도 고유한 타입을 가집니다.   이러한 변화는 코드의 명확성과 타입 안전성을 크게 향상시키며, 타입스크립트를 사용하는 개발자들에게 더 나은 개발 경험을 제공합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/typescript_enum/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-10T09:49:33+09:00" />
+<meta property="article:modified_time" content="2023-11-10T09:49:33+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Typescript Better Enum"/>
+<meta name="twitter:description" content="TL;DR  TS버전 5.*.*미만일 경우에는 Enum을 사용하지 말자, 대신 as const 사용하자. v5 부터는 enum 사용  1 2 3 4 5 6 7 8 9 10 11  const PostState = { Draft: &#34;DRAFT&#34;, Scheduled: &#34;SCHEDULED&#34;, Published: &#34;PUBLISHED&#34; } as const; type PostStateType = typeof PostState[keyof typeof PostState]; // Usage const x: PostStateType = PostState.Draft const y: PostStateType = &#34;SCHEDULED&#34;   다만 TS version5부터는, All enums Are Union enums enum의 기존 문제점들이 해결되었습니다.
+Enum의 문제점과 v5의 변화 기존의 타입스크립트에서 enum은 기본적으로 숫자 기반 enum이었습니다. 이는 각 enum 멤버가 숫자 값을 가지며, 이 숫자들은 컴파일 타임에 할당됩니다. 그러나 타입스크립트의 타입 체킹 시스템은 enum 타입으로 선언된 변수에 어떠한 숫자도 할당할 수 있게 허용했습니다. 이는 enum이 숫자의 집합으로 간주되었기 때문입니다.
+예를 들어, 다음과 같은 enum이 있다고 가정해보겠습니다:
+1 2 3 4 5  enum PostState { Draft, // 0  Published, // 1  Private, // 2 }   여기서 PostState 타입의 함수에 숫자를 전달하는 것은 허용되었습니다:
+1 2 3 4 5  function handlePost(state: PostState) {} handlePost(0); // Draft를 의미합니다. handlePost(1); // Published를 의미합니다. handlePost(9999); // 타입 체크를 통과합니다.   handlePost(9999)가 허용되는 이유는 타입스크립트가 enum 타입을 숫자의 서브타입으로 간주했기 때문입니다. 즉, PostState 타입은 실제로 숫자 타입에 할당 가능한 모든 값을 포함하고 있었습니다. (모든 숫자값을 허용하는 문제) 이는 타입 안전성을 저해하는 문제로 인식되었고, 코드의 의도를 명확하게 표현하는 데에도 문제가 있었습니다.
+타입스크립트 2.0에서 도입된 enum 리터럴 타입은 이 문제를 부분적으로 해결했습니다. 각 enum 멤버는 리터럴 타입을 가지게 되어, PostState 타입은 실제로 0 | 1 | 2와 같은 유니언 타입이 되었습니다. 그러나 계산된 멤버가 있는 경우에는 여전히 문제가 발생할 수 있었습니다.
+타입스크립트 5.0에서는 모든 enum 멤버가 고유한 타입을 가지게 되어, 이러한 문제를 완전히 해결했습니다. 이제 handlePost(9999)와 같은 호출은 타입 에러를 발생시키게 되어, 타입 안전성이 향상되었습니다.
+타입스크립트 5.0에서의 변화:
+타입스크립트 5.0에서는 모든 enum 멤버가 고유한 타입을 가지게 되어, enum은 멤버 타입들의 유니언이 됩니다. 이로 인해 각각의 enum 멤버를 더 명확하게 다룰 수 있게 되며, 타입 안전성이 향상됩니다.
+1 2 3 4 5 6 7 8 9 10 11 12 13  // 타입스크립트 version 5.*.* enum PostState { Draft, // 이제 &#39;PostState.Draft&#39; 타입을 가짐  Published, // &#39;PostState.Published&#39; 타입  Private, // &#39;PostState.Private&#39; 타입 } // 이 함수는 이제 &#39;PostState&#39;의 특정 멤버만을 받을 수 있습니다. function handlePost(state: PostState.Draft | PostState.Published) {} handlePost(PostState.Draft); // ✅ handlePost(PostState.Private); // ❌ 타입 체크 해줌 handlePost(999); // ❌ 값 체크 해줌   이제 handlePost 함수는 PostState의 모든 멤버를 받는 것이 아니라, 오직 Draft 또는 Published 상태의 포스트만을 처리할 수 있습니다. 이는 타입스크립트가 더 엄격한 타입 체크를 할 수 있게 해주어, 잘못된 값이 함수에 전달되는 것을 방지합니다.
+또한, 계산된 값을 가진 enum 멤버에 대해서도 고유한 타입을 생성하여, 이전에는 타입스크립트가 처리하지 못했던 경우에도 타입 안전성을 제공합니다.
+1 2 3 4 5 6 7 8  enum PostState { Draft = &#34;DRAFT&#34;, Published = &#34;PUBLISHED&#34;, Private = Math.random() // 계산된 값 } // 이전 버전에서는 &#39;Private&#39; 멤버의 타입이 계산될 수 없었지만, // 타입스크립트 5.0에서는 &#39;Private&#39;도 고유한 타입을 가집니다.   이러한 변화는 코드의 명확성과 타입 안전성을 크게 향상시키며, 타입스크립트를 사용하는 개발자들에게 더 나은 개발 경험을 제공합니다."/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/typescript_enum/" /><link rel="prev" href="https://minkj1992.github.io/typescript/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Typescript Better Enum",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/typescript_enum\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, typescript","wordcount":  476 ,
+        "url": "https:\/\/minkj1992.github.io\/typescript_enum\/","datePublished": "2023-11-10T09:49:33+09:00","dateModified": "2023-11-10T09:49:33+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Typescript Better Enum</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-10">2023-11-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;476 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/tsenum.png"
+        data-srcset="/images/tsenum.png, /images/tsenum.png 1.5x, /images/tsenum.png 2x"
+        data-sizes="auto"
+        alt="/images/tsenum.png"
+        title="/images/tsenum.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#enum의-문제점과-v5의-변화">Enum의 문제점과 v5의 변화</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="tldr">TL;DR</h2>
+<ul>
+<li>TS버전 5.*.*미만일 경우에는 Enum을 사용하지 말자, 대신 as const 사용하자.</li>
+<li>v5 부터는 enum 사용</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">PostState</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Draft</span><span class="o">:</span> <span class="s2">&#34;DRAFT&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Scheduled</span><span class="o">:</span> <span class="s2">&#34;SCHEDULED&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Published</span><span class="o">:</span> <span class="s2">&#34;PUBLISHED&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kr">as</span> <span class="kr">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">PostStateType</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">PostState</span><span class="p">[</span><span class="k">keyof</span> <span class="k">typeof</span> <span class="nx">PostState</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Usage
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">x</span>: <span class="kt">PostStateType</span> <span class="o">=</span> <span class="nx">PostState</span><span class="p">.</span><span class="nx">Draft</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">y</span>: <span class="kt">PostStateType</span> <span class="o">=</span> <span class="s2">&#34;SCHEDULED&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>다만 TS version5부터는, <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-5-0/#all-enums-are-union-enums" target="_blank" rel="noopener noreffer">All enums Are Union enums</a>
+ enum의 기존 문제점들이 해결되었습니다.</p>
+<h2 id="enum의-문제점과-v5의-변화">Enum의 문제점과 v5의 변화</h2>
+<p>기존의 타입스크립트에서 enum은 기본적으로 숫자 기반 enum이었습니다. 이는 각 enum 멤버가 숫자 값을 가지며, 이 숫자들은 컴파일 타임에 할당됩니다. 그러나 타입스크립트의 타입 체킹 시스템은 enum 타입으로 선언된 변수에 어떠한 숫자도 할당할 수 있게 허용했습니다. 이는 enum이 숫자의 집합으로 간주되었기 때문입니다.</p>
+<p>예를 들어, 다음과 같은 enum이 있다고 가정해보겠습니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">PostState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Draft</span><span class="p">,</span> <span class="c1">// 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Published</span><span class="p">,</span> <span class="c1">// 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Private</span><span class="p">,</span> <span class="c1">// 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>여기서 <code>PostState</code> 타입의 함수에 숫자를 전달하는 것은 허용되었습니다:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">handlePost</span><span class="p">(</span><span class="nx">state</span>: <span class="kt">PostState</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">handlePost</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// Draft를 의미합니다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">handlePost</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// Published를 의미합니다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">handlePost</span><span class="p">(</span><span class="mi">9999</span><span class="p">);</span> <span class="c1">// 타입 체크를 통과합니다.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>handlePost(9999)</code>가 허용되는 이유는 타입스크립트가 enum 타입을 숫자의 서브타입으로 간주했기 때문입니다. 즉, <code>PostState</code> 타입은 실제로 숫자 타입에 할당 가능한 모든 값을 포함하고 있었습니다. (모든 숫자값을 허용하는 문제) 이는 타입 안전성을 저해하는 문제로 인식되었고, 코드의 의도를 명확하게 표현하는 데에도 문제가 있었습니다.</p>
+<p>타입스크립트 2.0에서 도입된 enum 리터럴 타입은 이 문제를 부분적으로 해결했습니다. 각 enum 멤버는 리터럴 타입을 가지게 되어, <code>PostState</code> 타입은 실제로 <code>0 | 1 | 2</code>와 같은 유니언 타입이 되었습니다. 그러나 계산된 멤버가 있는 경우에는 여전히 문제가 발생할 수 있었습니다.</p>
+<p>타입스크립트 5.0에서는 모든 enum 멤버가 고유한 타입을 가지게 되어, 이러한 문제를 완전히 해결했습니다. 이제 <code>handlePost(9999)</code>와 같은 호출은 타입 에러를 발생시키게 되어, 타입 안전성이 향상되었습니다.</p>
+<p>타입스크립트 5.0에서의 변화:</p>
+<p>타입스크립트 5.0에서는 모든 enum 멤버가 고유한 타입을 가지게 되어, enum은 멤버 타입들의 유니언이 됩니다. 이로 인해 각각의 enum 멤버를 더 명확하게 다룰 수 있게 되며, 타입 안전성이 향상됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="c1">// 타입스크립트 version 5.*.*
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">enum</span> <span class="nx">PostState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Draft</span><span class="p">,</span> <span class="c1">// 이제 &#39;PostState.Draft&#39; 타입을 가짐
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Published</span><span class="p">,</span> <span class="c1">// &#39;PostState.Published&#39; 타입
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Private</span><span class="p">,</span> <span class="c1">// &#39;PostState.Private&#39; 타입
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 이 함수는 이제 &#39;PostState&#39;의 특정 멤버만을 받을 수 있습니다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nx">handlePost</span><span class="p">(</span><span class="nx">state</span>: <span class="kt">PostState.Draft</span> <span class="o">|</span> <span class="nx">PostState</span><span class="p">.</span><span class="nx">Published</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">handlePost</span><span class="p">(</span><span class="nx">PostState</span><span class="p">.</span><span class="nx">Draft</span><span class="p">);</span> <span class="c1">// ✅ 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">handlePost</span><span class="p">(</span><span class="nx">PostState</span><span class="p">.</span><span class="nx">Private</span><span class="p">);</span> <span class="c1">// ❌ 타입 체크 해줌
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">handlePost</span><span class="p">(</span><span class="mi">999</span><span class="p">);</span> <span class="c1">// ❌ 값 체크 해줌
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이제 <code>handlePost</code> 함수는 <code>PostState</code>의 모든 멤버를 받는 것이 아니라, 오직 <code>Draft</code> 또는 <code>Published</code> 상태의 포스트만을 처리할 수 있습니다. 이는 타입스크립트가 더 엄격한 타입 체크를 할 수 있게 해주어, 잘못된 값이 함수에 전달되는 것을 방지합니다.</p>
+<p>또한, 계산된 값을 가진 enum 멤버에 대해서도 고유한 타입을 생성하여, 이전에는 타입스크립트가 처리하지 못했던 경우에도 타입 안전성을 제공합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-typescript" data-lang="typescript"><span class="line"><span class="cl"><span class="kr">enum</span> <span class="nx">PostState</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Draft</span> <span class="o">=</span> <span class="s2">&#34;DRAFT&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Published</span> <span class="o">=</span> <span class="s2">&#34;PUBLISHED&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Private</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="c1">// 계산된 값
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 이전 버전에서는 &#39;Private&#39; 멤버의 타입이 계산될 수 없었지만,
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 타입스크립트 5.0에서는 &#39;Private&#39;도 고유한 타입을 가집니다.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이러한 변화는 코드의 명확성과 타입 안전성을 크게 향상시키며, 타입스크립트를 사용하는 개발자들에게 더 나은 개발 경험을 제공합니다.</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-10</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/typescript_enum/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/typescript_enum/" data-title="Typescript Better Enum" data-hashtags="dev,typescript"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/typescript_enum/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/typescript_enum/" data-title="Typescript Better Enum"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/typescript_enum/" data-title="Typescript Better Enum"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/typescript_enum/" data-title="Typescript Better Enum" data-image="/images/tsenum.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/typescript/">typescript</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/typescript/" class="prev" rel="prev" title="Deep dive into Typescript"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Deep dive into Typescript</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>
