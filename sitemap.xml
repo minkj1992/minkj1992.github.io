@@ -2,24 +2,27 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://minkj1992.github.io/categories/</loc><lastmod>2023-11-10T10:42:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2023-11-10T10:42:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/dev/</loc><lastmod>2023-11-10T10:42:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/</loc><lastmod>2023-11-10T10:42:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2023-11-10T10:42:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2023-11-10T10:42:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/typescript/</loc><lastmod>2023-11-10T10:42:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/typescript_enum/</loc><lastmod>2023-11-10T10:42:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/</loc><lastmod>2023-11-15T16:26:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/life/</loc><lastmod>2023-11-15T16:26:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/memory/</loc><lastmod>2023-11-15T16:26:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/memory_and_flow/</loc><lastmod>2023-11-15T16:26:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/</loc><lastmod>2023-11-15T16:26:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2023-11-15T16:26:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2023-11-15T16:26:37&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2023-11-10T10:43:44&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/dev/</loc><lastmod>2023-11-10T10:43:44&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/typescript/</loc><lastmod>2023-11-10T10:43:44&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/typescript_enum/</loc><lastmod>2023-11-10T10:43:44&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/typescript/</loc><lastmod>2023-11-10T10:42:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/go-receiver-race-condition/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url><url>
             <loc>https://minkj1992.github.io/tags/database/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url><url>
             <loc>https://minkj1992.github.io/categories/database/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url><url>
             <loc>https://minkj1992.github.io/postgresql/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url><url>
-            <loc>https://minkj1992.github.io/interview/</loc><lastmod>2023-10-13T11:51:53&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/cs/</loc><lastmod>2023-10-15T18:54:46&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/interview/</loc><lastmod>2023-10-13T11:51:53&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/cs/</loc><lastmod>2023-10-15T18:54:46&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
-            <loc>https://minkj1992.github.io/db/</loc><lastmod>2023-10-15T18:54:46&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url><url>
+            <loc>https://minkj1992.github.io/interview/</loc><lastmod>2023-10-13T11:51:53&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/cs/</loc><lastmod>2023-10-15T18:54:46&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/interview/</loc><lastmod>2023-10-13T11:51:53&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/cs/</loc><lastmod>2023-10-15T18:54:46&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url><url>
+            <loc>https://minkj1992.github.io/db/</loc><lastmod>2023-10-15T18:54:46&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.6</priority></url><url>
             <loc>https://minkj1992.github.io/mlops/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url><url>
             <loc>https://minkj1992.github.io/tags/mlops/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url><url>
             <loc>https://minkj1992.github.io/categories/mlops/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.9</priority></url><url>
@@ -72,12 +75,10 @@
             <loc>https://minkj1992.github.io/tags/plan/</loc><lastmod>2022-12-20T11:14:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/categories/plan/</loc><lastmod>2022-12-20T11:14:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/proverbs/</loc><lastmod>2022-11-30T06:55:09&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/memory/</loc><lastmod>2022-11-23T03:31:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/tags/study/</loc><lastmod>2022-11-23T03:31:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/what_is_memory/</loc><lastmod>2022-11-23T03:31:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/categories/money/</loc><lastmod>2022-11-18T00:55:36&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/spiritual_investments/</loc><lastmod>2022-11-18T00:55:36&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/life/</loc><lastmod>2023-01-07T18:25:01&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/categories/philosophy/</loc><lastmod>2022-12-20T14:26:41&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/tags/poetry/</loc><lastmod>2022-12-20T14:26:41&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/what-i-know/</loc><lastmod>2022-12-20T14:26:41&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
