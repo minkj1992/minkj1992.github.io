@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>gc - Tag - minkj1992</title>
+        <link>https://minkj1992.github.io/tags/gc/</link>
+        <description>gc - Tag - minkj1992</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 18 Nov 2023 21:14:17 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/gc/" rel="self" type="application/rss+xml" /><item>
+    <title>JS garbage collection (2018 v8)</title>
+    <link>https://minkj1992.github.io/v8_garbage_collection/</link>
+    <pubDate>Sat, 18 Nov 2023 21:14:17 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/v8_garbage_collection/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/v8gc/v8_gc_last.svg" referrerpolicy="no-referrer">
+            </div><p><a href="https://v8.dev/blog/concurrent-marking" target="_blank" rel="noopener noreffer">Concurrent marking in V8</a>
+의 내용을 참조해서 v8의 garbage collection의 원리를 정리합니다. 이 GC는 Chrome 64 및 Node.js v10 부터 적용 되어 있습니다.</p>]]></description>
+</item>
+</channel>
+</rss>

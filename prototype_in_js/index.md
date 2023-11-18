@@ -87,9 +87,38 @@ f.__proto__ = F.prototype
 즉 아래 2가지로 해석가능합니다. 이때 2번째 경우는 `F === F.prototype.constructor`이기 때문에 가능합니다.
 
 1. `instance.__proto__` === `F.prototype`
-2. `instance.__proto__` === `(F.prototype).constructor.prototype`
+2. `instance.__proto__` === `F.prototype.constructor.prototype`
 
-즉 2번을 통해서 간단하게 **`instance.__proto__`는 `constructor.prototype`입니다.**
+instance의 __proto__는 F.prototype을 가리키고, F.prototype.constructor는 F와 같기 때문에, instance.__proto__는 F.prototype과 F.prototype.constructor.prototype과 같습니다.
+
+3. `instance.constructor === instance.__proto__.constructor`
+
+js에서는 instance가 생성될 때, constructor라는 property를 추가시켜, F.prototype.constructor를 가리키고 있습니다.
+
+```js
+> function F() {}
+undefined
+> const f = new F()
+undefined
+> f.constructor
+[Function: F]
+> F.prototype.constructor === F
+true
+> F.prototype.constructor === f.__proto__.constructor
+true
+> F.prototype.constructor === f.constructor
+true
+> f.constructor = undefined
+undefined
+> f.constructor
+undefined
+> F.prototype.constructor
+[Function: F]
+```
+
+즉 instance의 constructor property는 reference타입이라는 것을 알 수 있습니다.
+
+
 
 ### The prototype chain
 

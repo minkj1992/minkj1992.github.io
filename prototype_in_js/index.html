@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/prototype_in_js/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-18T14:17:43+09:00" />
-<meta property="article:modified_time" content="2023-11-18T14:17:43+09:00" />
+<meta property="article:modified_time" content="2023-11-18T15:16:35+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -20,7 +20,7 @@
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/prototype_in_js/" /><link rel="prev" href="https://minkj1992.github.io/memory_and_flow/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/prototype_in_js/" /><link rel="prev" href="https://minkj1992.github.io/memory_and_flow/" /><link rel="next" href="https://minkj1992.github.io/core_js/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, js","wordcount":  666 ,
-        "url": "https:\/\/minkj1992.github.io\/prototype_in_js\/","datePublished": "2023-11-18T14:17:43+09:00","dateModified": "2023-11-18T14:17:43+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, js","wordcount":  755 ,
+        "url": "https:\/\/minkj1992.github.io\/prototype_in_js\/","datePublished": "2023-11-18T14:17:43+09:00","dateModified": "2023-11-18T15:16:35+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,7 +173,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Prototype in Javascript</h1><h2 class="single-subtitle">prototype in Javascript</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-18">2023-11-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;666 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-18">2023-11-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;755 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -322,9 +322,56 @@
 </div><p>즉 아래 2가지로 해석가능합니다. 이때 2번째 경우는 <code>F === F.prototype.constructor</code>이기 때문에 가능합니다.</p>
 <ol>
 <li><code>instance.__proto__</code> === <code>F.prototype</code></li>
-<li><code>instance.__proto__</code> === <code>(F.prototype).constructor.prototype</code></li>
+<li><code>instance.__proto__</code> === <code>F.prototype.constructor.prototype</code></li>
 </ol>
-<p>즉 2번을 통해서 간단하게 <strong><code>instance.__proto__</code>는 <code>constructor.prototype</code>입니다.</strong></p>
+<p>instance의 __proto__는 F.prototype을 가리키고, F.prototype.constructor는 F와 같기 때문에, instance.__proto__는 F.prototype과 F.prototype.constructor.prototype과 같습니다.</p>
+<ol start="3">
+<li><code>instance.constructor === instance.__proto__.constructor</code></li>
+</ol>
+<p>js에서는 instance가 생성될 때, constructor라는 property를 추가시켜, F.prototype.constructor를 가리키고 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="kd">function</span> <span class="nx">F</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="kc">undefined</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="kr">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">F</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="kc">undefined</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">f</span><span class="p">.</span><span class="nx">constructor</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nb">Function</span><span class="o">:</span> <span class="nx">F</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">F</span>
+</span></span><span class="line"><span class="cl"><span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">f</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">.</span><span class="nx">constructor</span>
+</span></span><span class="line"><span class="cl"><span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">===</span> <span class="nx">f</span><span class="p">.</span><span class="nx">constructor</span>
+</span></span><span class="line"><span class="cl"><span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">f</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="kc">undefined</span>
+</span></span><span class="line"><span class="cl"><span class="kc">undefined</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">f</span><span class="p">.</span><span class="nx">constructor</span>
+</span></span><span class="line"><span class="cl"><span class="kc">undefined</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nb">Function</span><span class="o">:</span> <span class="nx">F</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>즉 instance의 constructor property는 reference타입이라는 것을 알 수 있습니다.</p>
 <h3 id="the-prototype-chain">The prototype chain</h3>
 <p><img
         class="lazyload"
@@ -465,7 +512,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-11-18</span>
+                <span>Updated on 2023-11-18&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/954a76e7ed69edf9cf9d0254b211af01d9056242" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 954a76e7ed69edf9cf9d0254b211af01d9056242: fix: mistypo">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>954a76e</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
@@ -484,7 +532,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/memory_and_flow/" class="prev" rel="prev" title="Memory And Flow"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Memory And Flow</a></div>
+    <div class="post-nav"><a href="/memory_and_flow/" class="prev" rel="prev" title="Memory And Flow"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Memory And Flow</a>
+            <a href="/core_js/" class="next" rel="next" title="Core Javscript">Core Javscript<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.

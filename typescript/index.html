@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/typescript/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-07T17:13:37+09:00" />
-<meta property="article:modified_time" content="2023-11-10T10:42:01+09:00" />
+<meta property="article:modified_time" content="2023-11-18T15:16:35+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, typescript","wordcount":  1283 ,
-        "url": "https:\/\/minkj1992.github.io\/typescript\/","datePublished": "2023-11-07T17:13:37+09:00","dateModified": "2023-11-10T10:42:01+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, typescript","wordcount":  1253 ,
+        "url": "https:\/\/minkj1992.github.io\/typescript\/","datePublished": "2023-11-07T17:13:37+09:00","dateModified": "2023-11-18T15:16:35+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Deep dive into Typescript</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1283 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-07">2023-11-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1253 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -203,11 +203,6 @@
     </li>
     <li><a href="#esm-동작-원리">ESM 동작 원리</a></li>
     <li><a href="#esm-cjs-트리쉐이킹">ESM, CJS 트리쉐이킹</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#objecthttpsdevelopermozillaorgkodocswebjavascriptreferenceglobal_objectsobject"><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></a></li>
-    <li><a href="#object-prototypeshttpsdevelopermozillaorgkodocslearnjavascriptobjectsobject_prototypes"><a href="https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object_prototypes">Object Prototypes</a></a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>Deep dive into typescript</p>
@@ -576,46 +571,18 @@ flow nodes(flow container)는 flow conditional(조건식)을 기준으로 분기
 <p><a href="https://google.github.io/styleguide/tsguide.html" target="_blank" rel="noopener noreffer">https://google.github.io/styleguide/tsguide.html</a>
 </p>
 </blockquote>
-<h1 id="js-deep-dive">JS deep dive</h1>
+<h1 id="ts-handbook">TS handbook</h1>
 <blockquote>
-<p><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide" target="_blank" rel="noopener noreffer">MDN js handbook</a>
-
-<a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html#structural-type-system" target="_blank" rel="noopener noreffer">TS handbook</a>
-
-<a href="https://ko.javascript.info" target="_blank" rel="noopener noreffer">https://ko.javascript.info</a>
+<p><a href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html#structural-type-system" target="_blank" rel="noopener noreffer">TS handbook</a>
 </p>
 </blockquote>
-<ul>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> Object class</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> prototype</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> symbol</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> Array &hellip;</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> for in vs for of
-<ul>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> enumerable</li>
-</ul>
-</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> Set</li>
-<li><i class="far fa-square fa-fw" aria-hidden="true"></i> Map</li>
-</ul>
-<h2 id="objecthttpsdevelopermozillaorgkodocswebjavascriptreferenceglobal_objectsobject"><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" rel="noopener noreffer">Object</a>
-</h2>
-<ul>
-<li>Description</li>
-<li>Constructor</li>
-<li>Static methods</li>
-<li>Instance properties</li>
-<li>Instance methods</li>
-</ul>
-<h2 id="object-prototypeshttpsdevelopermozillaorgkodocslearnjavascriptobjectsobject_prototypes"><a href="https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object_prototypes" target="_blank" rel="noopener noreffer">Object Prototypes</a>
-</h2>
 <h1 id="node-js-architecture">Node JS Architecture</h1>
 <p>&hellip;</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-11-10&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/94b119085bce71eb5c44eeca12096ba652002384" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 94b119085bce71eb5c44eeca12096ba652002384: docs: update ts">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>94b1190</a></span>
+                <span>Updated on 2023-11-18&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/954a76e7ed69edf9cf9d0254b211af01d9056242" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 954a76e7ed69edf9cf9d0254b211af01d9056242: fix: mistypo">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>954a76e</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

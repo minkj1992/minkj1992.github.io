@@ -262,37 +262,8 @@ flow nodes(flow container)는 flow conditional(조건식)을 기준으로 분기
 # Google TS guide
 > https://google.github.io/styleguide/tsguide.html
 
-# JS deep dive
-> [MDN js handbook](https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide)
+# TS handbook
 > [TS handbook](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html#structural-type-system)
-> https://ko.javascript.info
-
-- [ ] Object class
-- [ ] prototype
-- [ ] symbol
-- [ ] Array ...
-- [ ] for in vs for of
-    - [ ] enumerable
-- [ ] Set
-- [ ] Map
-
-
-
-## [Object](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object)
-
-- Description
-- Constructor
-- Static methods
-- Instance properties
-- Instance methods
-
-
-
-
-
-## [Object Prototypes](https://developer.mozilla.org/ko/docs/Learn/JavaScript/Objects/Object_prototypes)
-
-
 
 # Node JS Architecture
 
