@@ -12,7 +12,7 @@ What is difference between **`__proto__`**, **`prototype`**, **`[[Prototype]]`**
     1. **function 정의**: js는 자동으로 함수 정의할때,  `함수.prototype`에 `{ constructor: 함수 }`인 object를 넣어준다. 
     2. **Constructor**: js는 자동으로 constructor로 instance를 생성(new operator)할 때, `const f = new F()` 라고 한다면, `f.__proto__ = F.prototype`를 시행한다.
 
-> FYI, __proto__를 직접적으로 활용하는 방식은 (deprecated)되었습니다.
+> FYI, `__proto__`를 직접적으로 활용하는 방식은 (deprecated)되었습니다.
 
 
 ```js
@@ -36,7 +36,7 @@ f.__proto__ = F.prototype
 ```
 
 
-## [__proto__ vs prototype vs [[Prototype]]](https://stackoverflow.com/a/62077007)
+## [`__proto__` vs prototype vs [[Prototype]]](https://stackoverflow.com/a/62077007)
 
 
 ### Function
@@ -72,7 +72,7 @@ F.prototype = {
 
 모든 function들은 `new`라는 operator를 통해서 `constructor`의 기능을 할 수 있습니다.
 
-new키워드를 통해서 instance가 생성될 때, js에서는 추가적으로 constructor.property를 instance.__proto__안에 넣어줍니다.
+new키워드를 통해서 instance가 생성될 때, js에서는 추가적으로 constructor.property를 `instance.__proto__`안에 넣어줍니다.
 
 ```js
 function F() {}
@@ -98,9 +98,9 @@ f.__proto__ = F.prototype
 
 js는 Built-in Object가 존재하며, User Defined Object들은 결국 빌트인 Object까지 chain을 타고 올라가며, 최종적으로 Object.[[Prototype]] === null에서 chainning이 마무리됩니다.
 
-> The chain of objects connected by the __proto__ property is called the prototype chain.
+> The chain of objects connected by the `__proto__` property is called the prototype chain.
 
-즉 js는 상속을 __proto__ 필드를 사용해서 구현했으며, 실제로는 reference로 저장되기 때문에, singleton object들을 공유해서 상속하는 방식으로 되어있습니다.
+즉 js는 상속을 `__proto__` 필드를 사용해서 구현했으며, 실제로는 reference로 저장되기 때문에, singleton object들을 공유해서 상속하는 방식으로 되어있습니다.
 
 아래는 위의 다이어그램을 js코드로 간단하게 표현해봤습니다.
 
@@ -154,20 +154,20 @@ function Polygon() {
 }
 ```
 
-## __proto__ vs [[Prototype]]
+## `__proto__` vs [[Prototype]]
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/proto
 
->> 주의: 객체의 [[Prototype]]을 변경하는 것은 최신 JavaScript 엔진이 속성 접근을 최적화하는 방식의 특성상 모든 브라우저 및 JavaScript 엔진에서 매우 느린 작업입니다. 상속 구조를 변경하는 것이 성능에 미치는 영향은 미묘하고 광범위하며, obj.__proto__ = ... 문에 소요되는 시간 뿐만 아니라 [[Prototype]]이 변경된 객체에 접근할 수 있는 모든 코드들에 대해서도 영향을 줄 수 있습니다. 성능에 관심이 있다면 객체의 [[Prototype]] 설정을 피해야 합니다. 대신 Object.create()를 사용하여 원하는 [[Prototype]]으로 새 객체를 만드세요.
+>> 주의: 객체의 [[Prototype]]을 변경하는 것은 최신 JavaScript 엔진이 속성 접근을 최적화하는 방식의 특성상 모든 브라우저 및 JavaScript 엔진에서 매우 느린 작업입니다. 상속 구조를 변경하는 것이 성능에 미치는 영향은 미묘하고 광범위하며, `obj.__proto__ = ...` 문에 소요되는 시간 뿐만 아니라 [[Prototype]]이 변경된 객체에 접근할 수 있는 모든 코드들에 대해서도 영향을 줄 수 있습니다. 성능에 관심이 있다면 객체의 [[Prototype]] 설정을 피해야 합니다. 대신 Object.create()를 사용하여 원하는 [[Prototype]]으로 새 객체를 만드세요.
 
->> 주의: Object.prototype.__proto__는 오늘날 대부분의 브라우저에서 지원되지만, 그 존재와 정확한 동작은 오직 웹 브라우저와의 호환성을 보장하기 위한 레거시 기능으로서 ECMAScript 2015 사양에서 비로소 표준화되었습니다. 더 나은 지원을 위해 대신 Object.getPrototypeOf()를 사용하세요.
+>> 주의: `Object.prototype.__proto__`는 오늘날 대부분의 브라우저에서 지원되지만, 그 존재와 정확한 동작은 오직 웹 브라우저와의 호환성을 보장하기 위한 레거시 기능으로서 ECMAScript 2015 사양에서 비로소 표준화되었습니다. 더 나은 지원을 위해 대신 Object.getPrototypeOf()를 사용하세요.
 
-그러니, 직접적인 __proto__ 보다는 Object.getPrototypeOf()를 사용하는 것이 권장된다.
+그러니, 직접적인 `__proto__` 보다는 Object.getPrototypeOf()를 사용하는 것이 권장된다.
 
 
 ## Conclusion
 
 
-- __proto__: getter of [[Prototype]].
+- `__proto__`: getter of [[Prototype]].
 - prototype: 함수에서는 constructor기능을 위해, 사용되며, object는 inheritance를 위해 사용되는 필드.
 - [[Prototype]]: proto chain을 사용한 상속(코드 공유)를 위해 사용되는 internal property.
 

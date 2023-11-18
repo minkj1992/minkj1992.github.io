@@ -190,14 +190,14 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#tldr">TL;DR</a></li>
-    <li><a href="#__proto__-vs-prototype-vs-prototypehttpsstackoverflowcoma62077007"><a href="https://stackoverflow.com/a/62077007"><strong>proto</strong> vs prototype vs [[Prototype]]</a></a>
+    <li><a href="#__proto__-vs-prototype-vs-prototypehttpsstackoverflowcoma62077007"><a href="https://stackoverflow.com/a/62077007"><code>__proto__</code> vs prototype vs [[Prototype]]</a></a>
       <ul>
         <li><a href="#function">Function</a></li>
         <li><a href="#constructor">Constructor</a></li>
         <li><a href="#the-prototype-chain">The prototype chain</a></li>
       </ul>
     </li>
-    <li><a href="#__proto__-vs-prototype"><strong>proto</strong> vs [[Prototype]]</a></li>
+    <li><a href="#__proto__-vs-prototype"><code>__proto__</code> vs [[Prototype]]</a></li>
     <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav></div>
@@ -214,7 +214,7 @@
 </li>
 </ul>
 <blockquote>
-<p>FYI, __proto__를 직접적으로 활용하는 방식은 (deprecated)되었습니다.</p>
+<p>FYI, <code>__proto__</code>를 직접적으로 활용하는 방식은 (deprecated)되었습니다.</p>
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -256,7 +256,7 @@
 </span></span><span class="line"><span class="cl"><span class="c1">// instance의 [[Prototype]]에 constructor.prototype에 대한 reference를 추가합니다.
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="__proto__-vs-prototype-vs-prototypehttpsstackoverflowcoma62077007"><a href="https://stackoverflow.com/a/62077007" target="_blank" rel="noopener noreffer"><strong>proto</strong> vs prototype vs [[Prototype]]</a>
+</div><h2 id="__proto__-vs-prototype-vs-prototypehttpsstackoverflowcoma62077007"><a href="https://stackoverflow.com/a/62077007" target="_blank" rel="noopener noreffer"><code>__proto__</code> vs prototype vs [[Prototype]]</a>
 </h2>
 <h3 id="function">Function</h3>
 <p>Javscript에서 Function은 사실 Object입니다. 더 정확히 말하자면 Function이란 키워드는 Object에 <code>[[Call]]</code>(ECMA-262) internal property를 추가한 object입니다.</p>
@@ -298,7 +298,7 @@
 </div>
 </div><h3 id="constructor">Constructor</h3>
 <p>모든 function들은 <code>new</code>라는 operator를 통해서 <code>constructor</code>의 기능을 할 수 있습니다.</p>
-<p>new키워드를 통해서 instance가 생성될 때, js에서는 추가적으로 constructor.property를 instance.__proto__안에 넣어줍니다.</p>
+<p>new키워드를 통해서 instance가 생성될 때, js에서는 추가적으로 constructor.property를 <code>instance.__proto__</code>안에 넣어줍니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -336,9 +336,9 @@
         title="By stackoverflow Above link" /></p>
 <p>js는 Built-in Object가 존재하며, User Defined Object들은 결국 빌트인 Object까지 chain을 타고 올라가며, 최종적으로 Object.[[Prototype]] === null에서 chainning이 마무리됩니다.</p>
 <blockquote>
-<p>The chain of objects connected by the <strong>proto</strong> property is called the prototype chain.</p>
+<p>The chain of objects connected by the <code>__proto__</code> property is called the prototype chain.</p>
 </blockquote>
-<p>즉 js는 상속을 <strong>proto</strong> 필드를 사용해서 구현했으며, 실제로는 reference로 저장되기 때문에, singleton object들을 공유해서 상속하는 방식으로 되어있습니다.</p>
+<p>즉 js는 상속을 <code>__proto__</code> 필드를 사용해서 구현했으며, 실제로는 reference로 저장되기 때문에, singleton object들을 공유해서 상속하는 방식으로 되어있습니다.</p>
 <p>아래는 위의 다이어그램을 js코드로 간단하게 표현해봤습니다.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -440,25 +440,25 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="__proto__-vs-prototype"><strong>proto</strong> vs [[Prototype]]</h2>
+</div><h2 id="__proto__-vs-prototype"><code>__proto__</code> vs [[Prototype]]</h2>
 <blockquote>
 <p><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/proto" target="_blank" rel="noopener noreffer">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/proto</a>
 </p>
 </blockquote>
 <blockquote>
 <blockquote>
-<p>주의: 객체의 [[Prototype]]을 변경하는 것은 최신 JavaScript 엔진이 속성 접근을 최적화하는 방식의 특성상 모든 브라우저 및 JavaScript 엔진에서 매우 느린 작업입니다. 상속 구조를 변경하는 것이 성능에 미치는 영향은 미묘하고 광범위하며, obj.<strong>proto</strong> = &hellip; 문에 소요되는 시간 뿐만 아니라 [[Prototype]]이 변경된 객체에 접근할 수 있는 모든 코드들에 대해서도 영향을 줄 수 있습니다. 성능에 관심이 있다면 객체의 [[Prototype]] 설정을 피해야 합니다. 대신 Object.create()를 사용하여 원하는 [[Prototype]]으로 새 객체를 만드세요.</p>
+<p>주의: 객체의 [[Prototype]]을 변경하는 것은 최신 JavaScript 엔진이 속성 접근을 최적화하는 방식의 특성상 모든 브라우저 및 JavaScript 엔진에서 매우 느린 작업입니다. 상속 구조를 변경하는 것이 성능에 미치는 영향은 미묘하고 광범위하며, <code>obj.__proto__ = ...</code> 문에 소요되는 시간 뿐만 아니라 [[Prototype]]이 변경된 객체에 접근할 수 있는 모든 코드들에 대해서도 영향을 줄 수 있습니다. 성능에 관심이 있다면 객체의 [[Prototype]] 설정을 피해야 합니다. 대신 Object.create()를 사용하여 원하는 [[Prototype]]으로 새 객체를 만드세요.</p>
 </blockquote>
 </blockquote>
 <blockquote>
 <blockquote>
-<p>주의: Object.prototype.__proto__는 오늘날 대부분의 브라우저에서 지원되지만, 그 존재와 정확한 동작은 오직 웹 브라우저와의 호환성을 보장하기 위한 레거시 기능으로서 ECMAScript 2015 사양에서 비로소 표준화되었습니다. 더 나은 지원을 위해 대신 Object.getPrototypeOf()를 사용하세요.</p>
+<p>주의: <code>Object.prototype.__proto__</code>는 오늘날 대부분의 브라우저에서 지원되지만, 그 존재와 정확한 동작은 오직 웹 브라우저와의 호환성을 보장하기 위한 레거시 기능으로서 ECMAScript 2015 사양에서 비로소 표준화되었습니다. 더 나은 지원을 위해 대신 Object.getPrototypeOf()를 사용하세요.</p>
 </blockquote>
 </blockquote>
-<p>그러니, 직접적인 <strong>proto</strong> 보다는 Object.getPrototypeOf()를 사용하는 것이 권장된다.</p>
+<p>그러니, 직접적인 <code>__proto__</code> 보다는 Object.getPrototypeOf()를 사용하는 것이 권장된다.</p>
 <h2 id="conclusion">Conclusion</h2>
 <ul>
-<li><strong>proto</strong>: getter of [[Prototype]].</li>
+<li><code>__proto__</code>: getter of [[Prototype]].</li>
 <li>prototype: 함수에서는 constructor기능을 위해, 사용되며, object는 inheritance를 위해 사용되는 필드.</li>
 <li>[[Prototype]]: proto chain을 사용한 상속(코드 공유)를 위해 사용되는 internal property.</li>
 </ul></div><div class="post-footer" id="post-footer">
