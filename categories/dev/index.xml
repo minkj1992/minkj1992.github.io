@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/categories/dev/</link>
         <description>dev - Category - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 10 Nov 2023 09:49:33 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 18 Nov 2023 14:17:43 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Prototype in Javascript</title>
+    <link>https://minkj1992.github.io/prototype_in_js/</link>
+    <pubDate>Sat, 18 Nov 2023 14:17:43 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/prototype_in_js/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/prototype_in_js.png" referrerpolicy="no-referrer">
+            </div><p>What is difference between <strong><code>__proto__</code></strong>, <strong><code>prototype</code></strong>, <strong><code>[[Prototype]]</code></strong></p>]]></description>
+</item>
+<item>
     <title>Typescript Better Enum</title>
     <link>https://minkj1992.github.io/typescript_enum/</link>
     <pubDate>Fri, 10 Nov 2023 09:49:33 &#43;0900</pubDate>
@@ -100,16 +110,6 @@
             </div><blockquote>
 <p><code>Modern c++</code>을 학습하고 기억할만한 요소들을 정리합니다.</p>
 </blockquote>]]></description>
-</item>
-<item>
-    <title>Design principle of C&#43;&#43; and Carbon</title>
-    <link>https://minkj1992.github.io/cpp/</link>
-    <pubDate>Wed, 28 Sep 2022 20:35:54 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/cpp/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/carbon.webp" referrerpolicy="no-referrer">
-            </div><p>Let&rsquo;s deep dive into <code>c++</code> and <code>Carbon</code></p>]]></description>
 </item>
 </channel>
 </rss>

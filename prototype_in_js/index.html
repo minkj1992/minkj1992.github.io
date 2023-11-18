@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Prototype in Javascript | minkj1992</title><meta name="Description" content="What is difference between .__proto__, .prototype, [[Prototype]]"><meta property="og:title" content="Prototype in Javascript" />
+<meta property="og:description" content="What is difference between .__proto__, .prototype, [[Prototype]]" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/prototype_in_js/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-18T14:17:43+09:00" />
+<meta property="article:modified_time" content="2023-11-18T14:17:43+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Prototype in Javascript"/>
+<meta name="twitter:description" content="What is difference between .__proto__, .prototype, [[Prototype]]"/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/prototype_in_js/" /><link rel="prev" href="https://minkj1992.github.io/memory_and_flow/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Prototype in Javascript",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/prototype_in_js\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, js","wordcount":  666 ,
+        "url": "https:\/\/minkj1992.github.io\/prototype_in_js\/","datePublished": "2023-11-18T14:17:43+09:00","dateModified": "2023-11-18T14:17:43+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": "What is difference between .__proto__, .prototype, [[Prototype]]"
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Prototype in Javascript</h1><h2 class="single-subtitle">prototype in Javascript</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-18">2023-11-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;666 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/prototype_in_js.png"
+        data-srcset="/images/prototype_in_js.png, /images/prototype_in_js.png 1.5x, /images/prototype_in_js.png 2x"
+        data-sizes="auto"
+        alt="/images/prototype_in_js.png"
+        title="What is difference between .__proto__, .prototype, [[Prototype]]" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#__proto__-vs-prototype-vs-prototypehttpsstackoverflowcoma62077007"><a href="https://stackoverflow.com/a/62077007"><strong>proto</strong> vs prototype vs [[Prototype]]</a></a>
+      <ul>
+        <li><a href="#function">Function</a></li>
+        <li><a href="#constructor">Constructor</a></li>
+        <li><a href="#the-prototype-chain">The prototype chain</a></li>
+      </ul>
+    </li>
+    <li><a href="#__proto__-vs-prototype"><strong>proto</strong> vs [[Prototype]]</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>What is difference between <strong><code>__proto__</code></strong>, <strong><code>prototype</code></strong>, <strong><code>[[Prototype]]</code></strong></p>
+<h2 id="tldr">TL;DR</h2>
+<ul>
+<li><code>.__proto__</code>: getter of [[Prototype]]</li>
+<li><code>[[Prototype]]</code>: Internal Property</li>
+<li><code>.prototype</code>
+<ol>
+<li><strong>function 정의</strong>: js는 자동으로 함수 정의할때,  <code>함수.prototype</code>에 <code>{ constructor: 함수 }</code>인 object를 넣어준다.</li>
+<li><strong>Constructor</strong>: js는 자동으로 constructor로 instance를 생성(new operator)할 때, <code>const f = new F()</code> 라고 한다면, <code>f.__proto__ = F.prototype</code>를 시행한다.</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>FYI, __proto__를 직접적으로 활용하는 방식은 (deprecated)되었습니다.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">F</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 1. Function 정의 시
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="o">:</span> <span class="nx">F</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 이때 js는 위와 같이 prototype property를 추가하고, 이 property안에 constructor라는 property를 지닌, object를 추가하고, 
+</span></span></span><span class="line"><span class="cl"><span class="c1">// constructor property는 함수 그자체를 가리킵니다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. Constructor (new 사용) 시
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">f</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// instance의 [[Prototype]]에 constructor.prototype에 대한 reference를 추가합니다.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="__proto__-vs-prototype-vs-prototypehttpsstackoverflowcoma62077007"><a href="https://stackoverflow.com/a/62077007" target="_blank" rel="noopener noreffer"><strong>proto</strong> vs prototype vs [[Prototype]]</a>
+</h2>
+<h3 id="function">Function</h3>
+<p>Javscript에서 Function은 사실 Object입니다. 더 정확히 말하자면 Function이란 키워드는 Object에 <code>[[Call]]</code>(ECMA-262) internal property를 추가한 object입니다.</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/prototype_in_js3.png"
+        data-srcset="/images/prototype_in_js3.png, /images/prototype_in_js3.png 1.5x, /images/prototype_in_js3.png 2x"
+        data-sizes="auto"
+        alt="/images/prototype_in_js3.png"
+        title="/images/prototype_in_js3.png" /></p>
+</center>
+<p>여기서 말하는 Function은 <code>function</code>이라는 함수를 생성할 때, 사용하는 예약어가 아닌 위 콘솔에서 확인할 수 있는 미리 생성되어있는(Built-in) object를 뜻합니다.</p>
+<p><strong>즉, 모든 function들은 Function(Built-in Function Object)의 instance입니다.</strong> 쉽게 설명해서 <strong><code>function = new Function()</code></strong> 라고 생각할 수 있습니다.</p>
+<p>또한 JS에서 <code>function F() {}</code>처럼 function을 정의할 때, 내부적으로 <code>prototype</code>이라는 property를 추가하고, 이 값으로 <code>{ constructor: self }</code>인 object를 추가합니다.</p>
+<blockquote>
+<p>JS의 Built-in들은 native source code로 정의되어있어, 매우 빠릅니다. (c++)</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">F</span><span class="p">()</span> <span class="p">{</span>    
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// js는 아래코드를, 자동으로 실행합니다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">constructor</span><span class="o">:</span> <span class="nx">F</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="constructor">Constructor</h3>
+<p>모든 function들은 <code>new</code>라는 operator를 통해서 <code>constructor</code>의 기능을 할 수 있습니다.</p>
+<p>new키워드를 통해서 instance가 생성될 때, js에서는 추가적으로 constructor.property를 instance.__proto__안에 넣어줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">F</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">F</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// JS는 아래코드를 자동으로 실행합니다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">f</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>즉 아래 2가지로 해석가능합니다. 이때 2번째 경우는 <code>F === F.prototype.constructor</code>이기 때문에 가능합니다.</p>
+<ol>
+<li><code>instance.__proto__</code> === <code>F.prototype</code></li>
+<li><code>instance.__proto__</code> === <code>(F.prototype).constructor.prototype</code></li>
+</ol>
+<p>즉 2번을 통해서 간단하게 <strong><code>instance.__proto__</code>는 <code>constructor.prototype</code>입니다.</strong></p>
+<h3 id="the-prototype-chain">The prototype chain</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/prototype_in_js2.jpeg"
+        data-srcset="/images/prototype_in_js2.jpeg, /images/prototype_in_js2.jpeg 1.5x, /images/prototype_in_js2.jpeg 2x"
+        data-sizes="auto"
+        alt="/images/prototype_in_js2.jpeg"
+        title="By stackoverflow Above link" /></p>
+<p>js는 Built-in Object가 존재하며, User Defined Object들은 결국 빌트인 Object까지 chain을 타고 올라가며, 최종적으로 Object.[[Prototype]] === null에서 chainning이 마무리됩니다.</p>
+<blockquote>
+<p>The chain of objects connected by the <strong>proto</strong> property is called the prototype chain.</p>
+</blockquote>
+<p>즉 js는 상속을 <strong>proto</strong> 필드를 사용해서 구현했으며, 실제로는 reference로 저장되기 때문에, singleton object들을 공유해서 상속하는 방식으로 되어있습니다.</p>
+<p>아래는 위의 다이어그램을 js코드로 간단하게 표현해봤습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 1. Built-in Objects in Javascript
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">function</span> <span class="nb">Object</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">prototype</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">constructor</span><span class="o">:</span> <span class="kd">function</span> <span class="nb">Object</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">__proto__</span><span class="o">:</span> <span class="kc">null</span> <span class="c1">// Object.prototype.__proto__ === null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Object Internal Property
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ecma: https://262.ecma-international.org/5.1/#sec-8.6.2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">[[</span><span class="nx">Prototype</span><span class="p">]]</span><span class="o">:</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">constructor</span><span class="o">:</span> <span class="kd">function</span> <span class="nb">Function</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">__proto__</span><span class="o">:</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">get</span> <span class="nx">__proto__</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">this</span><span class="p">.[[</span><span class="nx">Prototype</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">[[</span><span class="nx">Call</span><span class="p">]]</span><span class="o">:</span> <span class="p">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nb">Function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">prototype</span><span class="o">:</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">__proto__</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[[</span><span class="nx">Prototype</span><span class="p">]]</span><span class="o">:</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">__proto__</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">get</span> <span class="nx">__proto__</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">this</span><span class="p">.[[</span><span class="nx">Prototype</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">[[</span><span class="nx">Call</span><span class="p">]]</span><span class="o">:</span> <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. User-defined Objects
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// new를 사용하면 o.[[Prototype]] property에 포인터 of Constructor.prototype
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 즉 o.__proto__ === Object.prototype
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">Polygon</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 함수 생성시, js엔진은 prototype property를 추가해준다. 이 property는 object로 constructor로 self를 가리키는 property를 지니고 있다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">prototype</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">constructor</span><span class="o">:</span> <span class="kd">function</span> <span class="nx">Polygon</span><span class="p">(),</span> <span class="c1">// self
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">__proto__</span><span class="o">:</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span> <span class="c1">// {}(literal object)로 생성할 때, __proto__에 Object.prototype의 reference가 담긴다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">__proto__</span><span class="o">:</span> <span class="nb">Function</span><span class="p">.</span><span class="nx">prototype</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="__proto__-vs-prototype"><strong>proto</strong> vs [[Prototype]]</h2>
+<blockquote>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/proto" target="_blank" rel="noopener noreffer">https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/proto</a>
+</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>주의: 객체의 [[Prototype]]을 변경하는 것은 최신 JavaScript 엔진이 속성 접근을 최적화하는 방식의 특성상 모든 브라우저 및 JavaScript 엔진에서 매우 느린 작업입니다. 상속 구조를 변경하는 것이 성능에 미치는 영향은 미묘하고 광범위하며, obj.<strong>proto</strong> = &hellip; 문에 소요되는 시간 뿐만 아니라 [[Prototype]]이 변경된 객체에 접근할 수 있는 모든 코드들에 대해서도 영향을 줄 수 있습니다. 성능에 관심이 있다면 객체의 [[Prototype]] 설정을 피해야 합니다. 대신 Object.create()를 사용하여 원하는 [[Prototype]]으로 새 객체를 만드세요.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>주의: Object.prototype.__proto__는 오늘날 대부분의 브라우저에서 지원되지만, 그 존재와 정확한 동작은 오직 웹 브라우저와의 호환성을 보장하기 위한 레거시 기능으로서 ECMAScript 2015 사양에서 비로소 표준화되었습니다. 더 나은 지원을 위해 대신 Object.getPrototypeOf()를 사용하세요.</p>
+</blockquote>
+</blockquote>
+<p>그러니, 직접적인 <strong>proto</strong> 보다는 Object.getPrototypeOf()를 사용하는 것이 권장된다.</p>
+<h2 id="conclusion">Conclusion</h2>
+<ul>
+<li><strong>proto</strong>: getter of [[Prototype]].</li>
+<li>prototype: 함수에서는 constructor기능을 위해, 사용되며, object는 inheritance를 위해 사용되는 필드.</li>
+<li>[[Prototype]]: proto chain을 사용한 상속(코드 공유)를 위해 사용되는 internal property.</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-11-18</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/prototype_in_js/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/prototype_in_js/" data-title="Prototype in Javascript" data-hashtags="dev,js"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/prototype_in_js/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/prototype_in_js/" data-title="Prototype in Javascript"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/prototype_in_js/" data-title="Prototype in Javascript"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/prototype_in_js/" data-title="Prototype in Javascript" data-image="/images/prototype_in_js.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/js/">js</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/memory_and_flow/" class="prev" rel="prev" title="Memory And Flow"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Memory And Flow</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>

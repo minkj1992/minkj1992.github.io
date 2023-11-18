@@ -4,9 +4,19 @@
         <link>https://minkj1992.github.io/</link>
         <description>I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying.</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 15 Nov 2023 16:26:37 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 18 Nov 2023 14:17:43 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Prototype in Javascript</title>
+    <link>https://minkj1992.github.io/prototype_in_js/</link>
+    <pubDate>Sat, 18 Nov 2023 14:17:43 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/prototype_in_js/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/prototype_in_js.png" referrerpolicy="no-referrer">
+            </div><p>What is difference between <strong><code>__proto__</code></strong>, <strong><code>prototype</code></strong>, <strong><code>[[Prototype]]</code></strong></p>]]></description>
+</item>
+<item>
     <title>Memory And Flow</title>
     <link>https://minkj1992.github.io/memory_and_flow/</link>
     <pubDate>Wed, 15 Nov 2023 16:26:37 &#43;0900</pubDate>
@@ -99,16 +109,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/databricks.jpeg" referrerpolicy="no-referrer">
             </div>How to build Large Language Model based application for production ready.]]></description>
-</item>
-<item>
-    <title>Elderjs</title>
-    <link>https://minkj1992.github.io/elderjs/</link>
-    <pubDate>Wed, 26 Jul 2023 19:29:12 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/elderjs/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/elderjs.png" referrerpolicy="no-referrer">
-            </div><p><code>Elder.js</code>: an SEO first Svelte Framework &amp; Static Site Generator</p>]]></description>
 </item>
 </channel>
 </rss>
