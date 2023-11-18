@@ -92,7 +92,7 @@ b.__proto__
 > {constructor: ƒ}
 ```
 
-다음으로는 Arrow Function입니다. 결론부터 말씀드리면, .prototype을 받지 못해 constructor필드가 존재하지 않게되어 생성자(Constructor)로서의 기능을 하지 못합니다. 그렇기 때문에 `new` 연산을 통해서 instance를 생성할 수 없습니다. 
+다음으로는 Arrow Function입니다. **결론부터 말씀드리면, .prototype을 받지 못해 constructor필드가 존재하지 않게되어 생성자(Constructor)로서의 기능을 하지 못합니다.** 그렇기 때문에 `new` 연산을 통해서 instance를 생성할 수 없습니다. 
 
 ```js
 const a = () => {}
@@ -114,7 +114,7 @@ new a();
 다만 `__proto__`, 즉 `[[Prototype]]` property는 기존의 function declaration의 `[[Prototype]]`과 동일한 property를 가지고 있습니다.
 
 
-**정리하면, function declaration방식과 function expression 방식은 차이가 없이 동작하며, arrow function는 prototype을 받지 못해, constructor가 존재하지 않습니다. 이로**
+**정리하면, function declaration방식과 function expression 방식은 차이가 없이 동작하며, arrow function는 prototype을 받지 못해, constructor가 존재하지 않습니다.**
 
 
 ### Constructor
