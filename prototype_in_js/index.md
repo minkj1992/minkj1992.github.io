@@ -67,6 +67,55 @@ F.prototype = {
 }
 ```
 
+### 3 Functions compare
+
+`function declaration`(함수 선언식)외에도 추가로 2가지의 함수에 대해서도 동일하게 동작하는지 확인해보겠습니다.
+
+함수를 생성하는 방법은 3가지입니다.
+
+1. Function declaration (function a() {})
+2. Function expression (const f = function() {})
+3. Arrow function (const f = () => {})
+
+먼저 Function expression입니다. **결론부터 말씀드리면, function declaration과 동일하게 동작합니다.**
+
+```js
+const a = function() {}
+a.prototype
+> {constructor: ƒ}
+a.__proto__
+> ƒ () { [native code] }
+const b = new a()
+b.prototype
+> undefined
+b.__proto__
+> {constructor: ƒ}
+```
+
+다음으로는 Arrow Function입니다. 결론부터 말씀드리면, .prototype을 받지 못해 constructor필드가 존재하지 않게되어 생성자(Constructor)로서의 기능을 하지 못합니다. 그렇기 때문에 `new` 연산을 통해서 instance를 생성할 수 없습니다. 
+
+```js
+const a = () => {}
+> undefined
+a.prototype
+> undefined
+a.__proto__
+> ƒ () { [native code] }
+function compare() {}
+> undefined
+a.__proto__ === compare.__proto__
+> true
+
+new a();
+> VM1104:1 Uncaught TypeError: a is not a constructor
+    at <anonymous>:1:1
+```
+
+다만 `__proto__`, 즉 `[[Prototype]]` property는 기존의 function declaration의 `[[Prototype]]`과 동일한 property를 가지고 있습니다.
+
+
+**정리하면, function declaration방식과 function expression 방식은 차이가 없이 동작하며, arrow function는 prototype을 받지 못해, constructor가 존재하지 않습니다. 이로**
+
 
 ### Constructor
 
