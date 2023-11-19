@@ -49,7 +49,7 @@ undefined
 ### 함수 선언문 vs 함수 표현식
 
 ```js
-funciton sum(a, b) {
+function sum(a, b) {
     return a + b;
 }
 
