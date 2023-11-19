@@ -4,9 +4,19 @@
         <link>https://minkj1992.github.io/</link>
         <description>I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying.</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 18 Nov 2023 21:14:17 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 19 Nov 2023 15:29:46 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>this, javascript</title>
+    <link>https://minkj1992.github.io/this_in_js/</link>
+    <pubDate>Sun, 19 Nov 2023 15:29:46 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/this_in_js/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/this_in_js.png" referrerpolicy="no-referrer">
+            </div><p>Q. What on earth, <code>this</code> is interpretated in js?</p>]]></description>
+</item>
+<item>
     <title>JS garbage collection (2018 v8)</title>
     <link>https://minkj1992.github.io/v8_garbage_collection/</link>
     <pubDate>Sat, 18 Nov 2023 21:14:17 &#43;0900</pubDate>
@@ -99,16 +109,6 @@
             </div><blockquote>
 <p>Let&rsquo;s prepare basic computer science interview questions.</p>
 </blockquote>]]></description>
-</item>
-<item>
-    <title>Fundamentals of Database Engineering</title>
-    <link>https://minkj1992.github.io/db/</link>
-    <pubDate>Wed, 04 Oct 2023 20:25:04 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/db/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/db.png" referrerpolicy="no-referrer">
-            </div><p>Learn ACID, Indexing, Partitioning, Sharding, Concurrency control, Replication, DB Engines, Best Practices and More!</p>]]></description>
 </item>
 </channel>
 </rss>
