@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/this_in_js/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-19T15:29:46+09:00" />
-<meta property="article:modified_time" content="2023-11-19T19:15:13+09:00" />
+<meta property="article:modified_time" content="2023-11-19T21:46:13+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "js, this","wordcount":  940 ,
-        "url": "https:\/\/minkj1992.github.io\/this_in_js\/","datePublished": "2023-11-19T15:29:46+09:00","dateModified": "2023-11-19T19:15:13+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "js, this","wordcount":  1664 ,
+        "url": "https:\/\/minkj1992.github.io\/this_in_js\/","datePublished": "2023-11-19T15:29:46+09:00","dateModified": "2023-11-19T21:46:13+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">this, javascript</h1><h2 class="single-subtitle">What is this, categorize all this cases.</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-19">2023-11-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;940 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-19">2023-11-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1664 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -189,18 +189,74 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#0-this-intro">0. <code>this</code> intro</a></li>
     <li><a href="#1-global-context">1. Global context</a></li>
     <li><a href="#2-function-declaration의-context">2. Function declaration의 context</a></li>
     <li><a href="#3-callbacks">3. Callbacks</a></li>
     <li><a href="#4-arrow-functions">4. Arrow functions</a></li>
     <li><a href="#5-constructors-new-operator">5. Constructors (<code>new operator</code>)</a></li>
     <li><a href="#6-super">6. super</a></li>
+    <li><a href="#7-class">7. Class</a>
+      <ul>
+        <li><a href="#derived-classchild-constructorextends">Derived class(child) constructor(<code>extends</code>)</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-dom-event-handler">8. DOM Event Handler</a>
+      <ul>
+        <li><a href="#81-함수-이벤트-핸들러">8.1. 함수 이벤트 핸들러</a></li>
+        <li><a href="#82-인라인-이벤트-핸들러">8.2. 인라인 이벤트 핸들러</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>Q. What on earth, <code>this</code> is interpretated in js?</p>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,600,600i">
-## 0. `this` intro
-> [MDN: this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
+<h2 id="tldr">TL;DR</h2>
+<ol>
+<li><strong><code>this</code>는 동적으로 해석된다.</strong>
+<ul>
+<li>일반적으로 호출하는 주체가 parameter로 전달된다.</li>
+<li>즉 <code>obj.method(...)</code>는 <code>method(this=obj, ...)</code>로 해석</li>
+</ul>
+</li>
+<li><strong><code>Global context</code></strong>
+<ul>
+<li><code>commonJS</code>: <code>this</code> === <code>globalThis</code> (<code>window</code> or <code>global</code>)</li>
+<li><code>type=&quot;module&quot;</code>: <strong><code>this</code>는 언제나 <code>undefined</code></strong></li>
+</ul>
+</li>
+<li><strong><code>Function</code></strong>: method로 활용되지 않는 일반적인 함수에서 <code>this</code>는 2가지로 해석됩니다.
+<ul>
+<li><code>use strict</code>: undefined</li>
+<li><code>non strict</code>: globalThis</li>
+</ul>
+</li>
+<li><strong><code>Arrow functions</code></strong>: <code>outer scope</code>의 <code>this</code>를 <code>reference</code>하는 변수를 closure로 보존(<code>lexical scoping</code>)한다.</li>
+<li><strong><code>Callback</code></strong>: 일반적으로 this가 전달되지 않아 function과 동일하게 처리되지만, 일부 API (<code>JSON.parse(text, reviver)</code>)들은 내부적으로 this를 넣어준다.</li>
+<li><strong><code>Constructor</code> (<code>new</code>)</strong>: <code>new</code>를 통해 호출되는 constructor는 내부적으로 <code>this</code>에 생성될 instance를 할당한다.</li>
+<li><strong><code>super</code></strong>: 부모의 context가 아닌, super.method()를 호출한 context의 this가 적용된다.</li>
+<li><strong><code>Class</code></strong>
+<ol>
+<li>static vs instance</li>
+<li><code>derived class constructor</code>에서 super()를 호출하지 않거나, return object하지 않는 이상 this는 생성되지 않는다.</li>
+</ol>
+</li>
+<li><strong><code>EventHandler</code></strong>
+<ol>
+<li>대부분 브라우저는 <code>addEventListener</code>의 경우, handler에 현재 element를 this에 bind시켜서 줍니다.</li>
+<li>인라인 이벤트 핸들러에서도 this에 현재 이벤트 리스닝되는 element가 바인드됩니다.
+<ol>
+<li><code>&lt;button onclick=&quot;alert(this);&quot;&gt;Show this&lt;/button&gt;</code></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="0-this-intro">0. <code>this</code> intro</h2>
+<blockquote>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this" target="_blank" rel="noopener noreffer">MDN: this</a>
+</p>
+</blockquote>
 <ul>
 <li>
 <p>Javascript에서 <code>this</code> 키워드는, 일반적으로 instance에 bind되는 대부분 언어와 달리, <strong>동적으로 해석되며 호출한 방법에 의해 결정됩니다.</strong></p>
@@ -604,10 +660,6 @@
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Parent</span> <span class="p">{</span>
@@ -626,21 +678,344 @@
 </span></span><span class="line"><span class="cl">        <span class="kr">super</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&#34;child&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nx">getName</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kr">super</span><span class="p">.</span><span class="nx">getName</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="k">new</span> <span class="nx">Child</span><span class="p">()).</span><span class="nx">getName</span><span class="p">()</span> <span class="c1">// child
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>즉 위와 같은 경우 Parent의 메서드안에 this는 Parent가 아니라, child의 this를 따릅니다.</strong> 왜냐하면 super.getName을 감싸고 있는 child.getName의 this는 child를 가리키고 있기 때문입니다.</p></div><div class="post-footer" id="post-footer">
+</div><p><strong>즉 위와 같은 경우 Parent의 메서드안에 this는 Parent가 아니라, child의 this를 따릅니다.</strong> 왜냐하면 super.getName을 감싸고 있는 child.getName의 this는 child를 가리키고 있기 때문입니다.</p>
+<h2 id="7-class">7. Class</h2>
+<ol>
+<li>static context: <code>this</code> = <code>Class</code>
+<ol>
+<li><code>static method</code></li>
+<li><code>static field (initializer / block)</code></li>
+</ol>
+</li>
+<li>instance context: <code>this</code> = <code>instance</code>
+<ol>
+<li><code>constructor</code></li>
+<li><code>method</code></li>
+<li><code>instance field</code></li>
+</ol>
+</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">C</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">static</span> <span class="nx">staticField</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">instanceField</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">C</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">C</span><span class="p">.</span><span class="nx">staticField</span> <span class="o">===</span> <span class="nx">C</span><span class="p">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">instanceField</span> <span class="o">===</span> <span class="nx">c</span><span class="p">);</span> <span class="c1">// true
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="derived-classchild-constructorextends">Derived class(child) constructor(<code>extends</code>)</h3>
+<ul>
+<li><strong><code>파생 클래스 생성자</code></strong>: <strong>파생 클래스(자식 클래스) 생성자는 기본 클래스(부모 클래스) 생성자와 달리 초기에 this 바인딩이 없습니다.</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Base</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Child</span> <span class="kr">extends</span> <span class="nx">Base</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="o">=</span><span class="s2">&#34;child&#34;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Child</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Uncaught ReferenceError: Must call super constructor in derived class before accessing &#39;this&#39; or returning from derived constructor
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>super()를 호출하면 생성자 내에 this 바인딩이 생성되고, 이것은 사실상 <code>this = new Base();</code>라는 코드를 실행하는 것과 같은 효과를 가집니다. 여기서 Base는 기본 클래스를 의미합니다.</p>
+</li>
+<li>
+<p><strong>주의 사항</strong>: <code>super()</code>를 호출하기 전에 <code>this</code>를 참조하려고 하면 오류가 발생합니다(당연히 this가 없으니), 그러므로 생성자안에서 this를 사용한다면, 그 보다 더 위에 super()가 존재해야 합니다.</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Base</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="o">=</span> <span class="s2">&#34;Base&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Child</span> <span class="kr">extends</span> <span class="nx">Base</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">super</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Child</span><span class="p">();</span> <span class="c1">// Base
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong><code>super()</code> 호출 규칙</strong>: 파생 클래스의 constructor는 <code>super()</code>를 호출하지 않고 반환해서는 안 됩니다. <strong>단, 생성자가 객체를 반환하여 this 값을 덮어쓰는 경우나 클래스에 생성자가 전혀 없는 경우는 예외입니다.</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Good</span> <span class="kr">extends</span> <span class="nx">Base</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">5</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">Bad</span> <span class="kr">extends</span> <span class="nx">Base</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>JS</code>의 child class에서 constructor를 명시적으로 작성하지 않으면, 내부적으로 constructor를 생성하고, 이 생성자에서는 super()를 자동으로 호출합니다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">AlsoGood</span> <span class="kr">extends</span> <span class="nx">Base</span> <span class="p">{}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="8-dom-event-handler">8. DOM Event Handler</h2>
+<h3 id="81-함수-이벤트-핸들러">8.1. 함수 이벤트 핸들러</h3>
+<ul>
+<li>대부분의 브라우저에서, 이벤트 핸들러로 사용되는 함수의 <code>this</code>는 <strong>리스너가 부착된 DOM 요소에 바인딩 시킵니다.</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">bluify</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;use strict&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 원래라면 undefined이지만, addEventListener는 target을 this로 bind시킨다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">this</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s2">&#34;#A5D9F3&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">)</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span> <span class="c1">// currentTarget과 target이 같은 객체일 때 true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">elements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">&#34;*&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">ele</span> <span class="k">of</span> <span class="nx">elements</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ele</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="nx">bluify</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="82-인라인-이벤트-핸들러">8.2. 인라인 이벤트 핸들러</h3>
+<ul>
+<li>인라인에서 사용되는 this는 이벤트 리스너가 부착된 element 입니다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- [object HTMLButtonElement] --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;alert(this);&#34;</span><span class="p">&gt;</span>Show this<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>하지만, 내부 scope를 추가로 가지게 된다면, global context로 해석됩니다.</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="c">&lt;!-- undefined --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;alert((function () { &#39;use strict&#39;; return this; })());&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>즉 이는 다른말로, function을 정의해서 인라인에 집어넣더라도 동일하게 global context로 해석된다는 뜻입니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;print()&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;use strict&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">print</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// undefined
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>지금까지 내용들을 정리하면 아래와 같은 테스트 코드를 작성해볼 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Event Handler Reference Test<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 1. use outside function --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 1.1. just function: undefined --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 1.2. addEventListener: [object HTMLButtonElement] --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;btn1&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;print()&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      Show inner this (print Function)
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">hr</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 2. [object HTMLButtonElement] --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;alert(this);&#34;</span><span class="p">&gt;</span>Show this<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">hr</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c">&lt;!-- 3. undefined --&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;alert((function () { &#39;use strict&#39;; return this; })());&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      Show inner this (Anonymous Function, Nothing Happen!)
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;use strict&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 1.1. just function
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="kd">function</span> <span class="nx">print</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">);</span> <span class="c1">// undefined
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 1.2. addEventListener
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nb">document</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;btn1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="nx">printHandler</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">function</span> <span class="nx">printHandler</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">);</span> <span class="c1">// [object HTMLButtonElement]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span> <span class="o">===</span> <span class="nx">e</span><span class="p">.</span><span class="nx">currentTarget</span><span class="p">);</span> <span class="c1">// true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><center>- 끝 -</center></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-11-19&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/7642f999bb51b64132fe47333f6e209c485005ef" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 7642f999bb51b64132fe47333f6e209c485005ef: style: update blog theme">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>7642f99</a></span>
+                <span>Updated on 2023-11-19&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/864b5379c2e604f94a8490d97d9a89926a6175a5" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 864b5379c2e604f94a8490d97d9a89926a6175a5: docs: this in js">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>864b537</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

@@ -4,7 +4,29 @@
 Q. What on earth, `this` is interpretated in js?
 <!--more-->
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,600,600i">
+## TL;DR
+1. **`this`는 동적으로 해석된다.**
+    - 일반적으로 호출하는 주체가 parameter로 전달된다.
+    - 즉 `obj.method(...)`는 `method(this=obj, ...)`로 해석
+2. **`Global context`**
+    - `commonJS`: `this` === `globalThis` (`window` or `global`)
+    - `type="module"`: **`this`는 언제나 `undefined`**
+3. **`Function`**: method로 활용되지 않는 일반적인 함수에서 `this`는 2가지로 해석됩니다.
+    - `use strict`: undefined
+    - `non strict`: globalThis
+4. **`Arrow functions`**: `outer scope`의 `this`를 `reference`하는 변수를 closure로 보존(`lexical scoping`)한다.
+5. **`Callback`**: 일반적으로 this가 전달되지 않아 function과 동일하게 처리되지만, 일부 API (`JSON.parse(text, reviver)`)들은 내부적으로 this를 넣어준다.
+6. **`Constructor` (`new`)**: `new`를 통해 호출되는 constructor는 내부적으로 `this`에 생성될 instance를 할당한다.
+7. **`super`**: 부모의 context가 아닌, super.method()를 호출한 context의 this가 적용된다.
+8. **`Class`**
+    1. static vs instance
+    2. `derived class constructor`에서 super()를 호출하지 않거나, return object하지 않는 이상 this는 생성되지 않는다.
+9. **`EventHandler`**
+    1. 대부분 브라우저는 `addEventListener`의 경우, handler에 현재 element를 this에 bind시켜서 줍니다.
+    2. 인라인 이벤트 핸들러에서도 this에 현재 이벤트 리스닝되는 element가 바인드됩니다.
+        1. `<button onclick="alert(this);">Show this</button>`
+
+
 ## 0. `this` intro
 > [MDN: this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this)
 
@@ -249,13 +271,197 @@ class Child extends Parent {
         super();
         this.name = "child";
     }
-
-    getName() {
-        return super.getName();
-    }
 }
 
 (new Child()).getName() // child
 ```
 
 **즉 위와 같은 경우 Parent의 메서드안에 this는 Parent가 아니라, child의 this를 따릅니다.** 왜냐하면 super.getName을 감싸고 있는 child.getName의 this는 child를 가리키고 있기 때문입니다.
+
+
+## 7. Class
+
+1. static context: `this` = `Class`
+    1. `static method`
+    2. `static field (initializer / block)`
+2. instance context: `this` = `instance`
+    1. `constructor`
+    2. `method`
+    3. `instance field`
+
+```js
+class C {
+    static staticField = this;
+    instanceField = this;
+}
+
+const c = new C();
+console.log(C.staticField === C); // true
+console.log(c.instanceField === c); // true
+```
+
+### Derived class(child) constructor(`extends`)
+
+
+- **`파생 클래스 생성자`**: **파생 클래스(자식 클래스) 생성자는 기본 클래스(부모 클래스) 생성자와 달리 초기에 this 바인딩이 없습니다.** 
+
+```js
+class Base {}
+class Child extends Base {
+    name ="child"
+    
+    constructor() {
+        console.log(this.name)
+    }
+}
+const c = new Child()
+// Uncaught ReferenceError: Must call super constructor in derived class before accessing 'this' or returning from derived constructor
+```
+
+- super()를 호출하면 생성자 내에 this 바인딩이 생성되고, 이것은 사실상 `this = new Base();`라는 코드를 실행하는 것과 같은 효과를 가집니다. 여기서 Base는 기본 클래스를 의미합니다.
+
+- **주의 사항**: `super()`를 호출하기 전에 `this`를 참조하려고 하면 오류가 발생합니다(당연히 this가 없으니), 그러므로 생성자안에서 this를 사용한다면, 그 보다 더 위에 super()가 존재해야 합니다.
+
+```js
+class Base {
+    name = "Base"
+}
+
+class Child extends Base {
+    constructor() {
+        super();
+        console.log(this.name);
+    }
+}
+
+const c = new Child(); // Base
+```
+
+
+- **`super()` 호출 규칙**: 파생 클래스의 constructor는 `super()`를 호출하지 않고 반환해서는 안 됩니다. **단, 생성자가 객체를 반환하여 this 값을 덮어쓰는 경우나 클래스에 생성자가 전혀 없는 경우는 예외입니다.**
+
+```js
+class Good extends Base {
+  constructor() {
+    return { a: 5 };
+  }
+}
+
+class Bad extends Base {
+  constructor() {}
+}
+```
+
+- `JS`의 child class에서 constructor를 명시적으로 작성하지 않으면, 내부적으로 constructor를 생성하고, 이 생성자에서는 super()를 자동으로 호출합니다.
+
+```js
+class AlsoGood extends Base {}
+```
+
+
+## 8. DOM Event Handler
+
+### 8.1. 함수 이벤트 핸들러
+- 대부분의 브라우저에서, 이벤트 핸들러로 사용되는 함수의 `this`는 **리스너가 부착된 DOM 요소에 바인딩 시킵니다.**
+
+```js
+function bluify(e) {
+    "use strict"
+    // 원래라면 undefined이지만, addEventListener는 target을 this로 bind시킨다.
+    this.style.backgroundColor = "#A5D9F3";
+
+    console.log(this === e.currentTarget) // true
+    console.log(this === e.target) // currentTarget과 target이 같은 객체일 때 true
+}
+
+const elements = document.getElementsByTagName("*");
+for (const ele of elements) {
+    ele.addEventListener("click", bluify, false);
+}
+```
+
+### 8.2. 인라인 이벤트 핸들러
+
+- 인라인에서 사용되는 this는 이벤트 리스너가 부착된 element 입니다.
+
+
+```html
+<!-- [object HTMLButtonElement] -->
+<button onclick="alert(this);">Show this</button>
+```
+
+- **하지만, 내부 scope를 추가로 가지게 된다면, global context로 해석됩니다.**
+
+
+```html
+<!-- undefined -->
+<button onclick="alert((function () { 'use strict'; return this; })());">
+```
+
+즉 이는 다른말로, function을 정의해서 인라인에 집어넣더라도 동일하게 global context로 해석된다는 뜻입니다.
+
+```html
+
+<button onclick="print()">
+<script>
+    "use strict";
+    function print() {
+        // undefined
+        alert(this); 
+    }
+</script>
+```
+
+
+지금까지 내용들을 정리하면 아래와 같은 테스트 코드를 작성해볼 수 있습니다.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Event Handler Reference Test</title>
+  </head>
+  <body>
+    <!-- 1. use outside function -->
+    <!-- 1.1. just function: undefined -->
+    <!-- 1.2. addEventListener: [object HTMLButtonElement] -->
+    <button id="btn1" onclick="print()">
+      Show inner this (print Function)
+    </button>
+    
+    <hr />
+
+
+    <!-- 2. [object HTMLButtonElement] -->
+    <button onclick="alert(this);">Show this</button>
+    
+    <hr />
+    
+    <!-- 3. undefined -->
+    <button onclick="alert((function () { 'use strict'; return this; })());">
+      Show inner this (Anonymous Function, Nothing Happen!)
+    </button>
+
+    <script>
+      "use strict";
+      // 1.1. just function
+      function print() {
+        alert(this); // undefined
+      }
+      // 1.2. addEventListener
+      document
+        .getElementById("btn1")
+        .addEventListener("click", printHandler, false);
+      function printHandler(e) {
+        console.log(this); // [object HTMLButtonElement]
+        console.log(this === e.currentTarget); // true
+      }
+    </script>
+  </body>
+</html>
+```
+
+
+
+<center>- 끝 -</center>
+
