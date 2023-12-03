@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/this_in_js/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-19T15:29:46+09:00" />
-<meta property="article:modified_time" content="2023-11-19T21:46:13+09:00" />
+<meta property="article:modified_time" content="2023-11-20T12:38:51+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -20,7 +20,7 @@
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/this_in_js/" /><link rel="prev" href="https://minkj1992.github.io/v8_garbage_collection/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/this_in_js/" /><link rel="prev" href="https://minkj1992.github.io/v8_garbage_collection/" /><link rel="next" href="https://minkj1992.github.io/mlops/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "js, this","wordcount":  1664 ,
-        "url": "https:\/\/minkj1992.github.io\/this_in_js\/","datePublished": "2023-11-19T15:29:46+09:00","dateModified": "2023-11-19T21:46:13+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "js, this","wordcount":  1663 ,
+        "url": "https:\/\/minkj1992.github.io\/this_in_js\/","datePublished": "2023-11-19T15:29:46+09:00","dateModified": "2023-11-20T12:38:51+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,7 +173,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">this, javascript</h1><h2 class="single-subtitle">What is this, categorize all this cases.</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-19">2023-11-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1664 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-19">2023-11-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1663 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -611,7 +611,7 @@
 </div>
 </div><p><strong>2번 케이스를 보면 arrow function의 this값이 변경되는 것처럼 보입니다.</strong>  <code>hi</code> property는 function declaration을 가지고 있으며, function declaration은 <code>dot</code>앞의 주체를 this로 하여 param에 전달되는 것처럼 동작합니다.</p>
 <p>하지만 const hi는 dot앞의 주체가 없기 때문에 strict mode에서는 this가 undefined로 할당되게 됩니다. arrow function은 외부 scope의 function의 this를 reference하고 있기 때문에, 해당 function의 this가 undefined이기 때문에, 마치 변경된 것 처럼 동적으로 변화되어 undefined을 return합니다. <strong>그러므로 arrow function의 this 또한 동적으로 호출 방법에 따라서 변경되는 것처럼 동작가능합니다.</strong></p>
-<p>이런 현상 때문에 위에서 arrow function의 this는 lexical scope의 outer scope의 this를 closure의 this로 reference하고 있다고 표현한 것입니다. 즉 arrow function의 this인 reference는 여전히 변경되지 않았기 때문입니다.</p>
+<p>이런 현상 때문에 위에서 arrow function의 this는 lexical scope의 outer scope의 this를 closure의 this로 reference하고 있다고 표현한 것입니다. arrow function의 this인 reference는 여전히 변경되지 않았기 때문입니다.</p>
 <h2 id="5-constructors-new-operator">5. Constructors (<code>new operator</code>)</h2>
 <ul>
 <li><strong>function이 <code>new</code>를 통해 constructor로 사용되면, js는 내부적으로 constructor 함수 안의 this를 생성되는 instance로 할당합니다</strong></li>
@@ -1014,8 +1014,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-11-19&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/864b5379c2e604f94a8490d97d9a89926a6175a5" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 864b5379c2e604f94a8490d97d9a89926a6175a5: docs: this in js">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>864b537</a></span>
+                <span>Updated on 2023-11-20&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/30d2fe30d687de5e3552d6513bb1e290d0f1b75e" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 30d2fe30d687de5e3552d6513bb1e290d0f1b75e: docs: fin this in js">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>30d2fe3</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
@@ -1034,7 +1034,8 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/v8_garbage_collection/" class="prev" rel="prev" title="JS garbage collection (2018 v8)"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>JS garbage collection (2018 v8)</a></div>
+    <div class="post-nav"><a href="/v8_garbage_collection/" class="prev" rel="prev" title="JS garbage collection (2018 v8)"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>JS garbage collection (2018 v8)</a>
+            <a href="/mlops/" class="next" rel="next" title="MLops pipeline">MLops pipeline<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.

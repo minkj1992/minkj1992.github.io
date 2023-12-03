@@ -5,39 +5,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>JS garbage collection (2018 v8) | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="JS garbage collection (2018 v8)" />
-<meta property="og:description" content="Concurrent marking in V8
-의 내용을 참조해서 v8의 garbage collection의 원리를 정리합니다. 이 GC는 Chrome 64 및 Node.js v10 부터 적용 되어 있습니다." />
+    <title>Openai Rate Limit | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Openai Rate Limit" />
+<meta property="og:description" content="How to manage openai rate limit on production?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://minkj1992.github.io/v8_garbage_collection/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-11-18T21:14:17+09:00" />
-<meta property="article:modified_time" content="2023-11-18T21:49:10+09:00" />
+<meta property="og:url" content="https://minkj1992.github.io/openai_rate_limit/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-03T15:08:29+09:00" />
+<meta property="article:modified_time" content="2023-12-03T15:08:29+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
 
-<meta name="twitter:title" content="JS garbage collection (2018 v8)"/>
-<meta name="twitter:description" content="Concurrent marking in V8
-의 내용을 참조해서 v8의 garbage collection의 원리를 정리합니다. 이 GC는 Chrome 64 및 Node.js v10 부터 적용 되어 있습니다."/>
+<meta name="twitter:title" content="Openai Rate Limit"/>
+<meta name="twitter:description" content="How to manage openai rate limit on production?"/>
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/v8_garbage_collection/" /><link rel="prev" href="https://minkj1992.github.io/core_js/" /><link rel="next" href="https://minkj1992.github.io/this_in_js/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/openai_rate_limit/" /><link rel="prev" href="https://minkj1992.github.io/mlops/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "JS garbage collection (2018 v8)",
+        "headline": "Openai Rate Limit",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/minkj1992.github.io\/v8_garbage_collection\/"
+            "@id": "https:\/\/minkj1992.github.io\/openai_rate_limit\/"
         },"image": [{
                             "@type": "ImageObject",
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "js, gc, v8, node10","wordcount":  410 ,
-        "url": "https:\/\/minkj1992.github.io\/v8_garbage_collection\/","datePublished": "2023-11-18T21:14:17+09:00","dateModified": "2023-11-18T21:49:10+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  337 ,
+        "url": "https:\/\/minkj1992.github.io\/openai_rate_limit\/","datePublished": "2023-12-03T15:08:29+09:00","dateModified": "2023-12-03T15:08:29+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -172,199 +170,195 @@
             <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">JS garbage collection (2018 v8)</h1><h2 class="single-subtitle">최근 js garbage collection</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Openai Rate Limit</h1><h2 class="single-subtitle">How to manage openai rate limit on production?</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-18">2023-11-18</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;410 words&nbsp;
+</span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-12-03">2023-12-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;337 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/v8gc/v8_gc_last.svg"
-        data-srcset="/images/v8gc/v8_gc_last.svg, /images/v8gc/v8_gc_last.svg 1.5x, /images/v8gc/v8_gc_last.svg 2x"
+        data-src="/images/openai_rate_limit.png"
+        data-srcset="/images/openai_rate_limit.png, /images/openai_rate_limit.png 1.5x, /images/openai_rate_limit.png 2x"
         data-sizes="auto"
-        alt="/images/v8gc/v8_gc_last.svg"
-        title="/images/v8gc/v8_gc_last.svg" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/openai_rate_limit.png"
+        title="/images/openai_rate_limit.png" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#heading"></a></li>
-    <li><a href="#기존-gc-in-js-v8">기존 GC in JS (v8)</a>
-      <ul>
-        <li><a href="#incremental-collection">incremental collection</a></li>
-        <li><a href="#idle-time-colleciton">idle-time colleciton</a></li>
-      </ul>
-    </li>
-    <li><a href="#2-새로운-v8-마킹-방법">2. 새로운 v8 마킹 방법</a></li>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#rate-limits">Rate Limits</a></li>
+    <li><a href="#tiers">Tiers</a></li>
+    <li><a href="#rate-limit-headers">Rate Limit Headers</a></li>
+    <li><a href="#todo">TODO;</a></li>
+    <li><a href="#refs">Refs</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p><a href="https://v8.dev/blog/concurrent-marking" target="_blank" rel="noopener noreffer">Concurrent marking in V8</a>
-의 내용을 참조해서 v8의 garbage collection의 원리를 정리합니다. 이 GC는 Chrome 64 및 Node.js v10 부터 적용 되어 있습니다.</p>
-<ul>
-<li>minor gc vs major gc</li>
-<li>concurrent gc 동작 방식</li>
-<li>thread local에 들어가있는 방식</li>
-</ul>
-<h2 id="heading"></h2>
-<ul>
-<li>Minor GC (Scavenge)
-<ul>
-<li>1번 GC이후 살아있는 object은 nursery -&gt; Intermediate로 generation 변경</li>
-<li>2번째 GC이후 Intermediate -&gt; Old space로 이동</li>
-<li>Young generation의 1/2는 언제나 empty (half-empty)해야한다. (To영역) 왜냐하면 살아남은 객체들 evacuation(배설)해야하는 영역이 필요하니까.</li>
-<li>evacuation이후 기존의 reference들은 새로운 영역으로 update이 필요하다.</li>
-</ul>
-</li>
-<li>Major GC</li>
-</ul>
-<h2 id="기존-gc-in-js-v8">기존 GC in JS (v8)</h2>
-<ul>
-<li>
-<p><strong>자바스크립트는 reachability(도달 가능성) 개념으로 메모리 관리를 수행합니다.</strong> 즉 도달 가능한 값은 메모리에서 삭제되지 않습니다.</p>
-</li>
-<li>
-<p>mark-and-sweep, 루트들로 부터 시작해서 reach하는 영역들 마크하고, 마크되지 않은 영역 sweep</p>
-</li>
-<li>
-<p>generational collection, 오래된 객체와 새로운 객체를 나눠서 관리하는 방법</p>
-</li>
-</ul>
-<p>이전 JS의 GC는 주로 메인 스레드에서 동작했습니다. 당연히 marking 알고리즘의 마킹이 진행되는 동안, application은 일시 중지 된 경우에만 동작하기 떄문에 stop-the-world가 발생하게 됩니다.</p>
+            </div><div class="content" id="content"><p>How to manage openai rate limit on production?</p>
+<h2 id="tldr">TL;DR</h2>
+<p>아래는 rate limit을 도식화 해본 그림입니다.</p>
+<center>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/v8gc/v8_gc0.svg"
-        data-srcset="/images/v8gc/v8_gc0.svg, /images/v8gc/v8_gc0.svg 1.5x, /images/v8gc/v8_gc0.svg 2x"
+        data-src="/images/openai_rate_limit_excali.png"
+        data-srcset="/images/openai_rate_limit_excali.png, /images/openai_rate_limit_excali.png 1.5x, /images/openai_rate_limit_excali.png 2x"
         data-sizes="auto"
-        alt="/images/v8gc/v8_gc0.svg"
-        title="/images/v8gc/v8_gc0.svg" /></p>
-<p>마킹 상태는 3가지 상태로 구분되며, 최초 root에서 출발합니다. (grey로 색칠)</p>
+        alt="/images/openai_rate_limit_excali.png"
+        title="/images/openai_rate_limit_excali.png" /></p>
+</center>
+<hr>
+<h2 id="rate-limits">Rate Limits</h2>
+<p>Openai는 rate limit을 통해 organization별로 api access를 관리합니다. 이때 openai의 rate limit은 총 5가지 방법으로 measure됩니다.</p>
 <ol>
-<li>white(00): 초기 상태</li>
-<li>grey(10): gc collector가 발견하여, marking worklist로 push한 상태</li>
-<li>black(11): worklist에서 pop하여 Object의 모든 필드를 visit한 상태</li>
+<li><strong>RPM</strong> (Requests per minute, <code>requests / 1min</code>)</li>
+<li><strong>RPD</strong> (<code>requests / 1day</code>)</li>
+<li><strong>TPM</strong> (<code>tokens / 1min</code>)</li>
+<li><strong>TPD</strong> (<code>tokens / 1day</code>)</li>
+<li><strong>IPM</strong> (<code>images / 1min</code>)</li>
+</ol>
+<p><strong>추가로 5개중 1개만 할당량에 걸려도 rate limit가 발생합니다.</strong></p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/openai_important.png"
+        data-srcset="/images/openai_important.png, /images/openai_important.png 1.5x, /images/openai_important.png 2x"
+        data-sizes="auto"
+        alt="/images/openai_important.png"
+        title="openai important" /></p>
+</center>
+<ol>
+<li><strong>Rate limit은 user가 아닌 organization 기준으로 관리됩니다.</strong></li>
+<li>위의 5가지 quota는 model별로 다르게 관리됩니다.
+<ol>
+<li>예를들어 하나의 API key를 통해 서로 다른 model을 사용할 때, 둘 중 하나의 model이 rate limit에 걸리더라도, 다른 model은 영향을 받지 않습니다.</li>
+<li>물론 이 또한 organization의 max usage limit을 넘어가지 말아야 합니다.</li>
+</ol>
+</li>
 </ol>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/v8gc/v8_gc00.svg"
-        data-srcset="/images/v8gc/v8_gc00.svg, /images/v8gc/v8_gc00.svg 1.5x, /images/v8gc/v8_gc00.svg 2x"
+        data-src="/images/openai_usage_limit.png"
+        data-srcset="/images/openai_usage_limit.png, /images/openai_usage_limit.png 1.5x, /images/openai_usage_limit.png 2x"
         data-sizes="auto"
-        alt="/images/v8gc/v8_gc00.svg"
-        title="/images/v8gc/v8_gc00.svg" /></p>
-<p>더이상 grey object가 없게되면 마킹은 중단되고, 남아있는 white node들은 unreachable로 간주되어 제거됩니다.</p>
-<h3 id="incremental-collection">incremental collection</h3>
-<blockquote>
-<p>가비지 컬렉션의 검사해야 하는 heap을 여러 부분으로 분리한 다음, 각 부분들을 별도로 수행하는 방법.</p>
-</blockquote>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/v8gc/v8_gc1.svg"
-        data-srcset="/images/v8gc/v8_gc1.svg, /images/v8gc/v8_gc1.svg 1.5x, /images/v8gc/v8_gc1.svg 2x"
-        data-sizes="auto"
-        alt="/images/v8gc/v8_gc1.svg"
-        title="/images/v8gc/v8_gc1.svg" /></p>
-<p>Stop-the-World 시간을 줄이기 위해서 v8은 2011년 incremental collection을 도입했습니다. <strong>이를 통해 GC는 더 작은 청크로 분할하고 애플리케이션이 청크 사이에서 실행될 수 있도록 합니다.</strong></p>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/v8gc/v8_gc2.svg"
-        data-srcset="/images/v8gc/v8_gc2.svg, /images/v8gc/v8_gc2.svg 1.5x, /images/v8gc/v8_gc2.svg 2x"
-        data-sizes="auto"
-        alt="/images/v8gc/v8_gc2.svg"
-        title="/images/v8gc/v8_gc2.svg" /></p>
-<p>단, <code>Incremental marking</code>은 공짜로 이뤄지지 않습니다. application은 object graph (heap에서 root 부터 존재하는 instance들의 graph)가 변경될 때마다, GC에 notify해줘야 합니다. v8은 이 notification을 Dijkstra-style의 <code>write-barrier</code>를 통해 구현했습니다.</p>
-<p>아래 코드는 object.field = value와 같은 할당이 일어나게 될 경우, object의 색깔을 grey로 변경시키고, worklist에 다시 push하는 코드를 나타냅니다.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// Called after `object.field = value`.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">write_barrier</span><span class="p">(</span><span class="nx">object</span><span class="p">,</span> <span class="nx">field_offset</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">color</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span> <span class="o">==</span> <span class="nx">black</span> <span class="o">&amp;&amp;</span> <span class="nx">color</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">==</span> <span class="nx">white</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">set_color</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">grey</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">marking_worklist</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><code>write-barrier</code>는 black object는 모든 필드가 검사된 상태이기 때문에, 흰색 entity를 가리키지 않는다는 사실에 근거해 있습니다.</p>
-<h3 id="idle-time-colleciton">idle-time colleciton</h3>
-<blockquote>
-<p>가비지 컬렉터는 실행에 주는 영향을 최소화하기 위해, cpu가 idle 상태일 때만 GC를 실행하는 방법</p>
-</blockquote>
-<p>v8의 incremental collection으로 쪼개진 chunk단위로 gc가 이뤄지는 것은 cpu idle time에 gc가 스케쥴링 되도록 하는 idle-time collection 기법과 매우 효과적으로 작동합니다.</p>
-<h2 id="2-새로운-v8-마킹-방법">2. 새로운 v8 마킹 방법</h2>
-<p>2018년 v8에서는 새로운 접근방식인 <a href="https://v8.dev/blog/concurrent-marking" target="_blank" rel="noopener noreffer">Concurrent marking in V8</a>
-을 발표했습니다. (Chrome 64 및 Node.js v10에 적용)</p>
-<p>이 접근방식은 크게 2가지로 진행됩니다.</p>
-<ol>
-<li>Parallel Marking</li>
-<li>Concurrent Marking</li>
+        alt="/images/openai_usage_limit.png"
+        title="openai usage limit" /></p>
+<ol start="3">
+<li>Openai의 rate limit은 organization level로 관리됩니다.
+<ul>
+<li>이 때문에 하나의 organization에 속해있는 여러 api_key를 사용하더라도 특정 model이 rate limit에 걸리게 되면 다른 api key에서도 에러가 생깁니다.</li>
+<li>이를 방지하기 위해서, <strong>organization을 여러개 생성해서 api_token을 관리하는 방법이 있습니다.</strong></li>
+</ul>
+</li>
 </ol>
-<p><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/images/v8gc/v8_gc3.svg"
-        data-srcset="/images/v8gc/v8_gc3.svg, /images/v8gc/v8_gc3.svg 1.5x, /images/v8gc/v8_gc3.svg 2x"
-        data-sizes="auto"
-        alt="/images/v8gc/v8_gc3.svg"
-        title="/images/v8gc/v8_gc3.svg" /></p>
 <ul>
-<li><code>Parallel Marking</code>은 main thread와 모든 worker thread를 중단 시킨 뒤, parallel하게 mark작업을 진행하는 방식입니다.</li>
+<li>FYI, openai는 하나의 account당 하나의 organization만 만들 수 있습니다.</li>
 </ul>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/v8gc/v8_gc4.svg"
-        data-srcset="/images/v8gc/v8_gc4.svg, /images/v8gc/v8_gc4.svg 1.5x, /images/v8gc/v8_gc4.svg 2x"
+        data-src="/images/openai_orga.png"
+        data-srcset="/images/openai_orga.png, /images/openai_orga.png 1.5x, /images/openai_orga.png 2x"
         data-sizes="auto"
-        alt="/images/v8gc/v8_gc4.svg"
-        title="/images/v8gc/v8_gc4.svg" /></p>
+        alt="/images/openai_orga.png"
+        title="openai organization" /></p>
+<hr>
+<h2 id="tiers">Tiers</h2>
+<p>Rate limit 정책은 앞서 말했듯, organization과 model에 따라 달라집니다.</p>
+<ol>
+<li>Organization (Tier)</li>
+<li>Models (Rate Limit)</li>
+</ol>
+<p>먼저 orgranization은 tier에 따라서 또는 usage limit (bucket per month)설정에 따라서 다른 limit을 가집니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/openai_usage_tier.png"
+        data-srcset="/images/openai_usage_tier.png, /images/openai_usage_tier.png 1.5x, /images/openai_usage_tier.png 2x"
+        data-sizes="auto"
+        alt="/images/openai_usage_tier.png"
+        title="/images/openai_usage_tier.png" /></p>
+<p>마찬가지로 2번째의 model에 따라서도 tier별로 그리고 model별로 다른 rate limit 정책을 따릅니다. 아래는 tier3의 예시입니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/openai_model_rate_limit.png"
+        data-srcset="/images/openai_model_rate_limit.png, /images/openai_model_rate_limit.png 1.5x, /images/openai_model_rate_limit.png 2x"
+        data-sizes="auto"
+        alt="/images/openai_model_rate_limit.png"
+        title="/images/openai_model_rate_limit.png" /></p>
+<p><strong>실제 production에서 rate limit을 관리한다면 현재 tier에 대한 RPM, RPD들을 티어별로 저장해야 할 것 같습니다.</strong></p>
+<hr>
+<h2 id="rate-limit-headers">Rate Limit Headers</h2>
+<p>개발에서 현재 Rate limit을 확인하는 방법은 HTTP 요청을 통해 받은 response의 header를 통해서만 확인 가능합니다. (물론 UI를 통해서도 가능)</p>
+<p><del>세계적인 기업에서 token, model별로 현재 rate limit metric을 알려주는 api endpoint가 하나도 없다는게 충격적입니다.</del></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/openai_limit_header.png"
+        data-srcset="/images/openai_limit_header.png, /images/openai_limit_header.png 1.5x, /images/openai_limit_header.png 2x"
+        data-sizes="auto"
+        alt="/images/openai_limit_header.png"
+        title="/images/openai_limit_header.png" /></p>
+<ol>
+<li><code>x-ratelimit-limit-requests</code>: 남은 최대 요청 수</li>
+<li><code>x-ratelimit-limit-tokens</code>: 남은 최대 토큰 수</li>
+<li><code>x-ratelimit-remaining-requests</code>: 남은 허용 요청 수</li>
+<li><code>x-ratelimit-remaining-tokens</code>: 남은 허용 요청 수</li>
+<li><code>x-ratelimit-reset-requests</code>: request rate limit이 초기화 되기 까지 남은 시간</li>
+<li><code>x-ratelimit-reset-tokens</code>: token rate limit이 초기화 되기 까지 남은 시간</li>
+</ol>
+<p>사실 <code>remaing</code>과 <code>limit</code>의 차이점은 현재 진행하고 있는 request를 포함시키는지 여부입니다.</p>
+<p>즉 만약 <code>x-ratelimit-limit-requests</code>가 60이고 <code>x-ratelimit-remaining-requests</code>가 59라면, 후자는 현재 진행되고 있는 request를 포함시켰기 때문에 1차이가 나는 것 같습니다.</p>
+<h2 id="todo">TODO;</h2>
+<p>production managing architecture.</p>
 <ul>
-<li><code>Concurrent Marking</code>은 마킹을 주로 worker thread에 위임하고 marking이 되더라도, main thread에서는 application을 지속적으로 실행하는 방식입니다.</li>
+<li>source codes
+<ul>
+<li><a href="https://github.com/openai/openai-cookbook/blob/297c53430cad2d05ba763ab9dca64309cb5091e9/examples/How_to_handle_rate_limits.ipynb" target="_blank" rel="noopener noreffer">How to handle rate limits.ipynb</a>
+</li>
+<li><a href="https://github.com/openai/openai-cookbook/blob/297c53430cad2d05ba763ab9dca64309cb5091e9/examples/api_request_parallel_processor.py" target="_blank" rel="noopener noreffer">openai/api_requests_parallel_preprocessor.py</a>
+</li>
 </ul>
-<p>@TODO CONTINUE</p>
+</li>
+</ul>
+<h2 id="refs">Refs</h2>
 <ul>
-<li><a href="https://v8.dev/blog/concurrent-marking#parallel-marking" target="_blank" rel="noopener noreffer">https://v8.dev/blog/concurrent-marking#parallel-marking</a>
+<li><a href="https://platform.openai.com/docs/guides/rate-limits?context=tier-free" target="_blank" rel="noopener noreffer">Rate limit advice openai</a>
+</li>
+<li><a href="https://community.openai.com/t/rate-limiting-strategies/7128/3" target="_blank" rel="noopener noreffer">Q&amp;A openai rate limit strategy</a>
+</li>
+<li><a href="https://platform.openai.com/account/limits" target="_blank" rel="noopener noreffer">openai docs</a>
 </li>
 </ul></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2023-11-18&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/2f519b5a3a1c1dde6be51d044129c275253e14d4" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 2f519b5a3a1c1dde6be51d044129c275253e14d4: docs: v8 parallel &amp; concurrent garbage collection part1">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>2f519b5</a></span>
+                <span>Updated on 2023-12-03</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/v8_garbage_collection/index.md" target="_blank">Read Markdown</a>
+                            <a class="link-to-markdown" href="/openai_rate_limit/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/v8_garbage_collection/" data-title="JS garbage collection (2018 v8)" data-hashtags="js,gc,v8,node10"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/v8_garbage_collection/" data-hashtag="js"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/v8_garbage_collection/" data-title="JS garbage collection (2018 v8)"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/v8_garbage_collection/" data-title="JS garbage collection (2018 v8)"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/v8_garbage_collection/" data-title="JS garbage collection (2018 v8)" data-image="/images/v8gc/v8_gc_last.svg"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/openai_rate_limit/" data-title="Openai Rate Limit" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/openai_rate_limit/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/openai_rate_limit/" data-title="Openai Rate Limit"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/openai_rate_limit/" data-title="Openai Rate Limit"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/openai_rate_limit/" data-title="Openai Rate Limit" data-image="/images/openai_rate_limit.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/js/">js</a>,&nbsp;<a href="/tags/gc/">gc</a>,&nbsp;<a href="/tags/v8/">v8</a>,&nbsp;<a href="/tags/node10/">node10</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/core_js/" class="prev" rel="prev" title="Core Javscript"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Core Javscript</a>
-            <a href="/this_in_js/" class="next" rel="next" title="this, javascript">this, javascript<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/mlops/" class="prev" rel="prev" title="MLops pipeline"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>MLops pipeline</a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.

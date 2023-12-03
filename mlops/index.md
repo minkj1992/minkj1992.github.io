@@ -1,9 +1,11 @@
-# All about mlops
+# MLops pipeline
 
 
 > [MLOps for ALL](https://mlops-for-all.github.io/en/docs/introduction/intro)
 
 # 1. Introduction
+
+fdlkajfdlks
 
 ## What is MLOps?
 

@@ -231,7 +231,7 @@ hi() // undefined (use strict)
 
 하지만 const hi는 dot앞의 주체가 없기 때문에 strict mode에서는 this가 undefined로 할당되게 됩니다. arrow function은 외부 scope의 function의 this를 reference하고 있기 때문에, 해당 function의 this가 undefined이기 때문에, 마치 변경된 것 처럼 동적으로 변화되어 undefined을 return합니다. **그러므로 arrow function의 this 또한 동적으로 호출 방법에 따라서 변경되는 것처럼 동작가능합니다.**
 
-이런 현상 때문에 위에서 arrow function의 this는 lexical scope의 outer scope의 this를 closure의 this로 reference하고 있다고 표현한 것입니다. 즉 arrow function의 this인 reference는 여전히 변경되지 않았기 때문입니다.
+이런 현상 때문에 위에서 arrow function의 this는 lexical scope의 outer scope의 this를 closure의 this로 reference하고 있다고 표현한 것입니다. arrow function의 this인 reference는 여전히 변경되지 않았기 때문입니다.
 
 
 

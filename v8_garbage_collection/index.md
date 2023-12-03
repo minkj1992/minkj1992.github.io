@@ -4,6 +4,20 @@
 [Concurrent marking in V8](https://v8.dev/blog/concurrent-marking)의 내용을 참조해서 v8의 garbage collection의 원리를 정리합니다. 이 GC는 Chrome 64 및 Node.js v10 부터 적용 되어 있습니다.
 <!--more-->
 
+- minor gc vs major gc
+- concurrent gc 동작 방식
+- thread local에 들어가있는 방식
+
+## 
+
+- Minor GC (Scavenge)
+  - 1번 GC이후 살아있는 object은 nursery -> Intermediate로 generation 변경
+  - 2번째 GC이후 Intermediate -> Old space로 이동
+  - Young generation의 1/2는 언제나 empty (half-empty)해야한다. (To영역) 왜냐하면 살아남은 객체들 evacuation(배설)해야하는 영역이 필요하니까.
+  - evacuation이후 기존의 reference들은 새로운 영역으로 update이 필요하다.
+- Major GC 
+
+
 ## 기존 GC in JS (v8)
 
 - **자바스크립트는 reachability(도달 가능성) 개념으로 메모리 관리를 수행합니다.** 즉 도달 가능한 값은 메모리에서 삭제되지 않습니다.
@@ -75,6 +89,7 @@ v8의 incremental collection으로 쪼개진 chunk단위로 gc가 이뤄지는 �
 ![](/images/v8gc/v8_gc4.svg)
 
 - `Concurrent Marking`은 마킹을 주로 worker thread에 위임하고 marking이 되더라도, main thread에서는 application을 지속적으로 실행하는 방식입니다.
+
 
 
 
