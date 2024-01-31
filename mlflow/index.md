@@ -164,3 +164,8 @@ Mlflow 코드를 분석하기 위해서는, 실제 UI상에서 experiment들이 
 대략 mlflow를 local에서 실행해보고 났으니, 구체적으로 mlflow의 구성요소들을 정리해 보겠습니다.
 
 - [Getting Started with Mlflow](https://mlflow.org/docs/latest/getting-started/index.html)
+
+
+![](/images/tracking-basics.png)
+
+
