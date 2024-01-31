@@ -4,7 +4,7 @@
 Let's analize mlflow source code
 <!--more-->
 
-## Initialize
+## 1. Initialize
 
 1. [mlflow/__init__.py](https://github.com/mlflow/mlflow/blob/master/mlflow/__init__.py)
 2. [LazyLoader](https://github.com/mlflow/mlflow/blob/master/mlflow/utils/lazy_load.py#L8)
@@ -73,4 +73,82 @@ class LazyLoader(types.ModuleType):
 **문득 코드를 읽다, self._module를 저장하는 이유가 궁금해서 (내가 생각할 때는 불필요한 것 같은데) discussion을 남겨두었다.**
 
 - [MLFLOW: Question on LazyLoader Implementation](https://github.com/mlflow/mlflow/discussions/10962)
+
+
+## 2. Run
+
+- [mlflow/__main__.py](https://github.com/mlflow/mlflow/blob/master/mlflow/__main__.py)
+- [mlflow/cli.py](https://github.com/mlflow/mlflow/blob/master/mlflow/cli.py)
+
+init 이후, `__main__.py`을 통해서 호출된 cli 모듈을 통해서 명령어에 대한 처리가 시작됩니다. cli.py에서는 크게 4가지의 명령어가 존재하며, 다음과 같습니다.
+
+1. `run()`: Run an MLflow project from the given URI.
+2. `server()`: Run the MLflow tracking server.
+3. `gc()`: Permanently delete runs in the `deleted` lifecycle stage.
+4. `doctor()`: Prints out useful information for debugging issues with MLflow.
+
+기능 적인 측면에서 보면 크게 run, server 2가지만 파악하면 될 것같습니다.
+이외에도 import를 통해서 나머지 명령어들을 불러옵니다. 최종적인 mlflow의 cli는 아래와 같습니다.
+
+- load additional cli
+```py
+
+cli.add_command(mlflow.deployments.cli.commands)
+cli.add_command(mlflow.experiments.commands)
+cli.add_command(mlflow.store.artifact.cli.commands)
+cli.add_command(mlflow.runs.commands)
+cli.add_command(mlflow.db.commands)
+
+# We are conditional loading these commands since the skinny client does
+# not support them due to the pandas and numpy dependencies of MLflow Models
+try:
+    import mlflow.models.cli
+
+    cli.add_command(mlflow.models.cli.commands)
+except ImportError:
+    pass
+
+try:
+    import mlflow.recipes.cli
+
+    cli.add_command(mlflow.recipes.cli.commands)
+except ImportError:
+    pass
+
+try:
+    import mlflow.sagemaker.cli
+
+    cli.add_command(mlflow.sagemaker.cli.commands)
+except ImportError:
+    pass
+
+
+with contextlib.suppress(ImportError):
+    import mlflow.gateway.cli
+
+    cli.add_command(mlflow.gateway.cli.commands)
+
+```
+
+- FYI, suppress는 에러 ignore를 한줄로 사용하기 위해 사용됩니다.
+
+```sh
+> mlflow --help
+
+Commands:
+  artifacts    Upload, list, and download artifacts from an MLflow...
+  db           Commands for managing an MLflow tracking database.
+  deployments  Deploy MLflow models to custom targets.
+  doctor       Prints out useful information for debugging issues with MLflow.
+  experiments  Manage experiments.
+  gc           Permanently delete runs in the `deleted` lifecycle stage.
+  models       Deploy MLflow models locally.
+  recipes      Run MLflow Recipes and inspect recipe results.
+  run          Run an MLflow project from the given URI.
+  runs         Manage runs.
+  sagemaker    Serve models on SageMaker.
+  server       Run the MLflow tracking server.
+```
+
+
 
