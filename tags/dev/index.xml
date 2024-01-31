@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 03 Dec 2023 15:08:29 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 31 Jan 2024 19:06:42 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>MLflow code analysis</title>
+    <link>https://minkj1992.github.io/mlflow/</link>
+    <pubDate>Wed, 31 Jan 2024 19:06:42 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/mlflow/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/mlflow.png" referrerpolicy="no-referrer">
+            </div><p>Let&rsquo;s analize mlflow source code</p>]]></description>
+</item>
+<item>
     <title>Openai Rate Limit</title>
     <link>https://minkj1992.github.io/openai_rate_limit/</link>
     <pubDate>Sun, 03 Dec 2023 15:08:29 &#43;0900</pubDate>
@@ -98,16 +108,6 @@ What is MLOps?  Continuous Tranning pipeline Model CI / CD  Levels of MLOps 0단
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/databricks.jpeg" referrerpolicy="no-referrer">
             </div>How to build Large Language Model based application for production ready.]]></description>
-</item>
-<item>
-    <title>Elderjs</title>
-    <link>https://minkj1992.github.io/elderjs/</link>
-    <pubDate>Wed, 26 Jul 2023 19:29:12 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/elderjs/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/elderjs.png" referrerpolicy="no-referrer">
-            </div><p><code>Elder.js</code>: an SEO first Svelte Framework &amp; Static Site Generator</p>]]></description>
 </item>
 </channel>
 </rss>

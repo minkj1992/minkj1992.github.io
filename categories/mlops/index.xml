@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/categories/mlops/</link>
         <description>mlops - Category - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 27 Nov 2023 14:07:21 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/mlops/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 31 Jan 2024 19:06:42 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/mlops/" rel="self" type="application/rss+xml" /><item>
+    <title>MLflow code analysis</title>
+    <link>https://minkj1992.github.io/mlflow/</link>
+    <pubDate>Wed, 31 Jan 2024 19:06:42 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/mlflow/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/mlflow.png" referrerpolicy="no-referrer">
+            </div><p>Let&rsquo;s analize mlflow source code</p>]]></description>
+</item>
+<item>
     <title>MLops pipeline</title>
     <link>https://minkj1992.github.io/mlops/</link>
     <pubDate>Mon, 27 Nov 2023 14:07:21 &#43;0900</pubDate>
