@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/mlflow/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-31T19:06:42+09:00" />
-<meta property="article:modified_time" content="2024-01-31T21:44:24+09:00" />
+<meta property="article:modified_time" content="2024-02-01T11:04:32+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  793 ,
-        "url": "https:\/\/minkj1992.github.io\/mlflow\/","datePublished": "2024-01-31T19:06:42+09:00","dateModified": "2024-01-31T21:44:24+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  1044 ,
+        "url": "https:\/\/minkj1992.github.io\/mlflow\/","datePublished": "2024-01-31T19:06:42+09:00","dateModified": "2024-02-01T11:04:32+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">MLflow code analysis</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/mlflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mlflow</a>&nbsp;<a href="/categories/mlops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mlops</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-31">2024-01-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;793 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-31">2024-01-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1044 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -201,6 +201,7 @@
         <li><a href="#mlflow-tracking">MLflow Tracking</a>
           <ul>
             <li><a href="#tracking-components">Tracking Components</a></li>
+            <li><a href="#deployment">Deployment</a></li>
           </ul>
         </li>
       </ul>
@@ -548,12 +549,103 @@
         data-srcset="/images/tracking-setup-overview.png, /images/tracking-setup-overview.png 1.5x, /images/tracking-setup-overview.png 2x"
         data-sizes="auto"
         alt="/images/tracking-setup-overview.png"
-        title="/images/tracking-setup-overview.png" /></p></div><div class="post-footer" id="post-footer">
+        title="/images/tracking-setup-overview.png" /></p>
+<p>Deployment 코드를 보다가 아래와 같은 패턴을 발견습니다. 이렇게 데코레이터에서 원본으로 wraps을 하는 이유는</p>
+<ol>
+<li><code>__name__</code>, <code>__module__</code> 함수 이름/모듈 보존: 로깅 / 디버깅 시 wrapper func가 원본 함수 이름을 물려 받을 수있음</li>
+<li><code>__doc__</code> repr 보존: 원본 함수의 주석이 그대로 보존 될 수 있어, wrapper가 되더라도 주석을 wrapper에 쓰는 것이 아니라, 실제 기능하는 코드에 주석을 넣어둘 수 있습니다.</li>
+</ol>
+<p>오픈소스에서 <code>@functools.wraps(fn)</code>를 쓰는 이유는 딱 위의 2가지 이유 정도 있을 것 같습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="nd">@cache_return_value_per_process</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_or_create_nfs_tmp_dir</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Get or create a temporary NFS directory which will be removed once python process exit.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">from</span> <span class="nn">mlflow.utils.databricks_utils</span> <span class="kn">import</span> <span class="n">get_repl_id</span><span class="p">,</span> <span class="n">is_in_databricks_runtime</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">from</span> <span class="nn">mlflow.utils.nfs_on_spark</span> <span class="kn">import</span> <span class="n">get_nfs_cache_root_dir</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">nfs_root_dir</span> <span class="o">=</span> <span class="n">get_nfs_cache_root_dir</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">cache_return_value_per_process</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    A decorator which globally caches the return value of the decorated function.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    But if current process forked out a new child process, in child process,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    old cache values are invalidated.
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Restrictions: The decorated function must be called with only positional arguments,
+</span></span></span><span class="line"><span class="cl"><span class="s2">    and all the argument values must be hashable.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">wrapped_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;The function decorated by `cache_return_value_per_process` is not allowed to be &#34;</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;called with key-word style arguments.&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="ow">in</span> <span class="n">_per_process_value_cache_map</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">prev_value</span><span class="p">,</span> <span class="n">prev_pid</span> <span class="o">=</span> <span class="n">_per_process_value_cache_map</span><span class="o">.</span><span class="n">get</span><span class="p">((</span><span class="n">fn</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span> <span class="o">==</span> <span class="n">prev_pid</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">prev_value</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">new_value</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_pid</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getpid</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_per_process_value_cache_map</span><span class="p">[(</span><span class="n">fn</span><span class="p">,</span> <span class="n">args</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_value</span><span class="p">,</span> <span class="n">new_pid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">new_value</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">wrapped_fn</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="deployment">Deployment</h4></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-01-31&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/6f2f5b7593495f67ea15e0669bf1a161d95af5bc" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 6f2f5b7593495f67ea15e0669bf1a161d95af5bc: docs: mlflow">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>6f2f5b7</a></span>
+                <span>Updated on 2024-02-01&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/1faa3dfb9dafad821a04c962442750677436886a" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 1faa3dfb9dafad821a04c962442750677436886a: docs: mlflow">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>1faa3df</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

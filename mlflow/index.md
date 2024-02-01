@@ -204,4 +204,57 @@ mlflow server --host 127.0.0.1 --port 50
 ![](/images/tracking-setup-overview.png)
 
 
+Deployment 코드를 보다가 아래와 같은 패턴을 발견습니다. 이렇게 데코레이터에서 원본으로 wraps을 하는 이유는
+
+1. `__name__`, `__module__` 함수 이름/모듈 보존: 로깅 / 디버깅 시 wrapper func가 원본 함수 이름을 물려 받을 수있음
+2. `__doc__` repr 보존: 원본 함수의 주석이 그대로 보존 될 수 있어, wrapper가 되더라도 주석을 wrapper에 쓰는 것이 아니라, 실제 기능하는 코드에 주석을 넣어둘 수 있습니다.
+
+오픈소스에서 `@functools.wraps(fn)`를 쓰는 이유는 딱 위의 2가지 이유 정도 있을 것 같습니다.
+
+
+```py
+@cache_return_value_per_process
+def get_or_create_nfs_tmp_dir():
+    """
+    Get or create a temporary NFS directory which will be removed once python process exit.
+    """
+    from mlflow.utils.databricks_utils import get_repl_id, is_in_databricks_runtime
+    from mlflow.utils.nfs_on_spark import get_nfs_cache_root_dir
+
+    nfs_root_dir = get_nfs_cache_root_dir()
+    ...
+
+def cache_return_value_per_process(fn):
+    """
+    A decorator which globally caches the return value of the decorated function.
+    But if current process forked out a new child process, in child process,
+    old cache values are invalidated.
+
+    Restrictions: The decorated function must be called with only positional arguments,
+    and all the argument values must be hashable.
+    """
+
+    @functools.wraps(fn)
+    def wrapped_fn(*args, **kwargs):
+        if len(kwargs) > 0:
+            raise ValueError(
+                "The function decorated by `cache_return_value_per_process` is not allowed to be "
+                "called with key-word style arguments."
+            )
+        if (fn, args) in _per_process_value_cache_map:
+            prev_value, prev_pid = _per_process_value_cache_map.get((fn, args))
+            if os.getpid() == prev_pid:
+                return prev_value
+
+        new_value = fn(*args)
+        new_pid = os.getpid()
+        _per_process_value_cache_map[(fn, args)] = (new_value, new_pid)
+        return new_value
+
+    return wrapped_fn
+```
+
+
+#### Deployment
+
 
