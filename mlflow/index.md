@@ -163,9 +163,45 @@ Mlflow 코드를 분석하기 위해서는, 실제 UI상에서 experiment들이 
 
 대략 mlflow를 local에서 실행해보고 났으니, 구체적으로 mlflow의 구성요소들을 정리해 보겠습니다.
 
-- [Getting Started with Mlflow](https://mlflow.org/docs/latest/getting-started/index.html)
-
+- [x] [Getting Started with Mlflow](https://mlflow.org/docs/latest/getting-started/index.html)
+    - [x] [MLflow Tracking Quickstart](https://mlflow.org/docs/latest/getting-started/intro-quickstart/index.html)
 
 ![](/images/tracking-basics.png)
+
+
+## 3. Concepts
+
+- [Tracking Concepts](https://mlflow.org/docs/latest/tracking.html#concepts)
+
+### MLflow Tracking
+
+- `Runs`: Executions of some piece of code
+    - Each run records metrics, parameter, start ~ end times, artifacts(model weights, images, etc)
+- `Experiments`: Group of runs, for a specific task
+
+```bash
+# UI browser
+mlflow ui --port 5000
+
+# mlflow server
+mlflow server --host 127.0.0.1 --port 50
+```
+
+#### Tracking Components
+
+- Tracking APIs: Tracking Server와 interact할 수 있는 인터페이스
+    - 내 생각에는 이게, python, REST등의 client형식으로 관리 될 것 같다.(auth가 필요하니)
+- Backend Store: metadata for each Run (i.g. run ID, metrics ..)
+    - Default `/mlruns/**` (file based) 
+    - Databaed-based (db ...)
+- Artifact Store: 
+    - input data files, model weight, images 따위
+    - svn과 연동한다면 Artifact에서 작업이 되어야 할 것.
+    - Parquet, S3 등으로 대체 가능
+- Tracking Server
+    - standalone HTTP server that provides REST API for accessing backend/artifact store.
+
+![](/images/tracking-setup-overview.png)
+
 
 

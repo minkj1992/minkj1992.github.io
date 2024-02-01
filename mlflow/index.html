@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/mlflow/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-31T19:06:42+09:00" />
-<meta property="article:modified_time" content="2024-01-31T21:24:53+09:00" />
+<meta property="article:modified_time" content="2024-01-31T21:44:24+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  662 ,
-        "url": "https:\/\/minkj1992.github.io\/mlflow\/","datePublished": "2024-01-31T19:06:42+09:00","dateModified": "2024-01-31T21:24:53+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  793 ,
+        "url": "https:\/\/minkj1992.github.io\/mlflow\/","datePublished": "2024-01-31T19:06:42+09:00","dateModified": "2024-01-31T21:44:24+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,7 +173,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">MLflow code analysis</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/mlflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mlflow</a>&nbsp;<a href="/categories/mlops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mlops</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-31">2024-01-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;662 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-31">2024-01-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;793 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -194,6 +194,15 @@
       <ul>
         <li><a href="#22-start-a-local-mlflow-server">2.2. Start a Local Mlflow Server</a></li>
         <li><a href="#23-getting-started-with-mlflow">2.3. Getting Started with MLflow</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-concepts">3. Concepts</a>
+      <ul>
+        <li><a href="#mlflow-tracking">MLflow Tracking</a>
+          <ul>
+            <li><a href="#tracking-components">Tracking Components</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -460,7 +469,12 @@
 <h3 id="23-getting-started-with-mlflow">2.3. Getting Started with MLflow</h3>
 <p>대략 mlflow를 local에서 실행해보고 났으니, 구체적으로 mlflow의 구성요소들을 정리해 보겠습니다.</p>
 <ul>
-<li><a href="https://mlflow.org/docs/latest/getting-started/index.html" target="_blank" rel="noopener noreffer">Getting Started with Mlflow</a>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://mlflow.org/docs/latest/getting-started/index.html" target="_blank" rel="noopener noreffer">Getting Started with Mlflow</a>
+
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://mlflow.org/docs/latest/getting-started/intro-quickstart/index.html" target="_blank" rel="noopener noreffer">MLflow Tracking Quickstart</a>
+</li>
+</ul>
 </li>
 </ul>
 <p><img
@@ -470,12 +484,76 @@
         data-srcset="/images/tracking-basics.png, /images/tracking-basics.png 1.5x, /images/tracking-basics.png 2x"
         data-sizes="auto"
         alt="/images/tracking-basics.png"
-        title="/images/tracking-basics.png" /></p></div><div class="post-footer" id="post-footer">
+        title="/images/tracking-basics.png" /></p>
+<h2 id="3-concepts">3. Concepts</h2>
+<ul>
+<li><a href="https://mlflow.org/docs/latest/tracking.html#concepts" target="_blank" rel="noopener noreffer">Tracking Concepts</a>
+</li>
+</ul>
+<h3 id="mlflow-tracking">MLflow Tracking</h3>
+<ul>
+<li><code>Runs</code>: Executions of some piece of code
+<ul>
+<li>Each run records metrics, parameter, start ~ end times, artifacts(model weights, images, etc)</li>
+</ul>
+</li>
+<li><code>Experiments</code>: Group of runs, for a specific task</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># UI browser</span>
+</span></span><span class="line"><span class="cl">mlflow ui --port <span class="m">5000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># mlflow server</span>
+</span></span><span class="line"><span class="cl">mlflow server --host 127.0.0.1 --port <span class="m">50</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="tracking-components">Tracking Components</h4>
+<ul>
+<li>Tracking APIs: Tracking Server와 interact할 수 있는 인터페이스
+<ul>
+<li>내 생각에는 이게, python, REST등의 client형식으로 관리 될 것 같다.(auth가 필요하니)</li>
+</ul>
+</li>
+<li>Backend Store: metadata for each Run (i.g. run ID, metrics ..)
+<ul>
+<li>Default <code>/mlruns/**</code> (file based)</li>
+<li>Databaed-based (db &hellip;)</li>
+</ul>
+</li>
+<li>Artifact Store:
+<ul>
+<li>input data files, model weight, images 따위</li>
+<li>svn과 연동한다면 Artifact에서 작업이 되어야 할 것.</li>
+<li>Parquet, S3 등으로 대체 가능</li>
+</ul>
+</li>
+<li>Tracking Server
+<ul>
+<li>standalone HTTP server that provides REST API for accessing backend/artifact store.</li>
+</ul>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/tracking-setup-overview.png"
+        data-srcset="/images/tracking-setup-overview.png, /images/tracking-setup-overview.png 1.5x, /images/tracking-setup-overview.png 2x"
+        data-sizes="auto"
+        alt="/images/tracking-setup-overview.png"
+        title="/images/tracking-setup-overview.png" /></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-01-31&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/d1f03f36ccc37174ee5de06a60c07049ca9e7d5f" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) d1f03f36ccc37174ee5de06a60c07049ca9e7d5f: docs: mlflow">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d1f03f3</a></span>
+                <span>Updated on 2024-01-31&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/6f2f5b7593495f67ea15e0669bf1a161d95af5bc" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 6f2f5b7593495f67ea15e0669bf1a161d95af5bc: docs: mlflow">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>6f2f5b7</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
