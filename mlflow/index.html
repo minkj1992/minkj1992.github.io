@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/mlflow/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-31T19:06:42+09:00" />
-<meta property="article:modified_time" content="2024-02-01T11:04:32+09:00" />
+<meta property="article:modified_time" content="2024-02-01T12:45:45+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  1044 ,
-        "url": "https:\/\/minkj1992.github.io\/mlflow\/","datePublished": "2024-01-31T19:06:42+09:00","dateModified": "2024-02-01T11:04:32+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  1311 ,
+        "url": "https:\/\/minkj1992.github.io\/mlflow\/","datePublished": "2024-01-31T19:06:42+09:00","dateModified": "2024-02-01T12:45:45+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">MLflow code analysis</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/mlflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mlflow</a>&nbsp;<a href="/categories/mlops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mlops</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-31">2024-01-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1044 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-31">2024-01-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1311 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -198,10 +198,14 @@
     </li>
     <li><a href="#3-concepts">3. Concepts</a>
       <ul>
-        <li><a href="#mlflow-tracking">MLflow Tracking</a>
+        <li><a href="#31-mlflow-tracking">3.1. MLflow Tracking</a>
           <ul>
             <li><a href="#tracking-components">Tracking Components</a></li>
-            <li><a href="#deployment">Deployment</a></li>
+          </ul>
+        </li>
+        <li><a href="#32-mlflow-projects">3.2. Mlflow Projects</a>
+          <ul>
+            <li><a href="#mlflow-project-virtualenv">MLflow Project (<code>Virtualenv</code>)</a></li>
           </ul>
         </li>
       </ul>
@@ -491,7 +495,7 @@
 <li><a href="https://mlflow.org/docs/latest/tracking.html#concepts" target="_blank" rel="noopener noreffer">Tracking Concepts</a>
 </li>
 </ul>
-<h3 id="mlflow-tracking">MLflow Tracking</h3>
+<h3 id="31-mlflow-tracking">3.1. MLflow Tracking</h3>
 <ul>
 <li><code>Runs</code>: Executions of some piece of code
 <ul>
@@ -640,12 +644,105 @@
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">wrapped_fn</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="deployment">Deployment</h4></div><div class="post-footer" id="post-footer">
+</div><h3 id="32-mlflow-projects">3.2. Mlflow Projects</h3>
+<blockquote>
+<p><a href="https://mlflow.org/docs/latest/projects.html" target="_blank" rel="noopener noreffer">https://mlflow.org/docs/latest/projects.html</a>
+</p>
+</blockquote>
+<p>Mlflow Project란 소스 코드를 재사용 가능하게 패키징화 시킨 컴포넌트입니다.</p>
+<ul>
+<li>API, CLI entrypoint를 가지고 있습니다.</li>
+<li>chainning으로 multi-step workflows에 추가시킬 수 있습니다.</li>
+<li>Conda env나 MLproject (yaml file)를 통해서 properties들을 추가할 수 있습니다.</li>
+</ul>
+<p><strong>Project는 Git URI 또는 local directory에서 <code>mlflow run</code> command를 사용해서 실행 가능합니다. 코드 상에서는 <code>mlflow.projects.run()</code>을 통해 python api로 실행가능합니다.</strong> 이 api는 k8s나 databricks 환경에서 remote로 실행 가능합니다.</p>
+<p>Project가 실행되는 환경을 구성하기 위해서는 아래 4가지 구성이 옵션들이 가능합니다.</p>
+<ol>
+<li>Virtualenv (preferred)</li>
+<li>Docker container</li>
+<li>Conda</li>
+<li>System environment</li>
+</ol>
+<p>여기에서는 Viertualenv 세팅 위주로 살펴보겠습니다.</p>
+<h4 id="mlflow-project-virtualenv">MLflow Project (<code>Virtualenv</code>)</h4>
+<p>이 세팅을 구성한다면, mlflow는 pyenv를 활용해 isolated environment를 만들고, virtualenv를 통해 dependencies들을 포함시킵니다. 또한 mlflow 코드를 실행시키기 전에(prior to running the project code), 이 isolated env를 activate 시킵니다.</p>
+<p>이 세팅을 활용하기 위해서는 2개의 파일 세팅이 필요합니다.</p>
+<ul>
+<li><code>MLproject</code>: 시작 지점</li>
+<li><code>python_env.yaml</code>: virtualenv environment description</li>
+</ul>
+<p><strong>MLProject example</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">name: llm_summarization
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">python_env: python_env.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">entry_points:
+</span></span><span class="line"><span class="cl">  main:
+</span></span><span class="line"><span class="cl">    command: python summarization.py
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>python_env example</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">python</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.10&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">build_dependencies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">pip</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">dependencies</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">langchain&gt;=0.0.244</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">openai&gt;=0.27.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">evaluate&gt;=0.4.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">mlflow&gt;=2.4.0</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이후 project를 실행하기 위해서는, MLproject 파일이 있는 디렉토리에서 아래 코들르 사용하면 됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&gt; mlflow run .
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게 명령어를 작성하게 되면 cli상에서 mlflow는 projects 패키지를 호출하며, 실제 코드에서는 아래 부분이 호출 됩니다.</p>
+<script src="https://gist.github.com/minkj1992/efbd5b3d78367829167c37dbe4460379.js"></script>
+<ul>
+<li><strong>load_project</strong>에서 python_env.yaml을 읽어, Project 객체를 생성합니다.</li>
+<li>Project는 Entrypoint와 Parameter를 init하고 이를 통해 source code 파일들을 link 또는 remote의 경우 storage_dir로 download합니다.</li>
+<li>이후 projects.run을 통해 아래 코드가 호출되어 local 또는 databricks 같은 remote에 존재하는 코드들을 실행합니다. <a href="https://github.com/mlflow/mlflow/blob/bf141c74ffb816e4bfce54177eef704c25849d0b/mlflow/projects/__init__.py#L103-L120" target="_blank" rel="noopener noreffer">code</a>
+</li>
+<li>이후 projects.backend.local.py의 run이 호출되어 새로운 process가 동작합니다. <a href="https://github.com/mlflow/mlflow/blob/bf141c74ffb816e4bfce54177eef704c25849d0b/mlflow/projects/backend/local.py#L70" target="_blank" rel="noopener noreffer">코드</a>
+</li>
+</ul>
+<blockquote>
+<p>mlflow project를 실행해보다가, examples/llms/summarization을 실행해보는데, dep 에러가 발생해서 contribute했다. langchain이 워낙 빠르게 변화하는 open source다 보니까, dependency 관리가 쉽지 않나 보다. <a href="https://github.com/mlflow/mlflow/pull/10989" target="_blank" rel="noopener noreffer">FIx llm example tiktoken dependency error #10989</a>
+</p>
+</blockquote></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-02-01&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/1faa3dfb9dafad821a04c962442750677436886a" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 1faa3dfb9dafad821a04c962442750677436886a: docs: mlflow">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>1faa3df</a></span>
+                <span>Updated on 2024-02-01&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/70cec48ffd5edff5829fec97b98eb53f6715d0c1" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 70cec48ffd5edff5829fec97b98eb53f6715d0c1: docs: mlflow">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>70cec48</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

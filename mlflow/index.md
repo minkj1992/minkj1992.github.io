@@ -173,7 +173,7 @@ Mlflow 코드를 분석하기 위해서는, 실제 UI상에서 experiment들이 
 
 - [Tracking Concepts](https://mlflow.org/docs/latest/tracking.html#concepts)
 
-### MLflow Tracking
+### 3.1. MLflow Tracking
 
 - `Runs`: Executions of some piece of code
     - Each run records metrics, parameter, start ~ end times, artifacts(model weights, images, etc)
@@ -255,6 +255,81 @@ def cache_return_value_per_process(fn):
 ```
 
 
-#### Deployment
+### 3.2. Mlflow Projects
+> https://mlflow.org/docs/latest/projects.html
+
+Mlflow Project란 소스 코드를 재사용 가능하게 패키징화 시킨 컴포넌트입니다.
+
+- API, CLI entrypoint를 가지고 있습니다.
+- chainning으로 multi-step workflows에 추가시킬 수 있습니다.
+- Conda env나 MLproject (yaml file)를 통해서 properties들을 추가할 수 있습니다.
+
+**Project는 Git URI 또는 local directory에서 `mlflow run` command를 사용해서 실행 가능합니다. 코드 상에서는 `mlflow.projects.run()`을 통해 python api로 실행가능합니다.** 이 api는 k8s나 databricks 환경에서 remote로 실행 가능합니다.
+
+Project가 실행되는 환경을 구성하기 위해서는 아래 4가지 구성이 옵션들이 가능합니다.
+
+1. Virtualenv (preferred)
+2. Docker container
+3. Conda
+4. System environment
+
+여기에서는 Viertualenv 세팅 위주로 살펴보겠습니다. 
+
+#### MLflow Project (`Virtualenv`)
+
+이 세팅을 구성한다면, mlflow는 pyenv를 활용해 isolated environment를 만들고, virtualenv를 통해 dependencies들을 포함시킵니다. 또한 mlflow 코드를 실행시키기 전에(prior to running the project code), 이 isolated env를 activate 시킵니다.
+
+이 세팅을 활용하기 위해서는 2개의 파일 세팅이 필요합니다.
+
+- `MLproject`: 시작 지점
+- `python_env.yaml`: virtualenv environment description 
+
+
+**MLProject example**
+
+```
+name: llm_summarization
+
+python_env: python_env.yaml
+
+entry_points:
+  main:
+    command: python summarization.py
+
+```
+
+**python_env example**
+
+```yaml
+python: "3.10"
+build_dependencies:
+  - pip
+dependencies:
+  - langchain>=0.0.244
+  - openai>=0.27.2
+  - evaluate>=0.4.0
+  - mlflow>=2.4.0
+```
+
+이후 project를 실행하기 위해서는, MLproject 파일이 있는 디렉토리에서 아래 코들르 사용하면 됩니다.
+
+```
+> mlflow run .
+```
+
+이렇게 명령어를 작성하게 되면 cli상에서 mlflow는 projects 패키지를 호출하며, 실제 코드에서는 아래 부분이 호출 됩니다.
+
+<script src="https://gist.github.com/minkj1992/efbd5b3d78367829167c37dbe4460379.js"></script>
+
+
+- **load_project**에서 python_env.yaml을 읽어, Project 객체를 생성합니다.
+- Project는 Entrypoint와 Parameter를 init하고 이를 통해 source code 파일들을 link 또는 remote의 경우 storage_dir로 download합니다.
+- 이후 projects.run을 통해 아래 코드가 호출되어 local 또는 databricks 같은 remote에 존재하는 코드들을 실행합니다. [code](https://github.com/mlflow/mlflow/blob/bf141c74ffb816e4bfce54177eef704c25849d0b/mlflow/projects/__init__.py#L103-L120) 
+- 이후 projects.backend.local.py의 run이 호출되어 새로운 process가 동작합니다. [코드](https://github.com/mlflow/mlflow/blob/bf141c74ffb816e4bfce54177eef704c25849d0b/mlflow/projects/backend/local.py#L70)
+
+
+
+> mlflow project를 실행해보다가, examples/llms/summarization을 실행해보는데, dep 에러가 발생해서 contribute했다. langchain이 워낙 빠르게 변화하는 open source다 보니까, dependency 관리가 쉽지 않나 보다. [FIx llm example tiktoken dependency error #10989](https://github.com/mlflow/mlflow/pull/10989)
+
 
 
