@@ -355,5 +355,8 @@ Mlflow LLM는 아래와 같은 core concept들을 가지고 있습니다.
 - Tracking
 
 
-- 드디어 MLflow의 dev dependency 관련된 세팅을 처리했고, bug fix를 contribute했다. https://github.com/mlflow/mlflow/pull/10998
+> (자랑) MLflow 오픈소스가 여러모로 dependency 버그가 좀 있었는데, 이 부분에 MLflow의 dev dependency 관련된 세팅을 처리했고, bug fix를 contribute했다. https://github.com/mlflow/mlflow/pull/10998
+
+> (자랑) MLflow doc page가 현재 current doc을 제대로 표시하지 못해, 불편했었는데, 이 부분 fix하여 pr을 올렸다. https://github.com/mlflow/mlflow/pull/10999
+
 
