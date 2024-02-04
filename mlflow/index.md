@@ -317,7 +317,7 @@ dependencies:
 > mlflow run .
 ```
 
-이렇게 명령어를 작성하게 되면 cli상에서 mlflow는 projects 패키지를 호출하며, 실제 코드에서는 아래 부분이 호출 됩니다.
+이렇게 명령어를 `작성하게 되면 cli상에서 mlflow는 projects 패키지를 호출하며, 실제 코드에서는 아래 부분이 호출 됩니다.
 
 <script src="https://gist.github.com/minkj1992/efbd5b3d78367829167c37dbe4460379.js"></script>
 
@@ -332,4 +332,28 @@ dependencies:
 > mlflow project를 실행해보다가, examples/llms/summarization을 실행해보는데, dep 에러가 발생해서 contribute했다. langchain이 워낙 빠르게 변화하는 open source다 보니까, dependency 관리가 쉽지 않나 보다. [FIx llm example tiktoken dependency error #10989](https://github.com/mlflow/mlflow/pull/10989)
 
 
+### 3.3. MLflow LLMs
+> https://mlflow.org/docs/latest/llms/index.html
+
+Mlflow introduce `Deployment`(previously AI Gateway) that simplifies interactions with multiple LLM provides.
+
+1. Support multiple llm providers
+2. Integrate to mlflow model serving
+3. Centralized scattered API keys
+4. Seamless Provider swapping
+
+
+Mlflow LLM는 아래와 같은 core concept들을 가지고 있습니다.
+
+- Deployments
+- Evaluation
+- Prompt UI
+- Flavors
+    - OpenAI
+    - Langchain
+    - Transformer / BERT
+- Tracking
+
+
+- 드디어 MLflow의 dev dependency 관련된 세팅을 처리했고, bug fix를 contribute했다. https://github.com/mlflow/mlflow/pull/10998
 
