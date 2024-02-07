@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/compiler/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-06T22:41:31+09:00" />
-<meta property="article:modified_time" content="2024-02-06T22:41:31+09:00" />
+<meta property="article:modified_time" content="2024-02-07T17:33:10+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, ts, typescript, compiler","wordcount":  445 ,
-        "url": "https:\/\/minkj1992.github.io\/compiler\/","datePublished": "2024-02-06T22:41:31+09:00","dateModified": "2024-02-06T22:41:31+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, ts, typescript, compiler","wordcount":  900 ,
+        "url": "https:\/\/minkj1992.github.io\/compiler\/","datePublished": "2024-02-06T22:41:31+09:00","dateModified": "2024-02-07T17:33:10+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Typescript Compiler</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-06">2024-02-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;445 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-06">2024-02-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;900 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -190,7 +190,15 @@
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#reference">Reference</a></li>
-    <li><a href="#1-program">1. program</a></li>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#1-source-code-to-data">1. Source Code to Data</a></li>
+    <li><a href="#2-type-checking">2. Type Checking</a>
+      <ul>
+        <li><a href="#21-type-checking-binder">2.1. Type Checking: Binder</a></li>
+        <li><a href="#22-type-checking-type-checker">2.2. Type Checking: Type Checker</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-creating-files">3. Creating Files</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>How typescript api compiles ts to js?</p>
@@ -209,7 +217,7 @@
 </p>
 </li>
 </ul>
-<h2 id="1-program">1. program</h2>
+<h2 id="program">Program</h2>
 <ul>
 <li><a href="https://github.com/microsoft/TypeScript/blob/c790dc1dc7ff67e619a5a60fc109b7548f171322/src/compiler/program.ts#L1513" target="_blank" rel="noopener noreffer">typescript/src/compiler/program.ts</a>
 </li>
@@ -382,11 +390,150 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">authors</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">func</span><span class="p">(</span><span class="s2">&#34;minwook&#34;</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><p>자 이제 그럼 다시 compiler로 들어가보도록 하겠습니다.</p>
+<p>앞서 3줄의 코드에서 보였듯, ts program은 3가지 단계에 거쳐 진행됩니다.</p>
+<ol>
+<li>Source Code to Data (syntax tree)</li>
+<li>Type Checking (bind / check)</li>
+<li>Creating Files (emit)</li>
+</ol>
+<h2 id="1-source-code-to-data">1. Source Code to Data</h2>
+<p>Source code에서 의미있는 data로 변경하기 위해서는 <code>syntax tree</code> 개념이 존재합니다.</p>
+<blockquote>
+<p>Compiler는 frontend와 backend로 나눠지고, frontend에서 input code를 받아, 의미 있는 내부 형태로 구성하며 이를 기반으로 backend를 통해서 target output으로 변경을 합니다. 이런 구조를 취하는 이유는 adptor pattern 처럼 원하는 target language에 따라서 편하게 새로운 backend 또는 frontend를 갈아 끼우기 위해서 입니다. 또한 이런 유연한 구조를 위해서 내부적으로 AST (abstract syntax tree)를 도입하였습니다.</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Abstract_syntax_tree_for_Euclidean_algorithm.svg/800px-Abstract_syntax_tree_for_Euclidean_algorithm.svg.png"
+        data-srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Abstract_syntax_tree_for_Euclidean_algorithm.svg/800px-Abstract_syntax_tree_for_Euclidean_algorithm.svg.png, https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Abstract_syntax_tree_for_Euclidean_algorithm.svg/800px-Abstract_syntax_tree_for_Euclidean_algorithm.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Abstract_syntax_tree_for_Euclidean_algorithm.svg/800px-Abstract_syntax_tree_for_Euclidean_algorithm.svg.png 2x"
+        data-sizes="auto"
+        alt="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Abstract_syntax_tree_for_Euclidean_algorithm.svg/800px-Abstract_syntax_tree_for_Euclidean_algorithm.svg.png"
+        title="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Abstract_syntax_tree_for_Euclidean_algorithm.svg/800px-Abstract_syntax_tree_for_Euclidean_algorithm.svg.png" /></p>
+<p>Syntax tree는 크게 2가지로 나뉩니다.</p>
+<ol>
+<li>Scanner (src/compiler/scanner.ts), aka <code>Lexer</code></li>
+<li>Parser (src/compiler/parser.ts)</li>
+</ol>
+<p>Scanner은 text를 syntax tokens으로 변경합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/tsc_scanner.png"
+        data-srcset="/images/tsc_scanner.png, /images/tsc_scanner.png 1.5x, /images/tsc_scanner.png 2x"
+        data-sizes="auto"
+        alt="/images/tsc_scanner.png"
+        title="/images/tsc_scanner.png" /></p>
+<p>Parsesr은 syntax tokens를 tree로 변경합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/tsc_parser.png"
+        data-srcset="/images/tsc_parser.png, /images/tsc_parser.png 1.5x, /images/tsc_parser.png 2x"
+        data-sizes="auto"
+        alt="/images/tsc_parser.png"
+        title="/images/tsc_parser.png" /></p>
+<p>실제 코드를 보면</p>
+<ol>
+<li>parser가 source code를 받음</li>
+<li>parser가 scanner instance 생성</li>
+<li>parser가 scanner의 <a href="https://github.com/microsoft/TypeScript/blob/c790dc1dc7ff67e619a5a60fc109b7548f171322/src/compiler/scanner.ts#L212C7-L212C18" target="_blank" rel="noopener noreffer"><code>textToToken</code></a>
+ 를 통해 source code의 text 청크들 syntax token으로 변환</li>
+<li>parser가 syntax token의 stream들을 tree 형식으로 구성 <a href="https://github.com/microsoft/TypeScript/blob/c790dc1dc7ff67e619a5a60fc109b7548f171322/src/compiler/parser.ts#L1624" target="_blank" rel="noopener noreffer"><code>parseJsonText</code></a>
+</li>
+</ol>
+<p>정리하면</p>
+<ul>
+<li>Scanner: 소스코드를 컴파일러가 이해할 수 있는 토큰 시퀀스로 변환합니다.</li>
+<li>Parser: 토큰 스트림을 분석하여 AST를 생성합니다.
+<ul>
+<li>함수 선언, 변수 선언, 조건문, 반복문 등의 구조를 식별합니다.</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-type-checking">2. Type Checking</h2>
+<blockquote>
+<p>Checking the syntax tree</p>
+</blockquote>
+<p>Parsing process를 통해 stream of Syntax tree가 생성되면</p>
+<ol>
+<li><strong>Binder</strong>, Syntax -&gt; Symbols
+<ul>
+<li>Converts identifiers in syntax tree to symbols</li>
+</ul>
+</li>
+<li><strong>Type Check</strong>, Use binder and syntax tree to look for issues in code.</li>
+</ol>
+<h3 id="21-type-checking-binder">2.1. Type Checking: Binder</h3>
+<p>Binder, post-parser grab bag는 아래와 같은 역할을 수행합니다.</p>
+<ol>
+<li>identifiers가 정의되어있는 Symbol Tables 생성</li>
+<li>Sets up &lsquo;parent&rsquo; on all syntax tree nodes</li>
+<li>Make flow node for narrowing</li>
+<li>Validate script vs module conformance</li>
+</ol>
+<p>1번에서 symbol이란 scope에 따른 identifier를 말합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/tsc_symbols.png"
+        data-srcset="/images/tsc_symbols.png, /images/tsc_symbols.png 1.5x, /images/tsc_symbols.png 2x"
+        data-sizes="auto"
+        alt="/images/tsc_symbols.png"
+        title="/images/tsc_symbols.png" /></p>
+<p>2번이 무슨말인지 찾아보니, AST는 비록 트리구조이지만, parser에 의해 생성된 AST는 아직 각 노드에 부모 노드에 대한 정보가 없어 상위 context를 파악하기 어렵다고 합니다. Binder는 AST를 방문(매우 무거운 작업)하면서 각 노드에 대한 부모 노드 정보를 설정할 수 있습니다.</p>
+<p>3번의 flow nodes는 위에서 설명한 대로 scope를 찾아가면서 if conditional, functional scope 처럼 flow를 파악하는 것을 뜻합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/tsc_binder1.png"
+        data-srcset="/images/tsc_binder1.png, /images/tsc_binder1.png 1.5x, /images/tsc_binder1.png 2x"
+        data-sizes="auto"
+        alt="/images/tsc_binder1.png"
+        title="/images/tsc_binder1.png" /></p>
+<p>이렇게 flow graph가 만들어지게 되면 나중에 type check시에 typescript는 scope를 narrow하면서 check할 수 있습니다. 이 덕분에 typeof 같은 Type Guard가 typescript 타입 체크에 영향을 줄 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/tsc_binder2.png"
+        data-srcset="/images/tsc_binder2.png, /images/tsc_binder2.png 1.5x, /images/tsc_binder2.png 2x"
+        data-sizes="auto"
+        alt="/images/tsc_binder2.png"
+        title="/images/tsc_binder2.png" /></p>
+<p>Binder가 Symbols table를 생성하면 <code>Program.emit()</code>을 호출하여 Emit worker가 AST가 javascript source code로 변환될 수 있도록 합니다.</p>
+<p>Emitter가 running할때 <code>getDiagnostics()</code>를 호출하며, 이 함수를 통해 <code>Type Checker</code> (src/compiler/checker.ts)가 실행됩니다.</p>
+<p>Emitter는 AST를 traverse(walk)하며 each node에 상응하는 check function를 실행합니다.</p>
+<h3 id="22-type-checking-type-checker">2.2. Type Checking: Type Checker</h3>
+<p>모든 syntax tree node에는 그에 상응하는 check function이 정의되어 있습니다. 이를 통해서 syntax tree에 정의되어있는 node들을 타고 가면서 type check가 가능합니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/tsc_checker.png"
+        data-srcset="/images/tsc_checker.png, /images/tsc_checker.png 1.5x, /images/tsc_checker.png 2x"
+        data-sizes="auto"
+        alt="/images/tsc_checker.png"
+        title="/images/tsc_checker.png" /></p>
+<p>타입스크립트는 source, target로 타입을 구분하는데, const greet: string = &ldquo;Hello World&rsquo;의 경우에 string은 source, &lsquo;Hello World&rsquo;는 target이 되어 각각에 대해 check됩니다.</p>
+<p>방대한 양의 type check이다 보니, 이번 post에서는 여기까지만 파악하고 다음으로 넘어가도록 하겠습니다.</p>
+<h2 id="3-creating-files">3. Creating Files</h2>
+<blockquote>
+<p>Syntax tree -&gt; JS</p>
+</blockquote>
+<p>TS에는 여러 transformers가 존재하며, 지정된 버전에 따라서 실행되는 transformers가 달라집니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/tsc_transformers.png"
+        data-srcset="/images/tsc_transformers.png, /images/tsc_transformers.png 1.5x, /images/tsc_transformers.png 2x"
+        data-sizes="auto"
+        alt="/images/tsc_transformers.png"
+        title="/images/tsc_transformers.png" /></p>
+<p>이 과정을 거쳐서 typescript는 *.js, *.map, *.d.t를 만들어냅니다.</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-02-06</span>
+                <span>Updated on 2024-02-07&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/689cbd1d49dc819d1ded949d2b80e10448735e0f" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 689cbd1d49dc819d1ded949d2b80e10448735e0f: docs: mlflow">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>689cbd1</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
