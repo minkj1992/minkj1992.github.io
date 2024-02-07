@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Typescript Compiler | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Typescript Compiler" />
+<meta property="og:description" content="How typescript api compiles ts to js?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/compiler/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-06T22:41:31+09:00" />
+<meta property="article:modified_time" content="2024-02-06T22:41:31+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Typescript Compiler"/>
+<meta name="twitter:description" content="How typescript api compiles ts to js?"/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/compiler/" /><link rel="prev" href="https://minkj1992.github.io/mlflow/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Typescript Compiler",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/compiler\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, ts, typescript, compiler","wordcount":  445 ,
+        "url": "https:\/\/minkj1992.github.io\/compiler\/","datePublished": "2024-02-06T22:41:31+09:00","dateModified": "2024-02-06T22:41:31+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Typescript Compiler</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-06">2024-02-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;445 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/ts_compiler.webp"
+        data-srcset="/images/ts_compiler.webp, /images/ts_compiler.webp 1.5x, /images/ts_compiler.webp 2x"
+        data-sizes="auto"
+        alt="/images/ts_compiler.webp"
+        title="/images/ts_compiler.webp" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#reference">Reference</a></li>
+    <li><a href="#1-program">1. program</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>How typescript api compiles ts to js?</p>
+<ul>
+<li>I&rsquo;ve already wrote a simple typescript compiler <a href="https://minkj1992.github.io/typescript/" target="_blank" rel="noopener noreffer">blog post</a>
+ before, this is the more deeper version of typescript compiler api.</li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ul>
+<li>
+<p><a href="https://www.youtube.com/watch?v=X8k_4tZ16qU" target="_blank" rel="noopener noreffer">How the TypeScript Compiler Compiles - understanding the compiler internal</a>
+</p>
+</li>
+<li>
+<p><a href="https://github.com/microsoft/TypeScript/wiki/Using-the-Compiler-API" target="_blank" rel="noopener noreffer">Typescript Compiler API</a>
+</p>
+</li>
+</ul>
+<h2 id="1-program">1. program</h2>
+<ul>
+<li><a href="https://github.com/microsoft/TypeScript/blob/c790dc1dc7ff67e619a5a60fc109b7548f171322/src/compiler/program.ts#L1513" target="_blank" rel="noopener noreffer">typescript/src/compiler/program.ts</a>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-TypeScript" data-lang="TypeScript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">ts</span> <span class="kr">from</span> <span class="s2">&#34;typescript&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">program</span> <span class="o">=</span> <span class="nx">ts</span><span class="p">.</span><span class="nx">createProgram</span><span class="p">(</span><span class="nx">fileNames</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span> <span class="c1">// code -&gt; ast
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">checker</span> <span class="o">=</span> <span class="nx">program</span><span class="p">.</span><span class="nx">getTypeChecker</span><span class="p">();</span> <span class="c1">// binding, type check
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">program</span><span class="p">.</span><span class="nx">emit</span><span class="p">()</span> <span class="c1">// ast -&gt; code
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>typescript는 program을 생성하고, type check를 한 뒤, emit하는 방식으로 컴파일이 진행됩니다. ms doc에 따르면 아래 helper function을 사용하면 더 쉽게 컴파일이 가능합니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">ts</span> <span class="kr">from</span> <span class="s2">&#34;typescript&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">source</span> <span class="o">=</span> <span class="s2">&#34;let x: string  = &#39;string&#39;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">ts</span><span class="p">.</span><span class="nx">transpileModule</span><span class="p">(</span><span class="nx">source</span><span class="p">,</span> <span class="p">{</span> <span class="nx">compilerOptions</span><span class="o">:</span> <span class="p">{</span> <span class="nx">module</span>: <span class="kt">ts.ModuleKind.CommonJS</span> <span class="p">}});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">result</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이를 real world로 예를 든다면 아래 와 같이 isolated 환경에서 dynamic하게 custom code를 받아서 transpile 후 실행 시킬 수 있습니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">Script</span><span class="p">,</span> <span class="nx">createContext</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;node:vm&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">ts</span> <span class="kr">from</span> <span class="s2">&#34;typescript&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">AuthorDbWrapper</span> <span class="kr">from</span> <span class="s1">&#39;./dbwrapper.js&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// &#34;import dayjs from \&#34;dayjs\&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// import timezone from \&#34;dayjs/plugin/timezone.js\&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// import utc from \&#34;dayjs/plugin/utc.js\&#34;;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// export default async (input: Input): Promise&lt;Record&lt;string, any&gt;&gt; =&gt; {
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   dayjs.extend(timezone);
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   dayjs.extend(utc);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//   interface People {
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     name: string;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     email: string;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     age: number;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     birth: Date | null;
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   }
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   // imported from context
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   const authors: People[] = AuthorDbWrapper.select(
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     {
+</span></span></span><span class="line"><span class="cl"><span class="c1">//       deleted_at: undefined
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     }
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   )
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   return { authors }
+</span></span></span><span class="line"><span class="cl"><span class="c1">// }&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">customCode</span> <span class="o">=</span> <span class="s2">&#34;import dayjs from \&#34;dayjs\&#34;;\nimport timezone from \&#34;dayjs/plugin/timezone.js\&#34;;\nimport utc from \&#34;dayjs/plugin/utc.js\&#34;;\n\nexport default async (input: Input): Promise&lt;Record&lt;string, any&gt;&gt; =&gt; {\n  dayjs.extend(timezone);\n  dayjs.extend(utc);\n\n  interface People {\n    name: string;\n    email: string;\n    age: number;\n    birth: Date | null;\n  }\n  // imported from context\n  const authors: People[] = AuthorDbWrapper.select(\n    {\n      deleted_at: undefined, name:input.name\n    }\n  )\n  return { authors }\n}&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">exportTargets</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">AuthorDbWrapper</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...   
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">logContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LogContainer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">ts</span><span class="p">.</span><span class="nx">transpileModule</span><span class="p">(</span><span class="nx">customCode</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">compilerOptions</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">module</span>: <span class="kt">ts.ModuleKind.CommonJS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">esModuleInterop</span>: <span class="kt">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">sourceMap</span>: <span class="kt">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">transpiled</span> <span class="o">=</span> <span class="nx">output</span><span class="p">.</span><span class="nx">outputText</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Instances of the `vm.Script` class contain precompiled scripts that can be executed in specific contexts.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">script</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Script</span><span class="p">(</span><span class="nx">transpiled</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">createContext</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">require</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">exports</span><span class="o">:</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">module</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">exports</span><span class="o">:</span> <span class="p">{},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span>: <span class="kt">logContainer</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">setTimeout</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span><span class="nx">exportTargets</span><span class="p">,</span> <span class="c1">// already compiled codes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">func</span> <span class="o">=</span> <span class="nx">script</span><span class="p">.</span><span class="nx">runInNewContext</span><span class="p">(</span><span class="nx">context</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// result
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">const</span> <span class="nx">authors</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">func</span><span class="p">(</span><span class="s2">&#34;minwook&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-02-06</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/compiler/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/compiler/" data-title="Typescript Compiler" data-hashtags="dev,ts,typescript,compiler"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/compiler/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/compiler/" data-title="Typescript Compiler"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/compiler/" data-title="Typescript Compiler"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/compiler/" data-title="Typescript Compiler" data-image="/images/ts_compiler.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/ts/">ts</a>,&nbsp;<a href="/tags/typescript/">typescript</a>,&nbsp;<a href="/tags/compiler/">compiler</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/mlflow/" class="prev" rel="prev" title="MLflow code analysis"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>MLflow code analysis</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>

@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/categories/dev/</link>
         <description>dev - Category - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 19 Nov 2023 15:29:46 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 06 Feb 2024 22:41:31 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Typescript Compiler</title>
+    <link>https://minkj1992.github.io/compiler/</link>
+    <pubDate>Tue, 06 Feb 2024 22:41:31 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/compiler/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ts_compiler.webp" referrerpolicy="no-referrer">
+            </div><p>How typescript api compiles ts to js?</p>]]></description>
+</item>
+<item>
     <title>this, javascript</title>
     <link>https://minkj1992.github.io/this_in_js/</link>
     <pubDate>Sun, 19 Nov 2023 15:29:46 &#43;0900</pubDate>
@@ -98,16 +108,6 @@
                 <img src="/images/rust_prog.jpeg" referrerpolicy="no-referrer">
             </div><p><a href="https://minkj1992.github.io/the_rust_programming_lang/" target="_blank" rel="noopener noreffer">Part1. Rust 프로그래밍</a>
 에 이어서 Rust의 고급 문법들을 익혀보겠습니다.</p>]]></description>
-</item>
-<item>
-    <title>Internet Computer development environment</title>
-    <link>https://minkj1992.github.io/setup_icp_env/</link>
-    <pubDate>Fri, 27 Jan 2023 17:19:45 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/setup_icp_env/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/icp.jpeg" referrerpolicy="no-referrer">
-            </div><p>How to set up Internet Computer development environment.</p>]]></description>
 </item>
 </channel>
 </rss>

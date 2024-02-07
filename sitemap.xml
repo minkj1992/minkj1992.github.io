@@ -2,18 +2,22 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://minkj1992.github.io/categories/</loc><lastmod>2024-02-05T00:00:06&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2024-02-05T00:00:06&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/</loc><lastmod>2024-02-05T00:00:06&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/mlflow/</loc><lastmod>2024-02-05T00:00:06&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/mlflow/</loc><lastmod>2024-02-05T00:00:06&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/mlops/</loc><lastmod>2024-02-05T00:00:06&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2024-02-05T00:00:06&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2024-02-05T00:00:06&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/</loc><lastmod>2024-02-06T22:41:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/compiler/</loc><lastmod>2024-02-06T22:41:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2024-02-06T22:41:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/dev/</loc><lastmod>2024-02-06T22:41:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/</loc><lastmod>2024-02-06T22:41:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2024-02-06T22:41:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2024-02-06T22:41:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/ts/</loc><lastmod>2024-02-06T22:41:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/typescript/</loc><lastmod>2024-02-06T22:41:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/compiler/</loc><lastmod>2024-02-06T22:41:31&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/mlflow/</loc><lastmod>2024-02-05T00:24:23&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/mlflow/</loc><lastmod>2024-02-05T00:24:23&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/mlops/</loc><lastmod>2024-02-05T00:24:23&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/openai_rate_limit/</loc><lastmod>2023-12-03T16:16:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/tags/mlops/</loc><lastmod>2023-12-03T16:16:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/mlops/</loc><lastmod>2023-12-03T16:16:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/dev/</loc><lastmod>2023-12-03T16:16:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/tags/js/</loc><lastmod>2023-12-03T16:16:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/tags/this/</loc><lastmod>2023-12-03T16:16:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/this_in_js/</loc><lastmod>2023-12-03T16:16:27&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
@@ -26,7 +30,6 @@
             <loc>https://minkj1992.github.io/categories/life/</loc><lastmod>2023-11-15T16:33:16&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/tags/memory/</loc><lastmod>2023-11-15T16:33:16&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/memory_and_flow/</loc><lastmod>2023-11-15T16:33:16&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/typescript/</loc><lastmod>2023-11-18T21:49:10&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/typescript_enum/</loc><lastmod>2023-11-10T10:43:44&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/typescript/</loc><lastmod>2023-11-18T21:49:10&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/go-receiver-race-condition/</loc><lastmod>2023-11-02T19:05:04&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>

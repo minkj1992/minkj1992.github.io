@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/tags/typescript/</link>
         <description>typescript - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 10 Nov 2023 09:49:33 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/typescript/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 06 Feb 2024 22:41:31 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/typescript/" rel="self" type="application/rss+xml" /><item>
+    <title>Typescript Compiler</title>
+    <link>https://minkj1992.github.io/compiler/</link>
+    <pubDate>Tue, 06 Feb 2024 22:41:31 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/compiler/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/ts_compiler.webp" referrerpolicy="no-referrer">
+            </div><p>How typescript api compiles ts to js?</p>]]></description>
+</item>
+<item>
     <title>Typescript Better Enum</title>
     <link>https://minkj1992.github.io/typescript_enum/</link>
     <pubDate>Fri, 10 Nov 2023 09:49:33 &#43;0900</pubDate>

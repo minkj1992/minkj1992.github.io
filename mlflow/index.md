@@ -355,8 +355,22 @@ Mlflow LLM는 아래와 같은 core concept들을 가지고 있습니다.
 - Tracking
 
 
-> (자랑) MLflow 오픈소스가 여러모로 dependency 버그가 좀 있었는데, 이 부분에 MLflow의 dev dependency 관련된 세팅을 처리했고, bug fix를 contribute했다. https://github.com/mlflow/mlflow/pull/10998
-
-> (자랑) MLflow doc page가 현재 current doc을 제대로 표시하지 못해, 불편했었는데, 이 부분 fix하여 pr을 올렸다. https://github.com/mlflow/mlflow/pull/10999
+문득 Document를 보다가, 현재 페이지를 tracking 제대로 하지 못해, 이 부분 고쳐서 pr 올렸는데, 
 
 
+> [pr] MLflow doc page가 현재 current doc을 제대로 표시하지 못해, 불편했었는데, 이 부분 fix하여 pr을 올렸다. https://github.com/mlflow/mlflow/pull/10999
+
+ci 쪽 에러들이 block되어 추가로 2개 pr들을 더 올렸다.
+
+> [pr] MLflow 오픈소스가 여러모로 dependency 버그가 좀 있었는데, 이 부분에 MLflow의 dev dependency 관련된 세팅을 처리했고, bug fix를 contribute했다. https://github.com/mlflow/mlflow/pull/10998
+
+> [pr] https://github.com/mlflow/mlflow/pull/11003, keras related build fix.
+
+~~말은 open source인데, contributor들에게 여러모로 너무 불편한 상황인듯. pr을 아무도 관리하지 않는다는거나, issue관리 그리고 ci/cd 파이프라인이 막혀있는데 몇일째 아무도 신경 쓰지 않았다는 것 등;; Databricks분들은 바로 바로 merge 시키는데, 이걸 보면 그냥 기업 코드를 오픈시킨 databricks 홍보용 레포 같다.~~
+
+
+24.02.07, 5일이 지나고 나서야 드디어 merge되었다. 다행이다.
+
+- https://github.com/mlflow/mlflow/pull/11001
+- https://github.com/mlflow/mlflow/commit/39f0a4ae8e0920cac9fe35d5cd76c4f3be16bc1a
+- https://github.com/mlflow/mlflow/pull/10999
