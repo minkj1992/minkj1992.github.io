@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Go Value Parts | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Go Value Parts" />
+<meta property="og:description" content="Real implementation of value parts type in golang" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://minkj1992.github.io/go-value-parts/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-12T16:32:44+09:00" />
+<meta property="article:modified_time" content="2024-02-12T16:32:44+09:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
+
+<meta name="twitter:title" content="Go Value Parts"/>
+<meta name="twitter:description" content="Real implementation of value parts type in golang"/>
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/go-value-parts/" /><link rel="prev" href="https://minkj1992.github.io/compiler/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go Value Parts",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/go-value-parts\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev, golang, go","wordcount":  612 ,
+        "url": "https:\/\/minkj1992.github.io\/go-value-parts\/","datePublished": "2024-02-12T16:32:44+09:00","dateModified": "2024-02-12T16:32:44+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": ""
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><a class="menu-item" href="/categories/"> Categories </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992/love" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a class="menu-item" href="/categories/" title="">Categories</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Go Value Parts</h1><h2 class="single-subtitle">Go value parts</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a>&nbsp;<a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>go</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-02-12">2024-02-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;612 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/go-interface-value-parts.png"
+        data-srcset="/images/go-interface-value-parts.png, /images/go-interface-value-parts.png 1.5x, /images/go-interface-value-parts.png 2x"
+        data-sizes="auto"
+        alt="/images/go-interface-value-parts.png"
+        title="/images/go-interface-value-parts.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#value-parts">Value Parts</a></li>
+    <li><a href="#internal-definitions">Internal definitions</a>
+      <ul>
+        <li><a href="#map-channel-and-function-types"><code>map</code>, <code>channel</code> and <code>function types</code></a></li>
+        <li><a href="#slice">slice</a></li>
+        <li><a href="#string">string</a></li>
+        <li><a href="#interface">interface</a></li>
+      </ul>
+    </li>
+    <li><a href="#copy">copy</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Real implementation of value parts type in golang</p>
+<h2 id="value-parts">Value Parts</h2>
+<blockquote>
+<p><a href="https://go101.org/article/value-part.html" target="_blank" rel="noopener noreffer">https://go101.org/article/value-part.html</a>
+</p>
+</blockquote>
+<p>하나의 value가 하나의 메모리 block을 차지하는 <code>C</code>와 달리, golang은 몇몇 types들이 하나 이상의 memory block에 할당될 수도 있습니다. <strong>이렇게 다른 메모리 블록들에서 part되어 분포되는 value의 구성요소들을 value parts라고 칭합니다.</strong> 하나 이상의 메모리 블록에 hosting되는 value는 <code>direct value part</code>와 여러개의 <code>underlying indirect parts</code>로 구성됩니다.</p>
+<ul>
+<li><strong>Solo Direct Value Part</strong>는 단일 메모리 블록에 저장되는 값을 의미합니다. 즉, 값 전체가 하나의 연속된 메모리 공간에 존재합니다.</li>
+<li><strong>Direct value part</strong>:  포인터의 value처럼 reference 하는 address value</li>
+<li><strong>serveral underlying indirect parts</strong>: 여러 메모리 블록에 분산되어 있는 값의 각 부분</li>
+</ul>
+<p>아래는 golang에서 지원하는 type을 multiple value parts 여부 (메모리 블록 갯수)로 나눈 테이블입니다.</p>
+<table>
+<thead>
+<tr>
+<th>Types whose values each is only hosted on one single memory block (solo direct value part)</th>
+<th>Types whose values each may be hosted on multiple memory blocks (direct part -&gt; underlying direct part)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://go101.org/article/res/value-parts-single.png"
+        data-srcset="https://go101.org/article/res/value-parts-single.png, https://go101.org/article/res/value-parts-single.png 1.5x, https://go101.org/article/res/value-parts-single.png 2x"
+        data-sizes="auto"
+        alt="https://go101.org/article/res/value-parts-single.png"
+        title="single value part" /></td>
+<td><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://go101.org/article/res/value-parts-multiple.png"
+        data-srcset="https://go101.org/article/res/value-parts-multiple.png, https://go101.org/article/res/value-parts-multiple.png 1.5x, https://go101.org/article/res/value-parts-multiple.png 2x"
+        data-sizes="auto"
+        alt="https://go101.org/article/res/value-parts-multiple.png"
+        title="multiple value parts" /></td>
+</tr>
+<tr>
+<td>boolean types<br/>numeric types<br/>pointer types<br/>unsafe pointer types<br/>struct types<br/>array types</td>
+<td>slice types<br/>map types<br/>channel types<br/>function types<br/>interface types<br/>string types</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>* Note</p>
+<blockquote>
+<ul>
+<li>인터페이스와 문자열 값에 기본 부분이 포함될 수 있는지 여부는 컴파일러에 따라 다릅니다.</li>
+<li>표준 Go 컴파일러 구현의 경우 인터페이스 및 문자열 값에 기본 부분이 포함될 수 있습니다.</li>
+<li>함수 값에 기본 부분이 포함될 수 있는지 여부를 증명하는 것은 거의 불가능합니다.</li>
+</ul>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>어째서 101문서에서 pointer, unsafe pointer를 solo direct value part로 구분했는지 모르곘다. 관련된 문의 pr을 올렸다.
+<a href="https://github.com/go101/go101/issues/269" target="_blank" rel="noopener noreffer">https://github.com/go101/go101/issues/269</a>
+</p>
+</blockquote>
+<h2 id="internal-definitions">Internal definitions</h2>
+<p>그럼 이제 실제 2번째 type들의 내부 definitions들을 살펴보겠습니다.</p>
+<h3 id="map-channel-and-function-types"><code>map</code>, <code>channel</code> and <code>function types</code></h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// map types
+</span></span></span><span class="line"><span class="cl"><span class="c1">// map types
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">_map</span> <span class="o">*</span><span class="nx">hashtableImpl</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// channel types
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">_channel</span> <span class="o">*</span><span class="nx">channelImpl</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// function types
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">_function</span> <span class="o">*</span><span class="nx">functionImpl</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>3가지 유형은 내부적으로 그냥 포인터 유형입니다.</p>
+<h3 id="slice">slice</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">_slice</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// referencing underlying elements
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">elements</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// number of elements and capacity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">len</span><span class="p">,</span> <span class="nx">cap</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>슬라이스 유형은 pointer wrapper struct types입니다.</p>
+<blockquote>
+<p>Unsafe Pointer
+Go의 <code>unsafe</code> 패키지에 정의된 Unsafe Pointer는 언어의 타입 안전성 시스템을 우회하여 직접 메모리 접근을 수행할 수 있게 해줍니다. 이를 통해 성능 최적화, 시스템 레벨 프로그래밍, interfacing with non-Go 코드 등에 필요할 수 있습니다. 또한 일반 pointer 타입이 형변환이 불가한 것과 달리, 타입 시스템을 우회하는 unsafe pointer는 형변환이 가능합니다. (물론 일반 pointer도 reflect을 사용해서 runtime에 형변환을 시키는 방법도 있습니다.)</p>
+</blockquote>
+<h3 id="string">string</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">_string</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">elements</span> <span class="o">*</span><span class="kt">byte</span> <span class="c1">// referencing underlying bytes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">len</span>      <span class="kt">int</span>   <span class="c1">// number of bytes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>string 또한 pointer wrapper struct type입니다.</p>
+<h3 id="interface">interface</h3>
+<ul>
+<li>blank interface type</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">_interface</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dynamicType</span>  <span class="o">*</span><span class="nx">_type</span>         <span class="c1">// the dynamic type
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">dynamicValue</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// the dynamic value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>standard go compiler에서 위의 정의를 blank interface types에만 사용합니다.</strong></p>
+<blockquote>
+<p>Blnak interface types are the interface types which don&rsquo;t specify any methods.</p>
+</blockquote>
+<ul>
+<li>non-blacnk interface type</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">_interface</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dynamicTypeInfo</span> <span class="o">*</span><span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">dynamicType</span> <span class="o">*</span><span class="nx">_type</span>       <span class="c1">// the dynamic type
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">methods</span>     <span class="p">[]</span><span class="o">*</span><span class="nx">_function</span> <span class="c1">// method table
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dynamicValue</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// the dynamic value
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="copy">copy</h2>
+<blockquote>
+<p>Underlying Value Parts Are Not Copied in Value Assignments</p>
+</blockquote>
+<p>Golang에서 parameter passing을 포함한 value Assignments는 shallow value copy입니다. (단, destination과 source value의 타입이 같을 경우에만) 만약 타입이 다른 value끼리의 value assignment는 implicitly converted 되어 assignment가 진행됩니다.</p>
+<p>일반적인 값 할당 (shallow copy)</p>
+<ol>
+<li><code>direct part</code>만 복사됩니다.</li>
+<li><code>underlying value part</code>은 참조만 복사됩니다.</li>
+<li>결과적으로 원본 값과 복사된 값은 <code>underlying value part</code>을 공유하게 됩니다.</li>
+</ol>
+<p>문자열과 인터페이스의 특수 케이스:</p>
+<ul>
+<li>위의 shallow copy와 달리 <a href="https://go.dev/doc/faq#pass_by_value" target="_blank" rel="noopener noreffer">Go FAQ</a>
+에 따르면, 인터페이스 value가 copy될 때,<code>underlying value part</code> 또한 copy되어야 한다고 합니다.</li>
+<li>이론적으로는 <code>underlying value part</code>도 함께 복사되어야 하지만, 내부적으로는 그렇지 않습니다.</li>
+<li><strong>실제 동작에서는 인터페이스의 dynamic value는 read only이기 때문에, Go 컴파일러/런타임은 최적화를 위해 <code>underlying value part</code>를 복사하지 않습니다.</strong></li>
+<li>이는 string또한 똑같이 적용됩니다.</li>
+</ul>
+<p>결론:</p>
+<ul>
+<li>표준 Go 컴파일러/런타임에서 모든 타입의 값 할당은 <code>direct part</code>만 복사하고, <code>underlying value part</code>은 공유합니다.</li>
+<li>문자열과 인터페이스는 컴파일러 최적화로 인해 이론과 약간 차이가 있습니다.</li>
+<li><code>unsafe.Sizeof</code> 함수는 <code>direct part</code>의 크기만 반환하며, <code>underlying value part</code>은 포함하지 않습니다.</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-02-12</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/go-value-parts/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/go-value-parts/" data-title="Go Value Parts" data-hashtags="dev,golang,go"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/go-value-parts/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/go-value-parts/" data-title="Go Value Parts"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/go-value-parts/" data-title="Go Value Parts"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/go-value-parts/" data-title="Go Value Parts" data-image="/images/go-interface-value-parts.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/golang/">golang</a>,&nbsp;<a href="/tags/go/">go</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/compiler/" class="prev" rel="prev" title="Typescript Compiler"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Typescript Compiler</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>

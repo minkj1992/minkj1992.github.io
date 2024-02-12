@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 06 Feb 2024 22:41:31 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Go Value Parts</title>
+    <link>https://minkj1992.github.io/go-value-parts/</link>
+    <pubDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/go-value-parts/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/go-interface-value-parts.png" referrerpolicy="no-referrer">
+            </div><p>Real implementation of value parts type in golang</p>]]></description>
+</item>
+<item>
     <title>Typescript Compiler</title>
     <link>https://minkj1992.github.io/compiler/</link>
     <pubDate>Tue, 06 Feb 2024 22:41:31 &#43;0900</pubDate>
@@ -96,18 +106,6 @@ What is MLOps?  Continuous Tranning pipeline Model CI / CD  Levels of MLOps 0단
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/postgresql/postgresql-logo.webp" referrerpolicy="no-referrer">
             </div><p>Design efficient database structures with <code>PostgreSQL</code></p>]]></description>
-</item>
-<item>
-    <title>All Basic Computer Science</title>
-    <link>https://minkj1992.github.io/interview/</link>
-    <pubDate>Fri, 06 Oct 2023 22:00:50 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/interview/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/interview.jpeg" referrerpolicy="no-referrer">
-            </div><blockquote>
-<p>Let&rsquo;s prepare basic computer science interview questions.</p>
-</blockquote>]]></description>
 </item>
 </channel>
 </rss>
