@@ -11,7 +11,13 @@ Real implementation of value parts type in golang
 
 
 
-하나의 value가 하나의 메모리 block을 차지하는 `C`와 달리, golang은 몇몇 types들이 하나 이상의 memory block에 할당될 수도 있습니다. **이렇게 다른 메모리 블록들에서 part되어 분포되는 value의 구성요소들을 value parts라고 칭합니다.** 하나 이상의 메모리 블록에 hosting되는 value는 `direct value part`와 여러개의 `underlying indirect parts`로 구성됩니다.
+~~하나의 value가 하나의 메모리 block을 차지하는 `C`와 달리~~, golang은 몇몇 types들이 하나 이상의 memory block에 할당될 수도 있습니다. **이렇게 다른 메모리 블록들에서 part되어 분포되는 value의 구성요소들을 value parts라고 칭합니다.** 하나 이상의 메모리 블록에 hosting되는 value는 `direct value part`와 여러개의 `underlying indirect parts`로 구성됩니다.
+
+> go101 문서가 비약이 좀 많은 것 같습니다. 예를 들면 "Each C value in memory occupies one memory block (one continuous memory segment)." 라는 주장에 대해서 아래와 같이 반박할 수 있습니다.
+>> C 언어에서도 모든 값이 단일 메모리 블록에 저장된다는 주장은 정확하지 않습니다. 구조체, 배열, 포인터와 같은 데이터 타입들은 여러 메모리 블록에 걸쳐 저장될 수 있습니다. 예를 들어, 구조체는 각 멤버 변수가 서로 다른 메모리 위치에 저장될 수 있고, 큰 배열은 여러 블록에 분포될 수 있으며, 포인터가 가리키는 변수는 별도의 메모리 블록에 저장됩니다. 따라서 Go 언어와 마찬가지로 C 언어에서도 값의 복잡성에 따라 메모리 분포가 다양할 수 있다.
+>> https://github.com/go101/go101/issues/270 에 관련된 doc fix issue를 넣었습니다.
+
+
 
 - **Solo Direct Value Part**는 단일 메모리 블록에 저장되는 값을 의미합니다. 즉, 값 전체가 하나의 연속된 메모리 공간에 존재합니다.
 - **Direct value part**:  포인터의 value처럼 reference 하는 address value
