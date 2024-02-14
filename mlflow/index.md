@@ -372,5 +372,5 @@ ci 쪽 에러들이 block되어 추가로 2개 pr들을 더 올렸다.
 24.02.07, 5일이 지나고 나서야 드디어 merge되었다. 다행이다.
 
 - https://github.com/mlflow/mlflow/pull/11001
-- https://github.com/mlflow/mlflow/commit/39f0a4ae8e0920cac9fe35d5cd76c4f3be16bc1a
+- https://github.com/mlflow/mlflow/pull/10989
 - https://github.com/mlflow/mlflow/pull/10999
