@@ -2,18 +2,18 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2024-04-06T18:36:43&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/</loc><lastmod>2024-04-06T18:36:43&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/mlflow_doc/</loc><lastmod>2024-04-06T18:36:43&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2024-04-06T18:36:43&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2024-04-06T18:36:43&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
-            <loc>https://minkj1992.github.io/go-channel/</loc><lastmod>2024-03-04T20:21:47&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/</loc><lastmod>2024-02-19T11:46:56&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/computer-science/</loc><lastmod>2024-02-19T11:46:56&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/tags/concurrency/</loc><lastmod>2024-02-19T11:46:56&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/concurrency-go/</loc><lastmod>2024-02-19T11:46:56&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/dev/</loc><lastmod>2024-02-19T11:46:56&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
-            <loc>https://minkj1992.github.io/categories/go/</loc><lastmod>2024-02-19T11:46:56&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/dev/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/mlflow_doc/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/posts/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/go-channel/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/computer-science/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/tags/concurrency/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/concurrency-go/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/dev/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
+            <loc>https://minkj1992.github.io/categories/go/</loc><lastmod>2024-04-08T20:27:28&#43;09:00</lastmod><changefreq>daily</changefreq><priority>1</priority></url><url>
             <loc>https://minkj1992.github.io/tags/go/</loc><lastmod>2024-02-12T18:25:43&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/go-value-parts/</loc><lastmod>2024-02-12T18:25:43&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
             <loc>https://minkj1992.github.io/tags/golang/</loc><lastmod>2024-02-12T18:25:43&#43;09:00</lastmod><changefreq>daily</changefreq><priority>0.5</priority></url><url>
