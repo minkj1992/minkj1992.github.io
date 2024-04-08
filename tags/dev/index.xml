@@ -4,7 +4,37 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 06 Apr 2024 18:36:43 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Mlflow Document</title>
+    <link>https://minkj1992.github.io/mlflow_doc/</link>
+    <pubDate>Sat, 06 Apr 2024 18:36:43 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/mlflow_doc/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/mlflow_ambassador.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
+    <title>(WIP) Go Channel and Scheduler</title>
+    <link>https://minkj1992.github.io/go-channel/</link>
+    <pubDate>Mon, 04 Mar 2024 20:21:47 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/go-channel/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/go-scheduler.png" referrerpolicy="no-referrer">
+            </div><p>go channel and scheduler</p>]]></description>
+</item>
+<item>
+    <title>Concurrency Go</title>
+    <link>https://minkj1992.github.io/concurrency-go/</link>
+    <pubDate>Mon, 19 Feb 2024 11:46:56 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/concurrency-go/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/golang_channel.jpeg" referrerpolicy="no-referrer">
+            </div><p>Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang.</p>]]></description>
+</item>
+<item>
     <title>Go Value Parts</title>
     <link>https://minkj1992.github.io/go-value-parts/</link>
     <pubDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</pubDate>
@@ -76,36 +106,6 @@ What is MLOps?  Continuous Tranning pipeline Model CI / CD  Levels of MLOps 0단
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/tsenum.png" referrerpolicy="no-referrer">
             </div><p>Typescript Better Enum</p>]]></description>
-</item>
-<item>
-    <title>Deep dive into Typescript</title>
-    <link>https://minkj1992.github.io/typescript/</link>
-    <pubDate>Tue, 07 Nov 2023 17:13:37 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/typescript/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/typescripts/ts0.png" referrerpolicy="no-referrer">
-            </div><p>Deep dive into typescript</p>]]></description>
-</item>
-<item>
-    <title>Go Receiver Race Condition</title>
-    <link>https://minkj1992.github.io/go-receiver-race-condition/</link>
-    <pubDate>Thu, 02 Nov 2023 18:24:43 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/go-receiver-race-condition/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/race_condition.png" referrerpolicy="no-referrer">
-            </div><p>Golang Pointer Receiver를 사용할 때 발생할 수 있는 문제점</p>]]></description>
-</item>
-<item>
-    <title>PostgreSQL</title>
-    <link>https://minkj1992.github.io/postgresql/</link>
-    <pubDate>Sun, 15 Oct 2023 15:14:23 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/postgresql/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/postgresql/postgresql-logo.webp" referrerpolicy="no-referrer">
-            </div><p>Design efficient database structures with <code>PostgreSQL</code></p>]]></description>
 </item>
 </channel>
 </rss>

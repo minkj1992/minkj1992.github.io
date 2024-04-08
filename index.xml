@@ -4,9 +4,39 @@
         <link>https://minkj1992.github.io/</link>
         <description>I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying.</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</lastBuildDate>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 06 Apr 2024 18:36:43 &#43;0900</lastBuildDate>
             <atom:link href="https://minkj1992.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Mlflow Document</title>
+    <link>https://minkj1992.github.io/mlflow_doc/</link>
+    <pubDate>Sat, 06 Apr 2024 18:36:43 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/mlflow_doc/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/mlflow_ambassador.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item>
+<item>
+    <title>(WIP) Go Channel and Scheduler</title>
+    <link>https://minkj1992.github.io/go-channel/</link>
+    <pubDate>Mon, 04 Mar 2024 20:21:47 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/go-channel/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/go-scheduler.png" referrerpolicy="no-referrer">
+            </div><p>go channel and scheduler</p>]]></description>
+</item>
+<item>
+    <title>Concurrency Go</title>
+    <link>https://minkj1992.github.io/concurrency-go/</link>
+    <pubDate>Mon, 19 Feb 2024 11:46:56 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/concurrency-go/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/golang_channel.jpeg" referrerpolicy="no-referrer">
+            </div><p>Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang.</p>]]></description>
+</item>
+<item>
     <title>Go Value Parts</title>
     <link>https://minkj1992.github.io/go-value-parts/</link>
     <pubDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</pubDate>
@@ -79,37 +109,6 @@ What is MLOps?  Continuous Tranning pipeline Model CI / CD  Levels of MLOps 0단
                 <img src="/images/v8gc/v8_gc_last.svg" referrerpolicy="no-referrer">
             </div><p><a href="https://v8.dev/blog/concurrent-marking" target="_blank" rel="noopener noreffer">Concurrent marking in V8</a>
 의 내용을 참조해서 v8의 garbage collection의 원리를 정리합니다. 이 GC는 Chrome 64 및 Node.js v10 부터 적용 되어 있습니다.</p>]]></description>
-</item>
-<item>
-    <title>Core Javscript</title>
-    <link>https://minkj1992.github.io/core_js/</link>
-    <pubDate>Sat, 18 Nov 2023 19:19:34 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/core_js/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/core_js.png" referrerpolicy="no-referrer">
-            </div><p><a href="https://ko.javascript.info/?map" target="_blank" rel="noopener noreffer">모던 Javascript 튜토리얼</a>
-</p>]]></description>
-</item>
-<item>
-    <title>Prototype in Javascript</title>
-    <link>https://minkj1992.github.io/prototype_in_js/</link>
-    <pubDate>Sat, 18 Nov 2023 14:17:43 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/prototype_in_js/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/prototype_in_js.png" referrerpolicy="no-referrer">
-            </div><p>What is difference between <strong><code>__proto__</code></strong>, <strong><code>prototype</code></strong>, <strong><code>[[Prototype]]</code></strong></p>]]></description>
-</item>
-<item>
-    <title>Memory And Flow</title>
-    <link>https://minkj1992.github.io/memory_and_flow/</link>
-    <pubDate>Wed, 15 Nov 2023 16:26:37 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/memory_and_flow/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/flow.jpg" referrerpolicy="no-referrer">
-            </div><p>How to practice memorizing and flow (Csikszentmihalyi)</p>]]></description>
 </item>
 </channel>
 </rss>

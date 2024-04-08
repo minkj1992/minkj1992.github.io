@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/categories/dev/</link>
         <description>dev - Category - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 19 Feb 2024 11:46:56 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>Concurrency Go</title>
+    <link>https://minkj1992.github.io/concurrency-go/</link>
+    <pubDate>Mon, 19 Feb 2024 11:46:56 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/concurrency-go/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/golang_channel.jpeg" referrerpolicy="no-referrer">
+            </div><p>Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang.</p>]]></description>
+</item>
+<item>
     <title>Go Value Parts</title>
     <link>https://minkj1992.github.io/go-value-parts/</link>
     <pubDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</pubDate>
@@ -97,16 +107,6 @@
             </div><blockquote>
 <p>Let&rsquo;s prepare basic computer science interview questions.</p>
 </blockquote>]]></description>
-</item>
-<item>
-    <title>Elderjs</title>
-    <link>https://minkj1992.github.io/elderjs/</link>
-    <pubDate>Wed, 26 Jul 2023 19:29:12 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/elderjs/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/elderjs.png" referrerpolicy="no-referrer">
-            </div><p><code>Elder.js</code>: an SEO first Svelte Framework &amp; Static Site Generator</p>]]></description>
 </item>
 </channel>
 </rss>
