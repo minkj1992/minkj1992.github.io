@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/mlflow_doc/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-06T18:36:43+09:00" />
-<meta property="article:modified_time" content="2024-04-08T20:27:28+09:00" />
+<meta property="article:modified_time" content="2024-04-08T21:30:22+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  378 ,
-        "url": "https:\/\/minkj1992.github.io\/mlflow_doc\/","datePublished": "2024-04-06T18:36:43+09:00","dateModified": "2024-04-08T20:27:28+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  712 ,
+        "url": "https:\/\/minkj1992.github.io\/mlflow_doc\/","datePublished": "2024-04-06T18:36:43+09:00","dateModified": "2024-04-08T21:30:22+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mlflow Document</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-06">2024-04-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;378 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-06">2024-04-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;712 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -195,7 +195,18 @@
         <li><a href="#tracking-server">Tracking server</a></li>
       </ul>
     </li>
-    <li><a href="#2-llms">2. LLMs</a></li>
+    <li><a href="#2-llms">2. LLMs</a>
+      <ul>
+        <li><a href="#21-concepts">2.1. Concepts</a></li>
+        <li><a href="#22-deployments-server">2.2. Deployments Server</a>
+          <ul>
+            <li><a href="#221-confiquring-and-starting-the-deployments-server">2.2.1. Confiquring and Starting the Deployments Server</a></li>
+            <li><a href="#222-concepts-of-deployments-server">2.2.2. Concepts of Deployments Server</a></li>
+          </ul>
+        </li>
+        <li><a href="#llm-tracking">LLM Tracking</a></li>
+      </ul>
+    </li>
     <li><a href="#3-evaluate">3. Evaluate</a></li>
   </ul>
 </nav></div>
@@ -360,12 +371,188 @@
 <p><a href="https://mlflow.org/docs/latest/llms/index.html" target="_blank" rel="noopener noreffer">https://mlflow.org/docs/latest/llms/index.html</a>
 </p>
 </blockquote>
+<p>MLflow also support for LLMs aims to abstract(with unified interface) inticating processes while building and deploying llm products.</p>
+<h3 id="21-concepts">2.1. Concepts</h3>
+<p>MLflow가 현재(2.11.3) LLM관련 제공하는 feture들을 group화 시키면 아래와 같습니다.</p>
+<ul>
+<li>Deployment Server</li>
+<li>LLM Evaluate</li>
+<li>Prompt Engineering UI</li>
+<li>LLM Tracking System</li>
+</ul>
+<h3 id="22-deployments-server">2.2. Deployments Server</h3>
+<blockquote>
+<p>previously known as AI Gateway, <a href="https://mlflow.org/docs/latest/llms/deployments/index.html" target="_blank" rel="noopener noreffer">learn more</a>
+</p>
+</blockquote>
+<p>Deployments Server simplifies interactions with multiple llm providers. It has a lot of benefits such as following below.</p>
+<ol>
+<li><strong>Unified endpoint</strong>: Don&rsquo;t have to juggle between multiple provider APIs.</li>
+<li>Simplified intefrations</li>
+<li>Secure credential Management
+<ul>
+<li>Manges API keys in centralized storage</li>
+<li>No more hard-coded cert keys</li>
+</ul>
+</li>
+<li><strong>Seamless provider swapping</strong>
+<ul>
+<li>Swap providers without change codes.</li>
+<li>Zero downtime provider, model or route swapping.</li>
+</ul>
+</li>
+</ol>
+<h4 id="221-confiquring-and-starting-the-deployments-server">2.2.1. Confiquring and Starting the Deployments Server</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">$ poetry add <span class="s1">&#39;mlflow[genai]&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">OPENAI_API_KEY</span><span class="o">=</span>your_api_key_here
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>위의 세팅을 한 뒤, 아래 config.yaml을 생성하여 LLM deployment server의 스펙을 정의해줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># config.yaml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">endpoints</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">completions</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">endpoint_type</span><span class="p">:</span><span class="w"> </span><span class="l">llm/v1/completions</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">openai</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gpt-3.5-turbo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">openai_api_key</span><span class="p">:</span><span class="w"> </span><span class="l">$OPENAI_API_KEY</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">limit</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">renewal_period</span><span class="p">:</span><span class="w"> </span><span class="l">minute</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">calls</span><span class="p">:</span><span class="w"> </span><span class="m">10</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">chat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">endpoint_type</span><span class="p">:</span><span class="w"> </span><span class="l">llm/v1/chat</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">openai</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">gpt-3.5-turbo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">openai_api_key</span><span class="p">:</span><span class="w"> </span><span class="l">$OPENAI_API_KEY</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">embeddings</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">endpoint_type</span><span class="p">:</span><span class="w"> </span><span class="l">llm/v1/embeddings</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">model</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">openai</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">text-embedding-ada-002</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">openai_api_key</span><span class="p">:</span><span class="w"> </span><span class="l">$OPENAI_API_KEY</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이후 mlflow deployments cli를 실행시켜줍니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mlflow deployments start-server --config-path config.yaml --port <span class="o">{</span>port<span class="o">}</span> --host <span class="o">{</span>host<span class="o">}</span> --workers <span class="o">{</span>worker count<span class="o">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>cli 명령어가 실행되면 아래 코드가 동작하게 되며 worker를 지정해 준 만큼 uvicorn 객체가 실행됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># mlflow/deployments/server/runner.py</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;-m&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;gunicorn&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;--bind&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;--workers&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workers</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;--worker-class&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="s2">&#34;uvicorn.workers.UvicornWorker&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">app</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">:create_app_from_env()&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="n">env</span><span class="o">=</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="o">**</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">MLFLOW_DEPLOYMENTS_CONFIG</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_path</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>uvicorn은 ASGI를 구현한 구현체이며, 내부적으로 uvloop를 사용하고 있습니다. uvloop는 Cython과 libuv(v8 engine event loop)를 사용해 구현되어있습니다. 보통 uvicorn을 multi process (core, parallel)에서 사용할 때는 gunicorn을 사용하며, uvicorn 내부적으로 <code>uvicorn.workers.UvicornWorker</code>라는 gunicorn과 compatible한 worker 구현체를 가지고 있어 이를 사용합니다. FYI, pyhton 3.12 부터는 sub interpreters가 도입되어, startup에대한 속도를 끌어올렸다고 하는데 더 자세한 내용은 아래를 참고하시면 됩니다. <a href="https://tonybaloney.github.io/posts/sub-interpreter-web-workers.html" target="_blank" rel="noopener noreffer">Running Python Parallel Applications with Sub Interpreters</a>
+. 이걸 보다보면 Ray core나 dask parallel 같은 프레임워크는 GIL을 어떤 방식으로 우회하는지 궁금하네요.</p>
+</blockquote>
+<h4 id="222-concepts-of-deployments-server">2.2.2. Concepts of Deployments Server</h4>
+<ul>
+<li>Provider</li>
+<li>Models</li>
+<li>Routes</li>
+</ul>
+<h3 id="llm-tracking">LLM Tracking</h3>
 <h2 id="3-evaluate">3. Evaluate</h2></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-08&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/a0681398559c090230a555fb76e5a4d6984b2424" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) a0681398559c090230a555fb76e5a4d6984b2424: docs: mlflow ambassador">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a068139</a></span>
+                <span>Updated on 2024-04-08&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/7972bb9eadc1d25ecd5eea4b2b0bedf344ff4bdc" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 7972bb9eadc1d25ecd5eea4b2b0bedf344ff4bdc: docs: mlflow ambassador">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>7972bb9</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
