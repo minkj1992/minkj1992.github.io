@@ -10,7 +10,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/mlflow_doc/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-06T18:36:43+09:00" />
-<meta property="article:modified_time" content="2024-04-08T21:30:22+09:00" />
+<meta property="article:modified_time" content="2024-04-09T17:25:31+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -34,8 +34,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  712 ,
-        "url": "https:\/\/minkj1992.github.io\/mlflow_doc\/","datePublished": "2024-04-06T18:36:43+09:00","dateModified": "2024-04-08T21:30:22+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  1104 ,
+        "url": "https:\/\/minkj1992.github.io\/mlflow_doc\/","datePublished": "2024-04-06T18:36:43+09:00","dateModified": "2024-04-09T17:25:31+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -173,8 +173,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Mlflow Document</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-06">2024-04-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;712 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-06">2024-04-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1104 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -200,8 +200,9 @@
         <li><a href="#21-concepts">2.1. Concepts</a></li>
         <li><a href="#22-deployments-server">2.2. Deployments Server</a>
           <ul>
-            <li><a href="#221-confiquring-and-starting-the-deployments-server">2.2.1. Confiquring and Starting the Deployments Server</a></li>
-            <li><a href="#222-concepts-of-deployments-server">2.2.2. Concepts of Deployments Server</a></li>
+            <li><a href="#benefit">Benefit</a></li>
+            <li><a href="#deep-dive-to-deployments-server">Deep dive to deployments server</a></li>
+            <li><a href="#with-python-code">with python code</a></li>
           </ul>
         </li>
         <li><a href="#llm-tracking">LLM Tracking</a></li>
@@ -385,6 +386,7 @@
 <p>previously known as AI Gateway, <a href="https://mlflow.org/docs/latest/llms/deployments/index.html" target="_blank" rel="noopener noreffer">learn more</a>
 </p>
 </blockquote>
+<h4 id="benefit">Benefit</h4>
 <p>Deployments Server simplifies interactions with multiple llm providers. It has a lot of benefits such as following below.</p>
 <ol>
 <li><strong>Unified endpoint</strong>: Don&rsquo;t have to juggle between multiple provider APIs.</li>
@@ -402,7 +404,7 @@
 </ul>
 </li>
 </ol>
-<h4 id="221-confiquring-and-starting-the-deployments-server">2.2.1. Confiquring and Starting the Deployments Server</h4>
+<h4 id="deep-dive-to-deployments-server">Deep dive to deployments server</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -486,7 +488,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mlflow deployments start-server --config-path config.yaml --port <span class="o">{</span>port<span class="o">}</span> --host <span class="o">{</span>host<span class="o">}</span> --workers <span class="o">{</span>worker count<span class="o">}</span>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mlflow deployments start-server --config-path config.yaml --port <span class="m">8080</span> --host localhost --workers <span class="m">2</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>cli 명령어가 실행되면 아래 코드가 동작하게 되며 worker를 지정해 준 만큼 uvicorn 객체가 실행됩니다.</p>
@@ -540,19 +542,158 @@
 <p>uvicorn은 ASGI를 구현한 구현체이며, 내부적으로 uvloop를 사용하고 있습니다. uvloop는 Cython과 libuv(v8 engine event loop)를 사용해 구현되어있습니다. 보통 uvicorn을 multi process (core, parallel)에서 사용할 때는 gunicorn을 사용하며, uvicorn 내부적으로 <code>uvicorn.workers.UvicornWorker</code>라는 gunicorn과 compatible한 worker 구현체를 가지고 있어 이를 사용합니다. FYI, pyhton 3.12 부터는 sub interpreters가 도입되어, startup에대한 속도를 끌어올렸다고 하는데 더 자세한 내용은 아래를 참고하시면 됩니다. <a href="https://tonybaloney.github.io/posts/sub-interpreter-web-workers.html" target="_blank" rel="noopener noreffer">Running Python Parallel Applications with Sub Interpreters</a>
 . 이걸 보다보면 Ray core나 dask parallel 같은 프레임워크는 GIL을 어떤 방식으로 우회하는지 궁금하네요.</p>
 </blockquote>
-<h4 id="222-concepts-of-deployments-server">2.2.2. Concepts of Deployments Server</h4>
+<p>이제 http://127.0.0.1:8080/docs로 이동하게되면 아래와 같은 swagger를 확인할 수 있습니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/mf_deployment_server.png"
+        data-srcset="/images/mf_deployment_server.png, /images/mf_deployment_server.png 1.5x, /images/mf_deployment_server.png 2x"
+        data-sizes="auto"
+        alt="/images/mf_deployment_server.png"
+        title="/images/mf_deployment_server.png" /></p>
+<p>만약 config.yaml을 수정하고 save 한다면, deployemnt server의 swagger 또한 변경 된것을 확인할 수 있을 겁니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># mlflow/deployments/server/runner.py</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">run_app</span><span class="p">(</span><span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">workers</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">config_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">config_path</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="n">Runner</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">config_path</span><span class="o">=</span><span class="n">config_path</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">workers</span><span class="o">=</span><span class="n">workers</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span> <span class="k">as</span> <span class="n">runner</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">monitor_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&#34;Configuration updated, reloading workers&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">runner</span><span class="o">.</span><span class="n">reload</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이는 deployment server를 실행하게 되면, 아래 gunicorn으로 실행되는 runner 객체가 생성되고 난 뒤, monitor_config(config_path)를 호출 하면서, config file을 계속 watch하고 있기 때문입니다.</p>
+<blockquote>
+<p>만약 아래와 같은 에러가 도중에 발생한다면, known issue(psutil을 따로 관리하는 게 의도된)이므로, 그냥 pip install psutil 또는 poetry add psutil을 통해서 다운로드 받으시면 됩니다.</p>
+</blockquote>
+<pre><code>```
+  File &quot;/Users/minwook/code/personal/mlflow-demo/.venv/lib/python3.11/site-packages/mlflow/gateway/utils.py&quot;, line 71, in kill_child_processes
+    import psutil
+ModuleNotFoundError: No module named 'psutil'
+```
+</code></pre>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Runner</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl">        <span class="k">def</span> <span class="nf">reload</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">kill_child_processes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">pid</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>만약 file에 변경이 일어나게되면 runner.reload()를 통해서 process의 child들인 uvicorn.workers.UvicornWorker들이 종료되게 됩니다. 하지만 parent인 gunicorn은 종료되지 않았기 때문에, 새로운 config를 읽어서 uvicorn worker들이 재실행됩니다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">watchfiles</span> <span class="kn">import</span> <span class="n">watch</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">monitor_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prev_config</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">changes</span> <span class="ow">in</span> <span class="n">watch</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">config_path</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">((</span><span class="n">path</span> <span class="o">==</span> <span class="n">config_path</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">changes</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_path</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">config_path</span><span class="si">}</span><span class="s2"> deleted&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">config</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">config</span> <span class="o">==</span> <span class="n">prev_config</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_load_route_config</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&#34;Invalid configuration: </span><span class="si">%s</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">prev_config</span> <span class="o">=</span> <span class="n">config</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">yield</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>문득 궁금해지는 건, polling 하면서 file을 읽는 부분의 성능적인 이슈를 어떻게 해결했는지인데, 조금만 생각해봐도 file을 polling하면서 계속 watch가 실행된다면 부하가 있을 것 같아서 watchfiles라는 오픈소스를 확인해보니, rust를 호출해서 성능적인 퍼포먼스를 끌어올렸습니다.</p>
+<blockquote>
+<p>watchfile 소스코드를 읽다 보니, rust로 파일을 읽어들이는 것을 확인했다. 글들을 찾아보니 <a href="https://github.com/PyO3/pyo3" target="_blank" rel="noopener noreffer">py03</a>
+를 통해서 python에 대한 rust binding이라고 하는데, 이를 통해서 python을 통해서 rust코드를 호출 할 수 있는 것 처럼 읽혀졌다. 좀 더 찾아보니 numpy 또한 rust를 호출해서 성능을 향상 시키는 시도가 이뤄지고 있다. <a href="https://terencezl.github.io/blog/2023/06/06/a-week-of-pyo3-rust-numpy/" target="_blank" rel="noopener noreffer">PyO3 + rust-numpy</a>
+ 아직도 어떻게 python이 rust binary를 호출하는지 내부구조가 잘 그려지지 않지만 여기까지만 파악하기로 한다.</p>
+</blockquote>
+<p>마지막으로 현재 mlflow는 config에서 endpoint를 설정할 때 아래 3가지 type만 제공하고 있다.</p>
 <ul>
-<li>Provider</li>
-<li>Models</li>
-<li>Routes</li>
+<li>“llm/v1/completions”</li>
+<li>“llm/v1/chat”</li>
+<li>“llm/v1/embeddings”</li>
 </ul>
+<p>이 endpoint는 내부적으로 model provider에 따른 api를 wrapping하고 있다. see follwing url if you want to learn more in detail.</p>
+<p><a href="https://mlflow.org/docs/latest/llms/deployments/index.html#supported-provider-models" target="_blank" rel="noopener noreffer">supported-provider-models</a>
+</p>
+<h4 id="with-python-code">with python code</h4>
+<p>만약 swagger가 아닌 소스코드 상에서, deployment에 접근하고 싶다면 <a href="https://mlflow.org/docs/latest/python_api/mlflow.deployments.html#mlflow.deployments.MlflowDeploymentClient" target="_blank" rel="noopener noreffer">MlflowDeploymentClient</a>
+를 사용하면 됩니다.</p>
 <h3 id="llm-tracking">LLM Tracking</h3>
 <h2 id="3-evaluate">3. Evaluate</h2></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-08&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/7972bb9eadc1d25ecd5eea4b2b0bedf344ff4bdc" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 7972bb9eadc1d25ecd5eea4b2b0bedf344ff4bdc: docs: mlflow ambassador">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>7972bb9</a></span>
+                <span>Updated on 2024-04-09&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/7240075d98877a7767baa5f17eeb99f54a0bbae5" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 7240075d98877a7767baa5f17eeb99f54a0bbae5: docs: mlflow ambassador">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>7240075</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
