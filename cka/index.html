@@ -11,7 +11,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/cka/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-19T12:41:18+09:00" />
-<meta property="article:modified_time" content="2024-04-19T13:07:02+09:00" />
+<meta property="article:modified_time" content="2024-04-19T17:40:03+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -36,8 +36,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  827 ,
-        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-19T13:07:02+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  896 ,
+        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-19T17:40:03+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -175,8 +175,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;827 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;896 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -215,6 +215,7 @@
     </li>
     <li><a href="#kube-proxy">Kube proxy</a></li>
     <li><a href="#pod">Pod</a></li>
+    <li><a href="#replicaset">Replicaset</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
@@ -470,12 +471,53 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">containers</span><span class="p">:</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><ul>
+<li>get node</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">k get po -o wide
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>get yaml from running and edit on runtime</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># if already deployed
+</span></span><span class="line"><span class="cl"># $ k get po redis -o yaml 
+</span></span><span class="line"><span class="cl">$ kubectl run redis --image=redis123 --dry-run=client -o yaml &gt; redis.yaml
+</span></span><span class="line"><span class="cl">$ k create -f redis.yaml
+</span></span><span class="line"><span class="cl">$ k edit or vim redis.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># :%s/redis123/redis
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Q. k edit 으로 containerStatus를 edit하면 어떻게 되는거지?</li>
+</ul>
+<h2 id="replicaset">Replicaset</h2>
+<ul>
+<li>scale</li>
+<li>replace</li>
+</ul></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-19&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/d375a8451a935395b406f0f256d01fa8cbe0d182" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) d375a8451a935395b406f0f256d01fa8cbe0d182: docs: cka">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d375a84</a></span>
+                <span>Updated on 2024-04-19&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/ec00c4690ebe17dd3b2b44f44d09e483dabbd543" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) ec00c4690ebe17dd3b2b44f44d09e483dabbd543: docs: cka">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ec00c46</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

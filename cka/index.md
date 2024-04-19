@@ -186,4 +186,30 @@ spec:
     containers:
 ```
 
+- get node
 
+```
+k get po -o wide
+```
+
+
+
+- get yaml from running and edit on runtime
+
+```
+# if already deployed
+# $ k get po redis -o yaml 
+$ kubectl run redis --image=redis123 --dry-run=client -o yaml > redis.yaml
+$ k create -f redis.yaml
+$ k edit or vim redis.yaml
+
+# :%s/redis123/redis
+```
+
+- Q. k edit 으로 containerStatus를 edit하면 어떻게 되는거지?
+
+## Replicaset
+
+
+- scale
+- replace
