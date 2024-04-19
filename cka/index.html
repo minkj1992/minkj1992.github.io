@@ -5,18 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>cka | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="cka" />
+    <title>CKA certificate | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="CKA certificate" />
 <meta property="og:description" content="MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
 이 참에 cka -&gt; ckad -&gt; cks를 빠르게 따볼 계획이다." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/cka/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-19T12:41:18+09:00" />
-<meta property="article:modified_time" content="2024-04-19T12:41:18+09:00" />
+<meta property="article:modified_time" content="2024-04-19T13:07:02+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
 
-<meta name="twitter:title" content="cka"/>
+<meta name="twitter:title" content="CKA certificate"/>
 <meta name="twitter:description" content="MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
 이 참에 cka -&gt; ckad -&gt; cks를 빠르게 따볼 계획이다."/>
 <meta name="application-name" content="minkj1992">
@@ -26,7 +26,7 @@
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "cka",
+        "headline": "CKA certificate",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -36,8 +36,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  82 ,
-        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-19T12:41:18+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  827 ,
+        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-19T13:07:02+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -172,11 +172,11 @@
             <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">cka</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;82 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;827 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -193,7 +193,28 @@
   <ul>
     <li><a href="#prerequisite">Prerequisite</a></li>
     <li><a href="#planning">Planning</a></li>
-    <li><a href="#studying">Studying</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#cluster-architecture">Cluster architecture</a></li>
+    <li><a href="#docker-vs-containerd">Docker vs containerd</a></li>
+    <li><a href="#etcd">ETCD</a></li>
+    <li><a href="#etcd-in-k8s">etcd in k8s</a></li>
+    <li><a href="#kube-api-server">kube-api server</a></li>
+    <li><a href="#kube-controller-manager">Kube controller manager</a></li>
+    <li><a href="#kube-scheduler">Kube scheduler</a></li>
+    <li><a href="#kubelet">Kubelet</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#the-kubelet-is-the-primary-node-agent-that-runs-on-each-node-it-can-register-the-node-with-the-apiserver">The kubelet is the primary &ldquo;node agent&rdquo; that runs on each node. It can register the node with the <code>apiserver</code></a></li>
+            <li><a href="#the-lifecycle-of-the-kubeadm-cli-tool-is-decoupled-from-the-kubelet-which-is-a-daemon-that-runs-on-each-node-within-the-kubernetes-cluster-it-means-you-have-to-install-kubelet-and-kubeadm-when-you-init-cluster-by-kubeadm">The lifecycle of the kubeadm CLI tool is decoupled from the kubelet, which is a daemon that runs on each node within the Kubernetes cluster. It means you have to install kubelet and kubeadm when you init cluster by kubeadm.</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#kube-proxy">Kube proxy</a></li>
+    <li><a href="#pod">Pod</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
@@ -253,21 +274,215 @@
  셋업해서 로컬에서 연습해볼 예정</li>
 </ol>
 <p>하루 약 3~4시간씩 강의를 들어보자 약 23시간 강의이기 때문에 다 듣는데 약 5~6일 소요되기 때문에, 일주일 뒤에 테스트볼 예정이다. (~ 24.4.26)</p>
-<h2 id="studying">Studying</h2>
+<p>24.04.19 ~</p>
+<h1 id="chapter-2-core-concepts">Chapter 2: Core concepts</h1>
+<h2 id="cluster-architecture">Cluster architecture</h2>
+<ul>
+<li>Master: Manage, Plan, Schedule, Monitor nodes
+<ul>
+<li>etcd cluster: save, distributed</li>
+<li>kube-apiserver: orch all within cluster</li>
+<li>kube controller manager: run many controller (node, replica )</li>
+<li>kube-scheduler</li>
+</ul>
+</li>
+<li>Worker Nodes
+<ul>
+<li>kubelet: api client</li>
+<li>kube-proxy: enable communication with other service</li>
+<li>container runtime
+<ul>
+<li>docker, rkt, containerd, crio, podman&hellip;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="docker-vs-containerd">Docker vs containerd</h2>
+<ul>
+<li>
+<p>k8s(CRI &lt;&mdash; OCI)  &lt;-&gt; runtime (docker, rkt, podman&hellip;)</p>
+</li>
+<li>
+<p>containerd가 실제 k8s의 CRI( container runtime interface)와 호환되며, containerd는 최초의 docker의 runtime</p>
+</li>
+<li>
+<p>crictl is belongs to k8s, netctl and ctl is belongs to containerd</p>
+</li>
+</ul>
+<h2 id="etcd">ETCD</h2>
+<ul>
+<li>key-value store
+<ul>
+<li>stores information in the form of document or pages</li>
+</ul>
+</li>
+</ul>
 <blockquote>
-<p>24.04.19</p>
-</blockquote></div><div class="post-footer" id="post-footer">
+<p><a href="https://tech.kakao.com/2021/12/20/kubernetes-etcd/" target="_blank" rel="noopener noreffer">https://tech.kakao.com/2021/12/20/kubernetes-etcd/</a>
+</p>
+</blockquote>
+<p><a href="https://tech.kakao.com/storage/2021/12/01-2.png" target="_blank" rel="noopener noreffer">etcd kakao</a>
+</p>
+<ul>
+<li>높은 신뢰성을 제공하기 위해 ETCD는 RSM(Replicated state machine)이다.</li>
+<li>이는 똑같은 데이터를 여러 서버에 계속 복제하는 것이고, 이 방법을 사용하는 머신을 RSM이라 칭합니다.</li>
+<li>여러 서버에 복제하게 되면 발생하는 데이터 복제 과정에서 발생하는 여러 문제를 해결하기 위해 consensus를 확보하는 것이 핵심이며, 아래 4가지 속성을 만족한다는 것을 뜻합니다.</li>
+<li>etcd는 Raft알고리즘을 통해 이를 구현합니다.
+<ol>
+<li>Safety</li>
+<li>Available</li>
+<li>Independent from timing</li>
+<li>reactivity</li>
+</ol>
+</li>
+</ul>
+<p><a href="https://medium.com/@extio/deep-dive-into-etcd-a-distributed-key-value-store-a6a7699d3abc" target="_blank" rel="noopener noreffer">etcd dive deep</a>
+</p>
+<ul>
+<li>leader만 write 가능 이후 이를 follower에게 전파하여 append log</li>
+<li>follower는 client로 부터 read 요청을 처리 가능하다. (Q. timinig )</li>
+</ul>
+<p><a href="https://etcd.io/docs/v3.3/learning/api_guarantees/" target="_blank" rel="noopener noreffer">etcd kv api</a>
+</p>
+<p>etcd tries to <strong>ensure the strongest consistency</strong> and durability guarantees for a distributed system. This specification enumerates the <strong>KV API</strong> guarantees made by etcd.</p>
+<ol>
+<li>Atomicity: 모든 API request are atomic</li>
+<li>Consistency: All Api calls ensure <a href="https://en.wikipedia.org/wiki/Consistency_model#Sequential_consistency" target="_blank" rel="noopener noreffer">sequential consistency</a>
+, the strongest consistency guarantee ava from distributed systems</li>
+</ol>
+<ul>
+<li>엄격한 일관성 모델보다 약한 메모리 모델입니다.</li>
+<li>변수에 대한 쓰기는 즉시 표시될 필요는 없지만, 서로 다른 프로세서에 의한 변수에 대한 쓰기는 모든 프로세서에서 동일한 순서로 표시되어야 합니다.</li>
+<li>모든 실행 결과가 데이터 저장소에 있는 모든 프로세스의 (읽기 및 쓰기) 작업이 순차적 순서로 실행된 것과 동일하고 각 개별 프로세서의 작업이 이 순서대로 나타나는 경우 순차적 일관성이 충족됩니다</li>
+</ul>
+<p>For watch operations, etcd guarantees to return the same value for the same key across all members for the same revision.</p>
+<blockquote>
+<p>it is impossible for etcd to ensure strict consistency. etcd does not guarantee that it will return to a read the “most recent” value (as measured by a wall clock when a request is completed) available on any cluster member.</p>
+</blockquote>
+<h2 id="etcd-in-k8s">etcd in k8s</h2>
+<p><code>--advertise-client-urls</code>(internal_ip:3479): uri that etcd will listen, kubeapi가 여기로 접근</p>
+<h2 id="kube-api-server">kube-api server</h2>
+<blockquote>
+<p><a href="https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/docs/02-Core-Concepts/06-Kube-API-Server.md" target="_blank" rel="noopener noreffer">https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/docs/02-Core-Concepts/06-Kube-API-Server.md</a>
+</p>
+</blockquote>
+<ul>
+<li>We can trigger kube-apiserver by kubectl and kubeadm or directly we can send request to kube-apiserver by api(i.g. curl)</li>
+<li>Kube-apiserver is the only componenet that iteracts directly to the etcd datastore</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -X POST /api/v1/namespaces/default/pods ... [other]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>Authenticate User</li>
+<li>Validate Request</li>
+<li>Retrieve data</li>
+<li>Update ETCD</li>
+<li>Scheduler
+<ul>
+<li>kube-scheduler keep watching kube-apiserver so that it can know when etcd changes</li>
+<li>etcd changed -&gt; scheduler check and identifies right node to put pod on -&gt; request to kube-apiserver -&gt; send request to kubelet</li>
+</ul>
+</li>
+<li>kubelet</li>
+</ol>
+<h2 id="kube-controller-manager">Kube controller manager</h2>
+<p>Kube Controller manager manages various controllers in k8s. Then what is controller?</p>
+<p>In k8s terms, a controller is a process that continuously monitors the state of the componenets within the system and works towards bringing the whole system to the desired functioning state</p>
+<blockquote>
+<p>In Kubernetes, controllers are control <strong>loops</strong> that watch the state of your cluster, then make or request changes where needed. Each controller tries to move the current cluster state closer to the desired state</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">--node-monitor-period duration     Default: 5s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">--node-monitor-grace-period duration     Default: 40s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/#taint-based-evictions
+</span></span><span class="line"><span class="cl">`pod-eviction-timeout flag is deprecated as per v1.26 . -&gt; tolerationSeconds
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="kube-scheduler">Kube scheduler</h2>
+<p>Kube-scheduler is responsible for scheduling pods on nodes. The kube-schduler is only responsible for deciding which pod goes on which node. It doesn&rsquo;t actually place the pod on the nodes, that&rsquo;s the job of the <code>kubelet</code></p>
+<p>Schedule pod &lt;-&gt; node</p>
+<ol>
+<li>Filter Nodes</li>
+<li>Rank Nodes</li>
+<li>Post state which node to shcdule</li>
+</ol>
+<h2 id="kubelet">Kubelet</h2>
+<h4 id="the-kubelet-is-the-primary-node-agent-that-runs-on-each-node-it-can-register-the-node-with-the-apiserver">The kubelet is the primary &ldquo;node agent&rdquo; that runs on each node. It can register the node with the <code>apiserver</code></h4>
+<h4 id="the-lifecycle-of-the-kubeadm-cli-tool-is-decoupled-from-the-kubelet-which-is-a-daemon-that-runs-on-each-node-within-the-kubernetes-cluster-it-means-you-have-to-install-kubelet-and-kubeadm-when-you-init-cluster-by-kubeadm">The lifecycle of the kubeadm CLI tool is decoupled from the kubelet, which is a daemon that runs on each node within the Kubernetes cluster. It means you have to install kubelet and kubeadm when you init cluster by kubeadm.</h4>
+<ul>
+<li>The kubelet will create the pods on the Nodes</li>
+<li>Monitor Node &amp; Pods</li>
+</ul>
+<h2 id="kube-proxy">Kube proxy</h2>
+<ul>
+<li>kube-proxy is a network proxy that runs on each node in cluster, implementing part of the kubernetes <code>Service</code> concept.</li>
+<li>kube-proxy maintains network rules on nodes, allow network communication to pods from network sessions inside or outside of cluster.</li>
+<li>It uses the operating system packet filtering layer (OSI-L3) if can.</li>
+</ul>
+<h2 id="pod">Pod</h2>
+<ul>
+<li>single container pod</li>
+<li>multi-container pod
+<ul>
+<li>pod &lt;-localhost-&gt; helper containers, also shares persist vol</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-19</span>
+                <span>Updated on 2024-04-19&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/d375a8451a935395b406f0f256d01fa8cbe0d182" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) d375a8451a935395b406f0f256d01fa8cbe0d182: docs: cka">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d375a84</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
                             <a class="link-to-markdown" href="/cka/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/cka/" data-title="cka" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/cka/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/cka/" data-title="cka"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/cka/" data-title="cka"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/cka/" data-title="cka" data-image="/images/cka1.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/cka/" data-title="CKA certificate" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/cka/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/cka/" data-title="CKA certificate"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/cka/" data-title="CKA certificate"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/cka/" data-title="CKA certificate" data-image="/images/cka1.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
