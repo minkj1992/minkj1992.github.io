@@ -4,7 +4,18 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>dev - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 06 Apr 2024 18:36:43 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 19 Apr 2024 12:41:18 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>cka</title>
+    <link>https://minkj1992.github.io/cka/</link>
+    <pubDate>Fri, 19 Apr 2024 12:41:18 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/cka/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/cka1.png" referrerpolicy="no-referrer">
+            </div><p>MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
+이 참에 cka -&gt; ckad -&gt; cks를 빠르게 따볼 계획이다.</p>]]></description>
+</item>
+<item>
     <title>Mlflow Document</title>
     <link>https://minkj1992.github.io/mlflow_doc/</link>
     <pubDate>Sat, 06 Apr 2024 18:36:43 &#43;0900</pubDate>
@@ -96,16 +107,6 @@ What is MLOps?  Continuous Tranning pipeline Model CI / CD  Levels of MLOps 0단
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/prototype_in_js.png" referrerpolicy="no-referrer">
             </div><p>What is difference between <strong><code>__proto__</code></strong>, <strong><code>prototype</code></strong>, <strong><code>[[Prototype]]</code></strong></p>]]></description>
-</item>
-<item>
-    <title>Typescript Better Enum</title>
-    <link>https://minkj1992.github.io/typescript_enum/</link>
-    <pubDate>Fri, 10 Nov 2023 09:49:33 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/typescript_enum/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/tsenum.png" referrerpolicy="no-referrer">
-            </div><p>Typescript Better Enum</p>]]></description>
 </item>
 </channel>
 </rss>

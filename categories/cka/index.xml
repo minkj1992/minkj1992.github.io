@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>cka - Category - minkj1992</title>
+        <link>https://minkj1992.github.io/categories/cka/</link>
+        <description>cka - Category - minkj1992</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 19 Apr 2024 12:41:18 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/cka/" rel="self" type="application/rss+xml" /><item>
+    <title>cka</title>
+    <link>https://minkj1992.github.io/cka/</link>
+    <pubDate>Fri, 19 Apr 2024 12:41:18 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/cka/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/cka1.png" referrerpolicy="no-referrer">
+            </div><p>MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
+이 참에 cka -&gt; ckad -&gt; cks를 빠르게 따볼 계획이다.</p>]]></description>
+</item>
+</channel>
+</rss>
