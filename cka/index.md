@@ -311,12 +311,120 @@ spec:
 
 ![](/images/multi_node_nodeport.png)
 
-let's look at what happens when the Pods are distributed across multiple nodes.
+Let's look at what happens when the Pods are distributed across multiple nodes. In this case, we have the web application on Pods on separate nodes in the cluster, When we create a service, without having to do any additional configuration.
 
-In this case, we have the web application on Pods on separate nodes in the cluster, When we create a service, without having to do any additional configuration.
+Kubernetes automatically creates a service that spans **across all the nodes in the cluster** and **maps the target port to the same node port on all the nodes in the cluster.** 
 
-Kubernetes automatically creates a service that spans **across all the nodes in the cluster** and **maps the target port to the same node port on all the nodes in the cluster.**
+**This way you can access your application using the IP of any node in the cluster and using the same port number which in this case is 30,008.** As you can see, using the IP of any of these nodes, and I'm trying to curl to the same port, and the same port is made available on all the nodes part of the cluster.
 
-**This way you can access your application using the IP of any node in the cluster and using the same port number which in this case is 30,008.**
+#### ClusterIP
 
-As you can see, using the IP of any of these nodes, and I'm trying to curl to the same port, and the same port is made available on all the nodes part of the cluster.
+- The service creates a **Virtual IP** inside the cluster to enable communication between different services such as a set of frontend servers to a set of backend servers.
+- **A kubernetes service can help us group the pods together and provide a single interface to access the pod in a group.**
+
+![](/images/k8s_clusterip.png)
+
+
+#### LoadBalancer
+
+Where the service provisions a loadbalancer for our application in supported cloud providers.
+
+
+## Namespaces
+
+In k8s, namespaces provide a mechanism for **isolating groups of resources** within a single cluster. Names of resoures need to be unique within a namespace, but not across namespaces.
+
+> This means that when we have namespaces such as (dev, sandbox, prod), then we can generate golang backend pods for each environment respectively(accordingly).
+
+![](/images/k8s-namespace-isolation.png)
+
+#### namespace cli
+
+```python
+$ k get ns
+NAME              STATUS   AGE
+kube-system       Active   9m56s
+kube-public       Active   9m56s
+kube-node-lease   Active   9m56s
+default           Active   9m56s
+finance           Active   22s
+marketing         Active   22s
+dev               Active   21s
+prod              Active   21s
+manufacturing     Active   21s
+research          Active   21s
+
+$ k get ns --no-headers | wc -l
+10
+
+$ k get po -n=research --no-headers | wc -l
+2
+```
+
+```python
+# create and run pod with finance namespace
+# 생각해보니까 apply, create으로 pod 직접적으로 만들지 않았던 것 같네. 곧바로 run 했던 것 같은데, run = create + run like docker
+k run redis -n=finance --image=redis
+
+```
+
+```python
+# swich ns
+$ kubectl config set-context $(kubectl config current-context) --namespace=dev
+
+# view pods in all namespace
+$ kubectl get pods --all-namespaces
+```
+
+#### kubernetes DNS rule
+
+![](/images/k8s_dns_rule.png)
+
+- <Service_Name>.<Namespace>.svc.cluster.local
+
+- same namespace: just use service name
+- another namespace: db-service.dev.svc.cluster.local
+
+#### deterministic namespace
+
+- If you want to make sure that this pod gets you created in the dev env all the time, even if you don't specify in the command line, you can move the --namespace definition into the pod-definition file.
+
+```yaml
+# or $ kubectl create -f pod-definition.yaml --namespace=dev
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  namespace: dev
+  labels:
+     app: myapp
+     type: front-end
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+```
+
+
+#### ResourceQuota
+
+- To limit resources in a namespace, create a resource quota. To create one start with ResourceQuota definition file.
+
+![](/images/k8s_ns_resource_quota.png)
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-quota
+  namespace: dev
+spec:
+  hard:
+    pods: "10"
+    requests.cpu: "4"
+    requests.memory: 5Gi
+    limits.cpu: "10"
+    limits.memory: 10Gi
+```
+
