@@ -210,6 +210,113 @@ $ k edit or vim redis.yaml
 
 ## Replicaset
 
+- It is often used to guarantee the availability of a specified number of identical pods
+- Pods created from ReplicaSets can be distributed and executed on multiple nodes based on schduling, topologySpreadConstraints(affinity, maxSkew, labelSelector ..)
 
+
+```sh
 - scale
 - replace
+```
+
+## Deployments
+
+A Deployment provides declarative updates for Pods and ReplicaSets.
+
+The following are typical use cases for deployments
+
+1. rollout a ReplicaSet
+2. Declare the new state of the Pods
+3. Rollback to earlier deployment revision
+4. Scale out deployment
+5. Pause the rollout of a deployment
+
+
+> ReplicaSet-A for controlling your pods, then You wish to update your pods to a newer version, now you should create Replicaset-B, scale down ReplicaSet-A and scale up ReplicaSet-B by one step repeatedly **(This process is known as rolling update).**
+
+
+```sh
+k api-resources | grep deployment
+k create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
+```
+
+## Services
+
+Kubernetes Services enables communication between various components within and outside of the application.
+
+- NodePort: Where the service makes an internal port accessible on a port on the NODE.
+- ClusterIP
+- LoadBalancer
+
+#### NodePort
+
+- NodePort uses node machine's port and Node's IP.
+
+![](/images/k8s-nodeport1.png)
+
+Kubernetes sets up a cluster IP address, the same as if you had requested a Service of `type: ClusterIP` (10.106.1.12)
+
+- To connect the service to the pod, use selector
+
+
+```yaml
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-svc
+spec:
+  type: NodePort
+  ports:
+  - targetPort: 80
+    port: 80
+    nodePort: 30008
+  selector:
+    app: myapp
+    type: front-end
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+
+```
+
+
+**service.spec.selector must be equal to pod.metadata.labels** to connect each other.
+
+#### How do I verify if the NodePort service and the pod are properly connected?
+> To confirm whether the service and the pod are properly connected, we can check the endpoints via the service describe as shown below, and then compare them with the IP of the pod.
+
+![](/images/nodeport-with-pod.png)
+
+
+#### A service with multipe pods with single service
+
+- Random algorithm is used to balance the load of traffic
+- Session Affinity: yes in this case
+
+![](/images/multi_pod_nodeport.png)
+
+#### When pods are distributed across multiple nodes
+
+![](/images/multi_node_nodeport.png)
+
+let's look at what happens when the Pods are distributed across multiple nodes.
+
+In this case, we have the web application on Pods on separate nodes in the cluster, When we create a service, without having to do any additional configuration.
+
+Kubernetes automatically creates a service that spans **across all the nodes in the cluster** and **maps the target port to the same node port on all the nodes in the cluster.**
+
+**This way you can access your application using the IP of any node in the cluster and using the same port number which in this case is 30,008.**
+
+As you can see, using the IP of any of these nodes, and I'm trying to curl to the same port, and the same port is made available on all the nodes part of the cluster.

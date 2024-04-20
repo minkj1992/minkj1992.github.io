@@ -11,7 +11,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/cka/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-19T12:41:18+09:00" />
-<meta property="article:modified_time" content="2024-04-19T17:40:03+09:00" />
+<meta property="article:modified_time" content="2024-04-19T21:16:45+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -36,8 +36,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  896 ,
-        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-19T17:40:03+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  1357 ,
+        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-19T21:16:45+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -175,8 +175,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;896 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1357 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -216,6 +216,19 @@
     <li><a href="#kube-proxy">Kube proxy</a></li>
     <li><a href="#pod">Pod</a></li>
     <li><a href="#replicaset">Replicaset</a></li>
+    <li><a href="#deployments">Deployments</a></li>
+    <li><a href="#services">Services</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#nodeport">NodePort</a></li>
+            <li><a href="#how-do-i-verify-if-the-nodeport-service-and-the-pod-are-properly-connected">How do I verify if the NodePort service and the pod are properly connected?</a></li>
+            <li><a href="#a-service-with-multipe-pods-with-single-service">A service with multipe pods with single service</a></li>
+            <li><a href="#when-pods-are-distributed-across-multiple-nodes">When pods are distributed across multiple nodes</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
@@ -510,14 +523,172 @@
 </ul>
 <h2 id="replicaset">Replicaset</h2>
 <ul>
-<li>scale</li>
-<li>replace</li>
-</ul></div><div class="post-footer" id="post-footer">
+<li>It is often used to guarantee the availability of a specified number of identical pods</li>
+<li>Pods created from ReplicaSets can be distributed and executed on multiple nodes based on schduling, topologySpreadConstraints(affinity, maxSkew, labelSelector ..)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">- scale
+</span></span><span class="line"><span class="cl">- replace
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="deployments">Deployments</h2>
+<p>A Deployment provides declarative updates for Pods and ReplicaSets.</p>
+<p>The following are typical use cases for deployments</p>
+<ol>
+<li>rollout a ReplicaSet</li>
+<li>Declare the new state of the Pods</li>
+<li>Rollback to earlier deployment revision</li>
+<li>Scale out deployment</li>
+<li>Pause the rollout of a deployment</li>
+</ol>
+<blockquote>
+<p>ReplicaSet-A for controlling your pods, then You wish to update your pods to a newer version, now you should create Replicaset-B, scale down ReplicaSet-A and scale up ReplicaSet-B by one step repeatedly <strong>(This process is known as rolling update).</strong></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">k api-resources <span class="p">|</span> grep deployment
+</span></span><span class="line"><span class="cl">k create deployment --image<span class="o">=</span>nginx nginx --replicas<span class="o">=</span><span class="m">4</span> --dry-run<span class="o">=</span>client -o yaml &gt; nginx-deployment.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="services">Services</h2>
+<p>Kubernetes Services enables communication between various components within and outside of the application.</p>
+<ul>
+<li>NodePort: Where the service makes an internal port accessible on a port on the NODE.</li>
+<li>ClusterIP</li>
+<li>LoadBalancer</li>
+</ul>
+<h4 id="nodeport">NodePort</h4>
+<ul>
+<li>NodePort uses node machine&rsquo;s port and Node&rsquo;s IP.</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-nodeport1.png"
+        data-srcset="/images/k8s-nodeport1.png, /images/k8s-nodeport1.png 1.5x, /images/k8s-nodeport1.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-nodeport1.png"
+        title="/images/k8s-nodeport1.png" /></p>
+<p>Kubernetes sets up a cluster IP address, the same as if you had requested a Service of <code>type: ClusterIP</code> (10.106.1.12)</p>
+<ul>
+<li>To connect the service to the pod, use selector</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">myapp-svc</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">NodePort</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nodePort</span><span class="p">:</span><span class="w"> </span><span class="m">30008</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">front-end</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">myapp-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">myapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">front-end</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx-container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>service.spec.selector must be equal to pod.metadata.labels</strong> to connect each other.</p>
+<h4 id="how-do-i-verify-if-the-nodeport-service-and-the-pod-are-properly-connected">How do I verify if the NodePort service and the pod are properly connected?</h4>
+<blockquote>
+<p>To confirm whether the service and the pod are properly connected, we can check the endpoints via the service describe as shown below, and then compare them with the IP of the pod.</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/nodeport-with-pod.png"
+        data-srcset="/images/nodeport-with-pod.png, /images/nodeport-with-pod.png 1.5x, /images/nodeport-with-pod.png 2x"
+        data-sizes="auto"
+        alt="/images/nodeport-with-pod.png"
+        title="/images/nodeport-with-pod.png" /></p>
+<h4 id="a-service-with-multipe-pods-with-single-service">A service with multipe pods with single service</h4>
+<ul>
+<li>Random algorithm is used to balance the load of traffic</li>
+<li>Session Affinity: yes in this case</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/multi_pod_nodeport.png"
+        data-srcset="/images/multi_pod_nodeport.png, /images/multi_pod_nodeport.png 1.5x, /images/multi_pod_nodeport.png 2x"
+        data-sizes="auto"
+        alt="/images/multi_pod_nodeport.png"
+        title="/images/multi_pod_nodeport.png" /></p>
+<h4 id="when-pods-are-distributed-across-multiple-nodes">When pods are distributed across multiple nodes</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/multi_node_nodeport.png"
+        data-srcset="/images/multi_node_nodeport.png, /images/multi_node_nodeport.png 1.5x, /images/multi_node_nodeport.png 2x"
+        data-sizes="auto"
+        alt="/images/multi_node_nodeport.png"
+        title="/images/multi_node_nodeport.png" /></p>
+<p>let&rsquo;s look at what happens when the Pods are distributed across multiple nodes.</p>
+<p>In this case, we have the web application on Pods on separate nodes in the cluster, When we create a service, without having to do any additional configuration.</p>
+<p>Kubernetes automatically creates a service that spans <strong>across all the nodes in the cluster</strong> and <strong>maps the target port to the same node port on all the nodes in the cluster.</strong></p>
+<p><strong>This way you can access your application using the IP of any node in the cluster and using the same port number which in this case is 30,008.</strong></p>
+<p>As you can see, using the IP of any of these nodes, and I&rsquo;m trying to curl to the same port, and the same port is made available on all the nodes part of the cluster.</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-19&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/ec00c4690ebe17dd3b2b44f44d09e483dabbd543" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) ec00c4690ebe17dd3b2b44f44d09e483dabbd543: docs: cka">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ec00c46</a></span>
+                <span>Updated on 2024-04-19&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/ba1cab64daa6d876447fd460d566930a0b4208a6" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) ba1cab64daa6d876447fd460d566930a0b4208a6: docs: cka">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ba1cab6</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
