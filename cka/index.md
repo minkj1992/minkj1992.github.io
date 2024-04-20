@@ -155,9 +155,7 @@ Schedule pod <-> node
 
 ## Kubelet
 
-#### The kubelet is the primary "node agent" that runs on each node. It can register the node with the `apiserver`
-
-#### The lifecycle of the kubeadm CLI tool is decoupled from the kubelet, which is a daemon that runs on each node within the Kubernetes cluster. It means you have to install kubelet and kubeadm when you init cluster by kubeadm. 
+The kubelet is the primary "node agent" that runs on each node. It can register the node with the `apiserver`. The lifecycle of the kubeadm CLI tool is decoupled from the kubelet, which is a daemon that runs on each node within the Kubernetes cluster. It means you have to install kubelet and kubeadm when you init cluster by kubeadm. 
 
 - The kubelet will create the pods on the Nodes
 - Monitor Node & Pods
