@@ -5,37 +5,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>(WIP) Go Channel and Scheduler | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="(WIP) Go Channel and Scheduler" />
-<meta property="og:description" content="go channel and scheduler" />
+    <title>Bike sharing demand | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Bike sharing demand" />
+<meta property="og:description" content="Kaggle Project #1 - Bike Sharing Demand" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://minkj1992.github.io/go-channel/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-03-04T20:21:47+09:00" />
-<meta property="article:modified_time" content="2024-04-08T20:27:28+09:00" />
+<meta property="og:url" content="https://minkj1992.github.io/linear_regression/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-05T16:56:48+09:00" />
+<meta property="article:modified_time" content="2024-04-05T16:56:48+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
 
-<meta name="twitter:title" content="(WIP) Go Channel and Scheduler"/>
-<meta name="twitter:description" content="go channel and scheduler"/>
+<meta name="twitter:title" content="Bike sharing demand"/>
+<meta name="twitter:description" content="Kaggle Project #1 - Bike Sharing Demand"/>
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/go-channel/" /><link rel="prev" href="https://minkj1992.github.io/concurrency-go/" /><link rel="next" href="https://minkj1992.github.io/linear_regression/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/linear_regression/" /><link rel="prev" href="https://minkj1992.github.io/go-channel/" /><link rel="next" href="https://minkj1992.github.io/mlflow_doc/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "(WIP) Go Channel and Scheduler",
+        "headline": "Bike sharing demand",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/minkj1992.github.io\/go-channel\/"
+            "@id": "https:\/\/minkj1992.github.io\/linear_regression\/"
         },"image": [{
                             "@type": "ImageObject",
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  120 ,
-        "url": "https:\/\/minkj1992.github.io\/go-channel\/","datePublished": "2024-03-04T20:21:47+09:00","dateModified": "2024-04-08T20:27:28+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "ml","wordcount":  325 ,
+        "url": "https:\/\/minkj1992.github.io\/linear_regression\/","datePublished": "2024-04-05T16:56:48+09:00","dateModified": "2024-04-05T16:56:48+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -170,105 +170,103 @@
             <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">(WIP) Go Channel and Scheduler</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Bike sharing demand</h1><h2 class="single-subtitle">Linear regression</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-04">2024-03-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;120 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/ai/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>ai</a>&nbsp;<a href="/categories/ml/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>ml</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-05">2024-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;325 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/go-scheduler.png"
-        data-srcset="/images/go-scheduler.png, /images/go-scheduler.png 1.5x, /images/go-scheduler.png 2x"
+        data-src="/images/bike_sharing.png"
+        data-srcset="/images/bike_sharing.png, /images/bike_sharing.png 1.5x, /images/bike_sharing.png 2x"
         data-sizes="auto"
-        alt="/images/go-scheduler.png"
-        title="/images/go-scheduler.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/bike_sharing.png"
+        title="/images/bike_sharing.png" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#make-channel">Make channel</a></li>
-    <li><a href="#if-full">If full?</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#refs">Refs</a></li>
+    <li><a href="#kaggle-project-1---bike-sharing-demand">Kaggle Project #1 - Bike Sharing Demand</a>
+      <ul>
+        <li><a href="#dataset">Dataset</a>
+          <ul>
+            <li><a href="#evaluation-metrics">Evaluation metrics</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#submission">Submission</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>go channel and scheduler</p>
-<h1 id="1-go-channels">1. Go channels</h1>
-<blockquote>
-<p>Understanding Channels</p>
-</blockquote>
-<h2 id="make-channel">Make channel</h2>
-<ol>
-<li>G1, G2</li>
-</ol>
+            </div><div class="content" id="content"><p>Kaggle Project #1 - Bike Sharing Demand</p>
+<h2 id="kaggle-project-1---bike-sharing-demand">Kaggle Project #1 - Bike Sharing Demand</h2>
 <ul>
-<li>channel has mutex</li>
-<li>copy elements</li>
-</ul>
-<h2 id="if-full">If full?</h2>
-<p>P: context for scheduling</p>
-<ol>
-<li>P는 context를 들고 있으며, channel buffer가 full 되면 full된 버퍼로 task를 send하는 goroutine은 pausing되며 (receiver goroutine이 pause되는게 아니다.)</li>
-<li>go runtime scheduler로 <code>gopark</code>이 호출하여, pause를 진행한다.</li>
-<li>sender goroutine은 waiting state가 되며, 해당 고루틴의 os thread (M)과의 association을 지운다.</li>
-<li>Q. wait되는 goroutine은 어디에 저장되는가? (<a href="https://www.linkedin.com/pulse/golang-how-does-goroutine-parks-chung-yi-kao/" target="_blank" rel="noopener noreffer">https://www.linkedin.com/pulse/golang-how-does-goroutine-parks-chung-yi-kao/</a>
-) gobuf는 g struct안의 sched에서 사용된다.</li>
-<li>P가 들고있던 run queue에서 runnable goroutine을 pop한다.</li>
-</ol>
-<h1 id="2-go-scheduler">2. Go scheduler</h1>
-<blockquote>
-<p>Go scheduler: Implementing language with lightweight concurrency</p>
-</blockquote>
-<h2 id="refs">Refs</h2>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=-K11rY57K7k" target="_blank" rel="noopener noreffer">원본 유튜브 영상</a>
-</li>
-<li><a href="https://changhoi.kim/posts/go/go-scheduler/" target="_blank" rel="noopener noreffer">한글: go scheduler</a>
-</li>
-<li><a href="https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html" target="_blank" rel="noopener noreffer">Schduling In Go</a>
-</li>
-<li><a href="https://medium.com/@ankur_anand/illustrated-tales-of-go-runtime-scheduler-74809ef6d19b" target="_blank" rel="noopener noreffer">Illustrated Tales of Go Runtime Scheduler.</a>
-</li>
-<li><a href="https://www.linkedin.com/pulse/go-concurrency-series-deep-dive-scheduleri-pratik-pandey-mhx4e/" target="_blank" rel="noopener noreffer">Go Concurrency Series: Deep Dive into Go Scheduler(I)</a>
-</li>
-<li>c.f <a href="https://www.dabeaz.com/GIL/" target="_blank" rel="noopener noreffer">Understanding the python GIL</a>
-
-<ul>
-<li><a href="https://dabeaz.blogspot.com/2010/02/revisiting-thread-priorities-and-new.html" target="_blank" rel="noopener noreffer">https://dabeaz.blogspot.com/2010/02/revisiting-thread-priorities-and-new.html</a>
+<li>Source: <a href="https://www.kaggle.com/c/bike-sharing-demand" target="_blank" rel="noopener noreffer">https://www.kaggle.com/c/bike-sharing-demand</a>
 </li>
 </ul>
+<p>Bike sharing systems are a means of renting bicycles where the process of obtaining membership, rental, and bike return is automated via a network of kiosk locations throughout a city. Using these systems, people are able rent a bike from a one location and return it to a different place on an as-needed basis. Currently, there are over 500 bike-sharing programs around the world.</p>
+<p>The data generated by these systems makes them attractive for researchers because the duration of travel, departure location, arrival location, and time elapsed is explicitly recorded. Bike sharing systems therefore function as a sensor network, which can be used for studying mobility in a city. In this competition, participants are asked to combine historical usage patterns with weather data in order to forecast bike rental demand in the Capital Bikeshare program in Washington, D.C.</p>
+<h3 id="dataset">Dataset</h3>
+<ul>
+<li>datetime - hourly date + timestamp</li>
+<li>season -  1 = spring, 2 = summer, 3 = fall, 4 = winter</li>
+<li>holiday - whether the day is considered a holiday</li>
+<li>workingday - whether the day is neither a weekend nor holiday</li>
+<li>weather
+<ul>
+<li>1: Clear, Few clouds, Partly cloudy, Partly cloudy</li>
+<li>2: Mist + Cloudy, Mist + Broken clouds, Mist + Few clouds, Mist</li>
+<li>3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds</li>
+<li>4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog</li>
+</ul>
 </li>
-</ul></div><div class="post-footer" id="post-footer">
+<li>temp - temperature in Celsius</li>
+<li>atemp - &quot;feels like&quot; temperature in Celsius</li>
+<li>humidity - relative humidity</li>
+<li>windspeed - wind speed</li>
+<li>casual - number of non-registered user rentals initiated</li>
+<li>registered - number of registered user rentals initiated</li>
+<li>count - number of total rentals</li>
+</ul>
+<h4 id="evaluation-metrics">Evaluation metrics</h4>
+<p>$$
+\sqrt{\frac{1}{n} \sum_{i=1}^n (\log(p_i + 1) - \log(a_i+1))^2 }
+$$</p>
+<ul>
+<li>n  is the number of hours in the test set</li>
+<li>pi is your predicted count</li>
+<li>ai is the actual count</li>
+<li>log(x) is the natural logarithm&quot;</li>
+</ul>
+<h2 id="submission">Submission</h2>
+<script src="https://gist.github.com/minkj1992/665a428254979cd2d9abc184d24bb8f9.js"></script></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-08&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/a0681398559c090230a555fb76e5a4d6984b2424" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) a0681398559c090230a555fb76e5a4d6984b2424: docs: mlflow ambassador">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a068139</a></span>
+                <span>Updated on 2024-04-05</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/go-channel/index.md" target="_blank">Read Markdown</a>
+                            <a class="link-to-markdown" href="/linear_regression/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/go-channel/" data-title="(WIP) Go Channel and Scheduler" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/go-channel/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/go-channel/" data-title="(WIP) Go Channel and Scheduler"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/go-channel/" data-title="(WIP) Go Channel and Scheduler"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/go-channel/" data-title="(WIP) Go Channel and Scheduler" data-image="/images/go-scheduler.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/linear_regression/" data-title="Bike sharing demand" data-hashtags="ml"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/linear_regression/" data-hashtag="ml"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/linear_regression/" data-title="Bike sharing demand"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/linear_regression/" data-title="Bike sharing demand"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/linear_regression/" data-title="Bike sharing demand" data-image="/images/bike_sharing.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/ml/">ml</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/concurrency-go/" class="prev" rel="prev" title="Concurrency Go"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Concurrency Go</a>
-            <a href="/linear_regression/" class="next" rel="next" title="Bike sharing demand">Bike sharing demand<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/go-channel/" class="prev" rel="prev" title="(WIP) Go Channel and Scheduler"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>(WIP) Go Channel and Scheduler</a>
+            <a href="/mlflow_doc/" class="next" rel="next" title="Mlflow Document">Mlflow Document<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
