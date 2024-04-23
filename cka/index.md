@@ -426,3 +426,25 @@ spec:
     limits.memory: 10Gi
 ```
 
+## Imperative
+
+```python
+$ k run nginx-pod --image=nginx:alpine
+$ k run redis --image=redis:alpine --labels="tier=db"
+$ k expose po redis --port=6379 --name=redis-service
+$ k create deploy webapp --image=kodekloud/webapp-color --replicas=3
+$ k run custom-nginx --image=nginx --port=8080
+$ k create ns dev-ns
+$ k create deploy redis-deploy -n dev-ns --image=redis --replicas=2
+$ k run httpd --image=httpd:alpine && k expose po httpd --port=80 --name=httpd
+```
+
+
+# Chapter 3: Schedule
+
+## Taint and toleration
+
+```py
+# Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule
+k taint nodes node01 spray=mortein:NoSchedule
+```

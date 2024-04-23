@@ -36,7 +36,7 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  1724 ,
+                        }],"genre": "posts","keywords": "dev","wordcount":  1820 ,
         "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-20T19:39:42+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
@@ -175,7 +175,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1724 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1820 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -234,6 +234,11 @@
         </li>
       </ul>
     </li>
+    <li><a href="#imperative">Imperative</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#taint-and-toleration">Taint and toleration</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
@@ -884,6 +889,41 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">limits.cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;10&#34;</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">limits.memory</span><span class="p">:</span><span class="w"> </span><span class="l">10Gi</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="imperative">Imperative</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">run</span> <span class="n">nginx</span><span class="o">-</span><span class="n">pod</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">nginx</span><span class="p">:</span><span class="n">alpine</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">run</span> <span class="n">redis</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">redis</span><span class="p">:</span><span class="n">alpine</span> <span class="o">--</span><span class="n">labels</span><span class="o">=</span><span class="s2">&#34;tier=db&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">expose</span> <span class="n">po</span> <span class="n">redis</span> <span class="o">--</span><span class="n">port</span><span class="o">=</span><span class="mi">6379</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="n">redis</span><span class="o">-</span><span class="n">service</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">create</span> <span class="n">deploy</span> <span class="n">webapp</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">kodekloud</span><span class="o">/</span><span class="n">webapp</span><span class="o">-</span><span class="n">color</span> <span class="o">--</span><span class="n">replicas</span><span class="o">=</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">run</span> <span class="n">custom</span><span class="o">-</span><span class="n">nginx</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">nginx</span> <span class="o">--</span><span class="n">port</span><span class="o">=</span><span class="mi">8080</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">create</span> <span class="n">ns</span> <span class="n">dev</span><span class="o">-</span><span class="n">ns</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">create</span> <span class="n">deploy</span> <span class="n">redis</span><span class="o">-</span><span class="n">deploy</span> <span class="o">-</span><span class="n">n</span> <span class="n">dev</span><span class="o">-</span><span class="n">ns</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">redis</span> <span class="o">--</span><span class="n">replicas</span><span class="o">=</span><span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">run</span> <span class="n">httpd</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">httpd</span><span class="p">:</span><span class="n">alpine</span> <span class="o">&amp;&amp;</span> <span class="n">k</span> <span class="n">expose</span> <span class="n">po</span> <span class="n">httpd</span> <span class="o">--</span><span class="n">port</span><span class="o">=</span><span class="mi">80</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="n">httpd</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="chapter-3-schedule">Chapter 3: Schedule</h1>
+<h2 id="taint-and-toleration">Taint and toleration</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule</span>
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">taint</span> <span class="n">nodes</span> <span class="n">node01</span> <span class="n">spray</span><span class="o">=</span><span class="n">mortein</span><span class="p">:</span><span class="n">NoSchedule</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
