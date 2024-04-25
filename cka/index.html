@@ -11,7 +11,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/cka/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-19T12:41:18+09:00" />
-<meta property="article:modified_time" content="2024-04-25T12:34:53+09:00" />
+<meta property="article:modified_time" content="2024-04-25T14:34:52+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -36,8 +36,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  3353 ,
-        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-25T12:34:53+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  3572 ,
+        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-25T14:34:52+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -175,8 +175,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3353 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3572 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;17 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -281,6 +281,11 @@
   <ul>
     <li><a href="#configmap">Configmap</a></li>
     <li><a href="#secret">Secret</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#node-upgrade-os-upgrade">Node upgrade (OS upgrade)</a></li>
+    <li><a href="#cluster-upgrade-process">Cluster Upgrade Process</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
@@ -1651,7 +1656,7 @@
 </span></span><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">controlplane</span><span class="o">:~</span><span class="err">#</span> 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="chapter-5">Chapter 5</h1>
+</div><h1 id="chapter-5-application-lifecycle-management">Chapter 5: Application Lifecycle Management</h1>
 <h2 id="configmap">Configmap</h2>
 <ul>
 <li>Note that not to use <code>--from-file</code>, this is only handle single key like <code>--from-literal</code></li>
@@ -1711,12 +1716,95 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">test-secret</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
+</div><h1 id="chapter-6-cluster-maintenance">Chapter 6: Cluster Maintenance</h1>
+<h2 id="node-upgrade-os-upgrade">Node upgrade (OS upgrade)</h2>
+<ul>
+<li>drain: cordon + move resources</li>
+<li>uncordon: node ensable to be scheduled</li>
+<li>cordon: node disable to be scheduled</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// Move every resources from node-1 to others
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">k</span> <span class="nx">drain</span> <span class="nx">node</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// after node upgrade
+</span></span></span><span class="line"><span class="cl"><span class="c1">// cordon: block node from scheduling
+</span></span></span><span class="line"><span class="cl"><span class="c1">// uncordon: enable scheduling back
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">k</span> <span class="nx">uncordon</span> <span class="nx">node</span><span class="o">-</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Running the uncordon command on a node will not automatically schedule pods on the node. When new pods are created, they will be placed on node01.</p>
+<blockquote>
+<p>We will be upgrading the controlplane node first. Drain the controlplane node of workloads and mark it UnSchedulable</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">k</span> <span class="nx">drain</span> <span class="nx">node01</span> <span class="o">--</span><span class="nx">ignore</span><span class="o">-</span><span class="nx">daemonsets</span>
+</span></span><span class="line"><span class="cl"><span class="nx">node</span><span class="o">/</span><span class="nx">node01</span> <span class="nx">cordoned</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Warning</span><span class="o">:</span> <span class="nx">ignoring</span> <span class="nx">DaemonSet</span><span class="o">-</span><span class="nx">managed</span> <span class="nx">Pods</span><span class="o">:</span> <span class="nx">kube</span><span class="o">-</span><span class="nx">flannel</span><span class="o">/</span><span class="nx">kube</span><span class="o">-</span><span class="nx">flannel</span><span class="o">-</span><span class="nx">ds</span><span class="o">-</span><span class="nx">rp464</span><span class="p">,</span> <span class="nx">kube</span><span class="o">-</span><span class="nx">system</span><span class="o">/</span><span class="nx">kube</span><span class="o">-</span><span class="nx">proxy</span><span class="o">-</span><span class="mi">8</span><span class="nx">gmv5</span>
+</span></span><span class="line"><span class="cl"><span class="nx">evicting</span> <span class="nx">pod</span> <span class="k">default</span><span class="err">/blue-667bf6b9f9-qm6x9</span>
+</span></span><span class="line"><span class="cl"><span class="nx">evicting</span> <span class="nx">pod</span> <span class="k">default</span><span class="err">/blue-667bf6b9f9-hbzk9</span>
+</span></span><span class="line"><span class="cl"><span class="nx">pod</span><span class="o">/</span><span class="nx">blue</span><span class="o">-</span><span class="mi">667</span><span class="nx">bf6b9f9</span><span class="o">-</span><span class="nx">hbzk9</span> <span class="nx">evicted</span>
+</span></span><span class="line"><span class="cl"><span class="nx">pod</span><span class="o">/</span><span class="nx">blue</span><span class="o">-</span><span class="mi">667</span><span class="nx">bf6b9f9</span><span class="o">-</span><span class="nx">qm6x9</span> <span class="nx">evicted</span>
+</span></span><span class="line"><span class="cl"><span class="nx">node</span><span class="o">/</span><span class="nx">node01</span> <span class="nx">drained</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>There are daemonsets created in this cluster, especially in the kube-system namespace. To ignore these objects and drain the node, we can make use of the &ndash;ignore-daemonsets flag.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">$</span> <span class="nx">k</span> <span class="nx">drain</span> <span class="nx">node01</span> <span class="o">--</span><span class="nx">ignore</span><span class="o">-</span><span class="nx">daemonsets</span> <span class="o">--</span><span class="nx">force</span>
+</span></span><span class="line"><span class="cl"><span class="nx">node</span><span class="o">/</span><span class="nx">node01</span> <span class="nx">already</span> <span class="nx">cordoned</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Warning</span><span class="o">:</span> <span class="nx">deleting</span> <span class="nx">Pods</span> <span class="nx">that</span> <span class="nx">declare</span> <span class="nx">no</span> <span class="nx">controller</span><span class="o">:</span> <span class="k">default</span><span class="err">/hr-app; ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-rp464, kube-system/kube-proxy-8gmv5</span>
+</span></span><span class="line"><span class="cl"><span class="nx">evicting</span> <span class="nx">pod</span> <span class="k">default</span><span class="err">/hr-app</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="cluster-upgrade-process">Cluster Upgrade Process</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">get</span> <span class="nx">kubectl</span> <span class="nx">version</span>
+</span></span><span class="line"><span class="cl"><span class="nx">k</span> <span class="nx">version</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">get</span> <span class="nx">kubeadm</span> <span class="nx">upgrade</span> <span class="nx">plan</span>
+</span></span><span class="line"><span class="cl"><span class="nx">kubeadm</span> <span class="nx">upgrade</span> <span class="nx">plan</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-25&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/ea10910c50b0a7f1cc9d193a0b3d2f1912e7584a" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) ea10910c50b0a7f1cc9d193a0b3d2f1912e7584a: docs: cka">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ea10910</a></span>
+                <span>Updated on 2024-04-25&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/bdf00b0d6a6e181275ca7e0f5fe8c7d221fa8d0f" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) bdf00b0d6a6e181275ca7e0f5fe8c7d221fa8d0f: docs: cka">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>bdf00b0</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

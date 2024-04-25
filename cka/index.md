@@ -857,7 +857,7 @@ root@controlplane:~#
 ```
 
 
-# Chapter 5
+# Chapter 5: Application Lifecycle Management
 
 
 ## Configmap
@@ -893,3 +893,58 @@ spec:
     - secretRef:
         name: test-secret
 ```
+
+# Chapter 6: Cluster Maintenance
+
+
+## Node upgrade (OS upgrade)
+
+- drain: cordon + move resources
+- uncordon: node ensable to be scheduled 
+- cordon: node disable to be scheduled
+
+```js
+// Move every resources from node-1 to others
+k drain node-1
+// after node upgrade
+// cordon: block node from scheduling
+// uncordon: enable scheduling back
+k uncordon node-1
+```
+
+Running the uncordon command on a node will not automatically schedule pods on the node. When new pods are created, they will be placed on node01.
+
+> We will be upgrading the controlplane node first. Drain the controlplane node of workloads and mark it UnSchedulable
+
+```js
+> k drain node01 --ignore-daemonsets
+node/node01 cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-rp464, kube-system/kube-proxy-8gmv5
+evicting pod default/blue-667bf6b9f9-qm6x9
+evicting pod default/blue-667bf6b9f9-hbzk9
+pod/blue-667bf6b9f9-hbzk9 evicted
+pod/blue-667bf6b9f9-qm6x9 evicted
+node/node01 drained
+```
+
+There are daemonsets created in this cluster, especially in the kube-system namespace. To ignore these objects and drain the node, we can make use of the --ignore-daemonsets flag.
+
+```js
+$ k drain node01 --ignore-daemonsets --force
+node/node01 already cordoned
+Warning: deleting Pods that declare no controller: default/hr-app; ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-rp464, kube-system/kube-proxy-8gmv5
+evicting pod default/hr-app
+```
+
+
+## Cluster Upgrade Process
+
+
+```js
+# get kubectl version
+k version
+
+# get kubeadm upgrade plan
+kubeadm upgrade plan
+```
+
