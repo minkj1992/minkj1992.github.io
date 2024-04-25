@@ -937,7 +937,52 @@ evicting pod default/hr-app
 ```
 
 
-## Cluster Upgrade Process
+> Question... I'm just curious that why there's still pod on drained node
+>> controlplane ~ ➜  k drain controlplane --ignore-daemonsets 
+node/controlplane cordoned
+Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-9wfn6, kube-system/kube-proxy-x5qj8
+evicting pod kube-system/coredns-5dd5756b68-l5w24
+evicting pod kube-system/coredns-5dd5756b68-5nbck
+evicting pod default/blue-667bf6b9f9-pxxm6
+evicting pod default/blue-667bf6b9f9-m72qc
+pod/blue-667bf6b9f9-m72qc evicted
+pod/blue-667bf6b9f9-pxxm6 evicted
+pod/coredns-5dd5756b68-5nbck evicted
+pod/coredns-5dd5756b68-l5w24 evicted
+node/controlplane drained
+
+controlplane ~ ➜  k get no
+NAME           STATUS                     ROLES           AGE   VERSION
+controlplane   Ready,SchedulingDisabled   control-plane   29m   v1.28.0
+node01         Ready                      <none>          29m   v1.28.0
+
+controlplane ~ ➜  k get po -o wide
+NAME                    READY   STATUS    RESTARTS   AGE     IP            NODE     NOMINATED NODE   READINESS GATES
+blue-667bf6b9f9-987gj   1/1     Running   0          2m55s   10.244.1.4    node01   <none>           <none>
+blue-667bf6b9f9-bcdtn   1/1     Running   0          2m55s   10.244.1.3    node01   <none>           <none>
+blue-667bf6b9f9-gnlz5   1/1     Running   0          14s     10.244.1.10   node01   <none>           <none>
+blue-667bf6b9f9-lgbg4   1/1     Running   0          14s     10.244.1.9    node01   <none>           <none>
+blue-667bf6b9f9-tfcj2   1/1     Running   0          2m55s   10.244.1.2    node01   <none>           <none>
+
+controlplane ~ ➜  k get po -A -o wide
+NAMESPACE      NAME                                   READY   STATUS    RESTARTS   AGE    IP            NODE           NOMINATED NODE   READINESS GATES
+default        blue-667bf6b9f9-987gj                  1/1     Running   0          3m2s   10.244.1.4    node01         <none>           <none>
+default        blue-667bf6b9f9-bcdtn                  1/1     Running   0          3m2s   10.244.1.3    node01         <none>           <none>
+default        blue-667bf6b9f9-gnlz5                  1/1     Running   0          21s    10.244.1.10   node01         <none>           <none>
+default        blue-667bf6b9f9-lgbg4                  1/1     Running   0          21s    10.244.1.9    node01         <none>           <none>
+default        blue-667bf6b9f9-tfcj2                  1/1     Running   0          3m2s   10.244.1.2    node01         <none>           <none>
+kube-flannel   kube-flannel-ds-4krgp                  1/1     Running   0          29m    192.20.38.9   node01         <none>           <none>
+kube-flannel   kube-flannel-ds-9wfn6                  1/1     Running   0          29m    192.20.38.6   controlplane   <none>           <none>
+kube-system    coredns-5dd5756b68-7dv8x               1/1     Running   0          21s    10.244.1.8    node01         <none>           <none>
+kube-system    coredns-5dd5756b68-ptnml               1/1     Running   0          21s    10.244.1.11   node01         <none>           <none>
+kube-system    etcd-controlplane                      1/1     Running   0          29m    192.20.38.6   controlplane   <none>           <none>
+kube-system    kube-apiserver-controlplane            1/1     Running   0          29m    192.20.38.6   controlplane   <none>           <none>
+kube-system    kube-controller-manager-controlplane   1/1     Running   0          29m    192.20.38.6   controlplane   <none>           <none>
+kube-system    kube-proxy-bwrl5                       1/1     Running   0          29m    192.20.38.9   node01         <none>           <none>
+kube-system    kube-proxy-x5qj8                       1/1     Running   0          29m    192.20.38.6   controlplane   <none>           <none>
+kube-system    kube-scheduler-controlplane            1/1     Running   0          29m    192.20.38.6   controlplane   <none>           <none>
+
+## Kubernetes Software Versions
 
 
 ```js
@@ -947,4 +992,176 @@ k version
 # get kubeadm upgrade plan
 kubeadm upgrade plan
 ```
+
+You can find all kubernetes releases at https://github.com/kubernetes/kubernetes/releases.
+Downloaded package has all the kubernetes components in it except `ETCD cluster` and `CoreDNS` as they are seperate projects.
+
+
+## Cluster Upgrade Introduction
+
+> Q. Is it mandatory for all of the kubernetes components to have the same versions?
+
+No, The components can be at different release versions. At any time, **kubernetes supports only up to the recent 3 minor versions**, and the recommended approach is to upgrade one minor version at a time, instead of upgrading all 3 steps at once.
+
+![](https://github.com/kodekloudhub/certified-kubernetes-administrator-course/raw/master/images/up2.PNG)
+
+
+
+## Upgrading kubeadm clusters
+> https://v1-29.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/
+
+
+### 1. Upgrade kubeadm master node
+
+0. k drain <node> --ignore-daemonsets
+
+1. (opt) [Update package repository](https://v1-29.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/change-package-repository/)
+
+```js
+> pager /etc/apt/sources.list.d/kubernetes.list
+
+deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyri
+ng.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ 
+/
+```
+
+Switching to another Kubernetes package repository 
+
+```js
+vim /etc/apt/sources.list.d/kubernetes.list
+
+# change version v1.28 -> v1.29
+:s/v1.28/v1.29/g
+```
+
+2. Determine which version to upgrade to
+
+```js
+> sudo apt update
+> sudo apt-cache madison kubeadm
+
+
+   kubeadm | 1.29.4-2.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+   kubeadm | 1.29.3-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+   kubeadm | 1.29.2-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+   kubeadm | 1.29.1-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+   kubeadm | 1.29.0-1.1 | https://pkgs.k8s.io/core:/stable:/v1.29/deb  Packages
+```
+
+3. Upgrading control plane nodes
+
+
+- upgrade kubeadm
+```js
+> sudo apt-mark unhold kubeadm && \
+sudo apt-get update && sudo apt-get install -y kubeadm=1.29.0-1.1 && \
+sudo apt-mark hold kubeadm
+```
+
+- verify the upgrade plan
+
+```js
+target_version=v1.29.0
+
+> sudo kubeadm upgrade plan $target_version
+
+[upgrade/config] Making sure the configuration is correct:
+[upgrade/config] Reading configuration from the cluster...
+[upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
+[preflight] Running pre-flight checks.
+[upgrade] Running cluster health checks
+[upgrade] Fetching available versions to upgrade to
+[upgrade/versions] Cluster version: v1.28.0
+[upgrade/versions] kubeadm version: v1.29.0
+[upgrade/versions] Target version: v1.29.0
+[upgrade/versions] Latest version in the v1.28 series: v1.29.0
+
+Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
+COMPONENT   CURRENT       TARGET
+kubelet     2 x v1.28.0   v1.29.0
+
+Upgrade to the latest version in the v1.28 series:
+
+COMPONENT                 CURRENT   TARGET
+kube-apiserver            v1.28.0   v1.29.0
+kube-controller-manager   v1.28.0   v1.29.0
+kube-scheduler            v1.28.0   v1.29.0
+kube-proxy                v1.28.0   v1.29.0
+CoreDNS                   v1.10.1   v1.11.1
+etcd                      3.5.9-0   3.5.10-0
+
+You can now apply the upgrade by executing the following command:
+
+        kubeadm upgrade apply v1.29.0
+
+_____________________________________________________________________
+
+
+The table below shows the current state of component configs as understood by this version of kubeadm.
+Configs that have a "yes" mark in the "MANUAL UPGRADE REQUIRED" column require manual config upgrade or
+resetting to kubeadm defaults before a successful upgrade can be performed. The version to manually
+upgrade to is denoted in the "PREFERRED VERSION" column.
+
+API GROUP                 CURRENT VERSION   PREFERRED VERSION   MANUAL UPGRADE REQUIRED
+kubeproxy.config.k8s.io   v1alpha1          v1alpha1            no
+kubelet.config.k8s.io     v1beta1           v1beta1             no
+_____________________________________________________________________
+
+```
+
+- choose a version to upgrade and apply
+```js
+
+> sudo kubeadm upgrade apply $target_version
+
+```
+
+Now, upgrade the version and restart Kubelet. Also, mark the node (in this case, the "controlplane" node) as schedulable.
+
+```js
+> sudo apt-mark unhold kubelet kubectl && \
+sudo apt-get update && sudo apt-get install -y kubelet='1.29.0-1.1' kubectl='1.29.0-1.1' && \
+sudo apt-mark hold kubelet kubectl
+
+> sudo systemctl daemon-reload
+> sudo systemctl restart kubelet
+> sudo kubectl uncordon controlplane
+```
+
+### 2. Upgrade kubeadm worker node
+
+1. mirror update
+
+
+2. https://v1-29.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/upgrading-linux-nodes/
+
+```js
+sudo apt-mark unhold kubeadm && \
+sudo apt-get update && sudo apt-get install -y kubeadm='1.29.0-1.1' && \
+sudo apt-mark hold kubeadm
+```
+
+3. kubeadm upgrade node (instead apply)
+
+```js
+> sudo kubeadm upgrade node
+```
+
+4. updgrade kubelet and kubectl
+
+```js
+sudo apt-mark unhold kubelet kubectl && \
+sudo apt-get update && sudo apt-get install -y kubelet='1.29.0-1.1' kubectl='1.29.0-1.1' && \
+sudo apt-mark hold kubelet kubectl
+
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+
+
+exit (back to master)
+kubectl uncordon node01
+```
+
+
+
 
