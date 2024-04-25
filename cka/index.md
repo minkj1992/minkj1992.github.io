@@ -41,6 +41,10 @@ MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 �
 
 # Chapter 2: Core concepts
 
+![](/images/k8s-full.png)
+
+![](/images/k8s-full2.png)
+
 ## Cluster architecture
 
 - Master: Manage, Plan, Schedule, Monitor nodes
@@ -53,6 +57,8 @@ MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 �
     - kube-proxy: enable communication with other service
     - container runtime
         - docker, rkt, containerd, crio, podman...
+
+
 
 ## Docker vs containerd
 
@@ -442,9 +448,411 @@ $ k run httpd --image=httpd:alpine && k expose po httpd --port=80 --name=httpd
 
 # Chapter 3: Schedule
 
-## Taint and toleration
+## Manual schduling
+
+- Schduler bind pod to nodes
+- If there is no scheduler, pod's status would be 'Pending'
+
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    name: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 8080
+```
+
+- when there is scheduler
 
 ```py
+floe@floe-QEMU-Virtual-Machine:~$ k get po -o wide
+NAME    READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+nginx   1/1     Running   0          40s   10.244.0.14   minikube   <none>           <none>
+floe@floe-QEMU-Virtual-Machine:~$ k get nodes
+NAME       STATUS   ROLES           AGE     VERSION
+minikube   Ready    control-plane   5d19h   v1.28.3
+```
+
+- When there is no scheduler, there would be empty Node value on pod description.
+
+```py
+# There is no aligned node to the pod.
+$ k describe po nginx | grep Node
+
+# There is no scheduler.
+$ k get po -n kube-system | grep scheduler
+
+# get nodes
+$ k get nodes
+```
+
+- Then, if we want to manually scheule our pod, write nodeName to pod yaml
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  ...
+  nodeName: node02
+```
+
+- After that delete and replace our pod resource to schedule on node02
+
+```
+# kill pod and replace resource
+k replace --force -f nginx.yaml
+```
+
+## Labels and Selectors
+
+- Labels are key/value pairs that are attached to objects such as Pods
+  - Unlike names and UIDS, labels do not provide uniqueness. In general, we expect many objects to carry the same labels.
+- Via a label selector, the client/user can identify a set of objects. The label selector is the core grouping primitive in Kubernetes.
+
+
+
+## Taints and Tolerations
+
+- Node affinity: a property of Pods that attracts them to a set of nodes (either as a preference or a hard requirement).
+- Taints: Taints are the opposite -- they allow a **node** to repel(격퇴하다) a set of pods.
+- Tolerations: **Tolerations are applied to pods**. Tolerations allow the scheduler to schedule pods with matching taints. 
+
+```py
+kubectl taint nodes node1 key1=value1:NoExecute
+kubectl taint nodes node1 key1=value1:NoSchedule
+kubectl taint nodes node1 key1=value1:PreferNoSchedule
+```
+
+Taint Effect fields
+
+- `NoExecute`
+  - Pods that do not tolerate the taint are evicted immediately
+  - Pods that tolerate the taint without specifying tolerationSeconds in their toleration specification remain bound forever
+- `NoSchedule`
+  - No new pods will be scheduled unless matching toleration (key1=value1)
+  - Pods currently running on the node are not evicted.
+- `PreferNoSchedule`
+  - soft version of NoSchedule. The control plane will try to avoid but not guaranteed.
+
+```
 # Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule
 k taint nodes node01 spray=mortein:NoSchedule
+```
+
+## Node affinity
+
+he primary feature of Node Affinity is to ensure that the pods are hosted on particular nodes.
+
+- With Node Selectors we cannot provide the advance expressions.
+  - e.g. A OR B, NOT A
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+  - name: data-processor
+    image: data-processor
+  affinity:
+    nodeAffinity:
+      requireDuringScedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            opeator: In
+            values:
+            - Large
+            - Medium
+  
+```
+
+
+### Node Affinity Types
+> https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#types-of-inter-pod-affinity-and-anti-affinity
+
+- Available
+  - requiredDuringSchedulingIgnoredDuringExecution
+  - preferredDuringSchedulingIgnoredDuringExecution
+
+- Future plan
+  - double require: requiredDuringSchedulingRequiredDuringExecution
+  - prefer require: preferredDuringSchedulingRequiredDuringExecution
+
+
+Wrap up the available node affinity types states
+
+- **DuringScheduling: Required | Preferred**
+- **DuringExecution: Ignored**
+
+
+
+## Taints and tolerations and Node Affinity
+
+![](https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-na.PNG?raw=true)
+
+The combination of Taint + Tolearation can block other pod to be scheduled on tainted node, but cannot ensure that tolearated pod are being placed on the matching tainted node. so if that case we need affinity
+
+
+![](https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-nsa.png?raw=true)
+
+As such, a combination of taints and tolerations and node affinity rules can be used together to completely dedicate nodes for specific parts.
+
+## cli
+
+```py
+# Open terminal output with vim to easily find `/` N/n
+> k describe no node01 | vim -
+```
+
+
+```py
+k get no --no-headers | wc -l
+
+# set label to node
+k label no node01 color=blue
+
+k create deploy blue --image=nginx --replicas=3
+
+k describe no controlplane | grep -i taints
+Taints:             <none>
+k describe no node01 | grep -i taints
+Taints:             <none>
+```
+
+
+```py
+k describe no controlplane 
+Name:               controlplane
+Roles:              control-plane
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=controlplane
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/control-plane=
+```
+
+- label exists operator
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: red
+  name: red
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: red
+  template:
+    metadata:
+      labels:
+        app: red
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists
+```
+
+
+## Resource and Limit
+
+- If the node where a Pod is running has enough of a resource available, it's possible (and allowed) for a container to use more resource than its request for that resource specifies. 
+- However, a container is not allowed to use more than its resource limit.
+- Kubelet and container runtime enforce the limit.
+
+### Limit cpu vs Limit memory
+
+- memory: oom kill 
+- cpu: throttle
+
+#### **memory**
+> [when a process in the container tries to consume more than the allowed amount of memory, the system kernel terminates the process that attempted the allocation, **with an out of memory (OOM) error**.](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
+
+#### **cpu**
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cpu-demo
+  namespace: cpu-example
+spec:
+  containers:
+  - name: cpu-demo-ctr
+    image: vish/stress
+    resources:
+      limits:
+        cpu: "1"
+      requests:
+        cpu: "0.5"
+    args:
+    - -cpus
+    - "2"
+```
+
+> [Configured the Container to attempt to use 2 CPUs, but the Container is only being allowed to use about 1 CPU. The container's CPU use is being **throttled**, because the container is attempting to use more CPU resources than its limit.](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/)
+
+
+![](/images/resource_limit_cpu_memory.png)
+
+- CPU: Request and No Limit is ideal
+
+## Daemon Sets
+
+A DaemonSet ensures that all or some Nodes run a copy of a Pod.
+
+- As nodes are added to the cluster, Pods are added to them
+- As nodes are removed from the cluster, those Pods are garbage collected
+
+Some typical use of a DaemonSet are:
+
+- running a cluster storage daemon on every node
+- running a logs collection daemon on every node
+- running a node monitoring daemon on every node
+
+Also kube-proxy componenet can be deployed as DaemonSets
+
+### How to create?
+
+1. first create deployment --dry-run=client -o yaml > ds.yaml
+2. delete status / replicas
+3. and 
+
+## Static pods
+> https://kubernetes.io/docs/tasks/configure-pod-container/static-pod/
+
+Static Pods are managed directly by the kubelt daemon on a specific node without the `kube-apiserver` observing them. Unlike Pods that are managed by the control plane(etcd, api, scheduler, controller manager ..); instead, the kubelet watches each static Pod.
+
+- Static Pods are always bound to one Kubelt on a specific node.
+- The kubelet automatically tries to create a mirror Pod on the kube-apiserver for each static Pod. 
+- This means static pods running on a node are visible on the API server, but cannot be controlled from there.
+
+> Mirror pod? A pod object that a kubelt uses to represent a static pod
+
+- **Kubelet only can understand pod level**
+
+#### Use Case
+
+- kubeadm: Deploy control plane component as static Pods
+  - kubeadm은 kubelet을 통해 `/etc/kubernetest/manifests` 안에 있는 control plane  component spec을 읽어 static pods들을 생성하여 관리한다.
+- edge computing (iot)
+
+#### Check wheter pod is static or not
+
+There is two way
+
+1. k get nodes && k get po -A
+  - static pod naming: [POD NAME]-[NODE NAME]
+
+2. k describe po [POD NAME] and check Owner: Node or other resource types
+
+
+#### How to find staticPodPath
+```py
+
+controlplane ~ ➜  ps -aux | grep kubelet | grep -i config
+root        4351  0.0  0.0 4519680 100556 ?      Ssl  02:23   0:36 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9
+
+cat /var/lib/kubelet/config.yaml | grep staticPodPath
+```
+
+### How to create staticPod
+> Create a static pod named static-busybox that uses the busybox image and the command sleep 1000
+
+```py
+controlplane ~ ➜  k run static-busybox --image=busybox --dry-run=client -o yaml > /etc/kubernetes/manifests/static-busybox.yaml
+
+controlplane ~ ➜  vim /etc/kubernetes/manifests/static-busybox.yaml
+```
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: static-busybox
+  name: static-busybox
+spec:
+  containers:
+  - image: busybox
+    name: static-busybox
+    command: ["sleep"]
+    args:
+    - "1000"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+```
+
+
+### How to find staticPod and delete it
+> Question: We just created a new static pod named static-greenbox. Find it and delete it.
+>> This question is a bit tricky. But if you use the knowledge you gained in the previous questions in this lab, you should be able to find the answer to it.
+
+
+1. First, let's identify the node in which the pod called static-greenbox is created. To do this, run:
+
+```py
+root@controlplane:~# kubectl get pods --all-namespaces -o wide  | grep static-greenbox
+default       static-greenbox-node01                 1/1     Running   0          19s     10.244.1.2   node01       <none>           <none>
+root@controlplane:~#
+```
+
+From the result of this command, we can see that the pod is running on node01.
+
+2. Next, SSH to node01 and identify the path configured for static pods in this node.
+
+  - Important: The path need not be /etc/kubernetes/manifests. Make sure to check the path configured in the kubelet configuration file.
+
+```py
+root@controlplane:~# ssh node01 
+root@node01:~# ps -ef |  grep /usr/bin/kubelet 
+root        4147       1  0 14:05 ?        00:00:00 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9
+root        4773    4733  0 14:05 pts/0    00:00:00 grep /usr/bin/kubelet
+
+root@node01:~# grep -i staticpod /var/lib/kubelet/config.yaml
+staticPodPath: /etc/just-to-mess-with-you
+
+root@node01:~# 
+```
+
+Here the staticPodPath is /etc/just-to-mess-with-you
+
+
+3. Navigate to this directory and delete the YAML file:
+
+```py
+root@node01:/etc/just-to-mess-with-you# ls
+greenbox.yaml
+root@node01:/etc/just-to-mess-with-you# rm -rf greenbox.yaml 
+root@node01:/etc/just-to-mess-with-you#
+```
+
+4. Exit out of node01 using CTRL + D or type exit. You should return to the controlplane node. Check if the 
+
+```py
+static-greenbox pod has been deleted:
+root@controlplane:~# kubectl get pods --all-namespaces -o wide  | grep static-greenbox
+root@controlplane:~# 
 ```

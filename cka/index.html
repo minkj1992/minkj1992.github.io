@@ -11,7 +11,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/cka/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-19T12:41:18+09:00" />
-<meta property="article:modified_time" content="2024-04-20T19:39:42+09:00" />
+<meta property="article:modified_time" content="2024-04-23T17:34:36+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -36,8 +36,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  1820 ,
-        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-20T19:39:42+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  3288 ,
+        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-23T17:34:36+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -175,8 +175,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1820 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;9 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3288 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -238,7 +238,44 @@
   </ul>
 
   <ul>
-    <li><a href="#taint-and-toleration">Taint and toleration</a></li>
+    <li><a href="#manual-schduling">Manual schduling</a></li>
+    <li><a href="#labels-and-selectors">Labels and Selectors</a></li>
+    <li><a href="#taints-and-tolerations">Taints and Tolerations</a></li>
+    <li><a href="#node-affinity">Node affinity</a>
+      <ul>
+        <li><a href="#node-affinity-types">Node Affinity Types</a></li>
+      </ul>
+    </li>
+    <li><a href="#taints-and-tolerations-and-node-affinity">Taints and tolerations and Node Affinity</a></li>
+    <li><a href="#cli">cli</a></li>
+    <li><a href="#resource-and-limit">Resource and Limit</a>
+      <ul>
+        <li><a href="#limit-cpu-vs-limit-memory">Limit cpu vs Limit memory</a>
+          <ul>
+            <li><a href="#memory"><strong>memory</strong></a></li>
+            <li><a href="#cpu"><strong>cpu</strong></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#daemon-sets">Daemon Sets</a>
+      <ul>
+        <li><a href="#how-to-create">How to create?</a></li>
+      </ul>
+    </li>
+    <li><a href="#static-pods">Static pods</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#use-case">Use Case</a></li>
+            <li><a href="#check-wheter-pod-is-static-or-not">Check wheter pod is static or not</a></li>
+            <li><a href="#how-to-find-staticpodpath">How to find staticPodPath</a></li>
+          </ul>
+        </li>
+        <li><a href="#how-to-create-staticpod">How to create staticPod</a></li>
+        <li><a href="#how-to-find-staticpod-and-delete-it">How to find staticPod and delete it</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
@@ -300,6 +337,22 @@
 <p>하루 약 3~4시간씩 강의를 들어보자 약 23시간 강의이기 때문에 다 듣는데 약 5~6일 소요되기 때문에, 일주일 뒤에 테스트볼 예정이다. (~ 24.4.26)</p>
 <p>24.04.19 ~</p>
 <h1 id="chapter-2-core-concepts">Chapter 2: Core concepts</h1>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-full.png"
+        data-srcset="/images/k8s-full.png, /images/k8s-full.png 1.5x, /images/k8s-full.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-full.png"
+        title="/images/k8s-full.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-full2.png"
+        data-srcset="/images/k8s-full2.png, /images/k8s-full2.png 1.5x, /images/k8s-full2.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-full2.png"
+        title="/images/k8s-full2.png" /></p>
 <h2 id="cluster-architecture">Cluster architecture</h2>
 <ul>
 <li>Master: Manage, Plan, Schedule, Monitor nodes
@@ -914,23 +967,693 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="chapter-3-schedule">Chapter 3: Schedule</h1>
-<h2 id="taint-and-toleration">Taint and toleration</h2>
+<h2 id="manual-schduling">Manual schduling</h2>
+<ul>
+<li>Schduler bind pod to nodes</li>
+<li>If there is no scheduler, pod&rsquo;s status would be &lsquo;Pending&rsquo;</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">containerPort</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>when there is scheduler</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">floe</span><span class="nd">@floe</span><span class="o">-</span><span class="n">QEMU</span><span class="o">-</span><span class="n">Virtual</span><span class="o">-</span><span class="n">Machine</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">po</span> <span class="o">-</span><span class="n">o</span> <span class="n">wide</span>
+</span></span><span class="line"><span class="cl"><span class="n">NAME</span>    <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>   <span class="n">IP</span>            <span class="n">NODE</span>       <span class="n">NOMINATED</span> <span class="n">NODE</span>   <span class="n">READINESS</span> <span class="n">GATES</span>
+</span></span><span class="line"><span class="cl"><span class="n">nginx</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>   <span class="mi">0</span>          <span class="mi">40</span><span class="n">s</span>   <span class="mf">10.244.0.14</span>   <span class="n">minikube</span>   <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>           <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">floe</span><span class="nd">@floe</span><span class="o">-</span><span class="n">QEMU</span><span class="o">-</span><span class="n">Virtual</span><span class="o">-</span><span class="n">Machine</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">nodes</span>
+</span></span><span class="line"><span class="cl"><span class="n">NAME</span>       <span class="n">STATUS</span>   <span class="n">ROLES</span>           <span class="n">AGE</span>     <span class="n">VERSION</span>
+</span></span><span class="line"><span class="cl"><span class="n">minikube</span>   <span class="n">Ready</span>    <span class="n">control</span><span class="o">-</span><span class="n">plane</span>   <span class="mi">5</span><span class="n">d19h</span>   <span class="n">v1</span><span class="mf">.28.3</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>When there is no scheduler, there would be empty Node value on pod description.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># There is no aligned node to the pod.</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">describe</span> <span class="n">po</span> <span class="n">nginx</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">Node</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># There is no scheduler.</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">po</span> <span class="o">-</span><span class="n">n</span> <span class="n">kube</span><span class="o">-</span><span class="n">system</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">scheduler</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># get nodes</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">nodes</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Then, if we want to manually scheule our pod, write nodeName to pod yaml</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="l">...</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">nodeName</span><span class="p">:</span><span class="w"> </span><span class="l">node02</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>After that delete and replace our pod resource to schedule on node02</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule</span>
-</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">taint</span> <span class="n">nodes</span> <span class="n">node01</span> <span class="n">spray</span><span class="o">=</span><span class="n">mortein</span><span class="p">:</span><span class="n">NoSchedule</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># kill pod and replace resource
+</span></span><span class="line"><span class="cl">k replace --force -f nginx.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="labels-and-selectors">Labels and Selectors</h2>
+<ul>
+<li>Labels are key/value pairs that are attached to objects such as Pods
+<ul>
+<li>Unlike names and UIDS, labels do not provide uniqueness. In general, we expect many objects to carry the same labels.</li>
+</ul>
+</li>
+<li>Via a label selector, the client/user can identify a set of objects. The label selector is the core grouping primitive in Kubernetes.</li>
+</ul>
+<h2 id="taints-and-tolerations">Taints and Tolerations</h2>
+<ul>
+<li>Node affinity: a property of Pods that attracts them to a set of nodes (either as a preference or a hard requirement).</li>
+<li>Taints: Taints are the opposite &ndash; they allow a <strong>node</strong> to repel(격퇴하다) a set of pods.</li>
+<li>Tolerations: <strong>Tolerations are applied to pods</strong>. Tolerations allow the scheduler to schedule pods with matching taints.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">taint</span> <span class="n">nodes</span> <span class="n">node1</span> <span class="n">key1</span><span class="o">=</span><span class="n">value1</span><span class="p">:</span><span class="n">NoExecute</span>
+</span></span><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">taint</span> <span class="n">nodes</span> <span class="n">node1</span> <span class="n">key1</span><span class="o">=</span><span class="n">value1</span><span class="p">:</span><span class="n">NoSchedule</span>
+</span></span><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">taint</span> <span class="n">nodes</span> <span class="n">node1</span> <span class="n">key1</span><span class="o">=</span><span class="n">value1</span><span class="p">:</span><span class="n">PreferNoSchedule</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Taint Effect fields</p>
+<ul>
+<li><code>NoExecute</code>
+<ul>
+<li>Pods that do not tolerate the taint are evicted immediately</li>
+<li>Pods that tolerate the taint without specifying tolerationSeconds in their toleration specification remain bound forever</li>
+</ul>
+</li>
+<li><code>NoSchedule</code>
+<ul>
+<li>No new pods will be scheduled unless matching toleration (key1=value1)</li>
+<li>Pods currently running on the node are not evicted.</li>
+</ul>
+</li>
+<li><code>PreferNoSchedule</code>
+<ul>
+<li>soft version of NoSchedule. The control plane will try to avoid but not guaranteed.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># Create a taint on node01 with key of spray, value of mortein and effect of NoSchedule
+</span></span><span class="line"><span class="cl">k taint nodes node01 spray=mortein:NoSchedule
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="node-affinity">Node affinity</h2>
+<p>he primary feature of Node Affinity is to ensure that the pods are hosted on particular nodes.</p>
+<ul>
+<li>With Node Selectors we cannot provide the advance expressions.
+<ul>
+<li>e.g. A OR B, NOT A</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">myapp-pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">data-processor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">data-processor</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">affinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">nodeAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">requireDuringScedulingIgnoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">nodeSelectorTerms</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">size</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">opeator</span><span class="p">:</span><span class="w"> </span><span class="l">In</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">values</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">Large</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">Medium</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="node-affinity-types">Node Affinity Types</h3>
+<blockquote>
+<p><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#types-of-inter-pod-affinity-and-anti-affinity" target="_blank" rel="noopener noreffer">https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#types-of-inter-pod-affinity-and-anti-affinity</a>
+</p>
+</blockquote>
+<ul>
+<li>
+<p>Available</p>
+<ul>
+<li>requiredDuringSchedulingIgnoredDuringExecution</li>
+<li>preferredDuringSchedulingIgnoredDuringExecution</li>
+</ul>
+</li>
+<li>
+<p>Future plan</p>
+<ul>
+<li>double require: requiredDuringSchedulingRequiredDuringExecution</li>
+<li>prefer require: preferredDuringSchedulingRequiredDuringExecution</li>
+</ul>
+</li>
+</ul>
+<p>Wrap up the available node affinity types states</p>
+<ul>
+<li><strong>DuringScheduling: Required | Preferred</strong></li>
+<li><strong>DuringExecution: Ignored</strong></li>
+</ul>
+<h2 id="taints-and-tolerations-and-node-affinity">Taints and tolerations and Node Affinity</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-na.PNG?raw=true"
+        data-srcset="https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-na.PNG?raw=true, https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-na.PNG?raw=true 1.5x, https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-na.PNG?raw=true 2x"
+        data-sizes="auto"
+        alt="https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-na.PNG?raw=true"
+        title="https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-na.PNG?raw=true" /></p>
+<p>The combination of Taint + Tolearation can block other pod to be scheduled on tainted node, but cannot ensure that tolearated pod are being placed on the matching tainted node. so if that case we need affinity</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-nsa.png?raw=true"
+        data-srcset="https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-nsa.png?raw=true, https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-nsa.png?raw=true 1.5x, https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-nsa.png?raw=true 2x"
+        data-sizes="auto"
+        alt="https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-nsa.png?raw=true"
+        title="https://github.com/kodekloudhub/certified-kubernetes-administrator-course/blob/master/images/tn-nsa.png?raw=true" /></p>
+<p>As such, a combination of taints and tolerations and node affinity rules can be used together to completely dedicate nodes for specific parts.</p>
+<h2 id="cli">cli</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Open terminal output with vim to easily find `/` N/n</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">k</span> <span class="n">describe</span> <span class="n">no</span> <span class="n">node01</span> <span class="o">|</span> <span class="n">vim</span> <span class="o">-</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">k</span> <span class="n">get</span> <span class="n">no</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">headers</span> <span class="o">|</span> <span class="n">wc</span> <span class="o">-</span><span class="n">l</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set label to node</span>
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">label</span> <span class="n">no</span> <span class="n">node01</span> <span class="n">color</span><span class="o">=</span><span class="n">blue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">create</span> <span class="n">deploy</span> <span class="n">blue</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">nginx</span> <span class="o">--</span><span class="n">replicas</span><span class="o">=</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">describe</span> <span class="n">no</span> <span class="n">controlplane</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">taints</span>
+</span></span><span class="line"><span class="cl"><span class="n">Taints</span><span class="p">:</span>             <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">describe</span> <span class="n">no</span> <span class="n">node01</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">taints</span>
+</span></span><span class="line"><span class="cl"><span class="n">Taints</span><span class="p">:</span>             <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">k</span> <span class="n">describe</span> <span class="n">no</span> <span class="n">controlplane</span> 
+</span></span><span class="line"><span class="cl"><span class="n">Name</span><span class="p">:</span>               <span class="n">controlplane</span>
+</span></span><span class="line"><span class="cl"><span class="n">Roles</span><span class="p">:</span>              <span class="n">control</span><span class="o">-</span><span class="n">plane</span>
+</span></span><span class="line"><span class="cl"><span class="n">Labels</span><span class="p">:</span>             <span class="n">beta</span><span class="o">.</span><span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">arch</span><span class="o">=</span><span class="n">amd64</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">beta</span><span class="o">.</span><span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">os</span><span class="o">=</span><span class="n">linux</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">arch</span><span class="o">=</span><span class="n">amd64</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">hostname</span><span class="o">=</span><span class="n">controlplane</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">os</span><span class="o">=</span><span class="n">linux</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">node</span><span class="o">-</span><span class="n">role</span><span class="o">.</span><span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">control</span><span class="o">-</span><span class="n">plane</span><span class="o">=</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>label exists operator</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">apps/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Deployment</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">red</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">red</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">replicas</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">selector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">red</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">template</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">red</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">affinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">nodeAffinity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">requiredDuringSchedulingIgnoredDuringExecution</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">nodeSelectorTerms</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="nt">matchExpressions</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">              </span>- <span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l">node-role.kubernetes.io/control-plane</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="nt">operator</span><span class="p">:</span><span class="w"> </span><span class="l">Exists</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="resource-and-limit">Resource and Limit</h2>
+<ul>
+<li>If the node where a Pod is running has enough of a resource available, it&rsquo;s possible (and allowed) for a container to use more resource than its request for that resource specifies.</li>
+<li>However, a container is not allowed to use more than its resource limit.</li>
+<li>Kubelet and container runtime enforce the limit.</li>
+</ul>
+<h3 id="limit-cpu-vs-limit-memory">Limit cpu vs Limit memory</h3>
+<ul>
+<li>memory: oom kill</li>
+<li>cpu: throttle</li>
+</ul>
+<h4 id="memory"><strong>memory</strong></h4>
+<blockquote>
+<p><a href="https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/" target="_blank" rel="noopener noreffer">when a process in the container tries to consume more than the allowed amount of memory, the system kernel terminates the process that attempted the allocation, <strong>with an out of memory (OOM) error</strong>.</a>
+</p>
+</blockquote>
+<h4 id="cpu"><strong>cpu</strong></h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cpu-demo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">cpu-example</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">cpu-demo-ctr</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">vish/stress</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">limits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;1&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">requests</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0.5&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- -<span class="l">cpus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;2&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/" target="_blank" rel="noopener noreffer">Configured the Container to attempt to use 2 CPUs, but the Container is only being allowed to use about 1 CPU. The container&rsquo;s CPU use is being <strong>throttled</strong>, because the container is attempting to use more CPU resources than its limit.</a>
+</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/resource_limit_cpu_memory.png"
+        data-srcset="/images/resource_limit_cpu_memory.png, /images/resource_limit_cpu_memory.png 1.5x, /images/resource_limit_cpu_memory.png 2x"
+        data-sizes="auto"
+        alt="/images/resource_limit_cpu_memory.png"
+        title="/images/resource_limit_cpu_memory.png" /></p>
+<ul>
+<li>CPU: Request and No Limit is ideal</li>
+</ul>
+<h2 id="daemon-sets">Daemon Sets</h2>
+<p>A DaemonSet ensures that all or some Nodes run a copy of a Pod.</p>
+<ul>
+<li>As nodes are added to the cluster, Pods are added to them</li>
+<li>As nodes are removed from the cluster, those Pods are garbage collected</li>
+</ul>
+<p>Some typical use of a DaemonSet are:</p>
+<ul>
+<li>running a cluster storage daemon on every node</li>
+<li>running a logs collection daemon on every node</li>
+<li>running a node monitoring daemon on every node</li>
+</ul>
+<p>Also kube-proxy componenet can be deployed as DaemonSets</p>
+<h3 id="how-to-create">How to create?</h3>
+<ol>
+<li>first create deployment &ndash;dry-run=client -o yaml &gt; ds.yaml</li>
+<li>delete status / replicas</li>
+<li>and</li>
+</ol>
+<h2 id="static-pods">Static pods</h2>
+<blockquote>
+<p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/static-pod/" target="_blank" rel="noopener noreffer">https://kubernetes.io/docs/tasks/configure-pod-container/static-pod/</a>
+</p>
+</blockquote>
+<p>Static Pods are managed directly by the kubelt daemon on a specific node without the <code>kube-apiserver</code> observing them. Unlike Pods that are managed by the control plane(etcd, api, scheduler, controller manager ..); instead, the kubelet watches each static Pod.</p>
+<ul>
+<li>Static Pods are always bound to one Kubelt on a specific node.</li>
+<li>The kubelet automatically tries to create a mirror Pod on the kube-apiserver for each static Pod.</li>
+<li>This means static pods running on a node are visible on the API server, but cannot be controlled from there.</li>
+</ul>
+<blockquote>
+<p>Mirror pod? A pod object that a kubelt uses to represent a static pod</p>
+</blockquote>
+<ul>
+<li><strong>Kubelet only can understand pod level</strong></li>
+</ul>
+<h4 id="use-case">Use Case</h4>
+<ul>
+<li>kubeadm: Deploy control plane component as static Pods
+<ul>
+<li>kubeadm은 kubelet을 통해 <code>/etc/kubernetest/manifests</code> 안에 있는 control plane  component spec을 읽어 static pods들을 생성하여 관리한다.</li>
+</ul>
+</li>
+<li>edge computing (iot)</li>
+</ul>
+<h4 id="check-wheter-pod-is-static-or-not">Check wheter pod is static or not</h4>
+<p>There is two way</p>
+<ol>
+<li>k get nodes &amp;&amp; k get po -A</li>
+</ol>
+<ul>
+<li>static pod naming: [POD NAME]-[NODE NAME]</li>
+</ul>
+<ol start="2">
+<li>k describe po [POD NAME] and check Owner: Node or other resource types</li>
+</ol>
+<h4 id="how-to-find-staticpodpath">How to find staticPodPath</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">ps</span> <span class="o">-</span><span class="n">aux</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">kubelet</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">config</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span>        <span class="mi">4351</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span> <span class="mi">4519680</span> <span class="mi">100556</span> <span class="err">?</span>      <span class="n">Ssl</span>  <span class="mi">02</span><span class="p">:</span><span class="mi">23</span>   <span class="mi">0</span><span class="p">:</span><span class="mi">36</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">kubelet</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">kubeconfig</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">kubelet</span><span class="o">.</span><span class="n">conf</span> <span class="o">--</span><span class="n">kubeconfig</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">kubelet</span><span class="o">.</span><span class="n">conf</span> <span class="o">--</span><span class="n">config</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">container</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">endpoint</span><span class="o">=</span><span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">containerd</span><span class="o">/</span><span class="n">containerd</span><span class="o">.</span><span class="n">sock</span> <span class="o">--</span><span class="n">pod</span><span class="o">-</span><span class="n">infra</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">image</span><span class="o">=</span><span class="n">registry</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">pause</span><span class="p">:</span><span class="mf">3.9</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cat</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">staticPodPath</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="how-to-create-staticpod">How to create staticPod</h3>
+<blockquote>
+<p>Create a static pod named static-busybox that uses the busybox image and the command sleep 1000</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">run</span> <span class="n">static</span><span class="o">-</span><span class="n">busybox</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">busybox</span> <span class="o">--</span><span class="n">dry</span><span class="o">-</span><span class="n">run</span><span class="o">=</span><span class="n">client</span> <span class="o">-</span><span class="n">o</span> <span class="n">yaml</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">manifests</span><span class="o">/</span><span class="n">static</span><span class="o">-</span><span class="n">busybox</span><span class="o">.</span><span class="n">yaml</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">vim</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">manifests</span><span class="o">/</span><span class="n">static</span><span class="o">-</span><span class="n">busybox</span><span class="o">.</span><span class="n">yaml</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">creationTimestamp</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">static-busybox</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">static-busybox</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">busybox</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">static-busybox</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;sleep&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">args</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="s2">&#34;1000&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">dnsPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterFirst</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">restartPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Always</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="how-to-find-staticpod-and-delete-it">How to find staticPod and delete it</h3>
+<blockquote>
+<p>Question: We just created a new static pod named static-greenbox. Find it and delete it.</p>
+<blockquote>
+<p>This question is a bit tricky. But if you use the knowledge you gained in the previous questions in this lab, you should be able to find the answer to it.</p>
+</blockquote>
+</blockquote>
+<ol>
+<li>First, let&rsquo;s identify the node in which the pod called static-greenbox is created. To do this, run:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span><span class="p">:</span><span class="o">~</span><span class="c1"># kubectl get pods --all-namespaces -o wide  | grep static-greenbox</span>
+</span></span><span class="line"><span class="cl"><span class="n">default</span>       <span class="n">static</span><span class="o">-</span><span class="n">greenbox</span><span class="o">-</span><span class="n">node01</span>                 <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>   <span class="mi">0</span>          <span class="mi">19</span><span class="n">s</span>     <span class="mf">10.244.1.2</span>   <span class="n">node01</span>       <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>           <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span><span class="p">:</span><span class="o">~</span><span class="c1">#</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>From the result of this command, we can see that the pod is running on node01.</p>
+<ol start="2">
+<li>Next, SSH to node01 and identify the path configured for static pods in this node.</li>
+</ol>
+<ul>
+<li>Important: The path need not be /etc/kubernetes/manifests. Make sure to check the path configured in the kubelet configuration file.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span><span class="p">:</span><span class="o">~</span><span class="c1"># ssh node01 </span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">~</span><span class="c1"># ps -ef |  grep /usr/bin/kubelet </span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span>        <span class="mi">4147</span>       <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">14</span><span class="p">:</span><span class="mi">05</span> <span class="err">?</span>        <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">kubelet</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">kubeconfig</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">kubelet</span><span class="o">.</span><span class="n">conf</span> <span class="o">--</span><span class="n">kubeconfig</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">kubelet</span><span class="o">.</span><span class="n">conf</span> <span class="o">--</span><span class="n">config</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">container</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">endpoint</span><span class="o">=</span><span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">containerd</span><span class="o">/</span><span class="n">containerd</span><span class="o">.</span><span class="n">sock</span> <span class="o">--</span><span class="n">pod</span><span class="o">-</span><span class="n">infra</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">image</span><span class="o">=</span><span class="n">registry</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">pause</span><span class="p">:</span><span class="mf">3.9</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span>        <span class="mi">4773</span>    <span class="mi">4733</span>  <span class="mi">0</span> <span class="mi">14</span><span class="p">:</span><span class="mi">05</span> <span class="n">pts</span><span class="o">/</span><span class="mi">0</span>    <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">grep</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">kubelet</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">~</span><span class="c1"># grep -i staticpod /var/lib/kubelet/config.yaml</span>
+</span></span><span class="line"><span class="cl"><span class="n">staticPodPath</span><span class="p">:</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">just</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">mess</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">you</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">~</span><span class="c1"># </span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Here the staticPodPath is /etc/just-to-mess-with-you</p>
+<ol start="3">
+<li>Navigate to this directory and delete the YAML file:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">just</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">mess</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">you</span><span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl"><span class="n">greenbox</span><span class="o">.</span><span class="n">yaml</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">just</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">mess</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">you</span><span class="c1"># rm -rf greenbox.yaml </span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">just</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">mess</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">you</span><span class="c1">#</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>Exit out of node01 using CTRL + D or type exit. You should return to the controlplane node. Check if the</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">static</span><span class="o">-</span><span class="n">greenbox</span> <span class="n">pod</span> <span class="n">has</span> <span class="n">been</span> <span class="n">deleted</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span><span class="p">:</span><span class="o">~</span><span class="c1"># kubectl get pods --all-namespaces -o wide  | grep static-greenbox</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span><span class="p">:</span><span class="o">~</span><span class="c1"># </span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-20&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/c9b909bf9cb2ebb00fe9ef321537093a7ac283e7" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) c9b909bf9cb2ebb00fe9ef321537093a7ac283e7: docs: cka">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c9b909b</a></span>
+                <span>Updated on 2024-04-23&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/1812381dcacd8c6fceb0b0ba4e347db4779f5f5c" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 1812381dcacd8c6fceb0b0ba4e347db4779f5f5c: docs: cka">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>1812381</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
