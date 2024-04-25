@@ -344,7 +344,7 @@ In k8s, namespaces provide a mechanism for **isolating groups of resources** wit
 
 #### namespace cli
 
-```python
+```jsthon
 $ k get ns
 NAME              STATUS   AGE
 kube-system       Active   9m56s
@@ -365,14 +365,14 @@ $ k get po -n=research --no-headers | wc -l
 2
 ```
 
-```python
+```jsthon
 # create and run pod with finance namespace
 # 생각해보니까 apply, create으로 pod 직접적으로 만들지 않았던 것 같네. 곧바로 run 했던 것 같은데, run = create + run like docker
 k run redis -n=finance --image=redis
 
 ```
 
-```python
+```jsthon
 # swich ns
 $ kubectl config set-context $(kubectl config current-context) --namespace=dev
 
@@ -434,7 +434,7 @@ spec:
 
 ## Imperative
 
-```python
+```jsthon
 $ k run nginx-pod --image=nginx:alpine
 $ k run redis --image=redis:alpine --labels="tier=db"
 $ k expose po redis --port=6379 --name=redis-service
@@ -471,7 +471,7 @@ spec:
 
 - when there is scheduler
 
-```py
+```js
 floe@floe-QEMU-Virtual-Machine:~$ k get po -o wide
 NAME    READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 nginx   1/1     Running   0          40s   10.244.0.14   minikube   <none>           <none>
@@ -482,7 +482,7 @@ minikube   Ready    control-plane   5d19h   v1.28.3
 
 - When there is no scheduler, there would be empty Node value on pod description.
 
-```py
+```js
 # There is no aligned node to the pod.
 $ k describe po nginx | grep Node
 
@@ -526,7 +526,7 @@ k replace --force -f nginx.yaml
 - Taints: Taints are the opposite -- they allow a **node** to repel(격퇴하다) a set of pods.
 - Tolerations: **Tolerations are applied to pods**. Tolerations allow the scheduler to schedule pods with matching taints. 
 
-```py
+```js
 kubectl taint nodes node1 key1=value1:NoExecute
 kubectl taint nodes node1 key1=value1:NoSchedule
 kubectl taint nodes node1 key1=value1:PreferNoSchedule
@@ -610,13 +610,13 @@ As such, a combination of taints and tolerations and node affinity rules can be 
 
 ## cli
 
-```py
+```js
 # Open terminal output with vim to easily find `/` N/n
 > k describe no node01 | vim -
 ```
 
 
-```py
+```js
 k get no --no-headers | wc -l
 
 # set label to node
@@ -631,7 +631,7 @@ Taints:             <none>
 ```
 
 
-```py
+```js
 k describe no controlplane 
 Name:               controlplane
 Roles:              control-plane
@@ -769,7 +769,7 @@ There is two way
 
 
 #### How to find staticPodPath
-```py
+```js
 
 controlplane ~ ➜  ps -aux | grep kubelet | grep -i config
 root        4351  0.0  0.0 4519680 100556 ?      Ssl  02:23   0:36 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9
@@ -780,7 +780,7 @@ cat /var/lib/kubelet/config.yaml | grep staticPodPath
 ### How to create staticPod
 > Create a static pod named static-busybox that uses the busybox image and the command sleep 1000
 
-```py
+```js
 controlplane ~ ➜  k run static-busybox --image=busybox --dry-run=client -o yaml > /etc/kubernetes/manifests/static-busybox.yaml
 
 controlplane ~ ➜  vim /etc/kubernetes/manifests/static-busybox.yaml
@@ -813,7 +813,7 @@ spec:
 
 1. First, let's identify the node in which the pod called static-greenbox is created. To do this, run:
 
-```py
+```js
 root@controlplane:~# kubectl get pods --all-namespaces -o wide  | grep static-greenbox
 default       static-greenbox-node01                 1/1     Running   0          19s     10.244.1.2   node01       <none>           <none>
 root@controlplane:~#
@@ -825,7 +825,7 @@ From the result of this command, we can see that the pod is running on node01.
 
   - Important: The path need not be /etc/kubernetes/manifests. Make sure to check the path configured in the kubelet configuration file.
 
-```py
+```js
 root@controlplane:~# ssh node01 
 root@node01:~# ps -ef |  grep /usr/bin/kubelet 
 root        4147       1  0 14:05 ?        00:00:00 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9
@@ -842,17 +842,54 @@ Here the staticPodPath is /etc/just-to-mess-with-you
 
 3. Navigate to this directory and delete the YAML file:
 
-```py
+```js
 root@node01:/etc/just-to-mess-with-you# ls
 greenbox.yaml
 root@node01:/etc/just-to-mess-with-you# rm -rf greenbox.yaml 
 root@node01:/etc/just-to-mess-with-you#
 ```
 
-4. Exit out of node01 using CTRL + D or type exit. You should return to the controlplane node. Check if the 
+4. Exit out of node01 using CTRL + D or type exit. You should return to the controlplane node. Check if the static-greenbox pod has been deleted:
 
-```py
-static-greenbox pod has been deleted:
+```js
 root@controlplane:~# kubectl get pods --all-namespaces -o wide  | grep static-greenbox
 root@controlplane:~# 
+```
+
+
+# Chapter 5
+
+
+## Configmap
+
+- Note that not to use `--from-file`, this is only handle single key like `--from-literal`
+- Instead use `k create cm <NAME> --from-env-file=`
+
+```js
+controlplane ~ ➜  vim webapp.env 
+
+controlplane ~ ➜  k create cm webapp-config-map --from-env-file=./webapp.env
+configmap/webapp-config-map created
+```
+
+## Secret
+
+```js
+k create secret generic db-secret --from-env-file=./db.env
+```
+
+- `envFrom`
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: envfrom-secret
+spec:
+  containers:
+  - name: envars-test-container
+    image: nginx
+    envFrom:
+    - secretRef:
+        name: test-secret
 ```

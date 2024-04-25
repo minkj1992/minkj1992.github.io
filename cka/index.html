@@ -11,7 +11,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/cka/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-19T12:41:18+09:00" />
-<meta property="article:modified_time" content="2024-04-23T17:34:36+09:00" />
+<meta property="article:modified_time" content="2024-04-25T12:34:53+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -36,8 +36,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  3288 ,
-        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-23T17:34:36+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  3353 ,
+        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-25T12:34:53+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -175,7 +175,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3288 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3353 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -276,6 +276,11 @@
         <li><a href="#how-to-find-staticpod-and-delete-it">How to find staticPod and delete it</a></li>
       </ul>
     </li>
+  </ul>
+
+  <ul>
+    <li><a href="#configmap">Configmap</a></li>
+    <li><a href="#secret">Secret</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
@@ -795,24 +800,24 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">ns</span>
-</span></span><span class="line"><span class="cl"><span class="n">NAME</span>              <span class="n">STATUS</span>   <span class="n">AGE</span>
-</span></span><span class="line"><span class="cl"><span class="n">kube</span><span class="o">-</span><span class="n">system</span>       <span class="n">Active</span>   <span class="mi">9</span><span class="n">m56s</span>
-</span></span><span class="line"><span class="cl"><span class="n">kube</span><span class="o">-</span><span class="n">public</span>       <span class="n">Active</span>   <span class="mi">9</span><span class="n">m56s</span>
-</span></span><span class="line"><span class="cl"><span class="n">kube</span><span class="o">-</span><span class="n">node</span><span class="o">-</span><span class="n">lease</span>   <span class="n">Active</span>   <span class="mi">9</span><span class="n">m56s</span>
-</span></span><span class="line"><span class="cl"><span class="n">default</span>           <span class="n">Active</span>   <span class="mi">9</span><span class="n">m56s</span>
-</span></span><span class="line"><span class="cl"><span class="n">finance</span>           <span class="n">Active</span>   <span class="mi">22</span><span class="n">s</span>
-</span></span><span class="line"><span class="cl"><span class="n">marketing</span>         <span class="n">Active</span>   <span class="mi">22</span><span class="n">s</span>
-</span></span><span class="line"><span class="cl"><span class="n">dev</span>               <span class="n">Active</span>   <span class="mi">21</span><span class="n">s</span>
-</span></span><span class="line"><span class="cl"><span class="n">prod</span>              <span class="n">Active</span>   <span class="mi">21</span><span class="n">s</span>
-</span></span><span class="line"><span class="cl"><span class="n">manufacturing</span>     <span class="n">Active</span>   <span class="mi">21</span><span class="n">s</span>
-</span></span><span class="line"><span class="cl"><span class="n">research</span>          <span class="n">Active</span>   <span class="mi">21</span><span class="n">s</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ k get ns
+</span></span><span class="line"><span class="cl">NAME              STATUS   AGE
+</span></span><span class="line"><span class="cl">kube-system       Active   9m56s
+</span></span><span class="line"><span class="cl">kube-public       Active   9m56s
+</span></span><span class="line"><span class="cl">kube-node-lease   Active   9m56s
+</span></span><span class="line"><span class="cl">default           Active   9m56s
+</span></span><span class="line"><span class="cl">finance           Active   22s
+</span></span><span class="line"><span class="cl">marketing         Active   22s
+</span></span><span class="line"><span class="cl">dev               Active   21s
+</span></span><span class="line"><span class="cl">prod              Active   21s
+</span></span><span class="line"><span class="cl">manufacturing     Active   21s
+</span></span><span class="line"><span class="cl">research          Active   21s
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">ns</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">headers</span> <span class="o">|</span> <span class="n">wc</span> <span class="o">-</span><span class="n">l</span>
-</span></span><span class="line"><span class="cl"><span class="mi">10</span>
+</span></span><span class="line"><span class="cl">$ k get ns --no-headers | wc -l
+</span></span><span class="line"><span class="cl">10
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">po</span> <span class="o">-</span><span class="n">n</span><span class="o">=</span><span class="n">research</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">headers</span> <span class="o">|</span> <span class="n">wc</span> <span class="o">-</span><span class="n">l</span>
-</span></span><span class="line"><span class="cl"><span class="mi">2</span>
+</span></span><span class="line"><span class="cl">$ k get po -n=research --no-headers | wc -l
+</span></span><span class="line"><span class="cl">2
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -822,9 +827,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># create and run pod with finance namespace</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 생각해보니까 apply, create으로 pod 직접적으로 만들지 않았던 것 같네. 곧바로 run 했던 것 같은데, run = create + run like docker</span>
-</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">run</span> <span class="n">redis</span> <span class="o">-</span><span class="n">n</span><span class="o">=</span><span class="n">finance</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">redis</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># create and run pod with finance namespace
+</span></span><span class="line"><span class="cl"># 생각해보니까 apply, create으로 pod 직접적으로 만들지 않았던 것 같네. 곧바로 run 했던 것 같은데, run = create + run like docker
+</span></span><span class="line"><span class="cl">k run redis -n=finance --image=redis
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -836,11 +841,11 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># swich ns</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">kubectl</span> <span class="n">config</span> <span class="nb">set</span><span class="o">-</span><span class="n">context</span> <span class="err">$</span><span class="p">(</span><span class="n">kubectl</span> <span class="n">config</span> <span class="n">current</span><span class="o">-</span><span class="n">context</span><span class="p">)</span> <span class="o">--</span><span class="n">namespace</span><span class="o">=</span><span class="n">dev</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># swich ns
+</span></span><span class="line"><span class="cl">$ kubectl config set-context $(kubectl config current-context) --namespace=dev
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># view pods in all namespace</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">kubectl</span> <span class="n">get</span> <span class="n">pods</span> <span class="o">--</span><span class="nb">all</span><span class="o">-</span><span class="n">namespaces</span>
+</span></span><span class="line"><span class="cl"># view pods in all namespace
+</span></span><span class="line"><span class="cl">$ kubectl get pods --all-namespaces
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="kubernetes-dns-rule">kubernetes DNS rule</h4>
@@ -956,14 +961,14 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">run</span> <span class="n">nginx</span><span class="o">-</span><span class="n">pod</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">nginx</span><span class="p">:</span><span class="n">alpine</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">run</span> <span class="n">redis</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">redis</span><span class="p">:</span><span class="n">alpine</span> <span class="o">--</span><span class="n">labels</span><span class="o">=</span><span class="s2">&#34;tier=db&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">expose</span> <span class="n">po</span> <span class="n">redis</span> <span class="o">--</span><span class="n">port</span><span class="o">=</span><span class="mi">6379</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="n">redis</span><span class="o">-</span><span class="n">service</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">create</span> <span class="n">deploy</span> <span class="n">webapp</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">kodekloud</span><span class="o">/</span><span class="n">webapp</span><span class="o">-</span><span class="n">color</span> <span class="o">--</span><span class="n">replicas</span><span class="o">=</span><span class="mi">3</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">run</span> <span class="n">custom</span><span class="o">-</span><span class="n">nginx</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">nginx</span> <span class="o">--</span><span class="n">port</span><span class="o">=</span><span class="mi">8080</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">create</span> <span class="n">ns</span> <span class="n">dev</span><span class="o">-</span><span class="n">ns</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">create</span> <span class="n">deploy</span> <span class="n">redis</span><span class="o">-</span><span class="n">deploy</span> <span class="o">-</span><span class="n">n</span> <span class="n">dev</span><span class="o">-</span><span class="n">ns</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">redis</span> <span class="o">--</span><span class="n">replicas</span><span class="o">=</span><span class="mi">2</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">run</span> <span class="n">httpd</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">httpd</span><span class="p">:</span><span class="n">alpine</span> <span class="o">&amp;&amp;</span> <span class="n">k</span> <span class="n">expose</span> <span class="n">po</span> <span class="n">httpd</span> <span class="o">--</span><span class="n">port</span><span class="o">=</span><span class="mi">80</span> <span class="o">--</span><span class="n">name</span><span class="o">=</span><span class="n">httpd</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ k run nginx-pod --image=nginx:alpine
+</span></span><span class="line"><span class="cl">$ k run redis --image=redis:alpine --labels=&#34;tier=db&#34;
+</span></span><span class="line"><span class="cl">$ k expose po redis --port=6379 --name=redis-service
+</span></span><span class="line"><span class="cl">$ k create deploy webapp --image=kodekloud/webapp-color --replicas=3
+</span></span><span class="line"><span class="cl">$ k run custom-nginx --image=nginx --port=8080
+</span></span><span class="line"><span class="cl">$ k create ns dev-ns
+</span></span><span class="line"><span class="cl">$ k create deploy redis-deploy -n dev-ns --image=redis --replicas=2
+</span></span><span class="line"><span class="cl">$ k run httpd --image=httpd:alpine &amp;&amp; k expose po httpd --port=80 --name=httpd
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="chapter-3-schedule">Chapter 3: Schedule</h1>
@@ -1015,12 +1020,12 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">floe</span><span class="nd">@floe</span><span class="o">-</span><span class="n">QEMU</span><span class="o">-</span><span class="n">Virtual</span><span class="o">-</span><span class="n">Machine</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">po</span> <span class="o">-</span><span class="n">o</span> <span class="n">wide</span>
-</span></span><span class="line"><span class="cl"><span class="n">NAME</span>    <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>   <span class="n">IP</span>            <span class="n">NODE</span>       <span class="n">NOMINATED</span> <span class="n">NODE</span>   <span class="n">READINESS</span> <span class="n">GATES</span>
-</span></span><span class="line"><span class="cl"><span class="n">nginx</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>   <span class="mi">0</span>          <span class="mi">40</span><span class="n">s</span>   <span class="mf">10.244.0.14</span>   <span class="n">minikube</span>   <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>           <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="n">floe</span><span class="nd">@floe</span><span class="o">-</span><span class="n">QEMU</span><span class="o">-</span><span class="n">Virtual</span><span class="o">-</span><span class="n">Machine</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">nodes</span>
-</span></span><span class="line"><span class="cl"><span class="n">NAME</span>       <span class="n">STATUS</span>   <span class="n">ROLES</span>           <span class="n">AGE</span>     <span class="n">VERSION</span>
-</span></span><span class="line"><span class="cl"><span class="n">minikube</span>   <span class="n">Ready</span>    <span class="n">control</span><span class="o">-</span><span class="n">plane</span>   <span class="mi">5</span><span class="n">d19h</span>   <span class="n">v1</span><span class="mf">.28.3</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">floe</span><span class="err">@</span><span class="nx">floe</span><span class="o">-</span><span class="nx">QEMU</span><span class="o">-</span><span class="nx">Virtual</span><span class="o">-</span><span class="nx">Machine</span><span class="o">:~</span><span class="nx">$</span> <span class="nx">k</span> <span class="nx">get</span> <span class="nx">po</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">wide</span>
+</span></span><span class="line"><span class="cl"><span class="nx">NAME</span>    <span class="nx">READY</span>   <span class="nx">STATUS</span>    <span class="nx">RESTARTS</span>   <span class="nx">AGE</span>   <span class="nx">IP</span>            <span class="nx">NODE</span>       <span class="nx">NOMINATED</span> <span class="nx">NODE</span>   <span class="nx">READINESS</span> <span class="nx">GATES</span>
+</span></span><span class="line"><span class="cl"><span class="nx">nginx</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">40</span><span class="nx">s</span>   <span class="mf">10.244</span><span class="p">.</span><span class="mf">0.14</span>   <span class="nx">minikube</span>   <span class="o">&lt;</span><span class="nx">none</span><span class="o">&gt;</span>           <span class="o">&lt;</span><span class="nx">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">floe</span><span class="err">@</span><span class="nx">floe</span><span class="o">-</span><span class="nx">QEMU</span><span class="o">-</span><span class="nx">Virtual</span><span class="o">-</span><span class="nx">Machine</span><span class="o">:~</span><span class="nx">$</span> <span class="nx">k</span> <span class="nx">get</span> <span class="nx">nodes</span>
+</span></span><span class="line"><span class="cl"><span class="nx">NAME</span>       <span class="nx">STATUS</span>   <span class="nx">ROLES</span>           <span class="nx">AGE</span>     <span class="nx">VERSION</span>
+</span></span><span class="line"><span class="cl"><span class="nx">minikube</span>   <span class="nx">Ready</span>    <span class="nx">control</span><span class="o">-</span><span class="nx">plane</span>   <span class="mi">5</span><span class="nx">d19h</span>   <span class="nx">v1</span><span class="p">.</span><span class="mf">28.3</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -1038,14 +1043,14 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># There is no aligned node to the pod.</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">describe</span> <span class="n">po</span> <span class="n">nginx</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">Node</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">There</span> <span class="nx">is</span> <span class="nx">no</span> <span class="nx">aligned</span> <span class="nx">node</span> <span class="nx">to</span> <span class="nx">the</span> <span class="nx">pod</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nx">$</span> <span class="nx">k</span> <span class="nx">describe</span> <span class="nx">po</span> <span class="nx">nginx</span> <span class="o">|</span> <span class="nx">grep</span> <span class="nx">Node</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># There is no scheduler.</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">po</span> <span class="o">-</span><span class="n">n</span> <span class="n">kube</span><span class="o">-</span><span class="n">system</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">scheduler</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">There</span> <span class="nx">is</span> <span class="nx">no</span> <span class="nx">scheduler</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="nx">$</span> <span class="nx">k</span> <span class="nx">get</span> <span class="nx">po</span> <span class="o">-</span><span class="nx">n</span> <span class="nx">kube</span><span class="o">-</span><span class="nx">system</span> <span class="o">|</span> <span class="nx">grep</span> <span class="nx">scheduler</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># get nodes</span>
-</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">nodes</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">get</span> <span class="nx">nodes</span>
+</span></span><span class="line"><span class="cl"><span class="nx">$</span> <span class="nx">k</span> <span class="nx">get</span> <span class="nx">nodes</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -1106,9 +1111,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">taint</span> <span class="n">nodes</span> <span class="n">node1</span> <span class="n">key1</span><span class="o">=</span><span class="n">value1</span><span class="p">:</span><span class="n">NoExecute</span>
-</span></span><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">taint</span> <span class="n">nodes</span> <span class="n">node1</span> <span class="n">key1</span><span class="o">=</span><span class="n">value1</span><span class="p">:</span><span class="n">NoSchedule</span>
-</span></span><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">taint</span> <span class="n">nodes</span> <span class="n">node1</span> <span class="n">key1</span><span class="o">=</span><span class="n">value1</span><span class="p">:</span><span class="n">PreferNoSchedule</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">kubectl</span> <span class="nx">taint</span> <span class="nx">nodes</span> <span class="nx">node1</span> <span class="nx">key1</span><span class="o">=</span><span class="nx">value1</span><span class="o">:</span><span class="nx">NoExecute</span>
+</span></span><span class="line"><span class="cl"><span class="nx">kubectl</span> <span class="nx">taint</span> <span class="nx">nodes</span> <span class="nx">node1</span> <span class="nx">key1</span><span class="o">=</span><span class="nx">value1</span><span class="o">:</span><span class="nx">NoSchedule</span>
+</span></span><span class="line"><span class="cl"><span class="nx">kubectl</span> <span class="nx">taint</span> <span class="nx">nodes</span> <span class="nx">node1</span> <span class="nx">key1</span><span class="o">=</span><span class="nx">value1</span><span class="o">:</span><span class="nx">PreferNoSchedule</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Taint Effect fields</p>
@@ -1246,8 +1251,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># Open terminal output with vim to easily find `/` N/n</span>
-</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">k</span> <span class="n">describe</span> <span class="n">no</span> <span class="n">node01</span> <span class="o">|</span> <span class="n">vim</span> <span class="o">-</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">Open</span> <span class="nx">terminal</span> <span class="nx">output</span> <span class="kd">with</span> <span class="nx">vim</span> <span class="nx">to</span> <span class="nx">easily</span> <span class="nx">find</span> <span class="sb">`/`</span> <span class="nx">N</span><span class="o">/</span><span class="nx">n</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="nx">k</span> <span class="nx">describe</span> <span class="nx">no</span> <span class="nx">node01</span> <span class="o">|</span> <span class="nx">vim</span> <span class="o">-</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -1265,17 +1270,17 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">k</span> <span class="n">get</span> <span class="n">no</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">headers</span> <span class="o">|</span> <span class="n">wc</span> <span class="o">-</span><span class="n">l</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">k</span> <span class="nx">get</span> <span class="nx">no</span> <span class="o">--</span><span class="nx">no</span><span class="o">-</span><span class="nx">headers</span> <span class="o">|</span> <span class="nx">wc</span> <span class="o">-</span><span class="nx">l</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># set label to node</span>
-</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">label</span> <span class="n">no</span> <span class="n">node01</span> <span class="n">color</span><span class="o">=</span><span class="n">blue</span>
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">set</span> <span class="nx">label</span> <span class="nx">to</span> <span class="nx">node</span>
+</span></span><span class="line"><span class="cl"><span class="nx">k</span> <span class="nx">label</span> <span class="nx">no</span> <span class="nx">node01</span> <span class="nx">color</span><span class="o">=</span><span class="nx">blue</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">create</span> <span class="n">deploy</span> <span class="n">blue</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">nginx</span> <span class="o">--</span><span class="n">replicas</span><span class="o">=</span><span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="nx">k</span> <span class="nx">create</span> <span class="nx">deploy</span> <span class="nx">blue</span> <span class="o">--</span><span class="nx">image</span><span class="o">=</span><span class="nx">nginx</span> <span class="o">--</span><span class="nx">replicas</span><span class="o">=</span><span class="mi">3</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">describe</span> <span class="n">no</span> <span class="n">controlplane</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">taints</span>
-</span></span><span class="line"><span class="cl"><span class="n">Taints</span><span class="p">:</span>             <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">describe</span> <span class="n">no</span> <span class="n">node01</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">taints</span>
-</span></span><span class="line"><span class="cl"><span class="n">Taints</span><span class="p">:</span>             <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">k</span> <span class="nx">describe</span> <span class="nx">no</span> <span class="nx">controlplane</span> <span class="o">|</span> <span class="nx">grep</span> <span class="o">-</span><span class="nx">i</span> <span class="nx">taints</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Taints</span><span class="o">:</span>             <span class="o">&lt;</span><span class="nx">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">k</span> <span class="nx">describe</span> <span class="nx">no</span> <span class="nx">node01</span> <span class="o">|</span> <span class="nx">grep</span> <span class="o">-</span><span class="nx">i</span> <span class="nx">taints</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Taints</span><span class="o">:</span>             <span class="o">&lt;</span><span class="nx">none</span><span class="o">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -1291,15 +1296,15 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">k</span> <span class="n">describe</span> <span class="n">no</span> <span class="n">controlplane</span> 
-</span></span><span class="line"><span class="cl"><span class="n">Name</span><span class="p">:</span>               <span class="n">controlplane</span>
-</span></span><span class="line"><span class="cl"><span class="n">Roles</span><span class="p">:</span>              <span class="n">control</span><span class="o">-</span><span class="n">plane</span>
-</span></span><span class="line"><span class="cl"><span class="n">Labels</span><span class="p">:</span>             <span class="n">beta</span><span class="o">.</span><span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">arch</span><span class="o">=</span><span class="n">amd64</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">beta</span><span class="o">.</span><span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">os</span><span class="o">=</span><span class="n">linux</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">arch</span><span class="o">=</span><span class="n">amd64</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">hostname</span><span class="o">=</span><span class="n">controlplane</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">os</span><span class="o">=</span><span class="n">linux</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">node</span><span class="o">-</span><span class="n">role</span><span class="o">.</span><span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">control</span><span class="o">-</span><span class="n">plane</span><span class="o">=</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">k</span> <span class="nx">describe</span> <span class="nx">no</span> <span class="nx">controlplane</span> 
+</span></span><span class="line"><span class="cl"><span class="nx">Name</span><span class="o">:</span>               <span class="nx">controlplane</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Roles</span><span class="o">:</span>              <span class="nx">control</span><span class="o">-</span><span class="nx">plane</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Labels</span><span class="o">:</span>             <span class="nx">beta</span><span class="p">.</span><span class="nx">kubernetes</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">arch</span><span class="o">=</span><span class="nx">amd64</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">beta</span><span class="p">.</span><span class="nx">kubernetes</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">os</span><span class="o">=</span><span class="nx">linux</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">kubernetes</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">arch</span><span class="o">=</span><span class="nx">amd64</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">kubernetes</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">hostname</span><span class="o">=</span><span class="nx">controlplane</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">kubernetes</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">os</span><span class="o">=</span><span class="nx">linux</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">node</span><span class="o">-</span><span class="nx">role</span><span class="p">.</span><span class="nx">kubernetes</span><span class="p">.</span><span class="nx">io</span><span class="o">/</span><span class="nx">control</span><span class="o">-</span><span class="nx">plane</span><span class="o">=</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -1501,11 +1506,11 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">ps</span> <span class="o">-</span><span class="n">aux</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">kubelet</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">config</span>
-</span></span><span class="line"><span class="cl"><span class="n">root</span>        <span class="mi">4351</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span> <span class="mi">4519680</span> <span class="mi">100556</span> <span class="err">?</span>      <span class="n">Ssl</span>  <span class="mi">02</span><span class="p">:</span><span class="mi">23</span>   <span class="mi">0</span><span class="p">:</span><span class="mi">36</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">kubelet</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">kubeconfig</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">kubelet</span><span class="o">.</span><span class="n">conf</span> <span class="o">--</span><span class="n">kubeconfig</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">kubelet</span><span class="o">.</span><span class="n">conf</span> <span class="o">--</span><span class="n">config</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">container</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">endpoint</span><span class="o">=</span><span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">containerd</span><span class="o">/</span><span class="n">containerd</span><span class="o">.</span><span class="n">sock</span> <span class="o">--</span><span class="n">pod</span><span class="o">-</span><span class="n">infra</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">image</span><span class="o">=</span><span class="n">registry</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">pause</span><span class="p">:</span><span class="mf">3.9</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="nx">ps</span> <span class="o">-</span><span class="nx">aux</span> <span class="o">|</span> <span class="nx">grep</span> <span class="nx">kubelet</span> <span class="o">|</span> <span class="nx">grep</span> <span class="o">-</span><span class="nx">i</span> <span class="nx">config</span>
+</span></span><span class="line"><span class="cl"><span class="nx">root</span>        <span class="mi">4351</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span> <span class="mi">4519680</span> <span class="mi">100556</span> <span class="o">?</span>      <span class="nx">Ssl</span>  <span class="mi">02</span><span class="o">:</span><span class="mi">23</span>   <span class="mi">0</span><span class="o">:</span><span class="mi">36</span> <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">kubelet</span> <span class="o">--</span><span class="nx">bootstrap</span><span class="o">-</span><span class="nx">kubeconfig</span><span class="o">=</span><span class="err">/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">cat</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">staticPodPath</span>
+</span></span><span class="line"><span class="cl"><span class="nx">cat</span> <span class="o">/</span><span class="kd">var</span><span class="err">/lib/kubelet/config.yaml | grep staticPodPath</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="how-to-create-staticpod">How to create staticPod</h3>
@@ -1519,9 +1524,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">run</span> <span class="n">static</span><span class="o">-</span><span class="n">busybox</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">busybox</span> <span class="o">--</span><span class="n">dry</span><span class="o">-</span><span class="n">run</span><span class="o">=</span><span class="n">client</span> <span class="o">-</span><span class="n">o</span> <span class="n">yaml</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">manifests</span><span class="o">/</span><span class="n">static</span><span class="o">-</span><span class="n">busybox</span><span class="o">.</span><span class="n">yaml</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="nx">k</span> <span class="nx">run</span> <span class="kr">static</span><span class="o">-</span><span class="nx">busybox</span> <span class="o">--</span><span class="nx">image</span><span class="o">=</span><span class="nx">busybox</span> <span class="o">--</span><span class="nx">dry</span><span class="o">-</span><span class="nx">run</span><span class="o">=</span><span class="nx">client</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">yaml</span> <span class="o">&gt;</span> <span class="err">/etc/kubernetes/manifests/static-busybox.yaml</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">vim</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">manifests</span><span class="o">/</span><span class="n">static</span><span class="o">-</span><span class="n">busybox</span><span class="o">.</span><span class="n">yaml</span>
+</span></span><span class="line"><span class="cl"><span class="nx">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="nx">vim</span> <span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">kubernetes</span><span class="o">/</span><span class="nx">manifests</span><span class="o">/</span><span class="kr">static</span><span class="o">-</span><span class="nx">busybox</span><span class="p">.</span><span class="nx">yaml</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -1579,9 +1584,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span><span class="p">:</span><span class="o">~</span><span class="c1"># kubectl get pods --all-namespaces -o wide  | grep static-greenbox</span>
-</span></span><span class="line"><span class="cl"><span class="n">default</span>       <span class="n">static</span><span class="o">-</span><span class="n">greenbox</span><span class="o">-</span><span class="n">node01</span>                 <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>   <span class="mi">0</span>          <span class="mi">19</span><span class="n">s</span>     <span class="mf">10.244.1.2</span>   <span class="n">node01</span>       <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>           <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span><span class="p">:</span><span class="o">~</span><span class="c1">#</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">controlplane</span><span class="o">:~</span><span class="err">#</span> <span class="nx">kubectl</span> <span class="nx">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">all</span><span class="o">-</span><span class="nx">namespaces</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">wide</span>  <span class="o">|</span> <span class="nx">grep</span> <span class="kr">static</span><span class="o">-</span><span class="nx">greenbox</span>
+</span></span><span class="line"><span class="cl"><span class="k">default</span>       <span class="kr">static</span><span class="o">-</span><span class="nx">greenbox</span><span class="o">-</span><span class="nx">node01</span>                 <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="nx">Running</span>   <span class="mi">0</span>          <span class="mi">19</span><span class="nx">s</span>     <span class="mf">10.244</span><span class="p">.</span><span class="mf">1.2</span>   <span class="nx">node01</span>       <span class="o">&lt;</span><span class="nx">none</span><span class="o">&gt;</span>           <span class="o">&lt;</span><span class="nx">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">controlplane</span><span class="o">:~</span><span class="err">#</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>From the result of this command, we can see that the pod is running on node01.</p>
@@ -1604,15 +1609,15 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span><span class="p">:</span><span class="o">~</span><span class="c1"># ssh node01 </span>
-</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">~</span><span class="c1"># ps -ef |  grep /usr/bin/kubelet </span>
-</span></span><span class="line"><span class="cl"><span class="n">root</span>        <span class="mi">4147</span>       <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">14</span><span class="p">:</span><span class="mi">05</span> <span class="err">?</span>        <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">kubelet</span> <span class="o">--</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">kubeconfig</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">-</span><span class="n">kubelet</span><span class="o">.</span><span class="n">conf</span> <span class="o">--</span><span class="n">kubeconfig</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">kubelet</span><span class="o">.</span><span class="n">conf</span> <span class="o">--</span><span class="n">config</span><span class="o">=/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">kubelet</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="o">--</span><span class="n">container</span><span class="o">-</span><span class="n">runtime</span><span class="o">-</span><span class="n">endpoint</span><span class="o">=</span><span class="n">unix</span><span class="p">:</span><span class="o">///</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">containerd</span><span class="o">/</span><span class="n">containerd</span><span class="o">.</span><span class="n">sock</span> <span class="o">--</span><span class="n">pod</span><span class="o">-</span><span class="n">infra</span><span class="o">-</span><span class="n">container</span><span class="o">-</span><span class="n">image</span><span class="o">=</span><span class="n">registry</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">pause</span><span class="p">:</span><span class="mf">3.9</span>
-</span></span><span class="line"><span class="cl"><span class="n">root</span>        <span class="mi">4773</span>    <span class="mi">4733</span>  <span class="mi">0</span> <span class="mi">14</span><span class="p">:</span><span class="mi">05</span> <span class="n">pts</span><span class="o">/</span><span class="mi">0</span>    <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">grep</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">kubelet</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">controlplane</span><span class="o">:~</span><span class="err">#</span> <span class="nx">ssh</span> <span class="nx">node01</span> 
+</span></span><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">node01</span><span class="o">:~</span><span class="err">#</span> <span class="nx">ps</span> <span class="o">-</span><span class="nx">ef</span> <span class="o">|</span>  <span class="nx">grep</span> <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">kubelet</span> 
+</span></span><span class="line"><span class="cl"><span class="nx">root</span>        <span class="mi">4147</span>       <span class="mi">1</span>  <span class="mi">0</span> <span class="mi">14</span><span class="o">:</span><span class="mi">05</span> <span class="o">?</span>        <span class="mi">00</span><span class="o">:</span><span class="mi">00</span><span class="o">:</span><span class="mi">00</span> <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">kubelet</span> <span class="o">--</span><span class="nx">bootstrap</span><span class="o">-</span><span class="nx">kubeconfig</span><span class="o">=</span><span class="err">/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9</span>
+</span></span><span class="line"><span class="cl"><span class="nx">root</span>        <span class="mi">4773</span>    <span class="mi">4733</span>  <span class="mi">0</span> <span class="mi">14</span><span class="o">:</span><span class="mi">05</span> <span class="nx">pts</span><span class="o">/</span><span class="mi">0</span>    <span class="mi">00</span><span class="o">:</span><span class="mi">00</span><span class="o">:</span><span class="mi">00</span> <span class="nx">grep</span> <span class="o">/</span><span class="nx">usr</span><span class="o">/</span><span class="nx">bin</span><span class="o">/</span><span class="nx">kubelet</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">~</span><span class="c1"># grep -i staticpod /var/lib/kubelet/config.yaml</span>
-</span></span><span class="line"><span class="cl"><span class="n">staticPodPath</span><span class="p">:</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">just</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">mess</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">you</span>
+</span></span><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">node01</span><span class="o">:~</span><span class="err">#</span> <span class="nx">grep</span> <span class="o">-</span><span class="nx">i</span> <span class="nx">staticpod</span> <span class="o">/</span><span class="kd">var</span><span class="err">/lib/kubelet/config.yaml</span>
+</span></span><span class="line"><span class="cl"><span class="nx">staticPodPath</span><span class="o">:</span> <span class="err">/etc/just-to-mess-with-you</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">~</span><span class="c1"># </span>
+</span></span><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">node01</span><span class="o">:~</span><span class="err">#</span> 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Here the staticPodPath is /etc/just-to-mess-with-you</p>
@@ -1627,33 +1632,91 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">just</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">mess</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">you</span><span class="c1"># ls</span>
-</span></span><span class="line"><span class="cl"><span class="n">greenbox</span><span class="o">.</span><span class="n">yaml</span>
-</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">just</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">mess</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">you</span><span class="c1"># rm -rf greenbox.yaml </span>
-</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@node01</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">just</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">mess</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">you</span><span class="c1">#</span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">node01</span><span class="o">:</span><span class="err">/etc/just-to-mess-with-you# ls</span>
+</span></span><span class="line"><span class="cl"><span class="nx">greenbox</span><span class="p">.</span><span class="nx">yaml</span>
+</span></span><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">node01</span><span class="o">:</span><span class="err">/etc/just-to-mess-with-you# rm -rf greenbox.yaml </span>
+</span></span><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">node01</span><span class="o">:</span><span class="err">/etc/just-to-mess-with-you#</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="4">
-<li>Exit out of node01 using CTRL + D or type exit. You should return to the controlplane node. Check if the</li>
+<li>Exit out of node01 using CTRL + D or type exit. You should return to the controlplane node. Check if the static-greenbox pod has been deleted:</li>
 </ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
-</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">static</span><span class="o">-</span><span class="n">greenbox</span> <span class="n">pod</span> <span class="n">has</span> <span class="n">been</span> <span class="n">deleted</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span><span class="p">:</span><span class="o">~</span><span class="c1"># kubectl get pods --all-namespaces -o wide  | grep static-greenbox</span>
-</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span><span class="p">:</span><span class="o">~</span><span class="c1"># </span>
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">controlplane</span><span class="o">:~</span><span class="err">#</span> <span class="nx">kubectl</span> <span class="nx">get</span> <span class="nx">pods</span> <span class="o">--</span><span class="nx">all</span><span class="o">-</span><span class="nx">namespaces</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">wide</span>  <span class="o">|</span> <span class="nx">grep</span> <span class="kr">static</span><span class="o">-</span><span class="nx">greenbox</span>
+</span></span><span class="line"><span class="cl"><span class="nx">root</span><span class="err">@</span><span class="nx">controlplane</span><span class="o">:~</span><span class="err">#</span> 
 </span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="chapter-5">Chapter 5</h1>
+<h2 id="configmap">Configmap</h2>
+<ul>
+<li>Note that not to use <code>--from-file</code>, this is only handle single key like <code>--from-literal</code></li>
+<li>Instead use <code>k create cm &lt;NAME&gt; --from-env-file=</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="nx">vim</span> <span class="nx">webapp</span><span class="p">.</span><span class="nx">env</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="nx">k</span> <span class="nx">create</span> <span class="nx">cm</span> <span class="nx">webapp</span><span class="o">-</span><span class="nx">config</span><span class="o">-</span><span class="nx">map</span> <span class="o">--</span><span class="nx">from</span><span class="o">-</span><span class="nx">env</span><span class="o">-</span><span class="nx">file</span><span class="o">=</span><span class="p">.</span><span class="o">/</span><span class="nx">webapp</span><span class="p">.</span><span class="nx">env</span>
+</span></span><span class="line"><span class="cl"><span class="nx">configmap</span><span class="o">/</span><span class="nx">webapp</span><span class="o">-</span><span class="nx">config</span><span class="o">-</span><span class="nx">map</span> <span class="nx">created</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="secret">Secret</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">k</span> <span class="nx">create</span> <span class="nx">secret</span> <span class="nx">generic</span> <span class="nx">db</span><span class="o">-</span><span class="nx">secret</span> <span class="o">--</span><span class="nx">from</span><span class="o">-</span><span class="nx">env</span><span class="o">-</span><span class="nx">file</span><span class="o">=</span><span class="p">.</span><span class="o">/</span><span class="nx">db</span><span class="p">.</span><span class="nx">env</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>envFrom</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">envfrom-secret</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">envars-test-container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">nginx</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">envFrom</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">secretRef</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">test-secret</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-23&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/1812381dcacd8c6fceb0b0ba4e347db4779f5f5c" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 1812381dcacd8c6fceb0b0ba4e347db4779f5f5c: docs: cka">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>1812381</a></span>
+                <span>Updated on 2024-04-25&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/ea10910c50b0a7f1cc9d193a0b3d2f1912e7584a" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) ea10910c50b0a7f1cc9d193a0b3d2f1912e7584a: docs: cka">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ea10910</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
