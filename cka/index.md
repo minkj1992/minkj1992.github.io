@@ -35,6 +35,7 @@ MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 �
 
 하루 약 3~4시간씩 강의를 들어보자 약 23시간 강의이기 때문에 다 듣는데 약 5~6일 소요되기 때문에, 일주일 뒤에 테스트볼 예정이다. (~ 24.4.26)
 
+> edit, practice에 대한 시간이 빠져있었다. 조금 일정을 미뤄 + 2일뒤인 24.4.28에 시험을 볼 예정이다.
 
 24.04.19 ~
 
@@ -344,7 +345,7 @@ In k8s, namespaces provide a mechanism for **isolating groups of resources** wit
 
 #### namespace cli
 
-```jsthon
+```py
 $ k get ns
 NAME              STATUS   AGE
 kube-system       Active   9m56s
@@ -365,14 +366,14 @@ $ k get po -n=research --no-headers | wc -l
 2
 ```
 
-```jsthon
+```py
 # create and run pod with finance namespace
 # 생각해보니까 apply, create으로 pod 직접적으로 만들지 않았던 것 같네. 곧바로 run 했던 것 같은데, run = create + run like docker
 k run redis -n=finance --image=redis
 
 ```
 
-```jsthon
+```py
 # swich ns
 $ kubectl config set-context $(kubectl config current-context) --namespace=dev
 
@@ -434,7 +435,7 @@ spec:
 
 ## Imperative
 
-```jsthon
+```py
 $ k run nginx-pod --image=nginx:alpine
 $ k run redis --image=redis:alpine --labels="tier=db"
 $ k expose po redis --port=6379 --name=redis-service
@@ -471,7 +472,7 @@ spec:
 
 - when there is scheduler
 
-```js
+```py
 floe@floe-QEMU-Virtual-Machine:~$ k get po -o wide
 NAME    READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
 nginx   1/1     Running   0          40s   10.244.0.14   minikube   <none>           <none>
@@ -482,7 +483,7 @@ minikube   Ready    control-plane   5d19h   v1.28.3
 
 - When there is no scheduler, there would be empty Node value on pod description.
 
-```js
+```py
 # There is no aligned node to the pod.
 $ k describe po nginx | grep Node
 
@@ -507,7 +508,7 @@ spec:
 
 - After that delete and replace our pod resource to schedule on node02
 
-```
+```py
 # kill pod and replace resource
 k replace --force -f nginx.yaml
 ```
@@ -526,7 +527,7 @@ k replace --force -f nginx.yaml
 - Taints: Taints are the opposite -- they allow a **node** to repel(격퇴하다) a set of pods.
 - Tolerations: **Tolerations are applied to pods**. Tolerations allow the scheduler to schedule pods with matching taints. 
 
-```js
+```py
 kubectl taint nodes node1 key1=value1:NoExecute
 kubectl taint nodes node1 key1=value1:NoSchedule
 kubectl taint nodes node1 key1=value1:PreferNoSchedule
@@ -610,13 +611,13 @@ As such, a combination of taints and tolerations and node affinity rules can be 
 
 ## cli
 
-```js
+```py
 # Open terminal output with vim to easily find `/` N/n
 > k describe no node01 | vim -
 ```
 
 
-```js
+```py
 k get no --no-headers | wc -l
 
 # set label to node
@@ -631,7 +632,7 @@ Taints:             <none>
 ```
 
 
-```js
+```py
 k describe no controlplane 
 Name:               controlplane
 Roles:              control-plane
@@ -769,7 +770,7 @@ There is two way
 
 
 #### How to find staticPodPath
-```js
+```py
 
 controlplane ~ ➜  ps -aux | grep kubelet | grep -i config
 root        4351  0.0  0.0 4519680 100556 ?      Ssl  02:23   0:36 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9
@@ -780,7 +781,7 @@ cat /var/lib/kubelet/config.yaml | grep staticPodPath
 ### How to create staticPod
 > Create a static pod named static-busybox that uses the busybox image and the command sleep 1000
 
-```js
+```py
 controlplane ~ ➜  k run static-busybox --image=busybox --dry-run=client -o yaml > /etc/kubernetes/manifests/static-busybox.yaml
 
 controlplane ~ ➜  vim /etc/kubernetes/manifests/static-busybox.yaml
@@ -813,7 +814,7 @@ spec:
 
 1. First, let's identify the node in which the pod called static-greenbox is created. To do this, run:
 
-```js
+```py
 root@controlplane:~# kubectl get pods --all-namespaces -o wide  | grep static-greenbox
 default       static-greenbox-node01                 1/1     Running   0          19s     10.244.1.2   node01       <none>           <none>
 root@controlplane:~#
@@ -825,7 +826,7 @@ From the result of this command, we can see that the pod is running on node01.
 
   - Important: The path need not be /etc/kubernetes/manifests. Make sure to check the path configured in the kubelet configuration file.
 
-```js
+```py
 root@controlplane:~# ssh node01 
 root@node01:~# ps -ef |  grep /usr/bin/kubelet 
 root        4147       1  0 14:05 ?        00:00:00 /usr/bin/kubelet --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --config=/var/lib/kubelet/config.yaml --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock --pod-infra-container-image=registry.k8s.io/pause:3.9
@@ -842,7 +843,7 @@ Here the staticPodPath is /etc/just-to-mess-with-you
 
 3. Navigate to this directory and delete the YAML file:
 
-```js
+```py
 root@node01:/etc/just-to-mess-with-you# ls
 greenbox.yaml
 root@node01:/etc/just-to-mess-with-you# rm -rf greenbox.yaml 
@@ -851,7 +852,7 @@ root@node01:/etc/just-to-mess-with-you#
 
 4. Exit out of node01 using CTRL + D or type exit. You should return to the controlplane node. Check if the static-greenbox pod has been deleted:
 
-```js
+```py
 root@controlplane:~# kubectl get pods --all-namespaces -o wide  | grep static-greenbox
 root@controlplane:~# 
 ```
@@ -865,7 +866,7 @@ root@controlplane:~#
 - Note that not to use `--from-file`, this is only handle single key like `--from-literal`
 - Instead use `k create cm <NAME> --from-env-file=`
 
-```js
+```py
 controlplane ~ ➜  vim webapp.env 
 
 controlplane ~ ➜  k create cm webapp-config-map --from-env-file=./webapp.env
@@ -874,7 +875,7 @@ configmap/webapp-config-map created
 
 ## Secret
 
-```js
+```py
 k create secret generic db-secret --from-env-file=./db.env
 ```
 
@@ -903,7 +904,7 @@ spec:
 - uncordon: node ensable to be scheduled 
 - cordon: node disable to be scheduled
 
-```js
+```py
 // Move every resources from node-1 to others
 k drain node-1
 // after node upgrade
@@ -916,7 +917,7 @@ Running the uncordon command on a node will not automatically schedule pods on t
 
 > We will be upgrading the controlplane node first. Drain the controlplane node of workloads and mark it UnSchedulable
 
-```js
+```py
 > k drain node01 --ignore-daemonsets
 node/node01 cordoned
 Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-rp464, kube-system/kube-proxy-8gmv5
@@ -929,7 +930,7 @@ node/node01 drained
 
 There are daemonsets created in this cluster, especially in the kube-system namespace. To ignore these objects and drain the node, we can make use of the --ignore-daemonsets flag.
 
-```js
+```py
 $ k drain node01 --ignore-daemonsets --force
 node/node01 already cordoned
 Warning: deleting Pods that declare no controller: default/hr-app; ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-rp464, kube-system/kube-proxy-8gmv5
@@ -938,7 +939,9 @@ evicting pod default/hr-app
 
 
 > Question... I'm just curious that why there's still pod on drained node
->> controlplane ~ ➜  k drain controlplane --ignore-daemonsets 
+
+```py
+controlplane ~ ➜  k drain controlplane --ignore-daemonsets 
 node/controlplane cordoned
 Warning: ignoring DaemonSet-managed Pods: kube-flannel/kube-flannel-ds-9wfn6, kube-system/kube-proxy-x5qj8
 evicting pod kube-system/coredns-5dd5756b68-l5w24
@@ -981,11 +984,12 @@ kube-system    kube-controller-manager-controlplane   1/1     Running   0       
 kube-system    kube-proxy-bwrl5                       1/1     Running   0          29m    192.20.38.9   node01         <none>           <none>
 kube-system    kube-proxy-x5qj8                       1/1     Running   0          29m    192.20.38.6   controlplane   <none>           <none>
 kube-system    kube-scheduler-controlplane            1/1     Running   0          29m    192.20.38.6   controlplane   <none>           <none>
+```
 
 ## Kubernetes Software Versions
 
 
-```js
+```py
 # get kubectl version
 k version
 
@@ -1017,7 +1021,7 @@ No, The components can be at different release versions. At any time, **kubernet
 
 1. (opt) [Update package repository](https://v1-29.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/change-package-repository/)
 
-```js
+```py
 > pager /etc/apt/sources.list.d/kubernetes.list
 
 deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyri
@@ -1027,7 +1031,7 @@ ng.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/
 
 Switching to another Kubernetes package repository 
 
-```js
+```py
 vim /etc/apt/sources.list.d/kubernetes.list
 
 # change version v1.28 -> v1.29
@@ -1036,7 +1040,7 @@ vim /etc/apt/sources.list.d/kubernetes.list
 
 2. Determine which version to upgrade to
 
-```js
+```py
 > sudo apt update
 > sudo apt-cache madison kubeadm
 
@@ -1052,7 +1056,7 @@ vim /etc/apt/sources.list.d/kubernetes.list
 
 
 - upgrade kubeadm
-```js
+```py
 > sudo apt-mark unhold kubeadm && \
 sudo apt-get update && sudo apt-get install -y kubeadm=1.29.0-1.1 && \
 sudo apt-mark hold kubeadm
@@ -1060,7 +1064,7 @@ sudo apt-mark hold kubeadm
 
 - verify the upgrade plan
 
-```js
+```py
 target_version=v1.29.0
 
 > sudo kubeadm upgrade plan $target_version
@@ -1110,7 +1114,7 @@ _____________________________________________________________________
 ```
 
 - choose a version to upgrade and apply
-```js
+```py
 
 > sudo kubeadm upgrade apply $target_version
 
@@ -1118,7 +1122,7 @@ _____________________________________________________________________
 
 Now, upgrade the version and restart Kubelet. Also, mark the node (in this case, the "controlplane" node) as schedulable.
 
-```js
+```py
 > sudo apt-mark unhold kubelet kubectl && \
 sudo apt-get update && sudo apt-get install -y kubelet='1.29.0-1.1' kubectl='1.29.0-1.1' && \
 sudo apt-mark hold kubelet kubectl
@@ -1135,7 +1139,7 @@ sudo apt-mark hold kubelet kubectl
 
 2. https://v1-29.docs.kubernetes.io/docs/tasks/administer-cluster/kubeadm/upgrading-linux-nodes/
 
-```js
+```py
 sudo apt-mark unhold kubeadm && \
 sudo apt-get update && sudo apt-get install -y kubeadm='1.29.0-1.1' && \
 sudo apt-mark hold kubeadm
@@ -1143,13 +1147,13 @@ sudo apt-mark hold kubeadm
 
 3. kubeadm upgrade node (instead apply)
 
-```js
+```py
 > sudo kubeadm upgrade node
 ```
 
 4. updgrade kubelet and kubectl
 
-```js
+```py
 sudo apt-mark unhold kubelet kubectl && \
 sudo apt-get update && sudo apt-get install -y kubelet='1.29.0-1.1' kubectl='1.29.0-1.1' && \
 sudo apt-mark hold kubelet kubectl
@@ -1163,5 +1167,153 @@ kubectl uncordon node01
 ```
 
 
+# Chapter 7: Security
+> https://kubernetes.io/docs/concepts/security/
+
+## Authentication
+
+- Account
+- Service accuount
+
+All the user authentication is managed by kube-apiserver, authenticate
 
 
+
+## TLS Certificates
+
+- key, pem = public, priviate
+- certificate
+- certificate authority (CA)
+- Certificate Signning Request (CSR): with public key
+- PKI (public Key infrastructure)
+
+### Format
+
+- Certificate (pulic key)
+  - ***.crt, *.pem**
+  - i.g. server.crt, server.pem, client.crt, client.pem
+- Private key
+  - ***.key, *-key.pem**
+  - i.g. server.key, server-key.pem, client.key, client-key.pem
+
+
+When server requests to CSR to certify server with CSR, CA will verify the request and if it passed, then CA encrypt request(+server's pub key) with CA's private key and return to server and finally return to client.
+
+Client especially browser has CA's public key so that the browsers uses the public key of the Certificate Authority to validate the certificate was actually signed by the Verified Certificate Authority themselves.
+
+> Q. But does the public key is only for encryption not decryption then how does browser validate ca's encrypted data is valid or not?
+
+In public key cryptography, the public key is indeed primarily used for encryption, **but it also has a crucial role in verifying digital signatures**. Digital signatures are created by encrypting a hash (a unique fingerprint) of the data using the private key. The resulting encrypted hash, along with the data, forms the digital signature.
+
+To verify the digital signature, the recipient uses the public key associated with the private key used to create the signature. This process works as follows:
+
+1. The recipient uses the public key to decrypt the digital signature, resulting in the original hash value.
+2. The recipient independently computes the hash of the received data.
+3. If the decrypted hash matches the independently computed hash, the signature is valid. This indicates that the data hasn't been altered since it was signed and that the signature was indeed created with the private key associated with the public key used for decryption.
+
+In the context of SSL/TLS certificates:
+
+- The Certificate Authority (CA) signs the digital certificate with its private key, creating a digital signature.
+- Your browser, possessing the CA's public key, decrypts the digital signature to obtain the hash of the certificate.
+- The browser then independently computes the hash of the certificate data.
+- If the decrypted hash matches the computed hash, the browser knows that the certificate is authentic and was indeed issued by the CA. (decrypt라는 용어가 광범위하게 잘못사용되는 것도 한 몫하는 것 같다.)
+
+So, the CA's public key is used to validate the CA's digital signature on the certificate by decrypting the signature and verifying its integrity, ensuring that it was signed with the CA's private key.
+
+> Q. Then how computed hash can ensures whether the signature is valid or not?
+
+public key cryptography: A class of cryptographic techniques employing two-key ciphers. **Messages encrypted with the public key can only be decrypted with the associated private key. Conversely, messages signed with the private key can be verified with the public key.**
+
+1. CA public key로 valid 하다고 판결하면, server를 신뢰하고, 서버의 public key를 신뢰해서, 이를 통해서 symm key를 encrypt해서 server에 보낸다. 중간에 이를 가로채는 것은 서버가 정상 서비스 업체라고 가정한다면, private key를 마음대로 사용하지 않을테니 중간에 가로챈 사람들을 symm key를 복호화 할 수 없다.
+
+## TLS in kubernetes
+
+- Root Certificates (CA)
+- Server Certificates (server)
+- Client Certificates (client)
+
+
+![](/images/k8s-tls.png)
+
+### Server Certificates for servers
+
+- KUBE-API server
+  - apiserver.crt
+  - apiserver.key
+- ETCD server
+  - etcdserver.crt
+  - etcdserver.key
+- KUBELET server (node01, node02 ....)
+  - node01.crt
+  - node01.key
+
+### Client Certificates for clients
+
+- admin user: kubectl REST API to access kube-api server
+  - admin.crt
+  - admin.key
+- KUBE SCHEDULER: to access kube-api server API
+  - scheduler.crt
+  - scheduler.key
+- KUBE CONTROLLER-MANAGER: to access kube-api server api
+  - controller-manager.crt
+  - controller-manager.key
+- KUBE-PROXY
+  - kube-proxy.crt
+  - kube-proxy.key
+
+
+![](/images/k8s-tls2.png)
+
+## Developing network policies
+> https://kubernetes.io/docs/concepts/services-networking/network-policies/
+
+-By default, a pod is non-isolated for egress and ingress
+
+# Chapter 8: Storage
+
+
+- [Docker: Storage drivers versus Docker volumes](https://docs.docker.com/storage/storagedriver/#storage-drivers-versus-docker-volumes)
+
+As we start learning about containerization, we come across two important parts: storage drivers and volumes. These are crucial for managing data in Docker setups. Storage drivers handle storing image layers and container data, aiming for efficiency while considering performance. Volumes, on the other hand, provide a way to store data persistently, connecting the temporary nature of containers with the need for lasting data storage and sharing. In this discussion, we'll explore the key differences between storage drivers and volumes, understand why memory efficiency and Copy-on-Write (CoW) mechanisms matter for storage drivers, and see how volume drivers help keep data stored across container lifetimes. Let's summarize Docker storage and volume together.
+
+Containers are designed with a stateless assumption to facilitate reuse. Docker, not only for container reuse but also for efficient image building, divides images into layers. These layers enable reuse as the created image is read-only (RO).
+
+However, containers created from images can write and modify files. This occurs through Copy-on-Write (COW) functionality, where changes made in the layer trigger a copy and write process in the background. Storage drivers handle this role.
+
+Storage drivers need to be memory efficient and support COW, but they can impact performance, especially with large data IO operations like databases (db). To address this, volumes are used. Volumes ensure persistence beyond container lifespan and enable data sharing between containers. Depending on the driver, data can be stored in cloud or node hosts.
+
+### ko
+```ko
+- container는 재사용하기 위해 stateless를 가정한다.
+- docker는 container 재사용 뿐 아니라, image build 효율을 위해 image 각각에도 layer를 나눠서 관리한다.
+- 만들어진 image는 RO(stateless)이기 때문에 재사용 가능하다.
+- 하지만 image를 통해 만들어진 container는 파일을 쓰고 고칠수도 있다. 이는 COW, 실제 해당 layer에서 Write이 일어날때 copy 후 write하기 때문이며, 이 기능은 background에서 일어난다. 이 역할을 하는 것이 storage driver이다.
+- storage driver는 기본적으로 memory efficiend하게 만들어져야 하며, cow를 제공해야 하기 때문에 큰 데이터 IO의 경우(db) 성능에 안좋은 영향을 받는다.
+- 그렇기 때문에 Volume을 사용한다. volume은 persist를 위해 사용하며, container lifespan을 벗어난 데이터들을 관리할 수도 있고, container간에 share도 가능하다. driver에 따라서 cloud, node host에 저장할 수도 있다.
+```
+
+
+## CSI (container storage interface)
+
+- CRI: container runtime interface
+- CNI: container network interface
+- [CSI](https://github.com/container-storage-interface/spec/blob/master/spec.md): container storage interface
+
+## Volume
+
+Kubernetes volumes preserve container data, preventing loss on crashes, enabling file sharing in Pods, and enhancing application management by providing directories accessible to containers with various types, including ephemeral and persistent, ensuring data persistence across restarts.
+
+## Persistent Volume
+
+Volume have to write spec on pod definition, but when system is bigger than It is hard to manage all pods to mapping each volumes. So persistent volume and Persistent volume claim concepts are invented.
+
+## Persistent Volume Claims
+
+1. PVC created
+2. k8s search for matching pv (pending state pvc)
+3. Bind
+
+## Storage Class
+
+It would be great if make pv thenphysical memory provisioned, which is called `Dynamic Provisioning`. And we can achieve it by `Storage class(sc)` instead PV. Actually pv is created when sc definition is called but we do not manually create pv, because we need to manage volume dynamically.
