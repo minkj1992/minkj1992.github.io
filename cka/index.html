@@ -11,7 +11,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://minkj1992.github.io/cka/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-19T12:41:18+09:00" />
-<meta property="article:modified_time" content="2024-04-25T20:56:30+09:00" />
+<meta property="article:modified_time" content="2024-04-26T21:51:37+09:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
@@ -36,8 +36,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  5715 ,
-        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-25T20:56:30+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  6123 ,
+        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-26T21:51:37+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -175,8 +175,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>k8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5715 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;27 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;6123 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;29 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -291,6 +291,8 @@
       <ul>
         <li><a href="#1-upgrade-kubeadm-master-node">1. Upgrade kubeadm master node</a></li>
         <li><a href="#2-upgrade-kubeadm-worker-node">2. Upgrade kubeadm worker node</a></li>
+        <li><a href="#3-problem-backup-and-restore-etcd">3. Problem: backup and restore etcd</a></li>
+        <li><a href="#solution">Solution</a></li>
       </ul>
     </li>
   </ul>
@@ -2235,6 +2237,149 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span></span><span class="line"><span class="cl"><span class="n">kubectl</span> <span class="n">uncordon</span> <span class="n">node01</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h3 id="3-problem-backup-and-restore-etcd">3. Problem: backup and restore etcd</h3>
+<blockquote>
+<p>Q. An ETCD backup for cluster2 is stored at /opt/cluster2.db. Use this snapshot file to carryout a restore on cluster2 to a new path /var/lib/etcd-data-new. Once the restore is complete, ensure that the controlplane components on cluster2 are running. The snapshot was taken when there were objects created in the critical namespace on cluster2. These objects should be available post restore.</p>
+</blockquote>
+<h3 id="solution">Solution</h3>
+<p>Step 1. Copy the snapshot file from the student-node to the etcd-server. In the example below, we are copying it to the /root directory:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">student</span><span class="o">-</span><span class="n">node</span> <span class="o">~</span>  <span class="n">scp</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">cluster2</span><span class="o">.</span><span class="n">db</span> <span class="n">etcd</span><span class="o">-</span><span class="n">server</span><span class="p">:</span><span class="o">/</span><span class="n">root</span>
+</span></span><span class="line"><span class="cl"><span class="n">cluster2</span><span class="o">.</span><span class="n">db</span>                                                                                                        <span class="mi">100</span><span class="o">%</span> <span class="mi">1108</span><span class="n">KB</span> <span class="mf">178.5</span><span class="n">MB</span><span class="o">/</span><span class="n">s</span>   <span class="mi">00</span><span class="p">:</span><span class="mi">00</span>    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">student</span><span class="o">-</span><span class="n">node</span> <span class="o">~</span> <span class="err">➜</span>  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Step 2: Restore the snapshot on the cluster2. Since we are restoring directly on the etcd-server, we can use the endpoint https:/127.0.0.1. Use the same certificates that were identified earlier. Make sure to use the data-dir as /var/lib/etcd-data-new:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">etcd</span><span class="o">-</span><span class="n">server</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">ETCDCTL_API</span><span class="o">=</span><span class="mi">3</span> <span class="n">etcdctl</span> <span class="o">--</span><span class="n">endpoints</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="mf">127.0.0.1</span><span class="p">:</span><span class="mi">2379</span> <span class="o">--</span><span class="n">cacert</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">etcd</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">ca</span><span class="o">.</span><span class="n">pem</span> <span class="o">--</span><span class="n">cert</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">etcd</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">etcd</span><span class="o">.</span><span class="n">pem</span> <span class="o">--</span><span class="n">key</span><span class="o">=/</span><span class="n">etc</span><span class="o">/</span><span class="n">etcd</span><span class="o">/</span><span class="n">pki</span><span class="o">/</span><span class="n">etcd</span><span class="o">-</span><span class="n">key</span><span class="o">.</span><span class="n">pem</span> <span class="n">snapshot</span> <span class="n">restore</span> <span class="o">/</span><span class="n">root</span><span class="o">/</span><span class="n">cluster2</span><span class="o">.</span><span class="n">db</span> <span class="o">--</span><span class="n">data</span><span class="o">-</span><span class="nb">dir</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">etcd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">new</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;info&#34;</span><span class="p">,</span><span class="s2">&#34;ts&#34;</span><span class="p">:</span><span class="mf">1662004927.2399247</span><span class="p">,</span><span class="s2">&#34;caller&#34;</span><span class="p">:</span><span class="s2">&#34;snapshot/v3_snapshot.go:296&#34;</span><span class="p">,</span><span class="s2">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;restoring snapshot&#34;</span><span class="p">,</span><span class="s2">&#34;path&#34;</span><span class="p">:</span><span class="s2">&#34;/root/cluster2.db&#34;</span><span class="p">,</span><span class="s2">&#34;wal-dir&#34;</span><span class="p">:</span><span class="s2">&#34;/var/lib/etcd-data-new/member/wal&#34;</span><span class="p">,</span><span class="s2">&#34;data-dir&#34;</span><span class="p">:</span><span class="s2">&#34;/var/lib/etcd-data-new&#34;</span><span class="p">,</span><span class="s2">&#34;snap-dir&#34;</span><span class="p">:</span><span class="s2">&#34;/var/lib/etcd-data-new/member/snap&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;info&#34;</span><span class="p">,</span><span class="s2">&#34;ts&#34;</span><span class="p">:</span><span class="mf">1662004927.2584803</span><span class="p">,</span><span class="s2">&#34;caller&#34;</span><span class="p">:</span><span class="s2">&#34;membership/cluster.go:392&#34;</span><span class="p">,</span><span class="s2">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;added member&#34;</span><span class="p">,</span><span class="s2">&#34;cluster-id&#34;</span><span class="p">:</span><span class="s2">&#34;cdf818194e3a8c32&#34;</span><span class="p">,</span><span class="s2">&#34;local-member-id&#34;</span><span class="p">:</span><span class="s2">&#34;0&#34;</span><span class="p">,</span><span class="s2">&#34;added-peer-id&#34;</span><span class="p">:</span><span class="s2">&#34;8e9e05c52164694d&#34;</span><span class="p">,</span><span class="s2">&#34;added-peer-peer-urls&#34;</span><span class="p">:[</span><span class="s2">&#34;http://localhost:2380&#34;</span><span class="p">]}</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span><span class="s2">&#34;level&#34;</span><span class="p">:</span><span class="s2">&#34;info&#34;</span><span class="p">,</span><span class="s2">&#34;ts&#34;</span><span class="p">:</span><span class="mf">1662004927.264258</span><span class="p">,</span><span class="s2">&#34;caller&#34;</span><span class="p">:</span><span class="s2">&#34;snapshot/v3_snapshot.go:309&#34;</span><span class="p">,</span><span class="s2">&#34;msg&#34;</span><span class="p">:</span><span class="s2">&#34;restored snapshot&#34;</span><span class="p">,</span><span class="s2">&#34;path&#34;</span><span class="p">:</span><span class="s2">&#34;/root/cluster2.db&#34;</span><span class="p">,</span><span class="s2">&#34;wal-dir&#34;</span><span class="p">:</span><span class="s2">&#34;/var/lib/etcd-data-new/member/wal&#34;</span><span class="p">,</span><span class="s2">&#34;data-dir&#34;</span><span class="p">:</span><span class="s2">&#34;/var/lib/etcd-data-new&#34;</span><span class="p">,</span><span class="s2">&#34;snap-dir&#34;</span><span class="p">:</span><span class="s2">&#34;/var/lib/etcd-data-new/member/snap&#34;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">etcd</span><span class="o">-</span><span class="n">server</span> <span class="o">~</span> <span class="err">➜</span>  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Step 3: Update the systemd service unit file for etcdby running vi /etc/systemd/system/etcd.service and add the new value for data-dir:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[Unit]
+</span></span><span class="line"><span class="cl">Description=etcd key-value store
+</span></span><span class="line"><span class="cl">Documentation=https://github.com/etcd-io/etcd
+</span></span><span class="line"><span class="cl">After=network.target
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[Service]
+</span></span><span class="line"><span class="cl">User=etcd
+</span></span><span class="line"><span class="cl">Type=notify
+</span></span><span class="line"><span class="cl">ExecStart=/usr/local/bin/etcd \
+</span></span><span class="line"><span class="cl">  --name etcd-server \
+</span></span><span class="line"><span class="cl">  --data-dir=/var/lib/etcd-data-new \
+</span></span><span class="line"><span class="cl">---End of Snippet---
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Step 4: make sure the permissions on the new directory is correct (should be owned by etcd user):</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">etcd</span><span class="o">-</span><span class="n">server</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span> <span class="err">➜</span>  <span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="n">etcd</span><span class="p">:</span><span class="n">etcd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">etcd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">new</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">etcd</span><span class="o">-</span><span class="n">server</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span> <span class="err">➜</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">etcd</span><span class="o">-</span><span class="n">server</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span> <span class="err">➜</span>  <span class="n">ls</span> <span class="o">-</span><span class="n">ld</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">etcd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">new</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl"><span class="n">drwx</span><span class="o">------</span> <span class="mi">3</span> <span class="n">etcd</span> <span class="n">etcd</span> <span class="mi">4096</span> <span class="n">Sep</span>  <span class="mi">1</span> <span class="mi">02</span><span class="p">:</span><span class="mi">41</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">etcd</span><span class="o">-</span><span class="n">data</span><span class="o">-</span><span class="n">new</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl"><span class="n">etcd</span><span class="o">-</span><span class="n">server</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span> <span class="err">➜</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Step 5: Finally, reload and restart the etcd service.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">etcd</span><span class="o">-</span><span class="n">server</span> <span class="o">~/</span><span class="n">default</span><span class="o">.</span><span class="n">etcd</span> <span class="err">➜</span>  <span class="n">systemctl</span> <span class="n">daemon</span><span class="o">-</span><span class="n">reload</span> 
+</span></span><span class="line"><span class="cl"><span class="n">etcd</span><span class="o">-</span><span class="n">server</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">systemctl</span> <span class="n">restart</span> <span class="n">etcd</span>
+</span></span><span class="line"><span class="cl"><span class="n">etcd</span><span class="o">-</span><span class="n">server</span> <span class="o">~</span> <span class="err">➜</span>  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Step 6 (optional): It is recommended to restart controlplane components (e.g. kube-scheduler, kube-controller-manager, kubelet) to ensure that they don&rsquo;t rely on some stale data.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">student</span><span class="o">-</span><span class="n">node</span> <span class="o">~</span> <span class="err">✖</span> <span class="n">k</span> <span class="n">delete</span> <span class="n">po</span> <span class="n">kube</span><span class="o">-</span><span class="n">apiserver</span><span class="o">-</span><span class="n">cluster2</span><span class="o">-</span><span class="n">controlplane</span> <span class="n">kube</span><span class="o">-</span><span class="n">controller</span><span class="o">-</span><span class="n">manager</span><span class="o">-</span><span class="n">cluster2</span><span class="o">-</span><span class="n">controlplane</span> <span class="n">kube</span><span class="o">-</span><span class="n">scheduler</span><span class="o">-</span><span class="n">cluster2</span><span class="o">-</span><span class="n">controlplane</span> <span class="o">-</span><span class="n">n</span> <span class="n">kube</span><span class="o">-</span><span class="n">system</span> 
+</span></span><span class="line"><span class="cl"><span class="n">pod</span> <span class="s2">&#34;kube-apiserver-cluster2-controlplane&#34;</span> <span class="n">deleted</span>
+</span></span><span class="line"><span class="cl"><span class="n">pod</span> <span class="s2">&#34;kube-controller-manager-cluster2-controlplane&#34;</span> <span class="n">deleted</span>
+</span></span><span class="line"><span class="cl"><span class="n">pod</span> <span class="s2">&#34;kube-scheduler-cluster2-controlplane&#34;</span> <span class="n">deleted</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ssh</span> <span class="n">cluster2</span><span class="o">-</span><span class="n">controlplane</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">cluster2</span><span class="o">-</span><span class="n">controlplane</span> <span class="o">~</span> <span class="err">✖</span> <span class="n">systemctl</span> <span class="n">restart</span> <span class="n">kubelet</span>
+</span></span><span class="line"><span class="cl"><span class="n">cluster2</span><span class="o">-</span><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">systemctl</span> <span class="n">status</span> <span class="n">kubelet</span>
+</span></span><span class="line"><span class="cl"><span class="err">●</span> <span class="n">kubelet</span><span class="o">.</span><span class="n">service</span> <span class="o">-</span> <span class="n">kubelet</span><span class="p">:</span> <span class="n">The</span> <span class="n">Kubernetes</span> <span class="n">Node</span> <span class="n">Agent</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Loaded</span><span class="p">:</span> <span class="n">loaded</span> <span class="p">(</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">kubelet</span><span class="o">.</span><span class="n">service</span><span class="p">;</span> <span class="n">enabled</span><span class="p">;</span> <span class="n">vendor</span> <span class="n">preset</span><span class="p">:</span> <span class="n">enabled</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Drop</span><span class="o">-</span><span class="n">In</span><span class="p">:</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">system</span><span class="o">/</span><span class="n">kubelet</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">d</span>
+</span></span><span class="line"><span class="cl">           <span class="err">└─</span><span class="mi">10</span><span class="o">-</span><span class="n">kubeadm</span><span class="o">.</span><span class="n">conf</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Active</span><span class="p">:</span> <span class="n">active</span> <span class="p">(</span><span class="n">running</span><span class="p">)</span> <span class="n">since</span> <span class="n">Sat</span> <span class="mi">2024</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">27</span> <span class="mi">13</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">11</span> <span class="n">UTC</span><span class="p">;</span> <span class="mi">6</span><span class="n">s</span> <span class="n">ago</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><h1 id="chapter-7-security">Chapter 7: Security</h1>
 <blockquote>
 <p><a href="https://kubernetes.io/docs/concepts/security/" target="_blank" rel="noopener noreffer">https://kubernetes.io/docs/concepts/security/</a>
@@ -2422,8 +2567,8 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-25&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/fa61f53cba24f3c78cbaf2e274c62649682a6f46" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) fa61f53cba24f3c78cbaf2e274c62649682a6f46: docs: cka">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>fa61f53</a></span>
+                <span>Updated on 2024-04-26&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/ac92ad3b216e692f6535600ee230e00104dd532e" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) ac92ad3b216e692f6535600ee230e00104dd532e: docs: cka">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ac92ad3</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

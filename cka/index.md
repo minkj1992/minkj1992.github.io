@@ -1167,6 +1167,90 @@ kubectl uncordon node01
 ```
 
 
+### 3. Problem: backup and restore etcd
+> Q. An ETCD backup for cluster2 is stored at /opt/cluster2.db. Use this snapshot file to carryout a restore on cluster2 to a new path /var/lib/etcd-data-new. Once the restore is complete, ensure that the controlplane components on cluster2 are running. The snapshot was taken when there were objects created in the critical namespace on cluster2. These objects should be available post restore.
+
+### Solution
+Step 1. Copy the snapshot file from the student-node to the etcd-server. In the example below, we are copying it to the /root directory:
+
+```py
+student-node ~  scp /opt/cluster2.db etcd-server:/root
+cluster2.db                                                                                                        100% 1108KB 178.5MB/s   00:00    
+
+student-node ~ ➜  
+```
+
+Step 2: Restore the snapshot on the cluster2. Since we are restoring directly on the etcd-server, we can use the endpoint https:/127.0.0.1. Use the same certificates that were identified earlier. Make sure to use the data-dir as /var/lib/etcd-data-new:
+
+```py
+etcd-server ~ ➜  ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 --cacert=/etc/etcd/pki/ca.pem --cert=/etc/etcd/pki/etcd.pem --key=/etc/etcd/pki/etcd-key.pem snapshot restore /root/cluster2.db --data-dir /var/lib/etcd-data-new
+{"level":"info","ts":1662004927.2399247,"caller":"snapshot/v3_snapshot.go:296","msg":"restoring snapshot","path":"/root/cluster2.db","wal-dir":"/var/lib/etcd-data-new/member/wal","data-dir":"/var/lib/etcd-data-new","snap-dir":"/var/lib/etcd-data-new/member/snap"}
+{"level":"info","ts":1662004927.2584803,"caller":"membership/cluster.go:392","msg":"added member","cluster-id":"cdf818194e3a8c32","local-member-id":"0","added-peer-id":"8e9e05c52164694d","added-peer-peer-urls":["http://localhost:2380"]}
+{"level":"info","ts":1662004927.264258,"caller":"snapshot/v3_snapshot.go:309","msg":"restored snapshot","path":"/root/cluster2.db","wal-dir":"/var/lib/etcd-data-new/member/wal","data-dir":"/var/lib/etcd-data-new","snap-dir":"/var/lib/etcd-data-new/member/snap"}
+
+etcd-server ~ ➜  
+```
+
+Step 3: Update the systemd service unit file for etcdby running vi /etc/systemd/system/etcd.service and add the new value for data-dir:
+
+```
+[Unit]
+Description=etcd key-value store
+Documentation=https://github.com/etcd-io/etcd
+After=network.target
+
+[Service]
+User=etcd
+Type=notify
+ExecStart=/usr/local/bin/etcd \
+  --name etcd-server \
+  --data-dir=/var/lib/etcd-data-new \
+---End of Snippet---
+```
+
+Step 4: make sure the permissions on the new directory is correct (should be owned by etcd user):
+
+```py
+etcd-server /var/lib ➜  chown -R etcd:etcd /var/lib/etcd-data-new
+
+etcd-server /var/lib ➜ 
+
+
+etcd-server /var/lib ➜  ls -ld /var/lib/etcd-data-new/
+drwx------ 3 etcd etcd 4096 Sep  1 02:41 /var/lib/etcd-data-new/
+etcd-server /var/lib ➜ 
+```
+
+Step 5: Finally, reload and restart the etcd service.
+
+```py
+etcd-server ~/default.etcd ➜  systemctl daemon-reload 
+etcd-server ~ ➜  systemctl restart etcd
+etcd-server ~ ➜  
+```
+
+Step 6 (optional): It is recommended to restart controlplane components (e.g. kube-scheduler, kube-controller-manager, kubelet) to ensure that they don't rely on some stale data.
+
+```py
+
+student-node ~ ✖ k delete po kube-apiserver-cluster2-controlplane kube-controller-manager-cluster2-controlplane kube-scheduler-cluster2-controlplane -n kube-system 
+pod "kube-apiserver-cluster2-controlplane" deleted
+pod "kube-controller-manager-cluster2-controlplane" deleted
+pod "kube-scheduler-cluster2-controlplane" deleted
+
+ssh cluster2-controlplane
+
+cluster2-controlplane ~ ✖ systemctl restart kubelet
+cluster2-controlplane ~ ➜  systemctl status kubelet
+● kubelet.service - kubelet: The Kubernetes Node Agent
+   Loaded: loaded (/lib/systemd/system/kubelet.service; enabled; vendor preset: enabled)
+  Drop-In: /etc/systemd/system/kubelet.service.d
+           └─10-kubeadm.conf
+   Active: active (running) since Sat 2024-04-27 13:51:11 UTC; 6s ago
+```
+
+
+
 # Chapter 7: Security
 > https://kubernetes.io/docs/concepts/security/
 
