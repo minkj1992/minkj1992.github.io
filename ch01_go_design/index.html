@@ -5,20 +5,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>[일주일 만에 배우는 GO] CH.1 Go Language Design | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="[일주일 만에 배우는 GO] CH.1 Go Language Design" />
-<meta property="og:description" content="Go at Google: Language Design in the Service of Software Engineering
-를 기반으로Go에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://minkj1992.github.io/ch01_go_design/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-02-05T16:52:53+09:00" />
-<meta property="article:modified_time" content="2022-02-07T19:15:22+09:00" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
-
-<meta name="twitter:title" content="[일주일 만에 배우는 GO] CH.1 Go Language Design"/>
+    <title>[일주일 만에 배우는 GO] CH.1 Go Language Design | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:url" content="https://minkj1992.github.io/ch01_go_design/">
+  <meta property="og:site_name" content="minkj1992">
+  <meta property="og:title" content="[일주일 만에 배우는 GO] CH.1 Go Language Design">
+  <meta property="og:description" content="Go at Google: Language Design in the Service of Software Engineering 를 기반으로Go에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-02-05T16:52:53+09:00">
+    <meta property="article:modified_time" content="2022-02-07T19:15:22+09:00">
+    <meta property="article:tag" content="Dev">
+    <meta property="article:tag" content="Go">
+    <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"><meta name="twitter:title" content="[일주일 만에 배우는 GO] CH.1 Go Language Design">
 <meta name="twitter:description" content="Go at Google: Language Design in the Service of Software Engineering
-를 기반으로Go에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다."/>
+를 기반으로Go에 녹아있는 배경/철학을 분석합니다. 이후 사용되는 필드들을 정리하고 학습에 도움되는 best practice 레퍼런스들을 정리합니다.">
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -174,7 +176,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">[일주일 만에 배우는 GO] CH.1 Go Language Design</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>go</a></span></div>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/go/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Go</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-02-05">2022-02-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3237 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
         </div><div class="featured-image"><img
@@ -456,8 +458,8 @@ C -&gt; B -&gt; A 순으로 컴파일되면서 link됩니다. 이때 A가 컴파
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var fn func([]int) int
-</span></span><span class="line"><span class="cl">type T struct { a, b int }
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="k">var</span> <span class="n">fn</span> <span class="k">func</span><span class="p">([]</span><span class="ne">int</span><span class="p">)</span> <span class="ne">int</span>
+</span></span><span class="line"><span class="cl"><span class="n">type</span> <span class="n">T</span> <span class="n">struct</span> <span class="p">{</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ne">int</span> <span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -811,7 +813,7 @@ C -&gt; B -&gt; A 순으로 컴파일되면서 link됩니다. 이때 A가 컴파
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/go/">go</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">Dev</a>,&nbsp;<a href="/tags/go/">Go</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
@@ -824,7 +826,7 @@ C -&gt; B -&gt; A 순으로 컴파일되면서 link됩니다. 이때 A가 컴파
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
         </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.125.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

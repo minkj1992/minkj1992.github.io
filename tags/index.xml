@@ -1,0 +1,88 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tags - Tag - minkj1992</title>
+        <link>https://minkj1992.github.io/tags/</link>
+        <description>Tags - Tag - minkj1992</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 19 Apr 2024 12:41:18 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Dev</title>
+    <link>https://minkj1992.github.io/tags/dev/</link>
+    <pubDate>Fri, 19 Apr 2024 12:41:18 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/dev/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Ml</title>
+    <link>https://minkj1992.github.io/tags/ml/</link>
+    <pubDate>Fri, 05 Apr 2024 16:56:48 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/ml/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Concurrency</title>
+    <link>https://minkj1992.github.io/tags/concurrency/</link>
+    <pubDate>Mon, 19 Feb 2024 11:46:56 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/concurrency/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Go</title>
+    <link>https://minkj1992.github.io/tags/go/</link>
+    <pubDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/go/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Golang</title>
+    <link>https://minkj1992.github.io/tags/golang/</link>
+    <pubDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/golang/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Compiler</title>
+    <link>https://minkj1992.github.io/tags/compiler/</link>
+    <pubDate>Tue, 06 Feb 2024 22:41:31 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/compiler/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Ts</title>
+    <link>https://minkj1992.github.io/tags/ts/</link>
+    <pubDate>Tue, 06 Feb 2024 22:41:31 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/ts/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Typescript</title>
+    <link>https://minkj1992.github.io/tags/typescript/</link>
+    <pubDate>Tue, 06 Feb 2024 22:41:31 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/typescript/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Mlops</title>
+    <link>https://minkj1992.github.io/tags/mlops/</link>
+    <pubDate>Mon, 27 Nov 2023 14:07:21 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/mlops/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>Js</title>
+    <link>https://minkj1992.github.io/tags/js/</link>
+    <pubDate>Sun, 19 Nov 2023 15:29:46 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/js/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

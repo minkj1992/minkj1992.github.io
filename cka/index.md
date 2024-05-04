@@ -1346,13 +1346,230 @@ public key cryptography: A class of cryptographic techniques employing two-key c
   - kube-proxy.crt
   - kube-proxy.key
 
-
 ![](/images/k8s-tls2.png)
+
+## Kube config
+
+Kubeconfig is the file to organize information about clusters, users, namespaces and authentication mechanisms.
+
+kubectl command line tool uses kubeconfig file to find the information it needs to choose a cluster and communicate with API server of a cluster. Which  measn kubeconfig contains
+
+- kind: Config
+- cluster
+- contexts: mapping with cluster and users
+  - namespace
+- users
+  - crt files
+
+```sh
+> k config view
+> k config use-context
+```
+
+Base directory is `$HOME/.kube/config`. 
+
+`echo env | grep -i HOME` to figure out home
+
+## Authorization
+
+1. ABAC: user당 json형식으로 kind: policy를 관리하는 방식
+2. RBAC: policy group을 rule로 묶고, user와 binding하는 방식
+3. Webhook
+
+
+
+```sh
+# kubeadm 
+
+cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -i authorizaion
+
+...elipsis
+--authorization-mode=Node,RBAC,Webhook
+```
+
+
+Above setting means first Node auth try and RBAC try and Webhook try
+
+
+## RBAC
+
+- Role and Role Bindings are under the scope of namespaces
+  - so withoud namespace = default namespace role
+  - with namespace -> specific namespace
+
+
+```sh
+# check Access
+k auth can-i create deployments --as dev-user -n production
+
+k auth can-i list nodes --as michelle
+```
+
+
+## Cluster Roles
+
+Unlike Role, Cluster-Role's scope is not limited by namespace. In other words, it applies to all namespaces.
+
+- Namespaced
+  - pods, replicasets, jobs, deployments, services, secrets, roles, rolebindings configmaps, pvc
+  - `k api-resources --namespaced=true`
+- Cluster Scoped
+  - nodes, PV, clusterrole, clusterrolebindings, certificatesigningrequests(csr), namespaces
+  - `k api-resources --namespaced=false`
+
+```sh
+
+$ k create clusterrole storage-admin --resource=persistentvolumes,storageclasses --verb=*
+$ k get clusterrole storage-admin -o yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: "2024-05-04T06:22:03Z"
+  name: storage-admin
+  resourceVersion: "1696"
+  uid: d73ce51f-6ea7-4dfa-9db9-2564e3fa277c
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumes
+  verbs:
+  - '*'
+- apiGroups:
+  - storage.k8s.io
+  resources:
+  - storageclasses
+  verbs:
+  - '*'
+```
+
+## Service account
+
+![](/images/k8s-ua-vs-sa.png)
+
+The user account is literally an account for users, and the service account is literally an account for services such as Prometheus, Grafana, Kubeflow..
+
+```sh
+controlplane ~ ➜  k get sa -n default
+NAME      SECRETS   AGE
+default   0         11m
+dev       0         52s
+
+controlplane ~ ➜  k create sa test-sa
+serviceaccount/test-sa created
+
+controlplane ~ ➜  k get sa
+NAME      SECRETS   AGE
+default   0         11m
+dev       0         85s
+test-sa   0         3s
+
+controlplane ~ ➜  k describe sa test-sa
+Name:                test-sa
+Namespace:           default
+Labels:              <none>
+Annotations:         <none>
+Image pull secrets:  <none>
+Mountable secrets:   <none>
+Tokens:              <none>
+Events:              <none>
+```
+
+- Every namespace has it's own default service account
+
+```sh
+controlplane ~ ➜  k describe sa default
+Name:                default
+Namespace:           default
+Labels:              <none>
+Annotations:         <none>
+Image pull secrets:  <none>
+Mountable secrets:   <none>
+Tokens:              <none>
+Events:              <none>
+
+controlplane ~ ➜  k get po
+No resources found in default namespace.
+
+```
+
+- default sa is used when, create resources without sa
+
+```sh
+controlplane ~ ➜  k run nginx --image=ngin
+pod/nginx created
+
+
+controlplane ~ ➜  k describe po nginx | grep -i default
+Namespace:        default
+Service Account:  default
+  Normal   Scheduled  104s                default-scheduler  Successfully assigned default/nginx to controlplane
+
+
+- Default volume and mount are automatically created at `/var/run/secrets/*`.
+- Kubernetes automatically mounts the default service account token to inside pode.
+- ServiceAccount token Secrets store credentials identifying a ServiceAccount for Pods.
+- Legacy method providing long-lived credentials, but In Kubernetes v1.22+, recommended to obtain short-lived, rotating tokens using `TokenRequest API`.
+- Methods to obtain short-lived tokens include direct API calls or through kubectl.
+
+
+
+```sh
+controlplane ~ ➜  k describe po nginx
+
+...elipsis
+
+Containers:
+  nginx:
+    Container ID:   
+    Image:          ngin
+    Image ID:       
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ErrImagePull
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2pp72 (ro)
+Volumes:
+  kube-api-access-2pp72:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true      
+```
+
+We can check it like this
+
+```sh
+controlplane ~ ✖ k exec -it nginx -- ls /var/run/secrets/kubernetes.io/serviceaccount
+ca.crt  namespace  token
+controlplane ~ ➜  k exec -it nginx -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
+eyJhbGciOiJSUzI1NiIsImtpZCI6Im1VUi1aZllLak5Fc0MyV184aE1ycDVvcmN6Z1pnNWZlT1JGLXFxQ2NtTm8ifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiLCJrM3MiXSwiZXhwIjoxNzQ2MzQyNzYzLCJpYXQiOjE3MTQ4MDY3NjMsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0IiwicG9kIjp7Im5hbWUiOiJuZ2lueCIsInVpZCI6ImRjNjgzOTI0LTZmYjAtNGFlOC04YjNmLTRlZmU5NmEwMjI0YSJ9LCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiZGVmYXVsdCIsInVpZCI6IjgxY2M0MDU1LTBhNjAtNDNiNC05ODE3LTk3OWIwYTUwODA3MiJ9LCJ3YXJuYWZ0ZXIiOjE3MTQ4MTAzNzB9LCJuYmYiOjE3MTQ4MDY3NjMsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.KOu1urbQ_aqLSDe0tOChy9ZbEmeUFkf-yDKU0TPeK_zKqi1tbZRGV4pVY_6ac90ZCeWTTu2hA1jsUYFTLVyfWfCy7jb7H7BR3gBVrMnUncSYIbjGeZNuJK_3JJ_xaSN3cuKJyJbK19cQG19pACkp3TvPxXfmdAKFcuGXdpvp9m4vXGGHV4zMKebStuk5guhKyDsVQycoLSTse4mUohARPRb8BFTNcSTwUHaQ2crTo-FBa46XbwQUkQt0JTIeCijXb9cRe0zvuiZggUEv2i8BBVb6G6OAVt9n5uzYAv4WLSSF8ovfygbQhivq5U-BJP7B85IaEKwuejLDzMthXa9ioA
+```
+
+
+![](/images/k8s-sa-policy.png)
+
+Unlike the existing method on the left where a secret and a token were created when creating sa, from 1.24 onwards, you must explicitly create a token instead of creating a secret to confirm it. Also, if necessary, you must create a secret as shown below and connect to sa.
+
+![](/images/k8s-sa-policy2.png)
+
+
+> [But, Note: You should only create a ServiceAccount token Secret if you can't use the TokenRequest API to obtain a token, and the security exposure of persisting a non-expiring token credential in a readable API object is acceptable to you. For instructions, see Manually create a long-lived API token for a ServiceAccount.](https://kubernetes.io/docs/concepts/configuration/secret/#serviceaccount-token-secrets)
+
 
 ## Developing network policies
 > https://kubernetes.io/docs/concepts/services-networking/network-policies/
 
 -By default, a pod is non-isolated for egress and ingress
+
+The user account is literally an account for users, and the service account is literally an account for services such as Prometheus.
+
+
 
 # Chapter 8: Storage
 

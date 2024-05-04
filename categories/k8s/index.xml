@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>k8s - Category - minkj1992</title>
+        <title>K8s - Category - minkj1992</title>
         <link>https://minkj1992.github.io/categories/k8s/</link>
-        <description>k8s - Category - minkj1992</description>
+        <description>K8s - Category - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
             <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 19 Apr 2024 12:41:18 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/k8s/" rel="self" type="application/rss+xml" /><item>
     <title>CKA certificate</title>

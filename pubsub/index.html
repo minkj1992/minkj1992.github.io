@@ -5,18 +5,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>Google Cloud Pub/Sub | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="Google Cloud Pub/Sub" />
-<meta property="og:description" content="Let&rsquo;s get familiar with basic features of Google pubsub service by practicing." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://minkj1992.github.io/pubsub/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-05-21T20:51:52+09:00" />
-<meta property="article:modified_time" content="2022-05-27T23:09:04+09:00" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
-
-<meta name="twitter:title" content="Google Cloud Pub/Sub"/>
-<meta name="twitter:description" content="Let&rsquo;s get familiar with basic features of Google pubsub service by practicing."/>
+    <title>Google Cloud Pub/Sub | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:url" content="https://minkj1992.github.io/pubsub/">
+  <meta property="og:site_name" content="minkj1992">
+  <meta property="og:title" content="Google Cloud Pub/Sub">
+  <meta property="og:description" content="Let’s get familiar with basic features of Google pubsub service by practicing.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-05-21T20:51:52+09:00">
+    <meta property="article:modified_time" content="2022-05-27T23:09:04+09:00">
+    <meta property="article:tag" content="Dev">
+    <meta property="article:tag" content="Gcp">
+    <meta property="article:tag" content="Pubsub">
+    <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"><meta name="twitter:title" content="Google Cloud Pub/Sub">
+<meta name="twitter:description" content="Let&rsquo;s get familiar with basic features of Google pubsub service by practicing.">
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -34,7 +38,7 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, gcp, pubsub","wordcount":  2989 ,
+                        }],"genre": "posts","keywords": "dev, gcp, pubsub","wordcount":  2990 ,
         "url": "https:\/\/minkj1992.github.io\/pubsub\/","datePublished": "2022-05-21T20:51:52+09:00","dateModified": "2022-05-27T23:09:04+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
@@ -172,8 +176,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Google Cloud Pub/Sub</h1><h2 class="single-subtitle">Google Cloud Pub/Sub</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/iot/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>iot</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-21">2022-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2989 words&nbsp;
+</span>&nbsp;<span class="post-category">included in <a href="/categories/iot/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Iot</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-05-21">2022-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2990 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;15 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -247,7 +251,7 @@
 </span></span><span class="line"><span class="cl"><span class="n">Credentialed</span> <span class="n">Accounts</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">ACTIVE</span><span class="p">:</span> <span class="o">*</span>
-</span></span><span class="line"><span class="cl"><span class="n">ACCOUNT</span><span class="p">:</span> <span class="n">student</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">731</span><span class="n">a0523b9da</span><span class="nd">@qwiklabs</span><span class="o">.</span><span class="n">net</span>
+</span></span><span class="line"><span class="cl"><span class="n">ACCOUNT</span><span class="p">:</span> <span class="n">student</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">731</span><span class="n">a0523b9da</span><span class="nd">@qwiklabs.net</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">To</span> <span class="nb">set</span> <span class="n">the</span> <span class="n">active</span> <span class="n">account</span><span class="p">,</span> <span class="n">run</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">    <span class="err">$</span> <span class="n">gcloud</span> <span class="n">config</span> <span class="nb">set</span> <span class="n">account</span> <span class="err">`</span><span class="n">ACCOUNT</span><span class="err">`</span>
@@ -1512,7 +1516,7 @@
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a>,&nbsp;<a href="/tags/gcp/">gcp</a>,&nbsp;<a href="/tags/pubsub/">pubsub</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">Dev</a>,&nbsp;<a href="/tags/gcp/">Gcp</a>,&nbsp;<a href="/tags/pubsub/">Pubsub</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
@@ -1525,7 +1529,7 @@
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
         </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.125.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

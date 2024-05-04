@@ -5,18 +5,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>Rust 디자인 원칙 🦀 | minkj1992</title><meta name="Description" content="Rust Q&amp;A를 통해서 알아보는 원리"><meta property="og:title" content="Rust 디자인 원칙 🦀" />
-<meta property="og:description" content="Rust Q&amp;A를 통해서 알아보는 원리" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://minkj1992.github.io/rust_principle/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-01-07T15:52:24+09:00" />
-<meta property="article:modified_time" content="2023-01-10T11:46:07+09:00" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
-
-<meta name="twitter:title" content="Rust 디자인 원칙 🦀"/>
-<meta name="twitter:description" content="Rust Q&amp;A를 통해서 알아보는 원리"/>
+    <title>Rust 디자인 원칙 🦀 | minkj1992</title><meta name="Description" content="Rust Q&amp;A를 통해서 알아보는 원리"><meta property="og:url" content="https://minkj1992.github.io/rust_principle/">
+  <meta property="og:site_name" content="minkj1992">
+  <meta property="og:title" content="Rust 디자인 원칙 🦀">
+  <meta property="og:description" content="Rust Q&amp;A를 통해서 알아보는 원리">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-01-07T15:52:24+09:00">
+    <meta property="article:modified_time" content="2023-01-10T11:46:07+09:00">
+    <meta property="article:tag" content="Rust">
+    <meta property="article:tag" content="Principles">
+    <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"><meta name="twitter:title" content="Rust 디자인 원칙 🦀">
+<meta name="twitter:description" content="Rust Q&amp;A를 통해서 알아보는 원리">
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -34,7 +37,7 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "rust, principles","wordcount":  4022 ,
+                        }],"genre": "posts","keywords": "rust, principles","wordcount":  4130 ,
         "url": "https:\/\/minkj1992.github.io\/rust_principle\/","datePublished": "2023-01-07T15:52:24+09:00","dateModified": "2023-01-10T11:46:07+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
@@ -172,9 +175,9 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Rust 디자인 원칙 🦀</h1><h2 class="single-subtitle">Rust Q&amp;A를 통해서 알아보는 원리</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>dev</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-07">2023-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4022 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;19 minutes&nbsp;</div>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/dev/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Dev</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-07">2023-01-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;4130 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;20 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -417,8 +420,7 @@
 <li>서명은 프로그래머가 코드를 더 잘 이해할 수 있게 하므로, IDE가 함수의 인자 타입들을 추측하려고 전체 크레이트에 추론 알고리즘을 돌릴 필요가 사라집니다.</li>
 <li>언제나 명시적이고 바로 옆에 있기 때문이죠.
 기계적으로는 추론 과정에서 한 번에 한 함수만 보면 되므로 추론 알고리즘이 간단해집니다.</li>
-</ul>
-</div>
+</ul></div>
         </div>
     </div>
 <div class="details admonition question open">
@@ -715,8 +717,7 @@
 <li>android: <a href="https://github.com/rust-mobile/ndk" target="_blank" rel="noopener noreffer">https://github.com/rust-mobile/ndk</a>
 </li>
 <li>ios</li>
-</ul>
-</div>
+</ul></div>
         </div>
     </div>
 <div class="details admonition question open">
@@ -728,8 +729,7 @@
 <ul>
 <li><a href="https://d2.naver.com/helloworld/8257914" target="_blank" rel="noopener noreffer">WebAssembly의 동향에 대한 유용한 글, Naver D2</a>
 </li>
-</ul>
-</div>
+</ul></div>
         </div>
     </div>
 <hr>
@@ -997,9 +997,9 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">];</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="w"> </span><span class="p">{</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">print!</span><span class="p">(</span><span class="s">&#34;{} &#34;</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">print!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{}</span><span class="s"> &#34;</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;\nLength: {}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">len</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">Length: </span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">len</span><span class="p">());</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>Rust의 for 반복문은 반복하고자 하는 대상에 대해 (<code>IntoIterator</code> 트레이트에 정의된) <code>into_iter()</code>를 호출합니다. <code>IntoIterator</code> 트레이트를 구현하는 모든 value들은 for 반복문에서 사용될 수 있습니다.</p>
@@ -1129,7 +1129,7 @@
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">rust</a>,&nbsp;<a href="/tags/principles/">principles</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/rust/">Rust</a>,&nbsp;<a href="/tags/principles/">Principles</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
@@ -1142,7 +1142,7 @@
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
         </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.125.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>

@@ -300,13 +300,16 @@ is_interleaved(s1, s2, s3)
 
 > success
 
+- [x] 5 round interview (5-6hours)
+- [x] skipped english interview
 ## 5. payment
 
-> fin
+- [x] salary: 카카오 대비 45% 상승
+- [x] stock: 당시 가치 전체 연봉의 30%의 4년 토탈 1년 cliff.
 
 ## 6. apartment
 
-> todo
+- [x] 성수동 원룸 2년 계약 1000/80
 
 <center>-끝-</center>
 

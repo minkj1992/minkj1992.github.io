@@ -5,18 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>MLflow code analysis | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:title" content="MLflow code analysis" />
-<meta property="og:description" content="Let&rsquo;s analize mlflow source code" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://minkj1992.github.io/mlflow/" /><meta property="og:image" content="https://minkj1992.github.io/images/profile3.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-01-31T19:06:42+09:00" />
-<meta property="article:modified_time" content="2024-02-14T10:24:18+09:00" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"/>
-
-<meta name="twitter:title" content="MLflow code analysis"/>
-<meta name="twitter:description" content="Let&rsquo;s analize mlflow source code"/>
+    <title>MLflow code analysis | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:url" content="https://minkj1992.github.io/mlflow/">
+  <meta property="og:site_name" content="minkj1992">
+  <meta property="og:title" content="MLflow code analysis">
+  <meta property="og:description" content="Let’s analize mlflow source code">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-01-31T19:06:42+09:00">
+    <meta property="article:modified_time" content="2024-02-14T10:24:18+09:00">
+    <meta property="article:tag" content="Dev">
+    <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"><meta name="twitter:title" content="MLflow code analysis">
+<meta name="twitter:description" content="Let&rsquo;s analize mlflow source code">
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -34,7 +36,7 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  1478 ,
+                        }],"genre": "posts","keywords": "dev","wordcount":  1487 ,
         "url": "https:\/\/minkj1992.github.io\/mlflow\/","datePublished": "2024-01-31T19:06:42+09:00","dateModified": "2024-02-14T10:24:18+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
@@ -172,8 +174,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">MLflow code analysis</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/mlflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mlflow</a>&nbsp;<a href="/categories/mlops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>mlops</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-31">2024-01-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1478 words&nbsp;
+</span>&nbsp;<span class="post-category">included in <a href="/categories/mlflow/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Mlflow</a>&nbsp;<a href="/categories/mlops/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Mlops</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-01-31">2024-01-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1487 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -625,7 +627,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="s2">    and all the argument values must be hashable.
 </span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nd">@functools.wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">wrapped_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -806,7 +808,7 @@
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">dev</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">Dev</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
@@ -819,7 +821,7 @@
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
             </noscript></div></article></div>
         </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.98.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.125.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
         </div>
     </footer></div>
