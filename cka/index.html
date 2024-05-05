@@ -13,7 +13,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-04-19T12:41:18+09:00">
-    <meta property="article:modified_time" content="2024-04-27T23:01:46+09:00">
+    <meta property="article:modified_time" content="2024-05-04T16:53:47+09:00">
     <meta property="article:tag" content="Dev">
     <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -37,8 +37,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  7200 ,
-        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-04-27T23:01:46+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  8235 ,
+        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-05-04T16:53:47+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -176,8 +176,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>K8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;7200 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;34 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8235 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;39 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -316,7 +316,27 @@
     <li><a href="#rbac">RBAC</a></li>
     <li><a href="#cluster-roles">Cluster Roles</a></li>
     <li><a href="#service-account">Service account</a></li>
-    <li><a href="#developing-network-policies">Developing network policies</a></li>
+    <li><a href="#image-security">Image security</a></li>
+    <li><a href="#security-context">Security Context</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#attributes">Attributes</a></li>
+            <li><a href="#how-to-check-capabilities">How to check capabilities</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#network-policies">Network policies</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#solution-1">Solution</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 
   <ul>
@@ -2890,14 +2910,439 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 <p><a href="https://kubernetes.io/docs/concepts/configuration/secret/#serviceaccount-token-secrets" target="_blank" rel="noopener noreffer">But, Note: You should only create a ServiceAccount token Secret if you can&rsquo;t use the TokenRequest API to obtain a token, and the security exposure of persisting a non-expiring token credential in a readable API object is acceptable to you. For instructions, see Manually create a long-lived API token for a ServiceAccount.</a>
 </p>
 </blockquote>
-<h2 id="developing-network-policies">Developing network policies</h2>
+<h2 id="image-security">Image security</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">root@controlplane ~ ➜  k create secret -h
+</span></span><span class="line"><span class="cl">Create a secret with specified type.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> A docker-registry <span class="nb">type</span> secret is <span class="k">for</span> accessing a container registry.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> A generic <span class="nb">type</span> secret indicate an Opaque secret type.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> A tls <span class="nb">type</span> secret holds TLS certificate and its associated key.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Available Commands:
+</span></span><span class="line"><span class="cl">  docker-registry   Create a secret <span class="k">for</span> use with a Docker registry
+</span></span><span class="line"><span class="cl">  generic           Create a secret from a <span class="nb">local</span> file, directory, or literal value
+</span></span><span class="line"><span class="cl">  tls               Create a TLS secret
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Create a secret object with the credentials required to access the registry.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Name: private-reg-cred
+</span></span><span class="line"><span class="cl">Username: dock_user
+</span></span><span class="line"><span class="cl">Password: dock_password
+</span></span><span class="line"><span class="cl">Server: myprivateregistry.com:5000
+</span></span><span class="line"><span class="cl">Email: dock_user@myprivateregistry.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">root@controlplane ~ ➜  k create secret docker-registry private-reg-cred --docker-username<span class="o">=</span>dock_user --docker_email<span class="o">=</span>dock_user@myprivateregistry.com --docker-password<span class="o">=</span>dock_password --docker-server<span class="o">=</span>myprivateregistry.com:5000
+</span></span><span class="line"><span class="cl">secret/private-reg-cred created
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@controlplane ~ ➜  k get secret
+</span></span><span class="line"><span class="cl">NAME               TYPE                             DATA   AGE
+</span></span><span class="line"><span class="cl">private-reg-cred   kubernetes.io/dockerconfigjson   <span class="m">1</span>      6s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">root@controlplane ~ ✖ k describe secret private-reg-cred
+</span></span><span class="line"><span class="cl">Name:         private-reg-cred
+</span></span><span class="line"><span class="cl">Namespace:    default
+</span></span><span class="line"><span class="cl">Labels:       &lt;none&gt;
+</span></span><span class="line"><span class="cl">Annotations:  &lt;none&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Type:  kubernetes.io/dockerconfigjson
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">Data</span>
+</span></span><span class="line"><span class="cl"><span class="o">====</span>
+</span></span><span class="line"><span class="cl">.dockerconfigjson:  <span class="m">176</span> bytes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>edit deployment</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">&gt; root@controlplane ~ ➜  k edit deployments.apps web 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - image: myprivateregistry.com:5000/nginx:alpine
+</span></span><span class="line"><span class="cl">        imagePullPolicy: IfNotPresent
+</span></span><span class="line"><span class="cl">        imagePullSecrets: private-reg-cred
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">error: deployments.apps <span class="s2">&#34;web&#34;</span> is invalid
+</span></span><span class="line"><span class="cl">A copy of your changes has been stored to <span class="s2">&#34;/tmp/kubectl-edit-4288536569.yaml&#34;</span>
+</span></span><span class="line"><span class="cl">error: Edit cancelled, no valid changes were saved.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; vim /tmp/kubectl-edit-4288536569.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    spec:
+</span></span><span class="line"><span class="cl">      imagePullSecrets:
+</span></span><span class="line"><span class="cl">      - name: private-reg-cred
+</span></span><span class="line"><span class="cl">      containers:
+</span></span><span class="line"><span class="cl">      - image: myprivateregistry.com:5000/nginx:alpine
+</span></span><span class="line"><span class="cl">        imagePullPolicy: IfNotPresent
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; k apply -f /tmp/kubectl-edit-4288536569.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="security-context">Security Context</h2>
+<blockquote>
+<p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/" target="_blank" rel="noopener noreffer">https://kubernetes.io/docs/tasks/configure-pod-container/security-context/</a>
+</p>
+</blockquote>
+<p>A security context defines privilege and access control settings for a Pod or Container.</p>
+<ul>
+<li><code>pod.spec.securityContext</code></li>
+<li><code>pod.spec.containers.securityContext</code></li>
+</ul>
+<h4 id="attributes">Attributes</h4>
+<ul>
+<li><code>runAsGroup</code></li>
+<li><code>runAsUser</code></li>
+<li><code>capabilities</code>: Adds and removes POSIX capabilities from running containers.</li>
+</ul>
+<p><a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod" target="_blank" rel="noopener noreffer">The runAsGroup field specifies the primary group ID of &lt;runAsGroup_value&gt; for all processes within any containers of the Pod. If this field is omitted, the primary group ID of the containers will be root(0).</a>
+</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">controlplane ~ ➜  ps -ef <span class="p">|</span> grep -i sleep
+</span></span><span class="line"><span class="cl"> <span class="m">6747</span> root      0:00 sleep <span class="m">4800</span>
+</span></span><span class="line"><span class="cl"> <span class="m">7688</span> root      0:00 grep -i sleep
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  k <span class="nb">exec</span> -it ubuntu-sleeper -- ps -ef <span class="p">|</span> grep -i sleep
+</span></span><span class="line"><span class="cl">root           <span class="m">1</span>       <span class="m">0</span>  <span class="m">0</span> 09:17 ?        00:00:00 sleep <span class="m">4800</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="how-to-check-capabilities">How to check capabilities</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">controlplane ~ ➜  k <span class="nb">exec</span> -it ubuntu-sleeper -- sh
+</span></span><span class="line"><span class="cl"><span class="c1"># ls</span>
+</span></span><span class="line"><span class="cl">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+</span></span><span class="line"><span class="cl"><span class="c1"># ps -aux</span>
+</span></span><span class="line"><span class="cl">USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+</span></span><span class="line"><span class="cl">root           <span class="m">1</span>  0.0  0.0   <span class="m">2692</span>  <span class="m">1120</span> ?        Ss   04:13   0:00 sleep <span class="m">4800</span>
+</span></span><span class="line"><span class="cl">root          <span class="m">56</span>  0.0  0.0   <span class="m">2796</span>  <span class="m">1096</span> pts/0    Ss   04:15   0:00 sh
+</span></span><span class="line"><span class="cl">root          <span class="m">63</span>  0.0  0.0   <span class="m">7884</span>  <span class="m">4112</span> pts/0    R+   04:15   0:00 ps -aux
+</span></span><span class="line"><span class="cl">&gt; <span class="nb">cd</span> /proc/1
+</span></span><span class="line"><span class="cl">&gt; cat status <span class="p">|</span> grep -i Cap
+</span></span><span class="line"><span class="cl">CapInh: <span class="m">0000000000000000</span>
+</span></span><span class="line"><span class="cl">CapPrm: 00000000a80425fb
+</span></span><span class="line"><span class="cl">CapEff: 00000000a80425fb
+</span></span><span class="line"><span class="cl">CapBnd: 00000000a80425fb
+</span></span><span class="line"><span class="cl">CapAmb: <span class="m">0000000000000000</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># edit pod.spec.securityContext.capabilities</span>
+</span></span><span class="line"><span class="cl">k edit po ubuntu-sleeper
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="network-policies">Network policies</h2>
 <blockquote>
 <p><a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" target="_blank" rel="noopener noreffer">https://kubernetes.io/docs/concepts/services-networking/network-policies/</a>
 </p>
 </blockquote>
-<p>-By default, a pod is non-isolated for egress and ingress</p>
-<p>The user account is literally an account for users, and the service account is literally an account for services such as Prometheus.</p>
-<h1 id="chapter-8-storage">Chapter 8: Storage</h1>
+<ul>
+<li>By default, a pod is non-isolated for egress and ingress, which means default is all allowed</li>
+<li>Only traffic flows marked as &ldquo;Ingress&rdquo; or &ldquo;Egress&rdquo; in <code>spec.PolicyTypes</code> are impacted by network policy.</li>
+<li>If ingress is allowed, a response to the request is automatically delivered.</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network-policy1.png"
+        data-srcset="/images/k8s-network-policy1.png, /images/k8s-network-policy1.png 1.5x, /images/k8s-network-policy1.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network-policy1.png"
+        title="/images/k8s-network-policy1.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network-policy2.png"
+        data-srcset="/images/k8s-network-policy2.png, /images/k8s-network-policy2.png 1.5x, /images/k8s-network-policy2.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network-policy2.png"
+        title="/images/k8s-network-policy2.png" /></p>
+<blockquote>
+<p><a href="https://github.com/ahmetb/kubernetes-network-policy-recipes/blob/master/09-allow-traffic-only-to-a-port.md" target="_blank" rel="noopener noreffer">kubernetes-network-policy-recipes</a>
+</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">NetworkPolicy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">api-allow-5000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">podSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l">apiserver</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">ingress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">5000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">from</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">podSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l">monitoring</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Drop all non-whitelisted traffic to app=apiserver.</li>
+<li><strong>Allow traffic on port 5000 from pods with label role=monitoring in the same namespace.</strong></li>
+</ul>
+<h4 id="problem">Problem</h4>
+<blockquote>
+<p>Use the spec given below. You might want to enable ingress traffic to the pod to test your rules in the UI.Also, ensure that you allow egress traffic to DNS ports TCP and UDP (port 53) to enable DNS resolution from the internal pod.</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Policy Name: internal-policy
+</span></span><span class="line"><span class="cl">Policy Type: Egress
+</span></span><span class="line"><span class="cl">Egress Allow: payroll
+</span></span><span class="line"><span class="cl">Payroll Port: 8080
+</span></span><span class="line"><span class="cl">Egress Allow: mysql
+</span></span><span class="line"><span class="cl">MySQL Port: 3306
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">controlplane ~ ➜  k get all
+</span></span><span class="line"><span class="cl">NAME           READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">pod/external   1/1     Running   0          23m
+</span></span><span class="line"><span class="cl">pod/internal   1/1     Running   0          23m
+</span></span><span class="line"><span class="cl">pod/mysql      1/1     Running   0          23m
+</span></span><span class="line"><span class="cl">pod/payroll    1/1     Running   0          23m
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+</span></span><span class="line"><span class="cl">service/db-service         ClusterIP   10.97.124.55     &lt;none&gt;        3306/TCP         23m
+</span></span><span class="line"><span class="cl">service/external-service   NodePort    10.102.212.250   &lt;none&gt;        8080:30080/TCP   23m
+</span></span><span class="line"><span class="cl">service/internal-service   NodePort    10.107.186.112   &lt;none&gt;        8080:30082/TCP   23m
+</span></span><span class="line"><span class="cl">service/kubernetes         ClusterIP   10.96.0.1        &lt;none&gt;        443/TCP          105m
+</span></span><span class="line"><span class="cl">service/payroll-service    NodePort    10.103.183.130   &lt;none&gt;        8080:30083/TCP   23m
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="solution-1">Solution</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">k get netpol payroll-policy -o yaml &gt; netpol.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>netpol.yaml</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">networking.k8s.io/v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">NetworkPolicy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">internal-policy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">egress</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">to</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">podSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">payroll</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">8080</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">to</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">podSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">mysql</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">3306</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">53</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">UDP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="m">53</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="l">TCP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">podSelector</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">matchLabels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">internal</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">policyTypes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">Egress</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">k apply -f netpol.yaml
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="chapter-8-storage">Chapter 8: Storage</h1>
 <ul>
 <li><a href="https://docs.docker.com/storage/storagedriver/#storage-drivers-versus-docker-volumes" target="_blank" rel="noopener noreffer">Docker: Storage drivers versus Docker volumes</a>
 </li>
@@ -2936,6 +3381,152 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 <p>Kubernetes volumes preserve container data, preventing loss on crashes, enabling file sharing in Pods, and enhancing application management by providing directories accessible to containers with various types, including ephemeral and persistent, ensuring data persistence across restarts.</p>
 <h2 id="persistent-volume">Persistent Volume</h2>
 <p>Volume have to write spec on pod definition, but when system is bigger than It is hard to manage all pods to mapping each volumes. So persistent volume and Persistent volume claim concepts are invented.</p>
+<blockquote>
+<p>Configure a volume to store these logs at /var/log/webapp on the host.</p>
+</blockquote>
+<ul>
+<li>spec</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">Name</span><span class="p">:</span> <span class="n">webapp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="ne">Image</span> <span class="n">Name</span><span class="p">:</span> <span class="n">kodekloud</span><span class="o">/</span><span class="n">event</span><span class="o">-</span><span class="n">simulator</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Volume</span> <span class="n">HostPath</span><span class="p">:</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">webapp</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Volume</span> <span class="n">Mount</span><span class="p">:</span> <span class="o">/</span><span class="nb">log</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">controlplane ~ ➜  k get all
+</span></span><span class="line"><span class="cl">NAME         READY   STATUS    RESTARTS   AGE
+</span></span><span class="line"><span class="cl">pod/webapp   1/1     Running   <span class="m">0</span>          5m26s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>   AGE
+</span></span><span class="line"><span class="cl">service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   11m
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">&gt; k get po webapp -o yaml &gt; webapp.yaml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># edit</span>
+</span></span><span class="line"><span class="cl">&gt; k replace -f 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">Pod</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">webapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">containers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">event-simulator</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">kodekloud/event-simulator</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">LOG_HANDLERS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">value</span><span class="p">:</span><span class="w"> </span><span class="l">file</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumeMounts</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">mountPath</span><span class="p">:</span><span class="w"> </span><span class="l">/log</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">log-volume</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">log-volume</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># directory location on host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/var/log/webapp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># this field is optional</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">Directory</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Should volumeMounts.name == volumes.name</li>
+<li>not hostpath, hostPath</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">PersistentVolume</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">pv-log</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">spec</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">persistentVolumeReclaimPolicy</span><span class="p">:</span><span class="w"> </span><span class="l">Retain</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">accessModes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="l">ReadWriteMany</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">capacity</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">storage</span><span class="p">:</span><span class="w"> </span><span class="l">100Mi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">hostPath</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l">/pv/log</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes-1" target="_blank" rel="noopener noreffer"><strong>Claims use the same conventions as volumes when requesting storage with specific access modes.</strong></a>
+</li>
+</ul>
 <h2 id="persistent-volume-claims">Persistent Volume Claims</h2>
 <ol>
 <li>PVC created</li>
@@ -2943,12 +3534,13 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 <li>Bind</li>
 </ol>
 <h2 id="storage-class">Storage Class</h2>
-<p>It would be great if make pv thenphysical memory provisioned, which is called <code>Dynamic Provisioning</code>. And we can achieve it by <code>Storage class(sc)</code> instead PV. Actually pv is created when sc definition is called but we do not manually create pv, because we need to manage volume dynamically.</p></div><div class="post-footer" id="post-footer">
+<p><strong>It would be great if make pv then physical memory provisioned, which is called <code>Dynamic Provisioning</code>. And we can achieve it by <code>Storage class(sc)</code> instead PV. Actually pv is created when sc definition is called but we do not manually create pv, because we need to manage volume dynamically.</strong></p>
+<h1 id="chapter-9-networking">Chapter 9: Networking</h1></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-27&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/b749ffe4179d05305828983f99677d962fd04a3e" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) b749ffe4179d05305828983f99677d962fd04a3e: docs: cka">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>b749ffe</a></span>
+                <span>Updated on 2024-05-04&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/ee905041102c663d9cac22b9f423ccba8219e347" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) ee905041102c663d9cac22b9f423ccba8219e347: docs: cka">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ee90504</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

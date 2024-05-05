@@ -1449,6 +1449,7 @@ rules:
 
 The user account is literally an account for users, and the service account is literally an account for services such as Prometheus, Grafana, Kubeflow..
 
+
 ```sh
 controlplane ~ ➜  k get sa -n default
 NAME      SECRETS   AGE
@@ -1562,12 +1563,243 @@ Unlike the existing method on the left where a secret and a token were created w
 > [But, Note: You should only create a ServiceAccount token Secret if you can't use the TokenRequest API to obtain a token, and the security exposure of persisting a non-expiring token credential in a readable API object is acceptable to you. For instructions, see Manually create a long-lived API token for a ServiceAccount.](https://kubernetes.io/docs/concepts/configuration/secret/#serviceaccount-token-secrets)
 
 
-## Developing network policies
+## Image security
+
+```sh
+root@controlplane ~ ➜  k create secret -h
+Create a secret with specified type.
+
+ A docker-registry type secret is for accessing a container registry.
+
+ A generic type secret indicate an Opaque secret type.
+
+ A tls type secret holds TLS certificate and its associated key.
+
+Available Commands:
+  docker-registry   Create a secret for use with a Docker registry
+  generic           Create a secret from a local file, directory, or literal value
+  tls               Create a TLS secret
+```
+
+
+Create a secret object with the credentials required to access the registry.
+
+```
+Name: private-reg-cred
+Username: dock_user
+Password: dock_password
+Server: myprivateregistry.com:5000
+Email: dock_user@myprivateregistry.com
+```
+
+```sh
+root@controlplane ~ ➜  k create secret docker-registry private-reg-cred --docker-username=dock_user --docker_email=dock_user@myprivateregistry.com --docker-password=dock_password --docker-server=myprivateregistry.com:5000
+secret/private-reg-cred created
+
+root@controlplane ~ ➜  k get secret
+NAME               TYPE                             DATA   AGE
+private-reg-cred   kubernetes.io/dockerconfigjson   1      6s
+
+root@controlplane ~ ✖ k describe secret private-reg-cred
+Name:         private-reg-cred
+Namespace:    default
+Labels:       <none>
+Annotations:  <none>
+
+Type:  kubernetes.io/dockerconfigjson
+
+Data
+====
+.dockerconfigjson:  176 bytes
+
+```
+
+- edit deployment
+
+```sh
+> root@controlplane ~ ➜  k edit deployments.apps web 
+
+    spec:
+      containers:
+      - image: myprivateregistry.com:5000/nginx:alpine
+        imagePullPolicy: IfNotPresent
+        imagePullSecrets: private-reg-cred
+
+
+error: deployments.apps "web" is invalid
+A copy of your changes has been stored to "/tmp/kubectl-edit-4288536569.yaml"
+error: Edit cancelled, no valid changes were saved.
+
+> vim /tmp/kubectl-edit-4288536569.yaml
+
+    spec:
+      imagePullSecrets:
+      - name: private-reg-cred
+      containers:
+      - image: myprivateregistry.com:5000/nginx:alpine
+        imagePullPolicy: IfNotPresent
+
+> k apply -f /tmp/kubectl-edit-4288536569.yaml
+```
+
+## Security Context
+> https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+
+A security context defines privilege and access control settings for a Pod or Container.
+
+- `pod.spec.securityContext`
+- `pod.spec.containers.securityContext`
+
+#### Attributes
+
+- `runAsGroup`
+- `runAsUser`
+- `capabilities`: Adds and removes POSIX capabilities from running containers.
+
+[The runAsGroup field specifies the primary group ID of <runAsGroup_value> for all processes within any containers of the Pod. If this field is omitted, the primary group ID of the containers will be root(0).](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod)
+
+
+```sh
+controlplane ~ ➜  ps -ef | grep -i sleep
+ 6747 root      0:00 sleep 4800
+ 7688 root      0:00 grep -i sleep
+
+controlplane ~ ➜  k exec -it ubuntu-sleeper -- ps -ef | grep -i sleep
+root           1       0  0 09:17 ?        00:00:00 sleep 4800
+```
+
+
+#### How to check capabilities
+
+```sh
+controlplane ~ ➜  k exec -it ubuntu-sleeper -- sh
+# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+# ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0   2692  1120 ?        Ss   04:13   0:00 sleep 4800
+root          56  0.0  0.0   2796  1096 pts/0    Ss   04:15   0:00 sh
+root          63  0.0  0.0   7884  4112 pts/0    R+   04:15   0:00 ps -aux
+> cd /proc/1
+> cat status | grep -i Cap
+CapInh: 0000000000000000
+CapPrm: 00000000a80425fb
+CapEff: 00000000a80425fb
+CapBnd: 00000000a80425fb
+CapAmb: 0000000000000000
+
+# edit pod.spec.securityContext.capabilities
+k edit po ubuntu-sleeper
+```
+
+
+## Network policies
 > https://kubernetes.io/docs/concepts/services-networking/network-policies/
 
--By default, a pod is non-isolated for egress and ingress
+- By default, a pod is non-isolated for egress and ingress, which means default is all allowed
+- Only traffic flows marked as "Ingress" or "Egress" in `spec.PolicyTypes` are impacted by network policy.
+- If ingress is allowed, a response to the request is automatically delivered.
 
-The user account is literally an account for users, and the service account is literally an account for services such as Prometheus.
+
+![](/images/k8s-network-policy1.png)
+
+
+![](/images/k8s-network-policy2.png)
+
+
+> [kubernetes-network-policy-recipes](https://github.com/ahmetb/kubernetes-network-policy-recipes/blob/master/09-allow-traffic-only-to-a-port.md)
+
+```yaml
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: api-allow-5000
+spec:
+  podSelector:
+    matchLabels:
+      app: apiserver
+  ingress:
+  - ports:
+    - port: 5000
+    from:
+    - podSelector:
+        matchLabels:
+          role: monitoring
+```
+
+- Drop all non-whitelisted traffic to app=apiserver.
+- **Allow traffic on port 5000 from pods with label role=monitoring in the same namespace.**
+
+
+#### Problem
+> Use the spec given below. You might want to enable ingress traffic to the pod to test your rules in the UI.Also, ensure that you allow egress traffic to DNS ports TCP and UDP (port 53) to enable DNS resolution from the internal pod.
+
+```
+Policy Name: internal-policy
+Policy Type: Egress
+Egress Allow: payroll
+Payroll Port: 8080
+Egress Allow: mysql
+MySQL Port: 3306
+
+controlplane ~ ➜  k get all
+NAME           READY   STATUS    RESTARTS   AGE
+pod/external   1/1     Running   0          23m
+pod/internal   1/1     Running   0          23m
+pod/mysql      1/1     Running   0          23m
+pod/payroll    1/1     Running   0          23m
+
+NAME                       TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+service/db-service         ClusterIP   10.97.124.55     <none>        3306/TCP         23m
+service/external-service   NodePort    10.102.212.250   <none>        8080:30080/TCP   23m
+service/internal-service   NodePort    10.107.186.112   <none>        8080:30082/TCP   23m
+service/kubernetes         ClusterIP   10.96.0.1        <none>        443/TCP          105m
+service/payroll-service    NodePort    10.103.183.130   <none>        8080:30083/TCP   23m
+```
+
+#### Solution
+
+```sh
+k get netpol payroll-policy -o yaml > netpol.yaml
+```
+
+- netpol.yaml
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: internal-policy
+spec:
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          name: payroll
+    ports:
+    - port: 8080
+      protocol: TCP
+  - to:
+    - podSelector:
+        matchLabels:
+          name: mysql
+    ports:
+    - port: 3306
+      protocol: TCP
+  - ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
+  podSelector:
+    matchLabels:
+      name: internal
+  policyTypes:
+  - Egress
+```
+
+```sh
+k apply -f netpol.yaml
+```
 
 
 
@@ -1609,6 +1841,84 @@ Kubernetes volumes preserve container data, preventing loss on crashes, enabling
 
 Volume have to write spec on pod definition, but when system is bigger than It is hard to manage all pods to mapping each volumes. So persistent volume and Persistent volume claim concepts are invented.
 
+
+> Configure a volume to store these logs at /var/log/webapp on the host.
+
+- spec
+
+```
+Name: webapp
+
+Image Name: kodekloud/event-simulator
+
+Volume HostPath: /var/log/webapp
+
+Volume Mount: /log
+```
+
+```sh
+controlplane ~ ➜  k get all
+NAME         READY   STATUS    RESTARTS   AGE
+pod/webapp   1/1     Running   0          5m26s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   11m
+```
+
+```sh
+> k get po webapp -o yaml > webapp.yaml
+
+# edit
+> k replace -f 
+```
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapp
+spec:
+  containers:
+  - name: event-simulator
+    image: kodekloud/event-simulator
+    env:
+    - name: LOG_HANDLERS
+      value: file
+    volumeMounts:
+    - mountPath: /log
+      name: log-volume
+
+  volumes:
+  - name: log-volume
+    hostPath:
+      # directory location on host
+      path: /var/log/webapp
+      # this field is optional
+      type: Directory
+```
+
+- Should volumeMounts.name == volumes.name
+- not hostpath, hostPath
+
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-log
+spec:
+  persistentVolumeReclaimPolicy: Retain
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 100Mi
+  hostPath:
+    path: /pv/log
+```
+
+- [**Claims use the same conventions as volumes when requesting storage with specific access modes.**](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes-1)
+
+
 ## Persistent Volume Claims
 
 1. PVC created
@@ -1617,4 +1927,9 @@ Volume have to write spec on pod definition, but when system is bigger than It i
 
 ## Storage Class
 
-It would be great if make pv thenphysical memory provisioned, which is called `Dynamic Provisioning`. And we can achieve it by `Storage class(sc)` instead PV. Actually pv is created when sc definition is called but we do not manually create pv, because we need to manage volume dynamically.
+**It would be great if make pv then physical memory provisioned, which is called `Dynamic Provisioning`. And we can achieve it by `Storage class(sc)` instead PV. Actually pv is created when sc definition is called but we do not manually create pv, because we need to manage volume dynamically.**
+
+
+
+# Chapter 9: Networking
+
