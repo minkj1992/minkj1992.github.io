@@ -13,7 +13,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-04-19T12:41:18+09:00">
-    <meta property="article:modified_time" content="2024-05-05T15:29:44+09:00">
+    <meta property="article:modified_time" content="2024-05-06T16:22:50+09:00">
     <meta property="article:tag" content="Dev">
     <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -37,8 +37,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  10196 ,
-        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-05-05T15:29:44+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  10283 ,
+        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-05-06T16:22:50+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -176,8 +176,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>K8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;10196 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;48 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;10283 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;49 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -4397,12 +4397,17 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/k8s-docker-net3png"
-        data-srcset="/images/k8s-docker-net3png, /images/k8s-docker-net3png 1.5x, /images/k8s-docker-net3png 2x"
+        data-src="/images/k8s-docker-net3.png"
+        data-srcset="/images/k8s-docker-net3.png, /images/k8s-docker-net3.png 1.5x, /images/k8s-docker-net3.png 2x"
         data-sizes="auto"
-        alt="/images/k8s-docker-net3png"
-        title="/images/k8s-docker-net3png" /></p>
+        alt="/images/k8s-docker-net3.png"
+        title="/images/k8s-docker-net3.png" /></p>
 <h2 id="cni-container-networking-interface">CNI (Container Networking Interface)</h2>
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/cluster-administration/addons/" target="_blank" rel="noopener noreffer">CNI addons list</a>
+</li>
+<li></li>
+</ul>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -4410,12 +4415,54 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
         data-srcset="/images/k8s-network-cmd.png, /images/k8s-network-cmd.png 1.5x, /images/k8s-network-cmd.png 2x"
         data-sizes="auto"
         alt="/images/k8s-network-cmd.png"
-        title="/images/k8s-network-cmd.png" /></p></div><div class="post-footer" id="post-footer">
+        title="/images/k8s-network-cmd.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="n">show</span> <span class="n">eth0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>We use Containerd as our container runtime. What is the interface/bridge created by Containerd on the controlplane node?</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">address</span> <span class="n">show</span> <span class="nb">type</span> <span class="n">bridge</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># -t: TCP</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -n: keep number</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -l: listening only</span>
+</span></span><span class="line"><span class="cl"><span class="n">netstat</span> <span class="o">-</span><span class="n">nplt</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">scheduler</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">netstat</span> <span class="o">-</span><span class="n">npa</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">etcd</span> <span class="o">|</span> <span class="n">grep</span> <span class="mi">2379</span> <span class="o">|</span> <span class="n">wc</span> <span class="o">-</span><span class="n">l</span>
+</span></span><span class="line"><span class="cl"><span class="mi">63</span>
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">netstat</span> <span class="o">-</span><span class="n">npa</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">etcd</span> <span class="o">|</span> <span class="n">grep</span> <span class="mi">2381</span> <span class="o">|</span> <span class="n">wc</span> <span class="o">-</span><span class="n">l</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-05&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/9c5cda93e3f914c8bd1a4772ffe69435c9db4221" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 9c5cda93e3f914c8bd1a4772ffe69435c9db4221: docs: cka">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9c5cda9</a></span>
+                <span>Updated on 2024-05-06&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/acac62ddea244d4e98655ba354ebb39c94dbd77c" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) acac62ddea244d4e98655ba354ebb39c94dbd77c: docs: cka">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>acac62d</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

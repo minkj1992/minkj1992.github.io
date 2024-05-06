@@ -2397,9 +2397,36 @@ So we can isolate hostname with these commands.
 ![](/images/k8s-docker-net0.png)
 ![](/images/k8s-docker-net1.png)
 ![](/images/k8s-docker-net2.png)
-![](/images/k8s-docker-net3png)
+![](/images/k8s-docker-net3.png)
 
 ## CNI (Container Networking Interface)
 
 
+- [CNI addons list](https://kubernetes.io/docs/concepts/cluster-administration/addons/)
+- 
+
 ![](/images/k8s-network-cmd.png)
+
+
+```py
+ip link show eth0
+```
+
+We use Containerd as our container runtime. What is the interface/bridge created by Containerd on the controlplane node?
+
+```py
+ip address show type bridge
+```
+
+
+```py
+# -t: TCP
+# -n: keep number
+# -l: listening only
+netstat -nplt | grep scheduler
+
+controlplane ~ ➜  netstat -npa | grep etcd | grep 2379 | wc -l
+63
+controlplane ~ ➜  netstat -npa | grep etcd | grep 2381 | wc -l
+1
+```
