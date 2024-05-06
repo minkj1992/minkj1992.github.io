@@ -219,7 +219,7 @@ $ k edit or vim redis.yaml
 - Pods created from ReplicaSets can be distributed and executed on multiple nodes based on schduling, topologySpreadConstraints(affinity, maxSkew, labelSelector ..)
 
 
-```sh
+```py
 - scale
 - replace
 ```
@@ -240,7 +240,7 @@ The following are typical use cases for deployments
 > ReplicaSet-A for controlling your pods, then You wish to update your pods to a newer version, now you should create Replicaset-B, scale down ReplicaSet-A and scale up ReplicaSet-B by one step repeatedly **(This process is known as rolling update).**
 
 
-```sh
+```py
 k api-resources | grep deployment
 k create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml > nginx-deployment.yaml
 ```
@@ -1361,7 +1361,7 @@ kubectl command line tool uses kubeconfig file to find the information it needs 
 - users
   - crt files
 
-```sh
+```py
 > k config view
 > k config use-context
 ```
@@ -1378,7 +1378,7 @@ Base directory is `$HOME/.kube/config`.
 
 
 
-```sh
+```py
 # kubeadm 
 
 cat /etc/kubernetes/manifests/kube-apiserver.yaml | grep -i authorizaion
@@ -1398,7 +1398,7 @@ Above setting means first Node auth try and RBAC try and Webhook try
   - with namespace -> specific namespace
 
 
-```sh
+```py
 # check Access
 k auth can-i create deployments --as dev-user -n production
 
@@ -1417,7 +1417,7 @@ Unlike Role, Cluster-Role's scope is not limited by namespace. In other words, i
   - nodes, PV, clusterrole, clusterrolebindings, certificatesigningrequests(csr), namespaces
   - `k api-resources --namespaced=false`
 
-```sh
+```py
 
 $ k create clusterrole storage-admin --resource=persistentvolumes,storageclasses --verb=*
 $ k get clusterrole storage-admin -o yaml
@@ -1450,7 +1450,7 @@ rules:
 The user account is literally an account for users, and the service account is literally an account for services such as Prometheus, Grafana, Kubeflow..
 
 
-```sh
+```py
 controlplane ~ ➜  k get sa -n default
 NAME      SECRETS   AGE
 default   0         11m
@@ -1478,7 +1478,7 @@ Events:              <none>
 
 - Every namespace has it's own default service account
 
-```sh
+```py
 controlplane ~ ➜  k describe sa default
 Name:                default
 Namespace:           default
@@ -1496,7 +1496,7 @@ No resources found in default namespace.
 
 - default sa is used when, create resources without sa
 
-```sh
+```py
 controlplane ~ ➜  k run nginx --image=ngin
 pod/nginx created
 
@@ -1515,7 +1515,7 @@ Service Account:  default
 
 
 
-```sh
+```py
 controlplane ~ ➜  k describe po nginx
 
 ...elipsis
@@ -1545,7 +1545,7 @@ Volumes:
 
 We can check it like this
 
-```sh
+```py
 controlplane ~ ✖ k exec -it nginx -- ls /var/run/secrets/kubernetes.io/serviceaccount
 ca.crt  namespace  token
 controlplane ~ ➜  k exec -it nginx -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
@@ -1565,7 +1565,7 @@ Unlike the existing method on the left where a secret and a token were created w
 
 ## Image security
 
-```sh
+```py
 root@controlplane ~ ➜  k create secret -h
 Create a secret with specified type.
 
@@ -1592,7 +1592,7 @@ Server: myprivateregistry.com:5000
 Email: dock_user@myprivateregistry.com
 ```
 
-```sh
+```py
 root@controlplane ~ ➜  k create secret docker-registry private-reg-cred --docker-username=dock_user --docker_email=dock_user@myprivateregistry.com --docker-password=dock_password --docker-server=myprivateregistry.com:5000
 secret/private-reg-cred created
 
@@ -1616,7 +1616,7 @@ Data
 
 - edit deployment
 
-```sh
+```py
 > root@controlplane ~ ➜  k edit deployments.apps web 
 
     spec:
@@ -1659,7 +1659,7 @@ A security context defines privilege and access control settings for a Pod or Co
 [The runAsGroup field specifies the primary group ID of <runAsGroup_value> for all processes within any containers of the Pod. If this field is omitted, the primary group ID of the containers will be root(0).](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod)
 
 
-```sh
+```py
 controlplane ~ ➜  ps -ef | grep -i sleep
  6747 root      0:00 sleep 4800
  7688 root      0:00 grep -i sleep
@@ -1671,7 +1671,7 @@ root           1       0  0 09:17 ?        00:00:00 sleep 4800
 
 #### How to check capabilities
 
-```sh
+```py
 controlplane ~ ➜  k exec -it ubuntu-sleeper -- sh
 # ls
 bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
@@ -1759,7 +1759,7 @@ service/payroll-service    NodePort    10.103.183.130   <none>        8080:30083
 
 #### Solution
 
-```sh
+```py
 k get netpol payroll-policy -o yaml > netpol.yaml
 ```
 
@@ -1797,7 +1797,7 @@ spec:
   - Egress
 ```
 
-```sh
+```py
 k apply -f netpol.yaml
 ```
 
@@ -1856,7 +1856,7 @@ Volume HostPath: /var/log/webapp
 Volume Mount: /log
 ```
 
-```sh
+```py
 controlplane ~ ➜  k get all
 NAME         READY   STATUS    RESTARTS   AGE
 pod/webapp   1/1     Running   0          5m26s
@@ -1865,7 +1865,7 @@ NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   11m
 ```
 
-```sh
+```py
 > k get po webapp -o yaml > webapp.yaml
 
 # edit
@@ -1930,6 +1930,476 @@ spec:
 **It would be great if make pv then physical memory provisioned, which is called `Dynamic Provisioning`. And we can achieve it by `Storage class(sc)` instead PV. Actually pv is created when sc definition is called but we do not manually create pv, because we need to manage volume dynamically.**
 
 
+## Wrap up
+
+1. PV: provision된 physical volume을 관리하는 instance  (node처럼 cluster resource)
+2. PVC: volume를 쓰기위한 요청. **pod는 pvc를 통해 pv에 리소스 사용**
+3. StorageClass(sc)
+  - PVC와 PV는 같은 storageClassName일 때 bind
+  - 물론 default storageClass가 있으면 storageClassName omit가능
+
+**PV를 프로비저닝 하는 방법은 총 2가지이다.**
+
+1. Static Provisioning
+  - kube-apisesrver를 통해서 (kubectl) admin(관리자)이 직접 pv를 생성하는 방식
+2. Dynamic Provisioning
+  - storage class를 기반으로 자동으로 pv를 생성하여 provision하는 방식
+  - **PVC가 특정 spec을 정의한 storage class를 요청하면 pvc의 양만큼 sc에 정의된 스펙의 pv가 생성되고 프로비저닝 된다.**
+
+
 
 # Chapter 9: Networking
 
+
+## Switching Routing
+
+#### Switching
+
+```py
+$ ip addr
+$ ip address
+
+controlplane ~ ➜  ip address
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: flannel.1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1400 qdisc noqueue state UNKNOWN group default 
+    link/ether 7e:f7:9a:1e:dc:79 brd ff:ff:ff:ff:ff:ff
+    inet 10.244.0.0/32 scope global flannel.1
+       valid_lft forever preferred_lft forever
+3: cni0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1400 qdisc noqueue state UP group default qlen 1000
+    link/ether 8e:a7:28:ce:4f:34 brd ff:ff:ff:ff:ff:ff
+    inet 10.244.0.1/24 brd 10.244.0.255 scope global cni0
+       valid_lft forever preferred_lft forever
+4: veth94e4cabd@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1400 qdisc noqueue master cni0 state UP group default 
+    link/ether ca:df:3d:76:bb:96 brd ff:ff:ff:ff:ff:ff link-netns cni-cf9503cc-e140-55a0-5d1b-f0475dc95336
+5: veth58ee9409@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1400 qdisc noqueue master cni0 state UP group default 
+    link/ether b2:e3:5b:bd:ca:14 brd ff:ff:ff:ff:ff:ff link-netns cni-908defd9-94bd-1a21-0282-6ad3f832bc73
+13028: eth0@if13029: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1450 qdisc noqueue state UP group default 
+    link/ether 02:42:c0:00:f3:09 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 192.0.243.9/24 brd 192.0.243.255 scope global eth0
+       valid_lft forever preferred_lft forever
+13030: eth1@if13031: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 02:42:ac:19:00:15 brd ff:ff:ff:ff:ff:ff link-netnsid 1
+    inet 172.25.0.21/24 brd 172.25.0.255 scope global eth1
+       valid_lft forever preferred_lft forever
+```
+
+
+- eth0: 과거 디폴트 랜카드 지정 번지 (이더넷 카드 0번)
+- lo: loopback interface
+- veth: virtual ethernet interface
+- ens
+- em1
+- MULTICAST: Can handle multicast packet
+- UP: NUC is working
+- LOWER_UP: L1 layer, Physical device signal up
+- mtu: Maximum Transmission Unit (1500 default)
+- qdisc: Queuing Disciplines, NIC에 들어오기전 Queue에 저장되는 패킷들 우선순위 부여 알고리즘
+- state: NIC 현재 작동 상태
+- qlen: 전송큐 크기
+- link/ether
+  - L2 layer, Link layer protocol is ethernet
+  - 바로 옆에 나오는 주소는 해당 NIC의 MAC 주소
+  - brd는 브로드캐스트 시 사용되는 주소
+- inet: L3, 바로 옆 주소는 ipv4 or ipv6에 따른 주소
+- scope
+  - **Global**: Indicates accessibility and validity of the interface from a global perspective, allowing access from external networks. This is often seen in instances hosted in the cloud.
+  - **Link**: Specifies that the interface is only accessible and valid within the local LAN, restricting access to the local network.
+  - **Host**: Indicates that the interface is only valid and accessible within the host itself, limiting access to the local host.
+- valid_lft, preferred_lft
+  - Valid Lifetime and Preferred Lifetime
+
+
+```py
+ip link add
+```
+
+
+#### subnet mask
+> [https://www.cloudflare.com/ko-kr/learning/network-layer/what-is-a-subnet/](https://www.cloudflare.com/ko-kr/learning/network-layer/what-is-a-subnet/)
+
+라우터의 정의="서브넷이 다른 네트워크와 연결하기 위해 최적의 경로를 찾아서 목적지까지 패킷을 전달하는 장비"
+
+1. IP = 주소가 속한 네트워크 + 해당 네트워크 안의 장치 = subnet + device address
+2. 라우터 uses subnet mask to route (cidr)
+
+
+아래 예시는 cidr 적용안된 설명같긴 하다.
+
+> 실제 예를 들어, IP 패킷의 주소가 IP 주소 192.0.2.15라고 가정해 보겠습니다. 이 IP 주소는 클래스 C 네트워크이므로 네트워크는 "192.0.2"(또는 기술적으로는 정확하게 192.0.2.0/24)로 식별됩니다. 네트워크 라우터는 패킷을 "192.0.2"라고 표시된 네트워크의 호스트로 전달합니다. 패킷이 해당 네트워크에 도착하면 네트워크 내의 라우터가 라우팅 테이블을 참조합니다.서브넷 마스크 255.255.255.0을 사용하여 이진법 계산을 합니다.장치 주소 "15"(나머지 IP 주소는 네트워크를 나타냄)를 확인하고 패킷이 이동해야 하는 서브넷을 계산합니다.패킷을 해당 서브넷 내에서 패킷을 전달하는 라우터 또는 스위치로 전달하고 패킷은 IP 주소 192.0.2.15에 도착합니다(라우터 및 스위치에 대해 자세히 알아보기).
+
+
+
+#### Router / Gateway
+
+```py
+controlplane ~ ➜  route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         172.25.0.1      0.0.0.0         UG    0      0        0 eth1
+10.244.0.0      0.0.0.0         255.255.255.0   U     0      0        0 cni0
+10.244.1.0      10.244.1.0      255.255.255.0   UG    0      0        0 flannel.1
+172.25.0.0      0.0.0.0         255.255.255.0   U     0      0        0 eth1
+192.0.243.0     0.0.0.0         255.255.255.0   U     0      0        0 eth0
+
+
+# when to add
+ip route add 192.168.2.0/24 via 192.168.1.1
+```
+
+
+#### Default Destination
+
+- same 0.0.0.0, which means any IP addr
+- internet에 존재하는 다양한 ip들을 일일히 처리 불가, default를 두어 처리한다.
+
+```
+default         172.25.0.1      0.0.0.0         UG    0      0        0 eth1
+0.0.0.0
+```
+
+#### What if Gateway 0.0.0.0?
+
+```
+10.244.0.0      0.0.0.0         255.255.255.0   U     0      0        0 cni0
+```
+
+같은 네트워크 안에 있는 디바이스는 router / Gateway를 타고 가지 않아도 되니, 0.0.0.0값이 gateway에 존재
+
+
+
+![](/images/k8s-network.png)
+
+- To send packets from A to C, two routes need to be set up: `A -> B -> C` and `C -> B -> A`
+- **In Linux, packets received on eth1 are not automatically forwarded to eth0; this is due to security concerns.**
+
+![](/images/k8s-network2.png)
+
+To enable forwarding, you can either set it in `/etc/sysctl.conf` or temporarily change it by setting `/proc/sys/net/ipv4/ip_forward` to 1.
+
+
+![](/image/k8s_network_wrap.png)
+
+
+## DNS
+
+
+
+```py
+controlplane ~ ➜  cat /etc/hosts
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+192.2.61.9      controlplane
+10.0.0.6 docker-registry-mirror.kodekloud.com
+
+# ctrl + D to finish
+controlplane ~ ➜  cat >> /etc/hosts
+1.1.1.1         test
+```
+
+- `>>`: append
+- `>`: change
+
+
+- `/etc/hosts`: Domain name mapping
+- `/etc/resolv.conf`: Domain nameserver ip
+  - nameserver
+  - **search** field
+- `/etc/nsswitch.conf`: Order configuration
+
+```
+controlplane ~ ➜  cat /etc/nsswitch.conf 
+# /etc/nsswitch.conf
+#
+# Example configuration of GNU Name Service Switch functionality.
+# If you have the `glibc-doc-reference' and `info' packages installed, try:
+# `info libc "Name Service Switch"' for information about this file.
+
+passwd:         files
+group:          files
+shadow:         files
+gshadow:        files
+
+hosts:          files dns
+networks:       files
+
+protocols:      db files
+services:       db files
+ethers:         db files
+rpc:            db files
+
+netgroup:       nis
+```
+
+- hostsf를 보면 file -> dns 순으로 해독된다. 즉 /etc/hosts가 먼저 해석된다.
+
+
+
+```py
+$ ping
+# etc/hosts를 처리하지 않음, dns서버만 처리함
+$ nslookup
+$ dig
+```
+
+## CoreDNS
+
+## Namespace
+
+![](/images/k8s-network3.png)
+
+When the container is created, it has its own private routing table and ARP table, and a virtual Ethernet interface (veth0) is automatically created.
+
+#### Create Netwok ns
+
+```py
+ip netns add red
+ip netns add blue
+
+ip netns
+red
+blue
+```
+
+#### Exec in network ns
+
+```py
+ip netns exec red ip link
+
+# simpler
+ip -n red link
+```
+
+#### ARP
+> address resolution protocol
+
+- 동일한 네트워크 내에 존재하는 호스트들의 IP주소와 ethernet 주소(mac 주소)를 확인하는 명령어
+- 즉, 특정 네트워크 내에 어떤 호스트들이 존재하는지를 확인할 수 있는 것이 바로 arp 명령어
+
+```py
+arp 
+ip netns exec red arp
+```
+
+![](/images/k8s-network4.png)
+
+- Host는 container에 대해서 알 수 없다.
+
+
+
+![](/images/k8s-network5.png)
+
+
+```py
+ip netns add red
+ip netns add blue
+
+ip netns
+red
+blue
+
+# same
+ip -n red link
+ip netns exec red ip link
+
+ip netns exec red arp
+ip netns exec red route
+
+# link
+# i.g ip link add veth0 type veth peer name veth1 (veth0 <-> veth1)
+ip link add veth-red type veth peer name veth-blue # (veth-red <-> veth-blue)
+ip link set veth-red netns red && ip link set veth-blue netns blue # set namespace
+
+# set ip
+# dev means device
+ip -n red addr add 192.168.15.1 dev veth-red
+ip -n blue addr add 192.168.15.2 dev veth-blue
+
+# up link (running)
+ip  -n red link set veth-red up
+ip  -n blue link set veth-blue up
+
+# ping test
+ip netns exec red ping 192.168.15.2
+```
+
+#### Switch
+
+![](/images/k8s-network6.png)
+
+만약 container들이 많아진다면? switch가 필요하다.( virtual switch )
+
+- [x] LINUX BRIDGE
+- Open vSwitch(ovs)
+
+```py
+debian@debian:~$ ip netns list
+blue
+red
+
+debian@debian:~$ sudo ip netns add v-net-0 type bridge
+debian@debian:~$ ip netns list
+v-net-0
+blue
+red
+ip link set dev v-net-0 up
+```
+
+- **veth 타입과 달리 bridge type을 생성하면 자동으로 network namespace도 생성됨**
+
+```py
+# delete past cable
+# other pair automatically deleted
+ip -n  red link del veth-red
+
+# create new cable (veth-red <-> veth-red-br)
+ip link add veth-red type veth peer name veth-red-br
+ip link add veth-blue type veth peer name veth-blue-br
+
+# set veth to namespace
+ip link set veth-red netns red # red
+ip link set veth-red-br master v-net-0 # bridge
+ip link set veth-blue netns blue # blue
+ip link set veth-blue-br master v-net-0 # bridge
+
+# set ip
+ip -n red addr add 192.168.15.1 dev veth-red
+ip -n blue addr add 192.168.15.1 dev veth-blue
+
+# up
+ip -n red link set veth-red up
+ip -n red link set veth-blue up
+```
+
+- Set v-net-0 ip address on host namespace
+
+```py
+$ ping 192.168.15.1
+Not Reachable!
+$ ip addr add 192.168.15.5/24 dev v-net-0
+$ ping 192.168.15.1 # red ok
+```
+
+#### Route
+> "How to ping outside of host network from isolated namespace container?"
+
+![](/images/k8s-network7.png)
+
+```py
+# 1. allow request 
+# open v-net-0 -> LAN
+ip -n blue ip route add 192.168.1.0/24 via 192.168.15.5
+
+# 2. allow response
+iptables -t nat -A POSTROUTING -s 192.168.15.0/24 -j MASQUERADE
+```
+
+- Link to internet (route)
+
+```py
+$ ip -n blue ping 8.8.8.8
+Connect: Network is unreachable
+
+$ ip -n blue route
+... nothing related 8.8.8.8
+
+# default to v-net-0
+$ ip -n blue ip route add default via 192.168.15.5
+
+$ ip -n blue ping 8.8.8.8
+success
+```
+
+> Q. Then how to send request from outside host(192.168.1.3) to host's container?
+
+
+![](/images/k8s-network8.png)
+
+A. Set port forwarding rule on Host.
+
+```py
+$ iptables -t nat -A PREROUTING --dport 80 --to-destination 192.168.15.2:80 -j DNAT
+```
+
+
+## c.f) Linux namespace
+
+We need 2 things to isolate network
+
+1. UTS namespace
+2. Network namespace
+
+> 리눅스 네임스페이스란?
+[리눅스 네임스페이스는 프로세스를 실행할 때 시스템의 리소스를 분리해서 실행할 수 있도록 도와주는 기능입니다. 한 시스템의 프로세스들은 기본적으로 시스템의 리소스들을 공유해서 실행됩니다. 이를 단일 네임스페이스라고 생각해볼 수 있습니다. 실제로 리눅스에서는 1번 프로세스(init)에 할당되어있는 네임스페이스들을 자식 프로세스들이 모두 공유해서 사용하는 구조로 이루어져있습니다.](https://www.44bits.io/ko/keyword/linux-namespace)
+
+```
+$ ls -al /proc/1/ns
+total 0
+dr-x--x--x 2 root root 0 Jan 31 03:47 .
+dr-xr-xr-x 9 root root 0 Jan 24 14:46 ..
+lrwxrwxrwx 1 root root 0 Jan 31 03:47 cgroup -> 'cgroup:[4026531835]'
+lrwxrwxrwx 1 root root 0 Jan 31 03:47 ipc -> 'ipc:[4026531839]'
+lrwxrwxrwx 1 root root 0 Jan 31 03:47 mnt -> 'mnt:[4026531840]'
+lrwxrwxrwx 1 root root 0 Jan 31 03:47 net -> 'net:[4026531993]'
+lrwxrwxrwx 1 root root 0 Jan 31 03:47 pid -> 'pid:[4026531836]'
+lrwxrwxrwx 1 root root 0 Jan 31 03:47 pid_for_children -> 'pid:[4026531836]'
+lrwxrwxrwx 1 root root 0 Jan 31 03:47 user -> 'user:[4026531837]'
+lrwxrwxrwx 1 root root 0 Jan 31 03:47 uts -> 'uts:[4026531838]'
+
+$ ls -l /proc/1074/ns
+total 0
+lrwxrwxrwx 1 root root 0 Jan 31 04:08 cgroup -> 'cgroup:[4026531835]'
+lrwxrwxrwx 1 root root 0 Jan 31 04:08 ipc -> 'ipc:[4026531839]'
+lrwxrwxrwx 1 root root 0 Jan 31 04:08 mnt -> 'mnt:[4026531840]'
+lrwxrwxrwx 1 root root 0 Jan 31 04:08 net -> 'net:[4026531993]'
+lrwxrwxrwx 1 root root 0 Jan 31 04:08 pid -> 'pid:[4026531836]'
+lrwxrwxrwx 1 root root 0 Jan 31 04:08 pid_for_children -> 'pid:[4026531836]'
+lrwxrwxrwx 1 root root 0 Jan 31 04:08 user -> 'user:[4026531837]'
+lrwxrwxrwx 1 root root 0 Jan 31 04:08 uts -> 'uts:[4026531838]'
+
+diff <(ls -Al /proc/1/ns | awk '{ print $11 }')  \
+       <(ls -Al /proc/1074/ns | awk '{ print $11 }')
+```
+
+
+### UTS namespace
+> https://www.44bits.io/ko/post/container-network-1-uts-namespace
+
+```py
+debian@debian:~$ hostname
+debian
+
+debian@debian:~$ touch /tmp/utsns1
+debian@debian:~$ sudo unshare --uts=/tmp/utsns1 hostname utsns1
+debian@debian:~$ sudo nsenter --uts=/tmp/utsns1 hostname
+utsns1
+
+sudo nsenter --uts=/tmp/utsns1 bash
+debian@debian:~$ sudo nsenter --uts=/tmp/utsns1 bash
+root@utsns1:/home/debian# hostname
+utsns1
+```
+
+So we can isolate hostname with these commands.
+
+- `unshare`
+- `nsenter`
+
+
+## Docker Networking
+
+![](/images/k8s-docker-net0.png)
+![](/images/k8s-docker-net1.png)
+![](/images/k8s-docker-net2.png)
+![](/images/k8s-docker-net3png)
+
+## CNI (Container Networking Interface)
+
+
+![](/images/k8s-network-cmd.png)

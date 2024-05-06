@@ -13,7 +13,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-04-19T12:41:18+09:00">
-    <meta property="article:modified_time" content="2024-05-04T16:53:47+09:00">
+    <meta property="article:modified_time" content="2024-05-05T15:29:44+09:00">
     <meta property="article:tag" content="Dev">
     <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -37,8 +37,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev","wordcount":  8235 ,
-        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-05-04T16:53:47+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev","wordcount":  10196 ,
+        "url": "https:\/\/minkj1992.github.io\/cka\/","datePublished": "2024-04-19T12:41:18+09:00","dateModified": "2024-05-05T15:29:44+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -176,8 +176,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CKA certificate</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/cka/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Cka</a>&nbsp;<a href="/categories/k8s/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>K8s</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;8235 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;39 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-19">2024-04-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;10196 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;48 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -350,6 +350,45 @@
     <li><a href="#persistent-volume">Persistent Volume</a></li>
     <li><a href="#persistent-volume-claims">Persistent Volume Claims</a></li>
     <li><a href="#storage-class">Storage Class</a></li>
+    <li><a href="#wrap-up">Wrap up</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#switching-routing">Switching Routing</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#switching">Switching</a></li>
+            <li><a href="#subnet-mask">subnet mask</a></li>
+            <li><a href="#router--gateway">Router / Gateway</a></li>
+            <li><a href="#default-destination">Default Destination</a></li>
+            <li><a href="#what-if-gateway-0000">What if Gateway 0.0.0.0?</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#dns">DNS</a></li>
+    <li><a href="#coredns">CoreDNS</a></li>
+    <li><a href="#namespace">Namespace</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#create-netwok-ns">Create Netwok ns</a></li>
+            <li><a href="#exec-in-network-ns">Exec in network ns</a></li>
+            <li><a href="#arp">ARP</a></li>
+            <li><a href="#switch">Switch</a></li>
+            <li><a href="#route">Route</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#cf-linux-namespace">c.f) Linux namespace</a>
+      <ul>
+        <li><a href="#uts-namespace">UTS namespace</a></li>
+      </ul>
+    </li>
+    <li><a href="#docker-networking">Docker Networking</a></li>
+    <li><a href="#cni-container-networking-interface">CNI (Container Networking Interface)</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 수 있어서, k8s 자격증 시리즈를 구매했다.
@@ -671,8 +710,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">- scale
-</span></span><span class="line"><span class="cl">- replace
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">-</span> <span class="n">scale</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span> <span class="n">replace</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="deployments">Deployments</h2>
@@ -694,8 +733,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">k api-resources <span class="p">|</span> grep deployment
-</span></span><span class="line"><span class="cl">k create deployment --image<span class="o">=</span>nginx nginx --replicas<span class="o">=</span><span class="m">4</span> --dry-run<span class="o">=</span>client -o yaml &gt; nginx-deployment.yaml
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">k</span> <span class="n">api</span><span class="o">-</span><span class="n">resources</span> <span class="o">|</span> <span class="n">grep</span> <span class="n">deployment</span>
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">create</span> <span class="n">deployment</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">nginx</span> <span class="n">nginx</span> <span class="o">--</span><span class="n">replicas</span><span class="o">=</span><span class="mi">4</span> <span class="o">--</span><span class="n">dry</span><span class="o">-</span><span class="n">run</span><span class="o">=</span><span class="n">client</span> <span class="o">-</span><span class="n">o</span> <span class="n">yaml</span> <span class="o">&gt;</span> <span class="n">nginx</span><span class="o">-</span><span class="n">deployment</span><span class="o">.</span><span class="n">yaml</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="services">Services</h2>
@@ -2560,8 +2599,8 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">&gt; k config view
-</span></span><span class="line"><span class="cl">&gt; k config use-context
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">k</span> <span class="n">config</span> <span class="n">view</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">k</span> <span class="n">config</span> <span class="n">use</span><span class="o">-</span><span class="n">context</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Base directory is <code>$HOME/.kube/config</code>.</p>
@@ -2582,12 +2621,12 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># kubeadm </span>
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># kubeadm </span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">cat /etc/kubernetes/manifests/kube-apiserver.yaml <span class="p">|</span> grep -i authorizaion
+</span></span><span class="line"><span class="cl"><span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">/</span><span class="n">manifests</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">apiserver</span><span class="o">.</span><span class="n">yaml</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">authorizaion</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">...elipsis
-</span></span><span class="line"><span class="cl">--authorization-mode<span class="o">=</span>Node,RBAC,Webhook
+</span></span><span class="line"><span class="cl"><span class="o">...</span><span class="n">elipsis</span>
+</span></span><span class="line"><span class="cl"><span class="o">--</span><span class="n">authorization</span><span class="o">-</span><span class="n">mode</span><span class="o">=</span><span class="n">Node</span><span class="p">,</span><span class="n">RBAC</span><span class="p">,</span><span class="n">Webhook</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Above setting means first Node auth try and RBAC try and Webhook try</p>
@@ -2608,10 +2647,10 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># check Access</span>
-</span></span><span class="line"><span class="cl">k auth can-i create deployments --as dev-user -n production
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># check Access</span>
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">auth</span> <span class="n">can</span><span class="o">-</span><span class="n">i</span> <span class="n">create</span> <span class="n">deployments</span> <span class="o">--</span><span class="k">as</span> <span class="n">dev</span><span class="o">-</span><span class="n">user</span> <span class="o">-</span><span class="n">n</span> <span class="n">production</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">k auth can-i list nodes --as michelle
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">auth</span> <span class="n">can</span><span class="o">-</span><span class="n">i</span> <span class="nb">list</span> <span class="n">nodes</span> <span class="o">--</span><span class="k">as</span> <span class="n">michelle</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="cluster-roles">Cluster Roles</h2>
@@ -2657,29 +2696,29 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ k create clusterrole storage-admin --resource<span class="o">=</span>persistentvolumes,storageclasses --verb<span class="o">=</span>*
-</span></span><span class="line"><span class="cl">$ k get clusterrole storage-admin -o yaml
-</span></span><span class="line"><span class="cl">apiVersion: rbac.authorization.k8s.io/v1
-</span></span><span class="line"><span class="cl">kind: ClusterRole
-</span></span><span class="line"><span class="cl">metadata:
-</span></span><span class="line"><span class="cl">  creationTimestamp: <span class="s2">&#34;2024-05-04T06:22:03Z&#34;</span>
-</span></span><span class="line"><span class="cl">  name: storage-admin
-</span></span><span class="line"><span class="cl">  resourceVersion: <span class="s2">&#34;1696&#34;</span>
-</span></span><span class="line"><span class="cl">  uid: d73ce51f-6ea7-4dfa-9db9-2564e3fa277c
-</span></span><span class="line"><span class="cl">rules:
-</span></span><span class="line"><span class="cl">- apiGroups:
-</span></span><span class="line"><span class="cl">  - <span class="s2">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">  resources:
-</span></span><span class="line"><span class="cl">  - persistentvolumes
-</span></span><span class="line"><span class="cl">  verbs:
-</span></span><span class="line"><span class="cl">  - <span class="s1">&#39;*&#39;</span>
-</span></span><span class="line"><span class="cl">- apiGroups:
-</span></span><span class="line"><span class="cl">  - storage.k8s.io
-</span></span><span class="line"><span class="cl">  resources:
-</span></span><span class="line"><span class="cl">  - storageclasses
-</span></span><span class="line"><span class="cl">  verbs:
-</span></span><span class="line"><span class="cl">  - <span class="s1">&#39;*&#39;</span>
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">create</span> <span class="n">clusterrole</span> <span class="n">storage</span><span class="o">-</span><span class="n">admin</span> <span class="o">--</span><span class="n">resource</span><span class="o">=</span><span class="n">persistentvolumes</span><span class="p">,</span><span class="n">storageclasses</span> <span class="o">--</span><span class="n">verb</span><span class="o">=*</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">k</span> <span class="n">get</span> <span class="n">clusterrole</span> <span class="n">storage</span><span class="o">-</span><span class="n">admin</span> <span class="o">-</span><span class="n">o</span> <span class="n">yaml</span>
+</span></span><span class="line"><span class="cl"><span class="n">apiVersion</span><span class="p">:</span> <span class="n">rbac</span><span class="o">.</span><span class="n">authorization</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">v1</span>
+</span></span><span class="line"><span class="cl"><span class="n">kind</span><span class="p">:</span> <span class="n">ClusterRole</span>
+</span></span><span class="line"><span class="cl"><span class="n">metadata</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">creationTimestamp</span><span class="p">:</span> <span class="s2">&#34;2024-05-04T06:22:03Z&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">name</span><span class="p">:</span> <span class="n">storage</span><span class="o">-</span><span class="n">admin</span>
+</span></span><span class="line"><span class="cl">  <span class="n">resourceVersion</span><span class="p">:</span> <span class="s2">&#34;1696&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">uid</span><span class="p">:</span> <span class="n">d73ce51f</span><span class="o">-</span><span class="mi">6</span><span class="n">ea7</span><span class="o">-</span><span class="mi">4</span><span class="n">dfa</span><span class="o">-</span><span class="mi">9</span><span class="n">db9</span><span class="o">-</span><span class="mf">2564e3</span><span class="n">fa277c</span>
+</span></span><span class="line"><span class="cl"><span class="n">rules</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span> <span class="n">apiGroups</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">resources</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="n">persistentvolumes</span>
+</span></span><span class="line"><span class="cl">  <span class="n">verbs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="s1">&#39;*&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span> <span class="n">apiGroups</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="n">storage</span><span class="o">.</span><span class="n">k8s</span><span class="o">.</span><span class="n">io</span>
+</span></span><span class="line"><span class="cl">  <span class="n">resources</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="n">storageclasses</span>
+</span></span><span class="line"><span class="cl">  <span class="n">verbs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="s1">&#39;*&#39;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="service-account">Service account</h2>
@@ -2719,29 +2758,29 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">controlplane ~ ➜  k get sa -n default
-</span></span><span class="line"><span class="cl">NAME      SECRETS   AGE
-</span></span><span class="line"><span class="cl">default   <span class="m">0</span>         11m
-</span></span><span class="line"><span class="cl">dev       <span class="m">0</span>         52s
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">get</span> <span class="n">sa</span> <span class="o">-</span><span class="n">n</span> <span class="n">default</span>
+</span></span><span class="line"><span class="cl"><span class="n">NAME</span>      <span class="n">SECRETS</span>   <span class="n">AGE</span>
+</span></span><span class="line"><span class="cl"><span class="n">default</span>   <span class="mi">0</span>         <span class="mi">11</span><span class="n">m</span>
+</span></span><span class="line"><span class="cl"><span class="n">dev</span>       <span class="mi">0</span>         <span class="mi">52</span><span class="n">s</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">controlplane ~ ➜  k create sa test-sa
-</span></span><span class="line"><span class="cl">serviceaccount/test-sa created
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">create</span> <span class="n">sa</span> <span class="n">test</span><span class="o">-</span><span class="n">sa</span>
+</span></span><span class="line"><span class="cl"><span class="n">serviceaccount</span><span class="o">/</span><span class="n">test</span><span class="o">-</span><span class="n">sa</span> <span class="n">created</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">controlplane ~ ➜  k get sa
-</span></span><span class="line"><span class="cl">NAME      SECRETS   AGE
-</span></span><span class="line"><span class="cl">default   <span class="m">0</span>         11m
-</span></span><span class="line"><span class="cl">dev       <span class="m">0</span>         85s
-</span></span><span class="line"><span class="cl">test-sa   <span class="m">0</span>         3s
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">get</span> <span class="n">sa</span>
+</span></span><span class="line"><span class="cl"><span class="n">NAME</span>      <span class="n">SECRETS</span>   <span class="n">AGE</span>
+</span></span><span class="line"><span class="cl"><span class="n">default</span>   <span class="mi">0</span>         <span class="mi">11</span><span class="n">m</span>
+</span></span><span class="line"><span class="cl"><span class="n">dev</span>       <span class="mi">0</span>         <span class="mi">85</span><span class="n">s</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span><span class="o">-</span><span class="n">sa</span>   <span class="mi">0</span>         <span class="mi">3</span><span class="n">s</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">controlplane ~ ➜  k describe sa test-sa
-</span></span><span class="line"><span class="cl">Name:                test-sa
-</span></span><span class="line"><span class="cl">Namespace:           default
-</span></span><span class="line"><span class="cl">Labels:              &lt;none&gt;
-</span></span><span class="line"><span class="cl">Annotations:         &lt;none&gt;
-</span></span><span class="line"><span class="cl">Image pull secrets:  &lt;none&gt;
-</span></span><span class="line"><span class="cl">Mountable secrets:   &lt;none&gt;
-</span></span><span class="line"><span class="cl">Tokens:              &lt;none&gt;
-</span></span><span class="line"><span class="cl">Events:              &lt;none&gt;
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">describe</span> <span class="n">sa</span> <span class="n">test</span><span class="o">-</span><span class="n">sa</span>
+</span></span><span class="line"><span class="cl"><span class="n">Name</span><span class="p">:</span>                <span class="n">test</span><span class="o">-</span><span class="n">sa</span>
+</span></span><span class="line"><span class="cl"><span class="n">Namespace</span><span class="p">:</span>           <span class="n">default</span>
+</span></span><span class="line"><span class="cl"><span class="n">Labels</span><span class="p">:</span>              <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Annotations</span><span class="p">:</span>         <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Image</span> <span class="n">pull</span> <span class="n">secrets</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Mountable</span> <span class="n">secrets</span><span class="p">:</span>   <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Tokens</span><span class="p">:</span>              <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Events</span><span class="p">:</span>              <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -2763,18 +2802,18 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">controlplane ~ ➜  k describe sa default
-</span></span><span class="line"><span class="cl">Name:                default
-</span></span><span class="line"><span class="cl">Namespace:           default
-</span></span><span class="line"><span class="cl">Labels:              &lt;none&gt;
-</span></span><span class="line"><span class="cl">Annotations:         &lt;none&gt;
-</span></span><span class="line"><span class="cl">Image pull secrets:  &lt;none&gt;
-</span></span><span class="line"><span class="cl">Mountable secrets:   &lt;none&gt;
-</span></span><span class="line"><span class="cl">Tokens:              &lt;none&gt;
-</span></span><span class="line"><span class="cl">Events:              &lt;none&gt;
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">describe</span> <span class="n">sa</span> <span class="n">default</span>
+</span></span><span class="line"><span class="cl"><span class="n">Name</span><span class="p">:</span>                <span class="n">default</span>
+</span></span><span class="line"><span class="cl"><span class="n">Namespace</span><span class="p">:</span>           <span class="n">default</span>
+</span></span><span class="line"><span class="cl"><span class="n">Labels</span><span class="p">:</span>              <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Annotations</span><span class="p">:</span>         <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Image</span> <span class="n">pull</span> <span class="n">secrets</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Mountable</span> <span class="n">secrets</span><span class="p">:</span>   <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Tokens</span><span class="p">:</span>              <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Events</span><span class="p">:</span>              <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">controlplane ~ ➜  k get po
-</span></span><span class="line"><span class="cl">No resources found in default namespace.
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">get</span> <span class="n">po</span>
+</span></span><span class="line"><span class="cl"><span class="n">No</span> <span class="n">resources</span> <span class="n">found</span> <span class="ow">in</span> <span class="n">default</span> <span class="n">namespace</span><span class="o">.</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -2828,50 +2867,50 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">controlplane ~ ➜  k run nginx --image<span class="o">=</span>ngin
-</span></span><span class="line"><span class="cl">pod/nginx created
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">run</span> <span class="n">nginx</span> <span class="o">--</span><span class="n">image</span><span class="o">=</span><span class="n">ngin</span>
+</span></span><span class="line"><span class="cl"><span class="n">pod</span><span class="o">/</span><span class="n">nginx</span> <span class="n">created</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">controlplane ~ ➜  k describe po nginx <span class="p">|</span> grep -i default
-</span></span><span class="line"><span class="cl">Namespace:        default
-</span></span><span class="line"><span class="cl">Service Account:  default
-</span></span><span class="line"><span class="cl">  Normal   Scheduled  104s                default-scheduler  Successfully assigned default/nginx to controlplane
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">describe</span> <span class="n">po</span> <span class="n">nginx</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">default</span>
+</span></span><span class="line"><span class="cl"><span class="n">Namespace</span><span class="p">:</span>        <span class="n">default</span>
+</span></span><span class="line"><span class="cl"><span class="n">Service</span> <span class="n">Account</span><span class="p">:</span>  <span class="n">default</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Normal</span>   <span class="n">Scheduled</span>  <span class="mi">104</span><span class="n">s</span>                <span class="n">default</span><span class="o">-</span><span class="n">scheduler</span>  <span class="n">Successfully</span> <span class="n">assigned</span> <span class="n">default</span><span class="o">/</span><span class="n">nginx</span> <span class="n">to</span> <span class="n">controlplane</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">- Default volume and mount are automatically created at <span class="sb">`</span>/var/run/secrets/*<span class="sb">`</span>.
-</span></span><span class="line"><span class="cl">- Kubernetes automatically mounts the default service account token to inside pode.
-</span></span><span class="line"><span class="cl">- ServiceAccount token Secrets store credentials identifying a ServiceAccount <span class="k">for</span> Pods.
-</span></span><span class="line"><span class="cl">- Legacy method providing long-lived credentials, but In Kubernetes v1.22+, recommended to obtain short-lived, rotating tokens using <span class="sb">`</span>TokenRequest API<span class="sb">`</span>.
-</span></span><span class="line"><span class="cl">- Methods to obtain short-lived tokens include direct API calls or through kubectl.
+</span></span><span class="line"><span class="cl"><span class="o">-</span> <span class="n">Default</span> <span class="n">volume</span> <span class="ow">and</span> <span class="n">mount</span> <span class="n">are</span> <span class="n">automatically</span> <span class="n">created</span> <span class="n">at</span> <span class="err">`</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">secrets</span><span class="o">/*</span><span class="err">`</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span> <span class="n">Kubernetes</span> <span class="n">automatically</span> <span class="n">mounts</span> <span class="n">the</span> <span class="n">default</span> <span class="n">service</span> <span class="n">account</span> <span class="n">token</span> <span class="n">to</span> <span class="n">inside</span> <span class="n">pode</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span> <span class="n">ServiceAccount</span> <span class="n">token</span> <span class="n">Secrets</span> <span class="n">store</span> <span class="n">credentials</span> <span class="n">identifying</span> <span class="n">a</span> <span class="n">ServiceAccount</span> <span class="k">for</span> <span class="n">Pods</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span> <span class="n">Legacy</span> <span class="n">method</span> <span class="n">providing</span> <span class="n">long</span><span class="o">-</span><span class="n">lived</span> <span class="n">credentials</span><span class="p">,</span> <span class="n">but</span> <span class="n">In</span> <span class="n">Kubernetes</span> <span class="n">v1</span><span class="mf">.22</span><span class="o">+</span><span class="p">,</span> <span class="n">recommended</span> <span class="n">to</span> <span class="n">obtain</span> <span class="n">short</span><span class="o">-</span><span class="n">lived</span><span class="p">,</span> <span class="n">rotating</span> <span class="n">tokens</span> <span class="n">using</span> <span class="err">`</span><span class="n">TokenRequest</span> <span class="n">API</span><span class="err">`</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">-</span> <span class="n">Methods</span> <span class="n">to</span> <span class="n">obtain</span> <span class="n">short</span><span class="o">-</span><span class="n">lived</span> <span class="n">tokens</span> <span class="n">include</span> <span class="n">direct</span> <span class="n">API</span> <span class="n">calls</span> <span class="ow">or</span> <span class="n">through</span> <span class="n">kubectl</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="sb">```</span>sh
-</span></span><span class="line"><span class="cl">controlplane ~ ➜  k describe po nginx
+</span></span><span class="line"><span class="cl"><span class="err">```</span><span class="n">py</span>
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">describe</span> <span class="n">po</span> <span class="n">nginx</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">...elipsis
+</span></span><span class="line"><span class="cl"><span class="o">...</span><span class="n">elipsis</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Containers:
-</span></span><span class="line"><span class="cl">  nginx:
-</span></span><span class="line"><span class="cl">    Container ID:   
-</span></span><span class="line"><span class="cl">    Image:          ngin
-</span></span><span class="line"><span class="cl">    Image ID:       
-</span></span><span class="line"><span class="cl">    Port:           &lt;none&gt;
-</span></span><span class="line"><span class="cl">    Host Port:      &lt;none&gt;
-</span></span><span class="line"><span class="cl">    State:          Waiting
-</span></span><span class="line"><span class="cl">      Reason:       ErrImagePull
-</span></span><span class="line"><span class="cl">    Ready:          False
-</span></span><span class="line"><span class="cl">    Restart Count:  <span class="m">0</span>
-</span></span><span class="line"><span class="cl">    Environment:    &lt;none&gt;
-</span></span><span class="line"><span class="cl">    Mounts:
-</span></span><span class="line"><span class="cl">      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-2pp72 <span class="o">(</span>ro<span class="o">)</span>
-</span></span><span class="line"><span class="cl">Volumes:
-</span></span><span class="line"><span class="cl">  kube-api-access-2pp72:
-</span></span><span class="line"><span class="cl">    Type:                    Projected <span class="o">(</span>a volume that contains injected data from multiple sources<span class="o">)</span>
-</span></span><span class="line"><span class="cl">    TokenExpirationSeconds:  <span class="m">3607</span>
-</span></span><span class="line"><span class="cl">    ConfigMapName:           kube-root-ca.crt
-</span></span><span class="line"><span class="cl">    ConfigMapOptional:       &lt;nil&gt;
-</span></span><span class="line"><span class="cl">    DownwardAPI:             <span class="nb">true</span>      
+</span></span><span class="line"><span class="cl"><span class="n">Containers</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">nginx</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Container</span> <span class="n">ID</span><span class="p">:</span>   
+</span></span><span class="line"><span class="cl">    <span class="n">Image</span><span class="p">:</span>          <span class="n">ngin</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Image</span> <span class="n">ID</span><span class="p">:</span>       
+</span></span><span class="line"><span class="cl">    <span class="n">Port</span><span class="p">:</span>           <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Host</span> <span class="n">Port</span><span class="p">:</span>      <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">State</span><span class="p">:</span>          <span class="n">Waiting</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Reason</span><span class="p">:</span>       <span class="n">ErrImagePull</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Ready</span><span class="p">:</span>          <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Restart</span> <span class="n">Count</span><span class="p">:</span>  <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Environment</span><span class="p">:</span>    <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Mounts</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">secrets</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">serviceaccount</span> <span class="kn">from</span> <span class="nn">kube</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">access</span><span class="o">-</span><span class="mi">2</span><span class="n">pp72</span> <span class="p">(</span><span class="n">ro</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">Volumes</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">kube</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">access</span><span class="o">-</span><span class="mi">2</span><span class="n">pp72</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Type</span><span class="p">:</span>                    <span class="n">Projected</span> <span class="p">(</span><span class="n">a</span> <span class="n">volume</span> <span class="n">that</span> <span class="n">contains</span> <span class="n">injected</span> <span class="n">data</span> <span class="kn">from</span> <span class="nn">multiple</span> <span class="n">sources</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TokenExpirationSeconds</span><span class="p">:</span>  <span class="mi">3607</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ConfigMapName</span><span class="p">:</span>           <span class="n">kube</span><span class="o">-</span><span class="n">root</span><span class="o">-</span><span class="n">ca</span><span class="o">.</span><span class="n">crt</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ConfigMapOptional</span><span class="p">:</span>       <span class="o">&lt;</span><span class="n">nil</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DownwardAPI</span><span class="p">:</span>             <span class="n">true</span>      
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>We can check it like this</p>
@@ -2883,10 +2922,10 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">controlplane ~ ✖ k <span class="nb">exec</span> -it nginx -- ls /var/run/secrets/kubernetes.io/serviceaccount
-</span></span><span class="line"><span class="cl">ca.crt  namespace  token
-</span></span><span class="line"><span class="cl">controlplane ~ ➜  k <span class="nb">exec</span> -it nginx -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
-</span></span><span class="line"><span class="cl">eyJhbGciOiJSUzI1NiIsImtpZCI6Im1VUi1aZllLak5Fc0MyV184aE1ycDVvcmN6Z1pnNWZlT1JGLXFxQ2NtTm8ifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiLCJrM3MiXSwiZXhwIjoxNzQ2MzQyNzYzLCJpYXQiOjE3MTQ4MDY3NjMsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0IiwicG9kIjp7Im5hbWUiOiJuZ2lueCIsInVpZCI6ImRjNjgzOTI0LTZmYjAtNGFlOC04YjNmLTRlZmU5NmEwMjI0YSJ9LCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiZGVmYXVsdCIsInVpZCI6IjgxY2M0MDU1LTBhNjAtNDNiNC05ODE3LTk3OWIwYTUwODA3MiJ9LCJ3YXJuYWZ0ZXIiOjE3MTQ4MTAzNzB9LCJuYmYiOjE3MTQ4MDY3NjMsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.KOu1urbQ_aqLSDe0tOChy9ZbEmeUFkf-yDKU0TPeK_zKqi1tbZRGV4pVY_6ac90ZCeWTTu2hA1jsUYFTLVyfWfCy7jb7H7BR3gBVrMnUncSYIbjGeZNuJK_3JJ_xaSN3cuKJyJbK19cQG19pACkp3TvPxXfmdAKFcuGXdpvp9m4vXGGHV4zMKebStuk5guhKyDsVQycoLSTse4mUohARPRb8BFTNcSTwUHaQ2crTo-FBa46XbwQUkQt0JTIeCijXb9cRe0zvuiZggUEv2i8BBVb6G6OAVt9n5uzYAv4WLSSF8ovfygbQhivq5U-BJP7B85IaEKwuejLDzMthXa9ioA
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">✖</span> <span class="n">k</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">nginx</span> <span class="o">--</span> <span class="n">ls</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">secrets</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">serviceaccount</span>
+</span></span><span class="line"><span class="cl"><span class="n">ca</span><span class="o">.</span><span class="n">crt</span>  <span class="n">namespace</span>  <span class="n">token</span>
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">nginx</span> <span class="o">--</span> <span class="n">cat</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">secrets</span><span class="o">/</span><span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">serviceaccount</span><span class="o">/</span><span class="n">token</span>
+</span></span><span class="line"><span class="cl"><span class="n">eyJhbGciOiJSUzI1NiIsImtpZCI6Im1VUi1aZllLak5Fc0MyV184aE1ycDVvcmN6Z1pnNWZlT1JGLXFxQ2NtTm8ifQ</span><span class="o">.</span><span class="n">eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiLCJrM3MiXSwiZXhwIjoxNzQ2MzQyNzYzLCJpYXQiOjE3MTQ4MDY3NjMsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJkZWZhdWx0IiwicG9kIjp7Im5hbWUiOiJuZ2lueCIsInVpZCI6ImRjNjgzOTI0LTZmYjAtNGFlOC04YjNmLTRlZmU5NmEwMjI0YSJ9LCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiZGVmYXVsdCIsInVpZCI6IjgxY2M0MDU1LTBhNjAtNDNiNC05ODE3LTk3OWIwYTUwODA3MiJ9LCJ3YXJuYWZ0ZXIiOjE3MTQ4MTAzNzB9LCJuYmYiOjE3MTQ4MDY3NjMsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ</span><span class="o">.</span><span class="n">KOu1urbQ_aqLSDe0tOChy9ZbEmeUFkf</span><span class="o">-</span><span class="n">yDKU0TPeK_zKqi1tbZRGV4pVY_6ac90ZCeWTTu2hA1jsUYFTLVyfWfCy7jb7H7BR3gBVrMnUncSYIbjGeZNuJK_3JJ_xaSN3cuKJyJbK19cQG19pACkp3TvPxXfmdAKFcuGXdpvp9m4vXGGHV4zMKebStuk5guhKyDsVQycoLSTse4mUohARPRb8BFTNcSTwUHaQ2crTo</span><span class="o">-</span><span class="n">FBa46XbwQUkQt0JTIeCijXb9cRe0zvuiZggUEv2i8BBVb6G6OAVt9n5uzYAv4WLSSF8ovfygbQhivq5U</span><span class="o">-</span><span class="n">BJP7B85IaEKwuejLDzMthXa9ioA</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><img
@@ -2928,19 +2967,19 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">root@controlplane ~ ➜  k create secret -h
-</span></span><span class="line"><span class="cl">Create a secret with specified type.
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">create</span> <span class="n">secret</span> <span class="o">-</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl"><span class="n">Create</span> <span class="n">a</span> <span class="n">secret</span> <span class="k">with</span> <span class="n">specified</span> <span class="nb">type</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> A docker-registry <span class="nb">type</span> secret is <span class="k">for</span> accessing a container registry.
+</span></span><span class="line"><span class="cl"> <span class="n">A</span> <span class="n">docker</span><span class="o">-</span><span class="n">registry</span> <span class="nb">type</span> <span class="n">secret</span> <span class="ow">is</span> <span class="k">for</span> <span class="n">accessing</span> <span class="n">a</span> <span class="n">container</span> <span class="n">registry</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> A generic <span class="nb">type</span> secret indicate an Opaque secret type.
+</span></span><span class="line"><span class="cl"> <span class="n">A</span> <span class="n">generic</span> <span class="nb">type</span> <span class="n">secret</span> <span class="n">indicate</span> <span class="n">an</span> <span class="n">Opaque</span> <span class="n">secret</span> <span class="nb">type</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> A tls <span class="nb">type</span> secret holds TLS certificate and its associated key.
+</span></span><span class="line"><span class="cl"> <span class="n">A</span> <span class="n">tls</span> <span class="nb">type</span> <span class="n">secret</span> <span class="n">holds</span> <span class="n">TLS</span> <span class="n">certificate</span> <span class="ow">and</span> <span class="n">its</span> <span class="n">associated</span> <span class="n">key</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Available Commands:
-</span></span><span class="line"><span class="cl">  docker-registry   Create a secret <span class="k">for</span> use with a Docker registry
-</span></span><span class="line"><span class="cl">  generic           Create a secret from a <span class="nb">local</span> file, directory, or literal value
-</span></span><span class="line"><span class="cl">  tls               Create a TLS secret
+</span></span><span class="line"><span class="cl"><span class="n">Available</span> <span class="n">Commands</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">docker</span><span class="o">-</span><span class="n">registry</span>   <span class="n">Create</span> <span class="n">a</span> <span class="n">secret</span> <span class="k">for</span> <span class="n">use</span> <span class="k">with</span> <span class="n">a</span> <span class="n">Docker</span> <span class="n">registry</span>
+</span></span><span class="line"><span class="cl">  <span class="n">generic</span>           <span class="n">Create</span> <span class="n">a</span> <span class="n">secret</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">local</span> <span class="n">file</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span> <span class="ow">or</span> <span class="n">literal</span> <span class="n">value</span>
+</span></span><span class="line"><span class="cl">  <span class="n">tls</span>               <span class="n">Create</span> <span class="n">a</span> <span class="n">TLS</span> <span class="n">secret</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Create a secret object with the credentials required to access the registry.</p>
@@ -2982,24 +3021,24 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">root@controlplane ~ ➜  k create secret docker-registry private-reg-cred --docker-username<span class="o">=</span>dock_user --docker_email<span class="o">=</span>dock_user@myprivateregistry.com --docker-password<span class="o">=</span>dock_password --docker-server<span class="o">=</span>myprivateregistry.com:5000
-</span></span><span class="line"><span class="cl">secret/private-reg-cred created
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">create</span> <span class="n">secret</span> <span class="n">docker</span><span class="o">-</span><span class="n">registry</span> <span class="n">private</span><span class="o">-</span><span class="n">reg</span><span class="o">-</span><span class="n">cred</span> <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">username</span><span class="o">=</span><span class="n">dock_user</span> <span class="o">--</span><span class="n">docker_email</span><span class="o">=</span><span class="n">dock_user</span><span class="nd">@myprivateregistry.com</span> <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">password</span><span class="o">=</span><span class="n">dock_password</span> <span class="o">--</span><span class="n">docker</span><span class="o">-</span><span class="n">server</span><span class="o">=</span><span class="n">myprivateregistry</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">5000</span>
+</span></span><span class="line"><span class="cl"><span class="n">secret</span><span class="o">/</span><span class="n">private</span><span class="o">-</span><span class="n">reg</span><span class="o">-</span><span class="n">cred</span> <span class="n">created</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">root@controlplane ~ ➜  k get secret
-</span></span><span class="line"><span class="cl">NAME               TYPE                             DATA   AGE
-</span></span><span class="line"><span class="cl">private-reg-cred   kubernetes.io/dockerconfigjson   <span class="m">1</span>      6s
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">get</span> <span class="n">secret</span>
+</span></span><span class="line"><span class="cl"><span class="n">NAME</span>               <span class="n">TYPE</span>                             <span class="n">DATA</span>   <span class="n">AGE</span>
+</span></span><span class="line"><span class="cl"><span class="n">private</span><span class="o">-</span><span class="n">reg</span><span class="o">-</span><span class="n">cred</span>   <span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">dockerconfigjson</span>   <span class="mi">1</span>      <span class="mi">6</span><span class="n">s</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">root@controlplane ~ ✖ k describe secret private-reg-cred
-</span></span><span class="line"><span class="cl">Name:         private-reg-cred
-</span></span><span class="line"><span class="cl">Namespace:    default
-</span></span><span class="line"><span class="cl">Labels:       &lt;none&gt;
-</span></span><span class="line"><span class="cl">Annotations:  &lt;none&gt;
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@controlplane</span> <span class="o">~</span> <span class="err">✖</span> <span class="n">k</span> <span class="n">describe</span> <span class="n">secret</span> <span class="n">private</span><span class="o">-</span><span class="n">reg</span><span class="o">-</span><span class="n">cred</span>
+</span></span><span class="line"><span class="cl"><span class="n">Name</span><span class="p">:</span>         <span class="n">private</span><span class="o">-</span><span class="n">reg</span><span class="o">-</span><span class="n">cred</span>
+</span></span><span class="line"><span class="cl"><span class="n">Namespace</span><span class="p">:</span>    <span class="n">default</span>
+</span></span><span class="line"><span class="cl"><span class="n">Labels</span><span class="p">:</span>       <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Annotations</span><span class="p">:</span>  <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Type:  kubernetes.io/dockerconfigjson
+</span></span><span class="line"><span class="cl"><span class="n">Type</span><span class="p">:</span>  <span class="n">kubernetes</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">dockerconfigjson</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">Data</span>
+</span></span><span class="line"><span class="cl"><span class="n">Data</span>
 </span></span><span class="line"><span class="cl"><span class="o">====</span>
-</span></span><span class="line"><span class="cl">.dockerconfigjson:  <span class="m">176</span> bytes
+</span></span><span class="line"><span class="cl"><span class="o">.</span><span class="n">dockerconfigjson</span><span class="p">:</span>  <span class="mi">176</span> <span class="nb">bytes</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -3032,29 +3071,29 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">&gt; root@controlplane ~ ➜  k edit deployments.apps web 
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">root</span><span class="nd">@controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">edit</span> <span class="n">deployments</span><span class="o">.</span><span class="n">apps</span> <span class="n">web</span> 
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    spec:
-</span></span><span class="line"><span class="cl">      containers:
-</span></span><span class="line"><span class="cl">      - image: myprivateregistry.com:5000/nginx:alpine
-</span></span><span class="line"><span class="cl">        imagePullPolicy: IfNotPresent
-</span></span><span class="line"><span class="cl">        imagePullSecrets: private-reg-cred
+</span></span><span class="line"><span class="cl">    <span class="n">spec</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="n">containers</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="o">-</span> <span class="n">image</span><span class="p">:</span> <span class="n">myprivateregistry</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">5000</span><span class="o">/</span><span class="n">nginx</span><span class="p">:</span><span class="n">alpine</span>
+</span></span><span class="line"><span class="cl">        <span class="n">imagePullPolicy</span><span class="p">:</span> <span class="n">IfNotPresent</span>
+</span></span><span class="line"><span class="cl">        <span class="n">imagePullSecrets</span><span class="p">:</span> <span class="n">private</span><span class="o">-</span><span class="n">reg</span><span class="o">-</span><span class="n">cred</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">error: deployments.apps <span class="s2">&#34;web&#34;</span> is invalid
-</span></span><span class="line"><span class="cl">A copy of your changes has been stored to <span class="s2">&#34;/tmp/kubectl-edit-4288536569.yaml&#34;</span>
-</span></span><span class="line"><span class="cl">error: Edit cancelled, no valid changes were saved.
+</span></span><span class="line"><span class="cl"><span class="n">error</span><span class="p">:</span> <span class="n">deployments</span><span class="o">.</span><span class="n">apps</span> <span class="s2">&#34;web&#34;</span> <span class="ow">is</span> <span class="n">invalid</span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span> <span class="n">copy</span> <span class="n">of</span> <span class="n">your</span> <span class="n">changes</span> <span class="n">has</span> <span class="n">been</span> <span class="n">stored</span> <span class="n">to</span> <span class="s2">&#34;/tmp/kubectl-edit-4288536569.yaml&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">error</span><span class="p">:</span> <span class="n">Edit</span> <span class="n">cancelled</span><span class="p">,</span> <span class="n">no</span> <span class="n">valid</span> <span class="n">changes</span> <span class="n">were</span> <span class="n">saved</span><span class="o">.</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">&gt; vim /tmp/kubectl-edit-4288536569.yaml
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">vim</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">kubectl</span><span class="o">-</span><span class="n">edit</span><span class="o">-</span><span class="mf">4288536569.</span><span class="n">yaml</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    spec:
-</span></span><span class="line"><span class="cl">      imagePullSecrets:
-</span></span><span class="line"><span class="cl">      - name: private-reg-cred
-</span></span><span class="line"><span class="cl">      containers:
-</span></span><span class="line"><span class="cl">      - image: myprivateregistry.com:5000/nginx:alpine
-</span></span><span class="line"><span class="cl">        imagePullPolicy: IfNotPresent
+</span></span><span class="line"><span class="cl">    <span class="n">spec</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="n">imagePullSecrets</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">private</span><span class="o">-</span><span class="n">reg</span><span class="o">-</span><span class="n">cred</span>
+</span></span><span class="line"><span class="cl">      <span class="n">containers</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="o">-</span> <span class="n">image</span><span class="p">:</span> <span class="n">myprivateregistry</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">5000</span><span class="o">/</span><span class="n">nginx</span><span class="p">:</span><span class="n">alpine</span>
+</span></span><span class="line"><span class="cl">        <span class="n">imagePullPolicy</span><span class="p">:</span> <span class="n">IfNotPresent</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">&gt; k apply -f /tmp/kubectl-edit-4288536569.yaml
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">k</span> <span class="n">apply</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">kubectl</span><span class="o">-</span><span class="n">edit</span><span class="o">-</span><span class="mf">4288536569.</span><span class="n">yaml</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="security-context">Security Context</h2>
@@ -3085,12 +3124,12 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">controlplane ~ ➜  ps -ef <span class="p">|</span> grep -i sleep
-</span></span><span class="line"><span class="cl"> <span class="m">6747</span> root      0:00 sleep <span class="m">4800</span>
-</span></span><span class="line"><span class="cl"> <span class="m">7688</span> root      0:00 grep -i sleep
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">ps</span> <span class="o">-</span><span class="n">ef</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">sleep</span>
+</span></span><span class="line"><span class="cl"> <span class="mi">6747</span> <span class="n">root</span>      <span class="mi">0</span><span class="p">:</span><span class="mi">00</span> <span class="n">sleep</span> <span class="mi">4800</span>
+</span></span><span class="line"><span class="cl"> <span class="mi">7688</span> <span class="n">root</span>      <span class="mi">0</span><span class="p">:</span><span class="mi">00</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">sleep</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">controlplane ~ ➜  k <span class="nb">exec</span> -it ubuntu-sleeper -- ps -ef <span class="p">|</span> grep -i sleep
-</span></span><span class="line"><span class="cl">root           <span class="m">1</span>       <span class="m">0</span>  <span class="m">0</span> 09:17 ?        00:00:00 sleep <span class="m">4800</span>
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">ubuntu</span><span class="o">-</span><span class="n">sleeper</span> <span class="o">--</span> <span class="n">ps</span> <span class="o">-</span><span class="n">ef</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">sleep</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span>           <span class="mi">1</span>       <span class="mi">0</span>  <span class="mi">0</span> <span class="mi">09</span><span class="p">:</span><span class="mi">17</span> <span class="err">?</span>        <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">sleep</span> <span class="mi">4800</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="how-to-check-capabilities">How to check capabilities</h4>
@@ -3116,24 +3155,24 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">controlplane ~ ➜  k <span class="nb">exec</span> -it ubuntu-sleeper -- sh
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">ubuntu</span><span class="o">-</span><span class="n">sleeper</span> <span class="o">--</span> <span class="n">sh</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># ls</span>
-</span></span><span class="line"><span class="cl">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+</span></span><span class="line"><span class="cl"><span class="nb">bin</span>  <span class="n">boot</span>  <span class="n">dev</span>  <span class="n">etc</span>  <span class="n">home</span>  <span class="n">lib</span>  <span class="n">lib64</span>  <span class="n">media</span>  <span class="n">mnt</span>  <span class="n">opt</span>  <span class="n">proc</span>  <span class="n">root</span>  <span class="n">run</span>  <span class="n">sbin</span>  <span class="n">srv</span>  <span class="n">sys</span>  <span class="n">tmp</span>  <span class="n">usr</span>  <span class="n">var</span>
 </span></span><span class="line"><span class="cl"><span class="c1"># ps -aux</span>
-</span></span><span class="line"><span class="cl">USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
-</span></span><span class="line"><span class="cl">root           <span class="m">1</span>  0.0  0.0   <span class="m">2692</span>  <span class="m">1120</span> ?        Ss   04:13   0:00 sleep <span class="m">4800</span>
-</span></span><span class="line"><span class="cl">root          <span class="m">56</span>  0.0  0.0   <span class="m">2796</span>  <span class="m">1096</span> pts/0    Ss   04:15   0:00 sh
-</span></span><span class="line"><span class="cl">root          <span class="m">63</span>  0.0  0.0   <span class="m">7884</span>  <span class="m">4112</span> pts/0    R+   04:15   0:00 ps -aux
-</span></span><span class="line"><span class="cl">&gt; <span class="nb">cd</span> /proc/1
-</span></span><span class="line"><span class="cl">&gt; cat status <span class="p">|</span> grep -i Cap
-</span></span><span class="line"><span class="cl">CapInh: <span class="m">0000000000000000</span>
-</span></span><span class="line"><span class="cl">CapPrm: 00000000a80425fb
-</span></span><span class="line"><span class="cl">CapEff: 00000000a80425fb
-</span></span><span class="line"><span class="cl">CapBnd: 00000000a80425fb
-</span></span><span class="line"><span class="cl">CapAmb: <span class="m">0000000000000000</span>
+</span></span><span class="line"><span class="cl"><span class="n">USER</span>         <span class="n">PID</span> <span class="o">%</span><span class="n">CPU</span> <span class="o">%</span><span class="n">MEM</span>    <span class="n">VSZ</span>   <span class="n">RSS</span> <span class="n">TTY</span>      <span class="n">STAT</span> <span class="n">START</span>   <span class="n">TIME</span> <span class="n">COMMAND</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span>           <span class="mi">1</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>   <span class="mi">2692</span>  <span class="mi">1120</span> <span class="err">?</span>        <span class="n">Ss</span>   <span class="mi">04</span><span class="p">:</span><span class="mi">13</span>   <span class="mi">0</span><span class="p">:</span><span class="mi">00</span> <span class="n">sleep</span> <span class="mi">4800</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span>          <span class="mi">56</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>   <span class="mi">2796</span>  <span class="mi">1096</span> <span class="n">pts</span><span class="o">/</span><span class="mi">0</span>    <span class="n">Ss</span>   <span class="mi">04</span><span class="p">:</span><span class="mi">15</span>   <span class="mi">0</span><span class="p">:</span><span class="mi">00</span> <span class="n">sh</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span>          <span class="mi">63</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>   <span class="mi">7884</span>  <span class="mi">4112</span> <span class="n">pts</span><span class="o">/</span><span class="mi">0</span>    <span class="n">R</span><span class="o">+</span>   <span class="mi">04</span><span class="p">:</span><span class="mi">15</span>   <span class="mi">0</span><span class="p">:</span><span class="mi">00</span> <span class="n">ps</span> <span class="o">-</span><span class="n">aux</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">cd</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">cat</span> <span class="n">status</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">Cap</span>
+</span></span><span class="line"><span class="cl"><span class="n">CapInh</span><span class="p">:</span> <span class="mi">0000000000000000</span>
+</span></span><span class="line"><span class="cl"><span class="n">CapPrm</span><span class="p">:</span> <span class="mi">00000000</span><span class="n">a80425fb</span>
+</span></span><span class="line"><span class="cl"><span class="n">CapEff</span><span class="p">:</span> <span class="mi">00000000</span><span class="n">a80425fb</span>
+</span></span><span class="line"><span class="cl"><span class="n">CapBnd</span><span class="p">:</span> <span class="mi">00000000</span><span class="n">a80425fb</span>
+</span></span><span class="line"><span class="cl"><span class="n">CapAmb</span><span class="p">:</span> <span class="mi">0000000000000000</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># edit pod.spec.securityContext.capabilities</span>
-</span></span><span class="line"><span class="cl">k edit po ubuntu-sleeper
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">edit</span> <span class="n">po</span> <span class="n">ubuntu</span><span class="o">-</span><span class="n">sleeper</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="network-policies">Network policies</h2>
@@ -3262,7 +3301,7 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">k get netpol payroll-policy -o yaml &gt; netpol.yaml
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">k</span> <span class="n">get</span> <span class="n">netpol</span> <span class="n">payroll</span><span class="o">-</span><span class="n">policy</span> <span class="o">-</span><span class="n">o</span> <span class="n">yaml</span> <span class="o">&gt;</span> <span class="n">netpol</span><span class="o">.</span><span class="n">yaml</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -3339,7 +3378,7 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">k apply -f netpol.yaml
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">k</span> <span class="n">apply</span> <span class="o">-</span><span class="n">f</span> <span class="n">netpol</span><span class="o">.</span><span class="n">yaml</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="chapter-8-storage">Chapter 8: Storage</h1>
@@ -3417,12 +3456,12 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">controlplane ~ ➜  k get all
-</span></span><span class="line"><span class="cl">NAME         READY   STATUS    RESTARTS   AGE
-</span></span><span class="line"><span class="cl">pod/webapp   1/1     Running   <span class="m">0</span>          5m26s
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">k</span> <span class="n">get</span> <span class="nb">all</span>
+</span></span><span class="line"><span class="cl"><span class="n">NAME</span>         <span class="n">READY</span>   <span class="n">STATUS</span>    <span class="n">RESTARTS</span>   <span class="n">AGE</span>
+</span></span><span class="line"><span class="cl"><span class="n">pod</span><span class="o">/</span><span class="n">webapp</span>   <span class="mi">1</span><span class="o">/</span><span class="mi">1</span>     <span class="n">Running</span>   <span class="mi">0</span>          <span class="mi">5</span><span class="n">m26s</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>   AGE
-</span></span><span class="line"><span class="cl">service/kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP   11m
+</span></span><span class="line"><span class="cl"><span class="n">NAME</span>                 <span class="n">TYPE</span>        <span class="n">CLUSTER</span><span class="o">-</span><span class="n">IP</span>   <span class="n">EXTERNAL</span><span class="o">-</span><span class="n">IP</span>   <span class="n">PORT</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>   <span class="n">AGE</span>
+</span></span><span class="line"><span class="cl"><span class="n">service</span><span class="o">/</span><span class="n">kubernetes</span>   <span class="n">ClusterIP</span>   <span class="mf">10.96.0.1</span>    <span class="o">&lt;</span><span class="n">none</span><span class="o">&gt;</span>        <span class="mi">443</span><span class="o">/</span><span class="n">TCP</span>   <span class="mi">11</span><span class="n">m</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -3433,10 +3472,10 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">&gt; k get po webapp -o yaml &gt; webapp.yaml
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">k</span> <span class="n">get</span> <span class="n">po</span> <span class="n">webapp</span> <span class="o">-</span><span class="n">o</span> <span class="n">yaml</span> <span class="o">&gt;</span> <span class="n">webapp</span><span class="o">.</span><span class="n">yaml</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1"># edit</span>
-</span></span><span class="line"><span class="cl">&gt; k replace -f 
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span> <span class="n">k</span> <span class="n">replace</span> <span class="o">-</span><span class="n">f</span> 
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -3535,12 +3574,848 @@ Downloaded package has all the kubernetes components in it except <code>ETCD clu
 </ol>
 <h2 id="storage-class">Storage Class</h2>
 <p><strong>It would be great if make pv then physical memory provisioned, which is called <code>Dynamic Provisioning</code>. And we can achieve it by <code>Storage class(sc)</code> instead PV. Actually pv is created when sc definition is called but we do not manually create pv, because we need to manage volume dynamically.</strong></p>
-<h1 id="chapter-9-networking">Chapter 9: Networking</h1></div><div class="post-footer" id="post-footer">
+<h2 id="wrap-up">Wrap up</h2>
+<ol>
+<li>PV: provision된 physical volume을 관리하는 instance  (node처럼 cluster resource)</li>
+<li>PVC: volume를 쓰기위한 요청. <strong>pod는 pvc를 통해 pv에 리소스 사용</strong></li>
+<li>StorageClass(sc)</li>
+</ol>
+<ul>
+<li>PVC와 PV는 같은 storageClassName일 때 bind</li>
+<li>물론 default storageClass가 있으면 storageClassName omit가능</li>
+</ul>
+<p><strong>PV를 프로비저닝 하는 방법은 총 2가지이다.</strong></p>
+<ol>
+<li>Static Provisioning</li>
+</ol>
+<ul>
+<li>kube-apisesrver를 통해서 (kubectl) admin(관리자)이 직접 pv를 생성하는 방식</li>
+</ul>
+<ol start="2">
+<li>Dynamic Provisioning</li>
+</ol>
+<ul>
+<li>storage class를 기반으로 자동으로 pv를 생성하여 provision하는 방식</li>
+<li><strong>PVC가 특정 spec을 정의한 storage class를 요청하면 pvc의 양만큼 sc에 정의된 스펙의 pv가 생성되고 프로비저닝 된다.</strong></li>
+</ul>
+<h1 id="chapter-9-networking">Chapter 9: Networking</h1>
+<h2 id="switching-routing">Switching Routing</h2>
+<h4 id="switching">Switching</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ip</span> <span class="n">addr</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ip</span> <span class="n">address</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">ip</span> <span class="n">address</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="p">:</span> <span class="n">lo</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">LOOPBACK</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">65536</span> <span class="n">qdisc</span> <span class="n">noqueue</span> <span class="n">state</span> <span class="n">UNKNOWN</span> <span class="n">group</span> <span class="n">default</span> <span class="n">qlen</span> <span class="mi">1000</span>
+</span></span><span class="line"><span class="cl">    <span class="n">link</span><span class="o">/</span><span class="n">loopback</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="n">brd</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inet</span> <span class="mf">127.0.0.1</span><span class="o">/</span><span class="mi">8</span> <span class="n">scope</span> <span class="n">host</span> <span class="n">lo</span>
+</span></span><span class="line"><span class="cl">       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="p">:</span> <span class="n">flannel</span><span class="mf">.1</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">1400</span> <span class="n">qdisc</span> <span class="n">noqueue</span> <span class="n">state</span> <span class="n">UNKNOWN</span> <span class="n">group</span> <span class="n">default</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">link</span><span class="o">/</span><span class="n">ether</span> <span class="mi">7</span><span class="n">e</span><span class="p">:</span><span class="n">f7</span><span class="p">:</span><span class="mi">9</span><span class="n">a</span><span class="p">:</span><span class="mi">1</span><span class="n">e</span><span class="p">:</span><span class="n">dc</span><span class="p">:</span><span class="mi">79</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inet</span> <span class="mf">10.244.0.0</span><span class="o">/</span><span class="mi">32</span> <span class="n">scope</span> <span class="k">global</span> <span class="n">flannel</span><span class="mf">.1</span>
+</span></span><span class="line"><span class="cl">       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+</span></span><span class="line"><span class="cl"><span class="mi">3</span><span class="p">:</span> <span class="n">cni0</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">1400</span> <span class="n">qdisc</span> <span class="n">noqueue</span> <span class="n">state</span> <span class="n">UP</span> <span class="n">group</span> <span class="n">default</span> <span class="n">qlen</span> <span class="mi">1000</span>
+</span></span><span class="line"><span class="cl">    <span class="n">link</span><span class="o">/</span><span class="n">ether</span> <span class="mi">8</span><span class="n">e</span><span class="p">:</span><span class="n">a7</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="n">ce</span><span class="p">:</span><span class="mi">4</span><span class="n">f</span><span class="p">:</span><span class="mi">34</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inet</span> <span class="mf">10.244.0.1</span><span class="o">/</span><span class="mi">24</span> <span class="n">brd</span> <span class="mf">10.244.0.255</span> <span class="n">scope</span> <span class="k">global</span> <span class="n">cni0</span>
+</span></span><span class="line"><span class="cl">       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+</span></span><span class="line"><span class="cl"><span class="mi">4</span><span class="p">:</span> <span class="n">veth94e4cabd</span><span class="nd">@if2</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">1400</span> <span class="n">qdisc</span> <span class="n">noqueue</span> <span class="n">master</span> <span class="n">cni0</span> <span class="n">state</span> <span class="n">UP</span> <span class="n">group</span> <span class="n">default</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">link</span><span class="o">/</span><span class="n">ether</span> <span class="n">ca</span><span class="p">:</span><span class="n">df</span><span class="p">:</span><span class="mi">3</span><span class="n">d</span><span class="p">:</span><span class="mi">76</span><span class="p">:</span><span class="n">bb</span><span class="p">:</span><span class="mi">96</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span> <span class="n">link</span><span class="o">-</span><span class="n">netns</span> <span class="n">cni</span><span class="o">-</span><span class="n">cf9503cc</span><span class="o">-</span><span class="n">e140</span><span class="o">-</span><span class="mi">55</span><span class="n">a0</span><span class="o">-</span><span class="mi">5</span><span class="n">d1b</span><span class="o">-</span><span class="n">f0475dc95336</span>
+</span></span><span class="line"><span class="cl"><span class="mi">5</span><span class="p">:</span> <span class="n">veth58ee9409</span><span class="nd">@if2</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">1400</span> <span class="n">qdisc</span> <span class="n">noqueue</span> <span class="n">master</span> <span class="n">cni0</span> <span class="n">state</span> <span class="n">UP</span> <span class="n">group</span> <span class="n">default</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">link</span><span class="o">/</span><span class="n">ether</span> <span class="n">b2</span><span class="p">:</span><span class="n">e3</span><span class="p">:</span><span class="mi">5</span><span class="n">b</span><span class="p">:</span><span class="n">bd</span><span class="p">:</span><span class="n">ca</span><span class="p">:</span><span class="mi">14</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span> <span class="n">link</span><span class="o">-</span><span class="n">netns</span> <span class="n">cni</span><span class="o">-</span><span class="mi">908</span><span class="n">defd9</span><span class="o">-</span><span class="mi">94</span><span class="n">bd</span><span class="o">-</span><span class="mi">1</span><span class="n">a21</span><span class="o">-</span><span class="mi">0282</span><span class="o">-</span><span class="mi">6</span><span class="n">ad3f832bc73</span>
+</span></span><span class="line"><span class="cl"><span class="mi">13028</span><span class="p">:</span> <span class="n">eth0</span><span class="nd">@if13029</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">1450</span> <span class="n">qdisc</span> <span class="n">noqueue</span> <span class="n">state</span> <span class="n">UP</span> <span class="n">group</span> <span class="n">default</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">link</span><span class="o">/</span><span class="n">ether</span> <span class="mi">02</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="n">c0</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="n">f3</span><span class="p">:</span><span class="mi">09</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span> <span class="n">link</span><span class="o">-</span><span class="n">netnsid</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inet</span> <span class="mf">192.0.243.9</span><span class="o">/</span><span class="mi">24</span> <span class="n">brd</span> <span class="mf">192.0.243.255</span> <span class="n">scope</span> <span class="k">global</span> <span class="n">eth0</span>
+</span></span><span class="line"><span class="cl">       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+</span></span><span class="line"><span class="cl"><span class="mi">13030</span><span class="p">:</span> <span class="n">eth1</span><span class="nd">@if13031</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">BROADCAST</span><span class="p">,</span><span class="n">MULTICAST</span><span class="p">,</span><span class="n">UP</span><span class="p">,</span><span class="n">LOWER_UP</span><span class="o">&gt;</span> <span class="n">mtu</span> <span class="mi">1500</span> <span class="n">qdisc</span> <span class="n">noqueue</span> <span class="n">state</span> <span class="n">UP</span> <span class="n">group</span> <span class="n">default</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">link</span><span class="o">/</span><span class="n">ether</span> <span class="mi">02</span><span class="p">:</span><span class="mi">42</span><span class="p">:</span><span class="n">ac</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">15</span> <span class="n">brd</span> <span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span><span class="p">:</span><span class="n">ff</span> <span class="n">link</span><span class="o">-</span><span class="n">netnsid</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="n">inet</span> <span class="mf">172.25.0.21</span><span class="o">/</span><span class="mi">24</span> <span class="n">brd</span> <span class="mf">172.25.0.255</span> <span class="n">scope</span> <span class="k">global</span> <span class="n">eth1</span>
+</span></span><span class="line"><span class="cl">       <span class="n">valid_lft</span> <span class="n">forever</span> <span class="n">preferred_lft</span> <span class="n">forever</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>eth0: 과거 디폴트 랜카드 지정 번지 (이더넷 카드 0번)</li>
+<li>lo: loopback interface</li>
+<li>veth: virtual ethernet interface</li>
+<li>ens</li>
+<li>em1</li>
+<li>MULTICAST: Can handle multicast packet</li>
+<li>UP: NUC is working</li>
+<li>LOWER_UP: L1 layer, Physical device signal up</li>
+<li>mtu: Maximum Transmission Unit (1500 default)</li>
+<li>qdisc: Queuing Disciplines, NIC에 들어오기전 Queue에 저장되는 패킷들 우선순위 부여 알고리즘</li>
+<li>state: NIC 현재 작동 상태</li>
+<li>qlen: 전송큐 크기</li>
+<li>link/ether
+<ul>
+<li>L2 layer, Link layer protocol is ethernet</li>
+<li>바로 옆에 나오는 주소는 해당 NIC의 MAC 주소</li>
+<li>brd는 브로드캐스트 시 사용되는 주소</li>
+</ul>
+</li>
+<li>inet: L3, 바로 옆 주소는 ipv4 or ipv6에 따른 주소</li>
+<li>scope
+<ul>
+<li><strong>Global</strong>: Indicates accessibility and validity of the interface from a global perspective, allowing access from external networks. This is often seen in instances hosted in the cloud.</li>
+<li><strong>Link</strong>: Specifies that the interface is only accessible and valid within the local LAN, restricting access to the local network.</li>
+<li><strong>Host</strong>: Indicates that the interface is only valid and accessible within the host itself, limiting access to the local host.</li>
+</ul>
+</li>
+<li>valid_lft, preferred_lft
+<ul>
+<li>Valid Lifetime and Preferred Lifetime</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="n">add</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="subnet-mask">subnet mask</h4>
+<blockquote>
+<p><a href="https://www.cloudflare.com/ko-kr/learning/network-layer/what-is-a-subnet/" target="_blank" rel="noopener noreffer">https://www.cloudflare.com/ko-kr/learning/network-layer/what-is-a-subnet/</a>
+</p>
+</blockquote>
+<p>라우터의 정의=&ldquo;서브넷이 다른 네트워크와 연결하기 위해 최적의 경로를 찾아서 목적지까지 패킷을 전달하는 장비&rdquo;</p>
+<ol>
+<li>IP = 주소가 속한 네트워크 + 해당 네트워크 안의 장치 = subnet + device address</li>
+<li>라우터 uses subnet mask to route (cidr)</li>
+</ol>
+<p>아래 예시는 cidr 적용안된 설명같긴 하다.</p>
+<blockquote>
+<p>실제 예를 들어, IP 패킷의 주소가 IP 주소 192.0.2.15라고 가정해 보겠습니다. 이 IP 주소는 클래스 C 네트워크이므로 네트워크는 &ldquo;192.0.2&rdquo;(또는 기술적으로는 정확하게 192.0.2.0/24)로 식별됩니다. 네트워크 라우터는 패킷을 &ldquo;192.0.2&quot;라고 표시된 네트워크의 호스트로 전달합니다. 패킷이 해당 네트워크에 도착하면 네트워크 내의 라우터가 라우팅 테이블을 참조합니다.서브넷 마스크 255.255.255.0을 사용하여 이진법 계산을 합니다.장치 주소 &ldquo;15&rdquo;(나머지 IP 주소는 네트워크를 나타냄)를 확인하고 패킷이 이동해야 하는 서브넷을 계산합니다.패킷을 해당 서브넷 내에서 패킷을 전달하는 라우터 또는 스위치로 전달하고 패킷은 IP 주소 192.0.2.15에 도착합니다(라우터 및 스위치에 대해 자세히 알아보기).</p>
+</blockquote>
+<h4 id="router--gateway">Router / Gateway</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">route</span>
+</span></span><span class="line"><span class="cl"><span class="n">Kernel</span> <span class="n">IP</span> <span class="n">routing</span> <span class="n">table</span>
+</span></span><span class="line"><span class="cl"><span class="n">Destination</span>     <span class="n">Gateway</span>         <span class="n">Genmask</span>         <span class="n">Flags</span> <span class="n">Metric</span> <span class="n">Ref</span>    <span class="n">Use</span> <span class="n">Iface</span>
+</span></span><span class="line"><span class="cl"><span class="n">default</span>         <span class="mf">172.25.0.1</span>      <span class="mf">0.0.0.0</span>         <span class="n">UG</span>    <span class="mi">0</span>      <span class="mi">0</span>        <span class="mi">0</span> <span class="n">eth1</span>
+</span></span><span class="line"><span class="cl"><span class="mf">10.244.0.0</span>      <span class="mf">0.0.0.0</span>         <span class="mf">255.255.255.0</span>   <span class="n">U</span>     <span class="mi">0</span>      <span class="mi">0</span>        <span class="mi">0</span> <span class="n">cni0</span>
+</span></span><span class="line"><span class="cl"><span class="mf">10.244.1.0</span>      <span class="mf">10.244.1.0</span>      <span class="mf">255.255.255.0</span>   <span class="n">UG</span>    <span class="mi">0</span>      <span class="mi">0</span>        <span class="mi">0</span> <span class="n">flannel</span><span class="mf">.1</span>
+</span></span><span class="line"><span class="cl"><span class="mf">172.25.0.0</span>      <span class="mf">0.0.0.0</span>         <span class="mf">255.255.255.0</span>   <span class="n">U</span>     <span class="mi">0</span>      <span class="mi">0</span>        <span class="mi">0</span> <span class="n">eth1</span>
+</span></span><span class="line"><span class="cl"><span class="mf">192.0.243.0</span>     <span class="mf">0.0.0.0</span>         <span class="mf">255.255.255.0</span>   <span class="n">U</span>     <span class="mi">0</span>      <span class="mi">0</span>        <span class="mi">0</span> <span class="n">eth0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># when to add</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">route</span> <span class="n">add</span> <span class="mf">192.168.2.0</span><span class="o">/</span><span class="mi">24</span> <span class="n">via</span> <span class="mf">192.168.1.1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="default-destination">Default Destination</h4>
+<ul>
+<li>same 0.0.0.0, which means any IP addr</li>
+<li>internet에 존재하는 다양한 ip들을 일일히 처리 불가, default를 두어 처리한다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">default         172.25.0.1      0.0.0.0         UG    0      0        0 eth1
+</span></span><span class="line"><span class="cl">0.0.0.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="what-if-gateway-0000">What if Gateway 0.0.0.0?</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">10.244.0.0      0.0.0.0         255.255.255.0   U     0      0        0 cni0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>같은 네트워크 안에 있는 디바이스는 router / Gateway를 타고 가지 않아도 되니, 0.0.0.0값이 gateway에 존재</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network.png"
+        data-srcset="/images/k8s-network.png, /images/k8s-network.png 1.5x, /images/k8s-network.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network.png"
+        title="/images/k8s-network.png" /></p>
+<ul>
+<li>To send packets from A to C, two routes need to be set up: <code>A -&gt; B -&gt; C</code> and <code>C -&gt; B -&gt; A</code></li>
+<li><strong>In Linux, packets received on eth1 are not automatically forwarded to eth0; this is due to security concerns.</strong></li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network2.png"
+        data-srcset="/images/k8s-network2.png, /images/k8s-network2.png 1.5x, /images/k8s-network2.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network2.png"
+        title="/images/k8s-network2.png" /></p>
+<p>To enable forwarding, you can either set it in <code>/etc/sysctl.conf</code> or temporarily change it by setting <code>/proc/sys/net/ipv4/ip_forward</code> to 1.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/image/k8s_network_wrap.png"
+        data-srcset="/image/k8s_network_wrap.png, /image/k8s_network_wrap.png 1.5x, /image/k8s_network_wrap.png 2x"
+        data-sizes="auto"
+        alt="/image/k8s_network_wrap.png"
+        title="/image/k8s_network_wrap.png" /></p>
+<h2 id="dns">DNS</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">cat</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">hosts</span>
+</span></span><span class="line"><span class="cl"><span class="mf">127.0.0.1</span>       <span class="n">localhost</span>
+</span></span><span class="line"><span class="cl"><span class="p">::</span><span class="mi">1</span>     <span class="n">localhost</span> <span class="n">ip6</span><span class="o">-</span><span class="n">localhost</span> <span class="n">ip6</span><span class="o">-</span><span class="n">loopback</span>
+</span></span><span class="line"><span class="cl"><span class="n">fe00</span><span class="p">::</span><span class="mi">0</span> <span class="n">ip6</span><span class="o">-</span><span class="n">localnet</span>
+</span></span><span class="line"><span class="cl"><span class="n">ff00</span><span class="p">::</span><span class="mi">0</span> <span class="n">ip6</span><span class="o">-</span><span class="n">mcastprefix</span>
+</span></span><span class="line"><span class="cl"><span class="n">ff02</span><span class="p">::</span><span class="mi">1</span> <span class="n">ip6</span><span class="o">-</span><span class="n">allnodes</span>
+</span></span><span class="line"><span class="cl"><span class="n">ff02</span><span class="p">::</span><span class="mi">2</span> <span class="n">ip6</span><span class="o">-</span><span class="n">allrouters</span>
+</span></span><span class="line"><span class="cl"><span class="mf">192.2.61.9</span>      <span class="n">controlplane</span>
+</span></span><span class="line"><span class="cl"><span class="mf">10.0.0.6</span> <span class="n">docker</span><span class="o">-</span><span class="n">registry</span><span class="o">-</span><span class="n">mirror</span><span class="o">.</span><span class="n">kodekloud</span><span class="o">.</span><span class="n">com</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ctrl + D to finish</span>
+</span></span><span class="line"><span class="cl"><span class="n">controlplane</span> <span class="o">~</span> <span class="err">➜</span>  <span class="n">cat</span> <span class="o">&gt;&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">hosts</span>
+</span></span><span class="line"><span class="cl"><span class="mf">1.1.1.1</span>         <span class="n">test</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p><code>&gt;&gt;</code>: append</p>
+</li>
+<li>
+<p><code>&gt;</code>: change</p>
+</li>
+<li>
+<p><code>/etc/hosts</code>: Domain name mapping</p>
+</li>
+<li>
+<p><code>/etc/resolv.conf</code>: Domain nameserver ip</p>
+<ul>
+<li>nameserver</li>
+<li><strong>search</strong> field</li>
+</ul>
+</li>
+<li>
+<p><code>/etc/nsswitch.conf</code>: Order configuration</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">controlplane ~ ➜  cat /etc/nsswitch.conf 
+</span></span><span class="line"><span class="cl"># /etc/nsswitch.conf
+</span></span><span class="line"><span class="cl">#
+</span></span><span class="line"><span class="cl"># Example configuration of GNU Name Service Switch functionality.
+</span></span><span class="line"><span class="cl"># If you have the `glibc-doc-reference&#39; and `info&#39; packages installed, try:
+</span></span><span class="line"><span class="cl"># `info libc &#34;Name Service Switch&#34;&#39; for information about this file.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">passwd:         files
+</span></span><span class="line"><span class="cl">group:          files
+</span></span><span class="line"><span class="cl">shadow:         files
+</span></span><span class="line"><span class="cl">gshadow:        files
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">hosts:          files dns
+</span></span><span class="line"><span class="cl">networks:       files
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">protocols:      db files
+</span></span><span class="line"><span class="cl">services:       db files
+</span></span><span class="line"><span class="cl">ethers:         db files
+</span></span><span class="line"><span class="cl">rpc:            db files
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">netgroup:       nis
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>hostsf를 보면 file -&gt; dns 순으로 해독된다. 즉 /etc/hosts가 먼저 해석된다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ping</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># etc/hosts를 처리하지 않음, dns서버만 처리함</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">nslookup</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">dig</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="coredns">CoreDNS</h2>
+<h2 id="namespace">Namespace</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network3.png"
+        data-srcset="/images/k8s-network3.png, /images/k8s-network3.png 1.5x, /images/k8s-network3.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network3.png"
+        title="/images/k8s-network3.png" /></p>
+<p>When the container is created, it has its own private routing table and ARP table, and a virtual Ethernet interface (veth0) is automatically created.</p>
+<h4 id="create-netwok-ns">Create Netwok ns</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span> <span class="n">add</span> <span class="n">red</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span> <span class="n">add</span> <span class="n">blue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span>
+</span></span><span class="line"><span class="cl"><span class="n">red</span>
+</span></span><span class="line"><span class="cl"><span class="n">blue</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="exec-in-network-ns">Exec in network ns</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span> <span class="n">exec</span> <span class="n">red</span> <span class="n">ip</span> <span class="n">link</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># simpler</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">red</span> <span class="n">link</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="arp">ARP</h4>
+<blockquote>
+<p>address resolution protocol</p>
+</blockquote>
+<ul>
+<li>동일한 네트워크 내에 존재하는 호스트들의 IP주소와 ethernet 주소(mac 주소)를 확인하는 명령어</li>
+<li>즉, 특정 네트워크 내에 어떤 호스트들이 존재하는지를 확인할 수 있는 것이 바로 arp 명령어</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">arp</span> 
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span> <span class="n">exec</span> <span class="n">red</span> <span class="n">arp</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network4.png"
+        data-srcset="/images/k8s-network4.png, /images/k8s-network4.png 1.5x, /images/k8s-network4.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network4.png"
+        title="/images/k8s-network4.png" /></p>
+<ul>
+<li>Host는 container에 대해서 알 수 없다.</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network5.png"
+        data-srcset="/images/k8s-network5.png, /images/k8s-network5.png 1.5x, /images/k8s-network5.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network5.png"
+        title="/images/k8s-network5.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span> <span class="n">add</span> <span class="n">red</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span> <span class="n">add</span> <span class="n">blue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span>
+</span></span><span class="line"><span class="cl"><span class="n">red</span>
+</span></span><span class="line"><span class="cl"><span class="n">blue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># same</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">red</span> <span class="n">link</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span> <span class="n">exec</span> <span class="n">red</span> <span class="n">ip</span> <span class="n">link</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span> <span class="n">exec</span> <span class="n">red</span> <span class="n">arp</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span> <span class="n">exec</span> <span class="n">red</span> <span class="n">route</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># link</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># i.g ip link add veth0 type veth peer name veth1 (veth0 &lt;-&gt; veth1)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="n">add</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span> <span class="nb">type</span> <span class="n">veth</span> <span class="n">peer</span> <span class="n">name</span> <span class="n">veth</span><span class="o">-</span><span class="n">blue</span> <span class="c1"># (veth-red &lt;-&gt; veth-blue)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span> <span class="n">netns</span> <span class="n">red</span> <span class="o">&amp;&amp;</span> <span class="n">ip</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">veth</span><span class="o">-</span><span class="n">blue</span> <span class="n">netns</span> <span class="n">blue</span> <span class="c1"># set namespace</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set ip</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># dev means device</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">red</span> <span class="n">addr</span> <span class="n">add</span> <span class="mf">192.168.15.1</span> <span class="n">dev</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">blue</span> <span class="n">addr</span> <span class="n">add</span> <span class="mf">192.168.15.2</span> <span class="n">dev</span> <span class="n">veth</span><span class="o">-</span><span class="n">blue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># up link (running)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span>  <span class="o">-</span><span class="n">n</span> <span class="n">red</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span> <span class="n">up</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span>  <span class="o">-</span><span class="n">n</span> <span class="n">blue</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">veth</span><span class="o">-</span><span class="n">blue</span> <span class="n">up</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ping test</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">netns</span> <span class="n">exec</span> <span class="n">red</span> <span class="n">ping</span> <span class="mf">192.168.15.2</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="switch">Switch</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network6.png"
+        data-srcset="/images/k8s-network6.png, /images/k8s-network6.png 1.5x, /images/k8s-network6.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network6.png"
+        title="/images/k8s-network6.png" /></p>
+<p>만약 container들이 많아진다면? switch가 필요하다.( virtual switch )</p>
+<ul>
+<li><i class="far fa-check-square fa-fw" aria-hidden="true"></i> LINUX BRIDGE</li>
+<li>Open vSwitch(ovs)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">debian</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">ip</span> <span class="n">netns</span> <span class="nb">list</span>
+</span></span><span class="line"><span class="cl"><span class="n">blue</span>
+</span></span><span class="line"><span class="cl"><span class="n">red</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">debian</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">sudo</span> <span class="n">ip</span> <span class="n">netns</span> <span class="n">add</span> <span class="n">v</span><span class="o">-</span><span class="n">net</span><span class="o">-</span><span class="mi">0</span> <span class="nb">type</span> <span class="n">bridge</span>
+</span></span><span class="line"><span class="cl"><span class="n">debian</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">ip</span> <span class="n">netns</span> <span class="nb">list</span>
+</span></span><span class="line"><span class="cl"><span class="n">v</span><span class="o">-</span><span class="n">net</span><span class="o">-</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">blue</span>
+</span></span><span class="line"><span class="cl"><span class="n">red</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">dev</span> <span class="n">v</span><span class="o">-</span><span class="n">net</span><span class="o">-</span><span class="mi">0</span> <span class="n">up</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>veth 타입과 달리 bridge type을 생성하면 자동으로 network namespace도 생성됨</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># delete past cable</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># other pair automatically deleted</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">-</span><span class="n">n</span>  <span class="n">red</span> <span class="n">link</span> <span class="k">del</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># create new cable (veth-red &lt;-&gt; veth-red-br)</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="n">add</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span> <span class="nb">type</span> <span class="n">veth</span> <span class="n">peer</span> <span class="n">name</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span><span class="o">-</span><span class="n">br</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="n">add</span> <span class="n">veth</span><span class="o">-</span><span class="n">blue</span> <span class="nb">type</span> <span class="n">veth</span> <span class="n">peer</span> <span class="n">name</span> <span class="n">veth</span><span class="o">-</span><span class="n">blue</span><span class="o">-</span><span class="n">br</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set veth to namespace</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span> <span class="n">netns</span> <span class="n">red</span> <span class="c1"># red</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span><span class="o">-</span><span class="n">br</span> <span class="n">master</span> <span class="n">v</span><span class="o">-</span><span class="n">net</span><span class="o">-</span><span class="mi">0</span> <span class="c1"># bridge</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">veth</span><span class="o">-</span><span class="n">blue</span> <span class="n">netns</span> <span class="n">blue</span> <span class="c1"># blue</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">veth</span><span class="o">-</span><span class="n">blue</span><span class="o">-</span><span class="n">br</span> <span class="n">master</span> <span class="n">v</span><span class="o">-</span><span class="n">net</span><span class="o">-</span><span class="mi">0</span> <span class="c1"># bridge</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># set ip</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">red</span> <span class="n">addr</span> <span class="n">add</span> <span class="mf">192.168.15.1</span> <span class="n">dev</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">blue</span> <span class="n">addr</span> <span class="n">add</span> <span class="mf">192.168.15.1</span> <span class="n">dev</span> <span class="n">veth</span><span class="o">-</span><span class="n">blue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># up</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">red</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">veth</span><span class="o">-</span><span class="n">red</span> <span class="n">up</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">red</span> <span class="n">link</span> <span class="nb">set</span> <span class="n">veth</span><span class="o">-</span><span class="n">blue</span> <span class="n">up</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Set v-net-0 ip address on host namespace</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ping</span> <span class="mf">192.168.15.1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Not</span> <span class="n">Reachable</span><span class="err">!</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ip</span> <span class="n">addr</span> <span class="n">add</span> <span class="mf">192.168.15.5</span><span class="o">/</span><span class="mi">24</span> <span class="n">dev</span> <span class="n">v</span><span class="o">-</span><span class="n">net</span><span class="o">-</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ping</span> <span class="mf">192.168.15.1</span> <span class="c1"># red ok</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="route">Route</h4>
+<blockquote>
+<p>&ldquo;How to ping outside of host network from isolated namespace container?&rdquo;</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network7.png"
+        data-srcset="/images/k8s-network7.png, /images/k8s-network7.png 1.5x, /images/k8s-network7.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network7.png"
+        title="/images/k8s-network7.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="c1"># 1. allow request </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># open v-net-0 -&gt; LAN</span>
+</span></span><span class="line"><span class="cl"><span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">blue</span> <span class="n">ip</span> <span class="n">route</span> <span class="n">add</span> <span class="mf">192.168.1.0</span><span class="o">/</span><span class="mi">24</span> <span class="n">via</span> <span class="mf">192.168.15.5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2. allow response</span>
+</span></span><span class="line"><span class="cl"><span class="n">iptables</span> <span class="o">-</span><span class="n">t</span> <span class="n">nat</span> <span class="o">-</span><span class="n">A</span> <span class="n">POSTROUTING</span> <span class="o">-</span><span class="n">s</span> <span class="mf">192.168.15.0</span><span class="o">/</span><span class="mi">24</span> <span class="o">-</span><span class="n">j</span> <span class="n">MASQUERADE</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Link to internet (route)</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">blue</span> <span class="n">ping</span> <span class="mf">8.8.8.8</span>
+</span></span><span class="line"><span class="cl"><span class="n">Connect</span><span class="p">:</span> <span class="n">Network</span> <span class="ow">is</span> <span class="n">unreachable</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">blue</span> <span class="n">route</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span> <span class="n">nothing</span> <span class="n">related</span> <span class="mf">8.8.8.8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># default to v-net-0</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">blue</span> <span class="n">ip</span> <span class="n">route</span> <span class="n">add</span> <span class="n">default</span> <span class="n">via</span> <span class="mf">192.168.15.5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="n">ip</span> <span class="o">-</span><span class="n">n</span> <span class="n">blue</span> <span class="n">ping</span> <span class="mf">8.8.8.8</span>
+</span></span><span class="line"><span class="cl"><span class="n">success</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Q. Then how to send request from outside host(192.168.1.3) to host&rsquo;s container?</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network8.png"
+        data-srcset="/images/k8s-network8.png, /images/k8s-network8.png 1.5x, /images/k8s-network8.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network8.png"
+        title="/images/k8s-network8.png" /></p>
+<p>A. Set port forwarding rule on Host.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="err">$</span> <span class="n">iptables</span> <span class="o">-</span><span class="n">t</span> <span class="n">nat</span> <span class="o">-</span><span class="n">A</span> <span class="n">PREROUTING</span> <span class="o">--</span><span class="n">dport</span> <span class="mi">80</span> <span class="o">--</span><span class="n">to</span><span class="o">-</span><span class="n">destination</span> <span class="mf">192.168.15.2</span><span class="p">:</span><span class="mi">80</span> <span class="o">-</span><span class="n">j</span> <span class="n">DNAT</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="cf-linux-namespace">c.f) Linux namespace</h2>
+<p>We need 2 things to isolate network</p>
+<ol>
+<li>UTS namespace</li>
+<li>Network namespace</li>
+</ol>
+<blockquote>
+<p>리눅스 네임스페이스란?
+<a href="https://www.44bits.io/ko/keyword/linux-namespace" target="_blank" rel="noopener noreffer">리눅스 네임스페이스는 프로세스를 실행할 때 시스템의 리소스를 분리해서 실행할 수 있도록 도와주는 기능입니다. 한 시스템의 프로세스들은 기본적으로 시스템의 리소스들을 공유해서 실행됩니다. 이를 단일 네임스페이스라고 생각해볼 수 있습니다. 실제로 리눅스에서는 1번 프로세스(init)에 할당되어있는 네임스페이스들을 자식 프로세스들이 모두 공유해서 사용하는 구조로 이루어져있습니다.</a>
+</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ ls -al /proc/1/ns
+</span></span><span class="line"><span class="cl">total 0
+</span></span><span class="line"><span class="cl">dr-x--x--x 2 root root 0 Jan 31 03:47 .
+</span></span><span class="line"><span class="cl">dr-xr-xr-x 9 root root 0 Jan 24 14:46 ..
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 03:47 cgroup -&gt; &#39;cgroup:[4026531835]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 03:47 ipc -&gt; &#39;ipc:[4026531839]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 03:47 mnt -&gt; &#39;mnt:[4026531840]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 03:47 net -&gt; &#39;net:[4026531993]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 03:47 pid -&gt; &#39;pid:[4026531836]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 03:47 pid_for_children -&gt; &#39;pid:[4026531836]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 03:47 user -&gt; &#39;user:[4026531837]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 03:47 uts -&gt; &#39;uts:[4026531838]&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ ls -l /proc/1074/ns
+</span></span><span class="line"><span class="cl">total 0
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 04:08 cgroup -&gt; &#39;cgroup:[4026531835]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 04:08 ipc -&gt; &#39;ipc:[4026531839]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 04:08 mnt -&gt; &#39;mnt:[4026531840]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 04:08 net -&gt; &#39;net:[4026531993]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 04:08 pid -&gt; &#39;pid:[4026531836]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 04:08 pid_for_children -&gt; &#39;pid:[4026531836]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 04:08 user -&gt; &#39;user:[4026531837]&#39;
+</span></span><span class="line"><span class="cl">lrwxrwxrwx 1 root root 0 Jan 31 04:08 uts -&gt; &#39;uts:[4026531838]&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">diff &lt;(ls -Al /proc/1/ns | awk &#39;{ print $11 }&#39;)  \
+</span></span><span class="line"><span class="cl">       &lt;(ls -Al /proc/1074/ns | awk &#39;{ print $11 }&#39;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="uts-namespace">UTS namespace</h3>
+<blockquote>
+<p><a href="https://www.44bits.io/ko/post/container-network-1-uts-namespace" target="_blank" rel="noopener noreffer">https://www.44bits.io/ko/post/container-network-1-uts-namespace</a>
+</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="n">debian</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">hostname</span>
+</span></span><span class="line"><span class="cl"><span class="n">debian</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">debian</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">touch</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">utsns1</span>
+</span></span><span class="line"><span class="cl"><span class="n">debian</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">sudo</span> <span class="n">unshare</span> <span class="o">--</span><span class="n">uts</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">utsns1</span> <span class="n">hostname</span> <span class="n">utsns1</span>
+</span></span><span class="line"><span class="cl"><span class="n">debian</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">sudo</span> <span class="n">nsenter</span> <span class="o">--</span><span class="n">uts</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">utsns1</span> <span class="n">hostname</span>
+</span></span><span class="line"><span class="cl"><span class="n">utsns1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">nsenter</span> <span class="o">--</span><span class="n">uts</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">utsns1</span> <span class="n">bash</span>
+</span></span><span class="line"><span class="cl"><span class="n">debian</span><span class="nd">@debian</span><span class="p">:</span><span class="o">~</span><span class="err">$</span> <span class="n">sudo</span> <span class="n">nsenter</span> <span class="o">--</span><span class="n">uts</span><span class="o">=/</span><span class="n">tmp</span><span class="o">/</span><span class="n">utsns1</span> <span class="n">bash</span>
+</span></span><span class="line"><span class="cl"><span class="n">root</span><span class="nd">@utsns1</span><span class="p">:</span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">debian</span><span class="c1"># hostname</span>
+</span></span><span class="line"><span class="cl"><span class="n">utsns1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>So we can isolate hostname with these commands.</p>
+<ul>
+<li><code>unshare</code></li>
+<li><code>nsenter</code></li>
+</ul>
+<h2 id="docker-networking">Docker Networking</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-docker-net0.png"
+        data-srcset="/images/k8s-docker-net0.png, /images/k8s-docker-net0.png 1.5x, /images/k8s-docker-net0.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-docker-net0.png"
+        title="/images/k8s-docker-net0.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-docker-net1.png"
+        data-srcset="/images/k8s-docker-net1.png, /images/k8s-docker-net1.png 1.5x, /images/k8s-docker-net1.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-docker-net1.png"
+        title="/images/k8s-docker-net1.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-docker-net2.png"
+        data-srcset="/images/k8s-docker-net2.png, /images/k8s-docker-net2.png 1.5x, /images/k8s-docker-net2.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-docker-net2.png"
+        title="/images/k8s-docker-net2.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-docker-net3png"
+        data-srcset="/images/k8s-docker-net3png, /images/k8s-docker-net3png 1.5x, /images/k8s-docker-net3png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-docker-net3png"
+        title="/images/k8s-docker-net3png" /></p>
+<h2 id="cni-container-networking-interface">CNI (Container Networking Interface)</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/k8s-network-cmd.png"
+        data-srcset="/images/k8s-network-cmd.png, /images/k8s-network-cmd.png 1.5x, /images/k8s-network-cmd.png 2x"
+        data-sizes="auto"
+        alt="/images/k8s-network-cmd.png"
+        title="/images/k8s-network-cmd.png" /></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-04&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/ee905041102c663d9cac22b9f423ccba8219e347" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) ee905041102c663d9cac22b9f423ccba8219e347: docs: cka">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ee90504</a></span>
+                <span>Updated on 2024-05-05&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/9c5cda93e3f914c8bd1a4772ffe69435c9db4221" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 9c5cda93e3f914c8bd1a4772ffe69435c9db4221: docs: cka">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9c5cda9</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
