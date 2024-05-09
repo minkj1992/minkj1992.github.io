@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/tags/dev/</link>
         <description>Dev - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 19 Apr 2024 12:41:18 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 07 May 2024 14:07:08 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/dev/" rel="self" type="application/rss+xml" /><item>
+    <title>A Day before CKA</title>
+    <link>https://minkj1992.github.io/cka_mock_test/</link>
+    <pubDate>Tue, 07 May 2024 14:07:08 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/cka_mock_test/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/cka_test_ss.png" referrerpolicy="no-referrer">
+            </div><p>Do Killer.sh and Mock test.</p>]]></description>
+</item>
+<item>
     <title>CKA certificate</title>
     <link>https://minkj1992.github.io/cka/</link>
     <pubDate>Fri, 19 Apr 2024 12:41:18 &#43;0900</pubDate>
@@ -100,16 +110,6 @@ Environment Python code w\ Config Generates Artifacts 1 2 3 4 5 6 7 8 9 10 11 12
 또한 컴포넌트를 실행시키기 위해서는 Config가 필요한데, Pipeline을 구성하는 컴포넌트의 Config들을 모아 둔 것이 파이프라인 Config 입니다.
 4. Run Kubeflow에서는 실행된 파이프라인을 Run이라고 부릅니다. 파이프라인이 실행되면, 각 컴포넌트들이 아티팩트들을 생성하고, Kubeflow pipeline에서는 Run하나당 고유한 ID를 생성한 뒤, Run에서 생성되는 모든 아티팩트들을 저장합니다.
 5. Experiment Experiment란 Kubeflow 에서 실행되는 Run을 논리적으로 관리하는 단위입니다.]]></description>
-</item>
-<item>
-    <title>Prototype in Javascript</title>
-    <link>https://minkj1992.github.io/prototype_in_js/</link>
-    <pubDate>Sat, 18 Nov 2023 14:17:43 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/prototype_in_js/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/prototype_in_js.png" referrerpolicy="no-referrer">
-            </div><p>What is difference between <strong><code>__proto__</code></strong>, <strong><code>prototype</code></strong>, <strong><code>[[Prototype]]</code></strong></p>]]></description>
 </item>
 </channel>
 </rss>

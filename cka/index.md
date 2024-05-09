@@ -2080,7 +2080,7 @@ default         172.25.0.1      0.0.0.0         UG    0      0        0 eth1
 To enable forwarding, you can either set it in `/etc/sysctl.conf` or temporarily change it by setting `/proc/sys/net/ipv4/ip_forward` to 1.
 
 
-![](/image/k8s_network_wrap.png)
+![](/images/k8s_network_wrap.png)
 
 
 ## DNS
@@ -2430,3 +2430,5 @@ controlplane ~ ➜  netstat -npa | grep etcd | grep 2379 | wc -l
 controlplane ~ ➜  netstat -npa | grep etcd | grep 2381 | wc -l
 1
 ```
+
+
