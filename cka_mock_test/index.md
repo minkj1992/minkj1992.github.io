@@ -1,8 +1,30 @@
-# A Day before CKA
+# A Day before CKA (합격)
 
 
 Do Killer.sh and Mock test.
 <!--more-->
+
+## TL;DR
+
+
+24.04.19 ~ 24.05.08
+
+중간에 모두의 연구소와 아주대 멘토링 그리고 mlflow 엠버서더 활동때문에 일주일을 [다른 곳](https://github.com/minkj1992/llama3-langchain-mlflow)에 신경써야했지만, 그래도 다행히 아이펠 과정 본격적으로 시작하기 전에 빠르게 합격한 것 같다. (합격 여부만 나오고 아직 점수를 확인을 못해서 업데이트를 기다려야 할 것 같다.)
+
+![](/images/cka.png)
+
+개인적으로 CKA를 처음으로 돌아가 다시 시작한다면, 그리고 만약 정말 빠르게 자격증을 따야한다면
+
+1. killer.sh 먼저 풀어보기 또는 https://killercoda.com/killer-shell-cka 문제 유형 풀기
+2. 3일 반복
+3. 1차 시험
+4. 합격 결과에 따라서, 필요한 내용 공부
+
+이렇게 하면 좋을 것 같다. 이제 ckad랑 cks가 남았는데 빠르게 처리해야겠다.
+
+
+
+
 
 #### OS Upgrades
 > https://beta.kodekloud.com/user/courses/udemy-labs-certified-kubernetes-administrator-with-practice-tests/module/85e5661f-74bc-4534-adc8-f51d138fdace/lesson/afa1849c-2679-44e5-9e17-4105bf40a914
@@ -197,6 +219,8 @@ spec:
 #### NetworkPolicy
 
 **test-* namespace인 pod들의 Ingress 요청을 허용하고 싶었고, namespace 필터링하면 될 거라고 생각했지만 아니었다. Selector는 label기반으로 만들어진다.**
+
+
 
 
 

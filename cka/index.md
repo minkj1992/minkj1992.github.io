@@ -37,7 +37,14 @@ MLflow ambassador 혜택으로 linux foundation의 무료 수강권을 얻을 �
 
 > edit, practice에 대한 시간이 빠져있었다. 조금 일정을 미뤄 + 2일뒤인 24.4.28에 시험을 볼 예정이다.
 
-24.04.19 ~
+24.04.19 ~ 24.05.08
+
+중간에 모두의 연구소와 아주대 멘토링 그리고 mlflow 엠버서더 활동때문에 일주일을 [다른 곳](https://github.com/minkj1992/llama3-langchain-mlflow)에 신경써야했지만, 그래도 다행히 아이펠 과정 본격적으로 시작하기 전에 빠르게 합격한 것 같다. (합격 여부만 나오고 아직 점수를 확인을 못해서 업데이트를 기다려야 할 것 같다.)
+
+![](/images/cka.png)
+
+
+
 
 
 # Chapter 2: Core concepts
