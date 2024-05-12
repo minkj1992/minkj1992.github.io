@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 07 May 2024 14:07:08 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 12 May 2024 12:40:26 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>눈물의 여왕을 보고</title>
+    <link>https://minkj1992.github.io/2024-retrospect/</link>
+    <pubDate>Sun, 12 May 2024 12:40:26 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/2024-retrospect/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/tear_main.webp" referrerpolicy="no-referrer">
+            </div><p>눈물의 여왕을 보고 쓴, &ldquo;왜 사는지, 어떻게 살건지에 대하여&rdquo;</p>]]></description>
+</item>
+<item>
     <title>A Day before CKA (합격)</title>
     <link>https://minkj1992.github.io/cka_mock_test/</link>
     <pubDate>Tue, 07 May 2024 14:07:08 &#43;0900</pubDate>
@@ -94,16 +104,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/mlflow.png" referrerpolicy="no-referrer">
             </div><p>Let&rsquo;s analize mlflow source code</p>]]></description>
-</item>
-<item>
-    <title>Openai Rate Limit</title>
-    <link>https://minkj1992.github.io/openai_rate_limit/</link>
-    <pubDate>Sun, 03 Dec 2023 15:08:29 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/openai_rate_limit/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/openai_rate_limit.png" referrerpolicy="no-referrer">
-            </div><p>How to manage openai rate limit on production?</p>]]></description>
 </item>
 </channel>
 </rss>

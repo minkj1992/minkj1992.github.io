@@ -4,7 +4,15 @@
         <link>https://minkj1992.github.io/tags/</link>
         <description>Tags - Tag - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 07 May 2024 14:07:08 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 12 May 2024 12:40:26 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>Retrosepct</title>
+    <link>https://minkj1992.github.io/tags/retrosepct/</link>
+    <pubDate>Sun, 12 May 2024 12:40:26 &#43;0900</pubDate>
+    <author>Minwook Je</author>
+    <guid>https://minkj1992.github.io/tags/retrosepct/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Dev</title>
     <link>https://minkj1992.github.io/tags/dev/</link>
     <pubDate>Tue, 07 May 2024 14:07:08 &#43;0900</pubDate>
@@ -74,14 +82,6 @@
     <pubDate>Mon, 27 Nov 2023 14:07:21 &#43;0900</pubDate>
     <author>Minwook Je</author>
     <guid>https://minkj1992.github.io/tags/mlops/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Js</title>
-    <link>https://minkj1992.github.io/tags/js/</link>
-    <pubDate>Sun, 19 Nov 2023 15:29:46 &#43;0900</pubDate>
-    <author>Minwook Je</author>
-    <guid>https://minkj1992.github.io/tags/js/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>
