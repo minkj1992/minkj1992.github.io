@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Fundamentals of machine learning | minkj1992</title><meta name="Description" content="케라스 창시자에게 배우는 딥러닝 05"><meta property="og:url" content="https://minkj1992.github.io/keras05/">
+  <meta property="og:site_name" content="minkj1992">
+  <meta property="og:title" content="Fundamentals of machine learning">
+  <meta property="og:description" content="케라스 창시자에게 배우는 딥러닝 05">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-05-20T20:19:34+09:00">
+    <meta property="article:modified_time" content="2024-05-20T20:19:34+09:00">
+    <meta property="article:tag" content="Dev">
+    <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"><meta name="twitter:title" content="Fundamentals of machine learning">
+<meta name="twitter:description" content="케라스 창시자에게 배우는 딥러닝 05">
+<meta name="application-name" content="minkj1992">
+<meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/keras05/" /><link rel="prev" href="https://minkj1992.github.io/2024-retrospect/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Fundamentals of machine learning",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/minkj1992.github.io\/keras05\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
+                            "width":  1078 ,
+                            "height":  1082 
+                        }],"genre": "posts","keywords": "dev","wordcount":  1694 ,
+        "url": "https:\/\/minkj1992.github.io\/keras05\/","datePublished": "2024-05-20T20:19:34+09:00","dateModified": "2024-05-20T20:19:34+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "minkj1992","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/minkj1992.github.io\/images\/profile3.png",
+                    "width":  1362 ,
+                    "height":  1868 
+                }},"author": {
+                "@type": "Person",
+                "name": "leoo.j"
+            },"description": "케라스 창시자에게 배우는 딥러닝 05"
+    }
+    </script><meta name="msapplication-TileColor" content="#FFF" />
+<meta name="theme-color" content="#FFF" />
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png" />
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="/android-icon-36x36.png" sizes="36x36" />
+<link rel="icon" type="image/png" href="/android-icon-48x48.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="/android-icon-72x72.png" sizes="72x72" />
+<link rel="icon" type="image/png" href="/android-icon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/android-icon-144x144.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="/android-icon-192x192.png" sizes="192x192" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+<meta name="msapplication-square70x70logo" content="/ms-icon-70x70.png" />
+<meta name="msapplication-square150x150logo" content="/ms-icon-150x150.png" />
+<meta name="msapplication-wide310x150logo" content="/ms-icon-310x150.png" />
+<meta name="msapplication-square310x310logo" content="/ms-icon-310x310.png" />
+<link href="/apple-startup-320x460.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x920.png"
+    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-640x1096.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-748x1024.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1024.png" media="" rel="apple-touch-startup-image" />
+<link href="/apple-startup-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-768x1004.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 1) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1182x2208.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1242x2148.png"
+    media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1496x2048.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
+    rel="apple-touch-startup-image" />
+<link href="/apple-startup-1536x2008.png"
+    media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"
+    rel="apple-touch-startup-image" />
+<link rel="manifest" href="/manifest.json" /></head>
+
+<body data-header-desktop="auto"
+    data-header-mobile="auto"><script
+        type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('light' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'light' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-1" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/about/"> About </a><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="https://github.com/minkj1992" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="minkj1992"><span class="header-title-pre"><span style='color: Mediumslateblue;'><</span></span><span id="id-2" class="typeit"></span><span class="header-title-post"><span style='color: Mediumslateblue;'>/></span></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/about/" title="">About</a><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="https://github.com/minkj1992" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Fundamentals of machine learning</h1><h2 class="single-subtitle">케라스 창시자에게 배우는 딥러닝 05</h2><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/ai/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Ai</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-20">2024-05-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1694 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/dlwp2.webp"
+        data-srcset="/images/dlwp2.webp, /images/dlwp2.webp 1.5x, /images/dlwp2.webp 2x"
+        data-sizes="auto"
+        alt="/images/dlwp2.webp"
+        title="케라스 창시자에게 배우는 딥러닝 05" /></div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#51-일반화-머신러닝의-목표">5.1 일반화: 머신러닝의 목표</a>
+      <ul>
+        <li><a href="#511-과소적합과-과대적합">5.1.1 과소적합과 과대적합</a></li>
+        <li><a href="#512-딥러닝에서-일반화의-본질">5.1.2 딥러닝에서 일반화의 본질</a></li>
+        <li><a href="#매니폴드-가설-예시">매니폴드 가설 예시</a></li>
+        <li><a href="#매니폴드-가설">매니폴드 가설</a></li>
+        <li><a href="#딥러닝이-작동하는-이유">딥러닝이 작동하는 이유?</a></li>
+      </ul>
+    </li>
+    <li><a href="#52-머신-러닝-모델-평가">5.2 머신 러닝 모델 평가</a></li>
+    <li><a href="#53-훈련-성능-향상하기">5.3 훈련 성능 향상하기</a>
+      <ul>
+        <li><a href="#531-훈련이-되지-않을-경우">5.3.1 훈련이 되지 않을 경우</a></li>
+        <li><a href="#cf-배치-크기batch-size에-따른-기대-효과">c.f. 배치 크기(batch size)에 따른 기대 효과</a></li>
+        <li><a href="#요약">요약</a></li>
+        <li><a href="#532-훈련은-되지만-의미있는-일반화-달성-못함">5.3.2 훈련은 되지만, 의미있는 일반화 달성 못함</a></li>
+        <li><a href="#533-여전히-underfitting하는-경우">5.3.3 여전히 Underfitting하는 경우</a></li>
+      </ul>
+    </li>
+    <li><a href="#54-일반화-성능-향상하기">5.4 일반화 성능 향상하기</a>
+      <ul>
+        <li><a href="#541-dataset-curation">5.4.1 Dataset curation</a></li>
+        <li><a href="#543-early-stopping">5.4.3 Early stopping</a></li>
+        <li><a href="#544-모델-regulation-규제">5.4.4 모델 Regulation (규제)</a></li>
+        <li><a href="#l1-norm-vs-l2-norm">L1-norm vs L2-norm</a></li>
+        <li><a href="#dropout">Dropout</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>케라스 창시자에게 배우는 딥러닝, Fundamentals of machine learning</p>
+<h2 id="tldr">TL;DR</h2>
+<ol>
+<li>Understanding the tension between generalization and optimization, the fundamental issue in machine learning</li>
+<li>Evaluation methods for machine learning models</li>
+<li>Best practices to improve model fitting</li>
+<li>Best practices to achieve better generalization</li>
+</ol>
+<h2 id="51-일반화-머신러닝의-목표">5.1 일반화: 머신러닝의 목표</h2>
+<p>머신러닝의 목표는 좋은 일반화 성능을 얻는 것입니다. 하지만 모든 머신러닝 모델은 과대적합의 문제가 발생합니다.</p>
+<ul>
+<li>과대적합: 훈련 데이터의 성능에 overfitting되어 평가 성능과의 차이가 커지는 것을 통해 발견할 수 있으며, 정확하게는 모델이 훈련 데이터에 overfit하게 훈련하여 일반화를 점차 잃어가는 현상</li>
+</ul>
+<p>머신 러닝은 최적화와 일반화 사이의 줄다리기입니다.</p>
+<ul>
+<li>최적화 (Optimization): 훈련 데이터에서 최고의 성능을 얻으려고 모델을 train하는 과정</li>
+<li>일반화 (Generalization): 훈련된 모델이 이전에 본 적 없는 데이터에서 얼마나 잘 수행되는지</li>
+</ul>
+<p>과대적합의 원인은 무엇일까? 어떻게 하면 좋은 일반화 성능을 달성할 수 있을까?</p>
+<hr>
+<h3 id="511-과소적합과-과대적합">5.1.1 과소적합과 과대적합</h3>
+<p>validation과 train의 loss가 훈련이 진행되면서 같이 감소하게 되는 경우들은 “과소적합”이며, 이 과소적합이 발생한다는 것은 모델의 성능이 계속 발전될 여지가 있다는 뜻입니다.</p>
+<ul>
+<li>Holdout 검증: Train / Test로 분리하여 모델의 성능 평가 (1번만 나눔)</li>
+<li>과소적합 Underfitting:  훈련 데이터의 loss가 낮아질 수록 테스트 데이터의 loss도 낮아진다.</li>
+</ul>
+<p>보통 모델은 훈련이 진행됨에 따라 validation loss가 낮아지다가 잠시 후 train보다 높아집니다.  이 높아지는 구간은 overfitting에 의해서, 낮아지는 구간은 모델이 아직 underfitting 되었기 때문입니다.</p>
+<p>Overfitting은 모델이 훈련 데이터에 특화된 패턴을 학습하기 시작했다는 의미이며, 이 패턴은 새로운 데이터와 관련성이 적어 Generalization을 해치게됩니다.</p>
+<p>과대적합은 아래의 경우 특히 발생할 가능성이 높습니다.</p>
+<ol>
+<li>데이터에 noise</li>
+<li>불확실한 특성</li>
+<li>드문 특성과 가짜 상관관계</li>
+</ol>
+<p><strong>데이터에 노이즈</strong>가 낀경우 mnist 경우, 이미지 사진의 형태가 정확히 보이지 않는 경우, 이를 무리하게 학습하려 시도하여 과적합 발생가능합니다. 또한 실제 모델 이미지에 대한 라벨링이 잘못된 경우에도 발생합니다.</p>
+<p>데이터 잡음은 문제 정의에 <strong>불확실성과 모호성</strong>이 존재할 때에도 잡음이 발생할 수 있습니다. 예를 들면 바나나의 익은 정도 (덜익음, 썩음, 익음)를 판별하는 모델의 경우 라벨링하는 값에 주관이 개입될 수 있습니다. 또한 비슷하게 일정한 확률로 비가 오는 수치가 있을때, 랜덤하게 비가 오지 않는 경우도 존재합니다. 이 경우에도 무작위성에 의해서 잡음이 부여될 수 있습니다.</p>
+<p>이렇듯 모델이 특성 공간의 모호한 영역에 너무 큰 확신을 가지면, 이런 확률적인 / 모호한 데이터에 과대적합 될 수 있습니다.</p>
+<p>마지막으로 <strong>드문 특성과 가짜 상관관계</strong>가 존재합니다.</p>
+<p>잡음 feature는 모델이 해당 feature 패턴을 학습하기에, 필연적으로 overfitting을 유발시킵니다. 따라서 특성이 모델에 유익한지 또는 혼란스럽게 만드는지 확실하지 않다면 feature selection을 훈련전에 수행하는 것이 일반적입니다.</p>
+<p><strong>이를 위해서는 일반적으로 가용한 각 특성에 대해 유용성, 즉 특성과 레이블 사이의 상호 의존 정보(mutual information) 처럼 작업에 특성이 얼마나 유익한지 측정해야 합니다. 그 후 일정 threshold를 넘긴 특성만 사용합니다.</strong></p>
+<hr>
+<h3 id="512-딥러닝에서-일반화의-본질">5.1.2 딥러닝에서 일반화의 본질</h3>
+<h3 id="매니폴드-가설-예시">매니폴드 가설 예시</h3>
+<p>MNIST 28 * 28 unit8 벡터가 표현 가능한 가짓수는 784<strong>256로 우주에 있는 원자 갯수 10</strong>80보다 훨씬 큽니다. 하지만 이런 입력 중 매우 적은 수만 유효한 손글씨 데이터일 것이며, 이는 해당 공간에서 아주 작은 부분 공간만을 차지한다는 뜻입니다. (<strong>연속적 (Continuous)</strong>: 손글씨 숫자 이미지의 공간이 매끄럽고, 불연속적인 점이나 갑작스런 변화 없이 연결되어 있다는 것을 의미합니다.)</p>
+<p>연속적인 형태에 약간의 수정이 존재하더라도 이는 여전히 handwritten으로 인식될 수 있으며, handwritten 공간은 784**256 표현 공간에서 작은 부분공간에 밀집되어있기 때문에, 약간의 수정된 이미지 또한 이 공간에 분포할 것이라고 가정합니다. 또한 endpoint(3과 8 각각의 최종 handwritting image)들은 중간과정에 변형이 일어나더라도 이 공간에 포함될 것을 가정합니다.</p>
+<p>그럴 경우 다음과 같이 말할 수 있습니다. <strong>“In technical terms, you would say that handwritten digits form a manifold within the space of possible 28 × 28 uint8 arrays.”</strong></p>
+<p>즉 756차원  unit8에서 손글씨 숫자는 매니폴드를 형성합니다. 이를 일반화 하면</p>
+<h3 id="매니폴드-가설">매니폴드 가설</h3>
+<ol>
+<li>
+<p>머신러닝 모델은 가능한 입력 공간안에서 비교적 간단하고, 저차원이며, 매우 구조적인(highly structured) 부분 공간(latent manifold)만 학습하면된다.</p>
+<ol>
+<li>latent manifold = highly structured subspace</li>
+<li><strong>이는 다시말해 데이터가 고차원 공간에서 무작위로 분포되어 있는 것이 아니라, 더 낮은 차원의 매끄러운 구조를 따른다는 것입니다.</strong></li>
+</ol>
+</li>
+<li>
+<p>이 가설은 또한 고차원 공간에서의 두 데이터 점(예: 두 손글씨 숫자 이미지) 사이에 연속적인 경로가 존재하며, 이 경로 상의 모든 점들이 유효한 데이터 점임을 암시합니다. <strong>그러므로 두 입력 데이터 사이를 보간(interpolate)할 수 있으며, 이 보간 과정에서 생성된 모든 중간 점들이 매니폴드 상에 위치한다고 주장합니다.</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/Screenshot_2024-05-20_at_2.46.52_PM.png"
+        data-srcset="/images/keras05/Screenshot_2024-05-20_at_2.46.52_PM.png, /images/keras05/Screenshot_2024-05-20_at_2.46.52_PM.png 1.5x, /images/keras05/Screenshot_2024-05-20_at_2.46.52_PM.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/Screenshot_2024-05-20_at_2.46.52_PM.png"
+        title="Screenshot 2024-05-20 at 2.46.52 PM.png" /></p>
+</li>
+</ol>
+<p>샘플 사이를 보간(interpolate)하는 능력은 딥러닝에서 일반화를 이해하는 열쇠입니다. <strong>딥러닝은 latent manifold에서 sample들을 interpolate해서 continuous하게 빈곳을 채워서 해당 공간을 이해한다. (local generalization)</strong></p>
+<h3 id="딥러닝이-작동하는-이유">딥러닝이 작동하는 이유?</h3>
+<p>매우 충분한 파라미터를 통해서 크고 복잡한 곡선(매니폴드)을 선택하여 훈련 데이터에 맞을 때까지 파라미터를 점진적으로 조정 + 학습 데이터들은 매니폴드 가설에 의해, 희소하게 분산된 독립 포인트가 아닌, 매니폴드 안에서 포인트들이 연속적인 경로를 따라 한 입력에서 다른 입력으로 변형될 수 있으며 중간과정들 한 매니폴드 공간안에 포함됨.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/Screenshot_2024-05-20_at_2.46.11_PM.png"
+        data-srcset="/images/keras05/Screenshot_2024-05-20_at_2.46.11_PM.png, /images/keras05/Screenshot_2024-05-20_at_2.46.11_PM.png 1.5x, /images/keras05/Screenshot_2024-05-20_at_2.46.11_PM.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/Screenshot_2024-05-20_at_2.46.11_PM.png"
+        title="Screenshot 2024-05-20 at 2.46.11 PM.png" /></p>
+<p><em><strong>이를 통해 부모 공간을 highly structued된 latent manifold를 train data를 통해서 찾아내고, 매니폴드 가설의 continuous에 의해서 각 point들은 연결되어 공간을 표현할 수 있다. 이를 통해 train data가 아니더라도  이전에 본 적 없는 입력을 이해할 수 있다. (generalization)</strong></em> 그러므로 딥러닝 모델이 훈련 샘플 사이를 단순히 보간하는 것 이상을 수행하리라고 기대해서는 안됩니다.</p>
+<hr>
+<h2 id="52-머신-러닝-모델-평가">5.2 머신 러닝 모델 평가</h2>
+<p>관측할 수 있는 것만 제어할 수 있습니다. 우리는 모델의 일반화 성능을 신뢰 있게 측정할 수 있어야 합니다.</p>
+<ul>
+<li>information leak: 하이퍼 파라미터를 모델 train과정에서 변경하는 행위도 크게 보면 trainning일종이다. 그러므로 validation data set또한 overfitting 가능하다.</li>
+</ul>
+<p>Train / Validation / Test set 평가 방법(3)</p>
+<ol>
+<li><code>Hold-out validation</code>
+<ol>
+<li>fixed validation</li>
+<li>단점: validation, testset이 전체 데이터를 통계적으로 대표하지 못할수도 있다.</li>
+</ol>
+</li>
+<li><code>K-fold cross-validation</code>
+<ol>
+<li>k개로 train + validation fold를 나누고 0 ~ k-1 index를 loop돌면서 validation을 선택해서 train</li>
+<li><em><strong>when the performance of your model shows significant variance based on your train-test split</strong></em></li>
+<li>O(k)</li>
+</ol>
+</li>
+<li><code>iterated K-fold cross-validation</code>
+<ol>
+<li>O(P * K), when p == random 횟수</li>
+</ol>
+</li>
+</ol>
+<p>모델 평가 유의할 점</p>
+<ol>
+<li>대표성: 훈련 / 테스트 세트가 데이터 대표성이 있는가</li>
+<li>시간의 방향: 함부로 random no</li>
+<li>중복: 데이터에 중복이 있어서, train과 validation에 각각 들어가게 되면 <strong>훈련 데이터의 일부로 테스트하는 최악의 경우가 발생</strong></li>
+</ol>
+<hr>
+<h2 id="53-훈련-성능-향상하기">5.3 훈련 성능 향상하기</h2>
+<p>모델 훈련은 3(사실 2)가지 단계로 진행됩니다.</p>
+<ol>
+<li>약간의 일반화 능력을 보이고 과대적합할 수 있는 모델을 얻기</li>
+<li>(Overfitting 경계 찾기)</li>
+<li>과대적합과 싸워 일반화 성능 개선</li>
+</ol>
+<p>1번 과정(과대적합 모델 얻기)에서 일반적으로 세가지 문제가 발생가능합니다.</p>
+<ol>
+<li>훈련이 되지 않음
+<ul>
+<li>시간이 지나도 loss 줄어들지 않음</li>
+<li>너무 일찍 중단</li>
+</ul>
+</li>
+<li>훈련은 되지만, 의미있는 일반화 달성 못함</li>
+<li>여전히 과소적합(underfitting) 상태</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/Untitled.png"
+        data-srcset="/images/keras05/Untitled.png, /images/keras05/Untitled.png 1.5x, /images/keras05/Untitled.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/Untitled.png"
+        title="일반적인 모델 트레이닝" /></p>
+<p>일반적인 모델 트레이닝</p>
+<h3 id="531-훈련이-되지-않을-경우">5.3.1 훈련이 되지 않을 경우</h3>
+<ul>
+<li>시간이 지나도 loss가 줄지 않음</li>
+<li>너무 일찍 중단 될 경우</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/Untitled%201.png"
+        data-srcset="/images/keras05/Untitled%201.png, /images/keras05/Untitled%201.png 1.5x, /images/keras05/Untitled%201.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/Untitled%201.png"
+        title="RMSprop(1.)" /></p>
+<p>RMSprop(1.)</p>
+<p>우선 이런 문제는 항상 극복가능합니다. 왜냐면 딥러닝 모델은 랜덤한 trainning 데이터에서도 모델을 훈련할 수 있기 때문입니다. 이런 <strong>상황은 항상 경사 하강법 과정에 대한 설정에 문제가 있습니다.</strong></p>
+<ul>
+<li>옵티마이저 선택</li>
+<li>모델 가중치의 초깃값 분포</li>
+<li><strong>학습률</strong></li>
+<li><strong>배치 크기</strong></li>
+</ul>
+<p>일반적으로 학습률과 배치 크기 튜닝으로 해결합니다.</p>
+<p>학습률</p>
+<ul>
+<li>너무 높은 학습률: 최적접합(proper fit)을 크게 뛰어넘는 업데이트 가능</li>
+<li>너무 낮은 학습률: 훈련이 너무 느려, 멈춰보이는 것처럼 보일 수 있음</li>
+</ul>
+<p>배치 크기</p>
+<ul>
+<li>배치 크기 증가
+<ul>
+<li>유익하고 잡음이 적은(분산이 낮은) 그레디언트가 만들어짐</li>
+<li>local minimum</li>
+<li>단,  과적합 위험 존재</li>
+</ul>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/Untitled%202.png"
+        data-srcset="/images/keras05/Untitled%202.png, /images/keras05/Untitled%202.png 1.5x, /images/keras05/Untitled%202.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/Untitled%202.png"
+        title="RMSprop(1e-2)" /></p>
+<p>RMSprop(1e-2)</p>
+<h3 id="cf-배치-크기batch-size에-따른-기대-효과">c.f. 배치 크기(batch size)에 따른 기대 효과</h3>
+<h3 id="요약">요약</h3>
+<ul>
+<li><strong>큰 배치</strong>:
+<ul>
+<li><strong>장점</strong>: 빠른 학습, 안정적 수렴</li>
+<li><strong>단점</strong>: 과적합 위험 증가</li>
+</ul>
+</li>
+<li><strong>작은 배치</strong>:
+<ul>
+<li><strong>장점</strong>: Regularization 효과, 더 세밀한 학습</li>
+<li><strong>단점</strong>: 학습 시간 증가, local minima 위험</li>
+</ul>
+</li>
+</ul>
+<p>배치 크기(batch size)에 따른 기대 효과와 그 이유를 정리하면 다음과 같습니다.</p>
+<ul>
+<li>
+<p>Batch Size가 클때</p>
+<ol>
+<li><strong>학습 속도</strong>:
+<ul>
+<li><strong>효과</strong>: 학습이 빠르게 진행되며, 수렴 속도가 빠릅니다.</li>
+<li><strong>이유</strong>: 큰 배치는 병렬 연산의 효율을 극대화하여 하드웨어(특히 GPU)의 성능을 최대한 활용할 수 있습니다. 한번의 업데이트로 많은 데이터를 학습하므로 수렴 속도가 빨라집니다.</li>
+</ul>
+</li>
+<li><strong>수렴 안정성</strong>:
+<ul>
+<li><strong>효과</strong>: 그래디언트의 분산이 작아지므로, 매번의 업데이트가 안정적입니다. 로컬 옵티마(local optima)에 빠질 확률이 작습니다.</li>
+<li><strong>이유</strong>: 배치 크기가 크면 개별 샘플의 노이즈가 평균화되어 그래디언트의 추정이 더 정확해집니다.</li>
+</ul>
+</li>
+<li><strong>과적합</strong>:
+<ul>
+<li><strong>효과</strong>: 과적합의 위험이 있습니다.</li>
+<li><strong>이유</strong>: 큰 배치는 모델이 데이터의 일반적인 패턴을 학습하기 때문에, 작은 배치보다 정교한 regularization 효과가 덜할 수 있습니다. 데이터의 작은 변동에 대한 민감도가 낮아질 수 있습니다.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>Batch Size가 작을 때</p>
+<ol>
+<li><strong>학습 횟수 증가</strong>:
+<ul>
+<li><strong>효과</strong>: 1 epoch 당 iteration이 많아져서 학습이 더 세밀하게 이루어집니다.</li>
+<li><strong>이유</strong>: 작은 배치는 더 많은 업데이트를 필요로 하므로, 한 epoch 동안 여러 번의 파라미터 조정이 이루어집니다.</li>
+</ul>
+</li>
+<li><strong>Regularization 효과</strong>:
+<ul>
+<li><strong>효과</strong>: Loss의 분산이 커져서 regularization 효과가 있습니다.</li>
+<li><strong>이유</strong>: 작은 배치는 한 번에 계산하는 데이터 양이 적기 때문에 그래디언트에 더 많은 노이즈가 포함됩니다. 이는 모델이 과적합하지 않고, 더 일반적인 패턴을 학습하게 돕습니다.</li>
+</ul>
+</li>
+<li><strong>로컬 미니마</strong>:
+<ul>
+<li><strong>효과</strong>: local minima로 빠질 가능성이 높습니다.</li>
+<li><strong>이유</strong>: 노이즈가 많아 불안정한 경사 하강을 겪을 수 있으며, 이로 인해 매끄럽지 않은 경로를 따르게 될 수 있습니다.</li>
+</ul>
+</li>
+<li><strong>학습 시간</strong>:
+<ul>
+<li><strong>효과</strong>: 학습 시간이 오래 걸립니다.</li>
+<li><strong>이유</strong>: 작은 배치로 인한 여러 번의 업데이트가 필요하므로, 전체 학습 과정이 오래 걸릴 수 있습니다. 하드웨어 효율이 떨어지기도 합니다.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>Q. 배치샘플을 늘리면 더 유익하고 noise가 적은(분산이 낮은) 그래디언트가 만들어지는 이유? (201p)</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/Screenshot_2024-05-20_at_3.35.00_PM.png"
+        data-srcset="/images/keras05/Screenshot_2024-05-20_at_3.35.00_PM.png, /images/keras05/Screenshot_2024-05-20_at_3.35.00_PM.png 1.5x, /images/keras05/Screenshot_2024-05-20_at_3.35.00_PM.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/Screenshot_2024-05-20_at_3.35.00_PM.png"
+        title="Screenshot 2024-05-20 at 3.35.00 PM.png" /></p>
+</li>
+</ul>
+<h3 id="532-훈련은-되지만-의미있는-일반화-달성-못함">5.3.2 훈련은 되지만, 의미있는 일반화 달성 못함</h3>
+<p>모델이 훈련되지만 어떤 이유에서인지 검증 지표가 전혀 나이지지 않는 경우, 즉 모델이 훈련되지만 일반화되지 않습니다. (랜덤 분류기가 달성 할 수 있는 것과 크게 다르지 않는 성능)</p>
+<ol>
+<li>단순하게 입력 데이터에 타깃 예측을 위한 정보가 충분하지 않는 경우</li>
+<li>현재 사용하는 모델의 종류가 문제에 적합하지 않는 경우</li>
+</ol>
+<h3 id="533-여전히-underfitting하는-경우">5.3.3 여전히 Underfitting하는 경우</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/Screenshot_2024-05-20_at_7.14.34_PM.png"
+        data-srcset="/images/keras05/Screenshot_2024-05-20_at_7.14.34_PM.png, /images/keras05/Screenshot_2024-05-20_at_7.14.34_PM.png 1.5x, /images/keras05/Screenshot_2024-05-20_at_7.14.34_PM.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/Screenshot_2024-05-20_at_7.14.34_PM.png"
+        title="Screenshot 2024-05-20 at 7.14.34 PM.png" /></p>
+<p>모델이 훈련되고 검증 지표가 향상되며 최소한 어느 정도의 일반화 능력을 달성하고 있지만, validation loss가 역전되지 않고 멈추어 있거나 매우 느리게 좋아지는 것 같을 때, <strong>항상 overfitting이 가능하다는 것을 기억해야 합니다.</strong></p>
+<p>훈련 손실이 줄어들지 않는 문제와 마찬가지로 이런 문제도 항상 해결할 수 있습니다. Overfitting할 수 없는 것처럼 보인다면 이는 모델의 표현능력(representational power)가 부족한 것입니다. 즉 용량이 더 큰 모델이 필요합니다.</p>
+<ul>
+<li>layer를 추가한다. (더 많은 가중치를 가지도록)</li>
+<li>또는 층의 크기(more parameters)를 늘린다.</li>
+<li>더 적합한 종류의 층 사용(5.3.2 구조에 대한 더 나은 가정)</li>
+</ul>
+<h2 id="54-일반화-성능-향상하기">5.4 일반화 성능 향상하기</h2>
+<p>모델이 어느정도 Overfitting을 할 수 있다면, 이제 Generalization을 극대화하는 데 초점을 맞출 차례입니다.</p>
+<p>매니폴드 가설을 살펴보면서 우리는 딥러닝의 일반화가 데이터의 latent space(잠재 구조)에서 비롯된다는 것을 배웠습니다. 데이터를 사용해 샘플 사이를 부드럽게 보간(Interpolation)할 수 있다면 Generalization 성능을 가진 딥러닝 모델을 훈련 할 수 있습니다.</p>
+<h3 id="541-dataset-curation">5.4.1 Dataset curation</h3>
+<ol>
+<li>입력 → 출력 매핑하는 공간을 조밀하게 샘플링해야하니, 데이터가 충분한지 확인할 것</li>
+<li>레이블 할당 에러 최소화 (이상치확인)</li>
+<li>누락 값 처리, 데이터 정제</li>
+<li>많은 특성 중, 확실하지 않는 특성이 있다면 feature engineering
+<ol>
+<li>잠재 매니폴드를 더 매끄럽고 간단하고 구조적으로 만듭니다.</li>
+<li>좋은 특성은 적은 자원을 사용해 문제를 더 멋지게 풉니다.(시계 cnn 딥러닝 모델을 통한 현재시각 확인 → 시계 각도와 시간을 매핑한 함수)</li>
+<li>좋은 특성은 더 적은 데이터로 문제를 풀 수 있습니다. (샘플 갯수가 적다면 feature에 있는 정보가 매우 중요해집니다.)</li>
+</ol>
+</li>
+</ol>
+<h3 id="543-early-stopping">5.4.3 Early stopping</h3>
+<p>validation이 역전되는 overfitting 구간을 찾으면 <code>EarlyStopping</code> 콜백을 사용해 이를 처리가능</p>
+<h3 id="544-모델-regulation-규제">5.4.4 모델 Regulation (규제)</h3>
+<p><strong>Regulation은 훈련 데이터에 완벽하게 맞추려는(overfitting) 모델의 능력을 적극적으로 방해하여, overfitting에 의한 모델의 validation loss를 줄이는 것이 목적입니다. → 모델 Generalization 상승,</strong></p>
+<p>Regulation을 통해 모델은 더 간단하고 더 평범하게, 곡선을 부드럽게, 더 일반적으로 만드는 경향을 가집니다.</p>
+<ul>
+<li>
+<p>너무 작은 모델은 Overfitting 되지 않는다.</p>
+<ul>
+<li>모델의 기억 용량에 제한이 있어, 훈련 데이터를 단순 기억도 못할 정도의 사이즈</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/Screenshot_2024-05-20_at_7.46.47_PM.png"
+        data-srcset="/images/keras05/Screenshot_2024-05-20_at_7.46.47_PM.png, /images/keras05/Screenshot_2024-05-20_at_7.46.47_PM.png 1.5x, /images/keras05/Screenshot_2024-05-20_at_7.46.47_PM.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/Screenshot_2024-05-20_at_7.46.47_PM.png"
+        title="Screenshot 2024-05-20 at 7.46.47 PM.png" /></p>
+</li>
+<li>
+<p>너무 큰 모델은 바로 Overfitting된다.</p>
+<ul>
+<li>모델이 바로 overfitting된다.</li>
+<li>validation loss 곡선이 고르지 않고 분산이 크다면 모델이 너무 큰 것</li>
+<li>이는 신뢰할 수 있는 검증 과정을 사용하지 않는다는 징후로도 해석가능, 예를들면 validation set이 너무 작은 경우</li>
+</ul>
+</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/Screenshot_2024-05-20_at_7.46.32_PM.png"
+        data-srcset="/images/keras05/Screenshot_2024-05-20_at_7.46.32_PM.png, /images/keras05/Screenshot_2024-05-20_at_7.46.32_PM.png 1.5x, /images/keras05/Screenshot_2024-05-20_at_7.46.32_PM.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/Screenshot_2024-05-20_at_7.46.32_PM.png"
+        title="Screenshot 2024-05-20 at 7.46.32 PM.png" /></p>
+<h3 id="l1-norm-vs-l2-norm">L1-norm vs L2-norm</h3>
+<p><a href="https://laid.delanover.com/difference-between-l1-and-l2-regularization-implementation-and-visualization-in-tensorflow/" target="_blank" rel="noopener noreffer">https://laid.delanover.com/difference-between-l1-and-l2-regularization-implementation-and-visualization-in-tensorflow/</a>
+</p>
+<p><a href="https://seongyun-dev.tistory.com/52#google_vignette" target="_blank" rel="noopener noreffer">https://seongyun-dev.tistory.com/52#google_vignette</a>
+</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/5aa4ddcd-4a37-4078-ba00-86858aeac5b8.png"
+        data-srcset="/images/keras05/5aa4ddcd-4a37-4078-ba00-86858aeac5b8.png, /images/keras05/5aa4ddcd-4a37-4078-ba00-86858aeac5b8.png 1.5x, /images/keras05/5aa4ddcd-4a37-4078-ba00-86858aeac5b8.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/5aa4ddcd-4a37-4078-ba00-86858aeac5b8.png"
+        title="&lt;a href=&#34;https://scott.fortmann-roe.com/docs/BiasVariance.html&#34; target=&#34;_blank&#34; rel=&#34;noopener noreffer&#34;&gt;https://scott.fortmann-roe.com/docs/BiasVariance.html&lt;/a&gt;
+" /></p>
+<p><a href="https://scott.fortmann-roe.com/docs/BiasVariance.html" target="_blank" rel="noopener noreffer">https://scott.fortmann-roe.com/docs/BiasVariance.html</a>
+</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/e1fbf612-293f-44ee-a29d-c0e8372520ab.png"
+        data-srcset="/images/keras05/e1fbf612-293f-44ee-a29d-c0e8372520ab.png, /images/keras05/e1fbf612-293f-44ee-a29d-c0e8372520ab.png 1.5x, /images/keras05/e1fbf612-293f-44ee-a29d-c0e8372520ab.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/e1fbf612-293f-44ee-a29d-c0e8372520ab.png"
+        title="Screenshot 2024-05-20 at 10.25.19 AM.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/Screenshot_2024-05-20_at_8.16.40_PM.png"
+        data-srcset="/images/keras05/Screenshot_2024-05-20_at_8.16.40_PM.png, /images/keras05/Screenshot_2024-05-20_at_8.16.40_PM.png 1.5x, /images/keras05/Screenshot_2024-05-20_at_8.16.40_PM.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/Screenshot_2024-05-20_at_8.16.40_PM.png"
+        title="Screenshot 2024-05-20 at 8.16.40 PM.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/keras05/d471e465-a4a6-4346-85c1-374044c48820.png"
+        data-srcset="/images/keras05/d471e465-a4a6-4346-85c1-374044c48820.png, /images/keras05/d471e465-a4a6-4346-85c1-374044c48820.png 1.5x, /images/keras05/d471e465-a4a6-4346-85c1-374044c48820.png 2x"
+        data-sizes="auto"
+        alt="/images/keras05/d471e465-a4a6-4346-85c1-374044c48820.png"
+        title="Screenshot 2024-05-20 at 10.27.11 AM.png" /></p>
+<h3 id="dropout">Dropout</h3>
+<p>무작위로 층의 출력 특성을 일부 제외시키는 방식</p>
+<p>혁펜하임에 따르면 연차 쓰게 해서, 남아있는 직원들이 서로 더 긴밀하게 일해보는 것을 반복. 이를 통해 overfitting시키는 node 배제하고 학습도 가능</p>
+<p>테스트할 때(대통령이 오면) 연착 쓰던 직원들 모두 불러서 동작하며, 드롭아웃 비율로 출력을 낮춰줘야 한다.</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2024-05-20</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/keras05/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/keras05/" data-title="Fundamentals of machine learning" data-hashtags="dev"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/keras05/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/keras05/" data-title="Fundamentals of machine learning"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/keras05/" data-title="Fundamentals of machine learning"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/keras05/" data-title="Fundamentals of machine learning" data-image="/images/dlwp2.webp"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">Dev</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/2024-retrospect/" class="prev" rel="prev" title="눈물의 여왕을 보고"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>눈물의 여왕을 보고</a></div>
+</div>
+<div id="comments"><div id="utterances"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
+            </noscript></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.125.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/minkj1992" target="_blank">Minwook Je</a></span></div>
+        </div>
+    </footer></div>
+
+    <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+            <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+            <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+        </a>
+    </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lazysizes/ls.parent-fit.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{"utterances":{"darkTheme":"github-dark","issueTerm":"pathname","label":"✨💬✨","lightTheme":"github-light","repo":"minkj1992/minkj1992.github.io"}},"data":{"id-1":"The Serious","id-2":"The Serious"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+
+</html>

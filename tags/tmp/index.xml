@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tmp - Tag - minkj1992</title>
+        <link>http://localhost:1313/tags/tmp/</link>
+        <description>Tmp - Tag - minkj1992</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 14 May 2024 10:55:36 &#43;0900</lastBuildDate><atom:link href="http://localhost:1313/tags/tmp/" rel="self" type="application/rss+xml" /><item>
+    <title>Tmp</title>
+    <link>http://localhost:1313/tmp/</link>
+    <pubDate>Tue, 14 May 2024 10:55:36 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>http://localhost:1313/tmp/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/" referrerpolicy="no-referrer">
+            </div><p>github 레포 관리를 하고 있어서, readme파일 대신 임의의 네이밍을 가진 markdown으로 대체하여 올립니다.</p>]]></description>
+</item>
+</channel>
+</rss>

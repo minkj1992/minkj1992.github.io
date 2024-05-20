@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Tue, 14 May 2024 10:55:36 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 20 May 2024 20:19:34 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Fundamentals of machine learning</title>
+    <link>https://minkj1992.github.io/keras05/</link>
+    <pubDate>Mon, 20 May 2024 20:19:34 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/keras05/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/dlwp2.webp" referrerpolicy="no-referrer">
+            </div><p>케라스 창시자에게 배우는 딥러닝, Fundamentals of machine learning</p>]]></description>
+</item>
+<item>
     <title>눈물의 여왕을 보고</title>
     <link>https://minkj1992.github.io/2024-retrospect/</link>
     <pubDate>Sun, 12 May 2024 12:40:26 &#43;0900</pubDate>
@@ -94,16 +104,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/ts_compiler.webp" referrerpolicy="no-referrer">
             </div><p>How typescript api compiles ts to js?</p>]]></description>
-</item>
-<item>
-    <title>MLflow code analysis</title>
-    <link>https://minkj1992.github.io/mlflow/</link>
-    <pubDate>Wed, 31 Jan 2024 19:06:42 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/mlflow/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/mlflow.png" referrerpolicy="no-referrer">
-            </div><p>Let&rsquo;s analize mlflow source code</p>]]></description>
 </item>
 </channel>
 </rss>
