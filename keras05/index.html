@@ -13,7 +13,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-05-20T20:19:34+09:00">
-    <meta property="article:modified_time" content="2024-05-20T20:27:16+09:00">
+    <meta property="article:modified_time" content="2024-05-20T20:31:32+09:00">
     <meta property="article:tag" content="Dev">
     <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -37,7 +37,7 @@
                             "width":  1078 ,
                             "height":  1082 
                         }],"genre": "posts","keywords": "dev","wordcount":  1695 ,
-        "url": "https:\/\/minkj1992.github.io\/keras05\/","datePublished": "2024-05-20T20:19:34+09:00","dateModified": "2024-05-20T20:27:16+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/minkj1992.github.io\/keras05\/","datePublished": "2024-05-20T20:19:34+09:00","dateModified": "2024-05-20T20:31:32+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -271,15 +271,14 @@
 <p>즉 756차원  unit8에서 손글씨 숫자는 매니폴드를 형성합니다. 이를 일반화 하면</p>
 <h3 id="매니폴드-가설">매니폴드 가설</h3>
 <ol>
-<li>
-<p>머신러닝 모델은 가능한 입력 공간안에서 비교적 간단하고, 저차원이며, 매우 구조적인(highly structured) 부분 공간(latent manifold)만 학습하면된다.</p>
+<li>머신러닝 모델은 가능한 입력 공간안에서 비교적 간단하고, 저차원이며, 매우 구조적인(highly structured) 부분 공간(latent manifold)만 학습하면된다.
 <ol>
 <li>latent manifold = highly structured subspace</li>
 <li><strong>이는 다시말해 데이터가 고차원 공간에서 무작위로 분포되어 있는 것이 아니라, 더 낮은 차원의 매끄러운 구조를 따른다는 것입니다.</strong></li>
 </ol>
 </li>
-<li>
-<p>이 가설은 또한 고차원 공간에서의 두 데이터 점(예: 두 손글씨 숫자 이미지) 사이에 연속적인 경로가 존재하며, 이 경로 상의 모든 점들이 유효한 데이터 점임을 암시합니다. <strong>그러므로 두 입력 데이터 사이를 보간(interpolate)할 수 있으며, 이 보간 과정에서 생성된 모든 중간 점들이 매니폴드 상에 위치한다고 주장합니다.</strong></p>
+<li>이 가설은 또한 고차원 공간에서의 두 데이터 점(예: 두 손글씨 숫자 이미지) 사이에 연속적인 경로가 존재하며, 이 경로 상의 모든 점들이 유효한 데이터 점임을 암시합니다. <strong>그러므로 두 입력 데이터 사이를 보간(interpolate)할 수 있으며, 이 보간 과정에서 생성된 모든 중간 점들이 매니폴드 상에 위치한다고 주장합니다.</strong></li>
+</ol>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -288,8 +287,6 @@
         data-sizes="auto"
         alt="/images/keras05/Screenshot_2024-05-20_at_2.46.52_PM.png"
         title="Screenshot 2024-05-20 at 2.46.52 PM.png" /></p>
-</li>
-</ol>
 <p>샘플 사이를 보간(interpolate)하는 능력은 딥러닝에서 일반화를 이해하는 열쇠입니다. <strong>딥러닝은 latent manifold에서 sample들을 interpolate해서 continuous하게 빈곳을 채워서 해당 공간을 이해한다. (local generalization)</strong></p>
 <h3 id="딥러닝이-작동하는-이유">딥러닝이 작동하는 이유?</h3>
 <p>매우 충분한 파라미터를 통해서 크고 복잡한 곡선(매니폴드)을 선택하여 훈련 데이터에 맞을 때까지 파라미터를 점진적으로 조정 + 학습 데이터들은 매니폴드 가설에 의해, 희소하게 분산된 독립 포인트가 아닌, 매니폴드 안에서 포인트들이 연속적인 경로를 따라 한 입력에서 다른 입력으로 변형될 수 있으며 중간과정들 한 매니폴드 공간안에 포함됨.</p>
@@ -371,10 +368,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/keras05/Untitled%201.png"
-        data-srcset="/images/keras05/Untitled%201.png, /images/keras05/Untitled%201.png 1.5x, /images/keras05/Untitled%201.png 2x"
+        data-src="/images/keras05/Untitled1.png"
+        data-srcset="/images/keras05/Untitled1.png, /images/keras05/Untitled1.png 1.5x, /images/keras05/Untitled1.png 2x"
         data-sizes="auto"
-        alt="/images/keras05/Untitled%201.png"
+        alt="/images/keras05/Untitled1.png"
         title="RMSprop(1.)" /></p>
 <p>RMSprop(1.)</p>
 <p>우선 이런 문제는 항상 극복가능합니다. 왜냐면 딥러닝 모델은 랜덤한 trainning 데이터에서도 모델을 훈련할 수 있기 때문입니다. 이런 <strong>상황은 항상 경사 하강법 과정에 대한 설정에 문제가 있습니다.</strong></p>
@@ -403,10 +400,10 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/keras05/Untitled%202.png"
-        data-srcset="/images/keras05/Untitled%202.png, /images/keras05/Untitled%202.png 1.5x, /images/keras05/Untitled%202.png 2x"
+        data-src="/images/keras05/Untitled2.png"
+        data-srcset="/images/keras05/Untitled2.png, /images/keras05/Untitled2.png 1.5x, /images/keras05/Untitled2.png 2x"
         data-sizes="auto"
-        alt="/images/keras05/Untitled%202.png"
+        alt="/images/keras05/Untitled2.png"
         title="RMSprop(1e-2)" /></p>
 <p>RMSprop(1e-2)</p>
 <h3 id="cf-배치-크기batch-size에-따른-기대-효과">c.f. 배치 크기(batch size)에 따른 기대 효과</h3>
@@ -427,8 +424,7 @@
 </ul>
 <p>배치 크기(batch size)에 따른 기대 효과와 그 이유를 정리하면 다음과 같습니다.</p>
 <ul>
-<li>
-<p>Batch Size가 클때</p>
+<li>Batch Size가 클때
 <ol>
 <li><strong>학습 속도</strong>:
 <ul>
@@ -450,8 +446,7 @@
 </li>
 </ol>
 </li>
-<li>
-<p>Batch Size가 작을 때</p>
+<li>Batch Size가 작을 때
 <ol>
 <li><strong>학습 횟수 증가</strong>:
 <ul>
@@ -479,8 +474,8 @@
 </li>
 </ol>
 </li>
-<li>
-<p>Q. 배치샘플을 늘리면 더 유익하고 noise가 적은(분산이 낮은) 그래디언트가 만들어지는 이유? (201p)</p>
+<li>Q. 배치샘플을 늘리면 더 유익하고 noise가 적은(분산이 낮은) 그래디언트가 만들어지는 이유? (201p)</li>
+</ul>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -489,8 +484,6 @@
         data-sizes="auto"
         alt="/images/keras05/Screenshot_2024-05-20_at_3.35.00_PM.png"
         title="Screenshot 2024-05-20 at 3.35.00 PM.png" /></p>
-</li>
-</ul>
 <h3 id="532-훈련은-되지만-의미있는-일반화-달성-못함">5.3.2 훈련은 되지만, 의미있는 일반화 달성 못함</h3>
 <p>모델이 훈련되지만 어떤 이유에서인지 검증 지표가 전혀 나이지지 않는 경우, 즉 모델이 훈련되지만 일반화되지 않습니다. (랜덤 분류기가 달성 할 수 있는 것과 크게 다르지 않는 성능)</p>
 <ol>
@@ -535,10 +528,11 @@
 <p><strong>Regulation은 훈련 데이터에 완벽하게 맞추려는(overfitting) 모델의 능력을 적극적으로 방해하여, overfitting에 의한 모델의 validation loss를 줄이는 것이 목적입니다. → 모델 Generalization 상승,</strong></p>
 <p>Regulation을 통해 모델은 더 간단하고 더 평범하게, 곡선을 부드럽게, 더 일반적으로 만드는 경향을 가집니다.</p>
 <ul>
-<li>
-<p>너무 작은 모델은 Overfitting 되지 않는다.</p>
+<li>너무 작은 모델은 Overfitting 되지 않는다.
 <ul>
 <li>모델의 기억 용량에 제한이 있어, 훈련 데이터를 단순 기억도 못할 정도의 사이즈</li>
+</ul>
+</li>
 </ul>
 <p><img
         class="lazyload"
@@ -548,9 +542,8 @@
         data-sizes="auto"
         alt="/images/keras05/Screenshot_2024-05-20_at_7.46.47_PM.png"
         title="Screenshot 2024-05-20 at 7.46.47 PM.png" /></p>
-</li>
-<li>
-<p>너무 큰 모델은 바로 Overfitting된다.</p>
+<ul>
+<li>너무 큰 모델은 바로 Overfitting된다.
 <ul>
 <li>모델이 바로 overfitting된다.</li>
 <li>validation loss 곡선이 고르지 않고 분산이 크다면 모델이 너무 큰 것</li>
@@ -613,8 +606,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-20&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/a86fc83c74c68620b65358b08d0c0c966e184fe6" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) a86fc83c74c68620b65358b08d0c0c966e184fe6: docs: 케라스05">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a86fc83</a></span>
+                <span>Updated on 2024-05-20&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/15808a8524bc96689993010504e2038c2aa4f447" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 15808a8524bc96689993010504e2038c2aa4f447: docs: 케라스05">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>15808a8</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>

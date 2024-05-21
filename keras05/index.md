@@ -76,7 +76,7 @@ MNIST 28 * 28 unit8 벡터가 표현 가능한 가짓수는 784^256 로,  우주
     2. **이는 다시말해 데이터가 고차원 공간에서 무작위로 분포되어 있는 것이 아니라, 더 낮은 차원의 매끄러운 구조를 따른다는 것입니다.**
 2. 이 가설은 또한 고차원 공간에서의 두 데이터 점(예: 두 손글씨 숫자 이미지) 사이에 연속적인 경로가 존재하며, 이 경로 상의 모든 점들이 유효한 데이터 점임을 암시합니다. **그러므로 두 입력 데이터 사이를 보간(interpolate)할 수 있으며, 이 보간 과정에서 생성된 모든 중간 점들이 매니폴드 상에 위치한다고 주장합니다.**
     
-    ![Screenshot 2024-05-20 at 2.46.52 PM.png](/images/keras05/Screenshot_2024-05-20_at_2.46.52_PM.png)
+![Screenshot 2024-05-20 at 2.46.52 PM.png](/images/keras05/Screenshot_2024-05-20_at_2.46.52_PM.png)
     
 
 샘플 사이를 보간(interpolate)하는 능력은 딥러닝에서 일반화를 이해하는 열쇠입니다. **딥러닝은 latent manifold에서 sample들을 interpolate해서 continuous하게 빈곳을 채워서 해당 공간을 이해한다. (local generalization)**
@@ -142,7 +142,7 @@ Train / Validation / Test set 평가 방법(3)
 - 시간이 지나도 loss가 줄지 않음
 - 너무 일찍 중단 될 경우
 
-![RMSprop(1.)](/images/keras05/Untitled%201.png)
+![RMSprop(1.)](/images/keras05/Untitled1.png)
 
 RMSprop(1.)
 
@@ -167,7 +167,7 @@ RMSprop(1.)
     - local minimum
     - 단,  과적합 위험 존재
 
-![RMSprop(1e-2)](/images/keras05/Untitled%202.png)
+![RMSprop(1e-2)](/images/keras05/Untitled2.png)
 
 RMSprop(1e-2)
 
@@ -209,7 +209,7 @@ RMSprop(1e-2)
         - **이유**: 작은 배치로 인한 여러 번의 업데이트가 필요하므로, 전체 학습 과정이 오래 걸릴 수 있습니다. 하드웨어 효율이 떨어지기도 합니다.
 - Q. 배치샘플을 늘리면 더 유익하고 noise가 적은(분산이 낮은) 그래디언트가 만들어지는 이유? (201p)
     
-    ![Screenshot 2024-05-20 at 3.35.00 PM.png](/images/keras05/Screenshot_2024-05-20_at_3.35.00_PM.png)
+![Screenshot 2024-05-20 at 3.35.00 PM.png](/images/keras05/Screenshot_2024-05-20_at_3.35.00_PM.png)
     
 
 ### 5.3.2 훈련은 되지만, 의미있는 일반화 달성 못함
@@ -260,7 +260,7 @@ Regulation을 통해 모델은 더 간단하고 더 평범하게, 곡선을 부�
 - 너무 작은 모델은 Overfitting 되지 않는다.
     - 모델의 기억 용량에 제한이 있어, 훈련 데이터를 단순 기억도 못할 정도의 사이즈
     
-    ![Screenshot 2024-05-20 at 7.46.47 PM.png](/images/keras05/Screenshot_2024-05-20_at_7.46.47_PM.png)
+![Screenshot 2024-05-20 at 7.46.47 PM.png](/images/keras05/Screenshot_2024-05-20_at_7.46.47_PM.png)
     
 - 너무 큰 모델은 바로 Overfitting된다.
     - 모델이 바로 overfitting된다.
