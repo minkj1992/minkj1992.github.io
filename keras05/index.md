@@ -261,6 +261,10 @@ Regulation을 통해 모델은 더 간단하고 더 평범하게, 곡선을 부�
 ![Screenshot 2024-05-20 at 7.46.32 PM.png](/images/keras05/Screenshot_2024-05-20_at_7.46.32_PM.png)
 
 ### L1-norm vs L2-norm
+> https://blog.naver.com/wooy0ng/222408043621
+
+- L1-norm 마름모 처럼 꼭지점에서 만날 가능성이 높음 -> 특정 feature를 살리고 나머지는 0이 될 확률이 높음
+- L2-norm은 제곱으로 람다 곱해서 빼지니까, 큰 값들은 팍팍 줄고, 0~1사이의 값들은 작게작게 빠진다.
 
 [https://laid.delanover.com/difference-between-l1-and-l2-regularization-implementation-and-visualization-in-tensorflow/](https://laid.delanover.com/difference-between-l1-and-l2-regularization-implementation-and-visualization-in-tensorflow/)
 
@@ -275,6 +279,8 @@ Regulation을 통해 모델은 더 간단하고 더 평범하게, 곡선을 부�
 ![Screenshot 2024-05-20 at 8.16.40 PM.png](/images/keras05/Screenshot_2024-05-20_at_8.16.40_PM.png)
 
 ![Screenshot 2024-05-20 at 10.27.11 AM.png](/images/keras05/d471e465-a4a6-4346-85c1-374044c48820.png)
+
+
 
 ### Dropout
 

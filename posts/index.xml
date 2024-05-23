@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 20 May 2024 20:19:34 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 23 May 2024 20:51:34 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Precision과 Recall 절대 까먹지 않는방법</title>
+    <link>https://minkj1992.github.io/precision_recall/</link>
+    <pubDate>Thu, 23 May 2024 20:51:34 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/precision_recall/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/recall.png" referrerpolicy="no-referrer">
+            </div><p>분명 어느정도 이해하고 넘어갔던 precision, recall인데 계속 헷갈린다. 이번 기회에 정확히 이해하고 외워보자.</p>]]></description>
+</item>
+<item>
     <title>Fundamentals of machine learning</title>
     <link>https://minkj1992.github.io/keras05/</link>
     <pubDate>Mon, 20 May 2024 20:19:34 &#43;0900</pubDate>
@@ -94,16 +104,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/go-interface-value-parts.png" referrerpolicy="no-referrer">
             </div><p>Real implementation of value parts type in golang</p>]]></description>
-</item>
-<item>
-    <title>Typescript Compiler</title>
-    <link>https://minkj1992.github.io/compiler/</link>
-    <pubDate>Tue, 06 Feb 2024 22:41:31 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/compiler/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/ts_compiler.webp" referrerpolicy="no-referrer">
-            </div><p>How typescript api compiles ts to js?</p>]]></description>
 </item>
 </channel>
 </rss>

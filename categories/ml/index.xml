@@ -1,10 +1,20 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Ml - Category - minkj1992</title>
+        <title>ML - Category - minkj1992</title>
         <link>https://minkj1992.github.io/categories/ml/</link>
-        <description>Ml - Category - minkj1992</description>
+        <description>ML - Category - minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 05 Apr 2024 16:56:48 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/ml/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 23 May 2024 20:51:34 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/categories/ml/" rel="self" type="application/rss+xml" /><item>
+    <title>Precision과 Recall 절대 까먹지 않는방법</title>
+    <link>https://minkj1992.github.io/precision_recall/</link>
+    <pubDate>Thu, 23 May 2024 20:51:34 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/precision_recall/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/recall.png" referrerpolicy="no-referrer">
+            </div><p>분명 어느정도 이해하고 넘어갔던 precision, recall인데 계속 헷갈린다. 이번 기회에 정확히 이해하고 외워보자.</p>]]></description>
+</item>
+<item>
     <title>Bike sharing demand</title>
     <link>https://minkj1992.github.io/linear_regression/</link>
     <pubDate>Fri, 05 Apr 2024 16:56:48 &#43;0900</pubDate>

@@ -5,39 +5,40 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noodp" />
-    <title>Bike sharing demand | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:url" content="https://minkj1992.github.io/linear_regression/">
+    <title>Precision과 Recall 절대 까먹지 않는방법 | minkj1992</title><meta name="Description" content="I love ocean, moon, sun, breeze, plant, philosopher, believer, Taoism, artist, masters, learning, reading, coding, talking, teaching, praying."><meta property="og:url" content="https://minkj1992.github.io/precision_recall/">
   <meta property="og:site_name" content="minkj1992">
-  <meta property="og:title" content="Bike sharing demand">
-  <meta property="og:description" content="Kaggle Project #1 - Bike Sharing Demand">
+  <meta property="og:title" content="Precision과 Recall 절대 까먹지 않는방법">
+  <meta property="og:description" content="분명 어느정도 이해하고 넘어갔던 precision, recall인데 계속 헷갈린다. 이번 기회에 정확히 이해하고 외워보자.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2024-04-05T16:56:48+09:00">
-    <meta property="article:modified_time" content="2024-04-22T17:03:10+09:00">
-    <meta property="article:tag" content="Ml">
+    <meta property="article:published_time" content="2024-05-23T20:51:34+09:00">
+    <meta property="article:modified_time" content="2024-05-23T20:51:34+09:00">
+    <meta property="article:tag" content="Dev">
+    <meta property="article:tag" content="Data">
     <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"><meta name="twitter:title" content="Bike sharing demand">
-<meta name="twitter:description" content="Kaggle Project #1 - Bike Sharing Demand">
+<meta name="twitter:image" content="https://minkj1992.github.io/images/profile3.png"><meta name="twitter:title" content="Precision과 Recall 절대 까먹지 않는방법">
+<meta name="twitter:description" content="분명 어느정도 이해하고 넘어갔던 precision, recall인데 계속 헷갈린다. 이번 기회에 정확히 이해하고 외워보자.">
 <meta name="application-name" content="minkj1992">
 <meta name="apple-mobile-web-app-title" content="minkj1992"><meta name="theme-color" content="#DB6B97"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/linear_regression/" /><link rel="prev" href="https://minkj1992.github.io/go-channel/" /><link rel="next" href="https://minkj1992.github.io/mlflow_doc/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://minkj1992.github.io/precision_recall/" /><link rel="prev" href="https://minkj1992.github.io/keras05/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Bike sharing demand",
+        "headline": "Precision과 Recall 절대 까먹지 않는방법",
         "inLanguage": "en",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/minkj1992.github.io\/linear_regression\/"
+            "@id": "https:\/\/minkj1992.github.io\/precision_recall\/"
         },"image": [{
                             "@type": "ImageObject",
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "ml","wordcount":  325 ,
-        "url": "https:\/\/minkj1992.github.io\/linear_regression\/","datePublished": "2024-04-05T16:56:48+09:00","dateModified": "2024-04-22T17:03:10+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, data","wordcount":  583 ,
+        "url": "https:\/\/minkj1992.github.io\/precision_recall\/","datePublished": "2024-05-23T20:51:34+09:00","dateModified": "2024-05-23T20:51:34+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -172,104 +173,157 @@
             <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">Contents</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Bike sharing demand</h1><h2 class="single-subtitle">Linear regression</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Precision과 Recall 절대 까먹지 않는방법</h1><h2 class="single-subtitle">계속 헷갈리는 precision, recall 어떻게 기억할지를 정리해본다.</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
-</span>&nbsp;<span class="post-category">included in <a href="/categories/ai/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Ai</a>&nbsp;<a href="/categories/ml/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>ML</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-04-05">2024-04-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;325 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+</span>&nbsp;<span class="post-category">included in <a href="/categories/ml/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>ML</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-23">2024-05-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;583 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/images/bike_sharing.png"
-        data-srcset="/images/bike_sharing.png, /images/bike_sharing.png 1.5x, /images/bike_sharing.png 2x"
+        data-src="/images/recall.png"
+        data-srcset="/images/recall.png, /images/recall.png 1.5x, /images/recall.png 2x"
         data-sizes="auto"
-        alt="/images/bike_sharing.png"
-        title="/images/bike_sharing.png" /></div><div class="details toc" id="toc-static"  data-kept="">
+        alt="/images/recall.png"
+        title="/images/recall.png" /></div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>Contents</span>
                     <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#kaggle-project-1---bike-sharing-demand">Kaggle Project #1 - Bike Sharing Demand</a>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#고장난-accuracy">고장난 Accuracy</a></li>
+    <li><a href="#항상-헷갈리는-precision-recall">항상 헷갈리는 Precision, Recall</a>
       <ul>
-        <li><a href="#dataset">Dataset</a>
+        <li>
           <ul>
-            <li><a href="#evaluation-metrics">Evaluation metrics</a></li>
+            <li><a href="#precision이-사용되는-경우">Precision이 사용되는 경우</a></li>
+            <li><a href="#recall이-중요한-경우-recall이-낮으면-안되는-경우">Recall이 중요한 경우 (Recall이 낮으면 안되는 경우)</a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><a href="#submission">Submission</a></li>
+    <li><a href="#전쟁으로-보는-precision-vs-recall">전쟁으로 보는 Precision vs Recall</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>Kaggle Project #1 - Bike Sharing Demand</p>
-<h2 id="kaggle-project-1---bike-sharing-demand">Kaggle Project #1 - Bike Sharing Demand</h2>
+            </div><div class="content" id="content"><p>분명 어느정도 이해하고 넘어갔던 precision, recall인데 계속 헷갈린다. 이번 기회에 정확히 이해하고 외워보자.</p>
+<h2 id="tldr">TL;DR</h2>
 <ul>
-<li>Source: <a href="https://www.kaggle.com/c/bike-sharing-demand" target="_blank" rel="noopener noreffer">https://www.kaggle.com/c/bike-sharing-demand</a>
-</li>
-</ul>
-<p>Bike sharing systems are a means of renting bicycles where the process of obtaining membership, rental, and bike return is automated via a network of kiosk locations throughout a city. Using these systems, people are able rent a bike from a one location and return it to a different place on an as-needed basis. Currently, there are over 500 bike-sharing programs around the world.</p>
-<p>The data generated by these systems makes them attractive for researchers because the duration of travel, departure location, arrival location, and time elapsed is explicitly recorded. Bike sharing systems therefore function as a sensor network, which can be used for studying mobility in a city. In this competition, participants are asked to combine historical usage patterns with weather data in order to forecast bike rental demand in the Capital Bikeshare program in Washington, D.C.</p>
-<h3 id="dataset">Dataset</h3>
+<li>기억방법: <ins><strong>리암씨팸</strong></ins>(리암 니슨씨가 사람 패는 모습을 상상)
 <ul>
-<li>datetime - hourly date + timestamp</li>
-<li>season -  1 = spring, 2 = summer, 3 = fall, 4 = winter</li>
-<li>holiday - whether the day is considered a holiday</li>
-<li>workingday - whether the day is neither a weekend nor holiday</li>
-<li>weather
-<ul>
-<li>1: Clear, Few clouds, Partly cloudy, Partly cloudy</li>
-<li>2: Mist + Cloudy, Mist + Broken clouds, Mist + Few clouds, Mist</li>
-<li>3: Light Snow, Light Rain + Thunderstorm + Scattered clouds, Light Rain + Scattered clouds</li>
-<li>4: Heavy Rain + Ice Pallets + Thunderstorm + Mist, Snow + Fog</li>
+<li><strong>Re</strong>call, <strong>암</strong>진단, Pre<strong>ci</strong>sion, 스<strong>팸</strong>분류</li>
 </ul>
 </li>
-<li>temp - temperature in Celsius</li>
-<li>atemp - &quot;feels like&quot; temperature in Celsius</li>
-<li>humidity - relative humidity</li>
-<li>windspeed - wind speed</li>
-<li>casual - number of non-registered user rentals initiated</li>
-<li>registered - number of registered user rentals initiated</li>
-<li>count - number of total rentals</li>
-</ul>
-<h4 id="evaluation-metrics">Evaluation metrics</h4>
-<p>$$
-\sqrt{\frac{1}{n} \sum_{i=1}^n (\log(p_i + 1) - \log(a_i+1))^2 }
-$$</p>
+<li>이해방법
 <ul>
-<li>n  is the number of hours in the test set</li>
-<li>pi is your predicted count</li>
-<li>ai is the actual count</li>
-<li>log(x) is the natural logarithm&quot;</li>
+<li>Re-call(회상하다) -&gt; 절대로 놓치면 안되는 케이스 -&gt; 다시 상기해서 검사해봄</li>
+<li>Precision(정밀) -&gt; 함부로 버리면 안되는 케이스 -&gt; 정밀하게 분류해야함</li>
 </ul>
-<h2 id="submission">Submission</h2>
-<script src="https://gist.github.com/minkj1992/665a428254979cd2d9abc184d24bb8f9.js"></script></div><div class="post-footer" id="post-footer">
+</li>
+<li>수식
+<ul>
+<li>Precision과 Recall은 분자/분모 모두 <strong>TP</strong>가 깔린다.</li>
+<li><strong>P</strong>recision: 모두 P로 구성됨
+$$\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}} $$</li>
+<li>Recall: precision이 P로 구성되니 남는 FP 케이스가 분모에 존재
+$$\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}$$</li>
+</ul>
+</li>
+</ul>
+<h2 id="고장난-accuracy">고장난 Accuracy</h2>
+<p>흔히 ML 모델을 평가(evaluation)하는 지표로 정확도(Accuracy)를 사용하지만, Accuracy만으로는 불충분할 경우가 존재합니다. 이를 설명할 때 가장 흔히 드는 예시로 아래와 같은 문제가 존재합니다.</p>
+<blockquote>
+<p>암을 진단하는 병원에 내원한 환자가 암인지 아닌지 구분하는 예측 모델을 만들었습니다. 이때 100명의 환자에 대한 예측 결과는 아래와 같습니다.</p>
+<ul>
+<li>TP(실제로 암이면서, 암으로 예측한 결과) = 1</li>
+<li>TN(실제로 정상이고, 정상으로 예측한 결과) = 82</li>
+<li>FN(실제로 암이지만, 정상으로 예측한 결과) = 16</li>
+<li>FP(실제로 정상이지만, 암으로 예측한 결과) = 1
+이진 분류일 때, 정확도 공식에 따르면 정확도는 아래와 같습니다.
+$$\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}} = \frac{1 + 82}{1 + 82 + 16 + 1} = \frac{83}{100} = 0.83$$</li>
+</ul>
+</blockquote>
+<p>즉 암을 진단하는 모델의 정확도는 83%입니다. 척보기에는 완전쓰래기 모델이라고 부르기에는 높은 정확도입니다. 하지만 잠깐 생각해보면 여기에 큰 문제가 있다는 것을 쉽게 생각해볼 수 있스빈다.</p>
+<p><ins>방문한 100명중에서, 실제 암환자는 17명 밖에 없었는데&hellip; 그 중에서 16명의 암환자를 정상이라고 오진한 모델의 정확도가 83%라고?</ins></p>
+<p>수식을 보면 정확도가 높게 평가된 이유는 82명이나되는 TN 때문입니다. 이는 다른 라벨과 비교해서 매우 많은 수가 포진되어있다는 것을 확인할 수 있습니다.
+<strong>이처럼 클래스(라벨)이 불균형하게 분포되어있으면, 정확도는 평가 지표로의 신뢰를 잃어버리게 됩니다.</strong>(Accuracy Fails for Imbalanced Classification).</p>
+<p>클래스 분포가 약간 편향된 경우에 정확도가 여전히 유용한 측정항목이 될 수 있지만, <ins>클래스 분포의 불균형(skewed)이 심각한 경우 정확도는 모델 성능에 대한 신뢰할 수 없는 척도가 될 수 있습니다.<ins></p>
+<p>이런 불균형한 상황에 유용하게 쓸 수 있는 지표가 Precision, Recall입니다.</p>
+<h2 id="항상-헷갈리는-precision-recall">항상 헷갈리는 Precision, Recall</h2>
+<p>흔히 precision, recall을 설명할 때 등장하는 <code>Confusion Matrix</code>는 아래와 같습니다.</p>
+<center>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/images/confusion_matrix.png"
+        data-srcset="/images/confusion_matrix.png, /images/confusion_matrix.png 1.5x, /images/confusion_matrix.png 2x"
+        data-sizes="auto"
+        alt="/images/confusion_matrix.png"
+        title="/images/confusion_matrix.png" /></p>
+<p>source by <a href="https://wandb.ai/mostafaibrahim17/ml-articles/reports/Precision-vs-Recall-Understanding-How-to-Classify-with-Clarity--Vmlldzo1MTk1MDY5" target="_blank" rel="noopener noreffer">wandb</a>
+</p>
+</center>
+<ul>
+<li>True Positive (TP) - 모델이 양성(Positive)을 양성으로 맞혔을 때</li>
+<li>True Negative (TN) - 모델이 음성(Negative)을 음성으로 맞혔을 때</li>
+<li>False Positive (FP) - 모델이 음성(Negative)을 양성(Positive)으로 잘못 예측했을 때</li>
+<li>False Negative (FN) - 모델이 양성(Positive)을 음성(Negative)으로 잘못 예측했을 때</li>
+</ul>
+<p><code>Confusion</code>이라는 말 그래돌 항상 헷갈리고, 이게 뭘 나타내는 지 모르겠습니다. 이를 위해 제가 이해한 방식을 설명드리겠습니다.</p>
+<p>우선 <code>Precision</code>(정밀도)의 수식은 아래와 같습니다.</p>
+<p>$$\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}} $$</p>
+<p><code>Precision</code>은 수식의 분모를 보게되면 둘 모두 Positive라고 모델이 평가한 집합에서, 분자(실제로 True)인 비율을 의미합니다.</p>
+<p>핵심은 분모에 존재하는 <ins>FP가 작아지는 것에 집중</ins>하는 지표로, <ins><strong>함부러 버리면 안됨</strong></ins> 케이스에서 유용한 지표입니다. 아래의 예시를 보겠습니다.</p>
+<h4 id="precision이-사용되는-경우">Precision이 사용되는 경우</h4>
+<ul>
+<li><code>탈모 흰머리 뽑기 로봇</code>: 정상 모근을 흰머리라고 오판하고 뽑으면 큰일남!</li>
+<li><code>삼산 농장 잡초 제거 로봇</code> : 삼산을 잡초라고 오판하고 버리면 큰일남!</li>
+<li><code>스팸 메일 필터링</code> : 중요한 메일을 스팸이라고 오판하고 버리면 큰일남!</li>
+</ul>
+<p>이처럼 <code>Precision</code>은 위 예시와 같이 <ins>정상인것을 비정상이라고 판단하고 함부러 취급하면 큰일나는 경우에 유용</ins>한 지표입니다. <strong>영어 단어를 보더라도 Precise(정밀한) 정밀하게 분류를 해야하는 뉘양스를 풍깁니다.</strong></p>
+<hr>
+<p>다음으로 <code>Recall</code>(재현율)을 살펴보겠습니다. 사실 한국어 번역 재현율?? 뭔말이지 이해가 하나도 가지 않지만, Recall(상기,회상)이라는 단어처럼 소가 되새김질하는 것 같은 이미지가 떠오릅니다.</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://www.sciencetimes.co.kr/wp-content/uploads/2021/01/n-theheritagefarmme.jpg"
+        data-srcset="https://www.sciencetimes.co.kr/wp-content/uploads/2021/01/n-theheritagefarmme.jpg, https://www.sciencetimes.co.kr/wp-content/uploads/2021/01/n-theheritagefarmme.jpg 1.5x, https://www.sciencetimes.co.kr/wp-content/uploads/2021/01/n-theheritagefarmme.jpg 2x"
+        data-sizes="auto"
+        alt="https://www.sciencetimes.co.kr/wp-content/uploads/2021/01/n-theheritagefarmme.jpg"
+        title="https://www.sciencetimes.co.kr/wp-content/uploads/2021/01/n-theheritagefarmme.jpg" /></p>
+<p>$$\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}$$</p>
+<h4 id="recall이-중요한-경우-recall이-낮으면-안되는-경우">Recall이 중요한 경우 (Recall이 낮으면 안되는 경우)</h4>
+<ul>
+<li>의료 진단 (암 진단) : 암인데 암이 아니라고 판단하는 경우가 가장 크리티컬</li>
+<li>자율 주행 사람 검출 : 자율 주행 차량의 경우 사람을 미검출하는 경우 인명 사고로 이어질 수 있음</li>
+</ul>
+<h2 id="전쟁으로-보는-precision-vs-recall">전쟁으로 보는 Precision vs Recall</h2>
+<p>전쟁을 위해 살인 로봇을 만든다고 한다면 아군을 쏘지 않는 것이 중요하기 때문에, Precision이 중요합니다.
+하지만 만약 스파이를 검출하는 로봇을 만든다고 하면, 스파이를 놓치지 않는 것이 중요하기 때문에 Recall이 중요해집니다.</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-04-22&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/8bed5adb6581a8bc73a6a16b5d323f684f8790df" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 8bed5adb6581a8bc73a6a16b5d323f684f8790df: docs: bike sharing">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8bed5ad</a></span>
+                <span>Updated on 2024-05-23</span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
-                            <a class="link-to-markdown" href="/linear_regression/index.md" target="_blank">Read Markdown</a>
+                            <a class="link-to-markdown" href="/precision_recall/index.md" target="_blank">Read Markdown</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/linear_regression/" data-title="Bike sharing demand" data-hashtags="ml"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/linear_regression/" data-hashtag="ml"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/linear_regression/" data-title="Bike sharing demand"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/linear_regression/" data-title="Bike sharing demand"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/linear_regression/" data-title="Bike sharing demand" data-image="/images/bike_sharing.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://minkj1992.github.io/precision_recall/" data-title="Precision과 Recall 절대 까먹지 않는방법" data-hashtags="dev,data"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://minkj1992.github.io/precision_recall/" data-hashtag="dev"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://minkj1992.github.io/precision_recall/" data-title="Precision과 Recall 절대 까먹지 않는방법"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://minkj1992.github.io/precision_recall/" data-title="Precision과 Recall 절대 까먹지 않는방법"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://minkj1992.github.io/precision_recall/" data-title="Precision과 Recall 절대 까먹지 않는방법" data-image="/images/recall.png"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/ml/">Ml</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/dev/">Dev</a>,&nbsp;<a href="/tags/data/">Data</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/go-channel/" class="prev" rel="prev" title="(WIP) Go Channel and Scheduler"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>(WIP) Go Channel and Scheduler</a>
-            <a href="/mlflow_doc/" class="next" rel="next" title="Mlflow Document">Mlflow Document<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+    <div class="post-nav"><a href="/keras05/" class="prev" rel="prev" title="Fundamentals of machine learning"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Fundamentals of machine learning</a></div>
 </div>
 <div id="comments"><div id="utterances"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://utteranc.es/">Utterances</a>.
