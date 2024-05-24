@@ -13,7 +13,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-05-23T20:51:34+09:00">
-    <meta property="article:modified_time" content="2024-05-23T20:51:34+09:00">
+    <meta property="article:modified_time" content="2024-05-23T21:56:34+09:00">
     <meta property="article:tag" content="Dev">
     <meta property="article:tag" content="Data">
     <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
@@ -37,8 +37,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, data","wordcount":  583 ,
-        "url": "https:\/\/minkj1992.github.io\/precision_recall\/","datePublished": "2024-05-23T20:51:34+09:00","dateModified": "2024-05-23T20:51:34+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, data","wordcount":  750 ,
+        "url": "https:\/\/minkj1992.github.io\/precision_recall\/","datePublished": "2024-05-23T20:51:34+09:00","dateModified": "2024-05-23T21:56:34+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -176,8 +176,8 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Precision과 Recall 절대 까먹지 않는방법</h1><h2 class="single-subtitle">계속 헷갈리는 precision, recall 어떻게 기억할지를 정리해본다.</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/ml/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>ML</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-23">2024-05-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;583 words&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-23">2024-05-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;750 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -224,10 +224,10 @@
 <li>수식
 <ul>
 <li>Precision과 Recall은 분자/분모 모두 <strong>TP</strong>가 깔린다.</li>
-<li><strong>P</strong>recision: 모두 P로 구성됨
-$$\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}} $$</li>
-<li>Recall: precision이 P로 구성되니 남는 FP 케이스가 분모에 존재
-$$\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}$$</li>
+<li><strong>P</strong>recision: 모두 P로 구성됨</li>
+<li>$\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}$</li>
+<li>Recall: precision이 P로 구성되니 남는 FP 케이스가 분모에 존재</li>
+<li>$\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}$</li>
 </ul>
 </li>
 </ul>
@@ -241,7 +241,8 @@ $$\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} +
 <li>FN(실제로 암이지만, 정상으로 예측한 결과) = 16</li>
 <li>FP(실제로 정상이지만, 암으로 예측한 결과) = 1
 이진 분류일 때, 정확도 공식에 따르면 정확도는 아래와 같습니다.
-$$\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}} = \frac{1 + 82}{1 + 82 + 16 + 1} = \frac{83}{100} = 0.83$$</li>
+$\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}$ <br>
+$= \frac{1 + 82}{1 + 82 + 16 + 1} = \frac{83}{100} = 0.83$</li>
 </ul>
 </blockquote>
 <p>즉 암을 진단하는 모델의 정확도는 83%입니다. 척보기에는 완전쓰래기 모델이라고 부르기에는 높은 정확도입니다. 하지만 잠깐 생각해보면 여기에 큰 문제가 있다는 것을 쉽게 생각해볼 수 있스빈다.</p>
@@ -272,9 +273,12 @@ $$\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{F
 </ul>
 <p><code>Confusion</code>이라는 말 그래돌 항상 헷갈리고, 이게 뭘 나타내는 지 모르겠습니다. 이를 위해 제가 이해한 방식을 설명드리겠습니다.</p>
 <p>우선 <code>Precision</code>(정밀도)의 수식은 아래와 같습니다.</p>
-<p>$$\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}} $$</p>
+<center>
+<p>$\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}$</p>
+</center>
 <p><code>Precision</code>은 수식의 분모를 보게되면 둘 모두 Positive라고 모델이 평가한 집합에서, 분자(실제로 True)인 비율을 의미합니다.</p>
-<p>핵심은 분모에 존재하는 <ins>FP가 작아지는 것에 집중</ins>하는 지표로, <ins><strong>함부러 버리면 안됨</strong></ins> 케이스에서 유용한 지표입니다. 아래의 예시를 보겠습니다.</p>
+<p>핵심은 분모에 존재하는 <ins>FP가 작아지는 것에 집중</ins>하는 지표로, <ins><strong>함부로 버리면 안됨</strong></ins> 케이스에서 유용한 지표입니다. 분모 <code>FP</code>를 줄이는 것이 해당 수식이 커질 수 있는 방법이며, 이는 Precision은 <code>FP</code> 즉 <ins>실제로는 음성(산삼, 정상 모근, 정상 메일)인데, 양성(잡초, 흰머리, 스팸 메일)으로 예측한 케이스를 줄이는 문제</ins>에 적합합니다. 저는 이를 <strong>함부로 버리면 안되는 케이스</strong> 라고 지칭하였습니다.</p>
+<p>아래의 예시를 보겠습니다.</p>
 <h4 id="precision이-사용되는-경우">Precision이 사용되는 경우</h4>
 <ul>
 <li><code>탈모 흰머리 뽑기 로봇</code>: 정상 모근을 흰머리라고 오판하고 뽑으면 큰일남!</li>
@@ -284,6 +288,7 @@ $$\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{F
 <p>이처럼 <code>Precision</code>은 위 예시와 같이 <ins>정상인것을 비정상이라고 판단하고 함부러 취급하면 큰일나는 경우에 유용</ins>한 지표입니다. <strong>영어 단어를 보더라도 Precise(정밀한) 정밀하게 분류를 해야하는 뉘양스를 풍깁니다.</strong></p>
 <hr>
 <p>다음으로 <code>Recall</code>(재현율)을 살펴보겠습니다. 사실 한국어 번역 재현율?? 뭔말이지 이해가 하나도 가지 않지만, Recall(상기,회상)이라는 단어처럼 소가 되새김질하는 것 같은 이미지가 떠오릅니다.</p>
+<center>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -292,19 +297,27 @@ $$\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{F
         data-sizes="auto"
         alt="https://www.sciencetimes.co.kr/wp-content/uploads/2021/01/n-theheritagefarmme.jpg"
         title="https://www.sciencetimes.co.kr/wp-content/uploads/2021/01/n-theheritagefarmme.jpg" /></p>
-<p>$$\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}$$</p>
+<p>$\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}$</p>
+</center>
+<p>분모 <code>FN</code>는 사실은 양성인데, negative로 분류한 케이스입니다. 이 <code>FN</code>을 줄이는 것이 해당 수식이 커질 수 있는 방법이며, <ins>실제로는 양성(암환자, 사람)인데, 음성(정상인, 사람이 아닌 물체)로 예측한 케이스를 줄이는 문제</ins>에 적합합니다.  저는 이를 <strong>절대로 놓치면 안되는 케이스</strong>로 지칭하였습니다.</p>
 <h4 id="recall이-중요한-경우-recall이-낮으면-안되는-경우">Recall이 중요한 경우 (Recall이 낮으면 안되는 경우)</h4>
 <ul>
 <li>의료 진단 (암 진단) : 암인데 암이 아니라고 판단하는 경우가 가장 크리티컬</li>
 <li>자율 주행 사람 검출 : 자율 주행 차량의 경우 사람을 미검출하는 경우 인명 사고로 이어질 수 있음</li>
 </ul>
+<p><code>Recall</code>은 위 예시와 같이 <ins>절대로 놓치면 안되는 케이스</ins>에 유용한 지표입니다. 절대 놓치면 안되는 케이스 이기 때문에, 다시 상기해서 검사해본다. 이는 영어 re-call처럼 상기해본다로 해석해볼 수 있습니다.</p>
 <h2 id="전쟁으로-보는-precision-vs-recall">전쟁으로 보는 Precision vs Recall</h2>
-<p>전쟁을 위해 살인 로봇을 만든다고 한다면 아군을 쏘지 않는 것이 중요하기 때문에, Precision이 중요합니다.
-하지만 만약 스파이를 검출하는 로봇을 만든다고 하면, 스파이를 놓치지 않는 것이 중요하기 때문에 Recall이 중요해집니다.</p></div><div class="post-footer" id="post-footer">
+<p>마지막으로 하나의 케이스에서 Precision과 Recall이 사용되도록 예시를 만들어보겠습니다. 전쟁이 일어나고 있어서 두가지 ml모델을 만든다고 가정하겠습니다. 하나는 살인로봇이고, 다른 하나는 스파이 검출하는 로봇입니다.</p>
+<ul>
+<li>살인로봇의 우선순위는 당연히 살상능력이 높아야 하겠지만, 무엇보다 중요한 것이 아군을 공격하지 않는 것으로 정의 내립니다.</li>
+<li>스파이 로봇의 우선순위는 물론 정상인을 스파이라고 잡는 비율도 낮아야겠지만, 무엇보다 중요한 것이 한명의 스파이라도 놓치지 않는 상황으로 정의 내립니다.</li>
+</ul>
+<p>이떄 살인 로봇의 경우 &ldquo;함부로 버림면 안되는 케이스&rdquo;, 즉 아군을 함부로 적군으로 판단하면 안되는 케이스라고 볼 수 있으며, 이는 <code>precision</code>이 중요하게 됩니다. 반대로 스파이 검출 로봇은 &ldquo;절대로 놓치면 안되는 케이스&rdquo; 즉 한명의 스파이도 놓치지 않는 것이 중요하니 <code>recall</code>이 중요하게 된다고 말할 수 있습니다.</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-23</span>
+                <span>Updated on 2024-05-23&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/d9f2c786e82c8f0ac94a97f13c00c97ba3bea5bd" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) d9f2c786e82c8f0ac94a97f13c00c97ba3bea5bd: precision">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d9f2c78</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
