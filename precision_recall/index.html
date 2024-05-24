@@ -13,7 +13,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-05-23T20:51:34+09:00">
-    <meta property="article:modified_time" content="2024-05-24T14:16:44+09:00">
+    <meta property="article:modified_time" content="2024-05-24T14:18:32+09:00">
     <meta property="article:tag" content="Dev">
     <meta property="article:tag" content="Data">
     <meta property="og:image" content="https://minkj1992.github.io/images/profile3.png">
@@ -37,8 +37,8 @@
                             "url": "https:\/\/minkj1992.github.io\/images\/profile2.jpeg",
                             "width":  1078 ,
                             "height":  1082 
-                        }],"genre": "posts","keywords": "dev, data","wordcount":  749 ,
-        "url": "https:\/\/minkj1992.github.io\/precision_recall\/","datePublished": "2024-05-23T20:51:34+09:00","dateModified": "2024-05-24T14:16:44+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "dev, data","wordcount":  802 ,
+        "url": "https:\/\/minkj1992.github.io\/precision_recall\/","datePublished": "2024-05-23T20:51:34+09:00","dateModified": "2024-05-24T14:18:32+09:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "minkj1992","logo": {
                     "@type": "ImageObject",
@@ -176,7 +176,7 @@
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Precision과 Recall 절대 까먹지 않는방법</h1><h2 class="single-subtitle">계속 헷갈리는 precision, recall 어떻게 기억할지를 정리해본다.</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/minkj1992" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>leoo.j</a>
 </span>&nbsp;<span class="post-category">included in <a href="/categories/ml/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>ML</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-23">2024-05-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;749 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-05-23">2024-05-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;802 words&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;4 minutes&nbsp;</div>
         </div><div class="featured-image"><img
         class="lazyload"
@@ -192,7 +192,15 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#tldr">TL;DR</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#수식">수식</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
     <li><a href="#고장난-accuracy">고장난 Accuracy</a></li>
     <li><a href="#항상-헷갈리는-precision-recall">항상 헷갈리는 Precision, Recall</a>
       <ul>
@@ -221,12 +229,17 @@
 <li>Precision(정밀) -&gt; 함부로 버리면 안되는 케이스 -&gt; 정밀하게 분류해야함</li>
 </ul>
 </li>
-<li>수식
+</ul>
+<h4 id="수식">수식</h4>
 <ul>
-<li>Precision과 Recall은 분자/분모 모두 <strong>TP</strong>가 깔린다.</li>
-<li><strong>P</strong>recision: 모두 P로 구성됨</li>
+<li>
+<p>Precision과 Recall은 분자/분모 모두 <strong>TP</strong>가 깔린다. 다시말해 분모, 분자에 TP가 공통으로 들어갑니다.</p>
+</li>
+<li>
+<p><strong>P</strong>recision: 모두 P(모델예측 양성 케이스)로 구성됨</p>
+<ul>
 <li>$\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}$</li>
-<li>Recall: precision이 P로 구성되니 남는 FP 케이스가 분모에 존재</li>
+<li>Recall: precision이 P로 구성되니 남는 FN 케이스가 분모에 존재</li>
 <li>$\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}$</li>
 </ul>
 </li>
@@ -285,7 +298,7 @@ $= \frac{1 + 82}{1 + 82 + 16 + 1} = \frac{83}{100} = 0.83$</li>
 <li><code>삼산 농장 잡초 제거 로봇</code> : 삼산을 잡초라고 오판하고 버리면 큰일남!</li>
 <li><code>스팸 메일 필터링</code> : 중요한 메일을 스팸이라고 오판하고 버리면 큰일남!</li>
 </ul>
-<p>이처럼 <code>Precision</code>은 위 예시와 같이 <ins>정상인것을 비정상이라고 판단하고 함부러 취급하면 큰일나는 경우에 유용</ins>한 지표입니다. <strong>영어 단어를 보더라도 Precise(정밀한) 정밀하게 분류를 해야하는 뉘양스를 풍깁니다.</strong></p>
+<p>이처럼 <code>Precision</code>은 위 예시와 같이 <ins>정상인것을 비정상이라고 판단하고 함부로 취급하면 큰일나는 경우에 유용</ins>한 지표입니다. <strong>영어 단어를 보더라도 Precise(정밀한) 정밀하게 분류를 해야하는 뉘양스를 풍깁니다.</strong></p>
 <hr>
 <p>다음으로 <code>Recall</code>(재현율)을 살펴보겠습니다. 사실 한국어 번역 재현율?? 뭔말이지 이해가 하나도 가지 않지만, Recall(상기,회상)이라는 단어처럼 소가 되새김질하는 것 같은 이미지가 떠오릅니다.</p>
 <center>
@@ -309,15 +322,19 @@ $= \frac{1 + 82}{1 + 82 + 16 + 1} = \frac{83}{100} = 0.83$</li>
 <h2 id="전쟁으로-보는-precision-vs-recall">전쟁으로 보는 Precision vs Recall</h2>
 <p>마지막으로 하나의 케이스에서 Precision과 Recall이 사용되도록 예시를 만들어보겠습니다. 전쟁이 일어나고 있어서 두가지 ml모델을 만든다고 가정하겠습니다. 하나는 살인로봇이고, 다른 하나는 스파이 검출하는 로봇입니다.</p>
 <ul>
-<li>살인로봇의 우선순위는 당연히 살상능력이 높아야 하겠지만, 무엇보다 중요한 것이 아군을 공격하지 않는 것으로 정의 내립니다.</li>
+<li>살인로봇의 우선순위는 당연히 적을 한명도 놓치지 않는 것도 중요하겠지만, 무엇보다 중요한 것이 아군을 공격하지 않는 것으로 정의 내립니다.</li>
 <li>스파이 로봇의 우선순위는 물론 정상인을 스파이라고 잡는 비율도 낮아야겠지만, 무엇보다 중요한 것이 한명의 스파이라도 놓치지 않는 상황으로 정의 내립니다.</li>
 </ul>
-<p>이떄 살인 로봇의 경우 &ldquo;함부로 버림면 안되는 케이스&rdquo;, 즉 아군을 함부로 적군으로 판단하면 안되는 케이스라고 볼 수 있으며, 이는 <code>precision</code>이 중요하게 됩니다. 반대로 스파이 검출 로봇은 &ldquo;절대로 놓치면 안되는 케이스&rdquo; 즉 한명의 스파이도 놓치지 않는 것이 중요하니 <code>recall</code>이 중요하게 된다고 말할 수 있습니다.</p></div><div class="post-footer" id="post-footer">
+<p>이떄 살인 로봇의 경우 &ldquo;함부로 버림면 안되는 케이스&rdquo;, 즉 아군을 함부로 적군으로 판단하면 안되는 케이스라고 볼 수 있으며, 이는 <code>precision</code>이 중요하게 됩니다. 반대로 스파이 검출 로봇은 &ldquo;절대로 놓치면 안되는 케이스&rdquo; 즉 한명의 스파이도 놓치지 않는 것이 중요하니 <code>recall</code>이 중요하게 된다고 말할 수 있습니다.</p>
+<p>물론 두 케이스를 모두 잘하는 모델이라면 가장 최고이며, Accuracy는 모든 경우의 수를 포함하여 검사하기 때문에 일반적으로 사용되며, 저희는 Imbalanced한 skew 데이터(불균형한 라벨링)에 대하여 검사할 수 있는 방법을 고려하기 때문에 상황에 따라 <code>Precision</code>, <code>Recall</code>을 확인하는 것이라고 할 수 있습니다.</p>
+<blockquote>
+<p>모든 것에는 Trade-off가 존재한다.</p>
+</blockquote></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>Updated on 2024-05-24&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/e33db76016c4156bcbf02ca971143dceb894c81e" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) e33db76016c4156bcbf02ca971143dceb894c81e: precision and recall">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>e33db76</a></span>
+                <span>Updated on 2024-05-24&nbsp;<a class="git-hash" href="https://github.com/minkj1992/love/commit/92302db12cc02a3a1fbeeb6d7737b140dde69d4e" target="_blank" title="commit by minkj1992(minkj1992@gmail.com) 92302db12cc02a3a1fbeeb6d7737b140dde69d4e: precision and recall">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>92302db</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"><span>
