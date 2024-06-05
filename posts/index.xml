@@ -4,7 +4,17 @@
         <link>https://minkj1992.github.io/posts/</link>
         <description>All Posts | minkj1992</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>minkj1992@gmail.com (Minwook Je)</managingEditor>
-            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 23 May 2024 20:51:34 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>minkj1992@gmail.com (Minwook Je)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 05 Jun 2024 17:46:00 &#43;0900</lastBuildDate><atom:link href="https://minkj1992.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>What is `Depthwise separable convolution`?</title>
+    <link>https://minkj1992.github.io/conv/</link>
+    <pubDate>Wed, 05 Jun 2024 17:46:00 &#43;0900</pubDate>
+    <author>leoo.j</author>
+    <guid>https://minkj1992.github.io/conv/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/depth-wise.png" referrerpolicy="no-referrer">
+            </div><p>Depthwise separable convolution과 다른 conv layer들을 비교해보겠습니다.</p>]]></description>
+</item>
+<item>
     <title>Precision과 Recall 절대 까먹지 않는방법</title>
     <link>https://minkj1992.github.io/precision_recall/</link>
     <pubDate>Thu, 23 May 2024 20:51:34 &#43;0900</pubDate>
@@ -94,16 +104,6 @@
     <description><![CDATA[<div class="featured-image">
                 <img src="/images/golang_channel.jpeg" referrerpolicy="no-referrer">
             </div><p>Learn about Multithreading, Concurrency &amp; Parallel programming with practical and fun examples in Google&rsquo;s Go Lang.</p>]]></description>
-</item>
-<item>
-    <title>Go Value Parts</title>
-    <link>https://minkj1992.github.io/go-value-parts/</link>
-    <pubDate>Mon, 12 Feb 2024 16:32:44 &#43;0900</pubDate>
-    <author>leoo.j</author>
-    <guid>https://minkj1992.github.io/go-value-parts/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/go-interface-value-parts.png" referrerpolicy="no-referrer">
-            </div><p>Real implementation of value parts type in golang</p>]]></description>
 </item>
 </channel>
 </rss>
